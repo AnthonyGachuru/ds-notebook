@@ -1,0 +1,17 @@
+---
+title: "ML Flashcards"
+author: "Gordon"
+date: "April 23, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## CSV to SQL DB
+
+$ sqlite3 db_name.db
+sqlite> .mode csv db_name
+sqlite> .import data.csv db_name
+

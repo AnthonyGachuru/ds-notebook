@@ -1,0 +1,95 @@
+##General
+
+Two features interact if the effect on the prediction of one feature depends on the value of the other feature
+
+"No Free Lunch" theorem: no single classifier works best across all possible scenarios
+
+Warning PolynomialFeatures(degree=d) transforms an array containing n features into an array containing  features, where n! is the factorial of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial explosion of the number of features!
+
+If a model suffers from overfitting, we also say that the model has a high variance, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. Similarly, our model can also suffer from underfitting (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.
+
+It appears that each feature has modestly improved our model. There are certainly more features that we could add to our model. For example, we could add the day of the week and the hour of the posting, we could determine if the article is a listicle by running a regex on the headline, or we could examine the sentiment of each article. This only begins to touch on the features that could be important to model virality. We would certainly need to go much further to continue reducing the error in our model.
+
+Suppose Fixitol reduces symptoms by 20% over a placebo, but the trial you’re using to test it is too small to have adequate statistical power to detect this difference reliably. We know that small trials tend to have varying results; it’s easy to get 10 lucky patients who have shorter colds than usual but much harder to get 10,000 who all do.
+
+As I mentioned earlier, one drawback of the Bonferroni correction is that it greatly decreases the statistical power of your experiments, making it more likely that you’ll miss true effects. More sophisticated procedures than Bonferroni correction exist, ones with less of an impact on statistical power, but even these are not magic bullets. Worse, they don’t spare you from the base rate fallacy. You can still be misled by your p threshold and falsely claim there’s “only a 5% chance I’m wrong.” Procedures like the Bonferroni correction only help you eliminate some false positives.
+
+To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.
+
+In step 1, we find where missing values are located. The md.pattern() function from the mice package is a really useful function. It gives you a clear view of where missing values are located, helping you in decisions regarding exclusions or substitution. You can refer to the next recipe for missing value substitution.
+
+The degrees of freedom is the number of data rows minus the number of coefficients fit.
+
+"Product classification is an example of multicategory or multinomial classification. Most classification problems and most classification algorithms are specialized for two-category, or binomial, classification. There are tricks to using binary classifiers to solve multicategory problems (for example, building one classifier for each category, called a “one versus rest” classifier). But in most cases it’s worth the effort to find a suitable multiple-category implementation, as they tend to work better than multiple binary classifiers (for example, using the package mlogit instead of the base method glm() for logistic regression)."
+
+Another possible indication of collinearity in the inputs is seeing coefficients with an unexpected sign: for example, seeing
+that income is negatively correlated with years in the workforce.
+
+The overall model can still predict income quite well, even when the inputs are correlated; it just can’t determine which           variable deserves the credit for the prediction. Using regularization (especially ridge regression as found in lm.ridge() in the package MASS) is helpful in collinear situations (we prefer it to “x-alone” variable preprocessing, such as principal components analysis). If you want to use the coefficient values as advice as well as to make good predictions.
+
+The degrees of freedom is thought of as the number of training data rows you have after correcting for the number of coefficients
+you tried to solve for. You want the degrees of freedom to be large compared to the number of coefficients fit to avoid overfitting.
+Overfitting is when you find chance relations in your training data that aren’t present in the general population. Overfitting is bad: you think you have a good model when you don’t.
+
+The probable reason for nonconvergence is separation or quasi-separation: one of the model variables or some combination of the model variables predicts the outcome perfectly for at least a subset of the training data. You’d think this would be a good thing, but ironically logistic regression fails when the variables are too powerful.
+
+For categorical variables (male/female, or small/medium/large), you can define the distance as 0 if two points are in the same category, and 1 otherwise. If all the variables are categorical, then you can use Hamming distance, which counts the number of mismatches.
+
+Your next step is to select a performance measure. A typical performance measure for regression problems is the Root Mean Square Error (RMSE). It measures the standard deviation of the errors the system makes in its predictions.
+
+You should save every model you experiment with, so you can come back easily to any model you want. Make sure you save both the hyperparameters and the trained parameters, as well as the cross-validation scores and perhaps the actual predictions as well. This will allow you to easily compare scores across model types, and compare the types of errors they make. You can easily save Scikit-Learn models by using Python’s pickle module, or using sklearn.externals.joblib, which is more efficient at serializing large NumPy arrays.
+
+If all classifiers are able to estimate class probabilities (i.e., they have a predict_proba() method), then you can tell Scikit-Learn to predict the class with the highest class probability, averaged over all the individual classifiers. This is called soft voting. It often achieves higher performance than hard voting because it gives more weight to highly confident votes. All you need to do is replace voting="hard" with voting="soft" and ensure that all classifiers can estimate class probabilities.
+
+The standard value for k in k-fold cross-validation is 10, which is typically a reasonable choice for most applications. However, if we are working with relatively small training sets, it can be useful to increase the number of folds. If we increase the value of k, more training data will be used in each iteration, which results in a lower bias towards estimating the generalization performance by averaging the individual model estimates. However, large values of k will also increase the runtime of the cross-validation algorithm and yield estimates with higher variance since the training folds will be more similar to each other. On the other hand, if we are working with large datasets, we can choose a smaller value for k.
+
+hamming distance for categorical variables
+
+cosine distance for text data
+
+Gower distance for categorical data
+
+AIC: Explanatory power
+BIC: Parsimonious
+
+95% C.I: b_1 +/- 2*S.E(b_1)
+
+Bias is how far offon the average the model is from the truth. Variance is how much the estimate varies about its average. With low model complexity bias is high because predictions are more likely to stray from the truth, and variance is low because there are only few parameters being fit. With high model complexity bias is low because the model can adapt to more subtleties in the data, and variance is high because we have more parameters to estimate from the same amount of data.
+
+Note: The mean of highly correlated quantities has higher variance than the mean of uncorrelated quantities. The smaller the number of folds, the more biased the error estimates (they will be biased to be conservative indicating higher error than there is in reality) but the less variable they will be. On the extreme end you can have one fold for each data point which is known as Leave-One-Out-Cross-Validation. In this case, your error estimate is essentially unbiased but it could potentially have high variance. 
+
+LDA vs Logistic Regression: When the classes are well-separated parameters of logistic regression are unstable and LDA doesn't have this problem. If the distribution of X is approximately normal then LDA is more stable again. LDA doesn't need to fit multiple models for multiclass classification.
+
+SVM vs Logistic Regression: SVM is likely to overfit the data and can dominated LR on the training set. Kernel method makes SVM more flexible.
+
+Decision Tree vs Linear Model: Tree has non-linear boundary, selects important features, easier to intepret but unstable especially for small data.
+
+Naive Bayes vs LDA: Both use Bayes theorem, both assume gaussian distribution, but LDA takes care of the correlations. LDA might out-perform Naive Bayes when the features are highly correlated. 
+
+KNN vs Other Classification Methods: KNN is completely non-parametic, doesn't tell which features are important. Dominates LDA and Logistic Regression when the decision boundary is highly non-linear.
+
+TF-IDF: A feature vectorization method widely used in text mining to reflect the importance of a term to a document in the corpus. Denote a term by t, a document by d, and the corpus by D. TF(i,d) is the number of times the term t appears in document d while document frequency DF(t,D) is the number of documents which contain the term t. If a term appears very often across the corpus it doesn't carry any special info about the document. Inverse document frequency is a numerical measure of how much info a term provides. If a term appears in all documents its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF uses a hash function to transform input into text. 
+
+Note: When building, testing, and validating a suite of models, the optimal model (i.e., the optimal point in the ROC curve) is the spot where the overall accuracy of the model is essentially unchanged as we make small adjustments in the choice of model. That is to say, the change (from one model to the next) in the model’s precision (specificity) is exactly offset by the change in the model’s recall (sensitivity). Consequently, allowing for some imperfection, where the false positive rate and the false negative rate are in proper balance (so that neither one has too great of an impact on the overall accuracy and effectiveness of the model), is good fruit from your big data labors. The metric I used to guide my cross-validation is the F-score. This is a good metric when we have a lot more samples from one category than from the other categories.
+
+Note: The cost of the holdout method comes in the amount of data that is removed from the model training process. For instance, in the illustrative example here, we removed 30% of our data. This means that our model is trained on a smaller data set and its error is likely to be higher than if we trained it on the full data set. The standard procedure in this case is to report your error using the holdout set, and then train a final model using all your data.
+
+Note: A metric that minimizes false positives, by rarely flagging players and teams that fail to achieve the desired outcome, is specific. A metric that minimizes false negatives, by rarely failing to flag players and teams that achieve the desired outcome, is sensitive.
+
+Although the previous code example was useful to illustrate how k-fold cross-validation works, scikit-learn also implements a k-fold cross-validation scorer, which allows us to evaluate our model using stratified k-fold cross-validation more efficiently
+
+Sometimes it may be more useful to report the coefficient of determination (), which can be understood as a standardized version of the MSE, for better interpretability of the model performance. In other words,  is the fraction of response variance that is captured by the model. The  value is defined as follows:Here, SSE is the sum of squared errors and SST is the total sum of squares , or in other words, it is simply the variance of the response.
+
+Most people start working with data from exactly the wrong end. They begin with a data set, then apply their favorite tools and techniques to it. The result is narrow questions and shallow arguments. Starting with data, without first doing a lot of thinking, without having any structure, is a short road to simple questions and unsurprising results. We don’t want unsurprising—we want knowledge.
+
+Remember that the positive class in scikit-learn is the class that is labeled as class 1. If we want to specify a different positive label, we can construct our own scorer via the make_scorer function, which we can then directly provide as an argument to the scoring parameter in GridSearchCV
+
+While the weighted macro-average is the default for multiclass problems in scikit-learn, we can specify the averaging method via the average parameter inside the different scoring functions that we import from the sklean.metrics module, for example, the precision_score or make_scorer functions
+
+Transforming words into feature vectorsTo construct a bag-of-words model based on the word counts in the respective documents, we can use the CountVectorizer class implemented in scikit-learn. As we will see in the following code section, the CountVectorizer class takes an array of text data, which can be documents or just sentences, and constructs the bag-of-words model for us:
+
+Scikit-learn implements yet another transformer, the TfidfTransformer, that takes the raw term frequencies from CountVectorizer as input and transforms them into tf-idfs.
+
+Naive Bayes is a linear classifier, while k-NN is not. The curse of dimensionality and large feature sets are a problem for k-NN, while Naive Bayes performs well. k-NN requires no training (just load in the dataset), whereas Naive Bayes does.
+
+Note: Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.

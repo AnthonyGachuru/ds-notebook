@@ -1,0 +1,118 @@
+##Linear Regression
+
+http://www.statmethods.net/stats/rdiagnostics.html
+
+leaps lm package r +  Breusch-Pagan (BP) test lmtest package
+
+In summary, "pooling" your data and fitting one combined regression function allows you to easily and efficiently answer research questions concerning the binary predictor variable.
+
+If two independent variables are measured in exactly the same units, we can asses their relative importance in their effect on y quite simply: the larger the coefficient, the stronger the effect.
+
+Okay, so many of the features are strongly correlated. We can make use of this in our model by including polynomial features (e.g. PolynomialFeatures(degree=2) from scikit-learn). Adding these brings our validation loss down to 0.69256 (-0.05% from baseline).
+
+A linear regression model is only as good as the validity of its assumptions, which can be summarized as follows:
+
+Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem.
+
+Non-correlation of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model.
+
+Homoscedasticity: Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.
+
+No collinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates.
+
+Presence of outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.
+
+Assumes one can fit a hyperplane to the data. Link function is the identity.
+
+RSS: The sum of the squared error terms for each observation in our dataset.
+
+R.S.E: The standard deviation of the residuals about the regression surface. Estimate of sigma.
+
+ssumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
+
+Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
+
+Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
+
+Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.
+
+Independent Errors: The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated.  Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.
+
+No Multicollinearity: For multiple linear regression. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables.
+
+Transformations: Can remedy assumption violations and strengthen linear relationships between variables, but can lead to overfitting and less interpretability.
+
+square root correction: Take square root of x variable(s).
+
+log transformation: Take log of y.
+
+General thumb: powers > 1 for skewed left data, powers < 1 for data skewed right.
+
+Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize the fit of the transformed variable to a normal distribution. Does not guarantee normality since it minimizes standard deviation. Can only be used on positive values. Use on negative values by shifting by a constant value.
+
+TSS: A measure of the total squared deviation of our response variable from its mean value.
+
+R-squared = 1 – RSS/TSS.
+
+F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1. 
+
+Type 1 Error: Accept ha when h0 is true.
+
+A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and penalizes complexity. Favor A.I.C for prediction (n increases results in increase in accuracy) and B.I.C for descriptive power (penalty term more stringest and favors a parsimonious model).
+
+Stepwise Procedures: Forward, backward (sklearn.feature_selection.RFE in Python)
+
+Forward Stepwise Selection is a Greedy Algorithm because at each step it selects the variable that improves the current model the most. There is no guarantee that the final result will be optimal.
+
+NB: R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.
+
+NB: Pairwise Interactions, glm scales and centers data, 
+
+The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant.
+
+Shapiro-Wilk Test for Normality
+
+H0: The data is normally distributed. HA: The data is not normally distributed.
+To run this test in R, the syntax is quite simple:
+set.seed(0)
+data = rnorm(100) #Generating data from a standard normal distribution.
+shapiro.test(data) #P-value insignificant; retain H0, conclude data is normally distributed.
+Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
+qqnorm(normal.data) + qqline(normal.data)
+Model Plot Notes:
+
+Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
+
+##Logistic Regression
+
+In particular, logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated.
+
+In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in.
+
+link function is the logit function.
+
+Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. No closed form expression to maximize coefficients with maximum likelihood estimation, so one uses gradient descent or stochastic gradient descent. The second one is faster. For logistic regression value of c penalizes features. Low c penalizes a lot and vice versa. A large c decreases the effect of the regularization term (the l2 penalization). Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p). Makes a linear boundary between classes. For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
+
+Binomial: n identical trials, success/failure probability same for all trials, and each trial is independent.
+
+Odds = p/(1-p) and between 0 and infinity.
+
+Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are unaffected by x and so x has no bearing  on the prediction of success.
+
+Confidence interval: b+/-2*s.e(b) for log odds. Exponentiate for odds.
+
+Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says M is appropriate. Can be expanded to compare models by deviance. Also have McFadden's Pseudo R^2. 
+
+Assumptions: Independent errors and no multicollinearity.
+
+Note: Can still use A.I.C and B.I.C for model evaluation.
+
+Ridge: 
+
+Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
+
+Lasso: 
+
+Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
+
+Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
