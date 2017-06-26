@@ -1,0 +1,21 @@
+---
+title: "Bayesian"
+author: "Gordon"
+date: "April 29, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##KNN
+
+Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
+
+Pros: Only assumption is proximity. Non-parametric.
+
+Cons: Have to decide k and distance metric. Can be sensitive to outliers or irrelevant attributes. Computationally expensive.
+
+curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics
+

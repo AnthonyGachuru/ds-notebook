@@ -1,0 +1,25 @@
+---
+title: "Market Basket"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Association Rule Mining
+
+Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. Incredibly big feature space (2^k-1). The Apriori algorithm employs a simple a prioribeliefas a guideline for reducing the association rule space. The notions boil down to: all subsets of a frequent purchase must also be frequent and all supersets of a infrequent purchase must also be infrequent. An interesting association rule is usually a function of looking at three different parameters that surround a particular rule:
+Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better. 
+
+Confidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
+
+Lift: the ratio by which the confidence of a rule exceeds the expected outcome. When lift > 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift < 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
+
+Set thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
+
+Pros: Ideally suited for working with very large amounts of transactional data. The results are rules that are generally easy to understand and have a high amount of interpretability. The process is useful for data mining and uncovering unexpected knowledge within a dataset.
+
+Cons: The outcome is usually not interesting when applied to smaller datasets. It is difficult to separate actual insights from common sense notions. The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
+
+
