@@ -15,3 +15,7 @@ $ sqlite3 db_name.db
 sqlite> .mode csv db_name
 sqlite> .import data.csv db_name
 
+[Temp Pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
+
+[CSV to Database](https://gist.github.com/gfleetwood/c2ea91da4a8ab1a77f777e28e0b2949c)
+
