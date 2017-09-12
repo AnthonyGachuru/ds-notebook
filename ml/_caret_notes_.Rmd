@@ -1,7 +1,5 @@
 ---
 title: "Caret Notes"
-author: "Gordon"
-date: "June 1, 2017"
 output: html_document
 ---
 
@@ -10,6 +8,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## LM
+
+#### Vanilla
 
 ```{r cars}
 # Set seed
@@ -28,23 +28,7 @@ error <- p - diamonds$price
 sqrt(mean(error^2))
 ```
 
-```{r}
-
-# Shuffle row indices: rows
-rows = sample(nrow(Sonar))
-
-# Randomly order data: Sonar
-Sonar = Sonar[rows,]
-
-# Identify row to split on: split
-split <- round(nrow(Sonar) * .6)
-
-# Create train
-train = Sonar[1:split,]
-
-# Create test
-test = Sonar[(split+1):nrow(Sonar),]
-```
+## LM with CV
 
 ```{r}
 model <- train(
@@ -65,15 +49,14 @@ model <- train(
     repeats = 5, verboseIter = TRUE
   )
 )
-
-# Print model to console
-model
 ```
 
-## LOGREG
+## LogReg
+
+#### Vanilla
 
 ```{r}
-# Fit glm model: model
+# Fit glm model
 model = glm(Class ~ ., family = "binomial", train)
 
 # Predict on test: p
@@ -85,7 +68,40 @@ p_class <- ifelse(p > 0.50, "M", "R")
 confusionMatrix(p_class, test$Class)
 ```
 
-##AUC/ROC
+## Train-Test-Split & CV
+
+```{r}
+
+# Shuffle row indices: rows
+rows = sample(nrow(Sonar))
+
+# Randomly order data: Sonar
+Sonar = Sonar[rows,]
+
+# Identify row to split on: split
+split <- round(nrow(Sonar) * .6)
+
+# Create train: 60%
+train = Sonar[1:split,]
+
+# Create test: 40%
+test = Sonar[(split+1):nrow(Sonar),]
+
+# Create custom indices: myFolds
+myFolds <- createFolds(churn_y, k = 5)
+
+# Create reusable trainControl object: myControl
+myControl <- trainControl(
+  summaryFunction = twoClassSummary,
+  classProbs = TRUE, # IMPORTANT!
+  verboseIter = TRUE,
+  savePredictions = TRUE,
+  index = myFolds
+)
+```
+
+
+## AUC/ROC
 
 ```{r}
 # Predict on test: p
@@ -103,7 +119,7 @@ myControl <- trainControl(
 )
 ```
 
-##Random Forest
+## Random Forest
 
 ```{r}
 # Fit random forest: model
@@ -128,7 +144,7 @@ model
 plot(model)
 ```
 
-##Lasso/Ridge
+## Lasso/Ridge
 
 Alpha controls balance between lasso and ridge. Lambda controls penalty.
 
@@ -139,12 +155,6 @@ model <- train(
   method = "glmnet",
   trControl = myControl
 )
-
-# Print model to console
-model
-
-# Print maximum ROC statistic
-max(model[["results"]])
 
 # Train glmnet with custom trainControl and tuning: model
 model <- train(
@@ -161,7 +171,7 @@ model
 max(model[["results"]][["ROC"]])
 ```
 
-##Preprocessing
+## Preprocessing
 
 ```{r}
 # Apply median imputation: model
@@ -180,8 +190,6 @@ dotplot(resamples, metric = "ROC")
 min(model$results$RSME)
 ```
 
-Center and scale linear models
-
 ```{r}
 # Identify near zero variance predictors: remove_cols
 remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
@@ -194,21 +202,7 @@ all_cols = colnames(bloodbrain_x)
 bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
 ```
 
-##Model Selection
-
-```{r}
-# Create custom indices: myFolds
-myFolds <- createFolds(churn_y, k = 5)
-
-# Create reusable trainControl object: myControl
-myControl <- trainControl(
-  summaryFunction = twoClassSummary,
-  classProbs = TRUE, # IMPORTANT!
-  verboseIter = TRUE,
-  savePredictions = TRUE,
-  index = myFolds
-)
-```
+## Model Selection
 
 Now that you have fit two models to the churn dataset, it's time to compare their out-of-sample predictions and choose which one is the best model for your dataset.
 
@@ -231,11 +225,9 @@ bwplot(resamples, metric = 'ROC')
 xyplot(resamples)
 ```
 
-That concludes the course! As a teaser for a future course on making ensembles of caret models, I'll show you how to fit a stacked ensemble of models using the caretEnsemble package.
+## Stacking
 
-caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models.
-
-In this exercise, I've made a caretList for you, containing the glmnet and ranger models you fit on the churn dataset. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
+caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
 
 ```{r}
 # Create ensemble model: stack
@@ -244,31 +236,3 @@ stack <- caretStack(model_list, method = 'glm')
 # Look at summary
 summary(stack)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
