@@ -245,8 +245,7 @@ stack <- caretStack(model_list, method = 'glm')
 summary(stack)
 ```
 
-
-
+https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
 
 
 

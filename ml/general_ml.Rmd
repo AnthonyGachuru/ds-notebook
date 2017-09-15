@@ -38,13 +38,12 @@ The degrees of freedom is the number of data rows minus the number of coefficien
 
 "Product classification is an example of multicategory or multinomial classification. Most classification problems and most classification algorithms are specialized for two-category, or binomial, classification. There are tricks to using binary classifiers to solve multicategory problems (for example, building one classifier for each category, called a “one versus rest” classifier). But in most cases it’s worth the effort to find a suitable multiple-category implementation, as they tend to work better than multiple binary classifiers (for example, using the package mlogit instead of the base method glm() for logistic regression)."
 
-Another possible indication of collinearity in the inputs is seeing coefficients with an unexpected sign: for example, seeing
-that income is negatively correlated with years in the workforce.
+Another possible indication of collinearity in the inputs is seeing coefficients with an unexpected sign: for example, seeing that income is negatively correlated with years in the workforce.
 
-The overall model can still predict income quite well, even when the inputs are correlated; it just can’t determine which           variable deserves the credit for the prediction. Using regularization (especially ridge regression as found in lm.ridge() in the package MASS) is helpful in collinear situations (we prefer it to “x-alone” variable preprocessing, such as principal components analysis). If you want to use the coefficient values as advice as well as to make good predictions.
+The overall model can still predict income quite well, even when the inputs are correlated; it just can’t determine which variable deserves the credit for the prediction. Using regularization (especially ridge regression as found in lm.ridge() in the package MASS) is helpful in collinear situations (we prefer it to “x-alone” variable preprocessing, such as principal components analysis). If you want to use the coefficient values as advice as well as to make good predictions.
 
-The degrees of freedom is thought of as the number of training data rows you have after correcting for the number of coefficients
-you tried to solve for. You want the degrees of freedom to be large compared to the number of coefficients fit to avoid overfitting.
+The degrees of freedom is thought of as the number of training data rows you have after correcting for the number of coefficients you tried to solve for. You want the degrees of freedom to be large compared to the number of coefficients fit to avoid overfitting.
+
 Overfitting is when you find chance relations in your training data that aren’t present in the general population. Overfitting is bad: you think you have a good model when you don’t.
 
 The probable reason for nonconvergence is separation or quasi-separation: one of the model variables or some combination of the model variables predicts the outcome perfectly for at least a subset of the training data. You’d think this would be a good thing, but ironically logistic regression fails when the variables are too powerful.
