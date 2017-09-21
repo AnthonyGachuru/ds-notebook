@@ -1,0 +1,175 @@
+---
+title: "Workflow"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+##Preamble
+
+http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/
+
+**YAML**
+
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
+
+`conda env export > environment.yaml`
+
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:
+
+`conda env create -f environment.yaml`
+
+This will create a new environment with the same name listed in environment.yaml.
+
+## Data Ingestion/Wrangling
+
+* Encoding Precendence: utf-8, iso-8859-1, utf-16
+
+*Imputation*
+
+Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
+
+* Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
+
+* Random: Can amplify outlier observation and induce bias.
+
+* Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
+
+* pandas.factorize: Encode input values as an enumerated type or categorical variable
+
+##Exploration
+
+https://dataversioncontrol.com/
+https://blog.rstudio.org/2017/06/27/dbplyr-1-1-0/
+https://github.com/chardet/chardet
+https://github.com/ResidentMario/missingno
+https://github.com/thombashi/sqlitebiter
+https://dataset.readthedocs.io/en/latest/
+https://docs.continuum.io/iopro/
+
+https://github.com/data-cleaning/validate
+https://github.com/dataproofer/Dataproofer
+http://www.markvanderloo.eu/yaRb/2017/06/23/track-changes-in-data-with-the-lumberjack/
+
+https://github.com/drsimonj/corrr
+https://github.com/WinVector/replyr
+
+https://github.com/ujjwalkarn/xda
+https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html
+
+S.O.C.S: Shape, Outlier, Center, Spread. Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+
+Missingness: Missing completely at random/missing at random/missing not at random
+
+df.fillna(value) + df.isnull().sum(); df = df[np.isfinite(df['EPS'])]
+
+scipy.stats.describe
+
+group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
+
+na.strings, na.omit
+
+titanic3[titanic3==""] = NA #Replacing blank cells by nas.
+
+Histograms
+
+PCA
+
+Outlier Detection - Tukey IQR, Kernel density estimation, Bonferroni test
+
+Non-linear dimensionality reduction, Isomap - manifold or cluster
+ 
+##STATS
+
+test heteroscedaticity: breusch-pagan or ncv test
+
+Shapiro–Wilk test is a test of normality
+
+Bypass inferential stats if features at least 1/10 of data points. 
+
+The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+
+One Sample T-test: To examine the average difference between a sample and the known value 
+of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
+
+Two Sample T-test: To examine the average difference between two samples drawn from two 
+different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
+
+F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+
+Barlett Test: F-Test for more than two populations. 
+
+One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+
+Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+
+https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html
+
+##VISUALIZATION
+
+trendlines to scatterplots and confidence intervals
+
+from pandas.tools.plotting import scatter_matrix
+
+plotly
+
+##MODELING
+
+gradient boosting for class imbalance
+
+http://scikit-learn.org/stable/modules/gaussian_process.html
+
+http://darques.eu/blog/index.php/2017/07/27/mlbox-a-short-regression_tutorial/
+
+https://github.com/databricks/spark-sklearn
+
+https://cognitiveclass.ai/courses/spark-mllib/
+
+SHapley Additive exPlanations
+
+https://drsimonj.svbtle.com/easy-machine-learning-pipelines-with-pipelearner-intro-and-call-for-contributors
+
+https://topepo.github.io/recipes/
+
+https://github.com/tidyverse/modelr
+
+https://github.com/reiinakano/xcessiv
+
+https://github.com/datascienceinc/Skater
+
+https://edublancas.github.io/sklearn-evaluation/
+
+https://github.com/ClimbsRocks/auto_ml
+
+https://github.com/tidyverse/modelr
+
+http://alchemy.cs.washington.edu/
+
+https://github.com/SparkTC/r4ml
+
+https://systemml.apache.org/
+
+https://github.com/hyperopt/hyperopt-sklearn
+
+https://github.com/reiinakano/scikit-plot
+
+https://github.com/thomasp85/lime
+
+mlxtend
+
+cross_val_predict
+
+https://github.com/DistrictDataLabs/yellowbrick
+
+http://blog.fastforwardlabs.com/2017/03/09/fairml-auditing-black-box-predictive-models.html
+
+Variance Threshold: Use this to exclude features that don't meet a variance threshold.
+ 
+Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
+
+SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
+
+sklearn: preprocessing.binarize, feature_selection.RFE/CV

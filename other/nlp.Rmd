@@ -1,0 +1,21 @@
+---
+title: "Bayesian"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Basic Py NLP Pipeline**
+
+0) Converting text to numerical data is vectorization.
+
+i) Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.
+
+ii) Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.
+
+iii) Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance 
+within that document. CountVectorizer or TF-IDF.
+
+tf-idf & cosine similarity
