@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Preamble
 
-http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/
+* [Conda Setup](http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/)
 
 **YAML**
 
@@ -26,9 +26,15 @@ This will create a new environment with the same name listed in environment.yaml
 
 ## Data Ingestion/Wrangling
 
+* [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
+
+* Easy Database Management: [dataset](https://dataset.readthedocs.io/en/latest/)
+
+* [Data Validation](https://github.com/data-cleaning/validate)
+
 * Encoding Precendence: utf-8, iso-8859-1, utf-16
 
-* S.O.C.S: Shape, Outlier, Center, Spread. Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+* na.strings: Replace empty strings by na: `x <- read.csv("filepath/R_NA.csv",header=TRUE,na.strings=c(""))`
 
 * Missingness: Missing completely at random/missing at random/missing not at random
 
@@ -40,27 +46,35 @@ This will create a new environment with the same name listed in environment.yaml
 
 * Replacing blank cells by nas: titanic3[titanic3==""] = NA
 
-*Explore Data*
+**Explore Data**
 
 * Histograms
+
+* [EdaR](https://github.com/ujjwalkarn/xda)
+
+* [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
+
+* Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread). 
 
 * Outlier Detection - Tukey IQR, Kernel density estimation, Bonferroni test
 
 * PCA & non-linear dimensionality reduction, Isomap - manifold or cluster
 
-*Imputation*
+**Imputation**
 
-Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
+* Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
 
 * Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
 
 * Random: Can amplify outlier observation and induce bias.
 
 * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
-
-* pandas.factorize: Encode input values as an enumerated type or categorical variable
  
 ## Stats
+
+* [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
+
+* Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
 
 * test heteroscedaticity: breusch-pagan or ncv test
 
@@ -94,6 +108,8 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * sklearn: preprocessing.binarize
 
+* pandas.factorize: Encode input values as an enumerated type
+
 ### Feature Selection
 
 * Variance Threshold: Use this to exclude features that don't meet a variance threshold.
@@ -110,17 +126,13 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * cross_val_score & cross_val_predict
 
-## Exploration
+* Building custom ensembles: mlxtend
 
-http://scikit-learn.org/stable/modules/gaussian_process.html
+* [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
 
-http://darques.eu/blog/index.php/2017/07/27/mlbox-a-short-regression_tutorial/
+* Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
 
-https://github.com/databricks/spark-sklearn
-
-https://cognitiveclass.ai/courses/spark-mllib/
-
-SHapley Additive exPlanations
+## Test Stuff
 
 https://drsimonj.svbtle.com/easy-machine-learning-pipelines-with-pipelearner-intro-and-call-for-contributors
 
@@ -128,46 +140,4 @@ https://topepo.github.io/recipes/
 
 https://github.com/tidyverse/modelr
 
-https://github.com/reiinakano/xcessiv
-
-https://github.com/datascienceinc/Skater
-
-https://edublancas.github.io/sklearn-evaluation/
-
-https://github.com/ClimbsRocks/auto_ml
-
-https://github.com/tidyverse/modelr
-
-http://alchemy.cs.washington.edu/
-
-https://github.com/SparkTC/r4ml
-
-https://systemml.apache.org/
-
-https://github.com/hyperopt/hyperopt-sklearn
-
-https://github.com/reiinakano/scikit-plot
-
-https://github.com/thomasp85/lime
-
-mlxtend
-
-https://github.com/DistrictDataLabs/yellowbrick
-
-http://blog.fastforwardlabs.com/2017/03/09/fairml-auditing-black-box-predictive-models.html
-
-https://dataversioncontrol.com/
-na.strings, na.omit
-https://github.com/chardet/chardet
-https://github.com/ResidentMario/missingno
-https://github.com/thombashi/sqlitebiter
-https://dataset.readthedocs.io/en/latest/
-https://docs.continuum.io/iopro/
-https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html
-https://github.com/data-cleaning/validate
-https://github.com/dataproofer/Dataproofer
-http://www.markvanderloo.eu/yaRb/2017/06/23/track-changes-in-data-with-the-lumberjack/
-https://github.com/drsimonj/corrr
-https://github.com/WinVector/replyr
-https://github.com/ujjwalkarn/xda
-https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html
+[Tuning & Ensembling](https://github.com/reiinakano/xcessiv)
