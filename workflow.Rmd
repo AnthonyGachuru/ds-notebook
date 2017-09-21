@@ -131,13 +131,3 @@ different populations. Assumes the populations from which the samples are drawn 
 * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
 
 * Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
-
-## Test Stuff
-
-https://drsimonj.svbtle.com/easy-machine-learning-pipelines-with-pipelearner-intro-and-call-for-contributors
-
-https://topepo.github.io/recipes/
-
-https://github.com/tidyverse/modelr
-
-[Tuning & Ensembling](https://github.com/reiinakano/xcessiv)
