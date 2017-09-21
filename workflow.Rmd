@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-##Preamble
+## Preamble
 
 http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/
 
@@ -28,6 +28,26 @@ This will create a new environment with the same name listed in environment.yaml
 
 * Encoding Precendence: utf-8, iso-8859-1, utf-16
 
+* S.O.C.S: Shape, Outlier, Center, Spread. Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+
+* Missingness: Missing completely at random/missing at random/missing not at random
+
+* Dealing with missing data: df.fillna(value), df.isnull().sum(), df = df[np.isfinite(df['EPS'])]
+
+* scipy.stats.describe
+
+* group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
+
+* Replacing blank cells by nas: titanic3[titanic3==""] = NA
+
+*Explore Data*
+
+* Histograms
+
+* Outlier Detection - Tukey IQR, Kernel density estimation, Bonferroni test
+
+* PCA & non-linear dimensionality reduction, Isomap - manifold or cluster
+
 *Imputation*
 
 Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
@@ -39,82 +59,34 @@ Pros include helping to retain a larger data set, potentially avoiding bias, and
 * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
 
 * pandas.factorize: Encode input values as an enumerated type or categorical variable
-
-##Exploration
-
-https://dataversioncontrol.com/
-https://blog.rstudio.org/2017/06/27/dbplyr-1-1-0/
-https://github.com/chardet/chardet
-https://github.com/ResidentMario/missingno
-https://github.com/thombashi/sqlitebiter
-https://dataset.readthedocs.io/en/latest/
-https://docs.continuum.io/iopro/
-
-https://github.com/data-cleaning/validate
-https://github.com/dataproofer/Dataproofer
-http://www.markvanderloo.eu/yaRb/2017/06/23/track-changes-in-data-with-the-lumberjack/
-
-https://github.com/drsimonj/corrr
-https://github.com/WinVector/replyr
-
-https://github.com/ujjwalkarn/xda
-https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html
-
-S.O.C.S: Shape, Outlier, Center, Spread. Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
-
-Missingness: Missing completely at random/missing at random/missing not at random
-
-df.fillna(value) + df.isnull().sum(); df = df[np.isfinite(df['EPS'])]
-
-scipy.stats.describe
-
-group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
-
-na.strings, na.omit
-
-titanic3[titanic3==""] = NA #Replacing blank cells by nas.
-
-Histograms
-
-PCA
-
-Outlier Detection - Tukey IQR, Kernel density estimation, Bonferroni test
-
-Non-linear dimensionality reduction, Isomap - manifold or cluster
  
-##STATS
+## Stats
 
-test heteroscedaticity: breusch-pagan or ncv test
+* test heteroscedaticity: breusch-pagan or ncv test
 
-Shapiro–Wilk test is a test of normality
+* Test Normality: Shapiro–Wilk test is a test of normality
 
-Bypass inferential stats if features at least 1/10 of data points. 
+* Bypass inferential stats if features at least 1/10 of data points. 
 
-The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+* The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
 
-One Sample T-test: To examine the average difference between a sample and the known value 
+* One Sample T-test: To examine the average difference between a sample and the known value 
 of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
 
-Two Sample T-test: To examine the average difference between two samples drawn from two 
+* Two Sample T-test: To examine the average difference between two samples drawn from two 
 different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
 
-F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
 
-Barlett Test: F-Test for more than two populations. 
+* Barlett Test: F-Test for more than two populations. 
 
-One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+* One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
 
-Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+* Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
 
-https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html
+## Visualizations
 
-##VISUALIZATION
-
-trendlines to scatterplots and confidence intervals
-
-from pandas.tools.plotting import scatter_matrix
-
-plotly
+Make trendlines, scatterplots, and add confidence intervals
 
 ##MODELING
 
@@ -173,3 +145,21 @@ Univariate Feature Selection: For classification can use chi-squared and F-Test 
 SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
 
 sklearn: preprocessing.binarize, feature_selection.RFE/CV
+
+##Exploration
+
+https://dataversioncontrol.com/
+na.strings, na.omit
+https://github.com/chardet/chardet
+https://github.com/ResidentMario/missingno
+https://github.com/thombashi/sqlitebiter
+https://dataset.readthedocs.io/en/latest/
+https://docs.continuum.io/iopro/
+https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html
+https://github.com/data-cleaning/validate
+https://github.com/dataproofer/Dataproofer
+http://www.markvanderloo.eu/yaRb/2017/06/23/track-changes-in-data-with-the-lumberjack/
+https://github.com/drsimonj/corrr
+https://github.com/WinVector/replyr
+https://github.com/ujjwalkarn/xda
+https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html
