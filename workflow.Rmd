@@ -84,13 +84,33 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
 
-## Visualizations
+## Visualization
 
-Make trendlines, scatterplots, and add confidence intervals
+* Make trendlines, scatterplots, and add confidence intervals
 
-##MODELING
+## Modeling
 
-gradient boosting for class imbalance
+### Preprocessing
+
+* sklearn: preprocessing.binarize
+
+### Feature Selection
+
+* Variance Threshold: Use this to exclude features that don't meet a variance threshold.
+ 
+* Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
+
+* SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
+
+* sklearn: feature_selection.RFE/CV
+
+### Model Selection
+
+* Gradient boosting for class imbalance
+
+* cross_val_score & cross_val_predict
+
+## Exploration
 
 http://scikit-learn.org/stable/modules/gaussian_process.html
 
@@ -132,21 +152,9 @@ https://github.com/thomasp85/lime
 
 mlxtend
 
-cross_val_predict
-
 https://github.com/DistrictDataLabs/yellowbrick
 
 http://blog.fastforwardlabs.com/2017/03/09/fairml-auditing-black-box-predictive-models.html
-
-Variance Threshold: Use this to exclude features that don't meet a variance threshold.
- 
-Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
-
-SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
-
-sklearn: preprocessing.binarize, feature_selection.RFE/CV
-
-##Exploration
 
 https://dataversioncontrol.com/
 na.strings, na.omit
