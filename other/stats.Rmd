@@ -1,0 +1,37 @@
+---
+title: "Workflow"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Stats
+
+* [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
+
+* Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+
+* test heteroscedaticity: breusch-pagan or ncv test
+
+* Test Normality: Shapiro–Wilk test is a test of normality
+
+* Bypass inferential stats if features at least 1/10 of data points. 
+
+* The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+
+* One Sample T-test: To examine the average difference between a sample and the known value 
+of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
+
+* Two Sample T-test: To examine the average difference between two samples drawn from two 
+different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
+
+* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+
+* Barlett Test: F-Test for more than two populations. 
+
+* One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+
+* Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.

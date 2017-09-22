@@ -236,9 +236,10 @@ stack <- caretStack(model_list, method = 'glm')
 # Look at summary
 summary(stack)
 ```
-<<<<<<< HEAD:ml/caret_notes.Rmd
 
 https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
+
+caret: finalModel of model object
 
 
 
