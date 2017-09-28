@@ -43,6 +43,16 @@ R.S.E: The standard deviation of the residuals about the regression surface. Est
 
 ssumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
 
+Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.
+
+Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
+
+F-test & partial f-testr for simple and multiple linear regression.
+
+AIC,BIC, forward & backwards selection
+
+
+
 Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
 
 Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
@@ -129,6 +139,10 @@ Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic 
 Assumptions: Independent errors and no multicollinearity.
 
 Note: Can still use A.I.C and B.I.C for model evaluation.
+
+Wald Test
+
+
 
 Advantages:
 
