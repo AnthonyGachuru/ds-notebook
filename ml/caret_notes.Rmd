@@ -240,30 +240,3 @@ summary(stack)
 https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
 
 caret: finalModel of model object
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 00525289f4e436a27c3ff4dfb970ac96774c225f:ml/_caret_notes_.Rmd
