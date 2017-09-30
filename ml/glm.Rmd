@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Linear Regression
+## Linear Regression
 
 http://www.statmethods.net/stats/rdiagnostics.html
 
@@ -42,6 +42,16 @@ RSS: The sum of the squared error terms for each observation in our dataset.
 R.S.E: The standard deviation of the residuals about the regression surface. Estimate of sigma.
 
 ssumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
+
+Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.
+
+Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
+
+F-test & partial f-testr for simple and multiple linear regression.
+
+AIC,BIC, forward & backwards selection
+
+
 
 Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
 
@@ -96,7 +106,17 @@ Model Plot Notes:
 
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
 
-##Logistic Regression
+## Ridge: 
+
+Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
+
+## Lasso: 
+
+Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
+
+Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
+
+## Logistic Regression
 
 In particular, logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated.
 
@@ -120,12 +140,28 @@ Assumptions: Independent errors and no multicollinearity.
 
 Note: Can still use A.I.C and B.I.C for model evaluation.
 
-Ridge: 
+Wald Test
 
-Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
 
-Lasso: 
 
-Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
+Advantages:
 
-Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
+* Highly interpretably
+
+* Model training and prediction are fast
+
+* No tuning outside of regularization required
+
+* Features don't need scaling
+
+* Can perform with a small number of observations
+
+* Outputs well-calibrated predicted probabilities
+
+Disadvantages:
+
+* Presumes a linear relationship between the features and the log-odds of the response.
+
+* Performance is generally not competitive with the best supervised learning methods
+
+* Can't automatically learn feature interactions
