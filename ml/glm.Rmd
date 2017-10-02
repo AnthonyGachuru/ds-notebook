@@ -13,6 +13,43 @@ knitr::opts_chunk$set(echo = TRUE)
 
 http://www.statmethods.net/stats/rdiagnostics.html
 
+When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
+
+
+In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
+
+The fitted regression line using a sample of data gives imperfect predictions for future observations due to sampling variability and randomness in Y that is not related to X.
+
+
+For simple linear regression, the principal hypothesis test is as follows:
+➢ Null Hypothesis (H 0 ): ? 1 = 0
+➢ Alternative Hypothesis (H A ): ? 1 ≠ 0
+❖ What would it mean if the null hypothesis were true?
+➢ We would expect that the population mean of Y would be ? 0 no matter what
+the value of X.
+➢ In other words, this would mean that X has no effect on Y!
+❖ What would it mean if the null hypothesis were false?
+➢ We would expect that Y would vary with different values of X.
+➢ In other words, this would mean that X does have an effect on Y.
+
+We prefer natural logs (that is, logarithms base e) because, as described above,
+coefficients on the natural-log scale are directly interpretable as approximate pro-
+LOGARITHMIC TRANSFORMATIONS 61
+portional differences: with a coefficient of 0.06, a difference of 1 in x corresponds to
+an approximate 6% difference in y, and so forth.
+
+The regression assumption that is generally least important
+is that the errors are normally distributed. In fact, for the purpose of estimat-
+ing the regression line (as compared to predicting individual data points), the
+assumption of normality is barely important at all. Thus, in contrast to many
+regression textbooks, we do not recommend diagnostics of the normality of re-
+gression residuals. [Gelman]
+
+
+Use Box-Cox transformations when predictions are skewed
+
+Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.
+
 Got it: Linear Correlation => Causation if covariates respect: linearity normality indep homoscedasticity + all confounders in model
 
 leaps lm package r +  Breusch-Pagan (BP) test lmtest package
@@ -106,11 +143,13 @@ Model Plot Notes:
 
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
 
-## Ridge: 
+## Ridge 
 
 Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
 
-## Lasso: 
+## Lasso
+
+Standardize for ridge/lasso alpha makes them not scale invariant
 
 Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
 
@@ -139,6 +178,9 @@ Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic 
 Assumptions: Independent errors and no multicollinearity.
 
 Note: Can still use A.I.C and B.I.C for model evaluation.
+
+Logistic Regression breaks down when classes are perfectly separable.
+
 
 Wald Test
 

@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Stats
 
+* Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
+
 * [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
 
 * Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
@@ -35,3 +37,25 @@ different populations. Assumes the populations from which the samples are drawn 
 * One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
 
 * Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+
+
+* If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won't. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.
+
+Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.
+Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.
+
+Pmf prob mass function for a die p(1) = 1/6. Discrete rv
+Pdf continuous rv
+Can find quantiles (quartiles?) by setting cdf equal to percentage you want.
+Indepent rvs are uncorrelated. That is Cor (X,Y)=0
+Don’t sum sd’s. Not useful. Sum variances.
+
+One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.
+
+When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.
+
+When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.
+
+When do we use One-Way ANOVA?  To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist.  The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.
+
+When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.

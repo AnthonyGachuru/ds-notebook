@@ -9,6 +9,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+##Intro
+
+Bayes Rule:
+
+old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
+
+so I'll give you three reasons why you space you methods the first reason is messy data Big Data messy data non-random samples nonrandomized
+experiments wanting to learn from available data environmental measurements getting data on real people real humans simple formulas simple
+averages and standard deviations aren't enough we need to adjust our data we need to adjust our data to match the treatment group to the control group to
+match the sample to the population of interest to do these adjustments we fit models we fit somewhat complicated miles adjusting I'm many different variables 
+models have a lot of parameters classical methods that use simple point estimates of the parameters don't adequately capture uncertainty we turn to Bayesian 
+methods because Bayesian inference is one way of finding a large model with metadata the second reason we use Bayesian inference is for combining information 
+you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of 
+public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted to 
+combining information the third appeal of Bayesian methods and the sort of applications that I work on is that the inferences can map directly to decisions
+based on inferences express not its estimates and standard errors but rather as probability distributions we can take these probability distributions and pipe
+them directly into decision analysis for these reasons.
+
+An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.
+
+
 ##Naïve Bayes
 
 Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.
@@ -38,3 +59,23 @@ Project the samples onto the new feature subspace using the transformation matri
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own. 
 
 ##QDA
+
+
+##Bayes CTR
+
+```{python}
+from numpy.random import beta as beta_dist
+import numpy as np
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
+Posterior prob that CTR_A > CTR_B given data = np.mean(A_samples > B_samples)
+Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)

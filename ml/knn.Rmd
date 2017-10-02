@@ -19,3 +19,21 @@ Cons: Have to decide k and distance metric. Can be sensitive to outliers or irre
 
 curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics
 
+knn is terrible with high dimensions. Bad with categorical data.
+
+Pros of K-Nearest Neighbors:
+➢ The only assumption we are making about our data is related to proximity (i.
+e., observations that are close by in the feature space are similar to each
+other in respect to the target value).
+➢ We do not have to fit a model to the data since this is a non-parametric
+approach.
+❖ Cons of K-Nearest Neighbors:
+➢ We have to decide on K and a distance metric.
+➢ Can be sensitive to outliers or irrelevant attributes because they add noise.
+➢ Computationally expensive; as the number of observations, dimensions, and
+K increases, the time it takes for the algorithm to run and the space it takes
+to store the computations increases dramatically.
+■ Why is this bad? We want more data!
+
+What is a common drawback of 3NN classifiers? Prediction on large data sets is slow.
+

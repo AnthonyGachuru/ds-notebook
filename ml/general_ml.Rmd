@@ -14,7 +14,16 @@ http://hunch.net/?p=224
 
 ##General
 
+Embodiment Factor: How much we can compute vs how much we can communicate. 10 for a computer vs 10^13 for a human. computer can almost compute as fast as it can communicate. This human limitation is why Data Science is such a challenge.
+
 https://twitter.com/hashtag/machinelearningflashcards?src=hash
+
+If the performance of a classification model on the test set (out-of-sample) error is poor, you can't just re-calibrate your model parameters to achieve a better model. This is cheating.
+
+
+When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suffer from this problem. If n is small and the distribution of the predictors X is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.
+
+Roughly speaking, LDA tends to be a better bet than QDA if there are relatively few training observations and so reducing variance is crucial. In contrast, QDA is recommended if the training set is very large, so that the variance of the classifier is not a major concern, or if the assumption of a common covariance matrix for the K classes is clearly untenable.
 
 Two features interact if the effect on the prediction of one feature depends on the value of the other feature
 
