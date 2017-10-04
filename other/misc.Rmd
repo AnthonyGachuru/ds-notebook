@@ -9,6 +9,51 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##tuff
 
+Checkout: Leave master branch at latest version, move working directory to specified commit
+
+Reset: Move master and working directory.
+
+Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.
+
+git init, git add to stage, git rm --cached <file> to unstage. Git diff, git checkout, 
+echo ".DS_Store"> .gitignore// Ignore common OSX file.
+
+GIT
+git add -u: add modified files.
+List files: ls
+git checkout
+Create New File: touch file.ext
+Clones repo into current directory: git clone repo_url
+Check remote connections: git remote -v
+Stage files for commiting: git add . #adds all changed/new files
+git add filename.ext #adds single file
+Commit changes/new files: git commit -m "Commit message"
+See change log: git log
+Add upstream to update a forked repo with the original: remote add upstream repo_url 
+Update chnages from original repo, put in new branch: git fetch upstream
+Merge the upstream chnages to master on your local machine. Nos push them up if you want.
+git merge upstream/master
+Update local repo with master changes: git pull origin master
+
+Pull Request
+Asking someone to take up changes you made + go to personal repo + submit a pull request
+trying to commit to upstream repo
+
+Other
+git remote + git help add + git init + git add *.py + to ignore creat .gitignore
+git diff (--cache) + git rm t.py + git rm --cached 't.py' //remove from staging area
+change name: git rename origin newname + tagging: git tag + create: git tag -a sometagname
+git show version_name + git branch (--merged, --no-merged) + git merge fix20
+never rebase commits to public repo + rebase: branch working with behind in commit
+use revert (change commit and log the change) + dont use reset: erases commit and doesnt log.
+git revert HEAD + git reset HEAD + git clean -n: never use clean + generate ssh:
+generate multiple github accounts using diff ssh keys
+
+Fork and Pull
+get fork url use: git clone url + git remote add upstream url: ref original repo
+git fetch upstream: pull changes fro original repo + git push origin master: push stuff to clone
+git merge upstream/master: merge github and local + make pull request, send pull request
+
 import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
 
 matplotlib: rcparams set global parameters, isin and crosstab functions pandas
