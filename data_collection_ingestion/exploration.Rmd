@@ -7,22 +7,14 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## PH
+## General
 
 [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
 
 **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
 
-tidyr: complete function == pandas ravel; df.index.name = None; r functions: identify function, lev: compare leverage to average leverage
-join (py) = paste(sep, collapse), strsplit = split
-stack(): long form + unstack(): wide form 
+## SQL
 
-
-##SQL
-
-text functions [concatenate and mid] to manipulate text characters to clean text data
-Remove duplicate rows and perform text manipulations
-Transform and rearrange columns and rows
 Reconcile table data by joining and matching
 Explain differences between relational databases (tabular data storage) and document-based databases (key-value pairs)
 Collect data using standard sql commands [Select, From, Insert, Update, Delete, Create, Drop, Truncate]
@@ -38,17 +30,20 @@ agg n math funcs in excel/sql, window function & lag
 SQL: select, update, delete, insert, create + set, case, decode + how to deal with nulls sql
 A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
 
+## Missingness & Imputation
 
-Missingness: 1) Completely at Random, At Random, Not at random
+* Missingness types: 1) Completely at Random, 2) At Random, 3) Not at random
 
 The pros of imputation:
-➢ Helps retain a larger sample size of your data.
-➢ Does not sacrifice all the available information in an observation because of
-sparse missingness.
-➢ Can potentially avoid unwanted bias.
-❖ The cons of imputation:
-➢ The standard errors of any estimates made during analyses following
-imputation can tend to be too small.
-■ The methods are under the assumption that all measurements are
-actually “known,” when in fact some were imputed.
-➢ Can potentially induce unwanted bias.
+
+* Helps retain a larger sample size of your data.
+* Does not sacrifice all the available information in an observation because of sparse missingness.
+
+* Can potentially avoid unwanted bias.
+
+The cons of imputation:
+
+* The standard errors of any estimates made during analyses following imputation can tend to be too small.
+
+* The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
+* Can potentially induce unwanted bias.
