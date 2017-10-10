@@ -9,40 +9,37 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##Time Series
+## Time Series
 
-Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn't vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.
+* Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn't vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.
 
-White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.
+* White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.
 
-ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models: Atheoretical model.
+**ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models**
 
-AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.
+* AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.
 
-I(d): Integrated component for a series that needs to be differenced.
+* I(d): Integrated component for a series that needs to be differenced.
 
-MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.
+* MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.
 
-Note: In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.
+* In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.
 
-Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.
+* Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.
 
-Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.
+* Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.
 
-Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q). 
+* Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q). 
 
-Assess Model Fit: 
+**Assess Model Fit**
 
-Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.
+* Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.
 
-Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero. 
+* Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero. 
 
-Overfit model with extra AR/MA terms and compare using AIC/BIC.
+* Overfit model with extra AR/MA terms and compare using AIC/BIC.
 
-Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.
-MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.
+* Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.
 
-library(fpp) #Forecasting principles and practice library.
-library(forecast) #Loading the forecast library for time series analysis.
-library(tseries)
+* MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.
 
