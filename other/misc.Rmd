@@ -7,52 +7,47 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Stuff
+## Python
 
-import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
+* matplotlib: rcparams set global parameters
 
-matplotlib: rcparams set global parameters, isin and crosstab functions pandas
-%matplotlib notebook: interactive plots
-Python memory storage: use pd.copy to create a deep copy instead of a shallow copy
-use help or any in Ipy to bring up docs
-pd.DatetimeIndex, grouped.unstack()
-select_dtypes pandas
+* isin and crosstab functions pandas
 
-%who or %whos shows defined variables. %reset resets them.
-%run script.py: func? prints out func doc
-a[::2]: gives every even valued index in array.
-q is the debugger in IPy
+* %matplotlib notebook: interactive plots
 
-Append dict to df, use ignore_index = True: films_df = films_df.append(film_dict, ignore_index=1)
-%debug, interact IPy also use as decorator
-np: fromfile, genfromtxt
+* Python memory storage: use pd.copy to create a deep copy instead of a shallow copy
 
-Dictionary: keys (strings)-values(list) makes Dataframe: keys(cols)-values(rows)
-state.reset_index(level = 0, inplace = True)
+* %who or %whos shows defined variables & %reset resets them
 
-import pdb; pdb.set_trace(), sklearn.metrics.silhouette_samples
-import sqlite3 + con = sqlite3.connect(':memory:')
+* %run script.py: func? prints out func doc
 
-print(sessionInfo()); suppressPackageStartupMessages(library(ggmap)) 
-rm(objectlist): Remove one or more objects from the workspace; rm(list = ls()): Remove all objects in the current workspace
-The cut() function used to transform a numeric variable into a categorical variable.
-vec = rep(c(0,1), c(4,6)) + vec_fac = factor(vec, labels=c('male','female')
-Funcs: tail, levels, list.files(), as.Date, na.omit, all/any, xor, unlist, attributes(), names() na.strings = "", cor.test, is.na, complete.cases
-Key words: stop, invisible, and warning, recall (for recursion)
-Function(x) sd(x)/mean(x): equivalent of lambda functions In Python.
-Library(): shows currently installed packages.
-identify(), pairs(), par(), by(), grid.arrange(), do.call, with, .libPaths() 
-installr: update r in windows, stringi, dt: data table in R; RColorBrewer, gmodels R, scales R, GGally, scales, memisc, lattice, MASS, car, reshape gridextra
-packages: stringr, dbi, rodbc, RSQLite, RCurl, car: recode (good for dummying)
+* Append dict to df, use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)
 
-Nested CV: 5 x 5
+* np: fromfile, genfromtxt
 
-gs = GridSearchCV(estimator = pipe_svc, param)grid = param_grid, scoring = 'accuracy', cv = 5)
-scores = cross_val_score(gs, X, y, scoring = 'accuracy', cv = 5)
+* import pdb; pdb.set_trace(), 
 
-Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, 
-Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix Factorization, 
-Alternating Least Squares.
+* import sqlite3 + con = sqlite3.connect(':memory:')
+
+* gs = GridSearchCV(estimator = pipe_svc, param)grid = param_grid, scoring = 'accuracy', cv = 5)
+
+* scores = cross_val_score(gs, X, y, scoring = 'accuracy', cv = 5)
+
+## R
+
+* rm(objectlist): Remove one or more objects from the workspace
+
+* rm(list = ls()): Remove all objects in the current workspace
+
+* cut(): Transform a numeric variable into a categorical variable.
+
+* installr: update r in windows
+
+* Libraries: gmodels scales, GGally, memisc, lattice, MASS, car, reshape, car: recode (good for dummying)
+
+## Recommendation Systems
+
+Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix Factorization, Alternating Least Squares.
 
 
 
