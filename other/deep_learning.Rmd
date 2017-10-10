@@ -9,15 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 There are several activation functions you may encounter in practice:
 
-Sigmoid: takes a real-valued input and squashes it to range between 0 and 1
-σ(x) = 1 / (1 + exp(−x))
+* Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
 
-tanh: takes a real-valued input and squashes it to the range [-1, 1]
-tanh(x) = 2σ(2x) − 1
+* tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
 
-ReLU: ReLU stands for Rectified Linear Unit. It takes a real-valued input and thresholds it at zero (replaces negative values with zero)
-f(x) = max(0, x)
+* ReLU: ReLU stands for Rectified Linear Unit. It takes a real-valued input and thresholds it at zero (replaces negative values with zero)
+($f(x) = max(0, x)$)
 
-BackProp Algorithm:
+**BackProp Algorithm**
 
 Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
