@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##tuff
+## Stuff
 
 import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
 
@@ -49,7 +49,6 @@ Nested CV: 5 x 5
 
 gs = GridSearchCV(estimator = pipe_svc, param)grid = param_grid, scoring = 'accuracy', cv = 5)
 scores = cross_val_score(gs, X, y, scoring = 'accuracy', cv = 5)
-
 
 Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, 
 Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix Factorization, 
