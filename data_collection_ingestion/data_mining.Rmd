@@ -42,6 +42,7 @@ logging converts multiplicative relationships to additive relationships, and by 
 Selenium: save_screenshot selenium, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
 
 ``from pyvirtualdisplay import Display  
+
 from selenium import webdriver  
 display = Display(visible=0, size=(800, 600))  
 display.start()  
