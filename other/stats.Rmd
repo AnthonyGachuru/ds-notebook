@@ -57,4 +57,10 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * When do we use One-Way ANOVA?  To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist.  The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.
 
-When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.
+* When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.
+
+* To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.
+
+* The degrees of freedom is the number of data rows minus the number of coefficients fit.
+
+* Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
