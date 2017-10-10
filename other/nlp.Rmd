@@ -9,27 +9,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Basic Py NLP Pipeline**
 
-0) Converting text to numerical data is vectorization.
+* Converting text to numerical data is vectorization.
 
-i) Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.
+* Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.
 
-ii) Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.
+* Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.
 
-iii) Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance 
-within that document. CountVectorizer or TF-IDF.
+* Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance within that document. CountVectorizer or TF-IDF.
 
-tf-idf & cosine similarity
+* tf-idf & cosine similarity
 
-##Topic Modeling
+## Topic Modeling
 
-Pointwise mutual information is any way to evaluate topic models. Uses joint probabilities to evaluate how much a word tells you a label.
+* Pointwise mutual information is any way to evaluate topic models. Uses joint probabilities to evaluate how much a word tells you a label.
 
-Mutual information generalized pointwise mutual information averaged over all events.
+* Mutual information generalized pointwise mutual information averaged over all events.
 
-If you're just using the probability vectors that come out of a topic model you are selecting a probability metric. If you want to do post-processing you 
-something like mutual information or point was mutual information you're selecting another metric. Metrics always have a point of view. They're just like 
-human writers. Probability says I like really common words, pointwise mutual information as I like really really really discerning words and I don't care 
-how common they are. Mutual information is sort of a balance between the two. 
+* If you're just using the probability vectors that come out of a topic model you are selecting a probability metric. If you want to do post-processing you something like mutual information or point was mutual information you're selecting another metric. Metrics always have a point of view. 
 
+* They're just like human writers. Probability says I like really common words, pointwise mutual information as I like really really really discerning words and I don't care how common they are. Mutual information is sort of a balance between the two. 
 
-In topic modeling using latent Dirichlet distribution, how are “topics” represented? As distributions over words. 
+* In topic modeling using latent Dirichlet distribution, how are “topics” represented? As distributions over words. 
