@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Comparison: http://scikit-learn.org/stable/modules/clustering.html#clustering
 
+sklearn.metrics.silhouette_samples
+
 ####K-Means
 
 Must choose k for clusters. Initialize cluster centes randomly, assign each point to its closest cluster by a distance metric. Recalculate centroids. Halt when cluster assignments no longer change. Clusters will be distinct and non-overlapping. 
