@@ -29,14 +29,17 @@ gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
 
 logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
 
-Access robots.txt: website_url.domain/robots.txt
-botnet beautiful soup scraping
-user agent switching
+## Scraping
 
-Try polling in your wait about every 500 milliseconds. Also use presence of element located. I generally have better luck with that expected condition than visibility. Also, submit the search using the search button.
+* Access robots.txt: website_url.domain/robots.txt
 
-Selenium: save_screenshot selenium, forward(), back(), maximize(), use action_chains to do stuff like scroll
-find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
+* botnet beautiful soup scraping
+
+* user agent switching
+
+* Try polling in your wait about every 500 milliseconds. Also use presence of element located. I generally have better luck with that expected condition than visibility. Also, submit the search using the search button.
+
+Selenium: save_screenshot selenium, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
 
 from pyvirtualdisplay import Display  
 from selenium import webdriver  

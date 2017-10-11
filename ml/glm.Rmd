@@ -11,15 +11,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Linear Regression
 
-http://www.statmethods.net/stats/rdiagnostics.html
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
+[Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
 
 When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
-
 
 In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
 
 The fitted regression line using a sample of data gives imperfect predictions for future observations due to sampling variability and randomness in Y that is not related to X.
-
 
 For simple linear regression, the principal hypothesis test is as follows:
 ➢ Null Hypothesis (H 0 ): ? 1 = 0
@@ -88,8 +96,6 @@ F-test & partial f-testr for simple and multiple linear regression.
 
 AIC,BIC, forward & backwards selection
 
-
-
 Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
 
 Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
@@ -147,9 +153,29 @@ compare rmse to sd of data for sense of how good it is (rsme < sd good and vice 
 
 ## Ridge 
 
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
 Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
 
 ## Lasso
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
 
 Standardize for ridge/lasso alpha makes them not scale invariant
 
@@ -159,34 +185,39 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 ## Logistic Regression
 
-In particular, logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated.
+**Intro**
 
-In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in.
+* Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in.
 
-link function is the logit function.
+* The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p). 
 
-Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. No closed form expression to maximize coefficients with maximum likelihood estimation, so one uses gradient descent or stochastic gradient descent. The second one is faster. For logistic regression value of c penalizes features. Low c penalizes a lot and vice versa. A large c decreases the effect of the regularization term (the l2 penalization). Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p). Makes a linear boundary between classes. For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
+**Assumptions**
 
-Binomial: n identical trials, success/failure probability same for all trials, and each trial is independent.
+* Independent errors and no multicollinearity.
 
-Odds = p/(1-p) and between 0 and infinity.
+**Characteristics**
 
-Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are unaffected by x and so x has no bearing  on the prediction of success.
+Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. 
 
-Confidence interval: b+/-2*s.e(b) for log odds. Exponentiate for odds.
+* No closed form expression to maximize coefficients with maximum likelihood estimation, so one uses gradient descent or stochastic gradient descent. The second one is faster. 
 
-Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says M is appropriate. Can be expanded to compare models by deviance. Also have McFadden's Pseudo R^2. 
+* For logistic regression value of c penalizes features. Low c penalizes a lot and vice versa. A large c decreases the effect of the regularization term (the l2 penalization). 
 
-Assumptions: Independent errors and no multicollinearity.
+* Makes a linear boundary between classes. 
 
-Note: Can still use A.I.C and B.I.C for model evaluation.
+* For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
 
-Logistic Regression breaks down when classes are perfectly separable.
+**Evaluation**
 
+* Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are unaffected by x and so x has no bearing  on the prediction of success.
 
-Wald Test
+* Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says M is appropriate. Can be expanded to compare models by deviance.
 
+* McFadden's Pseudo R^2. 
 
+* A.I.C and B.I.C
+
+**Pros/Cons**
 
 Advantages:
 
@@ -210,6 +241,10 @@ Disadvantages:
 
 * Can't automatically learn feature interactions
 
+<<<<<<< HEAD
 ##Poisson Regression
 
 Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
+=======
+* Logistic Regression breaks down when classes are perfectly separable.
+>>>>>>> 1867844b3d751c75eea673498d835659a03740b1
