@@ -100,5 +100,10 @@ Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restrict
 Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix Factorization, 
 Alternating Least Squares.
 
+Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
+
+graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+
+Examine the objects in the workspace: ls.str()
 
 

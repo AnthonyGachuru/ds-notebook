@@ -143,6 +143,8 @@ Model Plot Notes:
 
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
 
+compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
+
 ## Ridge 
 
 Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS.  By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
@@ -207,3 +209,7 @@ Disadvantages:
 * Performance is generally not competitive with the best supervised learning methods
 
 * Can't automatically learn feature interactions
+
+##Poisson Regression
+
+Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
