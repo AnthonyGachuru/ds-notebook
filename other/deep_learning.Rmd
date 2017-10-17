@@ -13,9 +13,17 @@ There are several activation functions you may encounter in practice:
 
 * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
 
-* ReLU: ReLU stands for Rectified Linear Unit. It takes a real-valued input and thresholds it at zero (replaces negative values with zero)
+* ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive.
+
 ($f(x) = max(0, x)$)
 
 **BackProp Algorithm**
 
 Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
+
+
+* The last layer of a neural network captures the most complex interactions.
+
+* When plotting the mean-squared error loss function against predictions, the slope is $2x(y-xb)$, or $2input_data error$.
+
+* weights_updated = weights - slope*learning_rate

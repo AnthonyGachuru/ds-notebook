@@ -7,6 +7,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Algorithm Template
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
 ## Model Selection
 
 * http://hunch.net/?p=224

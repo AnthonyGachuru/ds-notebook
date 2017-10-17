@@ -45,6 +45,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Examine the objects in the workspace: ls.str()
 
+* Use bloom::glance to look at model objects.
+
 ## Git
 
 * Add upstream to update a forked repo with the original: remote add upstream repo_url 

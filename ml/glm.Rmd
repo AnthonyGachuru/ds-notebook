@@ -11,16 +11,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Linear Regression
 
-**Intro**
-
-**Assumptions**
-
-**Characteristics**
-
-**Evaluation**
-
-**Pros/Cons**
-
 [Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
 
 When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
@@ -241,10 +231,35 @@ Disadvantages:
 
 * Can't automatically learn feature interactions
 
-<<<<<<< HEAD
-##Poisson Regression
+* Breaks down when classes are perfectly separable.
+
+## Poisson Regression
 
 Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
-=======
-* Logistic Regression breaks down when classes are perfectly separable.
->>>>>>> 1867844b3d751c75eea673498d835659a03740b1
+
+One of the assumptions of Poisson regression to predict counts is that the event you are counting is Poisson distributed: the average count per unit time is the same as the variance of the count. In practice, "the same" means that the mean and the variance should be of a similar order of magnitude.
+
+When the variance is much larger than the mean, the Poisson assumption doesn't apply, and one solution is to use quasipoisson regression, which does not assume that variance=meanvariance=mean.
+
+Remember that you must specify family = poisson or family = quasipoisson when using glm() to fit a count model.
+
+## Generalized Additive Models
+
+**Intro**
+
+mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don't use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response. 
+
+Also remember that gam() from the package mgcv has the calling interface
+
+gam(formula, family, data)
+For standard regression, use family = gaussian (the default).
+
+For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
