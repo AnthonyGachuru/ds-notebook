@@ -17,13 +17,157 @@ There are several activation functions you may encounter in practice:
 
 ($f(x) = max(0, x)$)
 
+* Advised to scale features
+
 **BackProp Algorithm**
 
 Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
-
 
 * The last layer of a neural network captures the most complex interactions.
 
 * When plotting the mean-squared error loss function against predictions, the slope is $2x(y-xb)$, or $2input_data error$.
 
 * weights_updated = weights - slope*learning_rate
+
+* Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.
+
+* Epoch: One full pass through all the batches in the training data.
+
+* Stochastic gradient descent calculates slopes one batch at a time.
+
+* This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.
+
+* Few people use kfold cv in deep learning because of the large datasets in play. 
+
+* Dying neuron + vanishing gradient: Change activation function
+
+# Keras 
+
+* Uses numpy arrays 
+
+* keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
+
+## Regression
+
+* loss = mean_squared_error
+
+* metric: rmse
+
+* activation_function = relu
+
+```{python}
+# Import necessary modules
+
+import keras
+from keras.layers import Dense
+from keras.models import Sequential
+
+# Specify the model: Two hidden layers
+n_cols = predictors.shape[1]
+model = Sequential()
+
+## Input
+model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
+
+# Hidden
+model.add(Dense(32, activation='relu'))
+
+# Output
+model.add(Dense(1))
+
+# Compile the model
+model.compile(optimizer = 'adam', loss = 'mean_squared_error') 
+
+# Fit the model
+model.fit(predictors, target)
+
+#Look at summary
+model.summary()
+
+# Calculate predictions: predictions
+predictions = model.predict(pred_data)
+```
+
+## Classification
+
+* loss = categorical_crossentropy
+
+* metric = accuracy
+
+* activation_function = softmax
+
+* output layer with stuff equal to number of categorical groups
+
+```{python}
+# Import necessary modules
+
+import keras
+from keras.layers import Dense
+from keras.models import Sequential
+
+# Specify the model: Two hidden layers
+
+n_cols = predictors.shape[1]
+model = Sequential()
+
+## Input
+model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
+
+# Hidden
+
+model.add(Dense(32, activation='relu'))
+
+# Output
+model.add(Dense(2, activation = 'softmax'))
+
+# Compile the model
+model.compile(optimizer = 'sgd', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+
+# Fit the model
+model.fit(predictors, target)
+
+#Look at summary
+model.summary()
+
+#Calculate predictions: predictions
+predictions = model.predict(pred_data)
+
+#Calculate predicted probability of survival
+predicted_prob_true = predictions[:, 1]
+```
+
+## Another Example
+
+```{python}
+# Import the SGD optimizer
+from keras.optimizers import SGD
+
+# Create list of learning rates: lr_to_test
+lr_to_test = [.000001, 0.01, 1]
+
+# Loop over learning rates
+for lr in lr_to_test:
+    print('\n\nTesting model with learning rate: %f\n'%lr )
+    
+    # Build new model to test, unaffected by previous models
+    model = get_new_model()
+    
+    # Create SGD optimizer with specified learning rate: my_optimizer
+    my_optimizer = SGD(lr = lr)
+    
+    # Compile the model
+    model.compile(optimizer = my_optimizer, loss = 'categorical_crossentropy')
+    
+    # Fit the model
+    model.fit(predictors, 
+              target, 
+              validation_split = 0.3, 
+              epochs = 20, 
+              callbacks = [early_stopping_monitor*], 
+              verbose = False)
+```
+
+
+
+
+
