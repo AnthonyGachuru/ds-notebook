@@ -41,6 +41,7 @@ logging converts multiplicative relationships to additive relationships, and by 
 
 Selenium: save_screenshot selenium, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
 
+```{python}
 from pyvirtualdisplay import Display  
 from selenium import webdriver  
 display = Display(visible=0, size=(800, 600))  
@@ -50,6 +51,11 @@ browser.get('http://www.google.com')
 print browser.title  
 browser.quit()  
 display.stop()
+```
+
+## Other
+
+* [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
 
 
