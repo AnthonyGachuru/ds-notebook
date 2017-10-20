@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Python
 
+Remove this line.
+
 * isin and crosstab functions pandas
 
 * %matplotlib notebook: interactive plots
