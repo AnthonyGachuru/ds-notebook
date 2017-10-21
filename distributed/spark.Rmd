@@ -27,4 +27,4 @@ print(pi)
 sc.stop()
 ```
 
-
+On Windows: setx SPARK_HOME <path>
