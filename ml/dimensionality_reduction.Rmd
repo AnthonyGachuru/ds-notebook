@@ -42,3 +42,7 @@ Select  eigenvectors that correspond to the  largest eigenvalues, where  is the 
 Construct a projection matrix  from the ""top""  eigenvectors.
 
 Transform the -dimensional input dataset  using the projection matrix  to obtain the new -dimensional feature subspace.
+
+Probabilistic PCA introduces the Gaussian distribution to the PCA modeling framework.
+
+Kernel PCA must project data into a higher dimensional space than that of the original data.

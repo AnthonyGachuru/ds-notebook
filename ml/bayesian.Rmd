@@ -1,7 +1,5 @@
 ---
 title: "Bayesian"
-author: "Gordon"
-date: "April 29, 2017"
 output: html_document
 ---
 
@@ -79,3 +77,24 @@ B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
 
 Posterior prob that CTR_A > CTR_B given data = np.mean(A_samples > B_samples)
 Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
+
+## Heavy
+
+Thus, the “simulate from the prior, pull out the ones who matched our evidence” approach was able to combine the prior and the evidence.
+
+Approximate Bayesian Computation
+
+Laplace approximation: approximate the posterior of a non-conjugate model
+
+A second-order Markov chain uses the previous 2 observations when making a prediction of the next observation.
+
+The stationary distribution of a Markov chain is related to the first eigenvector.
+
+An iterative algorithm is not required to find the maximum likelihood estimate of the transition matrix associated with an observed Markov chain.
+
+In a hidden Markov model, the "hidden" portion corresponds to the state transition sequence.
+
+A continuous hidden Markov model can be thought of as a Gaussian mixture model with a Markovian transition property between clusters.
+
+When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.
+

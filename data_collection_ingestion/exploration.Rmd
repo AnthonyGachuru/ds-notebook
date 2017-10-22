@@ -40,3 +40,5 @@ The cons of imputation:
 
 * The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
 * Can potentially induce unwanted bias.
+
+dplyr::case_when

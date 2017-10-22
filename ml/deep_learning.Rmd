@@ -19,6 +19,12 @@ There are several activation functions you may encounter in practice:
 
 * Advised to scale features
 
+* Generally dealing with Images, Convolutional Neural Network is used mostly because of its better accuracy results.
+
+* model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.
+
+* The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.
+
 **BackProp Algorithm**
 
 Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
@@ -42,6 +48,8 @@ Initially all the edge weights are randomly assigned. For every input in the tra
 * Dying neuron + vanishing gradient: Change activation function
 
 # Keras 
+
+* declare: sequential, add: input-hidden-output, compile, fit
 
 * Uses numpy arrays 
 

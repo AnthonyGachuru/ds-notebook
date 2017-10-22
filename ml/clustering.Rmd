@@ -30,6 +30,10 @@ Davies–Bouldin index: This is an internal evaluation scheme, where the validat
 One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
 in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.[3] clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
 
+In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)
+
+We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
+
 ####Hierarchical Clustering
 
 Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
