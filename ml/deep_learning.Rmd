@@ -11,6 +11,8 @@ There are several activation functions you may encounter in practice:
 
 * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
 
+* Softmax: Same end result as sigmoid, but different function.
+
 * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
 
 * ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive.
