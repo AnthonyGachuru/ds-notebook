@@ -37,6 +37,8 @@ Initially all the edge weights are randomly assigned. For every input in the tra
 
 * weights_updated = weights - slope*learning_rate
 
+* This is exactly what's happening in the vanishing gradient problem -- the gradients of the network's output with respect to the parameters in the early layers become extremely small. That's a fancy way of saying that even a large change in the value of parameters for the early layers doesn't have a big effect on the output. 
+
 * Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.
 
 * Epoch: One full pass through all the batches in the training data.

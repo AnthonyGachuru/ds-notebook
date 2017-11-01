@@ -53,6 +53,12 @@ browser.quit()
 display.stop()
 ```
 
+##SQL Lite
+
+* List tables: SELECT name FROM sqlite_master WHERE type='table';
+
+* Show columns: .headers ON
+
 ## Other
 
 * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
