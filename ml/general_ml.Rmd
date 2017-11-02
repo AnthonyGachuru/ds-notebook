@@ -27,6 +27,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
 
+```{python}
+import numpy as np
+df['hr_sin'] = np.sin(df.hr*(2.*np.pi/24))
+df['hr_cos'] = np.cos(df.hr*(2.*np.pi/24))
+df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
+df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
+```
+
+
 ## Model Selection
 
 * http://hunch.net/?p=224

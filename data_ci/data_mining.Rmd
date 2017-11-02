@@ -64,4 +64,22 @@ display.stop()
 * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
 
+SQL joins allow you to combine two datasets side-by-side, but UNION allows you to stack one dataset on top of the other. Note that UNION only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL
 
+CAST(column_name AS integer)
+Note that you should not include an alias when you write a subquery in a conditional statement. 
+ROW_NUMBER(), RANK() and DENSE_RANK()
+NOW() + INTERVAL 
+artist IS NULL
+artist IS NOT NULL
+song_name NOT ILIKE '%a%': case insensitive
+ORDER BY year DESC, year_rank
+COUNT(DISTINCT month)
+count(col_name_or_col_index) returns count of non-null values like table in R
+The CASE statement is followed by at least one pair of WHEN and THEN statements:
+CASE WHEN year = 'SR' THEN 'yes' ELSE NULL END
+You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like
+
+If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
+
+Can use AND right after JOIN to filter before joining. Using WHERE filters after joining.
