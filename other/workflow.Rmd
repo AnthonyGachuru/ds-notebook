@@ -12,9 +12,40 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Workflow: import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
 
-* [Conda Setup](http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/)
+**VanderplasJupyter**
 
-* [Jupyter Vanderplas](https://www.youtube.com/watch?v=_ZEWDGpM-vM)
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+def fun(a): 
+```{python}
+def fun(a):
+
+  Role
+  -----
+  Does something
+  
+  Parameters
+  ---------
+  Accepts something
+  
+  Returns
+  -------
+  Returns something
+  
+  return(a)
+```
+
+
+
+
+
+* [Conda Setup](http://tdhopper.com/blog/2015/Nov/24/my-python-environment-workflow-with-conda/)
 
 **YAML**
 
