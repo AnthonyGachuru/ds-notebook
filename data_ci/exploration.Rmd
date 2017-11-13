@@ -30,6 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
 The pros of imputation:
 
 * Helps retain a larger sample size of your data.
+
 * Does not sacrifice all the available information in an observation because of sparse missingness.
 
 * Can potentially avoid unwanted bias.
@@ -39,6 +40,11 @@ The cons of imputation:
 * The standard errors of any estimates made during analyses following imputation can tend to be too small.
 
 * The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
+
 * Can potentially induce unwanted bias.
 
-dplyr::case_when
+* dplyr::case_when
+
+* mean of each column = df .mean(axis = 0)  || df .mean(axis = 'index' ) 
+
+* mean of each row = df .mean(axis = 1)  || df .mean(axis = 'columns' ) 

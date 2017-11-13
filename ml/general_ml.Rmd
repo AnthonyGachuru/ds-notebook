@@ -35,7 +35,6 @@ df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
 df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 ```
 
-
 ## Model Selection
 
 * http://hunch.net/?p=224
@@ -125,6 +124,33 @@ df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 * Scikit-learn implements yet another transformer, the TfidfTransformer, that takes the raw term frequencies from CountVectorizer as input and transforms them into tf-idfs.
 
 * Naive Bayes is a linear classifier, while k-NN is not. The curse of dimensionality and large feature sets are a problem for k-NN, while Naive Bayes performs well. k-NN requires no training (just load in the dataset), whereas Naive Bayes does.
+
+##Unbalanced Classes
+
+That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
+
+Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
+
+Balance the training set in some way: Oversample the minority class. Undersample the majority class.
+Synthesize new minority classes.
+
+Throw away minority examples and switch to an anomaly detection framework.
+
+At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
+
+Construct an entirely new algorithm to perform well on imbalanced data.
+
+Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.
+
+Use probability estimates and not the default .5 threshold. 
+
+Undersampling, oversampling, increase weight of minority class
+
+Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
+
+Reframe as Anomaly Detection
+
+* Sklearn Eg: wclf = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')
 
 ## Other
 

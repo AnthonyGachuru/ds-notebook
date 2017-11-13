@@ -177,7 +177,7 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 **Intro**
 
-* Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in.
+* Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
 
 * The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p). 
 
@@ -223,6 +223,8 @@ Advantages:
 
 * Outputs well-calibrated predicted probabilities
 
+* low variance
+
 Disadvantages:
 
 * Presumes a linear relationship between the features and the log-odds of the response.
@@ -232,6 +234,8 @@ Disadvantages:
 * Can't automatically learn feature interactions
 
 * Breaks down when classes are perfectly separable.
+
+* High bias
 
 ## Poisson Regression
 

@@ -17,6 +17,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
 
+* jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics	
+
+* box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series			
+
+* shapiro.test: Test for normality		
+
 * Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
 
 * test heteroscedaticity: breusch-pagan or ncv test
