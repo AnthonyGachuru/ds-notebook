@@ -27,8 +27,17 @@ them directly into decision analysis for these reasons.
 
 An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.
 
-
 ##Naïve Bayes
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
 
 Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.
 
@@ -38,6 +47,18 @@ Pros: It is relatively simple to understand. Training the classifier does not re
 
 Cons: The method relies upon the faulty assumptions that the features in the dataset are independentand equally important. While easily attainable, the estimated probabilities are often less reliable than the predicted class labels themselves.
 Formula: posterior = likelihood*prior/(marginal likelihood) or p(spam|word) = p(word|spam)*p(spam)/p(word)
+
+Pros
+
+* Computationally fast
+
+* Simple to implement
+
+* Works well with high dimensions
+
+Cons
+
+* Relies on independence assumption and will perform badly if this assumption is not met
 
 ##LDA
 

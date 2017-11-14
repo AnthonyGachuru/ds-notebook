@@ -9,6 +9,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##Decision Tree
 
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
 Decision Trees make very few assumptions about the training data (as opposed to linear models, which obviously assume that the data is linear, for example). Such a model is often called a nonparametric model, not because it does not have any parameters (it often has a lot) but because the number of parameters is not determined prior to training, so the model structure is free to stick closely to the data.
@@ -22,11 +32,73 @@ Regression: Use cost complexity pruning to build set of subtrees as a function o
 
 Note: Duplicate splits happen when they increase node purity. While pruning reduces the variance of the overall tree model upon repeated builds with different datasets, we induce biasbecause the trees are much simpler.
 
-Pros: Easy to interpret, easily adapts to qualitive predictors without needing dummy variables, and can easily depicts higher dimensionality.
+Pros: Easy to interpret, easily adapts to qualitive predictors without needing dummy variables, and can easily depicts higher dimensionality. Works well with decision boundaries parellel to the feature axis
 
 Cons: Weak predictive accuracy and prone to overfitting.
 
+##Bagging
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
+used to decrease variance in decision trees
+
+How it works: train multiple trees using bootstrapped datasets, regression trees: average the predictions from all the trees, classification: take a majority vote of the predictions, majority vote: the class which occurs most frequently, Out of bag (OOB) error, Only a portion of the data is used to train each tree, The remaining data which wasn't selected can be used  to assess the tree's performance, (the response for each observation is predicted using
+only the trees that were not fit using that observation)
+
+Bagging involves randomly generating Bootstrap samples from the dataset and trains the models individually. Predictions are then made by aggregating or averaging all the response variables:For example, consider a dataset (Xi, Yi), where i=1 …n, contains n data points.Now, randomly select B samples with replacements from the original dataset using Bootstrap technique.Next, train the B samples with regression/classification models independently. Then, predictions are made on the test set by averaging the responses from all the B models generated in the case of regression. Alternatively, the most often occurring class among B samples is generated in the case of classification.
+
+Bagging stabilizes decision trees and improves accuracy by reducing variance.
+            
+Bagging reduces generalization error.
+
+Take repeated samples of the same size from the single overall training dataset. Treat these different sets of data as pseudo-training sets. Fitting separate, independent decision treesto each of the bootstrapped training data sets. We can then average all predictions (or take the majority vote) to obtain the bagged estimate. Instead of pruning back our trees, create very large trees in the first place. These large trees will tend to have low bias, but high variance. Retain the low bias, but get rid of the high variance by averaging. Con is that the trees are correlation. 
+train multiple trees using bootstrapped data to reduce variance and prevent overfitting 
+
+Pros: 
+
+reduces variance in comparison to regular decision trees
+
+Can provide variable importance measures: classification: Gini index + regression: RSS
+
+Can easily handle qualitative (categorical) features
+
+Out of bag (OOB) estimates can be used for model validation
+
+Cons:
+
+Not as easy to visually interpret
+
+Does not reduce variance if the features are correlated
+
 ##Random Forest
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
+Build a number of decision trees using bootstrapped samples
+
+At each split in the tree only a portion of the features are considered
+
+a feature is selected from a subset of features not the whole feature space
+
+the subset is usually sqrt(n.features)
+
+This allows trees to be built without some of the strong features decorrelates the trees, unlike bagging
 
 Random forests are improvised supervised algorithms than bootstrap aggregation or bagging methods, though they are built on a similar approach. Unlike selecting all the variables in all the B samples generated using the Bootstrap technique in bagging, we select only a few predictor variables randomly from the total variables for each of the B samples. Then, these samples are trained with the models. Predictions are made by averaging the result of each model. The number of predictors in each sample is decided using the formula m = √p, where p is the total variable count in the original dataset.Here are some key notes:This approach removes the condition of dependency of strong predictors in the dataset as we intentionally select fewer variables.
 
@@ -41,21 +113,46 @@ Pros: All purpose model that performs well on most problems. Automatically choos
 
 Cons: Hard to interpret and needs a lot of work to tune parameters.
 
+Pros: 
 
-##Bagging
+Decorrelates trees (relative to boosted trees)
 
-Bagging involves randomly generating Bootstrap samples from the dataset and trains the models individually. Predictions are then made by aggregating or averaging all the response variables:For example, consider a dataset (Xi, Yi), where i=1 …n, contains n data points.Now, randomly select B samples with replacements from the original dataset using Bootstrap technique.Next, train the B samples with regression/classification models independently. Then, predictions are made on the test set by averaging the responses from all the B models generated in the case of regression. Alternatively, the most often occurring class among B samples is generated in the case of classification.
+important when dealing with mulitple features which may be correlated
 
-Bagging stabilizes decision trees and improves accuracy by reducing variance.
-            
-Bagging reduces generalization error.
+reduced variance (relative to regular trees)
 
-Take repeated samples of the same size from the single overall training dataset. Treat these different sets of data as pseudo-training sets. Fitting separate, independent decision treesto each of the bootstrapped training data sets. We can then average all predictions (or take the majority vote) to obtain the bagged estimate. Instead of pruning back our trees, create very large trees in the first place. These large trees will tend to have low bias, but high variance. Retain the low bias, but get rid of the high variance by averaging. Con is that the trees are correlation. 
+Cons:
+
+Not as easy to visually interpret
 
 ##Boosting
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
+Similar to bagging, but trees are grown sequentially. Each tree is created using information from previously grown trees 
 
 Each tree is generated using information from previously grown trees; the addition of a new tree improves upon the performance of the previous trees. The trees are now dependentupon one another. Boosting approach tends to slowly learn our data. Given a current decision tree model, we fit a new decision tree to the residualsof the current decision tree. The new decision tree (based on the residuals) is then added to the current decision tree, and the residuals are updated. We limit the number of terminal nodes in order to sequentially fit small trees. By fitting small trees to the residuals, we slowly improve the overall model in areas where it does not perform well. 
 
 Note: Unlike in bagging and random forests, boosting can overfit if ᫦is large (although very slowly). Use cross-validation to select number of trees᫦. Alpha controls the rate at which boosting learns and is usually between 0.01 to 0.001. A small alpha usually goes with a large number of trees. Can also choose the number of splits. Typically using stumps (single splits d = 1) is sufficient and results in an additive model. 
 
 Note on Variable Importance: For regression trees, we can use the reduction in the RSS. For classification trees, we can use the reduction in the Gini index. A relatively large value indicates a notable drop in the RSS or Gini index, and thus a better fit to the data; corresponding variables are relatively important predictors.
+
+Similar to bagging, but learns sequentially and builds off previous trees
+
+Pros: 
+
+Somewhat more interpretable than boosted trees/random forest as the user can define the size of each tree resulting in a collection of stumps (1 level) which can be viewed as an additive model
+
+Can easily handle qualitative (categorical) features
+
+Cons: 
+
+Unlike boosting and random forests, can overfit if number of trees is too large

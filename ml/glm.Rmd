@@ -11,6 +11,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Linear Regression
 
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
+
 [Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
 
 When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
@@ -42,7 +52,6 @@ ing the regression line (as compared to predicting individual data points), the
 assumption of normality is barely important at all. Thus, in contrast to many
 regression textbooks, we do not recommend diagnostics of the normality of re-
 gression residuals. [Gelman]
-
 
 Use Box-Cox transformations when predictions are skewed
 
@@ -238,6 +247,16 @@ Disadvantages:
 * High bias
 
 ## Poisson Regression
+
+**Intro**
+
+**Assumptions**
+
+**Characteristics**
+
+**Evaluation**
+
+**Pros/Cons**
 
 Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
 
