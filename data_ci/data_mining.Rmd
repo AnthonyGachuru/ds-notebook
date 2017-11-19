@@ -63,7 +63,6 @@ display.stop()
 
 * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
-
 SQL joins allow you to combine two datasets side-by-side, but UNION allows you to stack one dataset on top of the other. Note that UNION only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL
 
 CAST(column_name AS integer)

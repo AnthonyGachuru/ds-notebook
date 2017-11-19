@@ -48,3 +48,7 @@ The cons of imputation:
 * mean of each column = df .mean(axis = 0)  || df .mean(axis = 'index' ) 
 
 * mean of each row = df .mean(axis = 1)  || df .mean(axis = 'columns' ) 
+
+##Data Table
+
+dt[i, j, by] : subset by i calculate by j grouped using by

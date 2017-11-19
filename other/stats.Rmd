@@ -23,6 +23,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * shapiro.test: Test for normality		
 
+* Sum of normally distributed random variables: sum of means & sum of variances
+
 * Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
 
 * test heteroscedaticity: breusch-pagan or ncv test
@@ -97,6 +99,10 @@ significance level = P(Type I error) = probability of finding an effect that is 
 power = 1 - P(Type II error) = probability of finding an effect that is there
 
 Given any three, we can determine the fourth.
+
+The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β.
+
+For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.
 
 ### Stats For Hackers
  
