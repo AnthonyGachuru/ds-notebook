@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Evaluation**
 
-**Pros/Cons**
-
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
 Decision Trees make very few assumptions about the training data (as opposed to linear models, which obviously assume that the data is linear, for example). Such a model is often called a nonparametric model, not because it does not have any parameters (it often has a lot) but because the number of parameters is not determined prior to training, so the model structure is free to stick closely to the data.
@@ -32,9 +30,18 @@ Regression: Use cost complexity pruning to build set of subtrees as a function o
 
 Note: Duplicate splits happen when they increase node purity. While pruning reduces the variance of the overall tree model upon repeated builds with different datasets, we induce biasbecause the trees are much simpler.
 
+**Pros/Cons**
+
 Pros: Easy to interpret, easily adapts to qualitive predictors without needing dummy variables, and can easily depicts higher dimensionality. Works well with decision boundaries parellel to the feature axis
 
+- Fast
+- Robust to noise and missing values
+- Accurate
+
 Cons: Weak predictive accuracy and prone to overfitting.
+
+- Complex trees are hard to interpret
+- Duplication within the same sub-tree is possible
 
 ##Bagging
 

@@ -67,6 +67,15 @@ Initially all the edge weights are randomly assigned. For every input in the tra
 
 * activation_function = relu
 
+Pros: - Extremely powerful
+- Can model even very complex relationships
+- No need to understand the underlying data
+
+Cons:  Prone to overfitting
+- Long training time
+- Requires significant computing power for large datasets
+- Model is essentially unreadable
+
 ```{python}
 # Import necessary modules
 

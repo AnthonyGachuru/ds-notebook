@@ -19,9 +19,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Evaluation**
 
-**Pros/Cons**
-
 [Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
+
+Increasing x1 by 1 means you are increasing the underlying X1 by 1 standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1 is the effect on y of increasing X1 by 1 sigma.
 
 When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
 
@@ -149,6 +149,17 @@ Model Plot Notes:
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
 
 compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
+
+**Pros**
+
+- Very fast (runs in constant time)
+- Easy to understand the model
+- Less prone to overfitting
+
+**Cons**
+
+- Unable to model complex relationships
+-Unable to capture nonlinear relationships without first transforming the inputs
 
 ## Ridge 
 
