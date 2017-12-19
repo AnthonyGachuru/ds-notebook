@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## General
 
+* import pandas_profiling; pandas_profiling.ProfileReport(data)
+
 [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
 
 **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.

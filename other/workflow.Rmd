@@ -12,6 +12,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Workflow: import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
 
+* Workflow Languages: (R) import -> tidy -> (Python) transform <-> visualize <-> model -> (rmarkdown) communicate
+
+* Use branches to delineate iterations
+
+* Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]
+
+* Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]
+
+A typical data science workflow can be framed as following these 7 steps:
+
+Business: start with a business question, define the goal and measure of success
+
+Data: find, access and explore the data
+
+Features: extract, assess and evaluate, select and sort
+
+Models: find the right model for the problem at hand, compare, optimize, and fine tune
+
+Communication: Interpret and communicate the results
+
+Production: transform the code into production ready code, integrate into current ecosystem and deploy
+
+Maintain: adapt the models and features to the evolution of the environment
+
 **VanderplasJupyter**
 
 * create helper functions and units tests as R/py for Rmd/ipynb

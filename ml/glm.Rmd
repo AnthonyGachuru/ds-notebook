@@ -19,6 +19,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **Evaluation**
 
+Linear: When you’re predicting a continuous value. (What temperature will it be today?)
+
 [Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
 
 Increasing x1 by 1 means you are increasing the underlying X1 by 1 standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1 is the effect on y of increasing X1 by 1 sigma.
@@ -199,6 +201,8 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 * Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
 
+Logistic: When you’re predicting which category your observation is in. (Is this is a cat or a dog?)
+
 * The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p). 
 
 **Assumptions**
@@ -268,6 +272,8 @@ Disadvantages:
 **Evaluation**
 
 **Pros/Cons**
+
+Poisson: When you’re predicting a count value. (How many dogs will I see in the park?)
 
 Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
 
