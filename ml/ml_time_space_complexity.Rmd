@@ -1,0 +1,45 @@
+---
+title: "Packages"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Pythia: Py Model Training Time Estimate**
+
+https://stats.stackexchange.com/questions/81985/how-to-estimate-training-time-prior-to-training-machine-learning-neural-netw
+
+time and space complexity of ml algos
+
+Linear Regression
+
+TC: 
+SC:
+
+SVM
+
+The LinearSVC class is based on the liblinear library, which implements an optimized algorithm for linear SVMs. It does not support the kernel trick, but it scales almost linearly with the number of training instances and the number of features: its training time complexity is roughly O(m × n).
+
+TC: O(m x n)
+SC: 
+Assumes: Default settings
+
+Same for SGDClassifier.
+
+The SVC class is based on the libsvm library, which implements an algorithm that supports the kernel trick.2 The training time complexity is usually between O(m^2 × n) and O(m^3 × n). Unfortunately, this means that it gets dreadfully slow when the number of training instances gets large (e.g., hundreds of thousands of instances). This algorithm is perfect for complex but small or medium training sets. However, it scales well with the number of features, especially with sparse features (i.e., when each instance has few nonzero features). In this case, the algorithm scales roughly with the average number of nonzero features per instance. Table 5-1 compares Scikit-Learn’s SVM classification classes.
+
+TC: O(m^2 x n) / O(m^3 x n)
+SC: 
+Assumes: Default settings
+
+Deicison Tree
+
+TC: O(n*m*log(m))
+
+"Making predictions requires traversing the Decision Tree from the root to a leaf. Decision Trees are generally approximately balanced, so traversing the Decision Tree requires going through roughly O(log2(m)) nodes.3 Since each node only requires checking the value of one feature, the overall prediction complexity is just O(log2(m)), independent of the number of features. So predictions are very fast, even when dealing with large training sets.
+
+However, the training algorithm compares all features (or less if max_features is set) on all samples at each node. This results in a training complexity of O(n × m log(m)). For small training sets (less than a few thousand instances), Scikit-Learn can speed up training by presorting the data (se..."
+
+

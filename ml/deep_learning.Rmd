@@ -189,6 +189,35 @@ for lr in lr_to_test:
 ```
 
 
+### Week 1
 
+* [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
 
+* Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.
 
+* Momentum and learning rate decay are good for knowing which way to go in gradient descent.
+
+* Always try to lower your learning rate for improvement. 
+
+* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
+
+### Week 2
+
+* n inputs and k outputs gives you $(n+1)*k$ parameters. 
+
+* Back propogation takes about twice the memory as forward propogation. 
+
+* Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn't work, go deeper.
+
+### Week 3
+
+* Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn't matter then use translation invariance. Use weight sharing if this occurs in text. 
+
+* Things that don't chnage across time, space, etc are called statistical invariants.
+
+### Week 4
+
+* RNN's use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier. 
+
+* Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn't remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short
+term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.

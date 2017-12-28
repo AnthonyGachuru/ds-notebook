@@ -23,6 +23,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * from sklearn.preprocessing import MultiLabelBinarizer
 
+* Active Learning: Finding the optimal data to manually label
+
+*Simulated Annealing: Gradient descent extension
+
 ## Feature Selection
 
 Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
