@@ -51,6 +51,68 @@ The cons of imputation:
 
 * mean of each row = df .mean(axis = 1)  || df .mean(axis = 'columns' ) 
 
-##Data Table
+## Data Table
+
+Operations done by reference
 
 dt[i, j, by] : subset by i calculate by j grouped using by
+
+1: numeric 
+
+1L: integer
+
+NA_integer_: integer
+
+DT[.N] : prints last row
+
+names(DT): colnames
+
+dim(DT): dimensions
+
+DT[, .(A, B)]: returns two columns
+
+DT[, c(A, B)]: returns a concatenated vector
+
+DT[, .(sum_c = sum(C)]
+
+DT[, plot(A, C)]
+
+DT[, A:=NULL]: Remove column A
+
+DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
+
+DT[, .N, by = Sepal.Width]: .N is the count of each group
+
+DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
+
+dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
+
+for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+
+setnames(DT, 'y', 'z'): changes colname from y to z
+
+setkey(DT, A, B)
+
+DT[.('b')]
+
+DT[.(c('b', 'c'))]
+
+DT[.(c('b', 'c')), mult="first"]
+
+DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
+
+DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
+
+roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
+
+
+
+
+
+
+
+
+
+
+
+

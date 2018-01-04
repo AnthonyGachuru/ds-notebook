@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Preamble
+# Preamble
 
 * Workflow: import -> tidy -> Explore [ transform <-> visualize <-> model ] -> communicate
 
@@ -78,6 +78,8 @@ The first part conda env export writes out all the packages in the environment, 
 `conda env create -f environment.yaml`
 
 This will create a new environment with the same name listed in environment.yaml.
+
+# General Workflow
 
 ## Data Ingestion/Wrangling
 
@@ -158,3 +160,36 @@ This will create a new environment with the same name listed in environment.yaml
 * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
 
 * Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
+
+# R Stack
+
+import
+
+tidy
+
+Explore
+
+[ transform ] 
+
+[visualize]
+
+[model ]
+
+communicate
+
+# Py Stack
+
+import
+
+tidy
+
+Explore
+
+[ transform ] 
+
+[visualize]
+
+[model ]
+
+communicate
+
