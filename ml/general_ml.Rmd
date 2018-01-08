@@ -25,7 +25,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Active Learning: Finding the optimal data to manually label
 
-*Simulated Annealing: Gradient descent extension
+* Simulated Annealing: Gradient descent extension
+
+* https://ml-cheatsheet.readthedocs.io/en/latest/index.html
 
 ## Feature Selection
 
@@ -129,7 +131,7 @@ df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 
 * Naive Bayes is a linear classifier, while k-NN is not. The curse of dimensionality and large feature sets are a problem for k-NN, while Naive Bayes performs well. k-NN requires no training (just load in the dataset), whereas Naive Bayes does.
 
-##Unbalanced Classes
+## Unbalanced Classes
 
 That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
 
@@ -175,4 +177,6 @@ So, if your problem involves kind of searching a needle in the haystack when for
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression
 
 * Non-Parametric: No assumption about model form is made, Example: KNN
+
+* Set Random state by hand in sklearn.
 

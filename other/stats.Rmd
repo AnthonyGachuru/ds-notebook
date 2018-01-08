@@ -15,7 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Probably the most useful types of statistics for skewed probability distributions like this one, though, are quantiles. 
 
-* get 95% ci around p-value
+* Get 95% ci around p-value
+
+*Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:
+
+$\frac{-log(\frac{d}{2})}{2e^2}$
+
+then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
+
+* There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
 
 * Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
 
@@ -45,14 +53,13 @@ of the population mean. Assumes the population from which the sample is drawn is
 * Two Sample T-test: To examine the average difference between two samples drawn from two 
 different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
 
-* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
-
-* Barlett Test: F-Test for more than two populations. 
-
 * One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
 
 * Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
 
+* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+
+* Barlett Test: F-Test for more than two populations. 
 
 * If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won't. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.
 
@@ -82,29 +89,35 @@ different populations. Assumes the populations from which the samples are drawn 
 
 ### Level and power of statistical test
 
-The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means.  
+The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 
+
 1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]
+
 2) The approximation becomes better with larger n, given other things remaining the same.
 
 However if you are wondering why 30 ? why not 25 or 40 or something else ? Note that actual answer will depend:
 
 1) how much error are you going to tolerate
-2) size of the effect
-3) exact distribution family (like t vs chi-square vs gamma)
 
+2) size of the effect
+
+3) exact distribution family (like t vs chi-square vs gamma)
 
 The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β. In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down. Statistical power is affected chiefly by the size of the effect and the size of the sample used to detect it. Bigger effects are easier to detect than smaller effects, while large samples offer greater test sensitivity than small samples.
 
 The following four quantities have an intimate relationship:
 
 sample size
+
 effect size
+
 significance level = P(Type I error) = probability of finding an effect that is not there
+
 power = 1 - P(Type II error) = probability of finding an effect that is there
 
 Given any three, we can determine the fourth.
 
-The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β.
+The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.
 
 For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.
 

@@ -36,7 +36,75 @@ Production: transform the code into production ready code, integrate into curren
 
 Maintain: adapt the models and features to the evolution of the environment
 
-**VanderplasJupyter**
+# My Stack
+
+Import
+
+https://github.com/ContinuumIO/TextAdapter
+
+Tidy 
+
+widyr
+tidyr
+dplyr
+
+U:Transform
+
+https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/
+https://github.com/ropenscilabs/skimr
+https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html
+https://github.com/ResidentMario/missingno
+https://github.com/shawnbrown/datatest
+TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)|[2](http://www.tdda.info/)|[3](http://stochasticsolutions.com/)|[**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
+[Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
+missingness::[1](https://github.com/MimiOnuoha/missing-datasets):[2](https://github.com/njtierney/naniar)|[Py](https://github.com/ResidentMario/missingno)
+https://jennybc.github.io/purrr-tutorial/index.html
+https://github.com/drsimonj/corrr
+https://cran.r-project.org/web/packages/simputation/index.html
+[Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
+[Regex For Humans](https://github.com/iogf/crocs)
+https://github.com/yhat/pandasql
+https://github.com/njtierney/naniar
+
+U:Visualize
+
+ggformula
+ggplot2
+plotnine
+
+U:Model
+
+http://www.ats.ucla.edu/stat/mult_pkg/whatstat/
+https://github.com/WinVector/vtreat
+https://systemml.apache.org
+
+Pipelines & Feature Unions::[1](https://github.com/zipfian/pipelines_and_featureunions)|[2](http://zacstewart.com/2014/08/05/pipelines-of-featureunions-of-pipelines.html)
+
+https://github.com/scikit-learn-contrib/boruta_py
+[Algorithms](https://github.com/EpistasisLab/scikit-rebate)
+
+http://contrib.scikit-learn.org/imbalanced-learn/stable/
+
+https://github.com/DistrictDataLabs/yellowbrick
+https://github.com/marcotcr/lime
+https://github.com/TeamHG-Memex/eli5
+
+https://github.com/hyperopt/hyperopt-sklearn
+https://github.com/rsteca/sklearn-deap
+
+https://t.co/Zcnd7EJKsn
+https://rasbt.github.io/mlxtend/
+
+https://github.com/databricks/spark-sklearn
+pysparkling/sparkling_pandas/sparklyr
+
+https://github.com/ShopRunner/jupyter-notify
+
+Communicate
+
+Rmarkdown/Jupyter/Shiny/Dash
+
+**Vanderplas Jupyter**
 
 * create helper functions and units tests as R/py for Rmd/ipynb
 

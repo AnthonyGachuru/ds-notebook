@@ -9,8 +9,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Python
 
-Remove this line.
-
 * isin and crosstab functions pandas
 
 * %matplotlib notebook: interactive plots
@@ -43,7 +41,7 @@ Remove this line.
 
 * installr: update r in windows
 
-* Libraries: gmodels scales, GGally, memisc, lattice, MASS, car, reshape, car: recode (good for dummying)
+* car: recode (good for dummying)
 
 * Examine the objects in the workspace: ls.str()
 
@@ -59,11 +57,7 @@ Remove this line.
 
 * Update local repo with master changes: git pull origin master
 
-git remote + git help add + git init + git add *.py + to ignore creat .gitignore
-
-git diff (--cache) + git rm t.py + git rm --cached 't.py' //remove from staging area
-
-change name: git rename origin newname + tagging: git tag + create: git tag -a sometagname
+git diff (--cache) | git rm --cached 't.py' //remove from staging area
 
 git show version_name + git branch (--merged, --no-merged) + git merge fix20
 
@@ -77,13 +71,13 @@ git fetch upstream: pull changes fro original repo + git push origin master: pus
 
 git merge upstream/master: merge github and local + make pull request, send pull request
 
-Checkout: Leave master branch at latest version, move working directory to specified commit
-
 Reset: Move master and working directory.
 
 Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.
 
 ## Other
+
+Cheatsheets::[1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5):[2](https://github.com/kailashahirwar/cheatsheets-ai):[3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html):[RStudio](https://www.rstudio.com/resources/cheatsheets/):[DL](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
 
 Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
 
