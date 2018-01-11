@@ -180,3 +180,19 @@ So, if your problem involves kind of searching a needle in the haystack when for
 
 * Set Random state by hand in sklearn.
 
+* Linear Regression by Year
+
+```{r}
+library(purrr)
+pga %>% 
+  select(name,year,driveavg,drivepct, score.avg) %>%
+  split(.$year) %>%
+  map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
+  map(summary)
+```
+
+* Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I'm going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).
+
+* We can also tell that our input, smart_1_normalized, doesn't have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).
+
+

@@ -15,6 +15,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Probably the most useful types of statistics for skewed probability distributions like this one, though, are quantiles. 
 
+* Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!
+
+* Random sampling & random assignment: causal & generalizable
+
 * Get 95% ci around p-value
 
 *Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:

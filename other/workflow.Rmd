@@ -52,6 +52,8 @@ U:Transform
 
 https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/
 https://github.com/ropenscilabs/skimr
+[xda: Exploratory Analysis](https://github.com/ujjwalkarn/xda)
+[Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
 https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html
 https://github.com/ResidentMario/missingno
 https://github.com/shawnbrown/datatest

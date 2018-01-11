@@ -47,6 +47,8 @@ The cons of imputation:
 
 * dplyr::case_when
 
+* na.omit()
+
 * mean of each column = df .mean(axis = 0)  || df .mean(axis = 'index' ) 
 
 * mean of each row = df .mean(axis = 1)  || df .mean(axis = 'columns' ) 

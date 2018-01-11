@@ -7,6 +7,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## General
+
+‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc. (Statistical Analysis of Complete Social Networks 
+
 ## Networkx
 
 Import necessary modules and draw graph.
