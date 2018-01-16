@@ -42,6 +42,8 @@ Import
 
 https://github.com/ContinuumIO/TextAdapter
 
+library("readxl")
+
 Tidy 
 
 widyr
