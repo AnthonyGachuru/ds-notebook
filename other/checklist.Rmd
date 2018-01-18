@@ -17,9 +17,9 @@ So the first thing I do is fool around a bit to try to figure out what the data 
 
 If the data set is really big, I usually take a carefully chosen random subsample to make it possible to do my exploration interactively
 
- missing values or outliers
+missing values or outliers
 
- summary() 
+summary() 
 
 ### Tidy
 

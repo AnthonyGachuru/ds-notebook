@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * isin and crosstab functions pandas
 
+* The only float that isn't equal to itself is nan.
+
 * %matplotlib notebook: interactive plots
 
 * Python memory storage: use pd.copy to create a deep copy instead of a shallow copy
@@ -46,6 +48,23 @@ knitr::opts_chunk$set(echo = TRUE)
 * Examine the objects in the workspace: ls.str()
 
 * Use bloom::glance to look at model objects.
+
+* This is how you dynamically update a value in Rmarkdown: x = *backtick* r x *backtick*. 
+
+**R for Everything**
+
+dir.exists
+dir.create
+download.file
+untar
+unlink
+file.info
+getXCKD
+dir
+file.rename
+file.copy
+count.fields
+system
 
 ## Git
 

@@ -1,0 +1,18 @@
+---
+title: "Untitled"
+author: "Gordon"
+date: "January 16, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Transform
+
+Too many levels for a category?
+
+- limit number of categories through feature selection
+- https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables
+- bucket groups by number of samples
