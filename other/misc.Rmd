@@ -68,11 +68,28 @@ file.copy
 count.fields
 system
 
+https://www.rdocumentation.org/packages/dplyr/versions/0.7.3/topics/compute
+
+tryCatch({
+    # Selection code here
+    a_tibble[, c("artist_name", "release", "title", "year")]
+  },
+  error = print
+)
+
+stringr: matches, contains, starts_with
+
+dplyr has five main actions that you can perform on a data frame. You can select columns, filter rows, arrange the order of rows, change columns or add new columns, and calculate summary statistics.
+
+https://www.rdocumentation.org/packages/fpc/versions/2.1-10/topics/bhattacharyya.dist
+
 ## Git
 
 * Add upstream to update a forked repo with the original: remote add upstream repo_url 
 
 * To undo git add . use git reset (no dot)
+
+* git config --global credential.helper 'cache --timeout=10000000'
 
 * Update chnages from original repo, put in new branch: git fetch upstream
 

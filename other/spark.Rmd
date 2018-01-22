@@ -213,5 +213,122 @@ label (this is the default name for the response variable in Spark's machine lea
 
 ## Sparklyr
 
+library(sparklyr)
+
+Connect to your Spark cluster
+spark_conn <- spark_connect(master = "local")
+
+Print the version of Spark
+spark_version(sc = spark_conn)
+
+Disconnect from Spark
+spark_disconnect(sc = spark_conn)
+
+src_tbls(sc)
+
+Copy track_metadata to Spark
+track_metadata_tbl <- copy_to(spark_conn, track_metadata)
+
+Print 5 rows, all columns
+print(track_metadata_tbl, n = 5, width = Inf)
+
+To collect your data: that is, to move it from Spark to R, you call collect()
+
+copy_to() moves your data from R to Spark
+
+The solution is to use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
+
+If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
+
+Write SQL query
+query <- "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"
+
+Run the query
+(results <- dbGetQuery(spark_conn, query))
+
+A semi join returns the rows of the first table where it can find a match in the second table. The principle is shown in this diagram.
+
+feature transforms: ft_
+ml functions: ml_
+spark df functions: sdf_
+
+general structure
+
+a_tibble %>%
+  ft_some_transformation("x", "y", some_other_args)
+
+hotttnesss <- track_metadata_tbl %>%
+  # Select artist_hotttnesss
+  select(artist_hotttnesss) %>%
+  # Binarize to is_hottt_or_nottt
+  ft_binarizer('artist_hotttnesss', 'is_hottt_or_nottt', threshold = .5) %>%
+  # Collect the result
+  collect() %>%
+  # Convert is_hottt_or_nottt to logical
+  mutate(is_hottt_or_nottt = as.logical(is_hottt_or_nottt))
+
+ft_tokenizer(): to lower and split into individual words
+ft_regex_tokenizer
+sdf_sort
+
+track_metadata_tbl has been pre-defined
+
+track_metadata_tbl
+
+Get the schema
+
+(schema <- sdf_schema(track_metadata_tbl))
+
+Transform the schema
+
+schema %>%
+  lapply(function(x) do.call(data_frame, x)) %>%
+  bind_rows()
+
+train-test split
+partitioned <- track_metadata_tbl %>%
+  sdf_partition(training = 0.7, testing = 0.3)
+
+### ml
+
+ls("package:sparklyr", pattern = "^ml")
+
+Parquet files: quicker to read and write.  parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig. spark_read_parquet
+
+parquet_dir has been pre-defined
+
+parquet_dir
+
+List the files in the parquet dir
+
+filenames <- dir(parquet_dir, full.names = TRUE)
+
+Show the filenames and their sizes
+
+data_frame(
+  filename = basename(filenames),
+  size_bytes = file.size(filenames)
+)
+
+Import the data into Spark
+
+timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
+
+gradient_boosted_trees_model <- track_data_to_model_tbl %>%
+  # Run the gradient boosted trees model
+   ml_gradient_boosted_trees('year', feature_colnames)
+
+responses <- track_data_to_predict_tbl %>%
+  # Select the year column
+  select(year) %>%
+  # Collect the results
+  collect() %>%
+  # Add in the predictions
+  mutate(
+    predicted_year = predict(
+      gradient_boosted_trees_model,
+      track_data_to_predict_tbl
+    )
+  )
 
 
