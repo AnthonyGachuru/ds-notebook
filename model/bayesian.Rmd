@@ -121,3 +121,14 @@ A continuous hidden Markov model can be thought of as a Gaussian mixture model w
 
 When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.
 
+Beta for prior beta for posterior conjugate & binomial for likelihoood
+
+Small alpha and beta means the prior is less informative 
+
+Update: beta(alpha + successes, beta + failures)
+
+mean beta: alpha/(alpha + beta)
+
+mean beta posterior:  (alpha + successes)/(alpha + successes + beta + failures)
+
+Empirical Bayes is an approximation to more exact Bayesian methods- and with the amount of data we have, it’s a very good approximation.

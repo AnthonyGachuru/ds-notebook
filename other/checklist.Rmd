@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Import 
+## Import 
 
 Step 0: Figure out what I’m trying to do with the data
 
@@ -21,11 +21,11 @@ missing values or outliers
 
 summary() 
 
-### Tidy
+## Tidy
 
-### Transform
+## Transform
 
-### Visualize 
+## Visualize 
 
 To compare the distributions of variables I usually use overlayed density plots 
 
@@ -35,8 +35,34 @@ Step 3: Plot. That. Stuff. After getting a handle with mostly text based tables 
 
 Usually color/size the dots in the scatterplots by other variables to see if I can identify any confounding relationships that might screw up analyses downstream. Then, if the data are multivariate, I do some dimension reduction to get a feel for high dimensional structure. Nobody mentioned principal components or hierarchical clustering in the Twitter conversation, but I end up using these a lot to just figure out if there are any weird multivariate dependencies I might have missed.
 
-### Model 
+## Model 
 
-### Communicate
+tuning | dummy | standardize | feature selection | dimensionality reduction
+
+## Communicate
 
 N/A
+
+## [Kaggle Checklist](https://www.kaggle.com/general/19959)
+
+I use every new contest to update any general python environments (all Anaconda) I have on the 5 computers I may actually do coding on. (Even though this is not strictly necessary since I set up project environments, it's a trigger to keep things up to date.)
+
+Add the competition end date to my electronic and wall calendars.
+
+Update the kaggle evaluation metric wiki to reference back to the contest page.
+
+Identify any related contests
+
+Subscribe to the Forum
+
+Create a github repo, a standard folder structure, and a wiki so that I have a single place for model notes and to capture forum posts of interest. (I have a sub checklist for the steps, e.g., what I add to the .gitignore, etc.)
+
+Download the data
+
+Create virtual environments (conda) for my 3 linux machines with a standard set of libraries. Again, this is a separate sub checklist, and includes updating xgboost, theano, etc. Once I start a project, I do not update libraries unless absolutely necessary.
+
+Explore the data, which includes basic outlier analysis.
+
+Force myself to write error analysis code before I start building a model. (This is hard to stay true to, but worth the effort.)
+
+Start feature transformation, and finally model building

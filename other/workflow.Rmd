@@ -78,6 +78,8 @@ plotnine
 
 U:Model
 
+Work with data subset
+
 http://www.ats.ucla.edu/stat/mult_pkg/whatstat/
 https://github.com/WinVector/vtreat
 https://systemml.apache.org

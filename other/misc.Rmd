@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * isin and crosstab functions pandas
 
+* Why are functions considered first class objects in Python? A first class object is an entity that can be dynamically created, destroyed, passed to a function, returned as a value, and have all the rights as other variables in the programming language have. 
+
 * The only float that isn't equal to itself is nan.
 
 * %matplotlib notebook: interactive plots
