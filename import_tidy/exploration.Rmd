@@ -11,23 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * import pandas_profiling; pandas_profiling.ProfileReport(data)
 
-[Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
+* [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
 
-**The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
+* **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
 
 ## SQL
-
-* Standard sql commands: Select, From, Insert, Update, Delete, Create, Drop, Truncate
-
-* Joins: ‘left’, ‘right’, ‘inner’, ‘full’, and ‘union’
-
-* Differences between null vs. 0
 
 * A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
 
 ## Missingness & Imputation
 
-* Missingness types: 1) Completely at Random, 2) At Random, 3) Not at random
+There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
 
 The pros of imputation:
 
@@ -45,67 +39,67 @@ The cons of imputation:
 
 * Can potentially induce unwanted bias.
 
+Other notes:
+
 * dplyr::case_when
 
-* na.omit()
+* na.omit(): Similar to complete cases.
 
-* mean of each column = df .mean(axis = 0)  || df .mean(axis = 'index' ) 
+* mean of each column = df.mean(axis = 0) || df.mean(axis = 'index' )
 
-* mean of each row = df .mean(axis = 1)  || df .mean(axis = 'columns' ) 
+* mean of each row = df .mean(axis = 1) || df .mean(axis = 'columns' ) 
 
 ## Data Table
 
-Operations done by reference
+* Operations done by reference
 
-dt[i, j, by] : subset by i calculate by j grouped using by
+* dt[i, j, by] : subset by i calculate by j grouped using by
 
-1: numeric 
+* 1: numeric | 1L: integer
 
-1L: integer
+* NA_integer_: integer
 
-NA_integer_: integer
+* DT[.N] : prints last row
 
-DT[.N] : prints last row
+* names(DT): colnames
 
-names(DT): colnames
+* dim(DT): dimensions
 
-dim(DT): dimensions
+* DT[, .(A, B)]: returns two columns
 
-DT[, .(A, B)]: returns two columns
+* DT[, c(A, B)]: returns a concatenated vector
 
-DT[, c(A, B)]: returns a concatenated vector
+* DT[, .(sum_c = sum(C)]
 
-DT[, .(sum_c = sum(C)]
+* DT[, plot(A, C)]
 
-DT[, plot(A, C)]
+* DT[, A:=NULL]: Remove column A
 
-DT[, A:=NULL]: Remove column A
+* DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
 
-DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
+* DT[, .N, by = Sepal.Width]: .N is the count of each group
 
-DT[, .N, by = Sepal.Width]: .N is the count of each group
+* DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
 
-DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
+* dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
 
-dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
+* for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
 
-for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+* setnames(DT, 'y', 'z'): changes colname from y to z
 
-setnames(DT, 'y', 'z'): changes colname from y to z
+* setkey(DT, A, B)
 
-setkey(DT, A, B)
+* DT[.('b')]
 
-DT[.('b')]
+* DT[.(c('b', 'c'))]
 
-DT[.(c('b', 'c'))]
+* DT[.(c('b', 'c')), mult="first"]
 
-DT[.(c('b', 'c')), mult="first"]
+* DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
 
-DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
+* DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
 
-DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
-
-roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
+* roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
 
 
 
