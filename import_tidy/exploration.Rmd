@@ -15,10 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
 
-## SQL
-
-* A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
-
 ## Missingness & Imputation
 
 There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
