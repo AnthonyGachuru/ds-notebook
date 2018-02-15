@@ -1,7 +1,5 @@
 ---
 title: "GLM"
-author: "Gordon"
-date: "April 29, 2017"
 output: html_document
 ---
 
