@@ -33,11 +33,11 @@ knitr::opts_chunk$set(echo = TRUE)
     
 * [CSV to DB V2](https://gist.github.com/gfleetwood/c2ea91da4a8ab1a77f777e28e0b2949c)
 
-SQL joins allow you to combine two datasets side-by-side, but UNION allows you to stack one dataset on top of the other. Note that UNION only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL
+* SQL joins allow you to combine two datasets side-by-side, but UNION allows you to stack one dataset on top of the other. Note that UNION only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL
 
-* List tables: SELECT name FROM sqlite_master WHERE type='table';
+* List tables: SELECT name FROM sqlite_master WHERE type='table'; [sqllite]
 
-* Show columns: .headers ON
+* Show columns: .headers ON [sqllite]
 
 CAST(column_name AS integer)
 Note that you should not include an alias when you write a subquery in a conditional statement. 
@@ -56,8 +56,6 @@ You can also define a number of outcomes in a CASE statement by including as man
 If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
 
 Can use AND right after JOIN to filter before joining. Using WHERE filters after joining.
-
-
 
 ## Scraping
 
