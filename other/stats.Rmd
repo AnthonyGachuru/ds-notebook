@@ -9,21 +9,21 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## General
 
+Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:
+
+$\frac{-log(\frac{d}{2})}{2e^2}$
+
+then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
+
 * Type I Error: Saying there is an effect when there isn't one. Type II error: concluding there is no effect when, in fact, there is one.
 
 * Probably the most useful types of statistics for skewed probability distributions are quantiles. 
 
 * Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!
 
-* Random sampling & random assignment: causal & generalizable
+* Random sampling & random assignment: generalizable & causal
 
 * Get 95% ci around p-value
-
-* Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:
-
-$\frac{-log(\frac{d}{2})}{2e^2}$
-
-then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
 
 * There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
 
