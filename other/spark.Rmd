@@ -1,5 +1,5 @@
 ---
-title: "Bayesian"
+title: "Apache Spark"
 output: html_document
 ---
 
@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## PySpark
 
-https://www.qubole.com/resources/pyspark-cheatsheet/
+A [cheatsheet[(https://www.qubole.com/resources/pyspark-cheatsheet/).
 
 Quick Test:
 
@@ -31,82 +31,70 @@ print(pi)
 sc.stop()
 ```
 
-On Windows: setx SPARK_HOME <path>
+First have to create a SparkSession object from your SparkContext. The SparkContext is ther connection to the cluster and the SparkSession as your interface with that connection.
 
-To start working with Spark DataFrames, you first have to create a SparkSession object from your SparkContext. You can think of the SparkContext as your connection to the cluster and the SparkSession as your interface with that connection.
-
+```{python}
 import pyspark
 from pyspark.sql import SparkSession
 sc = pyspark.SparkContext()
-spark = SparkSession.builder.getOrCreate()
+spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
+```
 
-Your SparkSession has an attribute called catalog which lists all the data inside the cluster. This attribute has a few methods for extracting different pieces of information.
-
+```{python}
+## List tables
 spark.catalog.listTables()
 
+## Access and display data
 query = "FROM flights SELECT * LIMIT 10"
 flights10 = spark.sql(query)
 flights10.show()
 
+## Cast
 df['g'] = df['g'].astype(str)
 
-spark = SparkSession.builder.appName('chosenName').getOrCreate()
+## Read from csv
+df= spark.read.csv(file_path, header = True)
+df = spark.read.csv('fileNameWithPath', mode="DROPMALFORMED",inferSchema=True, header = True)
+df = spark.read.format("csv").option("header","true").option("inferSchema","true").load("john_doe.csv")
 
-df=spark.read.csv('fileNameWithPath', mode="DROPMALFORMED",inferSchema=True, header = True)
-
-df = spark.read.format("csv").option("header","true").option("inferSchema","true").load("FileStore/tables/pzufk5ib1500654887654/campaign.csv")
-
-airports = spark.read.csv(file_path, header = True)
-
-toPandas() / table
-
-Create spark_temp from pd_temp
+## Spark df to pandas and vice versa
+toPandas()
 spark_temp = spark.createDataFrame(pd_temp)
 
-Add spark_temp to the catalog
+## Add to the catalog
 spark_temp.createOrReplaceTempView("temp")
 
-Examine the tables in the catalog again
-print(spark.catalog.listTables())
-
+## Mutate
 df = df.withColumn("newCol", df.oldCol + 1)
 
-Create the DataFrame flights
+## Create the DataFrame flights
 flights = spark.table('flights')
 
-col names
+## Get column names
 spark_df.schema.names
 spark_df.printSchema()
 
-Let's take a look at the .filter() method. As you might suspect, this is the Spark counterpart of SQL's WHERE clause. The .filter() method takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string.
-
+## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string
 long_flights1 = flights.filter('distance > 1000')
-
-Filter flights with a boolean column
 long_flights2 = flights.filter(flights.distance > 1000)
 
-You can also use the .alias() method to rename a column you're selecting.
-
-The equivalent Spark DataFrame method .selectExpr() takes SQL expressions as a string
-
-Find the shortest flight from PDX in terms of distance
+## Groupby examples
 flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
-
-Average duration of Delta flights
 flights.filter(flights.carrier=='DL').filter(flights.origin=='SEA').groupBy().avg('air_time').show()
-
-Total hours in the air
 flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum('duration_hrs').show()
 
-.show() vs collect()
-
+## Spark functions
 import pyspark.sql.functions as F
-
-Standard deviation
 by_month_dest.agg(F.stddev('dep_delay')).show()
+```
 
+* alias() method to rename a column you're selecting.
 
-Spark only handles numeric data.
+* selectExpr() takes SQL expressions as a string
+
+* show() vs collect()
+
+* Spark only handles numeric data
 
 final_test_data.drop('State')
 
