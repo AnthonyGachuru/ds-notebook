@@ -11,8 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Transform
 
-Too many levels for a category?
+* Too many levels for a category?
 
-- limit number of categories through feature selection
-- https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables
-- bucket groups by number of samples
+    * limit number of categories through feature selection
+    * https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables
+    * bucket groups by number of samples
+ 
+* https://cran.r-project.org/web/packages/vtreat/index.html
