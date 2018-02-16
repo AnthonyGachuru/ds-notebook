@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * conda create -n yourenvname python=x.x anaconda
 
-* * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
+* [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
 * [Temp Pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
 
