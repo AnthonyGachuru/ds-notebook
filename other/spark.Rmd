@@ -40,6 +40,8 @@ sc = pyspark.SparkContext()
 spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
 ```
 
+The rest of my notes:
+
 ```{python}
 ## List tables
 spark.catalog.listTables()
@@ -66,6 +68,8 @@ spark_temp.createOrReplaceTempView("temp")
 
 ## Mutate
 df = df.withColumn("newCol", df.oldCol + 1)
+model_data = model_data.withColumn("arr_delay", model_data.arr_delay.cast('integer'))
+model_data = model_data.withColumn("plane_age", model_data.year - model_data.plane_year)
 
 ## Create the DataFrame flights
 flights = spark.table('flights')
@@ -77,6 +81,7 @@ spark_df.printSchema()
 ## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string
 long_flights1 = flights.filter('distance > 1000')
 long_flights2 = flights.filter(flights.distance > 1000)
+model_data = model_data.filter("arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL")
 
 ## Groupby examples
 flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
@@ -88,7 +93,97 @@ import pyspark.sql.functions as F
 by_month_dest.agg(F.stddev('dep_delay')).show()
 ```
 
+```{python}
+## Drop column
+final_test_data.drop('State')
+
+## Dummying
+
+The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a new DataFrame with a numeric column corresponding to the string column.
+
+The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly the same way as the StringIndexer by creating an Estimator and then a Transformer
+
+## Create a StringIndexer
+carr_indexer = StringIndexer(inputCol="carrier", outputCol="carrier_index")
+
+## Create a OneHotEncoder
+carr_encoder = OneHotEncoder(inputCol="carrier_index", outputCol="carrier_fact")
+
+## Make a VectorAssembler
+vec_assembler = VectorAssembler(inputCols=["month", "air_time", "carrier_fact", "dest_fact", "plane_age"], outputCol="features")
+
+## Import & Make Pipeline
+from pyspark.ml import Pipeline
+flights_pipe = Pipeline(stages=[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+
+## Fit and transform the data
+piped_data = flights_pipe.fit(model_data).transform(model_data)
+
+## Train-test split
+training, test = piped_data.randomSplit([.6, .4])
+
+## Tuning & Selection
+
+## Import LogisticRegression
+from pyspark.ml.classification import LogisticRegression
+
+## Create a LogisticRegression Estimator
+lr = LogisticRegression()
+
+## Import the evaluation submodule
+import pyspark.ml.evaluation as evals
+
+## Create a BinaryClassificationEvaluator
+evaluator = evals.BinaryClassificationEvaluator(metricName="areaUnderROC")
+
+## Import the tuning submodule
+import pyspark.ml.tuning as tune
+
+## Create the parameter grid
+grid = tune.ParamGridBuilder()
+
+## Add the hyperparameter
+grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01))
+grid = grid.addGrid(lr.elasticNetParam, [0, 1])
+
+## Build the grid
+grid = grid.build()
+
+## Create the CrossValidator
+cv = tune.CrossValidator(
+estimator=lr,
+estimatorParamMaps=grid,
+evaluator=evaluator
+               )
+
+## Fit cross validation models
+models = cv.fit(training)
+
+## Extract the best model
+best_lr = models.bestModel
+
+## Use the model to predict the test set
+test_results = best_lr.transform(test)
+
+## Evaluate the predictions
+print(evaluator.evaluate(test_results))
+```
+
+* Spark's assumes the target is called 'label' in ML. Everything else is a feature.
+
 * alias() method to rename a column you're selecting.
+
+* cast() method: nominative determinism on columns
+
+* withColumn(): create new column
+
+* pyspark.ml.feature
+
+* At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
+
+* You can create what are called 'one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
+
+* Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
 
 * selectExpr() takes SQL expressions as a string
 
@@ -96,152 +191,36 @@ by_month_dest.agg(F.stddev('dep_delay')).show()
 
 * Spark only handles numeric data
 
-final_test_data.drop('State')
-
-At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
-
-Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
-
-cast() method: nominative determinism on columns
-
-withColumn(): create new column
-
-model_data = model_data.withColumn("arr_delay", model_data.arr_delay.cast('integer'))
-
-model_data = model_data.withColumn("plane_age", model_data.year - model_data.plane_year)
-
-Remove missing values: SQL
-
-model_data = model_data.filter("arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL")
-
-pyspark.ml.feature
-
-You can create what are called 'one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
-
-Dummying
-
-The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a new DataFrame with a numeric column corresponding to the string column.
-
-The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly the same way as the StringIndexer by creating an Estimator and then a Transformer
-
-Create a StringIndexer
-
-carr_indexer = StringIndexer(inputCol="carrier", outputCol="carrier_index")
-
-Create a OneHotEncoder
-
-carr_encoder = OneHotEncoder(inputCol="carrier_index", outputCol="carrier_fact")
-
-Make a VectorAssembler
-
-vec_assembler = VectorAssembler(inputCols=["month", "air_time", "carrier_fact", "dest_fact", "plane_age"], outputCol="features")
-
- Import Pipeline
-from pyspark.ml import Pipeline
-
- Make the pipeline
-flights_pipe = Pipeline(stages=[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
-
-In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
-
- Fit and transform the data
-piped_data = flights_pipe.fit(model_data).transform(model_data)
-
- Split the data into training and test sets
-training, test = piped_data.randomSplit([.6, .4])
-
-**Tuning & Selection**
-
- Import LogisticRegression
-from pyspark.ml.classification import LogisticRegression
-
- Create a LogisticRegression Estimator
-lr = LogisticRegression()
-
- Import the evaluation submodule
-import pyspark.ml.evaluation as evals
-
- Create a BinaryClassificationEvaluator
-evaluator = evals.BinaryClassificationEvaluator(metricName="areaUnderROC")
-
- Import the tuning submodule
-import pyspark.ml.tuning as tune
-
- Create the parameter grid
-grid = tune.ParamGridBuilder()
-
- Add the hyperparameter
-grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01))
-grid = grid.addGrid(lr.elasticNetParam, [0, 1])
-
- Build the grid
-grid = grid.build()
-
- Create the CrossValidator
-cv = tune.CrossValidator(estimator=lr,
-               estimatorParamMaps=grid,
-               evaluator=evaluator
-               )
-
- Fit cross validation models
-models = cv.fit(training)
-
- Extract the best model
-best_lr = models.bestModel
-
- Use the model to predict the test set
-test_results = best_lr.transform(test)
-
- Evaluate the predictions
-print(evaluator.evaluate(test_results))
-
-**Find out how Spark finds out which columns are the features.**
-
-label (this is the default name for the response variable in Spark's machine learning routines
+* In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
 
 ## Sparklyr
 
+```{r}
 library(sparklyr)
 
-Connect to your Spark cluster
+## Connect to your Spark cluster
 spark_conn <- spark_connect(master = "local")
 
-Print the version of Spark
+## Print the version of Spark
 spark_version(sc = spark_conn)
 
-Disconnect from Spark
+## Disconnect from Spark
 spark_disconnect(sc = spark_conn)
 
+## See tables
 src_tbls(sc)
 
-Copy track_metadata to Spark
+## Copy track_metadata to Spark
 track_metadata_tbl <- copy_to(spark_conn, track_metadata)
 
-Print 5 rows, all columns
+## Print 5 rows, all columns
 print(track_metadata_tbl, n = 5, width = Inf)
 
-To collect your data: that is, to move it from Spark to R, you call collect()
-
-copy_to() moves your data from R to Spark
-
-The solution is to use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
-
-If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
-
-Write SQL query
+## Write and run SQL query
 query <- "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"
-
-Run the query
 (results <- dbGetQuery(spark_conn, query))
 
-A semi join returns the rows of the first table where it can find a match in the second table. The principle is shown in this diagram.
-
-feature transforms: ft_
-ml functions: ml_
-spark df functions: sdf_
-
-general structure
-
+## General transformation structure and example
 a_tibble %>%
   ft_some_transformation("x", "y", some_other_args)
 
@@ -254,53 +233,22 @@ hotttnesss <- track_metadata_tbl %>%
   collect() %>%
   # Convert is_hottt_or_nottt to logical
   mutate(is_hottt_or_nottt = as.logical(is_hottt_or_nottt))
-
-ft_tokenizer(): to lower and split into individual words
-ft_regex_tokenizer
-sdf_sort
-
-track_metadata_tbl has been pre-defined
-
-track_metadata_tbl
-
-Get the schema
+  
+## Get and transform the schema
 
 (schema <- sdf_schema(track_metadata_tbl))
-
-Transform the schema
-
 schema %>%
   lapply(function(x) do.call(data_frame, x)) %>%
   bind_rows()
 
-train-test split
+## Train-test split
 partitioned <- track_metadata_tbl %>%
   sdf_partition(training = 0.7, testing = 0.3)
 
-### ml
-
+## List ml functions
 ls("package:sparklyr", pattern = "^ml")
 
-Parquet files: quicker to read and write.  parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig. spark_read_parquet
-
-parquet_dir has been pre-defined
-
-parquet_dir
-
-List the files in the parquet dir
-
-filenames <- dir(parquet_dir, full.names = TRUE)
-
-Show the filenames and their sizes
-
-data_frame(
-  filename = basename(filenames),
-  size_bytes = file.size(filenames)
-)
-
-Import the data into Spark
-
-timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
+## GBT Example
 
 gradient_boosted_trees_model <- track_data_to_model_tbl %>%
   # Run the gradient boosted trees model
@@ -318,5 +266,36 @@ responses <- track_data_to_predict_tbl %>%
       track_data_to_predict_tbl
     )
   )
+```
 
+**Parquet Aside**
 
+Parquet files are quicker to read and write.  parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig.
+
+```{r}
+## The parquet_dir has been pre-defined
+parquet_dir
+
+## List the files in the parquet dir
+filenames <- dir(parquet_dir, full.names = TRUE)
+
+## Show the filenames and their sizes
+data_frame(
+  filename = basename(filenames),
+  size_bytes = file.size(filenames)
+)
+
+Import the data into Spark
+
+timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
+```
+
+* To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.
+
+* Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
+
+* If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
+
+* feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
+
+* ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort
