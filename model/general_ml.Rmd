@@ -7,18 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Algorithm Template
-
-**Intro**
-
-**Assumptions**
-
-**Characteristics**
-
-**Evaluation**
-
-**Pros/Cons**
-
 ## Prep
 
 * from sklearn.preprocessing import MultiLabelBinarizer
@@ -28,6 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 * Simulated Annealing: Gradient descent extension
 
 * https://ml-cheatsheet.readthedocs.io/en/latest/index.html
+
+* So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
 
 ## Feature Selection
 
@@ -158,9 +148,11 @@ Reframe as Anomaly Detection
 
 * Sklearn Eg: wclf = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')
 
-## Metrics
+**Longitudinal Data**
 
-So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
+* One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
+
+* Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
 
 ## Other
 

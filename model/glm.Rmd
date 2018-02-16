@@ -55,6 +55,8 @@ gression residuals. [Gelman]
 
 Use Box-Cox transformations when predictions are skewed
 
+regression discontinuity
+
 Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.
 
 Got it: Linear Correlation => Causation if covariates respect: linearity normality indep homoscedasticity + all confounders in model
