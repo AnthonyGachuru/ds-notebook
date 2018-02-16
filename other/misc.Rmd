@@ -9,81 +9,45 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Python
 
-* isin and crosstab functions pandas
-
-* Why are functions considered first class objects in Python? A first class object is an entity that can be dynamically created, destroyed, passed to a function, returned as a value, and have all the rights as other variables in the programming language have. 
+* pandas: isin | crosstab
 
 * The only float that isn't equal to itself is nan.
 
 * %matplotlib notebook: interactive plots
 
-* Python memory storage: use pd.copy to create a deep copy instead of a shallow copy
+* Memory storage: use pd.copy to create a deep copy instead of a shallow copy
 
-* %who or %whos shows defined variables & %reset resets them
+* IPy: %who or %whos shows defined variables & %reset resets them
 
-* %run script.py: func? prints out func doc
+* Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)
 
-* Append dict to df, use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)
-
-* np: fromfile, genfromtxt
-
-* import pdb; pdb.set_trace(), 
-
-* import sqlite3 + con = sqlite3.connect(':memory:')
-
-* gs = GridSearchCV(estimator = pipe_svc, param)grid = param_grid, scoring = 'accuracy', cv = 5)
-
-* scores = cross_val_score(gs, X, y, scoring = 'accuracy', cv = 5)
+* Debuggin: import pdb | pdb.set_trace(), 
 
 * dir() gives a list of in scope variables. globals() gives a dictionary of global variables. locals() gives a dictionary of local variables
 
 ## R
 
-* rm(objectlist): Remove one or more objects from the workspace
-
 * rm(list = ls()): Remove all objects in the current workspace
 
 * cut(): Transform a numeric variable into a categorical variable.
-
-* installr: update r in windows
 
 * car: recode (good for dummying)
 
 * Examine the objects in the workspace: ls.str()
 
-* Use bloom::glance to look at model objects.
-
 * This is how you dynamically update a value in Rmarkdown: x = *backtick* r x *backtick*. 
 
-**R for Everything**
+**R for Everything Talk**
 
-dir.exists
-dir.create
-download.file
-untar
-unlink
-file.info
-getXCKD
-dir
-file.rename
-file.copy
-count.fields
-system
+* dir.exists | dir.create | download.file
 
-https://www.rdocumentation.org/packages/dplyr/versions/0.7.3/topics/compute
+* untar | unlink | file.info
 
-tryCatch({
-    # Selection code here
-    a_tibble[, c("artist_name", "release", "title", "year")]
-  },
-  error = print
-)
+* dir | file.rename | file.copy
 
-stringr: matches, contains, starts_with
+* count.fields | system
 
-dplyr has five main actions that you can perform on a data frame. You can select columns, filter rows, arrange the order of rows, change columns or add new columns, and calculate summary statistics.
-
-https://www.rdocumentation.org/packages/fpc/versions/2.1-10/topics/bhattacharyya.dist
+* dplyr five main actions: select, filter, arrange, mutate, summarize.
 
 ## Git
 
@@ -99,28 +63,24 @@ https://www.rdocumentation.org/packages/fpc/versions/2.1-10/topics/bhattacharyya
 
 * Update local repo with master changes: git pull origin master
 
-git diff (--cache) | git rm --cached 't.py' //remove from staging area
+* git diff (--cache) | git rm --cached 't.py' //remove from staging area
 
-git show version_name + git branch (--merged, --no-merged) + git merge fix20
+* git show version_name + git branch (--merged, --no-merged) + git merge fix20
 
-never rebase commits to public repo + rebase: branch working with behind in commit
+* never rebase commits to public repo + rebase: branch working with behind in commit
 
-use revert (change commit and log the change) + dont use reset: erases commit and doesnt log.
+* use revert (change commit and log the change) + dont use reset: erases commit and doesnt log.
 
-get fork url use: git clone url + git remote add upstream url: ref original repo
+* get fork url use: git clone url + git remote add upstream url: ref original repo
 
-git fetch upstream: pull changes fro original repo + git push origin master: push stuff to clone
+* git fetch upstream: pull changes fro original repo + git push origin master: push stuff to clone
 
-git merge upstream/master: merge github and local + make pull request, send pull request
+* git merge upstream/master: merge github and local + make pull request, send pull request
 
-Reset: Move master and working directory.
+* Reset: Move master and working directory.
 
-Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.
+* Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.
 
 ## Other
 
-Cheatsheets::[1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5):[2](https://github.com/kailashahirwar/cheatsheets-ai):[3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html):[RStudio](https://www.rstudio.com/resources/cheatsheets/):[DL](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
-
-Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
-
-graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+* Cheatsheets::[1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5):[2](https://github.com/kailashahirwar/cheatsheets-ai):[3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html):[RStudio](https://www.rstudio.com/resources/cheatsheets/):[DL](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
