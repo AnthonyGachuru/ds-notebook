@@ -7,18 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Prep
-
-* from sklearn.preprocessing import MultiLabelBinarizer
-
-* Active Learning: Finding the optimal data to manually label
-
-* Simulated Annealing: Gradient descent extension
-
-* https://ml-cheatsheet.readthedocs.io/en/latest/index.html
-
-* So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
-
 ## Feature Selection
 
 Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
@@ -160,17 +148,37 @@ Reframe as Anomaly Detection
 
 * Bias: Error Introduced by approximating real-life problem by using a simple method
 
+* from sklearn.preprocessing import MultiLabelBinarizer
+
+* Active Learning: Finding the optimal data to manually label
+
+* Simulated Annealing: Gradient descent extension
+
+* https://ml-cheatsheet.readthedocs.io/en/latest/index.html
+
+* So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
+
 * Variance: The amount the model output will change if the model was trained using a different data
 
 * Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
 
 * Inflexible Methods: low variance, high bias, Example: Linear regression
 
+* Use broom::glance to look at model objects.
+
+* Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
+
+* graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression
 
 * Non-Parametric: No assumption about model form is made, Example: KNN
 
 * Set Random state by hand in sklearn.
+
+* Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]
+
+* Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]
 
 * Linear Regression by Year
 

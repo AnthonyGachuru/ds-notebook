@@ -84,3 +84,44 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Other
 
 * Cheatsheets::[1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5):[2](https://github.com/kailashahirwar/cheatsheets-ai):[3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html):[RStudio](https://www.rstudio.com/resources/cheatsheets/):[DL](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
+
+**Vanderplas Jupyter**
+
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+def fun(a): 
+```{python}
+def fun(a):
+
+  Role
+  -----
+  Does something
+  
+  Parameters
+  ---------
+  Accepts something
+  
+  Returns
+  -------
+  Returns something
+  
+  return(a)
+```
+
+**YAML**
+
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
+
+`conda env export > environment.yaml`
+
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:
+
+`conda env create -f environment.yaml`
+
+This will create a new environment with the same name listed in environment.yaml.

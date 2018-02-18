@@ -13,6 +13,8 @@ Comparison: http://scikit-learn.org/stable/modules/clustering.html#clustering
 
 sklearn.metrics.silhouette_samples
 
+https://twitter.com/thomaswdinsmore/status/965223193043718145
+
 ### K-Means
 
 K-Means clustering method considers two assumptions regarding the clusters – first that the clusters are spherical and second that the clusters are of similar size.

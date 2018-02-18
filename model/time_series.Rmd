@@ -43,3 +43,105 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.
 
+# Udacity: TS Fundamentals
+
+Naive vs Seasonal Naive vs Exponential Smooothing
+
+Seasonal Naive: Assumes magnitude of the seasonal pattern is constant.
+
+cyclical vs seasonal patterns: longer, harder to predicit, don't follow seasonl patterns
+
+ETS: Error-Trend-Seasonality
+
+The possible time series (TS) scenarios can be recognized by asking the following questions:
+
+TS has a trend? If yes, is the trend increasing linearly or exponentially?
+
+TS has seasonality? If yes, do the seasonal components increase in magnitude over time?
+
+We are going to explore four ETS models that can help forecast these possible time-series scenarios.
+
+Simple Exponential Smoothing Method
+
+Holt's Linear Trend Method
+
+Exponential Trend Method
+
+Holt-Winters Seasonal Method
+
+Time series does not have a trend line and does not have seasonality component. We would use a Simple Exponential Smoothing model.
+
+Time Seies: level, trend, seasonal compoent
+
+Methods
+
+There are several methods we need to pick in order to model any given time series appropriately:
+
+Simple Exponential Smoothing: Finds the level of the time series
+
+Holt's Linear Trend: Finds the level of the time series
+
+Additive model for linear trend
+
+Exponential Trend: Finds the level of the time series
+
+Multiplicative model for exponential trend
+
+Holt-Winters Seasonal: Finds the level of the time series
+
+Additive for trend
+
+Multiplicative and Additive for seasonal components
+
+These methods help deal with different scenarios in our time series involving:
+
+Linear or exponential trend
+
+Constant or increasing seasonality components
+
+For trends that are exponential, we would need to use a multiplicative model.
+
+For increasing seasonality components, we would need to use a multiplicative model model as well.
+
+ETS
+
+Therefore we can generalize all of these models using a naming system for ETS:
+
+ETS (Error, Trend, Seasonality)
+
+Error is the error line we saw in the time series decomposition part earlier in the course. If the error is increasing similar to an increasing seasonal components, we would need to consider a multiplicative design for the exponential model.
+
+Therefore, for each component in the ETS system, we can assign None, Multiplicative, or Additive (or N, M, A) for each of the three components in our time series.
+
+Examples
+
+A time series model that has a constant error, linear trend, and increasing seasonal components means we would need to use an ETS model of:
+
+ETS(N,A,M)
+
+A time series model that has increasing error, exponential trend, and no seasonality means we would need to use an ETS model of:
+
+ARIMA; Seasnoanl:ARIMA(p,d,q)(P,D,Q)M vs non-seasonal: ARIMA(p,d,q)
+
+non-=statipjary: This plot shows an upward trend and seasonality.
+
+stationaey: This plot revolves around a constant mean of 0 and shows contained variance.
+
+Evluated withhold set and residual plots, should have mean of 0. 
+
+is less sensitive to the occasional very large error because it does not square the errors in the calculation.
+
+Percentage Errors
+
+Percentage errors, like MAPE, are useful because they are scale independent, so they can be used to compare forecasts between different data series, unlike scale dependent errors. The disadvantage is that it cannot be used if the series has zero values.
+
+Mean Absolute Percentage Error (MAPE) is also often useful for purposes of reporting, because it is expressed in generic percentage terms it will make sense even to someone who has no idea what constitutes a "big" error in terms of dollars spent or widgets sold.
+
+Scale-Free Errors
+
+Scale-free errors were introduced more recently to offer a scale-independent measure that doesn't have many of the problems of other errors like percentage errors.
+
+Mean Absolute Scaled Error (MASE) is another relative measure of error that is applicable only to time series data. It is defined as the mean absolute error of the model divided by the the mean absolute value of the first difference of the series. Thus, it measures the relative reduction in error compared to a naive model. Ideally its value will be significantly less than 1 but is relative to comparison across other models for the same series. Since this error measurement is relative and can be applied across models, it is accepted as one of the best metrics for error measurement.
+
+Can use AIC for model selection. Also use confidence intervals.
+
