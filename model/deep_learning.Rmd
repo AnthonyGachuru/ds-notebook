@@ -7,31 +7,53 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-There are several activation functions you may encounter in practice:
+## General 
 
-* Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
+* There are several activation functions you may encounter in practice:
 
-* Softmax: Same end result as sigmoid, but different function.
+    * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
 
-* batch size: 32/64. if under-fitting increase and vice versa
+    * Softmax: Same end result as sigmoid, but different function.
 
-* tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
+    * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
 
-* ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive.
-
-($f(x) = max(0, x)$)
+   * ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. $f(x) = max(0, x)$
 
 * Advised to scale features
 
-* Generally dealing with Images, Convolutional Neural Network is used mostly because of its better accuracy results.
+* [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
 
-* model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.
+* Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.
+
+* Momentum and learning rate decay are good for knowing which way to go in gradient descent.
+
+* Always try to lower your learning rate for improvement. 
+
+* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
+
+* n inputs and k outputs gives you $(n+1)*k$ parameters. 
+
+* Back propogation takes about twice the memory as forward propogation. 
+
+* Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn't work, go deeper.
+
+* Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn't matter then use translation invariance. Use weight sharing if this occurs in text. 
+
+* Things that don't chnage across time, space, etc are called statistical invariants.
+
+* RNN's use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier. 
+
+* Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn't remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short
+term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.
+
+
+* Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.
+
+* Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.
 
 * The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.
 
-**BackProp Algorithm**
-
-Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
+* BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
 
 * The last layer of a neural network captures the most complex interactions.
 
@@ -53,15 +75,23 @@ Initially all the edge weights are randomly assigned. For every input in the tra
 
 * Dying neuron + vanishing gradient: Change activation function
 
-# Keras 
+## Keras 
 
-* declare: sequential, add: input-hidden-output, compile, fit
+The general framework:
 
-* Uses numpy arrays 
+* declare: sequential
+
+* add layers input-hidden-output
+
+* compile
+
+* fit
+
+Keras only uses numpy arrays. 
 
 * keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
 
-## Regression
+### Regression
 
 * loss = mean_squared_error
 
@@ -69,27 +99,16 @@ Initially all the edge weights are randomly assigned. For every input in the tra
 
 * activation_function = relu
 
-Pros: - Extremely powerful
-- Can model even very complex relationships
-- No need to understand the underlying data
-
-Cons:  Prone to overfitting
-- Long training time
-- Requires significant computing power for large datasets
-- Model is essentially unreadable
-
 ```{python}
-# Import necessary modules
-
 import keras
 from keras.layers import Dense
 from keras.models import Sequential
 
 # Specify the model: Two hidden layers
-n_cols = predictors.shape[1]
 model = Sequential()
 
 ## Input
+n_cols = predictors.shape[1]
 model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
 
 # Hidden
@@ -111,7 +130,7 @@ model.summary()
 predictions = model.predict(pred_data)
 ```
 
-## Classification
+### Classification
 
 * loss = categorical_crossentropy
 
@@ -122,14 +141,11 @@ predictions = model.predict(pred_data)
 * output layer with stuff equal to number of categorical groups
 
 ```{python}
-# Import necessary modules
-
 import keras
 from keras.layers import Dense
 from keras.models import Sequential
 
 # Specify the model: Two hidden layers
-
 n_cols = predictors.shape[1]
 model = Sequential()
 
@@ -137,7 +153,6 @@ model = Sequential()
 model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
 
 # Hidden
-
 model.add(Dense(32, activation='relu'))
 
 # Output
@@ -159,7 +174,7 @@ predictions = model.predict(pred_data)
 predicted_prob_true = predictions[:, 1]
 ```
 
-## Another Example
+### Another Example
 
 ```{python}
 # Import the SGD optimizer
@@ -189,37 +204,3 @@ for lr in lr_to_test:
               callbacks = [early_stopping_monitor*], 
               verbose = False)
 ```
-
-
-### Week 1
-
-* [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
-
-* Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.
-
-* Momentum and learning rate decay are good for knowing which way to go in gradient descent.
-
-* Always try to lower your learning rate for improvement. 
-
-* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
-
-### Week 2
-
-* n inputs and k outputs gives you $(n+1)*k$ parameters. 
-
-* Back propogation takes about twice the memory as forward propogation. 
-
-* Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn't work, go deeper.
-
-### Week 3
-
-* Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn't matter then use translation invariance. Use weight sharing if this occurs in text. 
-
-* Things that don't chnage across time, space, etc are called statistical invariants.
-
-### Week 4
-
-* RNN's use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier. 
-
-* Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn't remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short
-term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.

@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Association Rule Mining
 
+### Intro
+
 * Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
 
 * Incredibly big feature space (2^k-1). 
@@ -23,7 +25,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
 
-Pros: 
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+**Pros**
 
 * Ideally suited for working with very large amounts of transactional data.
 
@@ -31,7 +41,7 @@ Pros:
 
 * The process is useful for data mining and uncovering unexpected knowledge within a dataset.
 
-Cons: 
+**Cons**
 
 * The outcome is usually not interesting when applied to smaller datasets. 
 

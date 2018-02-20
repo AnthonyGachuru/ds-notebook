@@ -7,11 +7,38 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Preprocessing
+
+```{r}
+# Apply median imputation: model
+model <- train(
+  x = breast_cancer_x, 
+  y = breast_cancer_y,
+  method = 'glm',
+  trControl = myControl,
+  preProcess = c('medianImpute', "knnImpute", 'center', 'scale', 'pca')
+)
+
+dotplot(resamples, metric = "ROC")
+
+min(model$results$RSME)
+```
+
+```{r}
+# Identify near zero variance predictors: remove_cols
+remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
+                           freqCut = 2, uniqueCut = 20)
+
+# Get all column names from bloodbrain_x: all_cols
+all_cols = colnames(bloodbrain_x)
+
+# Remove from data: bloodbrain_x_small
+bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
+```
+
 ## LM
 
-#### Vanilla
-
-```{r cars}
+```{r basic_lm}
 # Set seed
 set.seed(42)
 
@@ -28,120 +55,17 @@ error <- p - diamonds$price
 sqrt(mean(error^2))
 ```
 
-## LM with CV
-
-```{r}
-model <- train(
-  medv ~ ., Boston,
-  method = "lm",
-  trControl = trainControl(
-    method = "cv", number = 5,
-    verboseIter = TRUE
-  )
-)
-
+```{r lm_with_cv}
 # Fit lm model using 5 x 5-fold CV: model
 model <- train(
-  medv ~ ., Boston,
+  medv ~ ., 
+  Boston,
   method = "lm",
   trControl = trainControl(
     method = "cv", number = 5,
     repeats = 5, verboseIter = TRUE
   )
 )
-```
-
-## LogReg
-
-#### Vanilla
-
-```{r}
-# Fit glm model
-model = glm(Class ~ ., family = "binomial", train)
-
-# Predict on test: p
-p = predict(model, test, type = "response")
-
-# Calculate class probabilities: p_class
-p_class <- ifelse(p > 0.50, "M", "R")
-# Create confusion matrix
-confusionMatrix(p_class, test$Class)
-```
-
-## Train-Test-Split & CV
-
-```{r}
-
-# Shuffle row indices: rows
-rows = sample(nrow(Sonar))
-
-# Randomly order data: Sonar
-Sonar = Sonar[rows,]
-
-# Identify row to split on: split
-split <- round(nrow(Sonar) * .6)
-
-# Create train: 60%
-train = Sonar[1:split,]
-
-# Create test: 40%
-test = Sonar[(split+1):nrow(Sonar),]
-
-# Create custom indices: myFolds
-myFolds <- createFolds(churn_y, k = 5)
-
-# Create reusable trainControl object: myControl
-myControl <- trainControl(
-  summaryFunction = twoClassSummary,
-  classProbs = TRUE, # IMPORTANT!
-  verboseIter = TRUE,
-  savePredictions = TRUE,
-  index = myFolds
-)
-```
-
-
-## AUC/ROC
-
-```{r}
-# Predict on test: p
-p = predict(model, test, type = 'response')
-# Make ROC curve
-colAUC(p, test$Class, plotROC = TRUE)
-
-# Create trainControl object: myControl
-myControl <- trainControl(
-  method = "cv",
-  number = 10,
-  summaryFunction = twoClassSummary, #default option is default summary
-  classProbs = TRUE, # IMPORTANT!
-  verboseIter = TRUE
-)
-```
-
-## Random Forest
-
-```{r}
-# Fit random forest: model
-model <- train(
-  quality~.,
-  tuneLength = 3,
-  data = wine, method = 'ranger',
-  trControl = trainControl(method = "cv", number = 5, verboseIter = TRUE)
-)
-
-model <- train(
-  quality~.,
-  tuneGrid = data.frame(mtry = c(2, 3, 7)),
-  data = wine, method = 'ranger',
-  trControl = trainControl(method = "cv", number = 5, verboseIter = TRUE)
-)
-
-# Print model to console
-model
-
-# Plot model
-plot(model)
 ```
 
 ## Lasso/Ridge
@@ -171,35 +95,71 @@ model
 max(model[["results"]][["ROC"]])
 ```
 
-## Preprocessing
+## LogReg
 
 ```{r}
-# Apply median imputation: model
+# Fit glm model
+model = glm(Class ~ ., family = "binomial", train)
+
+# Predict on test: p
+p = predict(model, test, type = "response")
+
+# Calculate class probabilities: p_class
+p_class <- ifelse(p > 0.50, "M", "R")
+
+# Create confusion matrix
+confusionMatrix(p_class, test$Class)
+```
+
+## Train-Test Split, Folds, & CV
+
+```{r}
+# Shuffle row indices: rows
+rows = sample(nrow(Sonar))
+
+# Randomly order data: Sonar
+Sonar = Sonar[rows,]
+
+# Identify row to split on: split
+split <- round(nrow(Sonar) * .6)
+
+# Create train: 60%
+train = Sonar[1:split,]
+
+# Create test: 40%
+test = Sonar[(split+1):nrow(Sonar),]
+
+# Create custom indices: myFolds
+myFolds <- createFolds(churn_y, k = 5)
+
+# Create reusable trainControl object: myControl
+myControl <- trainControl(
+  summaryFunction = twoClassSummary, #default option is default summary
+  classProbs = TRUE, # IMPORTANT!
+  verboseIter = TRUE,
+  savePredictions = TRUE,
+  index = myFolds
+)
+```
+
+## Random Forest
+
+```{r}
+# Fit random forest: model
 model <- train(
-  x = breast_cancer_x, 
-  y = breast_cancer_y,
-  method = 'glm',
-  trControl = myControl,
-  preProcess = c('medianImpute', "knnImpute", 'center', 'scale', 'pca')
+  quality~.,
+  tuneLength = 3,
+  #tuneGrid = data.frame(mtry = c(2, 3, 7)),
+  data = wine, 
+  method = 'ranger',
+  trControl = trainControl(method = "cv", number = 5, verboseIter = TRUE)
 )
 
 # Print model to console
 model
 
-dotplot(resamples, metric = "ROC")
-min(model$results$RSME)
-```
-
-```{r}
-# Identify near zero variance predictors: remove_cols
-remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
-                           freqCut = 2, uniqueCut = 20)
-
-# Get all column names from bloodbrain_x: all_cols
-all_cols = colnames(bloodbrain_x)
-
-# Remove from data: bloodbrain_x_small
-bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
+# Plot model
+plot(model)
 ```
 
 ## Model Selection
@@ -225,6 +185,16 @@ bwplot(resamples, metric = 'ROC')
 xyplot(resamples)
 ```
 
+```{r auc}
+# Predict on test: p
+p = predict(model, test, type = 'response')
+
+# Make ROC curve
+colAUC(p, test$Class, plotROC = TRUE)
+```
+
+* caret: finalModel of model object
+
 ## Stacking
 
 caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
@@ -237,6 +207,4 @@ stack <- caretStack(model_list, method = 'glm')
 summary(stack)
 ```
 
-https://cran.r-project.org/web/packages/caretEnsemble/vignettes/caretEnsemble-intro.html
-
-caret: finalModel of model object
+& caretEnnsemble

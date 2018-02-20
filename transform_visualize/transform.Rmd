@@ -18,3 +18,5 @@ knitr::opts_chunk$set(echo = TRUE)
     * bucket groups by number of samples
  
 * https://cran.r-project.org/web/packages/vtreat/index.html
+
+* Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.

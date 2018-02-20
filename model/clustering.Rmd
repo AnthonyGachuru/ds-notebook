@@ -1,7 +1,5 @@
 ---
 title: "Clustering"
-author: "Gordon"
-date: "April 29, 2017"
 output: html_document
 ---
 
@@ -9,13 +7,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Comparison: http://scikit-learn.org/stable/modules/clustering.html#clustering
+## General
 
-sklearn.metrics.silhouette_samples
+* [Comparison](http://scikit-learn.org/stable/modules/clustering.html#clustering)
 
-https://twitter.com/thomaswdinsmore/status/965223193043718145
+* [Rules](https://twitter.com/thomaswdinsmore/status/965223193043718145)
 
-### K-Means
+## K-Means
+
+### Intro
 
 K-Means clustering method considers two assumptions regarding the clusters – first that the clusters are spherical and second that the clusters are of similar size.
 
@@ -29,13 +29,6 @@ Goal to minimize within-cluster variation. The within-cluster variation for the 
 
 Note: Not enough to use within-cluster variance as this decreases as one increases k. Use elbow method or scree plot to choose optimal k where the variance no longer decreases dramatically. To choose how many groups to use, I ran a k-means analysis for each possible number of groups from 5 to 35 and found that 20 was right about the spot that the amount of variance stopped decreasing consistently. This is called the elbow test and while the results weren’t totally definitive, they fit in well with the general rule of thumb for determining # of groups which is the square root of the # of observations/2.
 
-Pros: Uses simple principle which can be explained in non-statistical terms. It is efficient.
-
-Cons: Less sophisticated, random choices of centers, and requires guess for centers.
- 
-Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval. 
-
-
 One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
 in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.[3] clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
 
@@ -43,9 +36,37 @@ In K-means, we assume that each cluster fits a Gaussian distribution (normal dis
 
 We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
 
-### Hierarchical Clustering
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval. 
+
+### Pros/Cons
+
+**Pros** 
+
+Uses simple principle which can be explained in non-statistical terms. It is efficient.
+
+**Cons**
+
+Less sophisticated, random choices of centers, and requires guess for centers.
+
+## Hierarchical Clustering
+
+### Intro
 
 Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
 Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
 
 K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn’t need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons

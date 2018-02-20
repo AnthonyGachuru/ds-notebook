@@ -1,7 +1,5 @@
 ---
-title: "Bayesian"
-author: "Gordon"
-date: "April 29, 2017"
+title: "KNN"
 output: html_document
 ---
 
@@ -9,44 +7,52 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-##KNN
+## KNN
+
+### Intro
 
 Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
 
-Pros: Only assumption is proximity. Non-parametric.
-
-Cons: Have to decide k and distance metric. Can be sensitive to outliers or irrelevant attributes. Computationally expensive.
-
 curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics
+
+smaller k means smaller training error, ut larger k is more stable. 
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+**Pros**
+
+Only assumption is proximity. Non-parametric.
+
+ The only assumption we are making about our data is related to proximity (i.
+e., observations that are close by in the feature space are similar to each
+other in respect to the target value).
+ We do not have to fit a model to the data since this is a non-parametric
+approach.
+
+- Powerful
+- No training involved (“lazy”)
+- Naturally handles multiclass classification and regression
+
+What is a common drawback of 3NN classifiers? Prediction on large data sets is slow.
+
+**Cons**
+
+Have to decide k and distance metric. Can be sensitive to outliers or irrelevant attributes. Computationally expensive.
 
 knn is terrible with high dimensions. Bad with categorical data.
 
-Pros of K-Nearest Neighbors:
-➢ The only assumption we are making about our data is related to proximity (i.
-e., observations that are close by in the feature space are similar to each
-other in respect to the target value).
-➢ We do not have to fit a model to the data since this is a non-parametric
-approach.
-
-Cons of K-Nearest Neighbors:
+ Expensive and slow to predict new instances
+- Must define a meaningful distance function
+- Performs poorly on high-dimensionality datasets
 
 We have to decide on K and a distance metric.
 
 Can be sensitive to outliers or irrelevant attributes because they add noise.
 
 Computationally expensive; as the number of observations, dimensions, and K increases, the time it takes for the algorithm to run and the space it takes to store the computations increases dramatically.
-
-Why is this bad? We want more data!
-
-What is a common drawback of 3NN classifiers? Prediction on large data sets is slow.
-
-smaller k means smaller training error, ut larger k is more stable. 
-
-Pros: - Simple
-- Powerful
-- No training involved (“lazy”)
-- Naturally handles multiclass classification and regression
-
-Cons: - Expensive and slow to predict new instances
-- Must define a meaningful distance function
-- Performs poorly on high-dimensionality datasets

@@ -33,6 +33,12 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 
 ## Import 
 
+* NA
+
+## Tidy
+
+* Tidy data
+
 * Figure out what I’m trying to do with the data, and ssee what it looks like. Types of variables, the first few observations and last few observations look like.
 
 * If the data set is really big, I usually take a carefully chosen random subsample to make it possible to do my exploration interactively
@@ -40,10 +46,6 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 * missing values or outliers
 
 * summary() 
-
-## Tidy
-
-* Tidy data
 
 ## Transform
 
@@ -93,7 +95,7 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 
     * SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
 
-* sklearn: feature_selection.RFE/CV
+    * sklearn: feature_selection.RFE(CV)
 
 * Dummying
 
@@ -101,7 +103,7 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 
     * pandas.factorize: Encode input values as an enumerated type
 
-* tuning
+* Tuning
 
 ## Communicate
 
@@ -119,7 +121,7 @@ General maintenance:
 
 ## Import
 
-pandas | read_csv | readxl
+* pandas | readr
 
 * [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
 
@@ -181,9 +183,9 @@ https://github.com/njtierney/naniar
 
 ## uVisualize
 
-ggformula | ggplot2
+* ggplot2
 
-plotnine
+* plotnine
 
 * [EdaR](https://github.com/ujjwalkarn/xda)
 
@@ -191,41 +193,23 @@ plotnine
 
 ## uModel
 
-http://www.ats.ucla.edu/stat/mult_pkg/whatstat/
-
-https://github.com/WinVector/vtreat
-
-https://systemml.apache.org
+* Pre-processing: https://github.com/WinVector/vtreat
 
 Pipelines & Feature Unions::[1](https://github.com/zipfian/pipelines_and_featureunions)|[2](http://zacstewart.com/2014/08/05/pipelines-of-featureunions-of-pipelines.html)
 
-https://github.com/scikit-learn-contrib/boruta_py
-
-[Algorithms](https://github.com/EpistasisLab/scikit-rebate)
+* FS Algorithms: [Rebate](https://github.com/EpistasisLab/scikit-rebate) | [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
 
 http://contrib.scikit-learn.org/imbalanced-learn/stable/
 
-https://github.com/DistrictDataLabs/yellowbrick
+* Model Selection: https://github.com/DistrictDataLabs/yellowbrick | [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/) | Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
 
-https://github.com/marcotcr/lime
+* Model Explanability: [lime](https://github.com/marcotcr/lime) | [eli5](https://github.com/TeamHG-Memex/eli5)
 
-https://github.com/TeamHG-Memex/eli5
+* Tuning: https://github.com/hyperopt/hyperopt-sklearn | https://github.com/rsteca/sklearn-deap
 
-https://github.com/hyperopt/hyperopt-sklearn
+* Class Imbalance: Gradient boosting
 
-https://github.com/rsteca/sklearn-deap
-
-https://github.com/databricks/spark-sklearn
-
-pysparkling/sparkling_pandas/sparklyr
-
-* Gradient boosting for class imbalance
-
-* Building custom ensembles: mlxtend
-
-* [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
-
-* Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
+* Ensembles: mlxtend
 
 ## Communicate
 
@@ -235,9 +219,15 @@ Rmarkdown | Jupyter | Shiny | Dash
 
 ## Import
 
+readr
+
 ## Tidy
 
+tidyr
+
 ## uTransform
+
+dplyr
 
 ## uVisualize
 
@@ -257,16 +247,28 @@ Shiny
 
 # Py Stack
 
-import
+## Import
 
-tidy
+pandas
 
-Explore
+## Tidy
 
-[ transform ] 
+pandas
 
-[visualize]
+## uTransform
 
-[model ]
+pandas
 
-communicate
+## uVisualize
+
+plotnine
+
+## uModel
+
+scikit-learn
+
+## Communicate
+
+Jupyter Notebooks
+
+Dash

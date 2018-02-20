@@ -11,6 +11,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Time Series
 
+### Intro
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+**Pros**
+
+**Cons**
+
 * Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn't vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.
 
 * White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.

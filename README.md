@@ -4,12 +4,16 @@ A set of quick theoretical and practical references notes for algorithms and oth
 
 ## Topic
 
-**Intro**
+### Intro
 
-**Assumptions**
+### Assumptions
 
-**Characteristics**
+### Characteristics
 
-**Evaluation**
+### Evaluation
 
-**Pros/Cons**
+### Pros/Cons
+
+**Pros**
+
+**Cons**

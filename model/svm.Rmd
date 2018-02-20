@@ -11,13 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ##SVM
 
-**Intro**
-
-**Assumptions**
-
-**Characteristics**
-
-**Evaluation**
+### Intro
 
 Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach?  To ensure small prediction error when the underlying distribution is not known
 
@@ -28,10 +22,13 @@ With so many kernels to choose from, how can you decide which one to use? As a r
 Here mostly talking about a maximal margin classifier. A separating hyperline of data of two classes. Maximizes distance to the nearest point in either class, i.e, the margin. Points which delineate the boundary are called support vectors. Correct classification first and then maximizing the margin. SVM only really works well with linear hyperplanes. The c hyperparameter deals with the tradeoff between a smooth decision boundary and correct classification. The larger the c the more points classified correctly as it increases the penalty for wrong classification. A smaller c gives more room for intial error which helps improve accuracy for not easily separable data. Work well in complicated domains with clear line of separation. Not so well in for large datasets because of training and not when there is a lot of noise. Can solve nonlinear decision boundaries by using polynomial terms. Kernel trick that draws boundaries by looking into higher dimensions. 
 
 Extracting the coefficients from the hyperplane equation (not including the intercept) yields what is called a normal vector. This vector points in a direction orthogonal to the surface of the hyperplane and essentially defines its orientation.
+
 Big data set and lot of features SVM might be slow and prone to overfitting. SVM slower than naïve bayes. A kernelis a function that quantifies the similarity of two observations. The beauty of the "kernel trick" is that, even if there is an infinite-dimensional basis, we need only look at the n^2 inner products between training data points. SVM not scale invariant. Check if library normalizes by default. RBF kernel is a good default. Try exponential sequences for parameters.
+
 Extension of above info about relaxing margin. Doesn't perfectly separate classes but is more robust to outliers. Helps better classify obervations. Take a penalty by potentially misclassifying soe observations. Have better predictive power. Called a soft margin. The C parameter is the budget for the slack variables which tell where observations are relative to the margin and hyperplane. Only observations that either fall on the margin or violate the margin affect the solution to the optimization problem. More robust than SVM. 
 
 When the support vector classifier is combined with a non-linear kernel, the resulting classifier is called a support vector machine.
+
 Note: Important to make sure the normal vector is of unit length. For the radial kernel, suppose we have a test observation. If it is far from a training observation, the Euclidean distance will be large, but the value of the radial kernel will be small. using kernels is much more computationally efficientbecause we only need to compute the kernel for distinct pairs of observations in our dataset. Furthermore, we need not actually work in the enlarged feature space. Intuitively, the gamma parameter defines how far the influence of a single training example reaches, with low values meaning ‘far’ and high values meaning ‘close’. The gamma parameters can be seen as the inverse of the radius of influence of samples selected by the model as support vectors. 
 
 Multiclass
@@ -40,9 +37,15 @@ Multiclass
 
 1vAll: Construct a support vector machine for each individual category against all other categories combined. Assign the observation to the classifier with the largest function value.
 
-**Pros/Cons**
+### Assumptions
 
-Pros: 
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+**Pros**
 
 * Performs similarly to logistic regression when linear separation
 
@@ -50,14 +53,19 @@ Pros:
 
 * Handle high dimensional data well
 
-- Can model complex, nonlinear relationships
-- Robust to noise (because they maximize margins)
+* Can model complex, nonlinear relationships
 
-Cons: 
+* Robust to noise (because they maximize margins)
+
+**Cons**
 
 * Susceptible to overfitting/training issues depending on kernel
 
-- Need to select a good kernel function
-- Model parameters are difficult to interpret
-- Sometimes numerical stability problems
-- Requires significant memory and processing power
+* Need to select a good kernel function
+
+* Model parameters are difficult to interpret
+
+* Sometimes numerical stability problems
+
+* Requires significant memory and processing power
+
