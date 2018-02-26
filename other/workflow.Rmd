@@ -29,6 +29,8 @@ More succinctly, as per Hadley Wickham:
 
 import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
 
+One important way to construct projects is to write user stories a la software engineering.
+
 # Checklist
 
 ## Import 
@@ -48,6 +50,12 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 * summary() 
 
 ## Transform
+
+* http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt
+
+* [Choosing a Statistical Test](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
+
+* [Stats Decision Process](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
 
 * Data set dependent.
 
@@ -114,6 +122,8 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 General maintenance:
 
 * TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)|[2](http://www.tdda.info/)|[3](http://stochasticsolutions.com/)|[**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
+
+* [Unit Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
 
 * Helper functions, unit tests, packages, makefiles.
 

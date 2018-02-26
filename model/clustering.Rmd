@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * [Rules](https://twitter.com/thomaswdinsmore/status/965223193043718145)
 
+* https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68
+
 ## K-Means
 
 ### Intro

@@ -23,6 +23,8 @@ df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 
 * http://hunch.net/?p=224
 
+* However, the problem with cross-validation is that it is rarely applicable to real world problems, for all the reasons described in the above sections. Cross-validation only works in the same cases where you can randomly shuffle your data to choose a validation set.
+
 * If the performance of a classification model on the test set (out-of-sample) error is poor, you can't just re-calibrate your model parameters to achieve a better model. This is cheating.
 
 * When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suffer from this problem. If n is small and the distribution of the predictors X is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.
@@ -181,5 +183,9 @@ Reframe as Anomaly Detection
 * Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I'm going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).
 
 * We can also tell that our input, smart_1_normalized, doesn't have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).
+
+* RF param grid example: param_grid = [ {"max_depth": [3,4,6,10], 'n_estimators": [100,200,500],    "max_features": ['sqrt','log2',0.2,0.5,0.8], "min_samples_split": [2, 5, 20,50], "min_samples_leaf": [2, 5, 20,50], "bootstrap": [True, False], "criterion": ["gini", "entropy"]}]
+
+
 
 

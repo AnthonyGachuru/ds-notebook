@@ -93,6 +93,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * use makefile to run cmd commands
 
+* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+
 * Make package for workflow with data (__init__.py) and use this formation for function docs:
 
 def fun(a): 
@@ -125,3 +127,4 @@ The first part conda env export writes out all the packages in the environment, 
 `conda env create -f environment.yaml`
 
 This will create a new environment with the same name listed in environment.yaml.
+
