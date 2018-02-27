@@ -21,9 +21,44 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)
 
-* Debuggin: import pdb | pdb.set_trace(), 
+* Debugging: import pdb | pdb.set_trace(), 
 
-* dir() gives a list of in scope variables. globals() gives a dictionary of global variables. locals() gives a dictionary of local variables
+* dir() gives a list of in scope variables
+
+* globals() gives a dictionary of global variables
+
+* locals() gives a dictionary of local variables
+
+**Vanderplas Jupyter**
+
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+def fun(a): 
+```{python}
+def fun(a):
+
+  Role
+  -----
+  Does something
+  
+  Parameters
+  ---------
+  Accepts something
+  
+  Returns
+  -------
+  Returns something
+  
+  return(a)
+```
 
 ## R
 
@@ -83,40 +118,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Other
 
-* Cheatsheets::[1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5):[2](https://github.com/kailashahirwar/cheatsheets-ai):[3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html):[RStudio](https://www.rstudio.com/resources/cheatsheets/):[DL](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
+* Cheatsheets: [1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5) | [2](https://github.com/kailashahirwar/cheatsheets-ai) | [3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html)
 
-**Vanderplas Jupyter**
-
-* create helper functions and units tests as R/py for Rmd/ipynb
-
-* pytest/hypothesis for testing
-
-* use makefile to run cmd commands
-
-* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
-
-* Make package for workflow with data (__init__.py) and use this formation for function docs:
-
-def fun(a): 
-```{python}
-def fun(a):
-
-  Role
-  -----
-  Does something
-  
-  Parameters
-  ---------
-  Accepts something
-  
-  Returns
-  -------
-  Returns something
-  
-  return(a)
-```
-
-**YAML**
+## YAML
 
 A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
 
