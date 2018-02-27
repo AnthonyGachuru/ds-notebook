@@ -306,27 +306,3 @@ For GAM models, the predict() method returns a matrix, so use as.numeric() to co
 **Pros**
 
 **Cons**
-
-## Other
-
-[Inference package](https://cran.r-project.org/web/packages/infer/infer.pdf)
-
-```{r}
-set.seed(4747)
-perm_slope <- twins %>%
-  specify(Foster ~ Biological) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = 10, type = "permute") %>%
-  calculate(stat = "slope")
-```
-
-Linear Regression by Year
-
-```{r}
-library(purrr)
-pga %>% 
-  select(name,year,driveavg,drivepct, score.avg) %>%
-  split(.$year) %>%
-  map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
-  map(summary)
-```
