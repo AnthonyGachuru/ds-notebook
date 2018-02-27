@@ -105,13 +105,13 @@ Variance Threshold: Use this to exclude features that don't meet a variance thre
 
 ## Deployment /  Maintenance
 
-* TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)|[2](http://www.tdda.info/)|[3](http://stochasticsolutions.com/)|[**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
+* TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
+
+* [**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
 
 * [Unit Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
 
 * Helper functions, unit tests, packages, makefiles.
-
-* pytest/hypothesis/testthat
 
 # Stack
 
@@ -121,67 +121,55 @@ Variance Threshold: Use this to exclude features that don't meet a variance thre
 
 * [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
 
-* Easy Database Management: [dataset](https://dataset.readthedocs.io/en/latest/)
+* [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
 
 * [Data Validation](https://github.com/data-cleaning/validate)
 
-## TIdy
+## Tidy
 
-widyr | tidyr | dplyr
+* widyr | tidyr | dplyr
 
 ## uTransform
 
-https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/
+* [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
 
-https://github.com/ropenscilabs/skimr
+* [skimr](https://github.com/ropenscilabs/skimr)
 
-[xda: Exploratory Analysis](https://github.com/ujjwalkarn/xda)
+* [Exploratory Analysis](https://github.com/ujjwalkarn/xda)
 
-[Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
+* [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
 
-https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html
+* [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
 
-https://github.com/ResidentMario/missingno
+* missingness: [1](https://github.com/MimiOnuoha/missing-datasets) | [2](https://github.com/njtierney/naniar)  |[Py](https://github.com/ResidentMario/missingno)
 
-https://github.com/shawnbrown/datatest
+* purrr
 
-[Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
+* https://github.com/drsimonj/corrr
 
-missingness::[1](https://github.com/MimiOnuoha/missing-datasets):[2](https://github.com/njtierney/naniar)|[Py](https://github.com/ResidentMario/missingno)
+* https://cran.r-project.org/web/packages/simputation/index.html
 
-https://jennybc.github.io/purrr-tutorial/index.html
+* [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
 
-https://github.com/drsimonj/corrr
+* [Regex For Humans](https://github.com/iogf/crocs)
 
-https://cran.r-project.org/web/packages/simputation/index.html
+* https://github.com/yhat/pandasql
 
-[Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
-
-[Regex For Humans](https://github.com/iogf/crocs)
-
-https://github.com/yhat/pandasql
-
-https://github.com/njtierney/naniar
-
-* Encoding Precendence: utf-8, iso-8859-1, utf-16
+* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
 * na.strings: Replace empty strings by na: `x <- read.csv("filepath/R_NA.csv",header=TRUE,na.strings=c(""))`
-
-* Missingness: Missing completely at random/missing at random/missing not at random
 
 * Dealing with missing data: df.fillna(value), df.isnull().sum(), df = df[np.isfinite(df['EPS'])]
 
 * scipy.stats.describe
 
-* group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
+* pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
 
 * Replacing blank cells by nas: titanic3[titanic3==""] = NA
 
 ## uVisualize
 
-* ggplot2
-
-* plotnine
+* ggplot2 | plotnine
 
 * [EdaR](https://github.com/ujjwalkarn/xda)
 
@@ -191,80 +179,26 @@ https://github.com/njtierney/naniar
 
 * Pre-processing: https://github.com/WinVector/vtreat
 
-Pipelines & Feature Unions::[1](https://github.com/zipfian/pipelines_and_featureunions)|[2](http://zacstewart.com/2014/08/05/pipelines-of-featureunions-of-pipelines.html)
+* Pipelines & Feature Unions
 
 * FS Algorithms: [Rebate](https://github.com/EpistasisLab/scikit-rebate) | [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
 
-http://contrib.scikit-learn.org/imbalanced-learn/stable/
-
-* Model Selection: https://github.com/DistrictDataLabs/yellowbrick | [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/) | Skplot::[1](https://github.com/DistrictDataLabs/yellowbrick):[2](https://github.com/reiinakano/scikit-plot)
+* Model Selection: https://github.com/DistrictDataLabs/yellowbrick | [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/) | Skplot: [1](https://github.com/DistrictDataLabs/yellowbrick) | [2](https://github.com/reiinakano/scikit-plot)
 
 * Model Explanability: [lime](https://github.com/marcotcr/lime) | [eli5](https://github.com/TeamHG-Memex/eli5)
 
 * Tuning: https://github.com/hyperopt/hyperopt-sklearn | https://github.com/rsteca/sklearn-deap
 
-* Class Imbalance: Gradient boosting
+* Class Imbalance: Gradient boosting | http://contrib.scikit-learn.org/imbalanced-learn/stable/
 
 * Ensembles: mlxtend
 
 ## Communicate
 
-Rmarkdown | Jupyter | Shiny | Dash
+* Rmarkdown | Jupyter | Shiny | Dash
 
-# R Stack
+## Deployment /  Maintenance
 
-## Import
+* pytest | hypothesis | testthat
 
-readr
-
-## Tidy
-
-tidyr
-
-## uTransform
-
-dplyr
-
-## uVisualize
-
-ggplot2
-
-## uModel
-
-caret
-
-sparklyr
-
-## Communicate
-
-Rmarkdown 
-
-Shiny
-
-# Py Stack
-
-## Import
-
-pandas
-
-## Tidy
-
-pandas
-
-## uTransform
-
-pandas
-
-## uVisualize
-
-plotnine
-
-## uModel
-
-scikit-learn
-
-## Communicate
-
-Jupyter Notebooks
-
-Dash
+* [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
