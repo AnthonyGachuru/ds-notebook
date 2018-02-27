@@ -9,6 +9,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Feature Selection
 
+Just some to note.
+
+* Variance Threshold: Use this to exclude features that don't meet a variance threshold.
+ 
+* Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
+
+* SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
+
+ * sklearn.feature_selection.RFE(CV)
+
+## Feature Engineering
+
 Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
 
 ```{python}
