@@ -29,75 +29,65 @@ More succinctly, as per Hadley Wickham:
 
 import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
 
-One important way to construct projects is to write user stories a la software engineering.
+My combination of the two:
+
+prep -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
+
+Another note is that one way to structure projects is to write user stories a la software engineering. 
+
+What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
 # Checklist
 
 ## Import 
 
-* NA
+* Sampling csv in Py: import subsample
 
 ## Tidy
 
-* Tidy data
+* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf)
 
-* Figure out what I’m trying to do with the data, and ssee what it looks like. Types of variables, the first few observations and last few observations look like.
+* Figure out what you're trying to do with the data.
 
-* If the data set is really big, I usually take a carefully chosen random subsample to make it possible to do my exploration interactively
+* See what the data looks like: types of variables, the first and last few observations, missing values or outliers
 
-* missing values or outliers
-
-* summary() 
+* Chose random subsample for big data
 
 ## Transform
 
-* http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt
+* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
 
-* [Choosing a Statistical Test](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
+* Imputation: Mean | KNN | Random | Regression | Mode
 
-* [Stats Decision Process](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
+## Visualize
 
-* Data set dependent.
+* Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
 
-* Imputation
+* Trendlines & Histograms
 
-    * Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
+* Confidence intervals
 
-    * Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
+* Compare the distributions of variables with overlayed density plots 
 
-    * Random: Can amplify outlier observation and induce bias.
+* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships
 
-    * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
+* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
 
-## Visualize 
-
-* Make trendlines, scatterplots, and add confidence intervals
-
-* To compare the distributions of variables I usually use overlayed density plots 
-
-* I make tons of scatterplots to look at relationships between variables
-
-* Usually color/size the dots in the scatterplots by other variables to see if I can identify any confounding relationships that might screw up analyses downstream. Then, if the data are multivariate, I do some dimension reduction to get a feel for high dimensional structure. 
-
-* Nobody mentioned principal components or hierarchical clustering in the Twitter conversation, but I end up using these a lot to just figure out if there are any weird multivariate dependencies I might have missed.
-
-* Histograms
-
-* Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread). 
-
-* Outlier Detection - Tukey IQR, Kernel density estimation, Bonferroni test
-
-* PCA & non-linear dimensionality reduction, Isomap - manifold or cluster
+* Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
 
 ## Model 
 
-* standardize
+* Feature Engineering
 
-* dimensionality reduction
+    * standardize
+    
+    * dimensionality reduction
+    
+    * dummying: sklearn.preprocessing.binarize | pandas.factorize
 
-* feature selection
+* Feature Selection: 
 
-    * Variance Threshold: Use this to exclude features that don't meet a variance threshold.
+Variance Threshold: Use this to exclude features that don't meet a variance threshold.
  
     * Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
 
@@ -105,21 +95,15 @@ One important way to construct projects is to write user stories a la software e
 
     * sklearn: feature_selection.RFE(CV)
 
-* Dummying
+* Ensembling: mlxtend  
 
-    * sklearn: preprocessing.binarize
-
-    * pandas.factorize: Encode input values as an enumerated type
-
-* Tuning
+* Tuning: 
 
 ## Communicate
 
-* N/A
+* Jupyter notebook or R Markdown.
 
-# My Stack
-
-General maintenance:
+## Deployment /  Maintenance
 
 * TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)|[2](http://www.tdda.info/)|[3](http://stochasticsolutions.com/)|[**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
 
@@ -128,6 +112,8 @@ General maintenance:
 * Helper functions, unit tests, packages, makefiles.
 
 * pytest/hypothesis/testthat
+
+# Stack
 
 ## Import
 
