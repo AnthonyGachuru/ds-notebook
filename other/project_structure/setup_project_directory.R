@@ -24,3 +24,21 @@ dir.create('communication')
 
 #Initialize git repo
 git2r::init('.')
+
+# CHANGELOG.md Example
+
+## Logs
+
+##Excluded processes should be assumed to be the same as version 0.1.
+
+##Current Best Model:
+##Current Best Score / Metric:
+
+## 0.1
+
+## 1_exploration.Rmd
+
+## 2_pre_processing.Rmd
+
+## 3_modeling.ipynb
+## {data used} | {robustness}| {model} | {params} | {best score & metric}
