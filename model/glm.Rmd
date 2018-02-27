@@ -13,8 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Assumptions
 
-### Characteristics
-
 ### Evaluation
 
 ### Pros/Cons
@@ -184,8 +182,6 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 ### Assumptions
 
-### Characteristics
-
 ### Evaluation
 
 ### Pros/Cons
@@ -203,8 +199,6 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 ### Assumptions
 
 * Independent errors and no multicollinearity.
-
-### Characteristics
 
 * Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. 
 
@@ -272,8 +266,6 @@ One of the assumptions of Poisson regression to predict counts is that the event
 
 When the variance is much larger than the mean, the Poisson assumption doesn't apply, and one solution is to use quasipoisson regression, which does not assume that variance=meanvariance=mean.
 
-### Characteristics
-
 ### Evaluation
 
 ### Pros/Cons
@@ -296,8 +288,6 @@ For standard regression, use family = gaussian (the default).
 For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
 
 ### Assumptions
-
-### Characteristics
 
 ### Evaluation
 
