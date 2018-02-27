@@ -190,25 +190,27 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 ### Intro
 
-* Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
+Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
 
-* Logistic: When you’re predicting which category your observation is in. (Is this is a cat or a dog?)
+Logistic: When you’re predicting which category your observation is in. (Is this is a cat or a dog?)
 
-* The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p).
+The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p).
+
+Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. 
+
+No closed form expression to maximize coefficients with maximum likelihood estimation, so one uses gradient descent or stochastic gradient descent. The second one is faster. 
+
+For logistic regression value of c penalizes features. Low c penalizes a lot and vice versa. A large c decreases the effect of the regularization term (the l2 penalization). 
+
+Makes a linear boundary between classes. 
+
+For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
 
 ### Assumptions
 
-* Independent errors and no multicollinearity.
+* Independent errors
 
-* Easy to incorpotate prior knowledge, number fo features are small, training is fast, precision not critical. 
-
-* No closed form expression to maximize coefficients with maximum likelihood estimation, so one uses gradient descent or stochastic gradient descent. The second one is faster. 
-
-* For logistic regression value of c penalizes features. Low c penalizes a lot and vice versa. A large c decreases the effect of the regularization term (the l2 penalization). 
-
-* Makes a linear boundary between classes. 
-
-* For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
+* No multicollinearity
 
 ### Evaluation
 
@@ -218,7 +220,7 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 * McFadden's Pseudo R^2. 
 
-* A.I.C and B.I.C
+* A.I.C / B.I.C
 
 ### Pros/Cons
 
