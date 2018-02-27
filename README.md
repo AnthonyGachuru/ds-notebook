@@ -8,8 +8,6 @@ A set of quick theoretical and practical references notes for algorithms and oth
 
 #### Assumptions
 
-#### Characteristics
-
 #### Evaluation
 
 #### Pros/Cons
