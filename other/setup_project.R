@@ -1,3 +1,5 @@
+library(knitr)
+
 #Create top level folder
 dir.create('my-data-project')
 setwd('./my-data-project/')
@@ -7,10 +9,19 @@ dir.create('code')
 dir.create('visualizations')
 dir.create('reports')
 dir.create('data')
+dir.create('deploy_maintain')
 
 #Create trackers
 file.create('README.md')
 file.create('CHANGELOG.md')
+
+#Create grandchildren files for code
+
+file.create('import_tidy.R')
+file.create('transform_visualize.R')
+file.create('model.R')
+
+knitr::spin('import_tidy.R', format = c('Rmd')) #doesn't work
 
 #Create grandchildren folders for data
 setwd('./data')

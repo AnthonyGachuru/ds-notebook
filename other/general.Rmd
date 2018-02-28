@@ -86,6 +86,8 @@ def fun(a):
 
 ## Git
 
+* "Just learned something cool- when you screw up a git merge, you can use git reset --hard master@{"300 minutes ago"} with any time quantity you want in there to get back to where things were a period of time ago." [[source]](https://twitter.com/data_stephanie/status/968226587547258886)
+
 * Add upstream to update a forked repo with the original: remote add upstream repo_url 
 
 * To undo git add . use git reset (no dot)
