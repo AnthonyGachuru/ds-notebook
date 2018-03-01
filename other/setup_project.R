@@ -16,15 +16,14 @@ file.create('README.md')
 file.create('CHANGELOG.md')
 
 #Create grandchildren files for code
-setwd('./code')
-file.create('import_tidy.R')
-file.create('transform_visualize.R')
-file.create('model.R')
-
-knitr::spin('import_tidy.R', format = c('Rmd')) #doesn't work
+#setwd('./code')
+#file.create('import_tidy.R')
+#file.create('transform_visualize.R')
+#file.create('model.R')
+#knitr::spin('import_tidy.R', format = c('Rmd')) #doesn't work
 
 #Create grandchildren folders for data
-setwd('../data')
+setwd('./data')
 dir.create('raw')
 dir.create('refined')
 
