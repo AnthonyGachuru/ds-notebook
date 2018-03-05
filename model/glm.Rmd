@@ -39,6 +39,8 @@ https://en.wikipedia.org/wiki/Quantile_regression
 
 Increasing x1 by 1 means you are increasing the underlying X1 by 1 standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1 is the effect on y of increasing X1 by 1 sigma.
 
+In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. 
+
 When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
 
 In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
