@@ -168,6 +168,8 @@ Reframe as Anomaly Detection
 
 * Simulated Annealing: Gradient descent extension
 
+* A variable that is completely useless by itself can provide a significant performance improvement when taken with others.
+
 * https://ml-cheatsheet.readthedocs.io/en/latest/index.html
 
 * So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).

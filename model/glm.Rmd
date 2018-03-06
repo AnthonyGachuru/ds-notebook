@@ -33,6 +33,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Linear: When you’re predicting a continuous value. (What temperature will it be today?)
 
+https://en.wikipedia.org/wiki/Newey–West_estimator
+
+box cox
+
 [Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
 
 https://en.wikipedia.org/wiki/Quantile_regression

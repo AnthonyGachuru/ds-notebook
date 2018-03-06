@@ -1,0 +1,126 @@
+---
+title: "Code Snippets"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Python
+
+```{python}
+# plotly display data
+
+from plotly.tools import FigureFactory as ff
+import plotly
+plotly.offline.init_notebook_mode()
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_usa_states.csv')
+table = ff.create_table(df.iloc[1:10, 1:5])
+plotly.offline.plot(table, output_type = 'div', show_link = False, include_plotlyjs = False)
+```
+
+```{python}
+# Display floats with 2 decimal places
+pd.options.display.float_format = '{:,.2f}'.format
+ 
+# Expand display limits
+pd.options.display.max_rows = 200
+pd.options.display.max_columns = 100
+```
+
+```{python}
+#Pyspark
+
+import findspark
+findspark.init()
+import pyspark
+import random
+
+sc = pyspark.SparkContext(appName="Pi")
+num_samples = 100000000
+def inside(p):     
+    x, y = random.random(), random.random()
+    return x*x + y*y < 1
+count = sc.parallelize(range(0, num_samples)).filter(inside).count()
+pi = 4 * count / num_samples
+print(pi)
+
+sc.stop()
+```
+
+```{python}
+# Define new operator
+
+class Infix:
+    def __init__(self, function):
+        self.function = function
+    def __ror__(self, other):
+        return Infix(lambda x, self = self, other = other: self.function(other, x))
+    def __or__(self, other):
+        return self.function(other)
+    def __rlshift__(self, other):
+        return Infix(lambda x, self=self, other=other: self.function(other, x))
+    def __rshift__(self, other):
+        return self.function(other)
+    def __call__(self, value1, value2):
+        return self.function(value1, value2)
+
+pipe = Infix(lambda x,y: y(x))
+4 |pipe| (lambda z: z**2)
+```
+
+```{python}
+# Generators Error
+
+iterator = iter(iterable)
+try:
+    while True:
+        item = next(iterator)
+        do_stuff(item)
+except StopIteration:
+    pass
+finally:
+    del iterator
+```
+
+```{python}
+# Apply a function to every row in a pandas dataframe
+
+rectangles = [
+    { 'height': 40, 'width': 10 },
+    { 'height': 20, 'width': 9 },
+    { 'height': 3.4, 'width': 4 }
+]
+
+rectangles_df = pd.DataFrame(rectangles)
+
+def calculate_area(row):
+    return row['height'] * row['width']
+
+rectangles_df.apply(calculate_area, axis=1)
+
+# Apply to single column
+
+df['SAL-RATE'].apply(money_to_float)
+```
+
+```{python}
+# Extra arguments to function
+
+import functools
+
+def add(x, y):
+    return x + y
+    
+a = [1, 2, 3]
+map(functools.partial(add, y=2), a)
+```
+
+## R
+
+You can also embed plots, for example:
+
+```{r}
+plot(pressure)
+```

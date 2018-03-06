@@ -12,3 +12,5 @@ knitr::opts_chunk$set(echo = TRUE)
 ## General
 
 * logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
+
+* swarmplot
