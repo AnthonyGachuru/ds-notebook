@@ -31,13 +31,25 @@ import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicat
 
 My combination of the two:
 
-prep -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
+preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
 
 Another note is that one way to structure projects is to write user stories a la software engineering. 
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
 # Annotated Checklist
+
+## Preparation
+
+* Understand the business question, goals, and measures of success
+
+* See if the data to answer the question exists, and if it is useful.
+
+* Structure project as user stories
+
+* Initiliaze [base project directory](https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R) and set up versioning.
+
+* Initialize report to track and summarise work and to do list.
 
 ## Import
 
@@ -102,11 +114,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ## uModel
 
-### Prescriptive
-
-* Use a regression model. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
-
-### Predictive
+* Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
 * Pre-processing
     * https://github.com/WinVector/vtreat
@@ -114,8 +122,15 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 * Pipelines & Feature Unions
 
 * Do feature selection
+    * Variance Threshold
+    * Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification
+    * SelectKBest/SelectPercentile
+    * sklearn: feature_selection.RFE(CV)
     * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
     * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
+    
+* Do feature engineering: Standardization, dimensionality reduction, dummying
+    * sklearn.preprocessing.binarize | pandas.factorize
 
 * Model Selection
     * https://github.com/DistrictDataLabs/yellowbrick
@@ -136,31 +151,15 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Create ensembles
     * mlxtend
-
+    
 * Choose Statistical Test
     * [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
     * [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
-
-* Hypothesis testing
     * infer library
     
-* Correlations
+* Check for correlations
     * https://github.com/drsimonj/corrr
-
-* Feature Engineering
-
-    * standardize
     
-    * dimensionality reduction
-    
-    * dummying: sklearn.preprocessing.binarize | pandas.factorize
-
-* Feature Selection
-    * Variance Threshold
-    * Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification
-    * SelectKBest/SelectPercentile
-    * sklearn: feature_selection.RFE(CV)
-
 * Ensembling: mlxtend  
 
 * Look at learning curves
@@ -172,16 +171,16 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ## Deployment /  Maintenance
 
-* TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
+* Write tests
+    * [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
+    * [2](http://www.tdda.info/)
+    * [3](http://stochasticsolutions.com/)
+    * [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
+    * [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
+    * [Data Validation](https://github.com/data-cleaning/validate)
+    * pytest | hypothesis | testthat
+    * [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
 
-* [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
+* Write helper functions.
 
-* [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
 
-* Helper functions and makefiles.
-
-* [Data Validation](https://github.com/data-cleaning/validate)
-
-* pytest | hypothesis | testthat
-
-* [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
