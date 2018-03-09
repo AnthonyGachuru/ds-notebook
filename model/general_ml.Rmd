@@ -17,7 +17,19 @@ Just some to note.
 
 * SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
 
- * sklearn.feature_selection.RFE(CV)
+* sklearn.feature_selection.RFE(CV)
+
+* To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.
+
+* Make sure that your test set meets the following two conditions:
+
+    * Is large enough to yield statistically meaningful results.
+
+    * Is representative of the data set as a whole. In other words, don't pick a test set with different characteristics than the training set.
+    
+* Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply "cap" or "clip" the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
+
+* Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).
 
 ## Feature Engineering
 
@@ -159,6 +171,8 @@ Reframe as Anomaly Detection
 * Multi-Modal Classification: In the machine learning community, the term Multi-Modal is used to refer to multiple kinds of data. For example, consider a YouTube video. It can be thought to contain 3 different modalities: 1) The video frames (visual modality), 2) The audio clip of what's being spoken (audio modality), 3) Some videos also come with the transcription of the words spoken in the form of subtitles (textual modality)
 
 * Less samples and more features increase the chance of overfitting.
+
+* https://www.dataquest.io/blog/learning-curves-machine-learning/
 
 * Bias: Error Introduced by approximating real-life problem by using a simple method
 

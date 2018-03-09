@@ -11,6 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * [DL Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
 
+* By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.
+
+* Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).
+
 * There are several activation functions you may encounter in practice:
 
     * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)

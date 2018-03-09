@@ -9,6 +9,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Python
 
+* https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/
+
+* flatten dict
+
+    * pd.io.json.json_normalize(stuff)
+    *https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055
+    * https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10
+
 ```{python}
 # plotly display data
 

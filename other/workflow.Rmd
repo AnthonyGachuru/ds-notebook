@@ -37,31 +37,55 @@ Another note is that one way to structure projects is to write user stories a la
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
-# Checklist
+# Annotated Checklist
 
-## Import 
+## Import
 
-* Sampling csv in Py: import subsample
+* Sampling from data if its too large
+    * [subsample package](https://pypi.python.org/pypi/subsample) in Python
+    * [sqldf library](https://stackoverflow.com/a/22262726/6627726) in R
+    
+* [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
+
+* [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
 
 ## Tidy
 
 * [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf)
+    * widyr | tidyr | dplyr | purrr
 
 * Figure out what you're trying to do with the data.
 
-* See what the data looks like: types of variables, the first and last few observations, missing values or outliers
+* See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+    * [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
+    * [skimr](https://github.com/ropenscilabs/skimr)
+    * [Exploratory Analysis](https://github.com/ujjwalkarn/xda)
+    * [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
+    * scipy.stats.describe()
+    * Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
 
-* Chose random subsample for big data
-
-## Transform
-
-* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
+## uTransform
 
 * Imputation: Mean | KNN | Random | Regression | Mode
+    * [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
 
-* infer package: Hypothesis testing
+* Look at missingness
+    * [2](https://github.com/njtierney/naniar)
+    * [Py](https://github.com/ResidentMario/missingno)
 
-## Visualize
+* [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
+
+* [Regex For Humans](https://github.com/iogf/crocs)
+
+* https://github.com/yhat/pandasql
+
+* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+
+* Replacing blank cells by nas: titanic3[titanic3==""] = NA
+
+* [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
+
+## uVisualize
 
 * Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
 
@@ -75,9 +99,52 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
 
-* Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
+## uModel
 
-## Model 
+### Prescriptive
+
+* Use a regression model. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
+
+### Predictive
+
+* Pre-processing
+    * https://github.com/WinVector/vtreat
+
+* Pipelines & Feature Unions
+
+* Do feature selection
+    * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
+    * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
+
+* Model Selection
+    * https://github.com/DistrictDataLabs/yellowbrick
+    * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
+    * [skl-plot](https://github.com/reiinakano/scikit-plot)
+
+* Model Explanability
+    * [lime](https://github.com/marcotcr/lime)
+    * [eli5](https://github.com/TeamHG-Memex/eli5)
+
+* Tuning
+    * https://github.com/hyperopt/hyperopt-sklearn
+    * https://github.com/rsteca/sklearn-deap
+
+* Deal with potential class imbalance
+   * Gradient boosting
+   * http://contrib.scikit-learn.org/imbalanced-learn/stable/
+
+* Create ensembles
+    * mlxtend
+
+* Choose Statistical Test
+    * [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
+    * [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
+
+* Hypothesis testing
+    * infer library
+    
+* Correlations
+    * https://github.com/drsimonj/corrr
 
 * Feature Engineering
 
@@ -87,119 +154,32 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
     
     * dummying: sklearn.preprocessing.binarize | pandas.factorize
 
-* Feature Selection: 
-
-Variance Threshold: Use this to exclude features that don't meet a variance threshold.
- 
-    * Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
-
-    * SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
-
+* Feature Selection
+    * Variance Threshold
+    * Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification
+    * SelectKBest/SelectPercentile
     * sklearn: feature_selection.RFE(CV)
 
 * Ensembling: mlxtend  
 
-* Tuning: 
+* Look at learning curves
+    * https://www.dataquest.io/blog/learning-curves-machine-learning/
 
 ## Communicate
 
-* Jupyter notebook or R Markdown.
+* Usually an R Markdown document.
 
 ## Deployment /  Maintenance
 
-* TDD::[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
+* TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
 
-* [**Data Testing**](https://github.com/ericmjl/data-testing-tutorial)
+* [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
 
-* [Unit Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
+* [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
 
-* Helper functions, unit tests, packages, makefiles.
-
-# Stack
-
-## Import
-
-* pandas | readr
-
-* [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
-
-* [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
+* Helper functions and makefiles.
 
 * [Data Validation](https://github.com/data-cleaning/validate)
-
-## Tidy
-
-* widyr | tidyr | dplyr
-
-## uTransform
-
-* [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
-
-* [skimr](https://github.com/ropenscilabs/skimr)
-
-* [Exploratory Analysis](https://github.com/ujjwalkarn/xda)
-
-* [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
-
-* [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
-
-* missingness: [1](https://github.com/MimiOnuoha/missing-datasets) | [2](https://github.com/njtierney/naniar)  |[Py](https://github.com/ResidentMario/missingno)
-
-* purrr
-
-* https://github.com/drsimonj/corrr
-
-* https://cran.r-project.org/web/packages/simputation/index.html
-
-* [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
-
-* [Regex For Humans](https://github.com/iogf/crocs)
-
-* https://github.com/yhat/pandasql
-
-* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
-
-* na.strings: Replace empty strings by na: `x <- read.csv("filepath/R_NA.csv",header=TRUE,na.strings=c(""))`
-
-* Dealing with missing data: df.fillna(value), df.isnull().sum(), df = df[np.isfinite(df['EPS'])]
-
-* scipy.stats.describe
-
-* pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
-
-* Replacing blank cells by nas: titanic3[titanic3==""] = NA
-
-## uVisualize
-
-* ggplot2 | plotnine
-
-* [EdaR](https://github.com/ujjwalkarn/xda)
-
-* [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
-
-## uModel
-
-* Pre-processing: https://github.com/WinVector/vtreat
-
-* Pipelines & Feature Unions
-
-* FS Algorithms: [Rebate](https://github.com/EpistasisLab/scikit-rebate) | [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
-
-* Model Selection: https://github.com/DistrictDataLabs/yellowbrick | [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/) | Skplot: [1](https://github.com/DistrictDataLabs/yellowbrick) | [2](https://github.com/reiinakano/scikit-plot)
-
-* Model Explanability: [lime](https://github.com/marcotcr/lime) | [eli5](https://github.com/TeamHG-Memex/eli5)
-
-* Tuning: https://github.com/hyperopt/hyperopt-sklearn | https://github.com/rsteca/sklearn-deap
-
-* Class Imbalance: Gradient boosting | http://contrib.scikit-learn.org/imbalanced-learn/stable/
-
-* Ensembles: mlxtend
-
-## Communicate
-
-* Rmarkdown | Jupyter | Shiny | Dash
-
-## Deployment /  Maintenance
 
 * pytest | hypothesis | testthat
 
