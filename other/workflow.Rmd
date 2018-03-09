@@ -81,7 +81,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
-* Replacing blank cells by nas: titanic3[titanic3==""] = NA
+* Check for blank spaces and replace with NA
+    * df[df==""] = NA
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
 
