@@ -89,6 +89,20 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
 
+### Infer Package
+
+Main verbs:
+
+* specify() vars
+
+* hypothesize() 
+
+* generate() data
+
+* calculate() metrics
+
+* visualize() results
+
 ### Statistical Tests
 
 The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 

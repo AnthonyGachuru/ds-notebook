@@ -1,0 +1,20 @@
+---
+title: "Caret Notes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Shiny
+
+* 1 r process: 30 users | shiny scales linearly
+
+```{r}
+# SHiny
+
+eventreactive()
+```
+
+

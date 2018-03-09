@@ -119,8 +119,27 @@ map(functools.partial(add, y=2), a)
 
 ## R
 
-You can also embed plots, for example:
+* ctrl + shift + a: reformat code in rstudio
+
+* studio multiple cursors, snippets,  addins
+
+* ctrl + shift + o: toggle table of contents
+
+* ctrl shift enter" run chunk
+
+* ctrl pageup/down: navigate chunks
+
+* atl shift k: shortcuts
+
+* ctrl + shift + R: label sections
+
+* ctrl + alt + R: run all chunks
 
 ```{r}
-plot(pressure)
+# DB Functions
+
+data <- dbGetQuery(con, 'select * from iris')
+dbListTables(con) %>% sort
+dbExistsTable(con, "iris")
+dbRemoveTable(con, "iris")
 ```

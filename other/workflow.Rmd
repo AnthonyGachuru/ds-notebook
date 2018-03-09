@@ -59,6 +59,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Imputation: Mean | KNN | Random | Regression | Mode
 
+* infer package: Hypothesis testing
+
 ## Visualize
 
 * Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
