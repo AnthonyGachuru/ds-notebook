@@ -75,7 +75,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
 
-* [Regex For Humans](https://github.com/iogf/crocs)
+* [Easy Regex](https://github.com/VerbalExpressions/PythonVerbalExpressions)
 
 * https://github.com/yhat/pandasql
 
