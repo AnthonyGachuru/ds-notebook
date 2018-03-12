@@ -17,6 +17,8 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 * Type I Error: Saying there is an effect when there isn't one. Type II error: concluding there is no effect when, in fact, there is one.
 
+* The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.
+
 * Probably the most useful types of statistics for skewed probability distributions are quantiles. 
 
 * Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!
