@@ -174,6 +174,16 @@ Outliers are observations that have high residual values. Leverage points are ob
 
 compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
 
+### Code Examples
+
+```{python}
+import statsmodels.api as sm
+
+X = sm.add_constant(X)
+rgr_lr = sm.OLS(Y, X).fit(disp=False)
+print(results.summary())
+```
+
 ## Ridge/Lasso
 
 ### Intro
@@ -259,6 +269,16 @@ Standardization isn't required for logistic regression. The main goal of standar
 * Breaks down when classes are perfectly separable.
 
 * High bias
+
+### Code Example
+
+```{python}
+import statsmodels.api as sm
+
+X = sm.add_constant(X)
+clf_lr = sm.Logit(Y, X).fit(disp=False)
+print(results.summary())
+```
 
 ## Poisson Regression
 
