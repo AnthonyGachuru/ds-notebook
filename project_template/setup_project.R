@@ -15,13 +15,6 @@ dir.create('deploy_maintain')
 file.create('README.md')
 file.create('CHANGELOG.md')
 
-#Create grandchildren files for code
-#setwd('./code')
-#file.create('import_tidy.R')
-#file.create('transform_visualize.R')
-#file.create('model.R')
-#knitr::spin('import_tidy.R', format = c('Rmd')) #doesn't work
-
 #Create grandchildren folders for data
 setwd('./data')
 dir.create('raw')
@@ -39,20 +32,19 @@ git2r::init('.')
 
 ## Logs
 
-##Excluded processes should be assumed to be the same as version 0.1.
+## Excluded processes should be assumed to be the same as version 0.1.
 
-##Current Best Model:
-##Current Best Score / Metric:
+## Current Best Model:
+## Current Best Score / Metric:
 
 ## 0.1
 
-## 1_exploration.Rmd
+## 1_import_tidy.Rmd
 
-## 2_pre_processing.Rmd
+## 2_transform_visualize.Rmd
 
 ## 3_modeling.ipynb
-## {data used} | {robustness}| {model} | {params} | {best score & metric}
 
-## ML Notebook Layout
+# Layout
 
 ## libs, functions, imports, preprocessing, feature engineering, feature selection, model building
