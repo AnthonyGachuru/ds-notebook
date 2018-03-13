@@ -12,6 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(glue)
+library(janitor)
+library(xray)
+library(skimr)
+library(xda)
 ```
 
 ## Functions
@@ -23,42 +27,12 @@ library(glue)
 ## Import
 
 ```{r}
-train_path <- '../data/raw/prostate_tumorVSNormal_train.arff'
-test_path <- '../data/raw/prostate_tumorVSNormal_test.arff'
-train_prostate <- read.arff(train_path)
-test_prostate <- read.arff(test_path)
 
-str(train_prostate)
-str(test_prostate)
-
-table(sapply(train_prostate, class))
-table(sapply(test_prostate, class))
 ```
-
-There are 102 and 34 data points in the training and testing sets, respectively. All 12,600 predictor variables are numeric, while the single factor variable is the target. The response column in both is normal or tumor indicating the state of the prostate sample. It's called `Class`.
-
-```{r}
-sapply(test_prostate, class) %>%
-  data.frame(cl = .) %>% 
-  mutate(col = rownames(.)) %>% 
-  filter(cl == 'factor')
-```
-
-Each of the 12,600 features corresponds to a different gene. This is a severe case where there are much more features than data points. 
-
-The class distribution in the training set is almost even, but in the testing set tumor samples count for almost 74% of the data. 
-
-```{r}
-table(train_prostate$Class) %>% prop.table()
-table(test_prostate$Class) %>% prop.table()
-```
-
-It's easy to use csvs so I'll output the data in that format going forward.
 
 ## Export
 
 ```{r}
-write.csv(train_prostate, '../data/refined/2018-01-10_train_prostate.csv', row.names = F)
-write.csv(test_prostate, '../data/refined/2018-01-10_test_prostate.csv', row.names = F)
+
 ```
 
