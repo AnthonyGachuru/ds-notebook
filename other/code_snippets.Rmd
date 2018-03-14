@@ -29,6 +29,11 @@ plotly.offline.plot(table, output_type = 'div', show_link = False, include_plotl
 ```
 
 ```{python}
+from civismlext.hyperband import HyperbandSearchCV
+#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
+```
+
+```{python}
 # Display floats with 2 decimal places
 pd.options.display.float_format = '{:,.2f}'.format
  

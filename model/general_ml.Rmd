@@ -180,6 +180,12 @@ Reframe as Anomaly Detection
 
 * from sklearn.preprocessing import MultiLabelBinarizer
 
+* Imagine a linear model with two strongly correlated features; that is, these two features are nearly identical copies of one another but one feature contains a small amount of random noise. If we train this model with L2 regularization, what will happen to the weights for these two features? L2 regularization will force the features towards roughly equivalent weights that are approximately half of what they would have been had only one of the two features been in the model.
+
+* L2 regularization will encourage many of the non-informative weights to be nearly (but not exactly) 0.0.
+
+* F1 Score = TP/(TP + FP + FN). Essentially how good you are at identifying the positive class.
+
 * Active Learning: Finding the optimal data to manually label
 
 * Simulated Annealing: Gradient descent extension
