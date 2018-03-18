@@ -1,0 +1,84 @@
+---
+title: "Model"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries 
+
+```{r}
+suppressPackageStartupMessages(
+  list(
+library(tidyverse),
+library(data.table),
+library(broom),
+library(glue), 
+library(xray),
+library(xda),
+library(skimr)
+)
+)
+```
+
+## Functions
+
+```{r}
+
+```
+
+## Imports
+
+```{r input warning=FALSE}
+df <- read_csv('../data/refined/2018-03-01_peer_groups_pre_processed.csv')
+```
+
+## Pre-processing
+
+```{r}
+skimr::skim(df)
+```
+
+```{r}
+xda::numSummary(df)
+```
+
+```{r}
+xda::charSummary(df)
+```
+
+```{r}
+xray::anomalies(df)
+```
+
+```{r}
+xray::distributions(df)
+```
+
+## Feature Engineering
+
+```{r}
+
+```
+
+## Feature Selection
+
+```{r}
+
+```
+
+## Modeling
+
+```{r}
+
+```
+
+## Export
+
+```{r}
+
+```
+
+
