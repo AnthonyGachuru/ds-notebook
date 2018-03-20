@@ -148,6 +148,16 @@ map(functools.partial(add, y=2), a)
 
 * ctrl + alt + R: run all chunks
 
+### Filter By Row
+
+```{r }
+df %>%
+  filter(
+    !grepl('Schedules', issues)
+  )
+```
+
+
 ```{r}
 # DB Functions
 
