@@ -262,6 +262,128 @@ When we know that any of the preceding three basic assumptions are violated, we 
 
 * Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model's prediction was on a single example. If the model's prediction is perfect, the loss is zero; otherwise, the loss is greater. 
 
+## Bayesian
+
+Bayes Rule:
+
+old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
+
+> Models have a lot of parameters classical methods that use simple point estimates of the parameters don't adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata. 
+
+> The second reason we use Bayesian inference is for combining information you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted tocombining information. 
+
+> The third appeal of Bayesian methods and the sort of applications that I work on is that the inferences can map directly to decisions based on inferences express not its estimates and standard errors but rather as probability distributions we can take these probability distributions and pipe them directly into decision analysis for these reasons.
+
+* An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.
+
+## Naïve Bayes
+
+### Intro
+
+Practitioners do use Naive Bayes regularly for ranking, where the actual values of the probabilities are not relevant—only the relative values for examples in the different classes. Another advantage of Naive Bayes is that it is naturally an “incremental learner.” An incremental learner is an induction technique that can update its model one training example at a time. It does not need to reprocess all past training examples when new training data become available.
+
+Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.
+
+Note: In addition, we can use function "partial_fit" to fit on a batch of samples incrementally while we are using. MultinomialNB and Bernoulli NB also support sample weighting. 
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+**Pros**
+
+* It is relatively simple to understand. Training the classifier does not require many observations, and the method also works well with large amounts of data. It is easy to obtain the estimated probabilityfor a classification prediction.
+
+* Computationally fast
+
+* Simple to implement
+
+* Works well with high dimensions
+
+**Cons**
+
+* Relies on independence assumption and will perform badly if this assumption is not met
+
+* While easily attainable, the estimated probabilities are often less reliable than the predicted class labels themselves.
+
+## LDA
+
+### Intro
+
+Before we take a look into the inner workings of LDA in the following subsections, let's summarize the key steps of the LDA approach:
+
+Standardize the -dimensional dataset ( is the number of features).
+
+For each class, compute the -dimensional mean vector.
+
+Construct the between-class scatter matrix  and the within-class scatter matrix .
+
+Compute the eigenvectors and corresponding eigenvalues of the matrix .
+
+Choose the  eigenvectors that correspond to the  largest eigenvalues to construct a -dimensional transformation matrix ; the eigenvectors are the columns of this matrix.
+
+Project the samples onto the new feature subspace using the transformation matrix.
+
+LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own. 
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+## QDA
+
+### Intro
+
+TBD
+
+### Assumptions
+
+### Characteristics
+
+### Evaluation
+
+### Pros/Cons
+
+## Advanced Bayesian
+
+* Approximate Bayesian Computation
+
+* Laplace approximation: Approximate the posterior of a non-conjugate model
+
+* When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.
+
+* Beta conjugacy: Beta for prior & binomial for likelihoood implies beta for posterior. Update: beta(alpha + successes, beta + failures). Mean: alpha/(alpha + beta)
+
+* Small alpha and beta means the prior is less informative 
+
+* Empirical Bayes is an approximation to more exact Bayesian methods. With a lot of data it is a very good approximation.
+
+```{python ctr}
+
+from numpy.random import beta as beta_dist
+import numpy as np
+
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
+Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
 
 
 
