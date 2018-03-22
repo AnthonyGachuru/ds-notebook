@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Python
 
+* https://chrisalbon.com/
+
 * pandas: isin | crosstab
 
 * pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
