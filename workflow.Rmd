@@ -51,6 +51,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Initialize report to track and summarise work and to do list.
 
+* Remember to use atomic commit messages
+
 ## Import
 
 * Sampling from data if its too large
