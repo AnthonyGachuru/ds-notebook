@@ -1,0 +1,26 @@
+name: "my-website"
+output_dir: "docs"
+navbar:
+  title: "Noted Resources"
+  left:
+    - text: "General"
+      href: general.html
+    - text: "Data Science"
+      href: data_science.html
+    - text: "Coding"
+      href: coding.html
+    - text: "AI/RL"
+      href: ai_rl.html
+    - text: "Python"
+      href: python.html
+    - text: "R"
+      href: R.html
+    - text: "Hardware"
+      href: hardware.html
+    - text: "Projects"
+      href: projects.html
+    - text: "Learn"
+      href: learn.html
+    - text: "Looking Forward"
+      href: looking_forward.html
+      

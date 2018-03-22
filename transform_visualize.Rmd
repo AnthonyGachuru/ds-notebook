@@ -35,3 +35,11 @@ Some types:
 
 * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
 
+## Visualize
+
+* logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
+
+* swarmplot
+
+* Rule of thumb for bins in histogram: `ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))`.
+
