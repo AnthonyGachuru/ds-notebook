@@ -1,17 +1,3 @@
-# Data Science Crib Sheet
+This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
 
-A set of quick theoretical and practical references notes for algorithms and other Data Science stuff. General format for the ML notes:
-
-### Topic
-
-#### Intro
-
-#### Assumptions
-
-#### Evaluation
-
-#### Pros/Cons
-
-**Pros**
-
-**Cons**
+You can find the preview of this example at https://bookdown.org/yihui/bookdown-demo/
