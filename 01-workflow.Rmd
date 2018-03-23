@@ -1,0 +1,184 @@
+# Workflow 
+
+# Preamble
+
+A typical data science workflow can be framed as following these 7 steps:
+
+* Business: start with a business question, define the goal and measure of success
+
+* Data: find, access and explore the data
+
+* Features: extract, assess and evaluate, select and sort
+
+* Models: find the right model for the problem at hand, compare, optimize, and fine tune
+
+* Communication: Interpret and communicate the results
+
+* Production: transform the code into production ready code, integrate into current ecosystem and deploy
+
+* Maintain: adapt the models and features to the evolution of the environment
+
+More succinctly, as per Hadley Wickham:
+
+import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
+
+My combination of the two:
+
+preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
+
+Another note is that one way to structure projects is to write user stories a la software engineering. 
+
+What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
+
+# Annotated Checklist
+
+## Preparation
+
+* Understand the business question, goals, and measures of success
+
+* See if the data to answer the question exists, and if it is useful.
+
+* Structure project as user stories
+
+* Initiliaze [base project directory](https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R) and set up versioning.
+
+* Initialize report to track and summarise work and to do list.
+
+* Remember to use atomic commit messages
+
+## Import
+
+* Sampling from data if its too large
+    * [subsample package](https://pypi.python.org/pypi/subsample) in Python
+    * [sqldf library](https://stackoverflow.com/a/22262726/6627726) in R
+    
+* [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
+
+* [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
+
+## Tidy
+
+* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf)
+    * widyr | tidyr | dplyr | purrr
+
+* Figure out what you're trying to do with the data.
+
+* See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+    * [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
+    * [skimr](https://github.com/ropenscilabs/skimr)
+    * [Exploratory Analysis](https://github.com/ujjwalkarn/xda)
+    * [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
+    * scipy.stats.describe()
+    * Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
+
+## uTransform
+
+* Imputation: Mean | KNN | Random | Regression | Mode
+    * [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
+
+* Look at missingness
+    * [2](https://github.com/njtierney/naniar)
+    * [Py](https://github.com/ResidentMario/missingno)
+
+* [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
+
+* [Easy Regex](https://github.com/VerbalExpressions/PythonVerbalExpressions)
+
+* https://github.com/yhat/pandasql
+
+* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+
+* Check for blank spaces and replace with NA
+    * df[df==""] = NA
+
+* [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
+
+## uVisualize
+
+* Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
+
+* Trendlines & Histograms
+
+* Confidence intervals
+
+* Compare the distributions of variables with overlayed density plots 
+
+* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships
+
+* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
+
+## uModel
+
+* Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
+
+* Pre-processing
+    * https://github.com/WinVector/vtreat
+
+* Pipelines & Feature Unions
+
+* Do feature selection
+    * Variance Threshold
+    * Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification
+    * SelectKBest/SelectPercentile
+    * sklearn: feature_selection.RFE(CV)
+    * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
+    * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
+    
+* Do feature engineering: Standardization, dimensionality reduction, dummying
+    * sklearn.preprocessing.binarize | pandas.factorize
+
+* Model Selection
+    * https://github.com/DistrictDataLabs/yellowbrick
+    * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
+    * [skl-plot](https://github.com/reiinakano/scikit-plot)
+
+* Model Explanability
+    * [lime](https://github.com/marcotcr/lime)
+    * [eli5](https://github.com/TeamHG-Memex/eli5)
+
+* Tuning
+    * https://github.com/hyperopt/hyperopt-sklearn
+    * https://github.com/rsteca/sklearn-deap
+
+* Deal with potential class imbalance
+   * Gradient boosting
+   * http://contrib.scikit-learn.org/imbalanced-learn/stable/
+
+* Create ensembles
+    * mlxtend
+    
+* Choose Statistical Test
+    * [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
+    * [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
+    * infer library
+    
+* Check for correlations
+    * https://github.com/drsimonj/corrr
+    
+* Ensembling: mlxtend  
+
+* Look at learning curves
+    * https://www.dataquest.io/blog/learning-curves-machine-learning/
+
+## Communicate
+
+* Usually an R Markdown document.
+
+## Deployment /  Maintenance
+
+* Write tests
+    * [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
+    * [2](http://www.tdda.info/)
+    * [3](http://stochasticsolutions.com/)
+    * [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
+    * [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
+    * [Data Validation](https://github.com/data-cleaning/validate)
+    * pytest | hypothesis | testthat
+    * [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
+
+* Write helper functions.
+
+
+
+
+

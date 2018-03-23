@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="workflow.html">
+<link rel="prev" href="cdm.html">
+<link rel="next" href="code-snippets.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -342,29 +342,461 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2018-03-22</em></h4>
+<div id="frameworks" class="section level1 unnumbered">
+<h1>Frameworks</h1>
+<div id="pyspark" class="section level2">
+<h2><span class="header-section-number">9.2</span> PySpark</h2>
+<p>A [cheatsheet[(<a href="https://www.qubole.com/resources/pyspark-cheatsheet/" class="uri">https://www.qubole.com/resources/pyspark-cheatsheet/</a>).</p>
+<p>Pipeline</p>
+<p>Setup</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">&#39;example&#39;</span>).getOrCreate()</code></pre></div>
+<p>Libs</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pyspark.ml.feature <span class="im">import</span> StringIndexer, OneHotEncoder, VectorAssembler
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="im">import</span> numpy <span class="im">as</span> np
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;data.csv&#39;</span>, header <span class="op">=</span> <span class="va">True</span>)
+df.show(<span class="dv">5</span>)
+df.columns</code></pre></div>
+<p>Preprocessing</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">df <span class="op">=</span> df.withColumn(<span class="st">&quot;label&quot;</span>, df[<span class="st">&quot;target&quot;</span>].cast(<span class="st">&#39;integer&#39;</span>))
+scf_indexer <span class="op">=</span> StringIndexer(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>)
+scf_encoder <span class="op">=</span> OneHotEncoder(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_fact&quot;</span>)
+feature_cols <span class="op">=</span> [<span class="st">&quot;some list of column names&quot;</span>]
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols <span class="op">=</span> feature_cols, 
+                                outputCol <span class="op">=</span> <span class="st">&quot;features&quot;</span>)
+pipe <span class="op">=</span> Pipeline(stages <span class="op">=</span> [scf_indexer, scf_encoder, vec_assembler])
+piped_data <span class="op">=</span> pipe.fit(df).transform(df)
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">8</span>, .<span class="dv">2</span>])</code></pre></div>
+<p>Model</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">clf_lr <span class="op">=</span> LogisticRegression()
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName <span class="op">=</span> <span class="st">&quot;areaUnderROC&quot;</span>)
+grid <span class="op">=</span> tune.ParamGridBuilder()
+grid <span class="op">=</span> grid.addGrid(clf_lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(clf_lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+grid <span class="op">=</span> grid.build()
+clf_lr_cv <span class="op">=</span> tune.CrossValidator(
+    estimator <span class="op">=</span> clf_lr,
+    estimatorParamMaps <span class="op">=</span> grid,
+    evaluator <span class="op">=</span> evaluator,
+    numFolds <span class="op">=</span> <span class="dv">5</span>
+               )
+best_clf_lr <span class="op">=</span> clf_lr_cv.fit(training).bestModel
+results <span class="op">=</span> best_clf_lr.transform(training)
+<span class="bu">print</span>(evaluator.evaluate(results))
+<span class="co">#stop</span>
+sc.stop()</code></pre></div>
+<p>Quick Test:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> pyspark
+<span class="im">import</span> random
+sc <span class="op">=</span> pyspark.SparkContext(appName<span class="op">=</span><span class="st">&quot;Pi&quot;</span>)
+num_samples <span class="op">=</span> <span class="dv">100000000</span>
+<span class="kw">def</span> inside(p):     
+    x, y <span class="op">=</span> random.random(), random.random()
+    <span class="cf">return</span> x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y <span class="op">&lt;</span> <span class="dv">1</span>
+count <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">0</span>, num_samples)).<span class="bu">filter</span>(inside).count()
+pi <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> count <span class="op">/</span> num_samples
+<span class="bu">print</span>(pi)
+sc.stop()</code></pre></div>
+<p>First have to create a SparkSession object from your SparkContext. The SparkContext is ther connection to the cluster and the SparkSession as your interface with that connection.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.getOrCreate() <span class="co"># SparkSession.builder.appName(&#39;chosenName&#39;).getOrCreate()</span></code></pre></div>
+<p>The rest of my notes:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">## List tables</span>
+spark.catalog.listTables()
+<span class="co">## Access and display data</span>
+query <span class="op">=</span> <span class="st">&quot;FROM flights SELECT * LIMIT 10&quot;</span>
+flights10 <span class="op">=</span> spark.sql(query)
+flights10.show()
+<span class="co">## Cast</span>
+df[<span class="st">&#39;g&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;g&#39;</span>].astype(<span class="bu">str</span>)
+<span class="co">## Read from csv</span>
+df<span class="op">=</span> spark.read.csv(file_path, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;fileNameWithPath&#39;</span>, mode<span class="op">=</span><span class="st">&quot;DROPMALFORMED&quot;</span>,inferSchema<span class="op">=</span><span class="va">True</span>, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">&quot;csv&quot;</span>).option(<span class="st">&quot;header&quot;</span>,<span class="st">&quot;true&quot;</span>).option(<span class="st">&quot;inferSchema&quot;</span>,<span class="st">&quot;true&quot;</span>).load(<span class="st">&quot;john_doe.csv&quot;</span>)
+<span class="co">## Spark df to pandas and vice versa</span>
+toPandas()
+spark_temp <span class="op">=</span> spark.createDataFrame(pd_temp)
+<span class="co">## Add to the catalog</span>
+spark_temp.createOrReplaceTempView(<span class="st">&quot;temp&quot;</span>)
+<span class="co">## Mutate</span>
+df <span class="op">=</span> df.withColumn(<span class="st">&quot;newCol&quot;</span>, df.oldCol <span class="op">+</span> <span class="dv">1</span>)
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;arr_delay&quot;</span>, model_data.arr_delay.cast(<span class="st">&#39;integer&#39;</span>))
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;plane_age&quot;</span>, model_data.year <span class="op">-</span> model_data.plane_year)
+<span class="co">## Create the DataFrame flights</span>
+flights <span class="op">=</span> spark.table(<span class="st">&#39;flights&#39;</span>)
+<span class="co">## Get column names</span>
+spark_df.schema.names
+spark_df.printSchema()
+<span class="co">## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string</span>
+long_flights1 <span class="op">=</span> flights.<span class="bu">filter</span>(<span class="st">&#39;distance &gt; 1000&#39;</span>)
+long_flights2 <span class="op">=</span> flights.<span class="bu">filter</span>(flights.distance <span class="op">&gt;</span> <span class="dv">1000</span>)
+model_data <span class="op">=</span> model_data.<span class="bu">filter</span>(<span class="st">&quot;arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL&quot;</span>)
+<span class="co">## Groupby examples</span>
+flights.<span class="bu">filter</span>(flights.origin <span class="op">==</span> <span class="st">&quot;PDX&quot;</span>).groupBy().<span class="bu">min</span>(<span class="st">&quot;distance&quot;</span>).show()
+flights.<span class="bu">filter</span>(flights.carrier<span class="op">==</span><span class="st">&#39;DL&#39;</span>).<span class="bu">filter</span>(flights.origin<span class="op">==</span><span class="st">&#39;SEA&#39;</span>).groupBy().avg(<span class="st">&#39;air_time&#39;</span>).show()
+flights.withColumn(<span class="st">&quot;duration_hrs&quot;</span>, flights.air_time<span class="op">/</span><span class="dv">60</span>).groupBy().<span class="bu">sum</span>(<span class="st">&#39;duration_hrs&#39;</span>).show()
+<span class="co">## Spark functions</span>
+<span class="im">import</span> pyspark.sql.functions <span class="im">as</span> F
+by_month_dest.agg(F.stddev(<span class="st">&#39;dep_delay&#39;</span>)).show()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">## Drop column</span>
+final_test_data.drop(<span class="st">&#39;State&#39;</span>)
+<span class="co">## Dummying</span>
+<span class="co">#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.</span>
+<span class="co">#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer</span>
+<span class="co">## Create a StringIndexer</span>
+carr_indexer <span class="op">=</span> StringIndexer(inputCol<span class="op">=</span><span class="st">&quot;carrier&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>)
+<span class="co">## Create a OneHotEncoder</span>
+carr_encoder <span class="op">=</span> OneHotEncoder(inputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_fact&quot;</span>)
+<span class="co">## Make a VectorAssembler</span>
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols<span class="op">=</span>[<span class="st">&quot;month&quot;</span>, <span class="st">&quot;air_time&quot;</span>, <span class="st">&quot;carrier_fact&quot;</span>, <span class="st">&quot;dest_fact&quot;</span>, <span class="st">&quot;plane_age&quot;</span>], outputCol<span class="op">=</span><span class="st">&quot;features&quot;</span>)
+<span class="co">## Import &amp; Make Pipeline</span>
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+flights_pipe <span class="op">=</span> Pipeline(stages<span class="op">=</span>[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+<span class="co">## Fit and transform the data</span>
+piped_data <span class="op">=</span> flights_pipe.fit(model_data).transform(model_data)
+<span class="co">## Train-test split</span>
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">6</span>, .<span class="dv">4</span>])
+<span class="co">## Tuning &amp; Selection</span>
+<span class="co">## Import LogisticRegression</span>
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="co">## Create a LogisticRegression Estimator</span>
+lr <span class="op">=</span> LogisticRegression()
+<span class="co">## Import the evaluation submodule</span>
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="co">## Create a BinaryClassificationEvaluator</span>
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName<span class="op">=</span><span class="st">&quot;areaUnderROC&quot;</span>)
+<span class="co">## Import the tuning submodule</span>
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="co">## Create the parameter grid</span>
+grid <span class="op">=</span> tune.ParamGridBuilder()
+<span class="co">## Add the hyperparameter</span>
+grid <span class="op">=</span> grid.addGrid(lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+<span class="co">## Build the grid</span>
+grid <span class="op">=</span> grid.build()
+<span class="co">## Create the CrossValidator</span>
+cv <span class="op">=</span> tune.CrossValidator(
+estimator<span class="op">=</span>lr,
+estimatorParamMaps<span class="op">=</span>grid,
+evaluator<span class="op">=</span>evaluator
+               )
+<span class="co">## Fit cross validation models</span>
+models <span class="op">=</span> cv.fit(training)
+<span class="co">## Extract the best model</span>
+best_lr <span class="op">=</span> models.bestModel
+<span class="co">## Use the model to predict the test set</span>
+test_results <span class="op">=</span> best_lr.transform(test)
+<span class="co">## Evaluate the predictions</span>
+<span class="bu">print</span>(evaluator.evaluate(test_results))</code></pre></div>
+<ul>
+<li><p>Spark’s assumes the target is called ‘label’ in ML. Everything else is a feature.</p></li>
+<li><p>alias() method to rename a column you’re selecting.</p></li>
+<li><p>cast() method: nominative determinism on columns</p></li>
+<li><p>withColumn(): create new column</p></li>
+<li><p>pyspark.ml.feature</p></li>
+<li><p>At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA</p></li>
+<li><p>You can create what are called ‘one-hot vectors’ to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).</p></li>
+<li><p>Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models</p></li>
+<li><p>selectExpr() takes SQL expressions as a string</p></li>
+<li><p>show() vs collect()</p></li>
+<li><p>Spark only handles numeric data</p></li>
+<li><p>In Spark it’s important to make sure you split the data after all the transformations. This is because operations like StringIndexer don’t always produce the same index even when given the same list of strings.</p></li>
+</ul>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="sparklyr" class="section level2">
+<h2><span class="header-section-number">9.3</span> Sparklyr</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 
+## Connect to your Spark cluster
+spark_conn &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)
+
+## Print the version of Spark
+<span class="kw">spark_version</span>(<span class="dt">sc =</span> spark_conn)
+
+## Disconnect from Spark
+<span class="kw">spark_disconnect</span>(<span class="dt">sc =</span> spark_conn)
+
+## See tables
+<span class="kw">src_tbls</span>(sc)
+
+## Copy track_metadata to Spark
+track_metadata_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(spark_conn, track_metadata)
+
+## Print 5 rows, all columns
+<span class="kw">print</span>(track_metadata_tbl, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)
+
+## Write and run SQL query
+query &lt;-<span class="st"> &quot;SELECT * FROM track_metadata WHERE year &lt; 1935 AND duration &gt; 300&quot;</span>
+(results &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(spark_conn, query))
+
+## General transformation structure and example
+a_tibble <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ft_some_transformation</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, some_other_args)
+
+hotttnesss &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select artist_hotttnesss</span>
+<span class="st">  </span><span class="kw">select</span>(artist_hotttnesss) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Binarize to is_hottt_or_nottt</span>
+<span class="st">  </span><span class="kw">ft_binarizer</span>(<span class="st">&#39;artist_hotttnesss&#39;</span>, <span class="st">&#39;is_hottt_or_nottt&#39;</span>, <span class="dt">threshold =</span> .<span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the result</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Convert is_hottt_or_nottt to logical</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_hottt_or_nottt =</span> <span class="kw">as.logical</span>(is_hottt_or_nottt))
+  
+## Get and transform the schema
+
+(schema &lt;-<span class="st"> </span><span class="kw">sdf_schema</span>(track_metadata_tbl))
+schema <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lapply</span>(<span class="cf">function</span>(x) <span class="kw">do.call</span>(data_frame, x)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>()
+
+## Train-test split
+partitioned &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sdf_partition</span>(<span class="dt">training =</span> <span class="fl">0.7</span>, <span class="dt">testing =</span> <span class="fl">0.3</span>)
+
+## List ml functions
+<span class="kw">ls</span>(<span class="st">&quot;package:sparklyr&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;^ml&quot;</span>)
+
+## GBT Example
+
+gradient_boosted_trees_model &lt;-<span class="st"> </span>track_data_to_model_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Run the gradient boosted trees model</span>
+<span class="st">   </span><span class="kw">ml_gradient_boosted_trees</span>(<span class="st">&#39;year&#39;</span>, feature_colnames)
+
+responses &lt;-<span class="st"> </span>track_data_to_predict_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select the year column</span>
+<span class="st">  </span><span class="kw">select</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the results</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add in the predictions</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">predicted_year =</span> <span class="kw">predict</span>(
+      gradient_boosted_trees_model,
+      track_data_to_predict_tbl
+    )
+  )</code></pre></div>
+<p><strong>Parquet Aside</strong></p>
+<p>Parquet files are quicker to read and write. parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## The parquet_dir has been pre-defined
+parquet_dir
+
+## List the files in the parquet dir
+filenames &lt;-<span class="st"> </span><span class="kw">dir</span>(parquet_dir, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+
+## Show the filenames and their sizes
+<span class="kw">data_frame</span>(
+  <span class="dt">filename =</span> <span class="kw">basename</span>(filenames),
+  <span class="dt">size_bytes =</span> <span class="kw">file.size</span>(filenames)
+)
+
+<span class="co">#Import the data into Spark</span>
+
+timbre_tbl &lt;-<span class="st"> </span><span class="kw">spark_read_parquet</span>(spark_conn, <span class="st">&#39;timbre&#39;</span>, parquet_dir)</code></pre></div>
+<ul>
+<li><p>To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.</p></li>
+<li><p>Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.</p></li>
+<li><p>If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.</p></li>
+<li><p>feature transforms: ft_, ml functions: ml_, spark df functions: sdf_</p></li>
+<li><p>ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort</p></li>
+</ul>
+</div>
+<div id="caret" class="section level2">
+<h2><span class="header-section-number">9.4</span> Caret</h2>
+</div>
+<div id="preprocessing" class="section level2">
+<h2><span class="header-section-number">9.5</span> Preprocessing</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply median imputation: model</span>
+model &lt;-<span class="st"> </span><span class="kw">train</span>(
+  <span class="dt">x =</span> breast_cancer_x, 
+  <span class="dt">y =</span> breast_cancer_y,
+  <span class="dt">method =</span> <span class="st">&#39;glm&#39;</span>,
+  <span class="dt">trControl =</span> myControl,
+  <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&#39;medianImpute&#39;</span>, <span class="st">&quot;knnImpute&quot;</span>, <span class="st">&#39;center&#39;</span>, <span class="st">&#39;scale&#39;</span>, <span class="st">&#39;pca&#39;</span>)
+)
+
+<span class="kw">dotplot</span>(resamples, <span class="dt">metric =</span> <span class="st">&quot;ROC&quot;</span>)
+
+<span class="kw">min</span>(model<span class="op">$</span>results<span class="op">$</span>RSME)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Identify near zero variance predictors: remove_cols</span>
+remove_cols &lt;-<span class="st"> </span><span class="kw">nearZeroVar</span>(bloodbrain_x, <span class="dt">names =</span> <span class="ot">TRUE</span>, 
+                           <span class="dt">freqCut =</span> <span class="dv">2</span>, <span class="dt">uniqueCut =</span> <span class="dv">20</span>)
+
+<span class="co"># Get all column names from bloodbrain_x: all_cols</span>
+all_cols =<span class="st"> </span><span class="kw">colnames</span>(bloodbrain_x)
+
+<span class="co"># Remove from data: bloodbrain_x_small</span>
+bloodbrain_x_small &lt;-<span class="st"> </span>bloodbrain_x[ , <span class="kw">setdiff</span>(all_cols, remove_cols)]</code></pre></div>
+</div>
+<div id="lm" class="section level2">
+<h2><span class="header-section-number">9.6</span> LM</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set seed</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+
+<span class="co"># Fit lm model: model</span>
+model &lt;-<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> diamonds)
+
+<span class="co"># Predict on full data: p</span>
+p &lt;-<span class="st"> </span><span class="kw">predict</span>(model, diamonds)
+
+<span class="co"># Compute errors: error</span>
+error &lt;-<span class="st"> </span>p <span class="op">-</span><span class="st"> </span>diamonds<span class="op">$</span>price
+
+<span class="co"># Calculate RMSE</span>
+<span class="kw">sqrt</span>(<span class="kw">mean</span>(error<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit lm model using 5 x 5-fold CV: model</span>
+model &lt;-<span class="st"> </span><span class="kw">train</span>(
+  medv <span class="op">~</span><span class="st"> </span>., 
+  Boston,
+  <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>,
+  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(
+    <span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>,
+    <span class="dt">repeats =</span> <span class="dv">5</span>, <span class="dt">verboseIter =</span> <span class="ot">TRUE</span>
+  )
+)</code></pre></div>
+</div>
+<div id="lassoridge" class="section level2">
+<h2><span class="header-section-number">9.7</span> Lasso/Ridge</h2>
+<p>Alpha controls balance between lasso and ridge. Lambda controls penalty.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit glmnet model: model</span>
+model &lt;-<span class="st"> </span><span class="kw">train</span>(
+  y<span class="op">~</span>., <span class="dt">data =</span> overfit,
+  <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,
+  <span class="dt">trControl =</span> myControl
+)
+
+<span class="co"># Train glmnet with custom trainControl and tuning: model</span>
+model &lt;-<span class="st"> </span><span class="kw">train</span>(
+  y<span class="op">~</span>., overfit,
+  <span class="dt">tuneGrid =</span> <span class="kw">expand.grid</span>(<span class="dt">alpha =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">lambda =</span> <span class="kw">seq</span>(<span class="fl">0.0001</span>, <span class="dv">1</span>, <span class="dt">length =</span> <span class="dv">20</span>)),
+  <span class="dt">method =</span> <span class="st">&#39;glmnet&#39;</span>,
+  <span class="dt">trControl =</span> myControl
+)
+
+<span class="co"># Print model to console</span>
+model
+
+<span class="co"># Print maximum ROC statistic</span>
+<span class="kw">max</span>(model[[<span class="st">&quot;results&quot;</span>]][[<span class="st">&quot;ROC&quot;</span>]])</code></pre></div>
+</div>
+<div id="logreg" class="section level2">
+<h2><span class="header-section-number">9.8</span> LogReg</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit glm model</span>
+model =<span class="st"> </span><span class="kw">glm</span>(Class <span class="op">~</span><span class="st"> </span>., <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, train)
+
+<span class="co"># Predict on test: p</span>
+p =<span class="st"> </span><span class="kw">predict</span>(model, test, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+
+<span class="co"># Calculate class probabilities: p_class</span>
+p_class &lt;-<span class="st"> </span><span class="kw">ifelse</span>(p <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.50</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;R&quot;</span>)
+
+<span class="co"># Create confusion matrix</span>
+<span class="kw">confusionMatrix</span>(p_class, test<span class="op">$</span>Class)</code></pre></div>
+</div>
+<div id="train-test-split-folds-cv" class="section level2">
+<h2><span class="header-section-number">9.9</span> Train-Test Split, Folds, &amp; CV</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Shuffle row indices: rows</span>
+rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">nrow</span>(Sonar))
+
+<span class="co"># Randomly order data: Sonar</span>
+Sonar =<span class="st"> </span>Sonar[rows,]
+
+<span class="co"># Identify row to split on: split</span>
+split &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">nrow</span>(Sonar) <span class="op">*</span><span class="st"> </span>.<span class="dv">6</span>)
+
+<span class="co"># Create train: 60%</span>
+train =<span class="st"> </span>Sonar[<span class="dv">1</span><span class="op">:</span>split,]
+
+<span class="co"># Create test: 40%</span>
+test =<span class="st"> </span>Sonar[(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(Sonar),]
+
+<span class="co"># Create custom indices: myFolds</span>
+myFolds &lt;-<span class="st"> </span><span class="kw">createFolds</span>(churn_y, <span class="dt">k =</span> <span class="dv">5</span>)
+
+<span class="co"># Create reusable trainControl object: myControl</span>
+myControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(
+  <span class="dt">summaryFunction =</span> twoClassSummary, <span class="co">#default option is default summary</span>
+  <span class="dt">classProbs =</span> <span class="ot">TRUE</span>, <span class="co"># IMPORTANT!</span>
+  <span class="dt">verboseIter =</span> <span class="ot">TRUE</span>,
+  <span class="dt">savePredictions =</span> <span class="ot">TRUE</span>,
+  <span class="dt">index =</span> myFolds
+)</code></pre></div>
+</div>
+<div id="random-forest-1" class="section level2">
+<h2><span class="header-section-number">9.10</span> Random Forest</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit random forest: model</span>
+model &lt;-<span class="st"> </span><span class="kw">train</span>(
+  quality<span class="op">~</span>.,
+  <span class="dt">tuneLength =</span> <span class="dv">3</span>,
+  <span class="co">#tuneGrid = data.frame(mtry = c(2, 3, 7)),</span>
+  <span class="dt">data =</span> wine, 
+  <span class="dt">method =</span> <span class="st">&#39;ranger&#39;</span>,
+  <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">5</span>, <span class="dt">verboseIter =</span> <span class="ot">TRUE</span>)
+)
+
+<span class="co"># Print model to console</span>
+model
+
+<span class="co"># Plot model</span>
+<span class="kw">plot</span>(model)</code></pre></div>
+</div>
+<div id="model-selection-1" class="section level2">
+<h2><span class="header-section-number">9.11</span> Model Selection</h2>
+<p>Now that you have fit two models to the churn dataset, it’s time to compare their out-of-sample predictions and choose which one is the best model for your dataset.</p>
+<p>You can compare models in caret using the resamples() function, provided they have the same training data and use the same trainControl object with preset cross-validation folds. resamples() takes as input a list of models and can be used to compare dozens of models at once (though in this case you are only comparing two models).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create model_list</span>
+model_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">item1 =</span> model_glmnet, <span class="dt">item2 =</span> model_rf)
+
+<span class="co"># Pass model_list to resamples(): resamples</span>
+resamples =<span class="st"> </span><span class="kw">resamples</span>(model_list)
+
+<span class="co"># Summarize the results</span>
+<span class="kw">summary</span>(resamples)
+
+<span class="co"># Create bwplot</span>
+<span class="kw">bwplot</span>(resamples, <span class="dt">metric =</span> <span class="st">&#39;ROC&#39;</span>)
+
+<span class="co"># Create xyplot</span>
+<span class="kw">xyplot</span>(resamples)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predict on test: p</span>
+p =<span class="st"> </span><span class="kw">predict</span>(model, test, <span class="dt">type =</span> <span class="st">&#39;response&#39;</span>)
+
+<span class="co"># Make ROC curve</span>
+<span class="kw">colAUC</span>(p, test<span class="op">$</span>Class, <span class="dt">plotROC =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<ul>
+<li>caret: finalModel of model object</li>
+</ul>
+</div>
+<div id="stacking" class="section level2">
+<h2><span class="header-section-number">9.12</span> Stacking</h2>
+<p>caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create ensemble model: stack</span>
+stack &lt;-<span class="st"> </span><span class="kw">caretStack</span>(model_list, <span class="dt">method =</span> <span class="st">&#39;glm&#39;</span>)
+
+<span class="co"># Look at summary</span>
+<span class="kw">summary</span>(stack)</code></pre></div>
+<p>&amp; caretEnnsemble</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="workflow.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cdm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="code-snippets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -394,7 +826,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-frameworks.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

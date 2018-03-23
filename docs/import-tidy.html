@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="workflow.html">
+<link rel="prev" href="annotated-checklist.html">
+<link rel="next" href="transform-visualize.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -342,29 +342,132 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2018-03-22</em></h4>
+<div id="import-tidy" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Import &amp; Tidy</h1>
+<div id="general" class="section level2">
+<h2><span class="header-section-number">5.1</span> General</h2>
+<ul>
+<li><p>A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.</p></li>
+<li><p>conda create -n yourenvname python=x.x anaconda</p></li>
+<li><p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html">json normalize</a></p></li>
+<li><p><a href="https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb">Temp Pandas Columns</a></p></li>
+<li><p>Sampling a massive CSV file:</p>
+<ul>
+<li><p>pip install subsample</p></li>
+<li><p>gzcat ginormous.csv.gz | subsample -n 100000 &gt; sampled.csv.gz</p></li>
+</ul></li>
+</ul>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="sql" class="section level2">
+<h2><span class="header-section-number">5.2</span> SQL</h2>
+<ul>
+<li><p>CSV to DB V1:</p>
+<ul>
+<li>$ sqlite3 db_name.db</li>
+<li>sqlite&gt; .mode csv db_name</li>
+<li>sqlite&gt; .import data.csv db_name</li>
+</ul></li>
+<li><p><a href="https://gist.github.com/gfleetwood/c2ea91da4a8ab1a77f777e28e0b2949c">CSV to DB V2</a></p></li>
+<li><p>SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.</p></li>
+<li><p>List tables: SELECT name FROM sqlite_master WHERE type=‘table’; [sqllite]</p></li>
+<li><p>Show columns: .headers ON [sqllite]</p></li>
+<li><p>ROW_NUMBER(), RANK(), DENSE_RANK(), NOW(), INTERVAL, x IS (NOT) NULL</p></li>
+<li><p>COUNT(DISTINCT month): returns count of non-null values like table in R</p></li>
+<li><p>The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = ‘SR’ THEN ‘yes’ ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like</p></li>
+<li><p>If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns</p></li>
+</ul>
+</div>
+<div id="scraping" class="section level2">
+<h2><span class="header-section-number">5.3</span> Scraping</h2>
+<ul>
+<li><p>Access robots.txt: website_url.domain/robots.txt</p></li>
+<li><p>Tips: 1) Use bot net, 2) user agent switching</p></li>
+<li><p>Try polling in your wait about every 500 milliseconds. Also use presence of element located. I generally have better luck with that expected condition than visibility. Also, submit the search using the search button.</p></li>
+<li><p>Selenium: save_screenshot, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> pyvirtualdisplay <span class="im">import</span> Display  
+<span class="im">from</span> selenium <span class="im">import</span> webdriver  
+display <span class="op">=</span> Display(visible<span class="op">=</span><span class="dv">0</span>, size<span class="op">=</span>(<span class="dv">800</span>, <span class="dv">600</span>))  
+display.start()  
+browser <span class="op">=</span> webdriver.Firefox()  
+browser.get(<span class="st">&#39;http://www.google.com&#39;</span>)  
+<span class="bu">print</span>(browser.title)</code></pre></div>
+</div>
+<div id="exploration" class="section level2">
+<h2><span class="header-section-number">5.4</span> Exploration</h2>
+</div>
+<div id="general-1" class="section level2">
+<h2><span class="header-section-number">5.5</span> General</h2>
+<ul>
+<li><p>import pandas_profiling; pandas_profiling.ProfileReport(data)</p></li>
+<li><p><a href="https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862">Optimal Bins For Histogram</a></p></li>
+<li><p><strong>The Coefficient of Unalikeability</strong>: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.</p></li>
+</ul>
+</div>
+<div id="missingness-imputation" class="section level2">
+<h2><span class="header-section-number">5.6</span> Missingness &amp; Imputation</h2>
+<ul>
+<li><p>There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random</p></li>
+<li><p>The pros of imputation:</p>
+<ul>
+<li><p>Helps retain a larger sample size of your data.</p></li>
+<li><p>Does not sacrifice all the available information in an observation because of sparse missingness.</p></li>
+<li><p>Can potentially avoid unwanted bias.</p></li>
+</ul></li>
+<li><p>The cons of imputation:</p>
+<ul>
+<li><p>The standard errors of any estimates made during analyses following imputation can tend to be too small.</p></li>
+<li><p>The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.</p></li>
+<li><p>Can potentially induce unwanted bias.</p></li>
+</ul></li>
+<li><p>Other:</p>
+<ul>
+<li><p>dplyr::case_when</p></li>
+<li><p>na.omit(): Similar to complete cases.</p></li>
+<li><p>mean of each column = df.mean(axis = 0) || df.mean(axis = ‘index’ )</p></li>
+<li><p>mean of each row = df .mean(axis = 1) || df .mean(axis = ‘columns’ )</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="data-table" class="section level2">
+<h2><span class="header-section-number">5.7</span> Data Table</h2>
+<ul>
+<li><p>Operations done by reference</p></li>
+<li><p>dt[i, j, by] : subset by i calculate by j grouped using by</p></li>
+<li><p>1: numeric | 1L: integer</p></li>
+<li><p>NA_integer_: integer</p></li>
+<li><p>DT[.N] : prints last row</p></li>
+<li><p>names(DT): colnames</p></li>
+<li><p>dim(DT): dimensions</p></li>
+<li><p>DT[, .(A, B)]: returns two columns</p></li>
+<li><p>DT[, c(A, B)]: returns a concatenated vector</p></li>
+<li><p>DT[, .(sum_c = sum(C)]</p></li>
+<li><p>DT[, plot(A, C)]</p></li>
+<li><p>DT[, A:=NULL]: Remove column A</p></li>
+<li><p>DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]</p></li>
+<li><p>DT[, .N, by = Sepal.Width]: .N is the count of each group</p></li>
+<li><p>DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns</p></li>
+<li><p>dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 &amp; 3</p></li>
+<li><p>for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column</p></li>
+<li><p>setnames(DT, ‘y’, ‘z’): changes colname from y to z</p></li>
+<li><p>setkey(DT, A, B)</p></li>
+<li><p>DT[.(‘b’)]</p></li>
+<li><p>DT[.(c(‘b’, ‘c’))]</p></li>
+<li><p>DT[.(c(‘b’, ‘c’)), mult=“first”]</p></li>
+<li><p>DT[c(“b”, “c”), .SD[c(1, .N)], by = .EACHI]: First and last row of the “b” and “c” groups</p></li>
+<li><p>DT[c(“b”, “c”), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]</p></li>
+<li><p>roll=TRUE, ‘nearest’, -Inf, Inf | rollends=FALSE</p></li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="workflow.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="annotated-checklist.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transform-visualize.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -394,7 +497,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-import_tidy.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

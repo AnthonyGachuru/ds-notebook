@@ -1,0 +1,168 @@
+# Import & Tidy
+
+## General
+
+* A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
+
+* conda create -n yourenvname python=x.x anaconda
+
+* [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
+
+* [Temp Pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
+
+* Sampling a massive CSV file:
+
+    * pip install subsample
+
+    * gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
+
+## SQL
+
+* CSV to DB V1: 
+
+    * $ sqlite3 db_name.db
+    * sqlite> .mode csv db_name
+    * sqlite> .import data.csv db_name
+    
+* [CSV to DB V2](https://gist.github.com/gfleetwood/c2ea91da4a8ab1a77f777e28e0b2949c)
+
+* SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.
+
+* List tables: SELECT name FROM sqlite_master WHERE type='table'; [sqllite]
+
+* Show columns: .headers ON [sqllite]
+
+* ROW_NUMBER(), RANK(), DENSE_RANK(), NOW(), INTERVAL, x IS (NOT) NULL
+
+* COUNT(DISTINCT month): returns count of non-null values like table in R
+
+* The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = 'SR' THEN 'yes' ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like
+
+* If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
+
+## Scraping
+
+* Access robots.txt: website_url.domain/robots.txt
+
+* Tips: 1) Use bot net, 2) user agent switching
+
+* Try polling in your wait about every 500 milliseconds. Also use presence of element located. I generally have better luck with that expected condition than visibility. Also, submit the search using the search button.
+
+* Selenium: save_screenshot, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
+
+```{python, eval = FALSE}
+from pyvirtualdisplay import Display  
+from selenium import webdriver  
+display = Display(visible=0, size=(800, 600))  
+display.start()  
+browser = webdriver.Firefox()  
+browser.get('http://www.google.com')  
+print(browser.title)
+```
+
+
+## Exploration
+
+## General
+
+* import pandas_profiling; pandas_profiling.ProfileReport(data)
+
+* [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
+
+* **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
+
+## Missingness & Imputation
+
+* There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
+
+* The pros of imputation:
+
+    * Helps retain a larger sample size of your data.
+
+    * Does not sacrifice all the available information in an observation because of sparse missingness.
+
+    * Can potentially avoid unwanted bias.
+
+* The cons of imputation:
+
+    * The standard errors of any estimates made during analyses following imputation can tend to be too small.
+
+    * The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
+
+    * Can potentially induce unwanted bias.
+
+* Other:
+
+    * dplyr::case_when
+
+    * na.omit(): Similar to complete cases.
+
+    * mean of each column = df.mean(axis = 0) || df.mean(axis = 'index' )
+
+    * mean of each row = df .mean(axis = 1) || df .mean(axis = 'columns' ) 
+
+## Data Table
+
+* Operations done by reference
+
+* dt[i, j, by] : subset by i calculate by j grouped using by
+
+* 1: numeric | 1L: integer
+
+* NA_integer_: integer
+
+* DT[.N] : prints last row
+
+* names(DT): colnames
+
+* dim(DT): dimensions
+
+* DT[, .(A, B)]: returns two columns
+
+* DT[, c(A, B)]: returns a concatenated vector
+
+* DT[, .(sum_c = sum(C)]
+
+* DT[, plot(A, C)]
+
+* DT[, A:=NULL]: Remove column A
+
+* DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
+
+* DT[, .N, by = Sepal.Width]: .N is the count of each group
+
+* DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
+
+* dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
+
+* for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+
+* setnames(DT, 'y', 'z'): changes colname from y to z
+
+* setkey(DT, A, B)
+
+* DT[.('b')]
+
+* DT[.(c('b', 'c'))]
+
+* DT[.(c('b', 'c')), mult="first"]
+
+* DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
+
+* DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
+
+* roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
+
+
+
+
+
+
+
+
+
+
+
+
+
+

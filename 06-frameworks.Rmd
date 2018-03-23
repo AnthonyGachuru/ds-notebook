@@ -1,0 +1,577 @@
+# Frameworks {-}
+
+## PySpark
+
+A [cheatsheet[(https://www.qubole.com/resources/pyspark-cheatsheet/).
+
+Pipeline
+
+Setup 
+
+```{python, eval = FALSE}
+import findspark
+findspark.init()
+
+import pyspark
+from pyspark.sql import SparkSession
+
+sc = pyspark.SparkContext()
+spark = SparkSession.builder.appName('example').getOrCreate()
+```
+
+Libs
+
+```{python, eval = FALSE}
+from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
+from pyspark.ml import Pipeline
+from pyspark.ml.classification import LogisticRegression
+import pyspark.ml.evaluation as evals
+import pyspark.ml.tuning as tune
+import numpy as np
+
+df = spark.read.csv('data.csv', header = True)
+df.show(5)
+df.columns
+```
+
+Preprocessing
+
+```{python, eval = FALSE}
+df = df.withColumn("label", df["target"].cast('integer'))
+
+scf_indexer = StringIndexer(inputCol = "some_cat_feature", outputCol = "some_cat_feature_index")
+scf_encoder = OneHotEncoder(inputCol = "some_cat_feature_index", outputCol = "some_cat_feature_fact")
+
+feature_cols = ["some list of column names"]
+
+vec_assembler = VectorAssembler(inputCols = feature_cols, 
+                                outputCol = "features")
+
+pipe = Pipeline(stages = [scf_indexer, scf_encoder, vec_assembler])
+
+piped_data = pipe.fit(df).transform(df)
+training, test = piped_data.randomSplit([.8, .2])
+```
+
+Model
+
+```{python, eval = FALSE}
+clf_lr = LogisticRegression()
+evaluator = evals.BinaryClassificationEvaluator(metricName = "areaUnderROC")
+
+grid = tune.ParamGridBuilder()
+grid = grid.addGrid(clf_lr.regParam, np.arange(0, .1, .01))
+grid = grid.addGrid(clf_lr.elasticNetParam, [0, 1])
+grid = grid.build()
+
+clf_lr_cv = tune.CrossValidator(
+    estimator = clf_lr,
+    estimatorParamMaps = grid,
+    evaluator = evaluator,
+    numFolds = 5
+               )
+
+best_clf_lr = clf_lr_cv.fit(training).bestModel
+results = best_clf_lr.transform(training)
+print(evaluator.evaluate(results))
+
+#stop
+
+sc.stop()
+```
+
+Quick Test:
+
+```{python, eval = FALSE}
+import findspark
+findspark.init()
+import pyspark
+import random
+
+sc = pyspark.SparkContext(appName="Pi")
+num_samples = 100000000
+def inside(p):     
+    x, y = random.random(), random.random()
+    return x*x + y*y < 1
+count = sc.parallelize(range(0, num_samples)).filter(inside).count()
+pi = 4 * count / num_samples
+print(pi)
+
+sc.stop()
+```
+
+First have to create a SparkSession object from your SparkContext. The SparkContext is ther connection to the cluster and the SparkSession as your interface with that connection.
+
+```{python, eval = FALSE}
+import pyspark
+from pyspark.sql import SparkSession
+sc = pyspark.SparkContext()
+spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
+```
+
+The rest of my notes:
+
+```{python, eval = FALSE}
+## List tables
+spark.catalog.listTables()
+
+## Access and display data
+query = "FROM flights SELECT * LIMIT 10"
+flights10 = spark.sql(query)
+flights10.show()
+
+## Cast
+df['g'] = df['g'].astype(str)
+
+## Read from csv
+df= spark.read.csv(file_path, header = True)
+df = spark.read.csv('fileNameWithPath', mode="DROPMALFORMED",inferSchema=True, header = True)
+df = spark.read.format("csv").option("header","true").option("inferSchema","true").load("john_doe.csv")
+
+## Spark df to pandas and vice versa
+toPandas()
+spark_temp = spark.createDataFrame(pd_temp)
+
+## Add to the catalog
+spark_temp.createOrReplaceTempView("temp")
+
+## Mutate
+df = df.withColumn("newCol", df.oldCol + 1)
+model_data = model_data.withColumn("arr_delay", model_data.arr_delay.cast('integer'))
+model_data = model_data.withColumn("plane_age", model_data.year - model_data.plane_year)
+
+## Create the DataFrame flights
+flights = spark.table('flights')
+
+## Get column names
+spark_df.schema.names
+spark_df.printSchema()
+
+## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string
+long_flights1 = flights.filter('distance > 1000')
+long_flights2 = flights.filter(flights.distance > 1000)
+model_data = model_data.filter("arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL")
+
+## Groupby examples
+flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
+flights.filter(flights.carrier=='DL').filter(flights.origin=='SEA').groupBy().avg('air_time').show()
+flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum('duration_hrs').show()
+
+## Spark functions
+import pyspark.sql.functions as F
+by_month_dest.agg(F.stddev('dep_delay')).show()
+```
+
+```{python, eval = FALSE}
+## Drop column
+final_test_data.drop('State')
+
+## Dummying
+
+#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.
+
+#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer
+
+## Create a StringIndexer
+carr_indexer = StringIndexer(inputCol="carrier", outputCol="carrier_index")
+
+## Create a OneHotEncoder
+carr_encoder = OneHotEncoder(inputCol="carrier_index", outputCol="carrier_fact")
+
+## Make a VectorAssembler
+vec_assembler = VectorAssembler(inputCols=["month", "air_time", "carrier_fact", "dest_fact", "plane_age"], outputCol="features")
+
+## Import & Make Pipeline
+from pyspark.ml import Pipeline
+flights_pipe = Pipeline(stages=[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+
+## Fit and transform the data
+piped_data = flights_pipe.fit(model_data).transform(model_data)
+
+## Train-test split
+training, test = piped_data.randomSplit([.6, .4])
+
+## Tuning & Selection
+
+## Import LogisticRegression
+from pyspark.ml.classification import LogisticRegression
+
+## Create a LogisticRegression Estimator
+lr = LogisticRegression()
+
+## Import the evaluation submodule
+import pyspark.ml.evaluation as evals
+
+## Create a BinaryClassificationEvaluator
+evaluator = evals.BinaryClassificationEvaluator(metricName="areaUnderROC")
+
+## Import the tuning submodule
+import pyspark.ml.tuning as tune
+
+## Create the parameter grid
+grid = tune.ParamGridBuilder()
+
+## Add the hyperparameter
+grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01))
+grid = grid.addGrid(lr.elasticNetParam, [0, 1])
+
+## Build the grid
+grid = grid.build()
+
+## Create the CrossValidator
+cv = tune.CrossValidator(
+estimator=lr,
+estimatorParamMaps=grid,
+evaluator=evaluator
+               )
+
+## Fit cross validation models
+models = cv.fit(training)
+
+## Extract the best model
+best_lr = models.bestModel
+
+## Use the model to predict the test set
+test_results = best_lr.transform(test)
+
+## Evaluate the predictions
+print(evaluator.evaluate(test_results))
+```
+
+* Spark's assumes the target is called 'label' in ML. Everything else is a feature.
+
+* alias() method to rename a column you're selecting.
+
+* cast() method: nominative determinism on columns
+
+* withColumn(): create new column
+
+* pyspark.ml.feature
+
+* At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
+
+* You can create what are called 'one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
+
+* Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
+
+* selectExpr() takes SQL expressions as a string
+
+* show() vs collect()
+
+* Spark only handles numeric data
+
+* In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
+
+## Sparklyr
+
+```{r, eval = FALSE}
+library(sparklyr)
+
+## Connect to your Spark cluster
+spark_conn <- spark_connect(master = "local")
+
+## Print the version of Spark
+spark_version(sc = spark_conn)
+
+## Disconnect from Spark
+spark_disconnect(sc = spark_conn)
+
+## See tables
+src_tbls(sc)
+
+## Copy track_metadata to Spark
+track_metadata_tbl <- copy_to(spark_conn, track_metadata)
+
+## Print 5 rows, all columns
+print(track_metadata_tbl, n = 5, width = Inf)
+
+## Write and run SQL query
+query <- "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"
+(results <- dbGetQuery(spark_conn, query))
+
+## General transformation structure and example
+a_tibble %>%
+  ft_some_transformation("x", "y", some_other_args)
+
+hotttnesss <- track_metadata_tbl %>%
+  # Select artist_hotttnesss
+  select(artist_hotttnesss) %>%
+  # Binarize to is_hottt_or_nottt
+  ft_binarizer('artist_hotttnesss', 'is_hottt_or_nottt', threshold = .5) %>%
+  # Collect the result
+  collect() %>%
+  # Convert is_hottt_or_nottt to logical
+  mutate(is_hottt_or_nottt = as.logical(is_hottt_or_nottt))
+  
+## Get and transform the schema
+
+(schema <- sdf_schema(track_metadata_tbl))
+schema %>%
+  lapply(function(x) do.call(data_frame, x)) %>%
+  bind_rows()
+
+## Train-test split
+partitioned <- track_metadata_tbl %>%
+  sdf_partition(training = 0.7, testing = 0.3)
+
+## List ml functions
+ls("package:sparklyr", pattern = "^ml")
+
+## GBT Example
+
+gradient_boosted_trees_model <- track_data_to_model_tbl %>%
+  # Run the gradient boosted trees model
+   ml_gradient_boosted_trees('year', feature_colnames)
+
+responses <- track_data_to_predict_tbl %>%
+  # Select the year column
+  select(year) %>%
+  # Collect the results
+  collect() %>%
+  # Add in the predictions
+  mutate(
+    predicted_year = predict(
+      gradient_boosted_trees_model,
+      track_data_to_predict_tbl
+    )
+  )
+```
+
+**Parquet Aside**
+
+Parquet files are quicker to read and write.  parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig.
+
+```{r, eval = FALSE}
+## The parquet_dir has been pre-defined
+parquet_dir
+
+## List the files in the parquet dir
+filenames <- dir(parquet_dir, full.names = TRUE)
+
+## Show the filenames and their sizes
+data_frame(
+  filename = basename(filenames),
+  size_bytes = file.size(filenames)
+)
+
+#Import the data into Spark
+
+timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
+```
+
+* To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.
+
+* Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
+
+* If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
+
+* feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
+
+* ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort
+
+## Caret
+
+## Preprocessing
+
+```{r, eval = FALSE}
+# Apply median imputation: model
+model <- train(
+  x = breast_cancer_x, 
+  y = breast_cancer_y,
+  method = 'glm',
+  trControl = myControl,
+  preProcess = c('medianImpute', "knnImpute", 'center', 'scale', 'pca')
+)
+
+dotplot(resamples, metric = "ROC")
+
+min(model$results$RSME)
+```
+
+```{r, eval = FALSE}
+# Identify near zero variance predictors: remove_cols
+remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
+                           freqCut = 2, uniqueCut = 20)
+
+# Get all column names from bloodbrain_x: all_cols
+all_cols = colnames(bloodbrain_x)
+
+# Remove from data: bloodbrain_x_small
+bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
+```
+
+## LM
+
+```{r basic_lm, eval = FALSE}
+# Set seed
+set.seed(42)
+
+# Fit lm model: model
+model <- lm(price ~ ., data = diamonds)
+
+# Predict on full data: p
+p <- predict(model, diamonds)
+
+# Compute errors: error
+error <- p - diamonds$price
+
+# Calculate RMSE
+sqrt(mean(error^2))
+```
+
+```{r lm_with_cv, eval = FALSE}
+# Fit lm model using 5 x 5-fold CV: model
+model <- train(
+  medv ~ ., 
+  Boston,
+  method = "lm",
+  trControl = trainControl(
+    method = "cv", number = 5,
+    repeats = 5, verboseIter = TRUE
+  )
+)
+```
+
+## Lasso/Ridge
+
+Alpha controls balance between lasso and ridge. Lambda controls penalty.
+
+```{r, eval = FALSE}
+# Fit glmnet model: model
+model <- train(
+  y~., data = overfit,
+  method = "glmnet",
+  trControl = myControl
+)
+
+# Train glmnet with custom trainControl and tuning: model
+model <- train(
+  y~., overfit,
+  tuneGrid = expand.grid(alpha = 0:1, lambda = seq(0.0001, 1, length = 20)),
+  method = 'glmnet',
+  trControl = myControl
+)
+
+# Print model to console
+model
+
+# Print maximum ROC statistic
+max(model[["results"]][["ROC"]])
+```
+
+## LogReg
+
+```{r, eval = FALSE}
+# Fit glm model
+model = glm(Class ~ ., family = "binomial", train)
+
+# Predict on test: p
+p = predict(model, test, type = "response")
+
+# Calculate class probabilities: p_class
+p_class <- ifelse(p > 0.50, "M", "R")
+
+# Create confusion matrix
+confusionMatrix(p_class, test$Class)
+```
+
+## Train-Test Split, Folds, & CV
+
+```{r, eval = FALSE}
+# Shuffle row indices: rows
+rows = sample(nrow(Sonar))
+
+# Randomly order data: Sonar
+Sonar = Sonar[rows,]
+
+# Identify row to split on: split
+split <- round(nrow(Sonar) * .6)
+
+# Create train: 60%
+train = Sonar[1:split,]
+
+# Create test: 40%
+test = Sonar[(split+1):nrow(Sonar),]
+
+# Create custom indices: myFolds
+myFolds <- createFolds(churn_y, k = 5)
+
+# Create reusable trainControl object: myControl
+myControl <- trainControl(
+  summaryFunction = twoClassSummary, #default option is default summary
+  classProbs = TRUE, # IMPORTANT!
+  verboseIter = TRUE,
+  savePredictions = TRUE,
+  index = myFolds
+)
+```
+
+## Random Forest
+
+```{r, eval = FALSE}
+# Fit random forest: model
+model <- train(
+  quality~.,
+  tuneLength = 3,
+  #tuneGrid = data.frame(mtry = c(2, 3, 7)),
+  data = wine, 
+  method = 'ranger',
+  trControl = trainControl(method = "cv", number = 5, verboseIter = TRUE)
+)
+
+# Print model to console
+model
+
+# Plot model
+plot(model)
+```
+
+## Model Selection
+
+Now that you have fit two models to the churn dataset, it's time to compare their out-of-sample predictions and choose which one is the best model for your dataset.
+
+You can compare models in caret using the resamples() function, provided they have the same training data and use the same trainControl object with preset cross-validation folds. resamples() takes as input a list of models and can be used to compare dozens of models at once (though in this case you are only comparing two models).
+
+```{r, eval = FALSE}
+# Create model_list
+model_list <- list(item1 = model_glmnet, item2 = model_rf)
+
+# Pass model_list to resamples(): resamples
+resamples = resamples(model_list)
+
+# Summarize the results
+summary(resamples)
+
+# Create bwplot
+bwplot(resamples, metric = 'ROC')
+
+# Create xyplot
+xyplot(resamples)
+```
+
+```{r, eval = FALSE}
+# Predict on test: p
+p = predict(model, test, type = 'response')
+
+# Make ROC curve
+colAUC(p, test$Class, plotROC = TRUE)
+```
+
+* caret: finalModel of model object
+
+## Stacking
+
+caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
+
+```{r, eval = FALSE}
+# Create ensemble model: stack
+stack <- caretStack(model_list, method = 'glm')
+
+# Look at summary
+summary(stack)
+```
+
+& caretEnnsemble
+
+
+

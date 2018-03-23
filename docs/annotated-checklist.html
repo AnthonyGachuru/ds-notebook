@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="workflow.html">
+<link rel="prev" href="preamble.html">
+<link rel="next" href="import-tidy.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -342,29 +342,178 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2018-03-22</em></h4>
+<div id="annotated-checklist" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Annotated Checklist</h1>
+<div id="preparation" class="section level2">
+<h2><span class="header-section-number">4.1</span> Preparation</h2>
+<ul>
+<li><p>Understand the business question, goals, and measures of success</p></li>
+<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
+<li><p>Structure project as user stories</p></li>
+<li><p>Initiliaze <a href="https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R">base project directory</a> and set up versioning.</p></li>
+<li><p>Initialize report to track and summarise work and to do list.</p></li>
+<li><p>Remember to use atomic commit messages</p></li>
+</ul>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="import" class="section level2">
+<h2><span class="header-section-number">4.2</span> Import</h2>
+<ul>
+<li>Sampling from data if its too large
+<ul>
+<li><a href="https://pypi.python.org/pypi/subsample">subsample package</a> in Python</li>
+<li><a href="https://stackoverflow.com/a/22262726/6627726">sqldf library</a> in R</li>
+</ul></li>
+<li><p><a href="https://github.com/thombashi/sqlitebiter">Sqlite Converter</a></p></li>
+<li><p><a href="https://dataset.readthedocs.io/en/latest/">Easy Database Management</a></p></li>
+</ul>
+</div>
+<div id="tidy" class="section level2">
+<h2><span class="header-section-number">4.3</span> Tidy</h2>
+<ul>
+<li><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>
+<ul>
+<li>widyr | tidyr | dplyr | purrr</li>
+</ul></li>
+<li><p>Figure out what you’re trying to do with the data.</p></li>
+<li>See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+<ul>
+<li><a href="https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/">xray</a></li>
+<li><a href="https://github.com/ropenscilabs/skimr">skimr</a></li>
+<li><a href="https://github.com/ujjwalkarn/xda">Exploratory Analysis</a></li>
+<li><a href="https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html">janitor</a></li>
+<li>scipy.stats.describe()</li>
+<li>Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test</li>
+</ul></li>
+</ul>
+</div>
+<div id="utransform" class="section level2">
+<h2><span class="header-section-number">4.4</span> uTransform</h2>
+<ul>
+<li>Imputation: Mean | KNN | Random | Regression | Mode
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/simputation/index.html">Imputation in R</a></li>
+</ul></li>
+<li>Look at missingness
+<ul>
+<li><a href="https://github.com/njtierney/naniar">2</a></li>
+<li><a href="https://github.com/ResidentMario/missingno">Py</a></li>
+</ul></li>
+<li><p><a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist">Categorical Dissimilarity</a></p></li>
+<li><p><a href="https://github.com/VerbalExpressions/PythonVerbalExpressions">Easy Regex</a></p></li>
+<li><p><a href="https://github.com/yhat/pandasql" class="uri">https://github.com/yhat/pandasql</a></p></li>
+<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
+<li>Check for blank spaces and replace with NA
+<ul>
+<li>df[df==“”] = NA</li>
+</ul></li>
+<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
+</ul>
+</div>
+<div id="uvisualize" class="section level2">
+<h2><span class="header-section-number">4.5</span> uVisualize</h2>
+<ul>
+<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
+<li><p>Trendlines &amp; Histograms</p></li>
+<li><p>Confidence intervals</p></li>
+<li><p>Compare the distributions of variables with overlayed density plots</p></li>
+<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships</p></li>
+<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
+</ul>
+</div>
+<div id="umodel" class="section level2">
+<h2><span class="header-section-number">4.6</span> uModel</h2>
+<ul>
+<li><p>Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
+<li>Pre-processing
+<ul>
+<li><a href="https://github.com/WinVector/vtreat" class="uri">https://github.com/WinVector/vtreat</a></li>
+</ul></li>
+<li><p>Pipelines &amp; Feature Unions</p></li>
+<li>Do feature selection
+<ul>
+<li>Variance Threshold</li>
+<li>Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification</li>
+<li>SelectKBest/SelectPercentile</li>
+<li>sklearn: feature_selection.RFE(CV)</li>
+<li><a href="https://github.com/EpistasisLab/scikit-rebate">Rebate</a></li>
+<li><a href="https://github.com/scikit-learn-contrib/boruta_py">Boruta</a></li>
+</ul></li>
+<li>Do feature engineering: Standardization, dimensionality reduction, dummying
+<ul>
+<li>sklearn.preprocessing.binarize | pandas.factorize</li>
+</ul></li>
+<li>Model Selection
+<ul>
+<li><a href="https://github.com/DistrictDataLabs/yellowbrick" class="uri">https://github.com/DistrictDataLabs/yellowbrick</a></li>
+<li><a href="https://edublancas.github.io/sklearn-evaluation/">Sklearn Evaluation</a></li>
+<li><a href="https://github.com/reiinakano/scikit-plot">skl-plot</a></li>
+</ul></li>
+<li>Model Explanability
+<ul>
+<li><a href="https://github.com/marcotcr/lime">lime</a></li>
+<li><a href="https://github.com/TeamHG-Memex/eli5">eli5</a></li>
+</ul></li>
+<li>Tuning
+<ul>
+<li><a href="https://github.com/hyperopt/hyperopt-sklearn" class="uri">https://github.com/hyperopt/hyperopt-sklearn</a></li>
+<li><a href="https://github.com/rsteca/sklearn-deap" class="uri">https://github.com/rsteca/sklearn-deap</a></li>
+</ul></li>
+<li>Deal with potential class imbalance</li>
+<li>Gradient boosting</li>
+<li><p><a href="http://contrib.scikit-learn.org/imbalanced-learn/stable/" class="uri">http://contrib.scikit-learn.org/imbalanced-learn/stable/</a></p></li>
+<li>Create ensembles
+<ul>
+<li>mlxtend</li>
+</ul></li>
+<li>Choose Statistical Test
+<ul>
+<li><a href="http://www.ats.ucla.edu/stat/mult_pkg/whatstat/">1</a></li>
+<li><a href="http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt">2</a></li>
+<li>infer library</li>
+</ul></li>
+<li>Check for correlations
+<ul>
+<li><a href="https://github.com/drsimonj/corrr" class="uri">https://github.com/drsimonj/corrr</a></li>
+</ul></li>
+<li><p>Ensembling: mlxtend</p></li>
+<li>Look at learning curves
+<ul>
+<li><a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" class="uri">https://www.dataquest.io/blog/learning-curves-machine-learning/</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="communicate" class="section level2">
+<h2><span class="header-section-number">4.7</span> Communicate</h2>
+<ul>
+<li>Usually an R Markdown document.</li>
+</ul>
+</div>
+<div id="deployment-maintenance" class="section level2">
+<h2><span class="header-section-number">4.8</span> Deployment / Maintenance</h2>
+<ul>
+<li>Write tests
+<ul>
+<li><a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a></li>
+<li><a href="http://www.tdda.info/">2</a></li>
+<li><a href="http://stochasticsolutions.com/">3</a></li>
+<li><a href="https://github.com/ericmjl/data-testing-tutorial">Data Testing</a></li>
+<li><a href="https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765">ML Testing</a></li>
+<li><a href="https://github.com/data-cleaning/validate">Data Validation</a></li>
+<li>pytest | hypothesis | testthat</li>
+<li><a href="https://rdrr.io/cran/checkmate/">Argument Checks</a><a href="https://github.com/shawnbrown/datatest">PyValidation</a></li>
+</ul></li>
+<li>Write helper functions.</li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="workflow.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="preamble.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="import-tidy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -394,7 +543,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-workflow.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

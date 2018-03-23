@@ -1,0 +1,37 @@
+# Transform & Visualize
+
+## Transform
+
+* Too many levels for a category?
+
+    * limit number of categories through feature selection
+    * https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables
+    * bucket groups by number of samples
+ 
+* https://cran.r-project.org/web/packages/vtreat/index.html
+
+* Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.
+
+* Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.
+
+**Imputation**
+
+Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
+
+Some types:
+
+* Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
+
+* Random: Can amplify outlier observation and induce bias.
+
+* Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
+
+## Visualize
+
+* logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
+
+* swarmplot
+
+* Rule of thumb for bins in histogram: `ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))`.
+
+

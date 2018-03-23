@@ -1,0 +1,7 @@
+# CDM
+
+## Shiny
+
+* 1 r process: 30 users | shiny scales linearly
+
+eventreactive()

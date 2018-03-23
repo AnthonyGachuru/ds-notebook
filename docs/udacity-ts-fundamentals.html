@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="workflow.html">
+<link rel="prev" href="model.html">
+<link rel="next" href="cdm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -342,29 +342,261 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<h4 class="author"><em>Yihui Xie</em></h4>
-<h4 class="date"><em>2018-03-22</em></h4>
+<div id="udacity-ts-fundamentals" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Udacity: TS Fundamentals</h1>
+<p>Naive vs Seasonal Naive vs Exponential Smooothing</p>
+<p>Seasonal Naive: Assumes magnitude of the seasonal pattern is constant.</p>
+<p>cyclical vs seasonal patterns: longer, harder to predicit, don’t follow seasonl patterns</p>
+<p>ETS: Error-Trend-Seasonality</p>
+<p>The possible time series (TS) scenarios can be recognized by asking the following questions:</p>
+<p>TS has a trend? If yes, is the trend increasing linearly or exponentially?</p>
+<p>TS has seasonality? If yes, do the seasonal components increase in magnitude over time?</p>
+<p>We are going to explore four ETS models that can help forecast these possible time-series scenarios.</p>
+<p>Simple Exponential Smoothing Method</p>
+<p>Holt’s Linear Trend Method</p>
+<p>Exponential Trend Method</p>
+<p>Holt-Winters Seasonal Method</p>
+<p>Time series does not have a trend line and does not have seasonality component. We would use a Simple Exponential Smoothing model.</p>
+<p>Time Seies: level, trend, seasonal compoent</p>
+<p>Methods</p>
+<p>There are several methods we need to pick in order to model any given time series appropriately:</p>
+<p>Simple Exponential Smoothing: Finds the level of the time series</p>
+<p>Holt’s Linear Trend: Finds the level of the time series</p>
+<p>Additive model for linear trend</p>
+<p>Exponential Trend: Finds the level of the time series</p>
+<p>Multiplicative model for exponential trend</p>
+<p>Holt-Winters Seasonal: Finds the level of the time series</p>
+<p>Additive for trend</p>
+<p>Multiplicative and Additive for seasonal components</p>
+<p>These methods help deal with different scenarios in our time series involving:</p>
+<p>Linear or exponential trend</p>
+<p>Constant or increasing seasonality components</p>
+<p>For trends that are exponential, we would need to use a multiplicative model.</p>
+<p>For increasing seasonality components, we would need to use a multiplicative model model as well.</p>
+<p>ETS</p>
+<p>Therefore we can generalize all of these models using a naming system for ETS:</p>
+<p>ETS (Error, Trend, Seasonality)</p>
+<p>Error is the error line we saw in the time series decomposition part earlier in the course. If the error is increasing similar to an increasing seasonal components, we would need to consider a multiplicative design for the exponential model.</p>
+<p>Therefore, for each component in the ETS system, we can assign None, Multiplicative, or Additive (or N, M, A) for each of the three components in our time series.</p>
+<p>Examples</p>
+<p>A time series model that has a constant error, linear trend, and increasing seasonal components means we would need to use an ETS model of:</p>
+<p>ETS(N,A,M)</p>
+<p>A time series model that has increasing error, exponential trend, and no seasonality means we would need to use an ETS model of:</p>
+<p>ARIMA; Seasnoanl:ARIMA(p,d,q)(P,D,Q)M vs non-seasonal: ARIMA(p,d,q)</p>
+<p>non-=statipjary: This plot shows an upward trend and seasonality.</p>
+<p>stationaey: This plot revolves around a constant mean of 0 and shows contained variance.</p>
+<p>Evluated withhold set and residual plots, should have mean of 0.</p>
+<p>is less sensitive to the occasional very large error because it does not square the errors in the calculation.</p>
+<p>Percentage Errors</p>
+<p>Percentage errors, like MAPE, are useful because they are scale independent, so they can be used to compare forecasts between different data series, unlike scale dependent errors. The disadvantage is that it cannot be used if the series has zero values.</p>
+<p>Mean Absolute Percentage Error (MAPE) is also often useful for purposes of reporting, because it is expressed in generic percentage terms it will make sense even to someone who has no idea what constitutes a “big” error in terms of dollars spent or widgets sold.</p>
+<p>Scale-Free Errors</p>
+<p>Scale-free errors were introduced more recently to offer a scale-independent measure that doesn’t have many of the problems of other errors like percentage errors.</p>
+<p>Mean Absolute Scaled Error (MASE) is another relative measure of error that is applicable only to time series data. It is defined as the mean absolute error of the model divided by the the mean absolute value of the first difference of the series. Thus, it measures the relative reduction in error compared to a naive model. Ideally its value will be significantly less than 1 but is relative to comparison across other models for the same series. Since this error measurement is relative and can be applied across models, it is accepted as one of the best metrics for error measurement.</p>
+<p>Can use AIC for model selection. Also use confidence intervals.</p>
+<div id="dl" class="section level2">
+<h2><span class="header-section-number">8.1</span> DL</h2>
+<ul>
+<li><p><a href="https://hackernoon.com/deep-learning-cheat-sheet-25421411e460">DL Cheatsheet</a></p></li>
+<li><p>By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.</p></li>
+<li><p>Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).</p></li>
+<li><p>There are several activation functions you may encounter in practice:</p>
+<ul>
+<li><p>Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 (<span class="math inline">\(σ(x) = 1 / (1 + exp(−x))\)</span>)</p></li>
+<li><p>Softmax: Same end result as sigmoid, but different function.</p></li>
+<li><p>tanh: Takes a real-valued input and squashes it to the range [-1, 1] (<span class="math inline">\(tanh(x) = 2σ(2x) − 1\)</span>)</p></li>
+</ul></li>
+<li><p>ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. <span class="math inline">\(f(x) = max(0, x)\)</span></p></li>
+<li><p>softmax doesn’t like multi-label classification</p></li>
+<li><p>Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days.</p></li>
+<li><p>Advised to scale features</p></li>
+<li><p><a href="https://www.youtube.com/watch?v=nqEYVzJLR_c&amp;feature=youtu.be&amp;t=31">Rule of 30</a>: A change that affects at least 30 data points in your validation set is usually significant and not just noise.</p></li>
+<li><p>Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.</p></li>
+<li><p>Momentum and learning rate decay are good for knowing which way to go in gradient descent.</p></li>
+<li><p>Always try to lower your learning rate for improvement.</p></li>
+<li><p>ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.</p></li>
+<li><p>n inputs and k outputs gives you <span class="math inline">\((n+1)*k\)</span> parameters.</p></li>
+<li><p>Back propogation takes about twice the memory as forward propogation.</p></li>
+<li><p>Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn’t work, go deeper.</p></li>
+<li><p>Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn’t matter then use translation invariance. Use weight sharing if this occurs in text.</p></li>
+<li><p>Things that don’t chnage across time, space, etc are called statistical invariants.</p></li>
+<li><p>RNN’s use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier.</p></li>
+<li><p>Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn’t remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.</p></li>
+<li><p>Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.</p></li>
+<li><p>Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.</p></li>
+<li><p>The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.</p></li>
+<li><p>BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.</p></li>
+<li><p>The last layer of a neural network captures the most complex interactions.</p></li>
+<li><p>When plotting the mean-squared error loss function against predictions, the slope is <span class="math inline">\(2x(y-xb)\)</span>, or <span class="math inline">\(2input_data error\)</span>.</p></li>
+<li><p>weights_updated = weights - slope*learning_rate</p></li>
+<li><p>This is exactly what’s happening in the vanishing gradient problem – the gradients of the network’s output with respect to the parameters in the early layers become extremely small. That’s a fancy way of saying that even a large change in the value of parameters for the early layers doesn’t have a big effect on the output.</p></li>
+<li><p>Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.</p></li>
+<li><p>Epoch: One full pass through all the batches in the training data.</p></li>
+<li><p>Stochastic gradient descent calculates slopes one batch at a time.</p></li>
+<li><p>This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.</p></li>
+<li><p>Few people use kfold cv in deep learning because of the large datasets in play.</p></li>
+<li><p>Dying neuron + vanishing gradient: Change activation function</p></li>
+</ul>
 </div>
-<div id="prerequisites" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)
-<span class="co"># or the development version</span>
-<span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+<div id="tensorflow" class="section level2">
+<h2><span class="header-section-number">8.2</span> TensorFlow</h2>
+<ul>
+<li><p>In TensorFlow, we indicate a feature’s data type using a construct called a feature column. Feature columns store only a description of the feature data; they do not contain the feature data itself.</p></li>
+<li><p>Amazingly enough, performing gradient descent on a small batch or even a batch of one example is usually more efficient than the full batch. After all, finding the gradient of one example is far cheaper than finding the gradient of millions of examples. To ensure a good representative sample, the algorithm scoops up another random small batch (or batch of one) on every iteration.</p></li>
+<li><p>SGD &amp; Mini-Batch Gradient Descent</p></li>
+</ul>
+<p>Could compute gradient over entire data set on each step, but this turns out to be unnecessary. Computing gradient on small data samples works well. On every step, get a new random sample</p>
+<p>Stochastic Gradient Descent: one example at a time</p>
+<p>Mini-Batch Gradient Descent: batches of 10-1000. Loss &amp; gradients are averaged over the batch</p>
+</div>
+<div id="keras" class="section level2">
+<h2><span class="header-section-number">8.3</span> Keras</h2>
+<p>Here’s a <a href="https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb">Hello World</a> and the general framework:</p>
+<ul>
+<li><p>declare: sequential</p></li>
+<li><p>add layers input-hidden-output</p></li>
+<li><p>compile</p></li>
+<li><p>fit</p></li>
+</ul>
+<p>Keras only uses numpy arrays.</p>
+<ul>
+<li>keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)</li>
+</ul>
+<div id="regression" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Regression</h3>
+<ul>
+<li><p>loss = mean_squared_error</p></li>
+<li><p>metric: rmse</p></li>
+<li><p>activation_function = relu</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> keras
+<span class="im">from</span> keras.layers <span class="im">import</span> Dense
+<span class="im">from</span> keras.models <span class="im">import</span> Sequential
+<span class="co"># Specify the model: Two hidden layers</span>
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">1</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;adam&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;mean_squared_error&#39;</span>) 
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co"># Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)</code></pre></div>
+</div>
+<div id="classification" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Classification</h3>
+<ul>
+<li><p>loss = categorical_crossentropy</p></li>
+<li><p>metric = accuracy</p></li>
+<li><p>activation_function = softmax</p></li>
+<li><p>output layer with stuff equal to number of categorical groups</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> keras
+<span class="im">from</span> keras.layers <span class="im">import</span> Dense
+<span class="im">from</span> keras.models <span class="im">import</span> Sequential
+<span class="co"># Specify the model: Two hidden layers</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">2</span>, activation <span class="op">=</span> <span class="st">&#39;softmax&#39;</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;sgd&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>, metrics <span class="op">=</span> [<span class="st">&#39;accuracy&#39;</span>])
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co">#Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)
+<span class="co">#Calculate predicted probability of survival</span>
+predicted_prob_true <span class="op">=</span> predictions[:, <span class="dv">1</span>]</code></pre></div>
+</div>
+<div id="another-example" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Another Example</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Import the SGD optimizer</span>
+<span class="im">from</span> keras.optimizers <span class="im">import</span> SGD
+<span class="co"># Create list of learning rates: lr_to_test</span>
+lr_to_test <span class="op">=</span> [.<span class="dv">000001</span>, <span class="fl">0.01</span>, <span class="dv">1</span>]
+<span class="co"># Loop over learning rates</span>
+<span class="cf">for</span> lr <span class="kw">in</span> lr_to_test:
+    <span class="bu">print</span>(<span class="st">&#39;Testing model with learning rate: &#39;</span>)
+    
+    <span class="co"># Build new model to test, unaffected by previous models</span>
+    model <span class="op">=</span> get_new_model()
+    
+    <span class="co"># Create SGD optimizer with specified learning rate: my_optimizer</span>
+    my_optimizer <span class="op">=</span> SGD(lr <span class="op">=</span> lr)
+    
+    <span class="co"># Compile the model</span>
+    model.<span class="bu">compile</span>(optimizer <span class="op">=</span> my_optimizer, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>)
+    
+    <span class="co"># Fit the model</span>
+    model.fit(predictors, 
+              target, 
+              validation_split <span class="op">=</span> <span class="fl">0.3</span>, 
+              epochs <span class="op">=</span> <span class="dv">20</span>, 
+              callbacks <span class="op">=</span> [early_stopping_monitor], 
+              verbose <span class="op">=</span> <span class="va">False</span>)</code></pre></div>
+</div>
+</div>
+<div id="association-rule-mining" class="section level2">
+<h2><span class="header-section-number">8.4</span> Association Rule Mining</h2>
+<div id="intro-18" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Intro</h3>
+<ul>
+<li><p>Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.</p></li>
+<li><p>Incredibly big feature space (2^k-1).</p></li>
+<li><p>The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space.</p></li>
+<li><p>Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better.</p></li>
+<li><p>nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.</p></li>
+<li><p>ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift &gt; 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift &lt; 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.</p></li>
+<li><p>t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don’t make it to the higher iterations.</p></li>
+</ul>
+</div>
+<div id="assumptions-18" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Assumptions</h3>
+</div>
+<div id="characteristics-13" class="section level3">
+<h3><span class="header-section-number">8.4.3</span> Characteristics</h3>
+</div>
+<div id="evaluation-18" class="section level3">
+<h3><span class="header-section-number">8.4.4</span> Evaluation</h3>
+</div>
+<div id="proscons-18" class="section level3">
+<h3><span class="header-section-number">8.4.5</span> Pros/Cons</h3>
+<p><strong>Pros</strong></p>
+<ul>
+<li><p>Ideally suited for working with very large amounts of transactional data.</p></li>
+<li><p>The results are rules that are generally easy to understand and have a high amount of interpretability.</p></li>
+<li><p>The process is useful for data mining and uncovering unexpected knowledge within a dataset.</p></li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li><p>The outcome is usually not interesting when applied to smaller datasets.</p></li>
+<li><p>It is difficult to separate actual insights from common sense notions.</p></li>
+<li><p>The analyst might be compelled to draw spurious conclusions–remember that correlation doesn’t imply causation!</p></li>
+</ul>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="workflow.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cdm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -394,7 +626,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-model.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
