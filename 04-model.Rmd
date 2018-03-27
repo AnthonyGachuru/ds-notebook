@@ -494,6 +494,8 @@ Kernel PCA must project data into a higher dimensional space than that of the or
 
 ## Linear Regression
 
+If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.
+
 ### Intro
 
 ### Assumptions
@@ -689,6 +691,8 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 ## Logistic Regression
 
+The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.
+
 ### Intro
 
 Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
@@ -714,6 +718,29 @@ Standardization isn't required for logistic regression. The main goal of standar
 * Independent errors
 
 * No multicollinearity
+
+(Generalized) Linear models make some strong assumptions concerning the data structure:
+
+Independance of each data points
+Correct distribution of the residuals
+Correct specification of the variance structure
+Linear relationship between the response and the linear predictor
+
+The logistic regression method assumes that:
+
+The outcome is a binary or dichotomous variable like yes vs no, positive vs negative, 1 vs 0.
+
+There is a linear relationship between the logit of the outcome and each predictor variables. Recall that the logit function is logit(p) = log(p/(1-p)), where p is the probabilities of the outcome (see Chapter @ref(logistic-regression)).
+
+There is no influential values (extreme values or outliers) in the continuous predictors
+
+There is no high intercorrelations (i.e. multicollinearity) among the predictors.
+
+GLM does not assume a linear relationship between dependent and independent variables. However, it assumes a linear relationship between link function and independent variables in logit model.
+ The dependent variable need not to be normally distributed.
+It does not uses OLS (Ordinary Least Square) for parameter estimation. Instead, it uses maximum likelihood estimation (MLE).
+Errors need to be independent but not normally distributed.
+
 
 ### Evaluation
 

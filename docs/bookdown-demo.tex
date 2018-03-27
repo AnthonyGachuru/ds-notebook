@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-03-22}
+  \date{2018-03-26}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -377,10 +377,17 @@ can be found on this
 \section{uModel}\label{umodel}
 
 \begin{itemize}
+\tightlist
 \item
   Stick to rergression models for prescriptive analysis. Validate
   assumptions and tune appropriately. If using Python leverage
   statsmodels.
+\end{itemize}
+
+\^{} car::vif() for multicollinearity,
+statsmodels.stats.outliers\_influence.variance\_inflation\_factor
+
+\begin{itemize}
 \item
   Pre-processing
 
@@ -1861,6 +1868,10 @@ of the original data.
 
 \section{Linear Regression}\label{linear-regression}
 
+If there is an ascending or descending order to your dependent variable,
+ordinal regression is more appropriate as it has more power than
+multinomial logistic regression.
+
 \subsection{Intro}\label{intro-6}
 
 \subsection{Assumptions}\label{assumptions-6}
@@ -2193,6 +2204,15 @@ appropriate value of lambda by means of cross-validation.
 
 \section{Logistic Regression}\label{logistic-regression}
 
+The right-hand predictor side of the equation must be linear with the
+left-hand outcome side of the equation. You must test for linearity in
+the logit (in logistic regression the logit is the outcome side). This
+is commonly done with the Box-Tidwell Transformation (Test): Add to the
+logistic model interaction terms which are the crossproduct of each
+independent times its natural logarithm {[}(X)ln(X){]}. If these terms
+are significant, then there is nonlinearity in the logit. This method is
+not sensitive to small nonlinearities.
+
 \subsection{Intro}\label{intro-8}
 
 Logistic regression assumes that logit(y) is linear in the values of x.
@@ -2241,6 +2261,37 @@ standardization treatment on the features.
 \item
   No multicollinearity
 \end{itemize}
+
+(Generalized) Linear models make some strong assumptions concerning the
+data structure:
+
+Independance of each data points Correct distribution of the residuals
+Correct specification of the variance structure Linear relationship
+between the response and the linear predictor
+
+The logistic regression method assumes that:
+
+The outcome is a binary or dichotomous variable like yes vs no, positive
+vs negative, 1 vs 0.
+
+There is a linear relationship between the logit of the outcome and each
+predictor variables. Recall that the logit function is logit(p) =
+log(p/(1-p)), where p is the probabilities of the outcome (see Chapter
+\citet{ref}(logistic-regression)).
+
+There is no influential values (extreme values or outliers) in the
+continuous predictors
+
+There is no high intercorrelations (i.e.~multicollinearity) among the
+predictors.
+
+GLM does not assume a linear relationship between dependent and
+independent variables. However, it assumes a linear relationship between
+link function and independent variables in logit model. The dependent
+variable need not to be normally distributed. It does not uses OLS
+(Ordinary Least Square) for parameter estimation. Instead, it uses
+maximum likelihood estimation (MLE). Errors need to be independent but
+not normally distributed.
 
 \subsection{Evaluation}\label{evaluation-8}
 
@@ -3933,6 +3984,8 @@ Pig.
 
 \section{Caret}\label{caret}
 
+attributes(clf\_lr): results, finalModel
+
 \section{Preprocessing}\label{preprocessing}
 
 \begin{Shaded}
@@ -4102,6 +4155,19 @@ CV}\label{train-test-split-folds-cv}
 
 \CommentTok{# Plot model}
 \KeywordTok{plot}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{SVM}\label{svm-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clf_svm <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  pass }\OperatorTok{~}\NormalTok{., }
+  \DataTypeTok{data =}\NormalTok{ df3, }
+  \DataTypeTok{method =} \StringTok{"svmLinear"}\NormalTok{,}
+  \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{)}
+\NormalTok{                 )}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4324,7 +4390,7 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Digits Intro}\label{digits-intro}
+\subsection{MNIST Example}\label{mnist-example}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4365,6 +4431,54 @@ subsequently apply any numpy operation:
   ctrl + alt + R: run all chunks
 \end{itemize}
 
+\subsection{Theme Template}\label{theme-template}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{theme_ilo <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
+  \KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{text =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{family =} \StringTok{"Bookman"}\NormalTok{, }\DataTypeTok{color =} \StringTok{"gray25"}\NormalTok{),}
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{),}
+    \DataTypeTok{plot.caption =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{color =} \StringTok{"gray30"}\NormalTok{),}
+    \DataTypeTok{plot.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"gray95"}\NormalTok{),}
+    \DataTypeTok{plot.margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{units =} \StringTok{"mm"}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Heatmap}\label{heatmap}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(corrplot)}
+\NormalTok{df_fltrd }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select_if}\NormalTok{(is.numeric) }\OperatorTok{%>%}\StringTok{  }
+\KeywordTok{cor}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{corrplot}\NormalTok{(}\DataTypeTok{method =} \StringTok{"circle"}\NormalTok{, }\DataTypeTok{is.corr =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Calculate Accuracy}\label{calculate-accuracy}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calc_accuracy <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(labels, preds)\{}
+  
+\NormalTok{  results <-}\StringTok{ }\KeywordTok{table}\NormalTok{(labels, preds) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\NormalTok{data.frame }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{correct =} \KeywordTok{ifelse}\NormalTok{(labels}\OperatorTok{==}\NormalTok{preds, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{group_by}\NormalTok{(correct) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{freq =} \KeywordTok{sum}\NormalTok{(Freq)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{prop =}\NormalTok{ freq}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(freq)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{filter}\NormalTok{(correct }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+  
+  \KeywordTok{return}\NormalTok{(results)}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Filter By Row}\label{filter-by-row}
 
 \begin{Shaded}
@@ -4376,6 +4490,8 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{DB Functions}\label{db-functions}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# DB Functions}
@@ -4384,6 +4500,16 @@ subsequently apply any numpy operation:
 \KeywordTok{dbListTables}\NormalTok{(con) }\OperatorTok{%>%}\StringTok{ }\NormalTok{sort}
 \KeywordTok{dbExistsTable}\NormalTok{(con, }\StringTok{"iris"}\NormalTok{)}
 \KeywordTok{dbRemoveTable}\NormalTok{(con, }\StringTok{"iris"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Bash}\label{bash}
+
+script to do joining of dummied csvs
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{paste}\NormalTok{ -d=}\StringTok{','}\NormalTok{ file1.csv file2.csv file3.csv }\OperatorTok{>}\NormalTok{ file_final.csv}
 \end{Highlighting}
 \end{Shaded}
 

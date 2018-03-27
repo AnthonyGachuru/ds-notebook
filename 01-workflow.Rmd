@@ -111,6 +111,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
+^ car::vif() for multicollinearity, statsmodels.stats.outliers_influence.variance_inflation_factor
+
 * Pre-processing
     * https://github.com/WinVector/vtreat
 

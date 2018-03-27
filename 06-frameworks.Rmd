@@ -371,6 +371,8 @@ timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
 
 ## Caret
 
+attributes(clf_lr): results, finalModel
+
 ## Preprocessing
 
 ```{r, eval = FALSE}
@@ -524,6 +526,17 @@ model
 
 # Plot model
 plot(model)
+```
+
+## SVM
+
+```{r, eval = FALSE}
+clf_svm <- train(
+  pass ~., 
+  data = df3, 
+  method = "svmLinear",
+  preProcess = c("center", "scale")
+                 )
 ```
 
 ## Model Selection
