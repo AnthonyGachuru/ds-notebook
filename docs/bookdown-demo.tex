@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-03-26}
+  \date{2018-03-29}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -841,6 +841,8 @@ Some types:
 \end{itemize}
 
 \chapter{Model}\label{model}
+
+\url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
 
 \section{Feature Selection}\label{feature-selection}
 
@@ -2255,43 +2257,30 @@ standardization treatment on the features.
 
 \subsection{Assumptions}\label{assumptions-8}
 
+Secondly, the linear regression analysis requires all variables to be
+multivariate normal. This assumption can best be checked with a
+histogram or a Q-Q-Plot.
+
 \begin{itemize}
 \item
-  Independent errors
+  Requires the dependent variable to be binary and ordinal logistic
+  regression requires the dependent variable to be ordinal.
 \item
-  No multicollinearity
+  The observations to be independent of each other. In other words, the
+  observations should not come from repeated measurements or matched
+  data.
+\item
+  There to be little or no multicollinearity among the independent
+  variables.
+\item
+  Assumes linearity of independent variables and logit of the
+  probabilities (logit(p) = log(p/(1-p))). Check
+  \href{https://stats.stackexchange.com/questions/169348/how-should-i-check-the-assumption-of-linearity-to-the-logit-for-the-continuous-i}{in
+  R}.
+\item
+  There is no influential values (extreme values or outliers) in the
+  continuous predictors
 \end{itemize}
-
-(Generalized) Linear models make some strong assumptions concerning the
-data structure:
-
-Independance of each data points Correct distribution of the residuals
-Correct specification of the variance structure Linear relationship
-between the response and the linear predictor
-
-The logistic regression method assumes that:
-
-The outcome is a binary or dichotomous variable like yes vs no, positive
-vs negative, 1 vs 0.
-
-There is a linear relationship between the logit of the outcome and each
-predictor variables. Recall that the logit function is logit(p) =
-log(p/(1-p)), where p is the probabilities of the outcome (see Chapter
-\citet{ref}(logistic-regression)).
-
-There is no influential values (extreme values or outliers) in the
-continuous predictors
-
-There is no high intercorrelations (i.e.~multicollinearity) among the
-predictors.
-
-GLM does not assume a linear relationship between dependent and
-independent variables. However, it assumes a linear relationship between
-link function and independent variables in logit model. The dependent
-variable need not to be normally distributed. It does not uses OLS
-(Ordinary Least Square) for parameter estimation. Instead, it uses
-maximum likelihood estimation (MLE). Errors need to be independent but
-not normally distributed.
 
 \subsection{Evaluation}\label{evaluation-8}
 
@@ -4430,6 +4419,18 @@ subsequently apply any numpy operation:
 \item
   ctrl + alt + R: run all chunks
 \end{itemize}
+
+\subsection{Geom\_Path}\label{geom_path}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ilo_data) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_path}\NormalTok{(}
+            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ working_hours, }\DataTypeTok{y =}\NormalTok{ country),}
+            \DataTypeTok{arrow =} \KeywordTok{arrow}\NormalTok{(}\DataTypeTok{length =} \KeywordTok{unit}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{type =} \StringTok{"closed"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Theme Template}\label{theme-template}
 

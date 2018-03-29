@@ -25,7 +25,7 @@
 <meta name="author" content="Yihui Xie">
 
 
-<meta name="date" content="2018-03-26">
+<meta name="date" content="2018-03-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -303,11 +303,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.14.1" data-path="code-snippets.html"><a href="code-snippets.html#mnist-example"><i class="fa fa-check"></i><b>9.14.1</b> MNIST Example</a></li>
 </ul></li>
 <li class="chapter" data-level="9.15" data-path="code-snippets.html"><a href="code-snippets.html#r"><i class="fa fa-check"></i><b>9.15</b> R</a><ul>
-<li class="chapter" data-level="9.15.1" data-path="code-snippets.html"><a href="code-snippets.html#theme-template"><i class="fa fa-check"></i><b>9.15.1</b> Theme Template</a></li>
-<li class="chapter" data-level="9.15.2" data-path="code-snippets.html"><a href="code-snippets.html#heatmap"><i class="fa fa-check"></i><b>9.15.2</b> Heatmap</a></li>
-<li class="chapter" data-level="9.15.3" data-path="code-snippets.html"><a href="code-snippets.html#calculate-accuracy"><i class="fa fa-check"></i><b>9.15.3</b> Calculate Accuracy</a></li>
-<li class="chapter" data-level="9.15.4" data-path="code-snippets.html"><a href="code-snippets.html#filter-by-row"><i class="fa fa-check"></i><b>9.15.4</b> Filter By Row</a></li>
-<li class="chapter" data-level="9.15.5" data-path="code-snippets.html"><a href="code-snippets.html#db-functions"><i class="fa fa-check"></i><b>9.15.5</b> DB Functions</a></li>
+<li class="chapter" data-level="9.15.1" data-path="code-snippets.html"><a href="code-snippets.html#geom_path"><i class="fa fa-check"></i><b>9.15.1</b> Geom_Path</a></li>
+<li class="chapter" data-level="9.15.2" data-path="code-snippets.html"><a href="code-snippets.html#theme-template"><i class="fa fa-check"></i><b>9.15.2</b> Theme Template</a></li>
+<li class="chapter" data-level="9.15.3" data-path="code-snippets.html"><a href="code-snippets.html#heatmap"><i class="fa fa-check"></i><b>9.15.3</b> Heatmap</a></li>
+<li class="chapter" data-level="9.15.4" data-path="code-snippets.html"><a href="code-snippets.html#calculate-accuracy"><i class="fa fa-check"></i><b>9.15.4</b> Calculate Accuracy</a></li>
+<li class="chapter" data-level="9.15.5" data-path="code-snippets.html"><a href="code-snippets.html#filter-by-row"><i class="fa fa-check"></i><b>9.15.5</b> Filter By Row</a></li>
+<li class="chapter" data-level="9.15.6" data-path="code-snippets.html"><a href="code-snippets.html#db-functions"><i class="fa fa-check"></i><b>9.15.6</b> DB Functions</a></li>
 </ul></li>
 <li class="chapter" data-level="9.16" data-path="code-snippets.html"><a href="code-snippets.html#bash"><i class="fa fa-check"></i><b>9.16</b> Bash</a></li>
 </ul></li>
@@ -351,6 +352,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="model" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Model</h1>
+<p><a href="http://ml-cheatsheet.readthedocs.io/en/latest/index.html" class="uri">http://ml-cheatsheet.readthedocs.io/en/latest/index.html</a></p>
 <div id="feature-selection" class="section level2">
 <h2><span class="header-section-number">7.1</span> Feature Selection</h2>
 <p>Just some to note.</p>
@@ -854,18 +856,14 @@ rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><
 </div>
 <div id="assumptions-8" class="section level3">
 <h3><span class="header-section-number">7.17.2</span> Assumptions</h3>
+<p>Secondly, the linear regression analysis requires all variables to be multivariate normal. This assumption can best be checked with a histogram or a Q-Q-Plot.</p>
 <ul>
-<li><p>Independent errors</p></li>
-<li><p>No multicollinearity</p></li>
+<li><p>Requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.</p></li>
+<li><p>The observations to be independent of each other. In other words, the observations should not come from repeated measurements or matched data.</p></li>
+<li><p>There to be little or no multicollinearity among the independent variables.</p></li>
+<li><p>Assumes linearity of independent variables and logit of the probabilities (logit(p) = log(p/(1-p))). Check <a href="https://stats.stackexchange.com/questions/169348/how-should-i-check-the-assumption-of-linearity-to-the-logit-for-the-continuous-i">in R</a>.</p></li>
+<li><p>There is no influential values (extreme values or outliers) in the continuous predictors</p></li>
 </ul>
-<p>(Generalized) Linear models make some strong assumptions concerning the data structure:</p>
-<p>Independance of each data points Correct distribution of the residuals Correct specification of the variance structure Linear relationship between the response and the linear predictor</p>
-<p>The logistic regression method assumes that:</p>
-<p>The outcome is a binary or dichotomous variable like yes vs no, positive vs negative, 1 vs 0.</p>
-<p>There is a linear relationship between the logit of the outcome and each predictor variables. Recall that the logit function is logit(p) = log(p/(1-p)), where p is the probabilities of the outcome (see Chapter <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(logistic-regression)).</p>
-<p>There is no influential values (extreme values or outliers) in the continuous predictors</p>
-<p>There is no high intercorrelations (i.e. multicollinearity) among the predictors.</p>
-<p>GLM does not assume a linear relationship between dependent and independent variables. However, it assumes a linear relationship between link function and independent variables in logit model. The dependent variable need not to be normally distributed. It does not uses OLS (Ordinary Least Square) for parameter estimation. Instead, it uses maximum likelihood estimation (MLE). Errors need to be independent but not normally distributed.</p>
 </div>
 <div id="evaluation-8" class="section level3">
 <h3><span class="header-section-number">7.17.3</span> Evaluation</h3>

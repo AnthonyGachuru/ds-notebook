@@ -182,6 +182,17 @@ plt.show()
 
 * ctrl + alt + R: run all chunks
 
+### Geom_Path
+
+```{r, eval=F}
+ggplot(ilo_data) +
+  geom_path(
+            aes(x = working_hours, y = country),
+            arrow = arrow(length = unit(1.5, "mm"), type = "closed")
+)
+```
+
+
 ### Theme Template
 
 ```{r, eval = F}

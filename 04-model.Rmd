@@ -1,5 +1,7 @@
 # Model
 
+http://ml-cheatsheet.readthedocs.io/en/latest/index.html
+
 ## Feature Selection
 
 Just some to note.
@@ -715,32 +717,17 @@ Standardization isn't required for logistic regression. The main goal of standar
 
 ### Assumptions
 
-* Independent errors
+Secondly, the linear regression analysis requires all variables to be multivariate normal.  This assumption can best be checked with a histogram or a Q-Q-Plot. 
 
-* No multicollinearity
+* Requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.
 
-(Generalized) Linear models make some strong assumptions concerning the data structure:
+* The observations to be independent of each other. In other words, the observations should not come from repeated measurements or matched data.
 
-Independance of each data points
-Correct distribution of the residuals
-Correct specification of the variance structure
-Linear relationship between the response and the linear predictor
+* There to be little or no multicollinearity among the independent variables.
 
-The logistic regression method assumes that:
+* Assumes linearity of independent variables and logit of the probabilities (logit(p) = log(p/(1-p))). Check [in R](https://stats.stackexchange.com/questions/169348/how-should-i-check-the-assumption-of-linearity-to-the-logit-for-the-continuous-i).
 
-The outcome is a binary or dichotomous variable like yes vs no, positive vs negative, 1 vs 0.
-
-There is a linear relationship between the logit of the outcome and each predictor variables. Recall that the logit function is logit(p) = log(p/(1-p)), where p is the probabilities of the outcome (see Chapter @ref(logistic-regression)).
-
-There is no influential values (extreme values or outliers) in the continuous predictors
-
-There is no high intercorrelations (i.e. multicollinearity) among the predictors.
-
-GLM does not assume a linear relationship between dependent and independent variables. However, it assumes a linear relationship between link function and independent variables in logit model.
- The dependent variable need not to be normally distributed.
-It does not uses OLS (Ordinary Least Square) for parameter estimation. Instead, it uses maximum likelihood estimation (MLE).
-Errors need to be independent but not normally distributed.
-
+* There is no influential values (extreme values or outliers) in the continuous predictors
 
 ### Evaluation
 
