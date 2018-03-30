@@ -141,6 +141,13 @@ a = [1, 2, 3]
 map(functools.partial(add, y=2), a)
 ```
 
+### Check CSV Encoding
+
+```{python, eval = F}
+with open("../input/kickstarter-projects/ks-projects-201801.csv", 'rb') as rawdata:
+    result = chardet.detect(rawdata.read(10000))
+```
+
 ### MNIST Example
 
 ```{python, eval = FALSE}
@@ -181,6 +188,13 @@ plt.show()
 * ctrl + shift + R: label sections
 
 * ctrl + alt + R: run all chunks
+
+### Extract Date
+
+```{r, eval = F}
+LessonStartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
+```
+
 
 ### Geom_Path
 

@@ -4379,6 +4379,15 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Check CSV Encoding}\label{check-csv-encoding}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(}\StringTok{"../input/kickstarter-projects/ks-projects-201801.csv"}\NormalTok{, }\StringTok{'rb'}\NormalTok{) }\ImportTok{as}\NormalTok{ rawdata:}
+\NormalTok{    result }\OperatorTok{=}\NormalTok{ chardet.detect(rawdata.read(}\DecValTok{10000}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{MNIST Example}\label{mnist-example}
 
 \begin{Shaded}
@@ -4419,6 +4428,14 @@ subsequently apply any numpy operation:
 \item
   ctrl + alt + R: run all chunks
 \end{itemize}
+
+\subsection{Extract Date}\label{extract-date}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LessonStartTime }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Geom\_Path}\label{geom_path}
 
