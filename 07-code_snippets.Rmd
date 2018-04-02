@@ -189,6 +189,29 @@ plt.show()
 
 * ctrl + alt + R: run all chunks
 
+## Custom Theme
+
+```{r}
+theme(
+     axis.text.y = element_text(angle = 65, vjust = 0.6),
+     axis.title.x = element_blank(),
+     panel.background = element_blank()
+     )
+```
+
+## Create Factor
+
+```{r}
+mons = factor(
+   c("August","September", "October","November",
+           "December", "January","February","March",
+               "April","May","June","July"),
+  levels = c("August","September", "October","November",
+           "December", "January","February","March",
+               "April","May","June","July"),
+  ordered = TRUE)
+```
+
 ### Extract Date
 
 ```{r, eval = F}
