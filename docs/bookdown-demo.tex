@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-03-29}
+  \date{2018-04-02}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -4429,6 +4429,33 @@ subsequently apply any numpy operation:
   ctrl + alt + R: run all chunks
 \end{itemize}
 
+\section{Custom Theme}\label{custom-theme}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{theme}\NormalTok{(}
+     \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{65}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{0.6}\NormalTok{),}
+     \DataTypeTok{axis.title.x =} \KeywordTok{element_blank}\NormalTok{(),}
+     \DataTypeTok{panel.background =} \KeywordTok{element_blank}\NormalTok{()}
+\NormalTok{     )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Create Factor}\label{create-factor}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mons =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}
+   \KeywordTok{c}\NormalTok{(}\StringTok{"August"}\NormalTok{,}\StringTok{"September"}\NormalTok{, }\StringTok{"October"}\NormalTok{,}\StringTok{"November"}\NormalTok{,}
+           \StringTok{"December"}\NormalTok{, }\StringTok{"January"}\NormalTok{,}\StringTok{"February"}\NormalTok{,}\StringTok{"March"}\NormalTok{,}
+               \StringTok{"April"}\NormalTok{,}\StringTok{"May"}\NormalTok{,}\StringTok{"June"}\NormalTok{,}\StringTok{"July"}\NormalTok{),}
+  \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"August"}\NormalTok{,}\StringTok{"September"}\NormalTok{, }\StringTok{"October"}\NormalTok{,}\StringTok{"November"}\NormalTok{,}
+           \StringTok{"December"}\NormalTok{, }\StringTok{"January"}\NormalTok{,}\StringTok{"February"}\NormalTok{,}\StringTok{"March"}\NormalTok{,}
+               \StringTok{"April"}\NormalTok{,}\StringTok{"May"}\NormalTok{,}\StringTok{"June"}\NormalTok{,}\StringTok{"July"}\NormalTok{),}
+  \DataTypeTok{ordered =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Extract Date}\label{extract-date}
 
 \begin{Shaded}
@@ -4494,6 +4521,15 @@ subsequently apply any numpy operation:
   \KeywordTok{return}\NormalTok{(results)}
 
 \NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Replace NA}\label{replace-na}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{replace_na}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{x =} \DecValTok{0}\NormalTok{, }\DataTypeTok{y =} \StringTok{"unknown"}\NormalTok{))}
+\NormalTok{df2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{replace}\NormalTok{(., }\KeywordTok{is.na}\NormalTok{(.), }\StringTok{""}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

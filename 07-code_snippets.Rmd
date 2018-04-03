@@ -191,7 +191,7 @@ plt.show()
 
 ## Custom Theme
 
-```{r}
+```{r, eval=F}
 theme(
      axis.text.y = element_text(angle = 65, vjust = 0.6),
      axis.title.x = element_blank(),
@@ -201,7 +201,7 @@ theme(
 
 ## Create Factor
 
-```{r}
+```{r, eval=F}
 mons = factor(
    c("August","September", "October","November",
            "December", "January","February","March",
@@ -271,6 +271,13 @@ calc_accuracy <- function(labels, preds){
   return(results)
 
 }
+```
+
+### Replace NA
+
+```{r, eval=F}
+df %>% replace_na(list(x = 0, y = "unknown"))
+df2 %>% replace(., is.na(.), "")
 ```
 
 ### Filter By Row
