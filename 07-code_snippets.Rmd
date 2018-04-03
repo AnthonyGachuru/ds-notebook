@@ -300,6 +300,12 @@ dbExistsTable(con, "iris")
 dbRemoveTable(con, "iris")
 ```
 
+## Knitr
+
+```{r, eval = F}
+knitr::include_graphics(rep("./assets/ml_trading/portfolio.png", 3))
+```
+
 ## Bash
 
 script to do joining of dummied csvs
