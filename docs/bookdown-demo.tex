@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-04-02}
+  \date{2018-04-07}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -4427,7 +4427,19 @@ subsequently apply any numpy operation:
   ctrl + shift + R: label sections
 \item
   ctrl + alt + R: run all chunks
+\item
+  df\_print: kable in yaml rmrkdown header
 \end{itemize}
+
+\section{Shiny Reactive}\label{shiny-reactive}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_labeled =}\StringTok{ }\KeywordTok{eventReactive}\NormalTok{(\{}\KeywordTok{c}\NormalTok{(input}\OperatorTok{$}\NormalTok{good, input}\OperatorTok{$}\NormalTok{bad)\}, \{    }
+\NormalTok{    df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{==}\StringTok{ }\NormalTok{input}\OperatorTok{$}\NormalTok{value)}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Custom Theme}\label{custom-theme}
 
