@@ -4,6 +4,8 @@
 
 * https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/
 
+* np.dot = np.multiply %>% np.sum
+
 * flatten dict
 
     * pd.io.json.json_normalize(stuff)
@@ -174,6 +176,8 @@ plt.show()
 ## R
 
 * ctrl + shift + a: reformat code in rstudio
+
+* rowwise in R: purrr::pmap
 
 * studio multiple cursors, snippets,  addins
 
