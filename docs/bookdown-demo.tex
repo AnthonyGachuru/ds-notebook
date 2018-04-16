@@ -24,8 +24,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={A Minimal Book Example},
-            pdfauthor={Yihui Xie},
+            pdftitle={Data Science Cribsheeet},
+            pdfauthor={Gordon Fleetwood},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -116,15 +116,14 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{A Minimal Book Example}
+  \title{Data Science Cribsheeet}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Yihui Xie}
+  \author{Gordon Fleetwood}
   \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
-  \postdate{\par}
-  \date{2018-04-14}
+  \date{}
+  \predate{}\postdate{}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -156,32 +155,9 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter{Prerequisites}\label{prerequisites}
-
-This is a \emph{sample} book written in \textbf{Markdown}. You can use
-anything that Pandoc's Markdown supports, e.g., a math equation
-\(a^2 + b^2 = c^2\).
-
-The \textbf{bookdown} package can be installed from CRAN or Github:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# or the development version}
-\CommentTok{# devtools::install_github("rstudio/bookdown")}
-\end{Highlighting}
-\end{Shaded}
-
-Remember each Rmd file contains one and only one chapter, and a chapter
-is defined by the first-level heading \texttt{\#}.
-
-To compile this example to PDF, you need XeLaTeX. You are recommended to
-install TinyTeX (which includes XeLaTeX):
-\url{https://yihui.name/tinytex/}.
-
 \chapter{Workflow}\label{workflow}
 
-\chapter{Preamble}\label{preamble}
+\section{Preamble}\label{preamble}
 
 A typical data science workflow can be framed as following these 7
 steps:
@@ -229,9 +205,9 @@ cribsheets, and libraries or packages to use not included in the Stack
 can be found on this
 \href{https://gfleetwood.github.io/noted-resources/data_science.html}{page}.
 
-\chapter{Annotated Checklist}\label{annotated-checklist}
+\section{Annotated Checklist}\label{annotated-checklist}
 
-\section{Preparation}\label{preparation}
+\subsection{Preparation}\label{preparation}
 
 \begin{itemize}
 \item
@@ -250,7 +226,7 @@ can be found on this
   Remember to use atomic commit messages
 \end{itemize}
 
-\section{Import}\label{import}
+\subsection{Import}\label{import}
 
 \begin{itemize}
 \item
@@ -272,7 +248,7 @@ can be found on this
   Management}
 \end{itemize}
 
-\section{Tidy}\label{tidy}
+\subsection{Tidy}\label{tidy}
 
 \begin{itemize}
 \item
@@ -308,7 +284,7 @@ can be found on this
   \end{itemize}
 \end{itemize}
 
-\section{uTransform}\label{utransform}
+\subsection{uTransform}\label{utransform}
 
 \begin{itemize}
 \item
@@ -354,7 +330,7 @@ can be found on this
   Stats}
 \end{itemize}
 
-\section{uVisualize}\label{uvisualize}
+\subsection{uVisualize}\label{uvisualize}
 
 \begin{itemize}
 \item
@@ -374,7 +350,7 @@ can be found on this
   dimensional structure.
 \end{itemize}
 
-\section{uModel}\label{umodel}
+\subsection{uModel}\label{umodel}
 
 \begin{itemize}
 \tightlist
@@ -505,7 +481,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   \end{itemize}
 \end{itemize}
 
-\section{Communicate}\label{communicate}
+\subsection{Communicate}\label{communicate}
 
 \begin{itemize}
 \tightlist
@@ -513,7 +489,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   Usually an R Markdown document.
 \end{itemize}
 
-\section{Deployment / Maintenance}\label{deployment-maintenance}
+\subsection{Deployment / Maintenance}\label{deployment-maintenance}
 
 \begin{itemize}
 \tightlist
