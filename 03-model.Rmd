@@ -8,6 +8,18 @@ multi-level / mixed effects / fixed effects model
 
 https://www.listendata.com/2018/03/regression-analysis.html
 
+## Feature Engineering
+
+Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
+
+```{python, eval = FALSE}
+import numpy as np
+df['hr_sin'] = np.sin(df.hr*(2.*np.pi/24))
+df['hr_cos'] = np.cos(df.hr*(2.*np.pi/24))
+df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
+df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
+```
+
 ## Feature Selection
 
 Just some to note.
@@ -31,18 +43,6 @@ Just some to note.
 * Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply "cap" or "clip" the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
 
 * Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).
-
-## Feature Engineering
-
-Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
-
-```{python, eval = FALSE}
-import numpy as np
-df['hr_sin'] = np.sin(df.hr*(2.*np.pi/24))
-df['hr_cos'] = np.cos(df.hr*(2.*np.pi/24))
-df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
-df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
-```
 
 ## Model Selection
 
@@ -502,13 +502,137 @@ Kernel PCA must project data into a higher dimensional space than that of the or
 
 ## Linear Regression
 
-If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.
-
 ### Intro
+
+The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant.
+
+Forward Stepwise Selection is a Greedy Algorithm because at each step it selects the variable that improves the current model the most. There is no guarantee that the final result will be optimal.
+
+Linear: When you’re predicting a continuous value. 
+
+Increasing x1 by 1 means you are increasing the underlying X1 by 1 standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1 is the effect on y of increasing X1 by 1 sigma.
+
+In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. 
+
+When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
+
+In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
+
+The fitted regression line using a sample of data gives imperfect predictions for future observations due to sampling variability and randomness in Y that is not related to X.
+
+Use Box-Cox transformations when predictions are skewed
+
+Got it: Linear Correlation => Causation if covariates respect: linearity normality indep homoscedasticity + all confounders in model
+
+In summary, "pooling" your data and fitting one combined regression function allows you to easily and efficiently answer research questions concerning the binary predictor variable.
+
+If two independent variables are measured in exactly the same units, we can asses their relative importance in their effect on y quite simply: the larger the coefficient, the stronger the effect.
+
+Okay, so many of the features are strongly correlated. We can make use of this in our model by including polynomial features (e.g. PolynomialFeatures(degree=2) from scikit-learn). Adding these brings our validation loss down to 0.69256 (-0.05% from baseline).
+
+We prefer natural logs (that is, logarithms base e) because, as described above, coefficients on the natural-log scale are directly interpretable as approximate proportional differences: with a coefficient of 0.06, a difference of 1 in x corresponds to an approximate 6% difference in y, and so forth.
+
+RSS: The sum of the squared error terms for each observation in our dataset.
+
+R.S.E: The standard deviation of the residuals about the regression surface. Estimate of sigma.
+
+AIC, BIC, forward & backwards selection
+
+Transformations: Can remedy assumption violations and strengthen linear relationships between variables, but can lead to overfitting and less interpretability.
+
+square root correction: Take square root of x variable(s).
+
+log transformation: Take log of y.
+
+General thumb: powers > 1 for skewed left data, powers < 1 for data skewed right.
+
+Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize the fit of the transformed variable to a normal distribution. Does not guarantee normality since it minimizes standard deviation. Can only be used on positive values. Use on negative values by shifting by a constant value.
+
+TSS: A measure of the total squared deviation of our response variable from its mean value.
+
+R-squared = 1 – RSS/TSS.
+
 
 ### Assumptions
 
+The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]
+
+Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.
+
+A linear regression model is only as good as the validity of its assumptions, which can be summarized as follows:
+
+Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem.
+
+Non-correlation of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model.
+
+Homoscedasticity: Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.
+
+No collinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates.
+
+Presence of outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.
+
+Assumes one can fit a hyperplane to the data. Link function is the identity.
+
+Assumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
+
+Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.
+
+Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
+
+F-test & partial f-testr for simple and multiple linear regression.
+
+Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
+
+Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
+
+Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.
+
+Independent Errors: The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated.  Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.
+
+No Multicollinearity: For multiple linear regression. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables.
+
+[Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
+
+Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model
+
 ### Evaluation
+
+Model Plot Notes:
+
+Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
+
+For simple linear regression, the principal hypothesis test is as follows:
+
+Null Hypothesis (H_0 ): ? 1 = 0
+
+Alternative Hypothesis (H A ): ? 1 ≠ 0
+
+What would it mean if the null hypothesis were true? We would expect that the population mean of Y would be ? 0 no matter what
+the value of X. In other words, this would mean that X has no effect on Y! What would it mean if the null hypothesis were false? We would expect that Y would vary with different values of X. In other words, this would mean that X does have an effect on Y.
+
+F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1. 
+
+Type 1 Error: Accept ha when h0 is true.
+
+A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and penalizes complexity. Favor A.I.C for prediction (n increases results in increase in accuracy) and B.I.C for descriptive power (penalty term more stringest and favors a parsimonious model)
+
+NB: R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.
+
+compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
+
+**Shapiro-Wilk Test for Normality**
+
+H0: The data is normally distributed. HA: The data is not normally distributed. To run this test in R, the syntax is quite simple:
+
+```{r, eval = FALSE}
+set.seed(0)
+
+data = rnorm(100) # Generating data from a standard normal distribution.
+shapiro.test(data) # P-value insignificant; retain H0, conclude data is normally distributed.
+
+# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
+qqnorm(normal.data) + qqline(normal.data)
+```
 
 ### Pros/Cons
 
@@ -526,150 +650,13 @@ If there is an ascending or descending order to your dependent variable, ordinal
 
 * Unable to capture nonlinear relationships without first transforming the inputs
 
-Linear: When you’re predicting a continuous value. (What temperature will it be today?)
+### Other
 
-https://en.wikipedia.org/wiki/Newey–West_estimator
+* https://en.wikipedia.org/wiki/Quantile_regression
 
-box cox
+* If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.
 
-[Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
-
-https://en.wikipedia.org/wiki/Quantile_regression
-
-Increasing x1 by 1 means you are increasing the underlying X1 by 1 standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1 is the effect on y of increasing X1 by 1 sigma.
-
-In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. 
-
-When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
-
-In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
-
-The fitted regression line using a sample of data gives imperfect predictions for future observations due to sampling variability and randomness in Y that is not related to X.
-
-For simple linear regression, the principal hypothesis test is as follows:
-
-Null Hypothesis (H 0 ): ? 1 = 0
-
-Alternative Hypothesis (H A ): ? 1 ≠ 0
-
-What would it mean if the null hypothesis were true?
-
-We would expect that the population mean of Y would be ? 0 no matter what
-the value of X.
-
-In other words, this would mean that X has no effect on Y!
-
-What would it mean if the null hypothesis were false?
-
-We would expect that Y would vary with different values of X.
-
-In other words, this would mean that X does have an effect on Y.
-
-We prefer natural logs (that is, logarithms base e) because, as described above, coefficients on the natural-log scale are directly interpretable as approximate proportional differences: with a coefficient of 0.06, a difference of 1 in x corresponds to an approximate 6% difference in y, and so forth.
-
-The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the
-assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]
-
-Use Box-Cox transformations when predictions are skewed
-
-regression discontinuity
-
-Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.
-
-Got it: Linear Correlation => Causation if covariates respect: linearity normality indep homoscedasticity + all confounders in model
-
-leaps lm package r +  Breusch-Pagan (BP) test lmtest package
-
-In summary, "pooling" your data and fitting one combined regression function allows you to easily and efficiently answer research questions concerning the binary predictor variable.
-
-If two independent variables are measured in exactly the same units, we can asses their relative importance in their effect on y quite simply: the larger the coefficient, the stronger the effect.
-
-Okay, so many of the features are strongly correlated. We can make use of this in our model by including polynomial features (e.g. PolynomialFeatures(degree=2) from scikit-learn). Adding these brings our validation loss down to 0.69256 (-0.05% from baseline).
-
-A linear regression model is only as good as the validity of its assumptions, which can be summarized as follows:
-
-Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem.
-
-Non-correlation of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model.
-
-Homoscedasticity: Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.
-
-No collinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates.
-
-Presence of outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.
-
-Assumes one can fit a hyperplane to the data. Link function is the identity.
-
-RSS: The sum of the squared error terms for each observation in our dataset.
-
-R.S.E: The standard deviation of the residuals about the regression surface. Estimate of sigma.
-
-ssumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
-
-Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.
-
-Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
-
-F-test & partial f-testr for simple and multiple linear regression.
-
-AIC,BIC, forward & backwards selection
-
-Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
-
-Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
-
-Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.
-
-Independent Errors: The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated.  Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.
-
-No Multicollinearity: For multiple linear regression. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables.
-
-Transformations: Can remedy assumption violations and strengthen linear relationships between variables, but can lead to overfitting and less interpretability.
-
-square root correction: Take square root of x variable(s).
-
-log transformation: Take log of y.
-
-General thumb: powers > 1 for skewed left data, powers < 1 for data skewed right.
-
-Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize the fit of the transformed variable to a normal distribution. Does not guarantee normality since it minimizes standard deviation. Can only be used on positive values. Use on negative values by shifting by a constant value.
-
-TSS: A measure of the total squared deviation of our response variable from its mean value.
-
-R-squared = 1 – RSS/TSS.
-
-F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1. 
-
-Type 1 Error: Accept ha when h0 is true.
-
-A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and penalizes complexity. Favor A.I.C for prediction (n increases results in increase in accuracy) and B.I.C for descriptive power (penalty term more stringest and favors a parsimonious model).
-
-Stepwise Procedures: Forward, backward (sklearn.feature_selection.RFE in Python)
-
-Forward Stepwise Selection is a Greedy Algorithm because at each step it selects the variable that improves the current model the most. There is no guarantee that the final result will be optimal.
-
-NB: R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.
-
-NB: Pairwise Interactions, glm scales and centers data, 
-
-The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant.
-
-Shapiro-Wilk Test for Normality
-
-H0: The data is normally distributed. HA: The data is not normally distributed.
-To run this test in R, the syntax is quite simple:
-set.seed(0)
-data = rnorm(100) #Generating data from a standard normal distribution.
-shapiro.test(data) #P-value insignificant; retain H0, conclude data is normally distributed.
-Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
-qqnorm(normal.data) + qqline(normal.data)
-Model Plot Notes:
-
-Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
-
-compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
-
-### Code Examples
+* leaps lm package r is a greedy way to find the best predictors by cycling through all the combinations.
 
 ```{python, eval = FALSE}
 import statsmodels.api as sm
