@@ -88,77 +88,55 @@ TSS: A measure of the total squared deviation of our response variable from its 
 
 R-squared = 1 – RSS/TSS.
 
-
 ### Assumptions
 
 The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]
 
 Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.
 
-A linear regression model is only as good as the validity of its assumptions, which can be summarized as follows:
+A linear regression model is only as good as the validity of its assumptions, which can be summarized as: $y = b_0+b_1x + \epsilon$, $\epsilon$ is i.i.d from N(0, $\sigma$). More verbosely:
 
-Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem.
+* Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem. Check with a scatterplot.
 
-Non-correlation of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model.
+* Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.
 
-Homoscedasticity: Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.
+* Non-correlation or independence of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model. The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated.  Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.
 
-No collinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates.
+* Homoscedasticity (constant variance): Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.  The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
 
-Presence of outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.
+* No multi-colinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables. Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
 
-Assumes one can fit a hyperplane to the data. Link function is the identity.
+* Minimal outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.
 
-Assumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
-
-Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.
-
-Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. >=5 is bad.
-
-F-test & partial f-testr for simple and multiple linear regression.
-
-Linearity:  The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.
-
-Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.
-
-Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.
-
-Independent Errors: The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated.  Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.
-
-No Multicollinearity: For multiple linear regression. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables.
-
-[Regression Diagnostics](http://www.statmethods.net/stats/rdiagnostics.html)
-
-Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model
+A practical [summary](http://www.statmethods.net/stats/rdiagnostics.html) using R. 
 
 ### Evaluation
 
+Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model
+
 Model Plot Notes:
 
-Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. 
+Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test & partial f-testr for simple and multiple linear regression. 
 
 For simple linear regression, the principal hypothesis test is as follows:
 
-Null Hypothesis (H_0 ): ? 1 = 0
+* H_0 : ? 1 = 0
 
-Alternative Hypothesis (H A ): ? 1 ≠ 0
+* H_A: ? 1 ≠ 0
 
-What would it mean if the null hypothesis were true? We would expect that the population mean of Y would be ? 0 no matter what
-the value of X. In other words, this would mean that X has no effect on Y! What would it mean if the null hypothesis were false? We would expect that Y would vary with different values of X. In other words, this would mean that X does have an effect on Y.
+If H_0 is true then the population mean of Y would be ? 0 no matter what the value of X. (X has no effect on Y.) 
 
-F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1. 
+F-Test: H_0 says that all/some coefficients are zero versus H_a which says that there is at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1. 
 
 Type 1 Error: Accept ha when h0 is true.
 
 A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and penalizes complexity. Favor A.I.C for prediction (n increases results in increase in accuracy) and B.I.C for descriptive power (penalty term more stringest and favors a parsimonious model)
 
-NB: R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.
+R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.
 
-compare rmse to sd of data for sense of how good it is (rsme < sd good and vice versa)
+* Compare rmse to sd of data for sense of how good it is. (If rsme < sd then good.)
 
-**Shapiro-Wilk Test for Normality**
-
-H0: The data is normally distributed. HA: The data is not normally distributed. To run this test in R, the syntax is quite simple:
+* Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
 
 ```{r, eval = FALSE}
 set.seed(0)
@@ -188,7 +166,7 @@ qqnorm(normal.data) + qqline(normal.data)
 
 ### Other
 
-* https://en.wikipedia.org/wiki/Quantile_regression
+* [Quantile regression](https://en.wikipedia.org/wiki/Quantile_regression) is an alternative for quantiles.
 
 * If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.
 
