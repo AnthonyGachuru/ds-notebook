@@ -1,6 +1,18 @@
+--- 
+title: "Data Science Cribsheeet"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "A collection of quick notes on the field."
+---
+
 # Workflow 
 
-# Preamble
+## Preamble
 
 A typical data science workflow can be framed as following these 7 steps:
 
@@ -30,9 +42,9 @@ Another note is that one way to structure projects is to write user stories a la
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
-# Annotated Checklist
+## Annotated Checklist
 
-## Preparation
+### Preparation
 
 * Understand the business question, goals, and measures of success
 
@@ -46,7 +58,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Remember to use atomic commit messages
 
-## Import
+### Import
 
 * Sampling from data if its too large
     * [subsample package](https://pypi.python.org/pypi/subsample) in Python
@@ -56,7 +68,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
 
-## Tidy
+### Tidy
 
 * [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf)
     * widyr | tidyr | dplyr | purrr
@@ -71,7 +83,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
     * scipy.stats.describe()
     * Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
 
-## uTransform
+### uTransform
 
 * Imputation: Mean | KNN | Random | Regression | Mode
     * [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
@@ -93,7 +105,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
 
-## uVisualize
+### uVisualize
 
 * Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
 
@@ -107,7 +119,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
 
-## uModel
+### uModel
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
@@ -162,11 +174,11 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 * Look at learning curves
     * https://www.dataquest.io/blog/learning-curves-machine-learning/
 
-## Communicate
+### Communicate
 
 * Usually an R Markdown document.
 
-## Deployment /  Maintenance
+### Deployment /  Maintenance
 
 * Write tests
     * [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
@@ -179,8 +191,3 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
     * [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
 
 * Write helper functions.
-
-
-
-
-

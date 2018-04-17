@@ -25,7 +25,6 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Data Science Cribsheeet},
-            pdfauthor={Gordon Fleetwood},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -119,9 +118,8 @@
   \title{Data Science Cribsheeet}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Gordon Fleetwood}
-  \preauthor{\centering\large\emph}
-  \postauthor{\par}
+  \author{}
+  \preauthor{}\postauthor{}
   \date{}
   \predate{}\postdate{}
 
@@ -818,19 +816,36 @@ Some types:
 
 \chapter{Model}\label{model}
 
-\url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
+\section{Pre-processing}\label{pre-processing}
 
-For example, multilevel models themselves may be referred to as
-hierarchical linear models, random effects models, multilevel models,
-random intercept models, random slope models, or pooling models.
+\section{Feature Engineering}\label{feature-engineering}
 
-multi-level / mixed effects / fixed effects model
+\begin{itemize}
+\tightlist
+\item
+  Dealing with cyclical features: Hours of the day, days of the week,
+  months in a year, and wind direction are all examples of features that
+  are cyclical. Many new machine learning engineers don't think to
+  convert these features into a representation that can preserve
+  information such as hour 23 and hour 0 being close to each other and
+  not far. Keeping with the hour example, the best way to handle this is
+  to calculate the sin and cos component so that you represent your
+  cyclical feature as (x,y) coordinates of a circle. In this
+  representation hour, 23 and hour 0 are right next to each other
+  numerically, just as they should be.
+\end{itemize}
 
-\url{https://www.listendata.com/2018/03/regression-analysis.html}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{df[}\StringTok{'hr_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin(df.hr}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
+\NormalTok{df[}\StringTok{'hr_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos(df.hr}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
+\NormalTok{df[}\StringTok{'mnth_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin((df.mnth}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
+\NormalTok{df[}\StringTok{'mnth_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos((df.mnth}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Feature Selection}\label{feature-selection}
-
-Just some to note.
 
 \begin{itemize}
 \item
@@ -881,552 +896,542 @@ Just some to note.
   dashboards).
 \end{itemize}
 
-\section{Feature Engineering}\label{feature-engineering}
+\section{Linear Regression}\label{linear-regression}
 
-Dealing with cyclical features: Hours of the day, days of the week,
-months in a year, and wind direction are all examples of features that
-are cyclical. Many new machine learning engineers don't think to convert
-these features into a representation that can preserve information such
-as hour 23 and hour 0 being close to each other and not far. Keeping
-with the hour example, the best way to handle this is to calculate the
-sin and cos component so that you represent your cyclical feature as
-(x,y) coordinates of a circle. In this representation hour, 23 and hour
-0 are right next to each other numerically, just as they should be.
+\subsection{Intro}\label{intro}
+
+The standard least squares coefficient estimates are scale equivariant:
+if we multiply a predictor variable by a constant, the corresponding
+least squares coefficient estimate will be scaled down by the same
+constant.
+
+Forward Stepwise Selection is a Greedy Algorithm because at each step it
+selects the variable that improves the current model the most. There is
+no guarantee that the final result will be optimal.
+
+Linear: When you're predicting a continuous value.
+
+Increasing x1 by 1 means you are increasing the underlying X1 by 1
+standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1
+is the effect on y of increasing X1 by 1 sigma.
+
+In regression, it is often recommended to center the variables so that
+the predictors have mean 0. This makes it so the intercept term is
+interpreted as the expected value of Y\_i when the predictor values are
+set to their means. Otherwise, the intercept is interpreted as the
+expected value of Y\_i when the predictors are set to 0, which may not
+be a realistic or interpretable situation.
+
+When p \textgreater{} n, we can no longer calculate a unique least
+square coefficient estimate, the variances become infinite, so OLS
+cannot be used at all.
+
+In presence of few variables with medium / large sized effect, use lasso
+regression. In presence of many variables with small / medium sized
+effect, use ridge regression.
+
+The fitted regression line using a sample of data gives imperfect
+predictions for future observations due to sampling variability and
+randomness in Y that is not related to X.
+
+Use Box-Cox transformations when predictions are skewed
+
+Got it: Linear Correlation =\textgreater{} Causation if covariates
+respect: linearity normality indep homoscedasticity + all confounders in
+model
+
+In summary, ``pooling'' your data and fitting one combined regression
+function allows you to easily and efficiently answer research questions
+concerning the binary predictor variable.
+
+If two independent variables are measured in exactly the same units, we
+can asses their relative importance in their effect on y quite simply:
+the larger the coefficient, the stronger the effect.
+
+Okay, so many of the features are strongly correlated. We can make use
+of this in our model by including polynomial features
+(e.g.~PolynomialFeatures(degree=2) from scikit-learn). Adding these
+brings our validation loss down to 0.69256 (-0.05\% from baseline).
+
+We prefer natural logs (that is, logarithms base e) because, as
+described above, coefficients on the natural-log scale are directly
+interpretable as approximate proportional differences: with a
+coefficient of 0.06, a difference of 1 in x corresponds to an
+approximate 6\% difference in y, and so forth.
+
+RSS: The sum of the squared error terms for each observation in our
+dataset.
+
+R.S.E: The standard deviation of the residuals about the regression
+surface. Estimate of sigma.
+
+AIC, BIC, forward \& backwards selection
+
+Transformations: Can remedy assumption violations and strengthen linear
+relationships between variables, but can lead to overfitting and less
+interpretability.
+
+square root correction: Take square root of x variable(s).
+
+log transformation: Take log of y.
+
+General thumb: powers \textgreater{} 1 for skewed left data, powers
+\textless{} 1 for data skewed right.
+
+Box-Cox: Iterates along values of lambda by maximum likelihood so as to
+maximize the fit of the transformed variable to a normal distribution.
+Does not guarantee normality since it minimizes standard deviation. Can
+only be used on positive values. Use on negative values by shifting by a
+constant value.
+
+TSS: A measure of the total squared deviation of our response variable
+from its mean value.
+
+R-squared = 1 -- RSS/TSS.
+
+\subsection{Assumptions}\label{assumptions}
+
+The regression assumption that is generally least important is that the
+errors are normally distributed. In fact, for the purpose of estimating
+the regression line (as compared to predicting individual data points),
+the assumption of normality is barely important at all. Thus, in
+contrast to many regression textbooks, we do not recommend diagnostics
+of the normality of regression residuals. {[}Gelman{]}
+
+Linear regression errors are not autocorrelated. The Durbin-Watson
+statistic detects this; if it is close to 2, there is no
+autocorrelation.
+
+A linear regression model is only as good as the validity of its
+assumptions, which can be summarized as follows:
+
+Linearity: This is a linear relationship between the predictor and the
+response variables. If this relationship is not clearly present,
+transformations (log, polynomial, exponent and so on) of the X or Y may
+solve the problem.
+
+Non-correlation of errors: A common problem in the time series and panel
+data where en = betan-1; if the errors are correlated, you run the risk
+of creating a poorly specified model.
+
+Homoscedasticity: Normally the distributed and constant variance of
+errors, which means that the variance of the errors is constant across
+the different values of inputs. Violations of this assumption can create
+biased coefficient estimates, leading to statistical tests for
+significance that can be either too high or too low. This, in turn,
+leads to the wrong conclusion. This violation is referred to as
+heteroscedasticity.
+
+No collinearity: No linear relationship between two predictor variables,
+which is to say that there should be no correlation between the
+features. This, again, can lead to biased estimates.
+
+Presence of outliers: Outliers can severely skew the estimation and,
+ideally, must be removed prior to fitting a model using linear
+regression; this again can lead to a biased estimate.
+
+Assumes one can fit a hyperplane to the data. Link function is the
+identity.
+
+Assumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
+
+Multiple Linear Reg: Additional assumption of little to no
+multicollinearity between predictor variables.
+
+Variance Inflation Factor: MEasures how the model facotrs influence hte
+uncertainity of coefficient estimates. \textgreater{}=5 is bad.
+
+F-test \& partial f-testr for simple and multiple linear regression.
+
+Linearity: The underlying function connecting the independent variable
+to the dependent variable is indeed linear. Check with a scatterplot.
+
+Constant Variance / homoscedasticity: The error terms have the same
+variance. Check the residual plot which is a scatterplot of the
+residuals vs the fitted values.
+
+Normality: The error terms are drawn from an identical Gaussian
+distribution, i.e a normal distribution of the dependent variable for
+each value of the independent variable. Inspect the quantile-quantile
+plot of the residuals. Also Shapiro-Wilk Test for Normality.
+
+Independent Errors: The residual value for an arbitrary observation is
+not predictable from knowledge of another observation's residual value;
+they are uncorrelated. Inspect the residual plot after fitting the
+regression. Ideally, there would be no clear pattern in the fluctuation
+of the error terms.
+
+No Multicollinearity: For multiple linear regression. If not coefficient
+estimates could be unstable, introduce redundancies within predictors,
+and make it more difficult to make inferences. Could inflate standard
+errors, decrease power and reliability of regression coefficients, and
+create need for a larger sample size. Check the variance inflation
+factors. Tells the factor by which the estimated variance of a variable
+is larger in comparison ti it it were completely uncorrelated with other
+variables in the model. If the VIF is more than five then the variable
+is a candidate to remove from the model. Its information is contained in
+the other variables.
+
+\href{http://www.statmethods.net/stats/rdiagnostics.html}{Regression
+Diagnostics}
+
+Breusch-Pagan (BP) test lmtest package: is used to test for
+heteroskedasticity in a linear regression model
+
+\subsection{Evaluation}\label{evaluation}
+
+Model Plot Notes:
+
+Outliers are observations that have high residual values. Leverage
+points are observations that have unusually small or large independent
+variable values. Cook's distance helps to measure the effect of deleting
+an observation from the \#dataset and rerunning the regression.
+Observations that have large residual values and also high leverage tend
+to pose threats to the accuracy of the regression line and thus need to
+be further investigated. Look at influence plot. Confidence and
+prediction intervals. For avplot distinct patterns are indications of
+good contributions. Influence plot to look at hat values (lower is
+better). Use F-test to compare models.
+
+For simple linear regression, the principal hypothesis test is as
+follows:
+
+Null Hypothesis (H\_0 ): ? 1 = 0
+
+Alternative Hypothesis (H A ): ? 1 ≠ 0
+
+What would it mean if the null hypothesis were true? We would expect
+that the population mean of Y would be ? 0 no matter what the value of
+X. In other words, this would mean that X has no effect on Y! What would
+it mean if the null hypothesis were false? We would expect that Y would
+vary with different values of X. In other words, this would mean that X
+does have an effect on Y.
+
+F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero
+coefficient. If h0 fail to reject than F value close to 1, else F value
+greater than 1.
+
+Type 1 Error: Accept ha when h0 is true.
+
+A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and
+penalizes complexity. Favor A.I.C for prediction (n increases results in
+increase in accuracy) and B.I.C for descriptive power (penalty term more
+stringest and favors a parsimonious model)
+
+NB: R-squared increases whenever a predictor is added, and it doesn't
+take model complexity into consideration which makes it prone to
+overfitting. Use adjusted R-squared instead. Additional predictors only
+make this increase is they are statistically significant. It's easy to
+show that given no other data for a set of numbers, the predictor that
+minimises the MAE is the median, while the predictor that minimises the
+MSE is the mean.
+
+compare rmse to sd of data for sense of how good it is (rsme \textless{}
+sd good and vice versa)
+
+\textbf{Shapiro-Wilk Test for Normality}
+
+H0: The data is normally distributed. HA: The data is not normally
+distributed. To run this test in R, the syntax is quite simple:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{df[}\StringTok{'hr_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin(df.hr}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'hr_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos(df.hr}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin((df.mnth}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos((df.mnth}\OperatorTok{-}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\DecValTok{2}\NormalTok{.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+
+\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
+\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
+
+\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
+\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Model Selection}\label{model-selection}
+\subsection{Pros/Cons}\label{proscons}
+
+\textbf{Pros}
 
 \begin{itemize}
 \item
-  \url{http://hunch.net/?p=224}
+  Very fast (runs in constant time)
 \item
-  However, the problem with cross-validation is that it is rarely
-  applicable to real world problems, for all the reasons described in
-  the above sections. Cross-validation only works in the same cases
-  where you can randomly shuffle your data to choose a validation set.
+  Easy to understand the model
 \item
-  If the performance of a classification model on the test set
-  (out-of-sample) error is poor, you can't just re-calibrate your model
-  parameters to achieve a better model. This is cheating.
-\item
-  When the classes are well-separated, the parameter estimates for the
-  logistic regression model are surprisingly unstable. Linear
-  discriminant analysis does not suffer from this problem. If n is small
-  and the distribution of the predictors X is approximately normal in
-  each of the classes, the linear discriminant model is again more
-  stable than the logistic regression model.
-\item
-  Roughly speaking, LDA tends to be a better bet than QDA if there are
-  relatively few training observations and so reducing variance is
-  crucial. In contrast, QDA is recommended if the training set is very
-  large, so that the variance of the classifier is not a major concern,
-  or if the assumption of a common covariance matrix for the K classes
-  is clearly untenable.
-\item
-  Two features interact if the effect on the prediction of one feature
-  depends on the value of the other feature
-\item
-  ``No Free Lunch'' theorem: no single classifier works best across all
-  possible scenarios
-\item
-  Warning PolynomialFeatures(degree=d) transforms an array containing n
-  features into an array containing features, where n! is the factorial
-  of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial
-  explosion of the number of features!
-\item
-  If a model suffers from overfitting, we also say that the model has a
-  high variance, which can be caused by having too many parameters that
-  lead to a model that is too complex given the underlying data.
-  Similarly, our model can also suffer from underfitting (high bias),
-  which means that our model is not complex enough to capture the
-  pattern in the training data well and therefore also suffers from low
-  performance on unseen data.
-\item
-  It appears that each feature has modestly improved our model. There
-  are certainly more features that we could add to our model. For
-  example, we could add the day of the week and the hour of the posting,
-  we could determine if the article is a listicle by running a regex on
-  the headline, or we could examine the sentiment of each article. This
-  only begins to touch on the features that could be important to model
-  virality. We would certainly need to go much further to continue
-  reducing the error in our model.
-\item
-  Suppose Fixitol reduces symptoms by 20\% over a placebo, but the trial
-  you're using to test it is too small to have adequate statistical
-  power to detect this difference reliably. We know that small trials
-  tend to have varying results; it's easy to get 10 lucky patients who
-  have shorter colds than usual but much harder to get 10,000 who all
-  do.
-\item
-  As I mentioned earlier, one drawback of the Bonferroni correction is
-  that it greatly decreases the statistical power of your experiments,
-  making it more likely that you'll miss true effects. More
-  sophisticated procedures than Bonferroni correction exist, ones with
-  less of an impact on statistical power, but even these are not magic
-  bullets. Worse, they don't spare you from the base rate fallacy. You
-  can still be misled by your p threshold and falsely claim there's
-  ``only a 5\% chance I'm wrong.'' Procedures like the Bonferroni
-  correction only help you eliminate some false positives.
-\item
-  In step 1, we find where missing values are located. The md.pattern()
-  function from the mice package is a really useful function. It gives
-  you a clear view of where missing values are located, helping you in
-  decisions regarding exclusions or substitution. You can refer to the
-  next recipe for missing value substitution.
-\item
-  ``Product classification is an example of multicategory or multinomial
-  classification. Most classification problems and most classification
-  algorithms are specialized for two-category, or binomial,
-  classification. There are tricks to using binary classifiers to solve
-  multicategory problems (for example, building one classifier for each
-  category, called a ``one versus rest'' classifier). But in most cases
-  it's worth the effort to find a suitable multiple-category
-  implementation, as they tend to work better than multiple binary
-  classifiers (for example, using the package mlogit instead of the base
-  method glm() for logistic regression).''
-\item
-  Another possible indication of collinearity in the inputs is seeing
-  coefficients with an unexpected sign: for example, seeing that income
-  is negatively correlated with years in the workforce.
-\item
-  The overall model can still predict income quite well, even when the
-  inputs are correlated; it just can't determine which variable deserves
-  the credit for the prediction. Using regularization (especially ridge
-  regression as found in lm.ridge() in the package MASS) is helpful in
-  collinear situations (we prefer it to ``x-alone'' variable
-  preprocessing, such as principal components analysis). If you want to
-  use the coefficient values as advice as well as to make good
-  predictions.
-\item
-  The degrees of freedom is thought of as the number of training data
-  rows you have after correcting for the number of coefficients you
-  tried to solve for. You want the degrees of freedom to be large
-  compared to the number of coefficients fit to avoid overfitting.
-\item
-  Overfitting is when you find chance relations in your training data
-  that aren't present in the general population. Overfitting is bad: you
-  think you have a good model when you don't.
-\item
-  The probable reason for nonconvergence is separation or
-  quasi-separation: one of the model variables or some combination of
-  the model variables predicts the outcome perfectly for at least a
-  subset of the training data. You'd think this would be a good thing,
-  but ironically logistic regression fails when the variables are too
-  powerful.
-\item
-  For categorical variables (male/female, or small/medium/large), you
-  can define the distance as 0 if two points are in the same category,
-  and 1 otherwise. If all the variables are categorical, then you can
-  use Hamming distance, which counts the number of mismatches.
-\item
-  Your next step is to select a performance measure. A typical
-  performance measure for regression problems is the Root Mean Square
-  Error (RMSE). It measures the standard deviation of the errors the
-  system makes in its predictions.
-\item
-  You should save every model you experiment with, so you can come back
-  easily to any model you want. Make sure you save both the
-  hyperparameters and the trained parameters, as well as the
-  cross-validation scores and perhaps the actual predictions as well.
-  This will allow you to easily compare scores across model types, and
-  compare the types of errors they make. You can easily save
-  Scikit-Learn models by using Python's pickle module, or using
-  sklearn.externals.joblib, which is more efficient at serializing large
-  NumPy arrays.
-\item
-  If all classifiers are able to estimate class probabilities (i.e.,
-  they have a predict\_proba() method), then you can tell Scikit-Learn
-  to predict the class with the highest class probability, averaged over
-  all the individual classifiers. This is called soft voting. It often
-  achieves higher performance than hard voting because it gives more
-  weight to highly confident votes. All you need to do is replace
-  voting=``hard'' with voting=``soft'' and ensure that all classifiers
-  can estimate class probabilities.
-\item
-  The standard value for k in k-fold cross-validation is 10, which is
-  typically a reasonable choice for most applications. However, if we
-  are working with relatively small training sets, it can be useful to
-  increase the number of folds. If we increase the value of k, more
-  training data will be used in each iteration, which results in a lower
-  bias towards estimating the generalization performance by averaging
-  the individual model estimates. However, large values of k will also
-  increase the runtime of the cross-validation algorithm and yield
-  estimates with higher variance since the training folds will be more
-  similar to each other. On the other hand, if we are working with large
-  datasets, we can choose a smaller value for k.
-\item
-  Distance Metrics: Hamming distance for categorical variables, Cosine
-  distance for text data, Gower distance for categorical data
-\item
-  AIC x BIC: Explanatory power x Parsimonious
-\item
-  Bias is how far offon the average the model is from the truth.
-  Variance is how much the estimate varies about its average. With low
-  model complexity bias is high because predictions are more likely to
-  stray from the truth, and variance is low because there are only few
-  parameters being fit. With high model complexity bias is low because
-  the model can adapt to more subtleties in the data, and variance is
-  high because we have more parameters to estimate from the same amount
-  of data.
-\item
-  The mean of highly correlated quantities has higher variance than the
-  mean of uncorrelated quantities. The smaller the number of folds, the
-  more biased the error estimates (they will be biased to be
-  conservative indicating higher error than there is in reality) but the
-  less variable they will be. On the extreme end you can have one fold
-  for each data point which is known as Leave-One-Out-Cross-Validation.
-  In this case, your error estimate is essentially unbiased but it could
-  potentially have high variance.
-\item
-  LDA vs Logistic Regression: When the classes are well-separated
-  parameters of logistic regression are unstable and LDA doesn't have
-  this problem. If the distribution of X is approximately normal then
-  LDA is more stable again. LDA doesn't need to fit multiple models for
-  multiclass classification.
-\item
-  SVM vs Logistic Regression: SVM is likely to overfit the data and can
-  dominated LR on the training set. Kernel method makes SVM more
-  flexible.
-\item
-  Decision Tree vs Linear Model: Tree has non-linear boundary, selects
-  important features, easier to intepret but unstable especially for
-  small data.
-\item
-  Naive Bayes vs LDA: Both use Bayes theorem, both assume gaussian
-  distribution, but LDA takes care of the correlations. LDA might
-  out-perform Naive Bayes when the features are highly correlated.
-\item
-  KNN vs Other Classification Methods: KNN is completely non-parametic,
-  doesn't tell which features are important. Dominates LDA and Logistic
-  Regression when the decision boundary is highly non-linear.
-\item
-  When building, testing, and validating a suite of models, the optimal
-  model (i.e., the optimal point in the ROC curve) is the spot where the
-  overall accuracy of the model is essentially unchanged as we make
-  small adjustments in the choice of model. That is to say, the change
-  (from one model to the next) in the model's precision (specificity) is
-  exactly offset by the change in the model's recall (sensitivity).
-  Consequently, allowing for some imperfection, where the false positive
-  rate and the false negative rate are in proper balance (so that
-  neither one has too great of an impact on the overall accuracy and
-  effectiveness of the model), is good fruit from your big data labors.
-  The metric I used to guide my cross-validation is the F-score. This is
-  a good metric when we have a lot more samples from one category than
-  from the other categories.
-\item
-  The cost of the holdout method comes in the amount of data that is
-  removed from the model training process. For instance, in the
-  illustrative example here, we removed 30\% of our data. This means
-  that our model is trained on a smaller data set and its error is
-  likely to be higher than if we trained it on the full data set. The
-  standard procedure in this case is to report your error using the
-  holdout set, and then train a final model using all your data.
-\item
-  A metric that minimizes false positives, by rarely flagging players
-  and teams that fail to achieve the desired outcome, is specific. A
-  metric that minimizes false negatives, by rarely failing to flag
-  players and teams that achieve the desired outcome, is sensitive.
-\item
-  Although the previous code example was useful to illustrate how k-fold
-  cross-validation works, scikit-learn also implements a k-fold
-  cross-validation scorer, which allows us to evaluate our model using
-  stratified k-fold cross-validation more efficiently
-\item
-  Sometimes it may be more useful to report the coefficient of
-  determination (), which can be understood as a standardized version of
-  the MSE, for better interpretability of the model performance. In
-  other words, is the fraction of response variance that is captured by
-  the model. The value is defined as follows:Here, SSE is the sum of
-  squared errors and SST is the total sum of squares , or in other
-  words, it is simply the variance of the response.
-\item
-  Most people start working with data from exactly the wrong end. They
-  begin with a data set, then apply their favorite tools and techniques
-  to it. The result is narrow questions and shallow arguments. Starting
-  with data, without first doing a lot of thinking, without having any
-  structure, is a short road to simple questions and unsurprising
-  results. We don't want unsurprising---we want knowledge.
-\item
-  Remember that the positive class in scikit-learn is the class that is
-  labeled as class 1. If we want to specify a different positive label,
-  we can construct our own scorer via the make\_scorer function, which
-  we can then directly provide as an argument to the scoring parameter
-  in GridSearchCV
-\item
-  While the weighted macro-average is the default for multiclass
-  problems in scikit-learn, we can specify the averaging method via the
-  average parameter inside the different scoring functions that we
-  import from the sklean.metrics module, for example, the
-  precision\_score or make\_scorer functions
-\item
-  Transforming words into feature vectorsTo construct a bag-of-words
-  model based on the word counts in the respective documents, we can use
-  the CountVectorizer class implemented in scikit-learn. As we will see
-  in the following code section, the CountVectorizer class takes an
-  array of text data, which can be documents or just sentences, and
-  constructs the bag-of-words model for us:
-\item
-  Scikit-learn implements yet another transformer, the TfidfTransformer,
-  that takes the raw term frequencies from CountVectorizer as input and
-  transforms them into tf-idfs.
-\item
-  Naive Bayes is a linear classifier, while k-NN is not. The curse of
-  dimensionality and large feature sets are a problem for k-NN, while
-  Naive Bayes performs well. k-NN requires no training (just load in the
-  dataset), whereas Naive Bayes does.
+  Less prone to overfitting
 \end{itemize}
 
-\section{Unbalanced Classes}\label{unbalanced-classes}
-
-That said, here is a rough outline of useful approaches. These are
-listed approximately in order of effort:
-
-Do nothing. Sometimes you get lucky and nothing needs to be done. You
-can train on the so-called natural (or stratified) distribution and
-sometimes it works without need for modification.
-
-Balance the training set in some way: Oversample the minority class.
-Undersample the majority class. Synthesize new minority classes.
-
-Throw away minority examples and switch to an anomaly detection
-framework.
-
-At the algorithm level, or after it: Adjust the class weight
-(misclassification costs). Adjust the decision threshold. Modify an
-existing algorithm to be more sensitive to rare classes.
-
-Construct an entirely new algorithm to perform well on imbalanced data.
-
-Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a
-lift curve, or a profit (gain) curve for evaluation.
-
-Use probability estimates and not the default .5 threshold.
-
-Undersampling, oversampling, increase weight of minority class
-
-Decision trees often perform well on imbalanced datasets because their
-hierarchical structure allows them to learn signals from both classes.
-
-Reframe as Anomaly Detection
-
-\begin{itemize}
-\tightlist
-\item
-  Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
-  \& svm.SVC(kernel=`linear', class\_weight=`balanced')
-\end{itemize}
-
-\textbf{Longitudinal Data}
+\textbf{Cons}
 
 \begin{itemize}
 \item
-  One far out suggestion in one of the links is to do PCA and then
-  regress the original variables against the new axis.
+  Unable to model complex relationships
 \item
-  Account for longitudinal data: random selection of one event from each
-  student, partition cross validation by dates, pca finds major trends
-  hidden within the data
+  Unable to capture nonlinear relationships without first transforming
+  the inputs
 \end{itemize}
 
-\section{Other}\label{other}
+\subsection{Other}\label{other}
 
 \begin{itemize}
 \item
-  R uses class encoded as 1 in classification to make predictions. Use
-  levels() function on factor to determine what 1 is.
+  \url{https://en.wikipedia.org/wiki/Quantile_regression}
 \item
-  In general, raising the classification threshold reduces false
-  positives, thus raising precision.
+  If there is an ascending or descending order to your dependent
+  variable, ordinal regression is more appropriate as it has more power
+  than multinomial logistic regression.
 \item
-  Multi-Modal Classification: In the machine learning community, the
-  term Multi-Modal is used to refer to multiple kinds of data. For
-  example, consider a YouTube video. It can be thought to contain 3
-  different modalities: 1) The video frames (visual modality), 2) The
-  audio clip of what's being spoken (audio modality), 3) Some videos
-  also come with the transcription of the words spoken in the form of
-  subtitles (textual modality)
-\item
-  Less samples and more features increase the chance of overfitting.
-\item
-  You can choose either of the following inference strategies: offline
-  inference, meaning that you make all possible predictions in a batch,
-  using a MapReduce or something similar. You then write the predictions
-  to an SSTable or Bigtable, and then feed these to a cache/lookup
-  table. online inference, meaning that you predict on demand, using a
-  server.
-\item
-  A static model is trained offline. That is, we train the model exactly
-  once and then use that trained model for a while. A dynamic model is
-  trained online. That is, data is continually entering the system and
-  we're incorporating that data into the model through continuous
-  updates.
-\item
-  How would multiplying all of the predictions from a given model by 2.0
-  (for example, if the model predicts 0.4, we multiply by 2.0 to get a
-  prediction of 0.8) change the model's performance as measured by AUC?
-  No change. AUC only cares about relative prediction scores. Yes, AUC
-  is based on the relative predictions, so any transformation of the
-  predictions that preserves the relative ranking has no effect on AUC.
-  This is clearly not the case for other metrics such as squared error,
-  log loss, or prediction bias (discussed later).
-\item
-  AUC is desirable for the following two reasons: AUC is
-  scale-invariant. It measures how well predictions are ranked, rather
-  than their absolute values. UC is classification-threshold-invariant.
-  It measures the quality of the model's predictions irrespective of
-  what classification threshold is chosen. However, both these reasons
-  come with caveats, which may limit the usefulness of AUC in certain
-  use cases: Scale invariance is not always desirable. For example,
-  sometimes we really do need well calibrated probability outputs, and
-  AUC won't tell us about that. Classification-threshold invariance is
-  not always desirable. In cases where there are wide disparities in the
-  cost of false negatives vs.~false positives, it may be critical to
-  minimize one type of classification error. For example, when doing
-  email spam detection, you likely want to prioritize minimizing false
-  positives (even if that results in a significant increase of false
-  negatives). AUC isn't a useful metric for this type of optimization.
-\item
-  Raising our classification threshold will cause the number of true
-  positives to decrease or stay the same and will cause the number of
-  false negatives to increase or stay the same. Thus, recall will either
-  stay constant or decrease.
-\item
-  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
-\item
-  A feature cross is a synthetic feature formed by multiplying
-  (crossing) two or more features. Crossing combinations of features can
-  provide predictive abilities beyond what those features can provide
-  individually.
-\item
-  Bias: Error Introduced by approximating real-life problem by using a
-  simple method
-\item
-  from sklearn.preprocessing import MultiLabelBinarizer
-\item
-  Imagine a linear model with two strongly correlated features; that is,
-  these two features are nearly identical copies of one another but one
-  feature contains a small amount of random noise. If we train this
-  model with L2 regularization, what will happen to the weights for
-  these two features? L2 regularization will force the features towards
-  roughly equivalent weights that are approximately half of what they
-  would have been had only one of the two features been in the model.
-\item
-  L2 regularization will encourage many of the non-informative weights
-  to be nearly (but not exactly) 0.0.
-\item
-  F1 Score = TP/(TP + FP + FN). Essentially how good you are at
-  identifying the positive class.
-\item
-  Active Learning: Finding the optimal data to manually label
-\item
-  Simulated Annealing: Gradient descent extension
-\item
-  Linear SVM often outperforms logistic regression and is explainable as
-  well.
-\item
-  A variable that is completely useless by itself can provide a
-  significant performance improvement when taken with others.
-\item
-  \url{https://ml-cheatsheet.readthedocs.io/en/latest/index.html}
-\item
-  So, if your problem involves kind of searching a needle in the
-  haystack when for ex: the positive class samples are very rare
-  compared to the negative classes, use a precision recall curve.
-  Otherwise use a ROC curve because a ROC curve remains the same
-  regardless of the baseline prior probability of your positive class
-  (the important rare class).
-\item
-  Variance: The amount the model output will change if the model was
-  trained using a different data
-\item
-  Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
-\item
-  Inflexible Methods: low variance, high bias, Example: Linear
-  regression
-\item
-  Use broom::glance to look at model objects.
-\item
-  Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
-\item
-  graphical lasso, ising model, granger causality test, network
-  hypothesis testing, bayesian networks
-\item
-  Parametric: Model has a function shape and form, Model is trained/fit
-  using training data to determine parameter values, reduces the problem
-  of training a model down to training a set of parameter values,
-  Examples: linear regression
-\item
-  Non-Parametric: No assumption about model form is made, Example: KNN
-\item
-  Set Random state by hand in sklearn.
-\item
-  Generally need 3 rows of data per variable (to prevent model from
-  seeing signal where there is only noise) {[}Nina Zumel{]}
-\item
-  Domain knowledge for feature selection and random forest feature
-  importance (5-10) best variables. {[}Nina Zumel{]}
-\item
-  Because we have a couple thousand data points, even though salary can
-  best be represented by a Poisson distribution, I'm going to use
-  Gaussian distribution. (With bigger datasets, these two distribution
-  start to become very similar).
-\item
-  We can also tell that our input, smart\_1\_normalized, doesn't have a
-  very strong relationship to our output because the standard error
-  (0.009) is more than 1/10 of our estimate (0.02).
-\item
-  RF param grid example: param\_grid = {[} \{``max\_depth'':
-  {[}3,4,6,10{]}, 'n\_estimators``: {[}100,200,500{]},''max\_features``:
-  {[}`sqrt',`log2',0.2,0.5,0.8{]},''min\_samples\_split``: {[}2, 5,
-  20,50{]},''min\_samples\_leaf``: {[}2, 5, 20,50{]},''bootstrap``:
-  {[}True, False{]},''criterion``: {[}``gini'', ``entropy''{]}\}{]}
-\item
-  The less complex an ML model, the more likely that a good empirical
-  result is not just due to the peculiarities of the sample.
-\item
-  The ML Fine Print: Three basic assumptions.
+  leaps lm package r is a greedy way to find the best predictors by
+  cycling through all the combinations.
 \end{itemize}
 
-We draw examples independently and identically (i.i.d.) at random from
-the distribution
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
+\NormalTok{rgr_lr }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(results.summary())}
+\end{Highlighting}
+\end{Shaded}
 
-The distribution is stationary: It doesn't change over time
+\section{Ridge/Lasso}\label{ridgelasso}
 
-We always pull from the same distribution: Including training,
-validation, and test sets
+\subsection{Intro}\label{intro-1}
 
-In practice, we sometimes violate these assumptions. For example:
+Minimizes RSS but also has shrinkage penalty (L2 penalty). A small
+lambda penalizes the RSS more than the shrinkage penalty. A large lambda
+penalizes the shrinkage penalty more than the RSS. By shrinking the
+coefficient estimates towards 0 by increasing lambda, the bias increases
+slightly but remains relatively small, the variance reduces
+substantially, and the mean squared error of the predictions drops. Not
+scale invariant due to the shrinkage penalty. To avoid the issue of
+overvaluing or undervaluing certain predictor variables simply based on
+their magnitudes, we must standardize the variables prior to performing
+ridge regression. The main disadvantage of ridge regression is that,
+while parameter estimates are shrunken, they only asymptotically
+approach 0 as we increase the value of lambda.
 
-Consider a model that chooses ads to display. The i.i.d. assumption
-would be violated if the model bases its choice of ads, in part, on what
-ads the user has previously seen.
+Standardize for ridge/lasso alpha makes them not scale invariant
 
-Consider a data set that contains retail sales information for a year.
-User's purchases change seasonally, which would violate stationarity.
+Minimizes RSS but also has L1 penalty (norm). This necessarily
+forcessome coefficient estimates to be exactly 0 (when lambda is
+sufficiently large). It has the added advantage of essentially
+performing variable selection, yielding models that are both accurate
+and parsimonious. Restricting ourselves to simpler models by including a
+Lasso penalty will generally decrease the variance of the fits at the
+cost of higher bias.
 
-When we know that any of the preceding three basic assumptions are
-violated, we must pay careful attention to metrics.
+Note: In both ridge and lasso regression, is important to select an
+appropriate value of lambda by means of cross-validation.
+
+\subsection{Assumptions}\label{assumptions-1}
+
+\subsection{Evaluation}\label{evaluation-1}
+
+\subsection{Pros/Cons}\label{proscons-1}
+
+\section{Logistic Regression}\label{logistic-regression}
+
+The right-hand predictor side of the equation must be linear with the
+left-hand outcome side of the equation. You must test for linearity in
+the logit (in logistic regression the logit is the outcome side). This
+is commonly done with the Box-Tidwell Transformation (Test): Add to the
+logistic model interaction terms which are the crossproduct of each
+independent times its natural logarithm {[}(X)ln(X){]}. If these terms
+are significant, then there is nonlinearity in the logit. This method is
+not sensitive to small nonlinearities.
+
+\subsection{Intro}\label{intro-2}
+
+Logistic regression assumes that logit(y) is linear in the values of x.
+Like linear regression, logistic regression will find the best
+coefficients to predict y, including finding advantageous combinations
+and cancellations when the inputs are correlated. In other words, you
+can think of logistic regression as a linear regression that finds the
+log-odds of the probability that you're interested in. Logistic
+Regression can also be used with kernel methods.
+
+Logistic: When you're predicting which category your observation is in.
+(Is this is a cat or a dog?)
+
+The link function is the logit function. Logit is the inverse of the
+sigmoid and gives the log odds, i.e p/(1-p).
+
+Easy to incorpotate prior knowledge, number fo features are small,
+training is fast, precision not critical.
+
+No closed form expression to maximize coefficients with maximum
+likelihood estimation, so one uses gradient descent or stochastic
+gradient descent. The second one is faster.
+
+For logistic regression value of c penalizes features. Low c penalizes a
+lot and vice versa. A large c decreases the effect of the regularization
+term (the l2 penalization).
+
+Makes a linear boundary between classes.
+
+For multiclass classification it will build multiple models. Given 3
+classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2
+and not 2.
+
+Standardization isn't required for logistic regression. The main goal of
+standardizing features is to help convergence of the technique used for
+optimization. For example, if you use Newton-Raphson to maximize the
+likelihood, standardizing the features makes the convergence faster.
+Otherwise, you can run your logistic regression without any
+standardization treatment on the features.
+
+\subsection{Assumptions}\label{assumptions-2}
+
+Secondly, the linear regression analysis requires all variables to be
+multivariate normal. This assumption can best be checked with a
+histogram or a Q-Q-Plot.
 
 \begin{itemize}
 \item
-  In supervised learning, a machine learning algorithm builds a model by
-  examining many examples and attempting to find a model that minimizes
-  loss; this process is called empirical risk minimization.
+  Requires the dependent variable to be binary and ordinal logistic
+  regression requires the dependent variable to be ordinal.
 \item
-  Loss is the penalty for a bad prediction. That is, loss is a number
-  indicating how bad the model's prediction was on a single example. If
-  the model's prediction is perfect, the loss is zero; otherwise, the
-  loss is greater.
+  The observations to be independent of each other. In other words, the
+  observations should not come from repeated measurements or matched
+  data.
+\item
+  There to be little or no multicollinearity among the independent
+  variables.
+\item
+  Assumes linearity of independent variables and logit of the
+  probabilities (logit(p) = log(p/(1-p))). Check
+  \href{https://stats.stackexchange.com/questions/169348/how-should-i-check-the-assumption-of-linearity-to-the-logit-for-the-continuous-i}{in
+  R}.
+\item
+  There is no influential values (extreme values or outliers) in the
+  continuous predictors
 \end{itemize}
+
+\subsection{Evaluation}\label{evaluation-2}
+
+\begin{itemize}
+\item
+  Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are
+  unaffected by x and so x has no bearing on the prediction of success.
+\item
+  Deviance G\^{}2 and Goodness of Fit: The deviance associated with a
+  given logistic regression model M is based on comparing the maximum
+  log-likelihood of model M against the saturated model S. The smaller
+  the deviance the better. For goodness of fit h0 says M is appropriate.
+  Can be expanded to compare models by deviance.
+\item
+  McFadden's Pseudo R\^{}2.
+\item
+  A.I.C / B.I.C
+\end{itemize}
+
+\subsection{Pros/Cons}\label{proscons-2}
+
+\textbf{Pros}
+
+\begin{itemize}
+\item
+  Highly interpretably
+\item
+  Model training and prediction are fast
+\item
+  No tuning outside of regularization required
+\item
+  Features don't need scaling
+\item
+  Can perform with a small number of observations
+\item
+  Outputs well-calibrated predicted probabilities
+\item
+  low variance
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  Presumes a linear relationship between the features and the log-odds
+  of the response.
+\item
+  Performance is generally not competitive with the best supervised
+  learning methods
+\item
+  Can't automatically learn feature interactions
+\item
+  Breaks down when classes are perfectly separable.
+\item
+  High bias
+\end{itemize}
+
+\subsection{Code Example}\label{code-example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
+\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ sm.Logit(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(results.summary())}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Poisson Regression}\label{poisson-regression}
+
+\subsection{Intro}\label{intro-3}
+
+Poisson: When you're predicting a count value. (How many dogs will I see
+in the park?)
+
+Poisson Regression: The Poisson distribution is used to model variation
+in count data (that is, data that can equal 0,1,2,\ldots{}).
+
+Remember that you must specify family = poisson or family = quasipoisson
+when using glm() to fit a count model.
+
+\subsection{Assumptions}\label{assumptions-3}
+
+One of the assumptions of Poisson regression to predict counts is that
+the event you are counting is Poisson distributed: the average count per
+unit time is the same as the variance of the count. In practice, ``the
+same'' means that the mean and the variance should be of a similar order
+of magnitude.
+
+When the variance is much larger than the mean, the Poisson assumption
+doesn't apply, and one solution is to use quasipoisson regression, which
+does not assume that variance=meanvariance=mean.
+
+\subsection{Evaluation}\label{evaluation-3}
+
+\subsection{Pros/Cons}\label{proscons-3}
+
+\textbf{Pros}
+
+\textbf{Cons}
+
+\section{Generalized Additive Models}\label{generalized-additive-models}
+
+\subsection{Intro}\label{intro-4}
+
+mgcv::gam: More complex than lm, more likely to overfit, best used on
+larger data sets. use s(var) to denote non-linear relationship. Don't
+use s() with categorical variable. Use type = terms for y values of
+plots to get predictions type = response.
+
+Also remember that gam() from the package mgcv has the calling interface
+
+gam(formula, family, data) For standard regression, use family =
+gaussian (the default).
+
+For GAM models, the predict() method returns a matrix, so use
+as.numeric() to convert the matrix to a vector.
+
+\subsection{Assumptions}\label{assumptions-4}
+
+\subsection{Evaluation}\label{evaluation-4}
+
+\subsection{Pros/Cons}\label{proscons-4}
+
+\textbf{Pros}
+
+\textbf{Cons}
 
 \section{Bayesian}\label{bayesian}
 
@@ -1470,7 +1475,7 @@ and pipe them directly into decision analysis for these reasons.
 
 \section{Naïve Bayes}\label{naive-bayes}
 
-\subsection{Intro}\label{intro}
+\subsection{Intro}\label{intro-5}
 
 Practitioners do use Naive Bayes regularly for ranking, where the actual
 values of the probabilities are not relevant---only the relative values
@@ -1496,13 +1501,13 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a
 batch of samples incrementally while we are using. MultinomialNB and
 Bernoulli NB also support sample weighting.
 
-\subsection{Assumptions}\label{assumptions}
+\subsection{Assumptions}\label{assumptions-5}
 
 \subsection{Characteristics}\label{characteristics}
 
-\subsection{Evaluation}\label{evaluation}
+\subsection{Evaluation}\label{evaluation-5}
 
-\subsection{Pros/Cons}\label{proscons}
+\subsection{Pros/Cons}\label{proscons-5}
 
 \textbf{Pros}
 
@@ -1533,7 +1538,7 @@ Bernoulli NB also support sample weighting.
 
 \section{LDA}\label{lda}
 
-\subsection{Intro}\label{intro-1}
+\subsection{Intro}\label{intro-6}
 
 Before we take a look into the inner workings of LDA in the following
 subsections, let's summarize the key steps of the LDA approach:
@@ -1560,27 +1565,27 @@ assumes gaussian distributions for each class share the same covariance
 matrix. If they don't share the same covariance matrix, then we use
 Quadratic Discriminant Analysis which assumes each class has its own.
 
-\subsection{Assumptions}\label{assumptions-1}
+\subsection{Assumptions}\label{assumptions-6}
 
 \subsection{Characteristics}\label{characteristics-1}
 
-\subsection{Evaluation}\label{evaluation-1}
+\subsection{Evaluation}\label{evaluation-6}
 
-\subsection{Pros/Cons}\label{proscons-1}
+\subsection{Pros/Cons}\label{proscons-6}
 
 \section{QDA}\label{qda}
 
-\subsection{Intro}\label{intro-2}
+\subsection{Intro}\label{intro-7}
 
 TBD
 
-\subsection{Assumptions}\label{assumptions-2}
+\subsection{Assumptions}\label{assumptions-7}
 
 \subsection{Characteristics}\label{characteristics-2}
 
-\subsection{Evaluation}\label{evaluation-2}
+\subsection{Evaluation}\label{evaluation-7}
 
-\subsection{Pros/Cons}\label{proscons-2}
+\subsection{Pros/Cons}\label{proscons-7}
 
 \section{Advanced Bayesian}\label{advanced-bayesian}
 
@@ -1640,7 +1645,7 @@ np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
 
 \section{K-Means}\label{k-means}
 
-\subsection{Intro}\label{intro-3}
+\subsection{Intro}\label{intro-8}
 
 K-Means clustering method considers two assumptions regarding the
 clusters -- first that the clusters are spherical and second that the
@@ -1691,11 +1696,11 @@ We can set K to optimally cluster the data by starting with a small
 number of clusters, and then iteratively splitting them until all
 clusters fit a normal distribution.
 
-\subsection{Assumptions}\label{assumptions-3}
+\subsection{Assumptions}\label{assumptions-8}
 
 \subsection{Characteristics}\label{characteristics-3}
 
-\subsection{Evaluation}\label{evaluation-3}
+\subsection{Evaluation}\label{evaluation-8}
 
 Davies--Bouldin index: This is an internal evaluation scheme, where the
 validation of how well the clustering has been done is made using
@@ -1703,7 +1708,7 @@ quantities and features inherent to the dataset. This has a drawback
 that a good value reported by this method does not imply the best
 information retrieval.
 
-\subsection{Pros/Cons}\label{proscons-3}
+\subsection{Pros/Cons}\label{proscons-8}
 
 \textbf{Pros}
 
@@ -1717,7 +1722,7 @@ centers.
 
 \section{Hierarchical Clustering}\label{hierarchical-clustering}
 
-\subsection{Intro}\label{intro-4}
+\subsection{Intro}\label{intro-9}
 
 Generates dendrograms. The lower down a fusion occurs the more similar
 the group of observations and vice versa. Begin with n observations and
@@ -1740,72 +1745,79 @@ of clusters to be speciﬁed. Hierarchical clustering doesn't need the
 number of clusters to be speciﬁed. K-means clustering is usually more
 effcient run-time wise.
 
-\subsection{Assumptions}\label{assumptions-4}
+\subsection{Assumptions}\label{assumptions-9}
 
 \subsection{Characteristics}\label{characteristics-4}
 
-\subsection{Evaluation}\label{evaluation-4}
+\subsection{Evaluation}\label{evaluation-9}
 
-\subsection{Pros/Cons}\label{proscons-4}
+\subsection{Pros/Cons}\label{proscons-9}
 
 \section{PCA}\label{pca}
 
-\subsection{Intro}\label{intro-5}
+\subsection{Intro}\label{intro-10}
 
-\subsection{Assumptions}\label{assumptions-5}
+\subsection{Assumptions}\label{assumptions-10}
 
 \subsection{Characteristics}\label{characteristics-5}
 
-\subsection{Evaluation}\label{evaluation-5}
+\subsection{Evaluation}\label{evaluation-10}
 
-\subsection{Pros/Cons}\label{proscons-5}
+\subsection{Pros/Cons}\label{proscons-10}
 
-Center and scale data. The eigenvectors yield orthogonal directions of
-greatest variability(principal components). The eigenvalues correspond
-to the magnitude of variancealong the principal components.
-Interpretability is a negative. PCA is completely nonparametric: any
-data set can be plugged in and an answer comes out, requiring no
-parameters to tweak and no regard for how the data was recorded. From
-one perspective, the fact that PCA is non-parametric (or plug-and-play)
-can be considered a positive feature because the answer is unique and
-independent of the user. From another perspective the fact that PCA is
-agnostic to the source of the data is also a weakness. When using
-dimensional reduction we restrict ourselves to simpler models. Thus, we
-expect bias to increase and variance to decrease. Getting latent
-components. Visualize high dimensional data. Reduce noise.
-Preprocessing. scale and center data before doing. Needs regularization.
-Too many principal components F1 score starts to drop after increase.
-Best F1 is 1. set number of components. Use fit\_transforms, use
-explained\_variance\_ratio\_ to see how much of the variance is
-explained by each component. Choose features that explain most of the
-variances, then use a inverse\_transform to reconstruct your x. Minimum
-number of principal components is min(n,p).
-
-pca: It accounts for as much of the variability in the data as possible
-by considering highly correlated features. Each succeeding component in
-turn has the highest variance using the features that are less
-correlated with the first principal component and that are orthogonal to
-the preceding component.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\tightlist
+\begin{itemize}
 \item
-  look at variance: apply(USArrests , 2, var)
+  Center and scale data. The eigenvectors yield orthogonal directions of
+  greatest variability(principal components). The eigenvalues correspond
+  to the magnitude of variancealong the principal components.
+  Interpretability is a negative. PCA is completely nonparametric: any
+  data set can be plugged in and an answer comes out, requiring no
+  parameters to tweak and no regard for how the data was recorded. From
+  one perspective, the fact that PCA is non-parametric (or
+  plug-and-play) can be considered a positive feature because the answer
+  is unique and independent of the user. From another perspective the
+  fact that PCA is agnostic to the source of the data is also a
+  weakness. When using dimensional reduction we restrict ourselves to
+  simpler models. Thus, we expect bias to increase and variance to
+  decrease. Getting latent components. Visualize high dimensional data.
+  Reduce noise. Preprocessing. scale and center data before doing. Needs
+  regularization. Too many principal components F1 score starts to drop
+  after increase. Best F1 is 1. set number of components. Use
+  fit\_transforms, use explained\_variance\_ratio\_ to see how much of
+  the variance is explained by each component. Choose features that
+  explain most of the variances, then use a inverse\_transform to
+  reconstruct your x. Minimum number of principal components is
+  min(n,p).
 \item
-  pca \& scale: pca = prcomp(USArrests , scale = TRUE)
+  pca: It accounts for as much of the variability in the data as
+  possible by considering highly correlated features. Each succeeding
+  component in turn has the highest variance using the features that are
+  less correlated with the first principal component and that are
+  orthogonal to the preceding component.
+\end{itemize}
+
+\subsection{Other}\label{other-1}
+
+\begin{itemize}
 \item
-  plot: biplot(pca, scale = 0)
-\end{enumerate}
-
-NB: pca\$rotation contains the principal component loadings matrix which
-explains proportion of each variable along each principal component.
-
-Kaiser-Harris criterion suggests retaining PCs with eigenvalues
-\textgreater{} 1; PCs with eigenvalues \textless{} 1 explain less
-variance than contained in a single variable. Cattell Scree test
-visually inspects the elbow graph for diminishing return; retain PCs
-before a drastic drop-off.
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    look at variance: apply(USArrests , 2, var) \textbar{} 2) pca \&
+    scale: pca = prcomp(USArrests , scale = TRUE) \textbar{} 3) plot:
+    biplot(pca, scale = 0)
+  \end{enumerate}
+\item
+  pca\$rotation contains the principal component loadings matrix which
+  explains proportion of each variable along each principal component.
+\item
+  Kaiser-Harris criterion suggests retaining PCs with eigenvalues
+  \textgreater{} 1; PCs with eigenvalues \textless{} 1 explain less
+  variance than contained in a single variable. Cattell Scree test
+  visually inspects the elbow graph for diminishing return; retain PCs
+  before a drastic drop-off.
+\end{itemize}
 
 PC columns contain loadings; correlations of the observed variables with
 the Pcs. h2 column displays the component comunalities; amount of
@@ -1851,547 +1863,6 @@ modeling framework.
 
 Kernel PCA must project data into a higher dimensional space than that
 of the original data.
-
-\section{Linear Regression}\label{linear-regression}
-
-If there is an ascending or descending order to your dependent variable,
-ordinal regression is more appropriate as it has more power than
-multinomial logistic regression.
-
-\subsection{Intro}\label{intro-6}
-
-\subsection{Assumptions}\label{assumptions-6}
-
-\subsection{Evaluation}\label{evaluation-6}
-
-\subsection{Pros/Cons}\label{proscons-6}
-
-\textbf{Pros}
-
-\begin{itemize}
-\item
-  Very fast (runs in constant time)
-\item
-  Easy to understand the model
-\item
-  Less prone to overfitting
-\end{itemize}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  Unable to model complex relationships
-\item
-  Unable to capture nonlinear relationships without first transforming
-  the inputs
-\end{itemize}
-
-Linear: When you're predicting a continuous value. (What temperature
-will it be today?)
-
-\url{https://en.wikipedia.org/wiki/Newey–West_estimator}
-
-box cox
-
-\href{http://www.statmethods.net/stats/rdiagnostics.html}{Regression
-Diagnostics}
-
-\url{https://en.wikipedia.org/wiki/Quantile_regression}
-
-Increasing x1 by 1 means you are increasing the underlying X1 by 1
-standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1
-is the effect on y of increasing X1 by 1 sigma.
-
-In regression, it is often recommended to center the variables so that
-the predictors have mean 0. This makes it so the intercept term is
-interpreted as the expected value of Y\_i when the predictor values are
-set to their means. Otherwise, the intercept is interpreted as the
-expected value of Y\_i when the predictors are set to 0, which may not
-be a realistic or interpretable situation.
-
-When p \textgreater{} n, we can no longer calculate a unique least
-square coefficient estimate, the variances become infinite, so OLS
-cannot be used at all.
-
-In presence of few variables with medium / large sized effect, use lasso
-regression. In presence of many variables with small / medium sized
-effect, use ridge regression.
-
-The fitted regression line using a sample of data gives imperfect
-predictions for future observations due to sampling variability and
-randomness in Y that is not related to X.
-
-For simple linear regression, the principal hypothesis test is as
-follows:
-
-Null Hypothesis (H 0 ): ? 1 = 0
-
-Alternative Hypothesis (H A ): ? 1 ≠ 0
-
-What would it mean if the null hypothesis were true?
-
-We would expect that the population mean of Y would be ? 0 no matter
-what the value of X.
-
-In other words, this would mean that X has no effect on Y!
-
-What would it mean if the null hypothesis were false?
-
-We would expect that Y would vary with different values of X.
-
-In other words, this would mean that X does have an effect on Y.
-
-We prefer natural logs (that is, logarithms base e) because, as
-described above, coefficients on the natural-log scale are directly
-interpretable as approximate proportional differences: with a
-coefficient of 0.06, a difference of 1 in x corresponds to an
-approximate 6\% difference in y, and so forth.
-
-The regression assumption that is generally least important is that the
-errors are normally distributed. In fact, for the purpose of estimating
-the regression line (as compared to predicting individual data points),
-the assumption of normality is barely important at all. Thus, in
-contrast to many regression textbooks, we do not recommend diagnostics
-of the normality of regression residuals. {[}Gelman{]}
-
-Use Box-Cox transformations when predictions are skewed
-
-regression discontinuity
-
-Linear regression errors are not autocorrelated. The Durbin-Watson
-statistic detects this; if it is close to 2, there is no
-autocorrelation.
-
-Got it: Linear Correlation =\textgreater{} Causation if covariates
-respect: linearity normality indep homoscedasticity + all confounders in
-model
-
-leaps lm package r + Breusch-Pagan (BP) test lmtest package
-
-In summary, ``pooling'' your data and fitting one combined regression
-function allows you to easily and efficiently answer research questions
-concerning the binary predictor variable.
-
-If two independent variables are measured in exactly the same units, we
-can asses their relative importance in their effect on y quite simply:
-the larger the coefficient, the stronger the effect.
-
-Okay, so many of the features are strongly correlated. We can make use
-of this in our model by including polynomial features
-(e.g.~PolynomialFeatures(degree=2) from scikit-learn). Adding these
-brings our validation loss down to 0.69256 (-0.05\% from baseline).
-
-A linear regression model is only as good as the validity of its
-assumptions, which can be summarized as follows:
-
-Linearity: This is a linear relationship between the predictor and the
-response variables. If this relationship is not clearly present,
-transformations (log, polynomial, exponent and so on) of the X or Y may
-solve the problem.
-
-Non-correlation of errors: A common problem in the time series and panel
-data where en = betan-1; if the errors are correlated, you run the risk
-of creating a poorly specified model.
-
-Homoscedasticity: Normally the distributed and constant variance of
-errors, which means that the variance of the errors is constant across
-the different values of inputs. Violations of this assumption can create
-biased coefficient estimates, leading to statistical tests for
-significance that can be either too high or too low. This, in turn,
-leads to the wrong conclusion. This violation is referred to as
-heteroscedasticity.
-
-No collinearity: No linear relationship between two predictor variables,
-which is to say that there should be no correlation between the
-features. This, again, can lead to biased estimates.
-
-Presence of outliers: Outliers can severely skew the estimation and,
-ideally, must be removed prior to fitting a model using linear
-regression; this again can lead to a biased estimate.
-
-Assumes one can fit a hyperplane to the data. Link function is the
-identity.
-
-RSS: The sum of the squared error terms for each observation in our
-dataset.
-
-R.S.E: The standard deviation of the residuals about the regression
-surface. Estimate of sigma.
-
-ssumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
-
-Multiple Linear Reg: Additional assumption of little to no
-multicollinearity between predictor variables.
-
-Variance Inflation Factor: MEasures how the model facotrs influence hte
-uncertainity of coefficient estimates. \textgreater{}=5 is bad.
-
-F-test \& partial f-testr for simple and multiple linear regression.
-
-AIC,BIC, forward \& backwards selection
-
-Linearity: The underlying function connecting the independent variable
-to the dependent variable is indeed linear. Check with a scatterplot.
-
-Constant Variance / homoscedasticity: The error terms have the same
-variance. Check the residual plot which is a scatterplot of the
-residuals vs the fitted values.
-
-Normality: The error terms are drawn from an identical Gaussian
-distribution, i.e a normal distribution of the dependent variable for
-each value of the independent variable. Inspect the quantile-quantile
-plot of the residuals. Also Shapiro-Wilk Test for Normality.
-
-Independent Errors: The residual value for an arbitrary observation is
-not predictable from knowledge of another observation's residual value;
-they are uncorrelated. Inspect the residual plot after fitting the
-regression. Ideally, there would be no clear pattern in the fluctuation
-of the error terms.
-
-No Multicollinearity: For multiple linear regression. If not coefficient
-estimates could be unstable, introduce redundancies within predictors,
-and make it more difficult to make inferences. Could inflate standard
-errors, decrease power and reliability of regression coefficients, and
-create need for a larger sample size. Check the variance inflation
-factors. Tells the factor by which the estimated variance of a variable
-is larger in comparison ti it it were completely uncorrelated with other
-variables in the model. If the VIF is more than five then the variable
-is a candidate to remove from the model. Its information is contained in
-the other variables.
-
-Transformations: Can remedy assumption violations and strengthen linear
-relationships between variables, but can lead to overfitting and less
-interpretability.
-
-square root correction: Take square root of x variable(s).
-
-log transformation: Take log of y.
-
-General thumb: powers \textgreater{} 1 for skewed left data, powers
-\textless{} 1 for data skewed right.
-
-Box-Cox: Iterates along values of lambda by maximum likelihood so as to
-maximize the fit of the transformed variable to a normal distribution.
-Does not guarantee normality since it minimizes standard deviation. Can
-only be used on positive values. Use on negative values by shifting by a
-constant value.
-
-TSS: A measure of the total squared deviation of our response variable
-from its mean value.
-
-R-squared = 1 -- RSS/TSS.
-
-F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero
-coefficient. If h0 fail to reject than F value close to 1, else F value
-greater than 1.
-
-Type 1 Error: Accept ha when h0 is true.
-
-A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and
-penalizes complexity. Favor A.I.C for prediction (n increases results in
-increase in accuracy) and B.I.C for descriptive power (penalty term more
-stringest and favors a parsimonious model).
-
-Stepwise Procedures: Forward, backward (sklearn.feature\_selection.RFE
-in Python)
-
-Forward Stepwise Selection is a Greedy Algorithm because at each step it
-selects the variable that improves the current model the most. There is
-no guarantee that the final result will be optimal.
-
-NB: R-squared increases whenever a predictor is added, and it doesn't
-take model complexity into consideration which makes it prone to
-overfitting. Use adjusted R-squared instead. Additional predictors only
-make this increase is they are statistically significant. It's easy to
-show that given no other data for a set of numbers, the predictor that
-minimises the MAE is the median, while the predictor that minimises the
-MSE is the mean.
-
-NB: Pairwise Interactions, glm scales and centers data,
-
-The standard least squares coefficient estimates are scale equivariant:
-if we multiply a predictor variable by a constant, the corresponding
-least squares coefficient estimate will be scaled down by the same
-constant.
-
-Shapiro-Wilk Test for Normality
-
-H0: The data is normally distributed. HA: The data is not normally
-distributed. To run this test in R, the syntax is quite simple:
-set.seed(0) data = rnorm(100) \#Generating data from a standard normal
-distribution. shapiro.test(data) \#P-value insignificant; retain H0,
-conclude data is normally distributed. Inspect this same data using the
-QQ-plots (For normal data, the QQ-plot produces a straight-line
-relationship. For uniform data, the QQ-plot does NOT produce a
-straight-line relationship): qqnorm(normal.data) + qqline(normal.data)
-Model Plot Notes:
-
-Outliers are observations that have high residual values. Leverage
-points are observations that have unusually small or large independent
-variable values. Cook's distance helps to measure the effect of deleting
-an observation from the \#dataset and rerunning the regression.
-Observations that have large residual values and also high leverage tend
-to pose threats to the accuracy of the regression line and thus need to
-be further investigated. Look at influence plot. Confidence and
-prediction intervals. For avplot distinct patterns are indications of
-good contributions. Influence plot to look at hat values (lower is
-better). Use F-test to compare models.
-
-compare rmse to sd of data for sense of how good it is (rsme \textless{}
-sd good and vice versa)
-
-\subsection{Code Examples}\label{code-examples}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
-\NormalTok{rgr_lr }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(results.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Ridge/Lasso}\label{ridgelasso}
-
-\subsection{Intro}\label{intro-7}
-
-Minimizes RSS but also has shrinkage penalty (L2 penalty). A small
-lambda penalizes the RSS more than the shrinkage penalty. A large lambda
-penalizes the shrinkage penalty more than the RSS. By shrinking the
-coefficient estimates towards 0 by increasing lambda, the bias increases
-slightly but remains relatively small, the variance reduces
-substantially, and the mean squared error of the predictions drops. Not
-scale invariant due to the shrinkage penalty. To avoid the issue of
-overvaluing or undervaluing certain predictor variables simply based on
-their magnitudes, we must standardize the variables prior to performing
-ridge regression. The main disadvantage of ridge regression is that,
-while parameter estimates are shrunken, they only asymptotically
-approach 0 as we increase the value of lambda.
-
-Standardize for ridge/lasso alpha makes them not scale invariant
-
-Minimizes RSS but also has L1 penalty (norm). This necessarily
-forcessome coefficient estimates to be exactly 0 (when lambda is
-sufficiently large). It has the added advantage of essentially
-performing variable selection, yielding models that are both accurate
-and parsimonious. Restricting ourselves to simpler models by including a
-Lasso penalty will generally decrease the variance of the fits at the
-cost of higher bias.
-
-Note: In both ridge and lasso regression, is important to select an
-appropriate value of lambda by means of cross-validation.
-
-\subsection{Assumptions}\label{assumptions-7}
-
-\subsection{Evaluation}\label{evaluation-7}
-
-\subsection{Pros/Cons}\label{proscons-7}
-
-\section{Logistic Regression}\label{logistic-regression}
-
-The right-hand predictor side of the equation must be linear with the
-left-hand outcome side of the equation. You must test for linearity in
-the logit (in logistic regression the logit is the outcome side). This
-is commonly done with the Box-Tidwell Transformation (Test): Add to the
-logistic model interaction terms which are the crossproduct of each
-independent times its natural logarithm {[}(X)ln(X){]}. If these terms
-are significant, then there is nonlinearity in the logit. This method is
-not sensitive to small nonlinearities.
-
-\subsection{Intro}\label{intro-8}
-
-Logistic regression assumes that logit(y) is linear in the values of x.
-Like linear regression, logistic regression will find the best
-coefficients to predict y, including finding advantageous combinations
-and cancellations when the inputs are correlated. In other words, you
-can think of logistic regression as a linear regression that finds the
-log-odds of the probability that you're interested in. Logistic
-Regression can also be used with kernel methods.
-
-Logistic: When you're predicting which category your observation is in.
-(Is this is a cat or a dog?)
-
-The link function is the logit function. Logit is the inverse of the
-sigmoid and gives the log odds, i.e p/(1-p).
-
-Easy to incorpotate prior knowledge, number fo features are small,
-training is fast, precision not critical.
-
-No closed form expression to maximize coefficients with maximum
-likelihood estimation, so one uses gradient descent or stochastic
-gradient descent. The second one is faster.
-
-For logistic regression value of c penalizes features. Low c penalizes a
-lot and vice versa. A large c decreases the effect of the regularization
-term (the l2 penalization).
-
-Makes a linear boundary between classes.
-
-For multiclass classification it will build multiple models. Given 3
-classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2
-and not 2.
-
-Standardization isn't required for logistic regression. The main goal of
-standardizing features is to help convergence of the technique used for
-optimization. For example, if you use Newton-Raphson to maximize the
-likelihood, standardizing the features makes the convergence faster.
-Otherwise, you can run your logistic regression without any
-standardization treatment on the features.
-
-\subsection{Assumptions}\label{assumptions-8}
-
-Secondly, the linear regression analysis requires all variables to be
-multivariate normal. This assumption can best be checked with a
-histogram or a Q-Q-Plot.
-
-\begin{itemize}
-\item
-  Requires the dependent variable to be binary and ordinal logistic
-  regression requires the dependent variable to be ordinal.
-\item
-  The observations to be independent of each other. In other words, the
-  observations should not come from repeated measurements or matched
-  data.
-\item
-  There to be little or no multicollinearity among the independent
-  variables.
-\item
-  Assumes linearity of independent variables and logit of the
-  probabilities (logit(p) = log(p/(1-p))). Check
-  \href{https://stats.stackexchange.com/questions/169348/how-should-i-check-the-assumption-of-linearity-to-the-logit-for-the-continuous-i}{in
-  R}.
-\item
-  There is no influential values (extreme values or outliers) in the
-  continuous predictors
-\end{itemize}
-
-\subsection{Evaluation}\label{evaluation-8}
-
-\begin{itemize}
-\item
-  Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are
-  unaffected by x and so x has no bearing on the prediction of success.
-\item
-  Deviance G\^{}2 and Goodness of Fit: The deviance associated with a
-  given logistic regression model M is based on comparing the maximum
-  log-likelihood of model M against the saturated model S. The smaller
-  the deviance the better. For goodness of fit h0 says M is appropriate.
-  Can be expanded to compare models by deviance.
-\item
-  McFadden's Pseudo R\^{}2.
-\item
-  A.I.C / B.I.C
-\end{itemize}
-
-\subsection{Pros/Cons}\label{proscons-8}
-
-\textbf{Pros}
-
-\begin{itemize}
-\item
-  Highly interpretably
-\item
-  Model training and prediction are fast
-\item
-  No tuning outside of regularization required
-\item
-  Features don't need scaling
-\item
-  Can perform with a small number of observations
-\item
-  Outputs well-calibrated predicted probabilities
-\item
-  low variance
-\end{itemize}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  Presumes a linear relationship between the features and the log-odds
-  of the response.
-\item
-  Performance is generally not competitive with the best supervised
-  learning methods
-\item
-  Can't automatically learn feature interactions
-\item
-  Breaks down when classes are perfectly separable.
-\item
-  High bias
-\end{itemize}
-
-\subsection{Code Example}\label{code-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
-\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ sm.Logit(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(results.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Poisson Regression}\label{poisson-regression}
-
-\subsection{Intro}\label{intro-9}
-
-Poisson: When you're predicting a count value. (How many dogs will I see
-in the park?)
-
-Poisson Regression: The Poisson distribution is used to model variation
-in count data (that is, data that can equal 0,1,2,\ldots{}).
-
-Remember that you must specify family = poisson or family = quasipoisson
-when using glm() to fit a count model.
-
-\subsection{Assumptions}\label{assumptions-9}
-
-One of the assumptions of Poisson regression to predict counts is that
-the event you are counting is Poisson distributed: the average count per
-unit time is the same as the variance of the count. In practice, ``the
-same'' means that the mean and the variance should be of a similar order
-of magnitude.
-
-When the variance is much larger than the mean, the Poisson assumption
-doesn't apply, and one solution is to use quasipoisson regression, which
-does not assume that variance=meanvariance=mean.
-
-\subsection{Evaluation}\label{evaluation-9}
-
-\subsection{Pros/Cons}\label{proscons-9}
-
-\textbf{Pros}
-
-\textbf{Cons}
-
-\section{Generalized Additive Models}\label{generalized-additive-models}
-
-\subsection{Intro}\label{intro-10}
-
-mgcv::gam: More complex than lm, more likely to overfit, best used on
-larger data sets. use s(var) to denote non-linear relationship. Don't
-use s() with categorical variable. Use type = terms for y values of
-plots to get predictions type = response.
-
-Also remember that gam() from the package mgcv has the calling interface
-
-gam(formula, family, data) For standard regression, use family =
-gaussian (the default).
-
-For GAM models, the predict() method returns a matrix, so use
-as.numeric() to convert the matrix to a vector.
-
-\subsection{Assumptions}\label{assumptions-10}
-
-\subsection{Evaluation}\label{evaluation-10}
-
-\subsection{Pros/Cons}\label{proscons-10}
-
-\textbf{Pros}
-
-\textbf{Cons}
 
 \section{KNN}\label{knn}
 
@@ -3572,6 +3043,517 @@ Keras only uses numpy arrays.
   that correlation doesn't imply causation!
 \end{itemize}
 
+\section{Model Selection}\label{model-selection}
+
+\begin{itemize}
+\item
+  \url{http://hunch.net/?p=224}
+\item
+  Linear SVM often outperforms logistic regression and is explainable as
+  well.
+\item
+  However, the problem with cross-validation is that it is rarely
+  applicable to real world problems, for all the reasons described in
+  the above sections. Cross-validation only works in the same cases
+  where you can randomly shuffle your data to choose a validation set.
+\item
+  If the performance of a classification model on the test set
+  (out-of-sample) error is poor, you can't just re-calibrate your model
+  parameters to achieve a better model. This is cheating.
+\item
+  When the classes are well-separated, the parameter estimates for the
+  logistic regression model are surprisingly unstable. Linear
+  discriminant analysis does not suffer from this problem. If n is small
+  and the distribution of the predictors X is approximately normal in
+  each of the classes, the linear discriminant model is again more
+  stable than the logistic regression model.
+\item
+  Roughly speaking, LDA tends to be a better bet than QDA if there are
+  relatively few training observations and so reducing variance is
+  crucial. In contrast, QDA is recommended if the training set is very
+  large, so that the variance of the classifier is not a major concern,
+  or if the assumption of a common covariance matrix for the K classes
+  is clearly untenable.
+\item
+  Two features interact if the effect on the prediction of one feature
+  depends on the value of the other feature
+\item
+  ``No Free Lunch'' theorem: no single classifier works best across all
+  possible scenarios
+\item
+  Warning PolynomialFeatures(degree=d) transforms an array containing n
+  features into an array containing features, where n! is the factorial
+  of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial
+  explosion of the number of features!
+\item
+  If a model suffers from overfitting, we also say that the model has a
+  high variance, which can be caused by having too many parameters that
+  lead to a model that is too complex given the underlying data.
+  Similarly, our model can also suffer from underfitting (high bias),
+  which means that our model is not complex enough to capture the
+  pattern in the training data well and therefore also suffers from low
+  performance on unseen data.
+\item
+  It appears that each feature has modestly improved our model. There
+  are certainly more features that we could add to our model. For
+  example, we could add the day of the week and the hour of the posting,
+  we could determine if the article is a listicle by running a regex on
+  the headline, or we could examine the sentiment of each article. This
+  only begins to touch on the features that could be important to model
+  virality. We would certainly need to go much further to continue
+  reducing the error in our model.
+\item
+  Suppose Fixitol reduces symptoms by 20\% over a placebo, but the trial
+  you're using to test it is too small to have adequate statistical
+  power to detect this difference reliably. We know that small trials
+  tend to have varying results; it's easy to get 10 lucky patients who
+  have shorter colds than usual but much harder to get 10,000 who all
+  do.
+\item
+  As I mentioned earlier, one drawback of the Bonferroni correction is
+  that it greatly decreases the statistical power of your experiments,
+  making it more likely that you'll miss true effects. More
+  sophisticated procedures than Bonferroni correction exist, ones with
+  less of an impact on statistical power, but even these are not magic
+  bullets. Worse, they don't spare you from the base rate fallacy. You
+  can still be misled by your p threshold and falsely claim there's
+  ``only a 5\% chance I'm wrong.'' Procedures like the Bonferroni
+  correction only help you eliminate some false positives.
+\item
+  In step 1, we find where missing values are located. The md.pattern()
+  function from the mice package is a really useful function. It gives
+  you a clear view of where missing values are located, helping you in
+  decisions regarding exclusions or substitution. You can refer to the
+  next recipe for missing value substitution.
+\item
+  ``Product classification is an example of multicategory or multinomial
+  classification. Most classification problems and most classification
+  algorithms are specialized for two-category, or binomial,
+  classification. There are tricks to using binary classifiers to solve
+  multicategory problems (for example, building one classifier for each
+  category, called a ``one versus rest'' classifier). But in most cases
+  it's worth the effort to find a suitable multiple-category
+  implementation, as they tend to work better than multiple binary
+  classifiers (for example, using the package mlogit instead of the base
+  method glm() for logistic regression).''
+\item
+  Another possible indication of collinearity in the inputs is seeing
+  coefficients with an unexpected sign: for example, seeing that income
+  is negatively correlated with years in the workforce.
+\item
+  The overall model can still predict income quite well, even when the
+  inputs are correlated; it just can't determine which variable deserves
+  the credit for the prediction. Using regularization (especially ridge
+  regression as found in lm.ridge() in the package MASS) is helpful in
+  collinear situations (we prefer it to ``x-alone'' variable
+  preprocessing, such as principal components analysis). If you want to
+  use the coefficient values as advice as well as to make good
+  predictions.
+\item
+  The degrees of freedom is thought of as the number of training data
+  rows you have after correcting for the number of coefficients you
+  tried to solve for. You want the degrees of freedom to be large
+  compared to the number of coefficients fit to avoid overfitting.
+\item
+  Overfitting is when you find chance relations in your training data
+  that aren't present in the general population. Overfitting is bad: you
+  think you have a good model when you don't.
+\item
+  The probable reason for nonconvergence is separation or
+  quasi-separation: one of the model variables or some combination of
+  the model variables predicts the outcome perfectly for at least a
+  subset of the training data. You'd think this would be a good thing,
+  but ironically logistic regression fails when the variables are too
+  powerful.
+\item
+  For categorical variables (male/female, or small/medium/large), you
+  can define the distance as 0 if two points are in the same category,
+  and 1 otherwise. If all the variables are categorical, then you can
+  use Hamming distance, which counts the number of mismatches.
+\item
+  Your next step is to select a performance measure. A typical
+  performance measure for regression problems is the Root Mean Square
+  Error (RMSE). It measures the standard deviation of the errors the
+  system makes in its predictions.
+\item
+  You should save every model you experiment with, so you can come back
+  easily to any model you want. Make sure you save both the
+  hyperparameters and the trained parameters, as well as the
+  cross-validation scores and perhaps the actual predictions as well.
+  This will allow you to easily compare scores across model types, and
+  compare the types of errors they make. You can easily save
+  Scikit-Learn models by using Python's pickle module, or using
+  sklearn.externals.joblib, which is more efficient at serializing large
+  NumPy arrays.
+\item
+  If all classifiers are able to estimate class probabilities (i.e.,
+  they have a predict\_proba() method), then you can tell Scikit-Learn
+  to predict the class with the highest class probability, averaged over
+  all the individual classifiers. This is called soft voting. It often
+  achieves higher performance than hard voting because it gives more
+  weight to highly confident votes. All you need to do is replace
+  voting=``hard'' with voting=``soft'' and ensure that all classifiers
+  can estimate class probabilities.
+\item
+  The standard value for k in k-fold cross-validation is 10, which is
+  typically a reasonable choice for most applications. However, if we
+  are working with relatively small training sets, it can be useful to
+  increase the number of folds. If we increase the value of k, more
+  training data will be used in each iteration, which results in a lower
+  bias towards estimating the generalization performance by averaging
+  the individual model estimates. However, large values of k will also
+  increase the runtime of the cross-validation algorithm and yield
+  estimates with higher variance since the training folds will be more
+  similar to each other. On the other hand, if we are working with large
+  datasets, we can choose a smaller value for k.
+\item
+  Distance Metrics: Hamming distance for categorical variables, Cosine
+  distance for text data, Gower distance for categorical data
+\item
+  AIC x BIC: Explanatory power x Parsimonious
+\item
+  Bias is how far offon the average the model is from the truth.
+  Variance is how much the estimate varies about its average. With low
+  model complexity bias is high because predictions are more likely to
+  stray from the truth, and variance is low because there are only few
+  parameters being fit. With high model complexity bias is low because
+  the model can adapt to more subtleties in the data, and variance is
+  high because we have more parameters to estimate from the same amount
+  of data.
+\item
+  The mean of highly correlated quantities has higher variance than the
+  mean of uncorrelated quantities. The smaller the number of folds, the
+  more biased the error estimates (they will be biased to be
+  conservative indicating higher error than there is in reality) but the
+  less variable they will be. On the extreme end you can have one fold
+  for each data point which is known as Leave-One-Out-Cross-Validation.
+  In this case, your error estimate is essentially unbiased but it could
+  potentially have high variance.
+\item
+  LDA vs Logistic Regression: When the classes are well-separated
+  parameters of logistic regression are unstable and LDA doesn't have
+  this problem. If the distribution of X is approximately normal then
+  LDA is more stable again. LDA doesn't need to fit multiple models for
+  multiclass classification.
+\item
+  SVM vs Logistic Regression: SVM is likely to overfit the data and can
+  dominated LR on the training set. Kernel method makes SVM more
+  flexible.
+\item
+  Decision Tree vs Linear Model: Tree has non-linear boundary, selects
+  important features, easier to intepret but unstable especially for
+  small data.
+\item
+  Naive Bayes vs LDA: Both use Bayes theorem, both assume gaussian
+  distribution, but LDA takes care of the correlations. LDA might
+  out-perform Naive Bayes when the features are highly correlated.
+\item
+  KNN vs Other Classification Methods: KNN is completely non-parametic,
+  doesn't tell which features are important. Dominates LDA and Logistic
+  Regression when the decision boundary is highly non-linear.
+\item
+  When building, testing, and validating a suite of models, the optimal
+  model (i.e., the optimal point in the ROC curve) is the spot where the
+  overall accuracy of the model is essentially unchanged as we make
+  small adjustments in the choice of model. That is to say, the change
+  (from one model to the next) in the model's precision (specificity) is
+  exactly offset by the change in the model's recall (sensitivity).
+  Consequently, allowing for some imperfection, where the false positive
+  rate and the false negative rate are in proper balance (so that
+  neither one has too great of an impact on the overall accuracy and
+  effectiveness of the model), is good fruit from your big data labors.
+  The metric I used to guide my cross-validation is the F-score. This is
+  a good metric when we have a lot more samples from one category than
+  from the other categories.
+\item
+  The cost of the holdout method comes in the amount of data that is
+  removed from the model training process. For instance, in the
+  illustrative example here, we removed 30\% of our data. This means
+  that our model is trained on a smaller data set and its error is
+  likely to be higher than if we trained it on the full data set. The
+  standard procedure in this case is to report your error using the
+  holdout set, and then train a final model using all your data.
+\item
+  A metric that minimizes false positives, by rarely flagging players
+  and teams that fail to achieve the desired outcome, is specific. A
+  metric that minimizes false negatives, by rarely failing to flag
+  players and teams that achieve the desired outcome, is sensitive.
+\item
+  Although the previous code example was useful to illustrate how k-fold
+  cross-validation works, scikit-learn also implements a k-fold
+  cross-validation scorer, which allows us to evaluate our model using
+  stratified k-fold cross-validation more efficiently
+\item
+  Sometimes it may be more useful to report the coefficient of
+  determination (), which can be understood as a standardized version of
+  the MSE, for better interpretability of the model performance. In
+  other words, is the fraction of response variance that is captured by
+  the model. The value is defined as follows:Here, SSE is the sum of
+  squared errors and SST is the total sum of squares , or in other
+  words, it is simply the variance of the response.
+\item
+  Most people start working with data from exactly the wrong end. They
+  begin with a data set, then apply their favorite tools and techniques
+  to it. The result is narrow questions and shallow arguments. Starting
+  with data, without first doing a lot of thinking, without having any
+  structure, is a short road to simple questions and unsurprising
+  results. We don't want unsurprising---we want knowledge.
+\item
+  Remember that the positive class in scikit-learn is the class that is
+  labeled as class 1. If we want to specify a different positive label,
+  we can construct our own scorer via the make\_scorer function, which
+  we can then directly provide as an argument to the scoring parameter
+  in GridSearchCV
+\item
+  While the weighted macro-average is the default for multiclass
+  problems in scikit-learn, we can specify the averaging method via the
+  average parameter inside the different scoring functions that we
+  import from the sklean.metrics module, for example, the
+  precision\_score or make\_scorer functions
+\item
+  Transforming words into feature vectorsTo construct a bag-of-words
+  model based on the word counts in the respective documents, we can use
+  the CountVectorizer class implemented in scikit-learn. As we will see
+  in the following code section, the CountVectorizer class takes an
+  array of text data, which can be documents or just sentences, and
+  constructs the bag-of-words model for us:
+\item
+  Scikit-learn implements yet another transformer, the TfidfTransformer,
+  that takes the raw term frequencies from CountVectorizer as input and
+  transforms them into tf-idfs.
+\item
+  Naive Bayes is a linear classifier, while k-NN is not. The curse of
+  dimensionality and large feature sets are a problem for k-NN, while
+  Naive Bayes performs well. k-NN requires no training (just load in the
+  dataset), whereas Naive Bayes does.
+\end{itemize}
+
+\section{Other}\label{other-2}
+
+\subsection{General}\label{general-2}
+
+\begin{itemize}
+\item
+  R uses class encoded as 1 in classification to make predictions. Use
+  levels() function on factor to determine what 1 is.
+\item
+  \url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
+\item
+  For example, multilevel models themselves may be referred to as
+  hierarchical linear models, random effects models, multilevel models,
+  random intercept models, random slope models, or pooling models.
+\item
+  \url{https://www.listendata.com/2018/03/regression-analysis.html}
+\item
+  In general, raising the classification threshold reduces false
+  positives, thus raising precision.
+\item
+  Multi-Modal Classification: In the machine learning community, the
+  term Multi-Modal is used to refer to multiple kinds of data. For
+  example, consider a YouTube video. It can be thought to contain 3
+  different modalities: 1) The video frames (visual modality), 2) The
+  audio clip of what's being spoken (audio modality), 3) Some videos
+  also come with the transcription of the words spoken in the form of
+  subtitles (textual modality)
+\item
+  Less samples and more features increase the chance of overfitting.
+\item
+  You can choose either of the following inference strategies: offline
+  inference, meaning that you make all possible predictions in a batch,
+  using a MapReduce or something similar. You then write the predictions
+  to an SSTable or Bigtable, and then feed these to a cache/lookup
+  table. online inference, meaning that you predict on demand, using a
+  server.
+\item
+  A static model is trained offline. That is, we train the model exactly
+  once and then use that trained model for a while. A dynamic model is
+  trained online. That is, data is continually entering the system and
+  we're incorporating that data into the model through continuous
+  updates.
+\item
+  How would multiplying all of the predictions from a given model by 2.0
+  (for example, if the model predicts 0.4, we multiply by 2.0 to get a
+  prediction of 0.8) change the model's performance as measured by AUC?
+  No change. AUC only cares about relative prediction scores. Yes, AUC
+  is based on the relative predictions, so any transformation of the
+  predictions that preserves the relative ranking has no effect on AUC.
+  This is clearly not the case for other metrics such as squared error,
+  log loss, or prediction bias (discussed later).
+\item
+  AUC is desirable for the following two reasons: AUC is
+  scale-invariant. It measures how well predictions are ranked, rather
+  than their absolute values. UC is classification-threshold-invariant.
+  It measures the quality of the model's predictions irrespective of
+  what classification threshold is chosen. However, both these reasons
+  come with caveats, which may limit the usefulness of AUC in certain
+  use cases: Scale invariance is not always desirable. For example,
+  sometimes we really do need well calibrated probability outputs, and
+  AUC won't tell us about that. Classification-threshold invariance is
+  not always desirable. In cases where there are wide disparities in the
+  cost of false negatives vs.~false positives, it may be critical to
+  minimize one type of classification error. For example, when doing
+  email spam detection, you likely want to prioritize minimizing false
+  positives (even if that results in a significant increase of false
+  negatives). AUC isn't a useful metric for this type of optimization.
+\item
+  Raising our classification threshold will cause the number of true
+  positives to decrease or stay the same and will cause the number of
+  false negatives to increase or stay the same. Thus, recall will either
+  stay constant or decrease.
+\item
+  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
+\item
+  A feature cross is a synthetic feature formed by multiplying
+  (crossing) two or more features. Crossing combinations of features can
+  provide predictive abilities beyond what those features can provide
+  individually.
+\item
+  Bias: Error Introduced by approximating real-life problem by using a
+  simple method
+\item
+  Imagine a linear model with two strongly correlated features; that is,
+  these two features are nearly identical copies of one another but one
+  feature contains a small amount of random noise. If we train this
+  model with L2 regularization, what will happen to the weights for
+  these two features? L2 regularization will force the features towards
+  roughly equivalent weights that are approximately half of what they
+  would have been had only one of the two features been in the model.
+\item
+  L2 regularization will encourage many of the non-informative weights
+  to be nearly (but not exactly) 0.0.
+\item
+  F1 Score = TP/(TP + FP + FN). Essentially how good you are at
+  identifying the positive class.
+\item
+  Active Learning: Finding the optimal data to manually label
+\item
+  Simulated Annealing: Gradient descent extension
+\item
+  A variable that is completely useless by itself can provide a
+  significant performance improvement when taken with others.
+\item
+  So, if your problem involves kind of searching a needle in the
+  haystack when for ex: the positive class samples are very rare
+  compared to the negative classes, use a precision recall curve.
+  Otherwise use a ROC curve because a ROC curve remains the same
+  regardless of the baseline prior probability of your positive class
+  (the important rare class).
+\item
+  Variance: The amount the model output will change if the model was
+  trained using a different data
+\item
+  Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
+\item
+  Inflexible Methods: low variance, high bias, Example: Linear
+  regression
+\item
+  Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
+\item
+  Network models: graphical lasso, ising model, granger causality test,
+  network hypothesis testing, bayesian networks
+\item
+  Parametric: Model has a function shape and form, Model is trained/fit
+  using training data to determine parameter values, reduces the problem
+  of training a model down to training a set of parameter values,
+  Examples: linear regression
+\item
+  Non-Parametric: No assumption about model form is made, Example: KNN
+\item
+  Set Random state by hand in sklearn.
+\item
+  Generally need 3 rows of data per variable (to prevent model from
+  seeing signal where there is only noise) {[}Nina Zumel{]}
+\item
+  Domain knowledge for feature selection and random forest feature
+  importance (5-10) best variables. {[}Nina Zumel{]}
+\item
+  Because we have a couple thousand data points, even though salary can
+  best be represented by a Poisson distribution, I'm going to use
+  Gaussian distribution. (With bigger datasets, these two distribution
+  start to become very similar).
+\item
+  We can also tell that our input, smart\_1\_normalized, doesn't have a
+  very strong relationship to our output because the standard error
+  (0.009) is more than 1/10 of our estimate (0.02).
+\item
+  The less complex an ML model, the more likely that a good empirical
+  result is not just due to the peculiarities of the sample.
+\item
+  The ML Fine Print: Three basic assumptions: 1) We draw examples
+  independently and identically (i.i.d.) at random from the
+  distribution, 2) The distribution is stationary: It doesn't change
+  over time, 3) We always pull from the same distribution: Including
+  training, validation, and test sets. In practice, we sometimes violate
+  these assumptions. For example: 1) Consider a model that chooses ads
+  to display. The i.i.d. assumption would be violated if the model bases
+  its choice of ads, in part, on what ads the user has previously seen.
+  2) Consider a data set that contains retail sales information for a
+  year. User's purchases change seasonally, which would violate
+  stationarity. When we know that any of the preceding three basic
+  assumptions are violated, we must pay careful attention to metrics.
+\item
+  empirical risk minimization: In supervised learning, a machine
+  learning algorithm builds a model by examining many examples and
+  attempting to find a model that minimizes loss.
+\item
+  Loss is the penalty for a bad prediction. That is, loss is a number
+  indicating how bad the model's prediction was on a single example. If
+  the model's prediction is perfect, the loss is zero; otherwise, the
+  loss is greater.
+\end{itemize}
+
+\subsection{Unbalanced Classes}\label{unbalanced-classes}
+
+That said, here is a rough outline of useful approaches. These are
+listed approximately in order of effort:
+
+Do nothing. Sometimes you get lucky and nothing needs to be done. You
+can train on the so-called natural (or stratified) distribution and
+sometimes it works without need for modification.
+
+Balance the training set in some way: Oversample the minority class.
+Undersample the majority class. Synthesize new minority classes.
+
+Throw away minority examples and switch to an anomaly detection
+framework.
+
+At the algorithm level, or after it: Adjust the class weight
+(misclassification costs). Adjust the decision threshold. Modify an
+existing algorithm to be more sensitive to rare classes.
+
+Construct an entirely new algorithm to perform well on imbalanced data.
+
+Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a
+lift curve, or a profit (gain) curve for evaluation.
+
+Use probability estimates and not the default .5 threshold.
+
+Undersampling, oversampling, increase weight of minority class
+
+Decision trees often perform well on imbalanced datasets because their
+hierarchical structure allows them to learn signals from both classes.
+
+Reframe as Anomaly Detection
+
+\begin{itemize}
+\tightlist
+\item
+  Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
+  \& svm.SVC(kernel=`linear', class\_weight=`balanced')
+\end{itemize}
+
+\subsection{Longitudinal Data}\label{longitudinal-data}
+
+\begin{itemize}
+\item
+  One far out suggestion in one of the links is to do PCA and then
+  regress the original variables against the new axis.
+\item
+  Account for longitudinal data: random selection of one event from each
+  student, partition cross validation by dates, pca finds major trends
+  hidden within the data
+\end{itemize}
+
 \chapter{CDM}\label{cdm}
 
 \section{Shiny}\label{shiny}
@@ -4575,7 +4557,7 @@ script to do joining of dummied csvs
 \end{Highlighting}
 \end{Shaded}
 
-\chapter*{General}\label{general-2}
+\chapter*{General}\label{general-3}
 \addcontentsline{toc}{chapter}{General}
 
 \section{Python}\label{python-1}
@@ -4729,7 +4711,7 @@ script to do joining of dummied csvs
   moves forward by one from most recent commit.
 \end{itemize}
 
-\section{Other}\label{other-1}
+\section{Other}\label{other-3}
 
 \begin{itemize}
 \tightlist
@@ -5345,7 +5327,7 @@ Given any three, we can determine the fourth.
   Spearman coefficient.
 \end{enumerate}
 
-\section{Other}\label{other-2}
+\section{Other}\label{other-4}
 
 \href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
 package}
