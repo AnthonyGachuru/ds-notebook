@@ -200,9 +200,9 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 
 ## Logistic Regression
 
-The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.
-
 ### Intro
+
+The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.
 
 Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.
 
@@ -224,7 +224,7 @@ Standardization isn't required for logistic regression. The main goal of standar
 
 ### Assumptions
 
-Secondly, the linear regression analysis requires all variables to be multivariate normal.  This assumption can best be checked with a histogram or a Q-Q-Plot. 
+* The linear regression analysis requires all variables to be multivariate normal.  This assumption can best be checked with a histogram or a Q-Q-Plot. 
 
 * Requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.
 
@@ -238,9 +238,9 @@ Secondly, the linear regression analysis requires all variables to be multivaria
 
 ### Evaluation
 
-* Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are unaffected by x and so x has no bearing  on the prediction of success.
+* Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.
 
-* Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says M is appropriate. Can be expanded to compare models by deviance.
+* Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says the model is appropriate while H_a says the opposite.
 
 * McFadden's Pseudo R^2. 
 
