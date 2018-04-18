@@ -1003,82 +1003,68 @@ statistic detects this; if it is close to 2, there is no
 autocorrelation.
 
 A linear regression model is only as good as the validity of its
-assumptions, which can be summarized as follows:
+assumptions, which can be summarized as: \(y = b_0+b_1x + \epsilon\),
+\(\epsilon\) is i.i.d from N(0, \(\sigma\)). More verbosely:
 
-Linearity: This is a linear relationship between the predictor and the
-response variables. If this relationship is not clearly present,
-transformations (log, polynomial, exponent and so on) of the X or Y may
-solve the problem.
+\begin{itemize}
+\item
+  Linearity: This is a linear relationship between the predictor and the
+  response variables. If this relationship is not clearly present,
+  transformations (log, polynomial, exponent and so on) of the X or Y
+  may solve the problem. Check with a scatterplot.
+\item
+  Normality: The error terms are drawn from an identical Gaussian
+  distribution, i.e a normal distribution of the dependent variable for
+  each value of the independent variable. Inspect the quantile-quantile
+  plot of the residuals. Also Shapiro-Wilk Test for Normality.
+\item
+  Non-correlation or independence of errors: A common problem in the
+  time series and panel data where en = betan-1; if the errors are
+  correlated, you run the risk of creating a poorly specified model. The
+  residual value for an arbitrary observation is not predictable from
+  knowledge of another observation's residual value; they are
+  uncorrelated. Inspect the residual plot after fitting the regression.
+  Ideally, there would be no clear pattern in the fluctuation of the
+  error terms.
+\item
+  Homoscedasticity (constant variance): Normally the distributed and
+  constant variance of errors, which means that the variance of the
+  errors is constant across the different values of inputs. Violations
+  of this assumption can create biased coefficient estimates, leading to
+  statistical tests for significance that can be either too high or too
+  low. This, in turn, leads to the wrong conclusion. This violation is
+  referred to as heteroscedasticity. The error terms have the same
+  variance. Check the residual plot which is a scatterplot of the
+  residuals vs the fitted values.
+\item
+  No multi-colinearity: No linear relationship between two predictor
+  variables, which is to say that there should be no correlation between
+  the features. This, again, can lead to biased estimates. If not
+  coefficient estimates could be unstable, introduce redundancies within
+  predictors, and make it more difficult to make inferences. Could
+  inflate standard errors, decrease power and reliability of regression
+  coefficients, and create need for a larger sample size. Check the
+  variance inflation factors. Tells the factor by which the estimated
+  variance of a variable is larger in comparison ti it it were
+  completely uncorrelated with other variables in the model. If the VIF
+  is more than five then the variable is a candidate to remove from the
+  model. Its information is contained in the other variables. Variance
+  Inflation Factor: MEasures how the model facotrs influence hte
+  uncertainity of coefficient estimates. \textgreater{}=5 is bad.
+\item
+  Minimal outliers: Outliers can severely skew the estimation and,
+  ideally, must be removed prior to fitting a model using linear
+  regression; this again can lead to a biased estimate.
+\end{itemize}
 
-Non-correlation of errors: A common problem in the time series and panel
-data where en = betan-1; if the errors are correlated, you run the risk
-of creating a poorly specified model.
+A practical
+\href{http://www.statmethods.net/stats/rdiagnostics.html}{summary} using
+R.
 
-Homoscedasticity: Normally the distributed and constant variance of
-errors, which means that the variance of the errors is constant across
-the different values of inputs. Violations of this assumption can create
-biased coefficient estimates, leading to statistical tests for
-significance that can be either too high or too low. This, in turn,
-leads to the wrong conclusion. This violation is referred to as
-heteroscedasticity.
-
-No collinearity: No linear relationship between two predictor variables,
-which is to say that there should be no correlation between the
-features. This, again, can lead to biased estimates.
-
-Presence of outliers: Outliers can severely skew the estimation and,
-ideally, must be removed prior to fitting a model using linear
-regression; this again can lead to a biased estimate.
-
-Assumes one can fit a hyperplane to the data. Link function is the
-identity.
-
-Assumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).
-
-Multiple Linear Reg: Additional assumption of little to no
-multicollinearity between predictor variables.
-
-Variance Inflation Factor: MEasures how the model facotrs influence hte
-uncertainity of coefficient estimates. \textgreater{}=5 is bad.
-
-F-test \& partial f-testr for simple and multiple linear regression.
-
-Linearity: The underlying function connecting the independent variable
-to the dependent variable is indeed linear. Check with a scatterplot.
-
-Constant Variance / homoscedasticity: The error terms have the same
-variance. Check the residual plot which is a scatterplot of the
-residuals vs the fitted values.
-
-Normality: The error terms are drawn from an identical Gaussian
-distribution, i.e a normal distribution of the dependent variable for
-each value of the independent variable. Inspect the quantile-quantile
-plot of the residuals. Also Shapiro-Wilk Test for Normality.
-
-Independent Errors: The residual value for an arbitrary observation is
-not predictable from knowledge of another observation's residual value;
-they are uncorrelated. Inspect the residual plot after fitting the
-regression. Ideally, there would be no clear pattern in the fluctuation
-of the error terms.
-
-No Multicollinearity: For multiple linear regression. If not coefficient
-estimates could be unstable, introduce redundancies within predictors,
-and make it more difficult to make inferences. Could inflate standard
-errors, decrease power and reliability of regression coefficients, and
-create need for a larger sample size. Check the variance inflation
-factors. Tells the factor by which the estimated variance of a variable
-is larger in comparison ti it it were completely uncorrelated with other
-variables in the model. If the VIF is more than five then the variable
-is a candidate to remove from the model. Its information is contained in
-the other variables.
-
-\href{http://www.statmethods.net/stats/rdiagnostics.html}{Regression
-Diagnostics}
+\subsection{Evaluation}\label{evaluation}
 
 Breusch-Pagan (BP) test lmtest package: is used to test for
 heteroskedasticity in a linear regression model
-
-\subsection{Evaluation}\label{evaluation}
 
 Model Plot Notes:
 
@@ -1091,25 +1077,25 @@ to pose threats to the accuracy of the regression line and thus need to
 be further investigated. Look at influence plot. Confidence and
 prediction intervals. For avplot distinct patterns are indications of
 good contributions. Influence plot to look at hat values (lower is
-better). Use F-test to compare models.
+better). Use F-test to compare models. F-test \& partial f-testr for
+simple and multiple linear regression.
 
 For simple linear regression, the principal hypothesis test is as
 follows:
 
-Null Hypothesis (H\_0 ): ? 1 = 0
+\begin{itemize}
+\item
+  H\_0 : ? 1 = 0
+\item
+  H\_A: ? 1 ≠ 0
+\end{itemize}
 
-Alternative Hypothesis (H A ): ? 1 ≠ 0
+If H\_0 is true then the population mean of Y would be ? 0 no matter
+what the value of X. (X has no effect on Y.)
 
-What would it mean if the null hypothesis were true? We would expect
-that the population mean of Y would be ? 0 no matter what the value of
-X. In other words, this would mean that X has no effect on Y! What would
-it mean if the null hypothesis were false? We would expect that Y would
-vary with different values of X. In other words, this would mean that X
-does have an effect on Y.
-
-F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero
-coefficient. If h0 fail to reject than F value close to 1, else F value
-greater than 1.
+F-Test: H\_0 says that all/some coefficients are zero versus H\_a which
+says that there is at least one non-zero coefficient. If h0 fail to
+reject than F value close to 1, else F value greater than 1.
 
 Type 1 Error: Accept ha when h0 is true.
 
@@ -1118,21 +1104,23 @@ penalizes complexity. Favor A.I.C for prediction (n increases results in
 increase in accuracy) and B.I.C for descriptive power (penalty term more
 stringest and favors a parsimonious model)
 
-NB: R-squared increases whenever a predictor is added, and it doesn't
-take model complexity into consideration which makes it prone to
-overfitting. Use adjusted R-squared instead. Additional predictors only
-make this increase is they are statistically significant. It's easy to
-show that given no other data for a set of numbers, the predictor that
-minimises the MAE is the median, while the predictor that minimises the
-MSE is the mean.
+R-squared increases whenever a predictor is added, and it doesn't take
+model complexity into consideration which makes it prone to overfitting.
+Use adjusted R-squared instead. Additional predictors only make this
+increase is they are statistically significant. It's easy to show that
+given no other data for a set of numbers, the predictor that minimises
+the MAE is the median, while the predictor that minimises the MSE is the
+mean.
 
-compare rmse to sd of data for sense of how good it is (rsme \textless{}
-sd good and vice versa)
-
-\textbf{Shapiro-Wilk Test for Normality}
-
-H0: The data is normally distributed. HA: The data is not normally
-distributed. To run this test in R, the syntax is quite simple:
+\begin{itemize}
+\item
+  Compare rmse to sd of data for sense of how good it is. (If rsme
+  \textless{} sd then good.)
+\item
+  Shapiro-Wilk Test for Normality: H\_0 says the data is normally
+  distributed while H\_a says it is not. To run this test in R, the
+  syntax is quite simple:
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1173,7 +1161,8 @@ distributed. To run this test in R, the syntax is quite simple:
 
 \begin{itemize}
 \item
-  \url{https://en.wikipedia.org/wiki/Quantile_regression}
+  \href{https://en.wikipedia.org/wiki/Quantile_regression}{Quantile
+  regression} is an alternative for quantiles.
 \item
   If there is an ascending or descending order to your dependent
   variable, ordinal regression is more appropriate as it has more power
@@ -1230,6 +1219,8 @@ appropriate value of lambda by means of cross-validation.
 
 \section{Logistic Regression}\label{logistic-regression}
 
+\subsection{Intro}\label{intro-2}
+
 The right-hand predictor side of the equation must be linear with the
 left-hand outcome side of the equation. You must test for linearity in
 the logit (in logistic regression the logit is the outcome side). This
@@ -1238,8 +1229,6 @@ logistic model interaction terms which are the crossproduct of each
 independent times its natural logarithm {[}(X)ln(X){]}. If these terms
 are significant, then there is nonlinearity in the logit. This method is
 not sensitive to small nonlinearities.
-
-\subsection{Intro}\label{intro-2}
 
 Logistic regression assumes that logit(y) is linear in the values of x.
 Like linear regression, logistic regression will find the best
@@ -1281,11 +1270,11 @@ standardization treatment on the features.
 
 \subsection{Assumptions}\label{assumptions-2}
 
-Secondly, the linear regression analysis requires all variables to be
-multivariate normal. This assumption can best be checked with a
-histogram or a Q-Q-Plot.
-
 \begin{itemize}
+\item
+  The linear regression analysis requires all variables to be
+  multivariate normal. This assumption can best be checked with a
+  histogram or a Q-Q-Plot.
 \item
   Requires the dependent variable to be binary and ordinal logistic
   regression requires the dependent variable to be ordinal.
@@ -1310,14 +1299,14 @@ histogram or a Q-Q-Plot.
 
 \begin{itemize}
 \item
-  Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are
+  Wald Test: h\_0: b = 0 and h\_a: b =/= 0. h\_0 means the log odds are
   unaffected by x and so x has no bearing on the prediction of success.
 \item
   Deviance G\^{}2 and Goodness of Fit: The deviance associated with a
   given logistic regression model M is based on comparing the maximum
   log-likelihood of model M against the saturated model S. The smaller
-  the deviance the better. For goodness of fit h0 says M is appropriate.
-  Can be expanded to compare models by deviance.
+  the deviance the better. For goodness of fit h0 says the model is
+  appropriate while H\_a says the opposite.
 \item
   McFadden's Pseudo R\^{}2.
 \item

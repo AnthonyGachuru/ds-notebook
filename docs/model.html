@@ -426,40 +426,36 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <h3><span class="header-section-number">4.4.2</span> Assumptions</h3>
 <p>The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]</p>
 <p>Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.</p>
-<p>A linear regression model is only as good as the validity of its assumptions, which can be summarized as follows:</p>
-<p>Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem.</p>
-<p>Non-correlation of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model.</p>
-<p>Homoscedasticity: Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity.</p>
-<p>No collinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates.</p>
-<p>Presence of outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.</p>
-<p>Assumes one can fit a hyperplane to the data. Link function is the identity.</p>
-<p>Assumptions: Succinctly: y = b0+b1*x+e, e is i.i.d N(0, variance).</p>
-<p>Multiple Linear Reg: Additional assumption of little to no multicollinearity between predictor variables.</p>
-<p>Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. &gt;=5 is bad.</p>
-<p>F-test &amp; partial f-testr for simple and multiple linear regression.</p>
-<p>Linearity: The underlying function connecting the independent variable to the dependent variable is indeed linear. Check with a scatterplot.</p>
-<p>Constant Variance / homoscedasticity: The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.</p>
-<p>Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.</p>
-<p>Independent Errors: The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated. Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.</p>
-<p>No Multicollinearity: For multiple linear regression. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables.</p>
-<p><a href="http://www.statmethods.net/stats/rdiagnostics.html">Regression Diagnostics</a></p>
-<p>Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model</p>
+<p>A linear regression model is only as good as the validity of its assumptions, which can be summarized as: <span class="math inline">\(y = b_0+b_1x + \epsilon\)</span>, <span class="math inline">\(\epsilon\)</span> is i.i.d from N(0, <span class="math inline">\(\sigma\)</span>). More verbosely:</p>
+<ul>
+<li><p>Linearity: This is a linear relationship between the predictor and the response variables. If this relationship is not clearly present, transformations (log, polynomial, exponent and so on) of the X or Y may solve the problem. Check with a scatterplot.</p></li>
+<li><p>Normality: The error terms are drawn from an identical Gaussian distribution, i.e a normal distribution of the dependent variable for each value of the independent variable. Inspect the quantile-quantile plot of the residuals. Also Shapiro-Wilk Test for Normality.</p></li>
+<li><p>Non-correlation or independence of errors: A common problem in the time series and panel data where en = betan-1; if the errors are correlated, you run the risk of creating a poorly specified model. The residual value for an arbitrary observation is not predictable from knowledge of another observation’s residual value; they are uncorrelated. Inspect the residual plot after fitting the regression. Ideally, there would be no clear pattern in the fluctuation of the error terms.</p></li>
+<li><p>Homoscedasticity (constant variance): Normally the distributed and constant variance of errors, which means that the variance of the errors is constant across the different values of inputs. Violations of this assumption can create biased coefficient estimates, leading to statistical tests for significance that can be either too high or too low. This, in turn, leads to the wrong conclusion. This violation is referred to as heteroscedasticity. The error terms have the same variance. Check the residual plot which is a scatterplot of the residuals vs the fitted values.</p></li>
+<li><p>No multi-colinearity: No linear relationship between two predictor variables, which is to say that there should be no correlation between the features. This, again, can lead to biased estimates. If not coefficient estimates could be unstable, introduce redundancies within predictors, and make it more difficult to make inferences. Could inflate standard errors, decrease power and reliability of regression coefficients, and create need for a larger sample size. Check the variance inflation factors. Tells the factor by which the estimated variance of a variable is larger in comparison ti it it were completely uncorrelated with other variables in the model. If the VIF is more than five then the variable is a candidate to remove from the model. Its information is contained in the other variables. Variance Inflation Factor: MEasures how the model facotrs influence hte uncertainity of coefficient estimates. &gt;=5 is bad.</p></li>
+<li><p>Minimal outliers: Outliers can severely skew the estimation and, ideally, must be removed prior to fitting a model using linear regression; this again can lead to a biased estimate.</p></li>
+</ul>
+<p>A practical <a href="http://www.statmethods.net/stats/rdiagnostics.html">summary</a> using R.</p>
 </div>
 <div id="evaluation" class="section level3">
 <h3><span class="header-section-number">4.4.3</span> Evaluation</h3>
+<p>Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model</p>
 <p>Model Plot Notes:</p>
-<p>Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook’s distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models.</p>
+<p>Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook’s distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test &amp; partial f-testr for simple and multiple linear regression.</p>
 <p>For simple linear regression, the principal hypothesis test is as follows:</p>
-<p>Null Hypothesis (H_0 ): ? 1 = 0</p>
-<p>Alternative Hypothesis (H A ): ? 1 ≠ 0</p>
-<p>What would it mean if the null hypothesis were true? We would expect that the population mean of Y would be ? 0 no matter what the value of X. In other words, this would mean that X has no effect on Y! What would it mean if the null hypothesis were false? We would expect that Y would vary with different values of X. In other words, this would mean that X does have an effect on Y.</p>
-<p>F-Test: h0: all/some coefficients are zero vs ha: at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1.</p>
+<ul>
+<li><p>H_0 : ? 1 = 0</p></li>
+<li><p>H_A: ? 1 ≠ 0</p></li>
+</ul>
+<p>If H_0 is true then the population mean of Y would be ? 0 no matter what the value of X. (X has no effect on Y.)</p>
+<p>F-Test: H_0 says that all/some coefficients are zero versus H_a which says that there is at least one non-zero coefficient. If h0 fail to reject than F value close to 1, else F value greater than 1.</p>
 <p>Type 1 Error: Accept ha when h0 is true.</p>
 <p>A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and penalizes complexity. Favor A.I.C for prediction (n increases results in increase in accuracy) and B.I.C for descriptive power (penalty term more stringest and favors a parsimonious model)</p>
-<p>NB: R-squared increases whenever a predictor is added, and it doesn’t take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.</p>
-<p>compare rmse to sd of data for sense of how good it is (rsme &lt; sd good and vice versa)</p>
-<p><strong>Shapiro-Wilk Test for Normality</strong></p>
-<p>H0: The data is normally distributed. HA: The data is not normally distributed. To run this test in R, the syntax is quite simple:</p>
+<p>R-squared increases whenever a predictor is added, and it doesn’t take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean.</p>
+<ul>
+<li><p>Compare rmse to sd of data for sense of how good it is. (If rsme &lt; sd then good.)</p></li>
+<li><p>Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:</p></li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">0</span>)
 
 data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="co"># Generating data from a standard normal distribution.</span>
@@ -485,7 +481,7 @@ data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10
 <div id="other" class="section level3">
 <h3><span class="header-section-number">4.4.5</span> Other</h3>
 <ul>
-<li><p><a href="https://en.wikipedia.org/wiki/Quantile_regression" class="uri">https://en.wikipedia.org/wiki/Quantile_regression</a></p></li>
+<li><p><a href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a> is an alternative for quantiles.</p></li>
 <li><p>If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.</p></li>
 <li><p>leaps lm package r is a greedy way to find the best predictors by cycling through all the combinations.</p></li>
 </ul>
@@ -516,9 +512,9 @@ rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><
 </div>
 <div id="logistic-regression" class="section level2">
 <h2><span class="header-section-number">4.6</span> Logistic Regression</h2>
-<p>The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.</p>
 <div id="intro-2" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> Intro</h3>
+<p>The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.</p>
 <p>Logistic regression assumes that logit(y) is linear in the values of x. Like linear regression, logistic regression will find the best coefficients to predict y, including finding advantageous combinations and cancellations when the inputs are correlated. In other words, you can think of logistic regression as a linear regression that finds the log-odds of the probability that you’re interested in. Logistic Regression can also be used with kernel methods.</p>
 <p>Logistic: When you’re predicting which category your observation is in. (Is this is a cat or a dog?)</p>
 <p>The link function is the logit function. Logit is the inverse of the sigmoid and gives the log odds, i.e p/(1-p).</p>
@@ -531,8 +527,8 @@ rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><
 </div>
 <div id="assumptions-2" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> Assumptions</h3>
-<p>Secondly, the linear regression analysis requires all variables to be multivariate normal. This assumption can best be checked with a histogram or a Q-Q-Plot.</p>
 <ul>
+<li><p>The linear regression analysis requires all variables to be multivariate normal. This assumption can best be checked with a histogram or a Q-Q-Plot.</p></li>
 <li><p>Requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.</p></li>
 <li><p>The observations to be independent of each other. In other words, the observations should not come from repeated measurements or matched data.</p></li>
 <li><p>There to be little or no multicollinearity among the independent variables.</p></li>
@@ -543,8 +539,8 @@ rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><
 <div id="evaluation-2" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> Evaluation</h3>
 <ul>
-<li><p>Wald Test: h0: b = 0 and ha: b =/= 0. h0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.</p></li>
-<li><p>Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says M is appropriate. Can be expanded to compare models by deviance.</p></li>
+<li><p>Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.</p></li>
+<li><p>Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says the model is appropriate while H_a says the opposite.</p></li>
 <li><p>McFadden’s Pseudo R^2.</p></li>
 <li><p>A.I.C / B.I.C</p></li>
 </ul>
