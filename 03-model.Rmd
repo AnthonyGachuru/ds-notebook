@@ -93,6 +93,21 @@ A linear regression model is only as good as the validity of its assumptions, wh
 A practical [summary](http://www.statmethods.net/stats/rdiagnostics.html) using R. 
 
 ```{r, eval = F}
+# general check
+plot(rgr_lr_st1)
+
+# linearity check
+avPlots(rgr_lr_st1)
+
+# repeat of outlier analysis
+#influencePlot(rgr_lr_st1)
+
+# multi-colinearity
+vif(rgr_lr_st1)
+
+# Test for Autocorrelated Errors
+durbinWatsonTest(rgr_lr_st1)
+
 set.seed(0)
 
 data = rnorm(100) # Generating data from a standard normal distribution.
