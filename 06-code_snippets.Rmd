@@ -1,6 +1,8 @@
-# Code Snippets {-}
+# Code Snippets
 
 ## Python
+
+### General
 
 * https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/
 
@@ -11,6 +13,8 @@
     * pd.io.json.json_normalize(stuff)
     *https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055
     * https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10
+    
+### Masking Array
     
 You can mask your array using the numpy.ma.array function and subsequently apply any numpy operation:
 
@@ -28,6 +32,7 @@ a_norm2 = a / np.std(a) # The std function ignores the masked values.
 a.data
 ```
 
+## Showing Data With Plotly
 
 ```{python, eval = FALSE}
 # plotly display data
@@ -41,10 +46,14 @@ table = ff.create_table(df.iloc[1:10, 1:5])
 plotly.offline.plot(table, output_type = 'div', show_link = False, include_plotlyjs = False)
 ```
 
+## Hyperband Cross Validation
+
 ```{python, eval = FALSE}
 from civismlext.hyperband import HyperbandSearchCV
 #https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
 ```
+
+## Pandas Display Options
 
 ```{python, eval = FALSE}
 # Display floats with 2 decimal places
@@ -55,25 +64,7 @@ pd.options.display.max_rows = 200
 pd.options.display.max_columns = 100
 ```
 
-```{python, eval = FALSE}
-#Pyspark
-
-import findspark
-findspark.init()
-import pyspark
-import random
-
-sc = pyspark.SparkContext(appName="Pi")
-num_samples = 100000000
-def inside(p):     
-    x, y = random.random(), random.random()
-    return x*x + y*y < 1
-count = sc.parallelize(range(0, num_samples)).filter(inside).count()
-pi = 4 * count / num_samples
-print(pi)
-
-sc.stop()
-```
+## Infix Operators
 
 ```{python, eval = FALSE}
 # Define new operator
@@ -96,6 +87,8 @@ pipe = Infix(lambda x,y: y(x))
 4 |pipe| (lambda z: z**2)
 ```
 
+## Generators
+
 ```{python, eval = FALSE}
 # Generators Error
 
@@ -109,6 +102,8 @@ except StopIteration:
 finally:
     del iterator
 ```
+
+## Rowwise Operations In Pandas
 
 ```{python, eval = FALSE}
 # Apply a function to every row in a pandas dataframe
@@ -130,6 +125,8 @@ rectangles_df.apply(calculate_area, axis=1)
 
 df['SAL-RATE'].apply(money_to_float)
 ```
+
+## Additional Functions Args In Map
 
 ```{python, eval = FALSE}
 # Extra arguments to function
@@ -175,6 +172,8 @@ plt.show()
 
 ## R
 
+#### General
+
 * ctrl + shift + a: reformat code in rstudio
 
 * rowwise in R: purrr::pmap
@@ -183,7 +182,7 @@ plt.show()
 
 * ctrl + shift + o: toggle table of contents
 
-* ctrl shift enter" run chunk
+* ctrl shift enter: run chunk
 
 * ctrl pageup/down: navigate chunks
 
@@ -195,7 +194,7 @@ plt.show()
 
 * df_print: kable in yaml rmrkdown header
 
-## Shiny Reactive
+### Shiny Reactive
 
 ```{r, eval = FALSE}
 df_labeled = eventReactive({c(input$good, input$bad)}, {    
@@ -203,8 +202,7 @@ df_labeled = eventReactive({c(input$good, input$bad)}, {
   })
 ```
 
-
-## Custom Theme
+### Custom Theme
 
 ```{r, eval=F}
 theme(
@@ -214,7 +212,7 @@ theme(
      )
 ```
 
-## Create Factor
+### Create Factor
 
 ```{r, eval=F}
 mons = factor(
@@ -233,7 +231,6 @@ mons = factor(
 LessonStartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
 ```
 
-
 ### Geom_Path
 
 ```{r, eval=F}
@@ -243,7 +240,6 @@ ggplot(ilo_data) +
             arrow = arrow(length = unit(1.5, "mm"), type = "closed")
 )
 ```
-
 
 ### Theme Template
 
@@ -267,7 +263,6 @@ library(corrplot)
 df_fltrd %>% select_if(is.numeric) %>%  
 cor() %>% corrplot(method = "circle", is.corr = FALSE)
 ```
-
 
 ### Calculate Accuracy
 

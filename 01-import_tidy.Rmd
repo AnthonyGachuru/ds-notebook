@@ -8,9 +8,10 @@
 
 * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
-* [Temp Pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
+* [Temporary pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
 
 * Sampling a massive CSV file:
+
 
     * pip install subsample
 
@@ -60,10 +61,9 @@ browser.get('http://www.google.com')
 print(browser.title)
 ```
 
-
 ## Exploration
 
-## General
+### General
 
 * import pandas_profiling; pandas_profiling.ProfileReport(data)
 
@@ -71,11 +71,12 @@ print(browser.title)
 
 * **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
 
-## Missingness & Imputation
+### Missingness & Imputation
 
 * There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
 
 * The pros of imputation:
+
 
     * Helps retain a larger sample size of your data.
 
@@ -85,6 +86,7 @@ print(browser.title)
 
 * The cons of imputation:
 
+
     * The standard errors of any estimates made during analyses following imputation can tend to be too small.
 
     * The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
@@ -93,6 +95,7 @@ print(browser.title)
 
 * Other:
 
+
     * dplyr::case_when
 
     * na.omit(): Similar to complete cases.
@@ -100,69 +103,3 @@ print(browser.title)
     * mean of each column = df.mean(axis = 0) || df.mean(axis = 'index' )
 
     * mean of each row = df .mean(axis = 1) || df .mean(axis = 'columns' ) 
-
-## Data Table
-
-* Operations done by reference
-
-* dt[i, j, by] : subset by i calculate by j grouped using by
-
-* 1: numeric | 1L: integer
-
-* NA_integer_: integer
-
-* DT[.N] : prints last row
-
-* names(DT): colnames
-
-* dim(DT): dimensions
-
-* DT[, .(A, B)]: returns two columns
-
-* DT[, c(A, B)]: returns a concatenated vector
-
-* DT[, .(sum_c = sum(C)]
-
-* DT[, plot(A, C)]
-
-* DT[, A:=NULL]: Remove column A
-
-* DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
-
-* DT[, .N, by = Sepal.Width]: .N is the count of each group
-
-* DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
-
-* dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
-
-* for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
-
-* setnames(DT, 'y', 'z'): changes colname from y to z
-
-* setkey(DT, A, B)
-
-* DT[.('b')]
-
-* DT[.(c('b', 'c'))]
-
-* DT[.(c('b', 'c')), mult="first"]
-
-* DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
-
-* DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
-
-* roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,6 +2,8 @@
 
 ## Transform
 
+### General
+
 * Too many levels for a category?
 
     * limit number of categories through feature selection
@@ -14,7 +16,7 @@
 
 * Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.
 
-**Imputation**
+### Imputation
 
 Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
 
@@ -33,5 +35,3 @@ Some types:
 * swarmplot
 
 * Rule of thumb for bins in histogram: `ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))`.
-
-

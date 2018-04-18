@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="code-snippets.html">
 
-<link rel="next" href="import-tidy.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -377,164 +377,320 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Cribsheeet</h1>
-</div>
-<div id="workflow" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Workflow</h1>
-<div id="preamble" class="section level2">
-<h2><span class="header-section-number">1.1</span> Preamble</h2>
-<p>A typical data science workflow can be framed as following these steps:</p>
+<div id="general-6" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> General</h1>
+<div id="python-1" class="section level2">
+<h2><span class="header-section-number">8.1</span> Python</h2>
 <ul>
-<li><p>Business: start with a business question, define the goal and measure of success</p></li>
-<li><p>Data: find, access and explore the data</p></li>
-<li><p>Features: extract, assess and evaluate, select and sort</p></li>
-<li><p>Models: find the right model for the problem at hand, compare, optimize, and fine tune</p></li>
-<li><p>Communication: Interpret and communicate the results</p></li>
-<li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
-<li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
+<li><p><a href="https://chrisalbon.com/" class="uri">https://chrisalbon.com/</a></p></li>
+<li><p>pandas: isin | crosstab</p></li>
+<li><p>pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last</p></li>
+<li><p>The only float that isn’t equal to itself is nan.</p></li>
+<li><p>%matplotlib notebook: interactive plots</p></li>
+<li><p>Memory storage: use pd.copy to create a deep copy instead of a shallow copy</p></li>
+<li><p>IPy: %who or %whos shows defined variables &amp; %reset resets them</p></li>
+<li><p>Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)</p></li>
+<li><p>Debugging: import pdb | pdb.set_trace(),</p></li>
+<li><p>dir() gives a list of in scope variables</p></li>
+<li><p>globals() gives a dictionary of global variables</p></li>
+<li><p>locals() gives a dictionary of local variables</p></li>
 </ul>
-<p>More succinctly, as per Hadley Wickham:</p>
-<p>import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
-<p>My combination of the two:</p>
-<p>preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
-<p>Another note is that one way to structure projects is to write user stories a la software engineering.</p>
-<p>What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this <a href="https://gfleetwood.github.io/noted-resources/data_science.html">page</a>.</p>
-</div>
-<div id="annotated-checklist" class="section level2">
-<h2><span class="header-section-number">1.2</span> Annotated Checklist</h2>
-<div id="preparation" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Preparation</h3>
+<p><strong>Vanderplas Jupyter</strong></p>
 <ul>
-<li><p>Understand the business question, goals, and measures of success</p></li>
-<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
-<li><p>Structure project as user stories</p></li>
-<li><p>Initiliaze <a href="https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R">base project directory</a> and set up versioning.</p></li>
-<li><p>Initialize report to track and summarise work and to do list.</p></li>
-<li><p>Remember to use atomic commit messages</p></li>
+<li><p>create helper functions and units tests as R/py for Rmd/ipynb</p></li>
+<li><p>pytest/hypothesis for testing</p></li>
+<li><p>use makefile to run cmd commands</p></li>
+<li><p>Write file with date: df.to_csv(’{}_model.csv’.format(str(datetime.datetime.now()).split(‘’)[0]))</p></li>
+<li><p>Make package for workflow with data (<strong>init</strong>.py) and use this formation for function docs:</p></li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fun(a):
+  <span class="co">#Role</span>
+  <span class="co">#-----</span>
+  <span class="co">#Does something</span>
+  
+  <span class="co">#Parameters</span>
+  <span class="co">#---------</span>
+  <span class="co">#Accepts something</span>
+  
+  <span class="co">#Returns</span>
+  <span class="co">#-------</span>
+  <span class="co">#Returns something</span>
+  
+  <span class="cf">return</span>(a)</code></pre></div>
 </div>
-<div id="import" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Import</h3>
+<div id="r-1" class="section level2">
+<h2><span class="header-section-number">8.2</span> R</h2>
 <ul>
-<li><p>Sampling from data if its too large</p>
-<ul>
-<li><a href="https://pypi.python.org/pypi/subsample">subsample package</a> in Python</li>
-<li><a href="https://stackoverflow.com/a/22262726/6627726">sqldf library</a> in R</li>
-</ul></li>
-<li><p><a href="https://github.com/thombashi/sqlitebiter">Sqlite Converter</a></p></li>
-<li><p><a href="https://dataset.readthedocs.io/en/latest/">Easy Database Management</a></p></li>
+<li><p>rm(list = ls()): Remove all objects in the current workspace</p></li>
+<li><p>cut(): Transform a numeric variable into a categorical variable.</p></li>
+<li><p>car: recode (good for dummying)</p></li>
+<li><p>Examine the objects in the workspace: ls.str()</p></li>
+<li><p>This is how you dynamically update a value in Rmarkdown: x = <em>backtick</em> r x <em>backtick</em>.</p></li>
 </ul>
-</div>
-<div id="tidy" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Tidy</h3>
+<p><strong>R for Everything Talk</strong></p>
 <ul>
-<li><p><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>. In R: widyr, tidyr, dplyr.</p></li>
-<li><p>Figure out what you’re trying to do with the data.</p></li>
-<li><p>See what the data looks like: types of variables, the first and last few observations, missing values or outliers.</p>
-<ul>
-<li><a href="https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/">xray</a></li>
-<li><a href="https://github.com/ropenscilabs/skimr">skimr</a></li>
-<li><a href="https://github.com/ujjwalkarn/xda">xda</a></li>
-<li><a href="https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html">janitor</a></li>
-<li>scipy.stats.describe()</li>
-<li>outlier detection: interquartile range, kernel density estimation, bonferroni test</li>
-</ul></li>
+<li><p>dir.exists | dir.create | download.file</p></li>
+<li><p>untar | unlink | file.info</p></li>
+<li><p>dir | file.rename | file.copy</p></li>
+<li><p>count.fields | system</p></li>
+<li><p>dplyr five main actions: select, filter, arrange, mutate, summarize.</p></li>
 </ul>
 </div>
-<div id="utransform" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> uTransform</h3>
+<div id="git" class="section level2">
+<h2><span class="header-section-number">8.3</span> Git</h2>
 <ul>
-<li><p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression. A package for imputation <a href="https://cran.r-project.org/web/packages/simputation/index.html">in R</a></p></li>
-<li><p>Look at missingness. IN Python there are <a href="https://github.com/njtierney/naniar">naniar</a> and <a href="https://github.com/ResidentMario/missingno">missingno</a> packages. In R there is the <a href="https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html">VIM library</a>.</p></li>
-<li><p>An R library for <a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist">categorical dissimilarity</a></p></li>
-<li><p><a href="https://github.com/VerbalExpressions/PythonVerbalExpressions">Easy Regex</a></p></li>
-<li><p>Writing sql in pandas: <a href="https://github.com/yhat/pandasql" class="uri">https://github.com/yhat/pandasql</a></p></li>
-<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
-<li><p>Check for blank spaces and replace with NA. In R: <code>df[df==&quot;&quot;] = NA</code>.</p></li>
-<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
+<li><p>“Just learned something cool- when you screw up a git merge, you can use git reset –hard master@{”300 minutes ago“} with any time quantity you want in there to get back to where things were a period of time ago.” <a href="https://twitter.com/data_stephanie/status/968226587547258886">[source]</a></p></li>
+<li><p>Add upstream to update a forked repo with the original: remote add upstream repo_url</p></li>
+<li><p>To undo git add . use git reset (no dot)</p></li>
+<li><p>git config –global credential.helper ‘cache –timeout=10000000’</p></li>
+<li><p>Update chnages from original repo, put in new branch: git fetch upstream</p></li>
+<li><p>Merge the upstream chnages to master on your local machine: git merge upstream/master</p></li>
+<li><p>Update local repo with master changes: git pull origin master</p></li>
+<li><p>git diff (–cache) | git rm –cached ‘t.py’ //remove from staging area</p></li>
+<li><p>git show version_name + git branch (–merged, –no-merged) + git merge fix20</p></li>
+<li><p>never rebase commits to public repo + rebase: branch working with behind in commit</p></li>
+<li><p>use revert (change commit and log the change) + dont use reset: erases commit and doesnt log.</p></li>
+<li><p>get fork url use: git clone url + git remote add upstream url: ref original repo</p></li>
+<li><p>git fetch upstream: pull changes fro original repo + git push origin master: push stuff to clone</p></li>
+<li><p>git merge upstream/master: merge github and local + make pull request, send pull request</p></li>
+<li><p>Reset: Move master and working directory.</p></li>
+<li><p>Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.</p></li>
 </ul>
 </div>
-<div id="uvisualize" class="section level3">
-<h3><span class="header-section-number">1.2.5</span> uVisualize</h3>
+<div id="other-3" class="section level2">
+<h2><span class="header-section-number">8.4</span> Other</h2>
 <ul>
-<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
-<li><p>Trendlines &amp; Histograms</p></li>
-<li><p>Confidence intervals</p></li>
-<li><p>Compare the distributions of variables with overlayed density plots</p></li>
-<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships</p></li>
-<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
+<li>Cheatsheets: <a href="https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5">1</a> | <a href="https://github.com/kailashahirwar/cheatsheets-ai">2</a> | <a href="https://github.com/juliangaal/python-cheat-sheet">3</a>:<a href="http://www.datasciencefree.com/cheatsheets.html">4</a></li>
 </ul>
 </div>
-<div id="umodel" class="section level3">
-<h3><span class="header-section-number">1.2.6</span> uModel</h3>
+<div id="yaml" class="section level2">
+<h2><span class="header-section-number">8.5</span> YAML</h2>
+<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:</p>
+<p><code>conda env export &gt; environment.yaml</code></p>
+<p>The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:</p>
+<p><code>conda env create -f environment.yaml</code></p>
+<p>This will create a new environment with the same name listed in environment.yaml.</p>
+</div>
+<div id="ab-testing-overview" class="section level2">
+<h2><span class="header-section-number">8.6</span> AB Testing Overview</h2>
+<p>Guide: Choose metric (CTR), review stats (Hypothesis Testing), design, analyse</p>
+<p>Need to have clear control and thing to test. Also need time. Frequency of customer interaqction is important.</p>
+<p>shopping and searching not independent events.</p>
+<p>Point estimate of CTR (users who clicked)/users. Need margin of error for estimate. Approximate binomial by normal if N*p &amp; N(1-p) &gt; 5.</p>
+<p>marin of error = Z*(stndad error)</p>
+<p>se = sqrt(p(1-p)/n)</p>
+<p>Z for 95% s 1.96 and 2.58 for 99%.</p>
+<p>for Two samples calculate a pooled CTR point estimate and standard error.</p>
+<p>Need to be substantive (a worthy difference) in addition to being statistically significant. Some changes might not be useful due to the resources one might want to allocate.</p>
+<p>Result are repeatable (stat sig) bar should be lower than business interesting (practically sig)</p>
+<p>Stat Power: How many page view necessary to get a stat sig result.</p>
+<p>Size v Power: The smaller the effect or increased confidence you want to detect/have (greater power of experiment), the larger the sample you need to use.</p>
+<p>alpha = P(reject null when true) beta = P(accept null when false)</p>
+<p>small sample: low alpha, high beta larger sample: low alpha, low beta</p>
+<p>1- alpha = confidence level 1 - beta = sensitivity (often 80%)</p>
+<p>practical significance: 2%, alpha = 0.05, beta = 0.2</p>
+<p>sample size dp_to ctr (increase in se), confidence level, sensitivity sample size invp_to practical sig (larger changes easier to detect)</p>
+<p>above is design of experiment. below is analysis:</p>
+<p>estimate diff: experimental prop - control prop margin of error = z*se</p>
+<p>conf int: estimated diff +/- margin of error</p>
+<div id="policy-ethics" class="section level3">
+<h3><span class="header-section-number">8.6.1</span> Policy &amp; Ethics</h3>
+<p>In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.</p>
+<p>Next, what benefits might result from the study? Even if the risk is minimal, how might the results help?</p>
+<p>Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.</p>
+<p>Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?</p>
+<p>Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:</p>
+<p>Are participants facing more than minimal risk? Do participants understand what data is being gathered? Is that data identifiable? How is the data handled?</p>
+<p>Internal process recommendations Finally, regarding internal process of data handling, we recommend that:</p>
+<p>Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).</p>
+<p>All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.</p>
+<p>rate better for usability test than prob</p>
+</div>
+<div id="choosing-characterizing-metrics" class="section level3">
+<h3><span class="header-section-number">8.6.2</span> Choosing &amp; Characterizing Metrics</h3>
+<p><strong>Define</strong></p>
+<p>Make sure to granularize funnel</p>
+<p><strong>Intuition</strong></p>
+<p>NA</p>
+<p><strong>Characterize</strong></p>
+<p>Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data</p>
+<p>temporal effects across hours, days, weeks are important</p>
+<p>different browsers screw with the CTR depending on how they deal with JS</p>
+<p>Can use cookies to track users</p>
+<p>Metric definitions</p>
+<p>Def #1 (Cookie probability): For each <time interval>, number of cookies that click divided by number of cookies</p>
+<p>Def #2 (Pageview probability): Number of pageviews with a click within <time interval> divided by number of pageviews</p>
+<p>Def #3 (Rate): Number of clicks divided by number of pageviews</p>
+<p>CTR vs CTP: The first can be &gt;1.</p>
+<p>Take into consideration mean and median. Median is robust but might not be useful so look at percentiles.</p>
+<p>Measuring sensitiviyt and robustness: 1) Running experiments to see if metrics move as predicted. A vs A experiments: Measure people who saw the same thing to see if there is a difference between them according to the metric or its too sensitive. Look at previous experiments. 2) Retrospective analysis of logs to see how the metrics responded in the past.</p>
+<p>Metric For Loading Vid: Look at distribution of load times for vid. Want a robust metric that doesn’t really change for comparable vids. But wnat a metric that is sensitive to a change that you care about like resolution.</p>
+<p>How to compare experiment vs control: difference or relative change. Relative change allows you to keep same significance boundary.</p>
+<p>Check that praticial sig level is good for metric. Need to have handle on variability for confidence interval.</p>
+<p>sign test: Good for looking to implement a change, but doesn’t give effect size.</p>
+<p>empirical vs analytic: underlying distribution could be weird so do empirical. Analyticcal for simple metrics. If empirical and anlytical don’t agree then run AvA test.</p>
+<p>A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don’t have enough traffic for a big A v A test.</p>
+</div>
+<div id="designing-an-experiment" class="section level3">
+<h3><span class="header-section-number">8.6.3</span> Designing An Experiment</h3>
+<p><strong>Choose Subject</strong></p>
+<p>Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).</p>
+<p>Intra-user vs inter-user experiment.</p>
+<p><strong>Choose Population</strong></p>
+<p>Size</p>
+<p>Duration</p>
+<p>Cohort: People who enter the experiment at the same time.</p>
+<p>Cohort &gt; Population: Learning effects, user retention</p>
+<p>Can reduce sample if just targeting english speaking traffic</p>
+<p>When going to run experiment: holiday or not? How many people to put through experiment and control?</p>
+<p><strong>Analyzing Results</strong></p>
+<p>Sanity Checks:</p>
+<p>Pass all before move on</p>
+<p>Good invariants: # of events, video load time (user has no control over it). Want these to be about the same for experiment and control.</p>
+<p>Single Metric:</p>
+<p>sign test</p>
+<p>Multiple Metrics:</p>
+<p>More metrics increase false positive chance. Use Bonferroni assumption: makes no independence assumption and is conservative.</p>
+<p>margin of error smaller than observed diff so the confidence interval won’t include 0.</p>
+<p>Different strategies: family-wise error rate, false discovery rate,</p>
+<p>Gotchas:</p>
+<p>Simpson’s Paradox</p>
+<p>Usually A/B testing works for testing changes in elements in the web page. A/B testing framework is following sequence:</p>
+<p>Design a research question. Choose test statistics method or metrics to evaluate experiment. Designing the control group and experiment group. Analyzing results, and draw valid conclusions.</p>
+</div>
+</div>
+<div id="networks" class="section level2">
+<h2><span class="header-section-number">8.7</span> Networks</h2>
+<p>‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc. (Statistical Analysis of Complete Social Networks</p>
+<div id="networkx" class="section level3">
+<h3><span class="header-section-number">8.7.1</span> Networkx</h3>
+<p>Import necessary modules and draw graph.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+<span class="im">import</span> networkx <span class="im">as</span> nx
+nx.draw(T_sub)
+plt.show()</code></pre></div>
+<p>Get the nodes of interest.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">noi <span class="op">=</span> [n <span class="cf">for</span> n, d <span class="kw">in</span> T.nodes(data<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> d[<span class="st">&#39;occupation&#39;</span>] <span class="op">==</span> <span class="st">&#39;scientist&#39;</span>]
+<span class="co">### Use a list comprehension to get the edges of interest: eoi</span>
+eoi <span class="op">=</span> [(u, v) <span class="cf">for</span> u, v, d <span class="kw">in</span> T.edges(data<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> d[<span class="st">&#39;date&#39;</span>] <span class="op">&lt;</span> date(<span class="dv">2010</span>, <span class="dv">1</span>, <span class="dv">1</span>)]
+<span class="co">### Set the weight of the edge</span>
+weight <span class="op">=</span> <span class="dv">2</span>
+<span class="cf">for</span> u, v, d <span class="kw">in</span> T.edges(data<span class="op">=</span><span class="va">True</span>):
+  <span class="co"># Check if node 293 is involved</span>
+  <span class="cf">if</span> <span class="dv">293</span> <span class="kw">in</span> [u,v]:
+    
+    <span class="co"># Set the weight to 1.1</span>
+    T[u][v][<span class="st">&#39;weight&#39;</span>] <span class="op">=</span> <span class="fl">1.1</span></code></pre></div>
+</div>
+</div>
+<div id="stats" class="section level2">
+<h2><span class="header-section-number">8.8</span> Stats</h2>
+<p>Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:</p>
+<p><span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
+<p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
 <ul>
-<li><p>Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
-<li><p>Pre-processing: <a href="https://github.com/WinVector/vtreat" class="uri">https://github.com/WinVector/vtreat</a></p></li>
-<li><p>Pipelines &amp; Feature Unions</p></li>
-<li><p>Do feature selection</p>
+<li><p>Type I Error: Saying there is an effect when there isn’t one. Type II error: concluding there is no effect when, in fact, there is one.</p></li>
+<li><p>The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.</p></li>
+<li><p>Probably the most useful types of statistics for skewed probability distributions are quantiles.</p></li>
+<li><p>Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!</p></li>
+<li><p>Random sampling &amp; random assignment: generalizable &amp; causal</p></li>
+<li><p>Get 95% ci around p-value</p></li>
+<li><p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p></li>
+<li><p>Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.</p></li>
+<li><p><a href="https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html">Effect size</a></p></li>
+<li><p>jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics</p></li>
+<li><p>box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series</p></li>
+<li><p>shapiro.test: Test for normality</p></li>
+<li><p>Sum of normally distributed random variables: sum of means &amp; sum of variances</p></li>
+<li><p>Zero correlation doesn’t mean independent variables. Covariance only determines linear relationships.</p></li>
+<li><p>test heteroscedaticity: breusch-pagan or ncv test</p></li>
+<li><p>Test Normality: Shapiro–Wilk test is a test of normality</p></li>
+<li><p>Bypass inferential stats if features at least 1/10 of data points.</p></li>
+<li><p>The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.</p></li>
+<li><p>One Sample T-test: To examine the average difference between a sample and the known value of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
+<li><p>Two Sample T-test: To examine the average difference between two samples drawn from two different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.</p></li>
+<li><p>One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent.</p></li>
+<li><p>Chi-Squared Test of Independence: To test whether two categorical variables are independent. Assumes the sample observations are randomly drawn and independent.</p></li>
+<li><p>F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
+<li><p>Barlett Test: F-Test for more than two populations.</p></li>
+<li><p>If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won’t. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.</p></li>
+<li><p>Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.</p></li>
+<li><p>Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.</p></li>
+<li><p>Independent rvs are uncorrelated. That is Cor (X,Y)=0</p></li>
+<li><p>Don’t sum sd’s, sum variances.</p></li>
+<li><p>One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.</p></li>
+<li><p>When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.</p></li>
+<li><p>When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.</p></li>
+<li><p>When do we use One-Way ANOVA? To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.</p></li>
+<li><p>When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.</p></li>
+<li><p>To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.</p></li>
+<li><p>The degrees of freedom is the number of data rows minus the number of coefficients fit.</p></li>
+<li><p>Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.</p></li>
+</ul>
+<div id="inference-package" class="section level3">
+<h3><span class="header-section-number">8.8.1</span> <a href="https://cran.r-project.org/web/packages/infer/infer.pdf">Inference Package</a></h3>
+<p>Main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">4747</span>)
+perm_slope &lt;-<span class="st"> </span>twins <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">specify</span>(Foster <span class="op">~</span><span class="st"> </span>Biological) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">hypothesize</span>(<span class="dt">null =</span> <span class="st">&quot;independence&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">generate</span>(<span class="dt">reps =</span> <span class="dv">10</span>, <span class="dt">type =</span> <span class="st">&quot;permute&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">calculate</span>(<span class="dt">stat =</span> <span class="st">&quot;slope&quot;</span>)</code></pre></div>
+</div>
+<div id="statistical-tests" class="section level3">
+<h3><span class="header-section-number">8.8.2</span> Statistical Tests</h3>
+<p>The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The “30” rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means.</p>
+<ol style="list-style-type: decimal">
+<li><p>for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]</p></li>
+<li><p>The approximation becomes better with larger n, given other things remaining the same.</p></li>
+</ol>
+<p>However if you are wondering why 30 ? why not 25 or 40 or something else ? Note that actual answer will depend:</p>
+<ol style="list-style-type: decimal">
+<li><p>how much error are you going to tolerate</p></li>
+<li><p>size of the effect</p></li>
+<li><p>exact distribution family (like t vs chi-square vs gamma)</p></li>
+</ol>
+<p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β. In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down. Statistical power is affected chiefly by the size of the effect and the size of the sample used to detect it. Bigger effects are easier to detect than smaller effects, while large samples offer greater test sensitivity than small samples.</p>
+<p>The following four quantities have an intimate relationship:</p>
 <ul>
-<li>Variance Threshold</li>
-<li>Univariate Feature Selection: skl_fs.chi2 | f_regression | f_classification</li>
-<li>SelectKBest/SelectPercentile</li>
-<li>sklearn: feature_selection.RFE(CV)</li>
-<li><a href="https://github.com/EpistasisLab/scikit-rebate">Rebate</a></li>
-<li><a href="https://github.com/scikit-learn-contrib/boruta_py">Boruta</a></li>
-</ul></li>
-<li><p>Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize</p></li>
-<li><p>Model Selection</p>
+<li><p>sample size</p></li>
+<li><p>effect size</p></li>
+<li><p>significance level = P(Type I error) = probability of finding an effect that is not there</p></li>
+<li><p>power = 1 - P(Type II error) = probability of finding an effect that is there</p></li>
+</ul>
+<p>Given any three, we can determine the fourth.</p>
+<p><strong>Other</strong></p>
 <ul>
-<li><a href="https://github.com/DistrictDataLabs/yellowbrick" class="uri">https://github.com/DistrictDataLabs/yellowbrick</a></li>
-<li><a href="https://edublancas.github.io/sklearn-evaluation/">Sklearn Evaluation</a></li>
-<li><a href="https://github.com/reiinakano/scikit-plot">skl-plot</a></li>
-</ul></li>
-<li><p>Model Explanability</p>
-<ul>
-<li><a href="https://github.com/marcotcr/lime">lime</a></li>
-<li><a href="https://github.com/TeamHG-Memex/eli5">eli5</a></li>
-</ul></li>
-<li><p>Tuning</p>
-<ul>
-<li><a href="https://github.com/hyperopt/hyperopt-sklearn" class="uri">https://github.com/hyperopt/hyperopt-sklearn</a></li>
-<li><a href="https://github.com/rsteca/sklearn-deap" class="uri">https://github.com/rsteca/sklearn-deap</a></li>
-</ul></li>
-<li><p>Deal with potential class imbalance</p></li>
-<li>Gradient boosting</li>
-<li><p><a href="http://contrib.scikit-learn.org/imbalanced-learn/stable/" class="uri">http://contrib.scikit-learn.org/imbalanced-learn/stable/</a></p></li>
-<li><p>Create ensembles: mlxtend in Python</p></li>
-<li><p>Choose Statistical Test</p>
-<ul>
-<li><a href="http://www.ats.ucla.edu/stat/mult_pkg/whatstat/">1</a></li>
-<li><a href="http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt">2</a></li>
-<li>infer library</li>
-</ul></li>
-<li><p>Check for correlations: <a href="https://github.com/drsimonj/corrr" class="uri">https://github.com/drsimonj/corrr</a></p></li>
-<li><p>Ensembling: mlxtend in Python, and caretEnsemble in R.</p></li>
-<li><p>Look at learning curves: <a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" class="uri">https://www.dataquest.io/blog/learning-curves-machine-learning/</a></p></li>
+<li><p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.</p></li>
+<li><p>For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.</p></li>
+<li><p><a href="http://www.evanmiller.org/ab-testing/sample-size.html">Power Analysis Calculator</a></p></li>
 </ul>
 </div>
-<div id="communicate" class="section level3">
-<h3><span class="header-section-number">1.2.7</span> Communicate</h3>
+<div id="stats-for-hackers" class="section level3">
+<h3><span class="header-section-number">8.8.3</span> Stats For Hackers</h3>
 <ul>
-<li>Usually an R Markdown document.</li>
+<li><p>Methods: Simluation, Boostrapping (with replacement, not good with ranks), Shuffling (Works when assumption is that the data are the same, representative samples, non-longitudinal data), &amp; Cross Validation.</p></li>
+<li><p>Assumes iid.</p></li>
 </ul>
 </div>
-<div id="deployment-maintenance" class="section level3">
-<h3><span class="header-section-number">1.2.8</span> Deployment / Maintenance</h3>
+<div id="think-stats" class="section level3">
+<h3><span class="header-section-number">8.8.4</span> Think Stats</h3>
 <ul>
-<li><p>Write tests</p>
-<ul>
-<li><a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a></li>
-<li><a href="http://www.tdda.info/">2</a></li>
-<li><a href="http://stochasticsolutions.com/">3</a></li>
-<li><a href="https://github.com/ericmjl/data-testing-tutorial">Data Testing</a></li>
-<li><a href="https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765">ML Testing</a></li>
-<li><a href="https://github.com/data-cleaning/validate">Data Validation</a></li>
-<li>pytest | hypothesis | testthat</li>
-<li><a href="https://rdrr.io/cran/checkmate/">Argument Checks</a><a href="https://github.com/shawnbrown/datatest">PyValidation</a></li>
-</ul></li>
-<li><p>Write helper functions.</p></li>
+<li><p>Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.</p></li>
+<li><p>The sampling distribution is the distribution of the samples mean.</p></li>
+<li><p>The CDF is the function that maps values to their percentile rank in a distribution.</p></li>
+<li><p>I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.</p></li>
+<li><p>CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).</p></li>
+<li><p>Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.</p></li>
+<li><p>Statistical power is the probability that the test will be positive if the null hypothesis is false. In general, the power of a test depends on the sample size, the magnitude of the effect, and the threshold α.</p></li>
+<li><p>If there are no outliers, the sample mean minimizes the mean squared error</p></li>
+<li><p>An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.</p></li>
+<li><p>A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same units, they come from different distributions. There are two common solutions to these problems:</p></li>
 </ul>
+<ol style="list-style-type: decimal">
+<li><p>Transform all values to standard scores. This leads to the Pearson coefficient of correlation.</p></li>
+<li><p>Transform all values to their percentile ranks. This leads to the Spearman coefficient.</p></li>
+</ol>
 
 </div>
 </div>
@@ -544,8 +700,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
+<a href="code-snippets.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="import-tidy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -575,7 +731,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-general.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

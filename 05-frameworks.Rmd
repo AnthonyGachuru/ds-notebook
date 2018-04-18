@@ -1,4 +1,4 @@
-# Frameworks {-}
+# Frameworks
 
 ## PySpark
 
@@ -17,6 +17,22 @@ from pyspark.sql import SparkSession
 
 sc = pyspark.SparkContext()
 spark = SparkSession.builder.appName('example').getOrCreate()
+
+import findspark
+findspark.init()
+import pyspark
+import random
+
+sc = pyspark.SparkContext(appName="Pi")
+num_samples = 100000000
+def inside(p):     
+    x, y = random.random(), random.random()
+    return x*x + y*y < 1
+count = sc.parallelize(range(0, num_samples)).filter(inside).count()
+pi = 4 * count / num_samples
+print(pi)
+
+sc.stop()
 ```
 
 Libs
@@ -373,7 +389,7 @@ timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
 
 attributes(clf_lr): results, finalModel
 
-## Preprocessing
+### Preprocessing
 
 ```{r, eval = FALSE}
 # Apply median imputation: model
@@ -388,9 +404,7 @@ model <- train(
 dotplot(resamples, metric = "ROC")
 
 min(model$results$RSME)
-```
 
-```{r, eval = FALSE}
 # Identify near zero variance predictors: remove_cols
 remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
                            freqCut = 2, uniqueCut = 20)
@@ -402,7 +416,7 @@ all_cols = colnames(bloodbrain_x)
 bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
 ```
 
-## LM
+### LM
 
 ```{r basic_lm, eval = FALSE}
 # Set seed
@@ -419,9 +433,7 @@ error <- p - diamonds$price
 
 # Calculate RMSE
 sqrt(mean(error^2))
-```
 
-```{r lm_with_cv, eval = FALSE}
 # Fit lm model using 5 x 5-fold CV: model
 model <- train(
   medv ~ ., 
@@ -434,7 +446,7 @@ model <- train(
 )
 ```
 
-## Lasso/Ridge
+### Lasso/Ridge
 
 Alpha controls balance between lasso and ridge. Lambda controls penalty.
 
@@ -461,7 +473,7 @@ model
 max(model[["results"]][["ROC"]])
 ```
 
-## LogReg
+### Logistic Regression
 
 ```{r, eval = FALSE}
 # Fit glm model
@@ -477,7 +489,7 @@ p_class <- ifelse(p > 0.50, "M", "R")
 confusionMatrix(p_class, test$Class)
 ```
 
-## Train-Test Split, Folds, & CV
+### Train-Test Split, Folds, & CV
 
 ```{r, eval = FALSE}
 # Shuffle row indices: rows
@@ -508,7 +520,7 @@ myControl <- trainControl(
 )
 ```
 
-## Random Forest
+### Random Forest
 
 ```{r, eval = FALSE}
 # Fit random forest: model
@@ -528,7 +540,7 @@ model
 plot(model)
 ```
 
-## SVM
+### SVM
 
 ```{r, eval = FALSE}
 clf_svm <- train(
@@ -539,7 +551,7 @@ clf_svm <- train(
                  )
 ```
 
-## Model Selection
+### Model Selection
 
 Now that you have fit two models to the churn dataset, it's time to compare their out-of-sample predictions and choose which one is the best model for your dataset.
 
@@ -560,9 +572,7 @@ bwplot(resamples, metric = 'ROC')
 
 # Create xyplot
 xyplot(resamples)
-```
 
-```{r, eval = FALSE}
 # Predict on test: p
 p = predict(model, test, type = 'response')
 
@@ -572,7 +582,7 @@ colAUC(p, test$Class, plotROC = TRUE)
 
 * caret: finalModel of model object
 
-## Stacking
+### Stacking
 
 caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
 
@@ -586,5 +596,200 @@ summary(stack)
 
 & caretEnnsemble
 
+## Data Table
 
+* Operations done by reference
+
+* dt[i, j, by] : subset by i calculate by j grouped using by
+
+* 1: numeric | 1L: integer
+
+* NA_integer_: integer
+
+* DT[.N] : prints last row
+
+* names(DT): colnames
+
+* dim(DT): dimensions
+
+* DT[, .(A, B)]: returns two columns
+
+* DT[, c(A, B)]: returns a concatenated vector
+
+* DT[, .(sum_c = sum(C)]
+
+* DT[, plot(A, C)]
+
+* DT[, A:=NULL]: Remove column A
+
+* DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
+
+* DT[, .N, by = Sepal.Width]: .N is the count of each group
+
+* DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
+
+* dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
+
+* for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+
+* setnames(DT, 'y', 'z'): changes colname from y to z
+
+* setkey(DT, A, B)
+
+* DT[.('b')]
+
+* DT[.(c('b', 'c'))]
+
+* DT[.(c('b', 'c')), mult="first"]
+
+* DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
+
+* DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
+
+* roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
+
+## TensorFlow
+
+* In TensorFlow, we indicate a feature's data type using a construct called a feature column. Feature columns store only a description of the feature data; they do not contain the feature data itself.
+
+* Amazingly enough, performing gradient descent on a small batch or even a batch of one example is usually more efficient than the full batch. After all, finding the gradient of one example is far cheaper than finding the gradient of millions of examples. To ensure a good representative sample, the algorithm scoops up another random small batch (or batch of one) on every iteration.
+
+* SGD & Mini-Batch Gradient Descent
+
+Could compute gradient over entire data set on each step, but this turns out to be unnecessary. Computing gradient on small data samples works well. On every step, get a new random sample
+
+Stochastic Gradient Descent: one example at a time
+
+Mini-Batch Gradient Descent: batches of 10-1000. Loss & gradients are averaged over the batch
+
+## Keras 
+
+Here's a [Hello World](https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb) and the general framework:
+
+* declare: sequential
+
+* add layers input-hidden-output
+
+* compile
+
+* fit
+
+Keras only uses numpy arrays. 
+
+* keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
+
+### Regression
+
+* loss = mean_squared_error
+
+* metric: rmse
+
+* activation_function = relu
+
+```{python, eval = FALSE}
+import keras
+from keras.layers import Dense
+from keras.models import Sequential
+
+# Specify the model: Two hidden layers
+model = Sequential()
+
+## Input
+n_cols = predictors.shape[1]
+model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
+
+# Hidden
+model.add(Dense(32, activation='relu'))
+
+# Output
+model.add(Dense(1))
+
+# Compile the model
+model.compile(optimizer = 'adam', loss = 'mean_squared_error') 
+
+# Fit the model
+model.fit(predictors, target)
+
+#Look at summary
+model.summary()
+
+# Calculate predictions: predictions
+predictions = model.predict(pred_data)
+```
+
+
+### Classification
+
+* loss = categorical_crossentropy
+
+* metric = accuracy
+
+* activation_function = softmax
+
+* output layer with stuff equal to number of categorical groups
+
+```{python, eval = FALSE}
+import keras
+from keras.layers import Dense
+from keras.models import Sequential
+
+# Specify the model: Two hidden layers
+n_cols = predictors.shape[1]
+model = Sequential()
+
+## Input
+model.add(Dense(50, activation='relu', input_shape = (n_cols,)))
+
+# Hidden
+model.add(Dense(32, activation='relu'))
+
+# Output
+model.add(Dense(2, activation = 'softmax'))
+
+# Compile the model
+model.compile(optimizer = 'sgd', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+
+# Fit the model
+model.fit(predictors, target)
+
+#Look at summary
+model.summary()
+
+#Calculate predictions: predictions
+predictions = model.predict(pred_data)
+
+#Calculate predicted probability of survival
+predicted_prob_true = predictions[:, 1]
+```
+
+### Another Example
+
+```{python, eval = FALSE}
+# Import the SGD optimizer
+from keras.optimizers import SGD
+
+# Create list of learning rates: lr_to_test
+lr_to_test = [.000001, 0.01, 1]
+
+# Loop over learning rates
+for lr in lr_to_test:
+    print('Testing model with learning rate: ')
+    
+    # Build new model to test, unaffected by previous models
+    model = get_new_model()
+    
+    # Create SGD optimizer with specified learning rate: my_optimizer
+    my_optimizer = SGD(lr = lr)
+    
+    # Compile the model
+    model.compile(optimizer = my_optimizer, loss = 'categorical_crossentropy')
+    
+    # Fit the model
+    model.fit(predictors, 
+              target, 
+              validation_split = 0.3, 
+              epochs = 20, 
+              callbacks = [early_stopping_monitor], 
+              verbose = False)
+```
 

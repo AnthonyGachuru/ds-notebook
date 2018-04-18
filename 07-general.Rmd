@@ -1,4 +1,4 @@
-# General {-}
+# General
 
 ## Python
 
@@ -177,7 +177,7 @@ margin of error = z*se
 
 conf int: estimated diff +/- margin of error
 
-#### Policy & Ethics
+### Policy & Ethics
 
 In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.
 
@@ -203,7 +203,7 @@ All data, identified or not, be stored securely, with access limited to those wh
 
 rate better for usability test than prob
 
-#### Choosing & Characterizing Metrics
+### Choosing & Characterizing Metrics
 
 **Define**
 
@@ -249,7 +249,7 @@ empirical vs analytic: underlying distribution could be weird so do empirical. A
 
 A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don't have enough traffic for a big A v A test.
 
-## Designing An Experiment
+### Designing An Experiment
 
 **Choose Subject**
 
@@ -302,12 +302,11 @@ Choose test statistics method or metrics to evaluate experiment.
 Designing the control group and experiment group.
 Analyzing results, and draw valid conclusions.
 
-
 ## Networks
 
 ‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc. (Statistical Analysis of Complete Social Networks 
 
-## Networkx
+### Networkx
 
 Import necessary modules and draw graph.
 
@@ -420,19 +419,18 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
 
-### Infer Package
+### [Inference Package](https://cran.r-project.org/web/packages/infer/infer.pdf)
 
-Main verbs:
+Main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results
 
-* specify() vars
-
-* hypothesize() 
-
-* generate() data
-
-* calculate() metrics
-
-* visualize() results
+```{r, eval = FALSE}
+set.seed(4747)
+perm_slope <- twins %>%
+  specify(Foster ~ Biological) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10, type = "permute") %>%
+  calculate(stat = "slope")
+```
 
 ### Statistical Tests
 
@@ -506,31 +504,3 @@ units, they come from different distributions. There are two common solutions to
 1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation.
 
 2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
-
-## Other
-
-[Inference package](https://cran.r-project.org/web/packages/infer/infer.pdf)
-
-```{r, eval = FALSE}
-set.seed(4747)
-perm_slope <- twins %>%
-  specify(Foster ~ Biological) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = 10, type = "permute") %>%
-  calculate(stat = "slope")
-```
-
-Linear Regression by Year
-
-```{r, eval = FALSE}
-library(purrr)
-pga %>% 
-  select(name,year,driveavg,drivepct, score.avg) %>%
-  split(.$year) %>%
-  map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
-  map(summary)
-```
-
-
-
-

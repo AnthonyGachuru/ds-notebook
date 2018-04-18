@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="import-tidy.html">
+<link rel="prev" href="model.html">
+<link rel="next" href="frameworks.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -377,166 +377,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Cribsheeet</h1>
-</div>
-<div id="workflow" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Workflow</h1>
-<div id="preamble" class="section level2">
-<h2><span class="header-section-number">1.1</span> Preamble</h2>
-<p>A typical data science workflow can be framed as following these steps:</p>
+<div id="communicate-deploy-maintain" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Communicate, Deploy, Maintain</h1>
+<div id="shiny" class="section level2">
+<h2><span class="header-section-number">5.1</span> Shiny</h2>
 <ul>
-<li><p>Business: start with a business question, define the goal and measure of success</p></li>
-<li><p>Data: find, access and explore the data</p></li>
-<li><p>Features: extract, assess and evaluate, select and sort</p></li>
-<li><p>Models: find the right model for the problem at hand, compare, optimize, and fine tune</p></li>
-<li><p>Communication: Interpret and communicate the results</p></li>
-<li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
-<li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
-</ul>
-<p>More succinctly, as per Hadley Wickham:</p>
-<p>import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
-<p>My combination of the two:</p>
-<p>preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
-<p>Another note is that one way to structure projects is to write user stories a la software engineering.</p>
-<p>What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this <a href="https://gfleetwood.github.io/noted-resources/data_science.html">page</a>.</p>
-</div>
-<div id="annotated-checklist" class="section level2">
-<h2><span class="header-section-number">1.2</span> Annotated Checklist</h2>
-<div id="preparation" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Preparation</h3>
-<ul>
-<li><p>Understand the business question, goals, and measures of success</p></li>
-<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
-<li><p>Structure project as user stories</p></li>
-<li><p>Initiliaze <a href="https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R">base project directory</a> and set up versioning.</p></li>
-<li><p>Initialize report to track and summarise work and to do list.</p></li>
-<li><p>Remember to use atomic commit messages</p></li>
-</ul>
-</div>
-<div id="import" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Import</h3>
-<ul>
-<li><p>Sampling from data if its too large</p>
-<ul>
-<li><a href="https://pypi.python.org/pypi/subsample">subsample package</a> in Python</li>
-<li><a href="https://stackoverflow.com/a/22262726/6627726">sqldf library</a> in R</li>
-</ul></li>
-<li><p><a href="https://github.com/thombashi/sqlitebiter">Sqlite Converter</a></p></li>
-<li><p><a href="https://dataset.readthedocs.io/en/latest/">Easy Database Management</a></p></li>
-</ul>
-</div>
-<div id="tidy" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Tidy</h3>
-<ul>
-<li><p><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>. In R: widyr, tidyr, dplyr.</p></li>
-<li><p>Figure out what you’re trying to do with the data.</p></li>
-<li><p>See what the data looks like: types of variables, the first and last few observations, missing values or outliers.</p>
-<ul>
-<li><a href="https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/">xray</a></li>
-<li><a href="https://github.com/ropenscilabs/skimr">skimr</a></li>
-<li><a href="https://github.com/ujjwalkarn/xda">xda</a></li>
-<li><a href="https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html">janitor</a></li>
-<li>scipy.stats.describe()</li>
-<li>outlier detection: interquartile range, kernel density estimation, bonferroni test</li>
-</ul></li>
-</ul>
-</div>
-<div id="utransform" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> uTransform</h3>
-<ul>
-<li><p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression. A package for imputation <a href="https://cran.r-project.org/web/packages/simputation/index.html">in R</a></p></li>
-<li><p>Look at missingness. IN Python there are <a href="https://github.com/njtierney/naniar">naniar</a> and <a href="https://github.com/ResidentMario/missingno">missingno</a> packages. In R there is the <a href="https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html">VIM library</a>.</p></li>
-<li><p>An R library for <a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist">categorical dissimilarity</a></p></li>
-<li><p><a href="https://github.com/VerbalExpressions/PythonVerbalExpressions">Easy Regex</a></p></li>
-<li><p>Writing sql in pandas: <a href="https://github.com/yhat/pandasql" class="uri">https://github.com/yhat/pandasql</a></p></li>
-<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
-<li><p>Check for blank spaces and replace with NA. In R: <code>df[df==&quot;&quot;] = NA</code>.</p></li>
-<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
-</ul>
-</div>
-<div id="uvisualize" class="section level3">
-<h3><span class="header-section-number">1.2.5</span> uVisualize</h3>
-<ul>
-<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
-<li><p>Trendlines &amp; Histograms</p></li>
-<li><p>Confidence intervals</p></li>
-<li><p>Compare the distributions of variables with overlayed density plots</p></li>
-<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships</p></li>
-<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
-</ul>
-</div>
-<div id="umodel" class="section level3">
-<h3><span class="header-section-number">1.2.6</span> uModel</h3>
-<ul>
-<li><p>Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
-<li><p>Pre-processing: <a href="https://github.com/WinVector/vtreat" class="uri">https://github.com/WinVector/vtreat</a></p></li>
-<li><p>Pipelines &amp; Feature Unions</p></li>
-<li><p>Do feature selection</p>
-<ul>
-<li>Variance Threshold</li>
-<li>Univariate Feature Selection: skl_fs.chi2 | f_regression | f_classification</li>
-<li>SelectKBest/SelectPercentile</li>
-<li>sklearn: feature_selection.RFE(CV)</li>
-<li><a href="https://github.com/EpistasisLab/scikit-rebate">Rebate</a></li>
-<li><a href="https://github.com/scikit-learn-contrib/boruta_py">Boruta</a></li>
-</ul></li>
-<li><p>Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize</p></li>
-<li><p>Model Selection</p>
-<ul>
-<li><a href="https://github.com/DistrictDataLabs/yellowbrick" class="uri">https://github.com/DistrictDataLabs/yellowbrick</a></li>
-<li><a href="https://edublancas.github.io/sklearn-evaluation/">Sklearn Evaluation</a></li>
-<li><a href="https://github.com/reiinakano/scikit-plot">skl-plot</a></li>
-</ul></li>
-<li><p>Model Explanability</p>
-<ul>
-<li><a href="https://github.com/marcotcr/lime">lime</a></li>
-<li><a href="https://github.com/TeamHG-Memex/eli5">eli5</a></li>
-</ul></li>
-<li><p>Tuning</p>
-<ul>
-<li><a href="https://github.com/hyperopt/hyperopt-sklearn" class="uri">https://github.com/hyperopt/hyperopt-sklearn</a></li>
-<li><a href="https://github.com/rsteca/sklearn-deap" class="uri">https://github.com/rsteca/sklearn-deap</a></li>
-</ul></li>
-<li><p>Deal with potential class imbalance</p></li>
-<li>Gradient boosting</li>
-<li><p><a href="http://contrib.scikit-learn.org/imbalanced-learn/stable/" class="uri">http://contrib.scikit-learn.org/imbalanced-learn/stable/</a></p></li>
-<li><p>Create ensembles: mlxtend in Python</p></li>
-<li><p>Choose Statistical Test</p>
-<ul>
-<li><a href="http://www.ats.ucla.edu/stat/mult_pkg/whatstat/">1</a></li>
-<li><a href="http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt">2</a></li>
-<li>infer library</li>
-</ul></li>
-<li><p>Check for correlations: <a href="https://github.com/drsimonj/corrr" class="uri">https://github.com/drsimonj/corrr</a></p></li>
-<li><p>Ensembling: mlxtend in Python, and caretEnsemble in R.</p></li>
-<li><p>Look at learning curves: <a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" class="uri">https://www.dataquest.io/blog/learning-curves-machine-learning/</a></p></li>
-</ul>
-</div>
-<div id="communicate" class="section level3">
-<h3><span class="header-section-number">1.2.7</span> Communicate</h3>
-<ul>
-<li>Usually an R Markdown document.</li>
-</ul>
-</div>
-<div id="deployment-maintenance" class="section level3">
-<h3><span class="header-section-number">1.2.8</span> Deployment / Maintenance</h3>
-<ul>
-<li><p>Write tests</p>
-<ul>
-<li><a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a></li>
-<li><a href="http://www.tdda.info/">2</a></li>
-<li><a href="http://stochasticsolutions.com/">3</a></li>
-<li><a href="https://github.com/ericmjl/data-testing-tutorial">Data Testing</a></li>
-<li><a href="https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765">ML Testing</a></li>
-<li><a href="https://github.com/data-cleaning/validate">Data Validation</a></li>
-<li>pytest | hypothesis | testthat</li>
-<li><a href="https://rdrr.io/cran/checkmate/">Argument Checks</a><a href="https://github.com/shawnbrown/datatest">PyValidation</a></li>
-</ul></li>
-<li><p>Write helper functions.</p></li>
+<li><p>1 r process: 30 users | shiny scales linearly</p></li>
+<li><p>eventreactive()</p></li>
 </ul>
 
-</div>
 </div>
 </div>
             </section>
@@ -544,8 +393,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="import-tidy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="frameworks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -575,7 +424,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-communicate_deploy_maintain.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

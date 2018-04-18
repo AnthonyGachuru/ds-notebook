@@ -14,7 +14,7 @@ description: "A collection of quick notes on the field."
 
 ## Preamble
 
-A typical data science workflow can be framed as following these 7 steps:
+A typical data science workflow can be framed as following these steps:
 
 * Business: start with a business question, define the goal and measure of success
 
@@ -61,6 +61,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 ### Import
 
 * Sampling from data if its too large
+
     * [subsample package](https://pypi.python.org/pypi/subsample) in Python
     * [sqldf library](https://stackoverflow.com/a/22262726/6627726) in R
     
@@ -70,38 +71,34 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ### Tidy
 
-* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf)
-    * widyr | tidyr | dplyr | purrr
+* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). In R: widyr, tidyr, dplyr.
 
 * Figure out what you're trying to do with the data.
 
 * See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+
     * [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
     * [skimr](https://github.com/ropenscilabs/skimr)
-    * [Exploratory Analysis](https://github.com/ujjwalkarn/xda)
+    * [xda](https://github.com/ujjwalkarn/xda)
     * [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
     * scipy.stats.describe()
-    * Outlier Detection: Interquartile Range, Kernel density estimation, Bonferroni test
+    * outlier detection: interquartile range, kernel density estimation, bonferroni test
 
 ### uTransform
 
-* Imputation: Mean | KNN | Random | Regression | Mode
-    * [Imputation in R](https://cran.r-project.org/web/packages/simputation/index.html)
+* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. A package for imputation [in R](https://cran.r-project.org/web/packages/simputation/index.html)
 
-* Look at missingness
-    * [2](https://github.com/njtierney/naniar)
-    * [Py](https://github.com/ResidentMario/missingno)
+* Look at missingness. IN Python there are [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) packages. In R there is the [VIM library](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html).
 
-* [Categorical Dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
+* An R library for [categorical dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
 
 * [Easy Regex](https://github.com/VerbalExpressions/PythonVerbalExpressions)
 
-* https://github.com/yhat/pandasql
+* Writing sql in pandas: https://github.com/yhat/pandasql
 
 * Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
-* Check for blank spaces and replace with NA
-    * df[df==""] = NA
+* Check for blank spaces and replace with NA. In R: `df[df==""] = NA`.
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
 
@@ -123,56 +120,55 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
-^ car::vif() for multicollinearity, statsmodels.stats.outliers_influence.variance_inflation_factor
-
-* Pre-processing
-    * https://github.com/WinVector/vtreat
+* Pre-processing: https://github.com/WinVector/vtreat
 
 * Pipelines & Feature Unions
 
 * Do feature selection
+
     * Variance Threshold
-    * Univariate Feature Selection: skl_fs.chi2|f_regression|f_classification
+    * Univariate Feature Selection: skl_fs.chi2 | f_regression | f_classification
     * SelectKBest/SelectPercentile
     * sklearn: feature_selection.RFE(CV)
     * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
     * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
     
-* Do feature engineering: Standardization, dimensionality reduction, dummying
-    * sklearn.preprocessing.binarize | pandas.factorize
+* Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize
 
 * Model Selection
+
     * https://github.com/DistrictDataLabs/yellowbrick
     * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
     * [skl-plot](https://github.com/reiinakano/scikit-plot)
 
 * Model Explanability
+
     * [lime](https://github.com/marcotcr/lime)
     * [eli5](https://github.com/TeamHG-Memex/eli5)
 
 * Tuning
+
     * https://github.com/hyperopt/hyperopt-sklearn
     * https://github.com/rsteca/sklearn-deap
 
 * Deal with potential class imbalance
+
    * Gradient boosting
    * http://contrib.scikit-learn.org/imbalanced-learn/stable/
 
-* Create ensembles
-    * mlxtend
+* Create ensembles: mlxtend in Python
     
 * Choose Statistical Test
+
     * [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
     * [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
     * infer library
     
-* Check for correlations
-    * https://github.com/drsimonj/corrr
+* Check for correlations: https://github.com/drsimonj/corrr
     
-* Ensembling: mlxtend  
+* Ensembling: mlxtend in Python, and caretEnsemble in R.
 
-* Look at learning curves
-    * https://www.dataquest.io/blog/learning-curves-machine-learning/
+* Look at learning curves: https://www.dataquest.io/blog/learning-curves-machine-learning/
 
 ### Communicate
 
@@ -181,6 +177,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 ### Deployment /  Maintenance
 
 * Write tests
+
     * [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
     * [2](http://www.tdda.info/)
     * [3](http://stochasticsolutions.com/)

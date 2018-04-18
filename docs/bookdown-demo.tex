@@ -157,8 +157,7 @@
 
 \section{Preamble}\label{preamble}
 
-A typical data science workflow can be framed as following these 7
-steps:
+A typical data science workflow can be framed as following these steps:
 
 \begin{itemize}
 \item
@@ -251,13 +250,7 @@ can be found on this
 \begin{itemize}
 \item
   \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data
-  principles}
-
-  \begin{itemize}
-  \tightlist
-  \item
-    widyr \textbar{} tidyr \textbar{} dplyr \textbar{} purrr
-  \end{itemize}
+  principles}. In R: widyr, tidyr, dplyr.
 \item
   Figure out what you're trying to do with the data.
 \item
@@ -271,14 +264,14 @@ can be found on this
   \item
     \href{https://github.com/ropenscilabs/skimr}{skimr}
   \item
-    \href{https://github.com/ujjwalkarn/xda}{Exploratory Analysis}
+    \href{https://github.com/ujjwalkarn/xda}{xda}
   \item
     \href{https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html}{janitor}
   \item
     scipy.stats.describe()
   \item
-    Outlier Detection: Interquartile Range, Kernel density estimation,
-    Bonferroni test
+    outlier detection: interquartile range, kernel density estimation,
+    bonferroni test
   \end{itemize}
 \end{itemize}
 
@@ -286,43 +279,31 @@ can be found on this
 
 \begin{itemize}
 \item
-  Imputation: Mean \textbar{} KNN \textbar{} Random \textbar{}
-  Regression \textbar{} Mode
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://cran.r-project.org/web/packages/simputation/index.html}{Imputation
-    in R}
-  \end{itemize}
+  Imputation. Options include the Mean, Mode, KNN, Random, and
+  Regression. A package for imputation
+  \href{https://cran.r-project.org/web/packages/simputation/index.html}{in
+  R}
 \item
-  Look at missingness
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://github.com/njtierney/naniar}{2}
-  \item
-    \href{https://github.com/ResidentMario/missingno}{Py}
-  \end{itemize}
+  Look at missingness. IN Python there are
+  \href{https://github.com/njtierney/naniar}{naniar} and
+  \href{https://github.com/ResidentMario/missingno}{missingno} packages.
+  In R there is the
+  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM
+  library}.
 \item
-  \href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{Categorical
-  Dissimilarity}
+  An R library for
+  \href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{categorical
+  dissimilarity}
 \item
   \href{https://github.com/VerbalExpressions/PythonVerbalExpressions}{Easy
   Regex}
 \item
-  \url{https://github.com/yhat/pandasql}
+  Writing sql in pandas: \url{https://github.com/yhat/pandasql}
 \item
   Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
-  Check for blank spaces and replace with NA
-
-  \begin{itemize}
-  \tightlist
-  \item
-    df{[}df==``''{]} = NA
-  \end{itemize}
+  Check for blank spaces and replace with NA. In R:
+  \texttt{df{[}df==""{]}\ =\ NA}.
 \item
   \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned
   Stats}
@@ -351,25 +332,12 @@ can be found on this
 \subsection{uModel}\label{umodel}
 
 \begin{itemize}
-\tightlist
 \item
   Stick to rergression models for prescriptive analysis. Validate
   assumptions and tune appropriately. If using Python leverage
   statsmodels.
-\end{itemize}
-
-\^{} car::vif() for multicollinearity,
-statsmodels.stats.outliers\_influence.variance\_inflation\_factor
-
-\begin{itemize}
 \item
-  Pre-processing
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \url{https://github.com/WinVector/vtreat}
-  \end{itemize}
+  Pre-processing: \url{https://github.com/WinVector/vtreat}
 \item
   Pipelines \& Feature Unions
 \item
@@ -380,8 +348,8 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   \item
     Variance Threshold
   \item
-    Univariate Feature Selection:
-    skl\_fs.chi2\textbar{}f\_regression\textbar{}f\_classification
+    Univariate Feature Selection: skl\_fs.chi2 \textbar{} f\_regression
+    \textbar{} f\_classification
   \item
     SelectKBest/SelectPercentile
   \item
@@ -393,13 +361,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   \end{itemize}
 \item
   Do feature engineering: Standardization, dimensionality reduction,
-  dummying
-
-  \begin{itemize}
-  \tightlist
-  \item
-    sklearn.preprocessing.binarize \textbar{} pandas.factorize
-  \end{itemize}
+  dummying. sklearn.preprocessing.binarize, pandas.factorize
 \item
   Model Selection
 
@@ -440,13 +402,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
 \item
   \url{http://contrib.scikit-learn.org/imbalanced-learn/stable/}
 \item
-  Create ensembles
-
-  \begin{itemize}
-  \tightlist
-  \item
-    mlxtend
-  \end{itemize}
+  Create ensembles: mlxtend in Python
 \item
   Choose Statistical Test
 
@@ -460,23 +416,12 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
     infer library
   \end{itemize}
 \item
-  Check for correlations
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \url{https://github.com/drsimonj/corrr}
-  \end{itemize}
+  Check for correlations: \url{https://github.com/drsimonj/corrr}
 \item
-  Ensembling: mlxtend
+  Ensembling: mlxtend in Python, and caretEnsemble in R.
 \item
-  Look at learning curves
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
-  \end{itemize}
+  Look at learning curves:
+  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
 \end{itemize}
 
 \subsection{Communicate}\label{communicate}
@@ -490,7 +435,6 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
 \subsection{Deployment / Maintenance}\label{deployment-maintenance}
 
 \begin{itemize}
-\tightlist
 \item
   Write tests
 
@@ -534,8 +478,8 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   \href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html}{json
   normalize}
 \item
-  \href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temp
-  Pandas Columns}
+  \href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temporary
+  pandas Columns}
 \item
   Sampling a massive CSV file:
 
@@ -624,7 +568,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
 
 \section{Exploration}\label{exploration}
 
-\section{General}\label{general-1}
+\subsection{General}\label{general-1}
 
 \begin{itemize}
 \item
@@ -638,7 +582,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   to 1. The higher the value, the more unalike the data are.
 \end{itemize}
 
-\section{Missingness \& Imputation}\label{missingness-imputation}
+\subsection{Missingness \& Imputation}\label{missingness-imputation}
 
 \begin{itemize}
 \item
@@ -686,68 +630,11 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   \end{itemize}
 \end{itemize}
 
-\section{Data Table}\label{data-table}
-
-\begin{itemize}
-\item
-  Operations done by reference
-\item
-  dt{[}i, j, by{]} : subset by i calculate by j grouped using by
-\item
-  1: numeric \textbar{} 1L: integer
-\item
-  NA\_integer\_: integer
-\item
-  DT{[}.N{]} : prints last row
-\item
-  names(DT): colnames
-\item
-  dim(DT): dimensions
-\item
-  DT{[}, .(A, B){]}: returns two columns
-\item
-  DT{[}, c(A, B){]}: returns a concatenated vector
-\item
-  DT{[}, .(sum\_c = sum(C){]}
-\item
-  DT{[}, plot(A, C){]}
-\item
-  DT{[}, A:=NULL{]}: Remove column A
-\item
-  DT{[}, .(sumB = sum(B)), by = .(Grp = A\%\%2){]}
-\item
-  DT{[}, .N, by = Sepal.Width{]}: .N is the count of each group
-\item
-  DT{[}, lapply(.SD, median){]}: .SD is a placeholder for all the
-  columns
-\item
-  dogs{[}, lapply(.SD, mean), .SDcols = 2:3{]}: Find mean of columns 2
-  \& 3
-\item
-  for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
-\item
-  setnames(DT, `y', `z'): changes colname from y to z
-\item
-  setkey(DT, A, B)
-\item
-  DT{[}.(`b'){]}
-\item
-  DT{[}.(c(`b', `c')){]}
-\item
-  DT{[}.(c(`b', `c')), mult=``first''{]}
-\item
-  DT{[}c(``b'', ``c''), .SD{[}c(1, .N){]}, by = .EACHI{]}: First and
-  last row of the ``b'' and ``c'' groups
-\item
-  DT{[}c(``b'', ``c''), \{ print(.SD); .SD{[}c(1, .N){]} \}, by =
-  .EACHI{]}
-\item
-  roll=TRUE, `nearest', -Inf, Inf \textbar{} rollends=FALSE
-\end{itemize}
-
 \chapter{Transform \& Visualize}\label{transform-visualize}
 
 \section{Transform}\label{transform}
+
+\subsection{General}\label{general-2}
 
 \begin{itemize}
 \item
@@ -779,7 +666,7 @@ statsmodels.stats.outliers\_influence.variance\_inflation\_factor
   continuous latent trait underlying the categorical variable.
 \end{itemize}
 
-\textbf{Imputation}
+\subsection{Imputation}\label{imputation}
 
 Pros include helping to retain a larger data set, potentially avoiding
 bias, and the resulting standard errors tend to be too small.
@@ -900,94 +787,65 @@ Some types:
 
 \subsection{Intro}\label{intro}
 
-The standard least squares coefficient estimates are scale equivariant:
-if we multiply a predictor variable by a constant, the corresponding
-least squares coefficient estimate will be scaled down by the same
-constant.
+\begin{itemize}
+\item
+  The standard least squares coefficient estimates are scale
+  equivariant: if we multiply a predictor variable by a constant, the
+  corresponding least squares coefficient estimate will be scaled down
+  by the same constant.
+\item
+  Used when you're predicting a continuous value.
+\item
+  In regression, it is often recommended to center the variables so that
+  the predictors have mean 0. This makes it so the intercept term is
+  interpreted as the expected value of Y\_i when the predictor values
+  are set to their means. Otherwise, the intercept is interpreted as the
+  expected value of Y\_i when the predictors are set to 0, which may not
+  be a realistic or interpretable situation.
+\item
+  When p \textgreater{} n, we can no longer calculate a unique least
+  square coefficient estimate, the variances become infinite, so OLS
+  cannot be used at all.
+\item
+  In presence of few variables with medium / large sized effect, use
+  lasso regression. In presence of many variables with small / medium
+  sized effect, use ridge regression.
+\item
+  The fitted regression line using a sample of data gives imperfect
+  predictions for future observations due to sampling variability and
+  randomness in Y that is not related to X.
+\item
+  Linear Correlation =\textgreater{} Causation if covariates respect:
+  linearity normality indep homoscedasticity + all confounders in model
+\item
+  In summary, ``pooling'' your data and fitting one combined regression
+  function allows you to easily and efficiently answer research
+  questions concerning the binary predictor variable.
+\item
+  If two independent variables are measured in exactly the same units,
+  we can asses their relative importance in their effect on y quite
+  simply: the larger the coefficient, the stronger the effect.
+\item
+  Okay, so many of the features are strongly correlated. We can make use
+  of this in our model by including polynomial features
+  (e.g.~PolynomialFeatures(degree=2) from scikit-learn). Adding these
+  brings our validation loss down to 0.69256 (-0.05\% from baseline).
+\item
+  We prefer natural logs (that is, logarithms base e) because, as
+  described above, coefficients on the natural-log scale are directly
+  interpretable as approximate proportional differences: with a
+  coefficient of 0.06, a difference of 1 in x corresponds to an
+  approximate 6\% difference in y, and so forth.
+\end{itemize}
 
-Forward Stepwise Selection is a Greedy Algorithm because at each step it
-selects the variable that improves the current model the most. There is
-no guarantee that the final result will be optimal.
-
-Linear: When you're predicting a continuous value.
-
-Increasing x1 by 1 means you are increasing the underlying X1 by 1
-standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1
-is the effect on y of increasing X1 by 1 sigma.
-
-In regression, it is often recommended to center the variables so that
-the predictors have mean 0. This makes it so the intercept term is
-interpreted as the expected value of Y\_i when the predictor values are
-set to their means. Otherwise, the intercept is interpreted as the
-expected value of Y\_i when the predictors are set to 0, which may not
-be a realistic or interpretable situation.
-
-When p \textgreater{} n, we can no longer calculate a unique least
-square coefficient estimate, the variances become infinite, so OLS
-cannot be used at all.
-
-In presence of few variables with medium / large sized effect, use lasso
-regression. In presence of many variables with small / medium sized
-effect, use ridge regression.
-
-The fitted regression line using a sample of data gives imperfect
-predictions for future observations due to sampling variability and
-randomness in Y that is not related to X.
-
-Use Box-Cox transformations when predictions are skewed
-
-Got it: Linear Correlation =\textgreater{} Causation if covariates
-respect: linearity normality indep homoscedasticity + all confounders in
-model
-
-In summary, ``pooling'' your data and fitting one combined regression
-function allows you to easily and efficiently answer research questions
-concerning the binary predictor variable.
-
-If two independent variables are measured in exactly the same units, we
-can asses their relative importance in their effect on y quite simply:
-the larger the coefficient, the stronger the effect.
-
-Okay, so many of the features are strongly correlated. We can make use
-of this in our model by including polynomial features
-(e.g.~PolynomialFeatures(degree=2) from scikit-learn). Adding these
-brings our validation loss down to 0.69256 (-0.05\% from baseline).
-
-We prefer natural logs (that is, logarithms base e) because, as
-described above, coefficients on the natural-log scale are directly
-interpretable as approximate proportional differences: with a
-coefficient of 0.06, a difference of 1 in x corresponds to an
-approximate 6\% difference in y, and so forth.
-
-RSS: The sum of the squared error terms for each observation in our
-dataset.
-
-R.S.E: The standard deviation of the residuals about the regression
-surface. Estimate of sigma.
-
-AIC, BIC, forward \& backwards selection
-
-Transformations: Can remedy assumption violations and strengthen linear
-relationships between variables, but can lead to overfitting and less
-interpretability.
-
-square root correction: Take square root of x variable(s).
-
-log transformation: Take log of y.
-
-General thumb: powers \textgreater{} 1 for skewed left data, powers
-\textless{} 1 for data skewed right.
-
-Box-Cox: Iterates along values of lambda by maximum likelihood so as to
-maximize the fit of the transformed variable to a normal distribution.
-Does not guarantee normality since it minimizes standard deviation. Can
-only be used on positive values. Use on negative values by shifting by a
-constant value.
-
-TSS: A measure of the total squared deviation of our response variable
-from its mean value.
-
-R-squared = 1 -- RSS/TSS.
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
+\NormalTok{rgr_lr }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(results.summary())}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Assumptions}\label{assumptions}
 
@@ -1061,12 +919,18 @@ A practical
 \href{http://www.statmethods.net/stats/rdiagnostics.html}{summary} using
 R.
 
-\subsection{Evaluation}\label{evaluation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
 
-Breusch-Pagan (BP) test lmtest package: is used to test for
-heteroskedasticity in a linear regression model
+\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
+\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
 
-Model Plot Notes:
+\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
+\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
+\CommentTok{#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model}
+\end{Highlighting}
+\end{Shaded}
 
 Outliers are observations that have high residual values. Leverage
 points are observations that have unusually small or large independent
@@ -1080,59 +944,65 @@ good contributions. Influence plot to look at hat values (lower is
 better). Use F-test to compare models. F-test \& partial f-testr for
 simple and multiple linear regression.
 
-For simple linear regression, the principal hypothesis test is as
-follows:
+Shapiro-Wilk Test for Normality: H\_0 says the data is normally
+distributed while H\_a says it is not. To run this test in R, the syntax
+is quite simple:
 
-\begin{itemize}
-\item
-  H\_0 : ? 1 = 0
-\item
-  H\_A: ? 1 ≠ 0
-\end{itemize}
-
-If H\_0 is true then the population mean of Y would be ? 0 no matter
-what the value of X. (X has no effect on Y.)
-
-F-Test: H\_0 says that all/some coefficients are zero versus H\_a which
-says that there is at least one non-zero coefficient. If h0 fail to
-reject than F value close to 1, else F value greater than 1.
-
-Type 1 Error: Accept ha when h0 is true.
-
-A.I.C and B.I.C: Smaller value is better. Rewards goodness of fit and
-penalizes complexity. Favor A.I.C for prediction (n increases results in
-increase in accuracy) and B.I.C for descriptive power (penalty term more
-stringest and favors a parsimonious model)
-
-R-squared increases whenever a predictor is added, and it doesn't take
-model complexity into consideration which makes it prone to overfitting.
-Use adjusted R-squared instead. Additional predictors only make this
-increase is they are statistically significant. It's easy to show that
-given no other data for a set of numbers, the predictor that minimises
-the MAE is the median, while the predictor that minimises the MSE is the
-mean.
-
-\begin{itemize}
-\item
-  Compare rmse to sd of data for sense of how good it is. (If rsme
-  \textless{} sd then good.)
-\item
-  Shapiro-Wilk Test for Normality: H\_0 says the data is normally
-  distributed while H\_a says it is not. To run this test in R, the
-  syntax is quite simple:
-\end{itemize}
+And a guide for python.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
-
-\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
-\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
-
-\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
-\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
+\NormalTok{statsmodels.stats.outliers_influence.variance_inflation_factor}
 \end{Highlighting}
 \end{Shaded}
+
+Fixing assumptions:
+
+Transformations: Can remedy assumption violations and strengthen linear
+relationships between variables, but can lead to overfitting and less
+interpretability. square root correction: Take square root of x
+variable(s). log transformation: Take log of y. General rule of thumb:
+powers \textgreater{} 1 for skewed left data, powers \textless{} 1 for
+data skewed right.
+
+Box-Cox: Iterates along values of lambda by maximum likelihood so as to
+maximize the fit of the transformed variable to a normal distribution.
+Does not guarantee normality since it minimizes standard deviation. Can
+only be used on positive values. Use on negative values by shifting by a
+constant value. Use Box-Cox transformations when predictions are skewed.
+
+\subsection{Selection}\label{selection}
+
+\begin{itemize}
+\item
+  Forward and Backward Stepwise Selection.
+\item
+  For simple linear regression, the principal hypothesis test is as
+  follows: H\_0 : ? 1 = 0, H\_A: ? 1 ≠ 0. If H\_0 is true then the
+  population mean of Y would be ? 0 no matter what the value of X. (X
+  has no effect on Y.)
+\item
+  F-Test: H\_0 says that all/some coefficients are zero versus H\_a
+  which says that there is at least one non-zero coefficient. If h0 fail
+  to reject than F value close to 1, else F value greater than 1.
+\item
+  A.I.C and B.I.C: Smaller values are better. Can be used to compare
+  multiple models at the same time. They reward goodness of fit and
+  penalizes complexity. Favor A.I.C for prediction and B.I.C for
+  descriptive power (penalty term more stringest and favors a
+  parsimonious model)
+\item
+  R-squared increases whenever a predictor is added, and it doesn't take
+  model complexity into consideration which makes it prone to
+  overfitting. Use adjusted R-squared instead. Additional predictors
+  only make this increase is they are statistically significant. It's
+  easy to show that given no other data for a set of numbers, the
+  predictor that minimises the MAE is the median, while the predictor
+  that minimises the MSE is the mean.
+\item
+  Compare RSME to sd of data for sense of how good it is. (If RSME
+  \textless{} sd then good.)
+\end{itemize}
 
 \subsection{Pros/Cons}\label{proscons}
 
@@ -1164,20 +1034,36 @@ mean.
   \href{https://en.wikipedia.org/wiki/Quantile_regression}{Quantile
   regression} is an alternative for quantiles.
 \item
+  Type 1 Error: Accept ha when h0 is true.
+\item
+  RSS is The sum of the squared error terms for each observation in our
+  dataset. RSE is The standard deviation of the residuals about the
+  regression surface and is an estimate of sigma. TSS is a measure of
+  the total squared deviation of our response variable from its mean
+  value. R\^{}2 = 1 -- RSS/TSS.
+\item
+  Increasing x1 by 1 means you are increasing the underlying X1 by 1
+  standard deviation x1+1=(X1+sig-mu)/sig. Therefore you can say that b1
+  is the effect on y of increasing X1 by 1 sigma.
+\item
   If there is an ascending or descending order to your dependent
   variable, ordinal regression is more appropriate as it has more power
   than multinomial logistic regression.
 \item
   leaps lm package r is a greedy way to find the best predictors by
   cycling through all the combinations.
+\item
+  Linear Regression by Year
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
-\NormalTok{rgr_lr }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(results.summary())}
+\KeywordTok{library}\NormalTok{(purrr)}
+\NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(score.avg }\OperatorTok{~}\StringTok{ }\NormalTok{driveavg }\OperatorTok{+}\StringTok{ }\NormalTok{drivepct, }\DataTypeTok{data=}\NormalTok{.)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(summary)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1213,7 +1099,7 @@ appropriate value of lambda by means of cross-validation.
 
 \subsection{Assumptions}\label{assumptions-1}
 
-\subsection{Evaluation}\label{evaluation-1}
+\subsection{Evaluation}\label{evaluation}
 
 \subsection{Pros/Cons}\label{proscons-1}
 
@@ -1295,7 +1181,7 @@ standardization treatment on the features.
   continuous predictors
 \end{itemize}
 
-\subsection{Evaluation}\label{evaluation-2}
+\subsection{Evaluation}\label{evaluation-1}
 
 \begin{itemize}
 \item
@@ -1387,7 +1273,7 @@ When the variance is much larger than the mean, the Poisson assumption
 doesn't apply, and one solution is to use quasipoisson regression, which
 does not assume that variance=meanvariance=mean.
 
-\subsection{Evaluation}\label{evaluation-3}
+\subsection{Evaluation}\label{evaluation-2}
 
 \subsection{Pros/Cons}\label{proscons-3}
 
@@ -1414,7 +1300,7 @@ as.numeric() to convert the matrix to a vector.
 
 \subsection{Assumptions}\label{assumptions-4}
 
-\subsection{Evaluation}\label{evaluation-4}
+\subsection{Evaluation}\label{evaluation-3}
 
 \subsection{Pros/Cons}\label{proscons-4}
 
@@ -1494,7 +1380,7 @@ Bernoulli NB also support sample weighting.
 
 \subsection{Characteristics}\label{characteristics}
 
-\subsection{Evaluation}\label{evaluation-5}
+\subsection{Evaluation}\label{evaluation-4}
 
 \subsection{Pros/Cons}\label{proscons-5}
 
@@ -1558,7 +1444,7 @@ Quadratic Discriminant Analysis which assumes each class has its own.
 
 \subsection{Characteristics}\label{characteristics-1}
 
-\subsection{Evaluation}\label{evaluation-6}
+\subsection{Evaluation}\label{evaluation-5}
 
 \subsection{Pros/Cons}\label{proscons-6}
 
@@ -1572,7 +1458,7 @@ TBD
 
 \subsection{Characteristics}\label{characteristics-2}
 
-\subsection{Evaluation}\label{evaluation-7}
+\subsection{Evaluation}\label{evaluation-6}
 
 \subsection{Pros/Cons}\label{proscons-7}
 
@@ -1689,7 +1575,7 @@ clusters fit a normal distribution.
 
 \subsection{Characteristics}\label{characteristics-3}
 
-\subsection{Evaluation}\label{evaluation-8}
+\subsection{Evaluation}\label{evaluation-7}
 
 Davies--Bouldin index: This is an internal evaluation scheme, where the
 validation of how well the clustering has been done is made using
@@ -1738,7 +1624,7 @@ effcient run-time wise.
 
 \subsection{Characteristics}\label{characteristics-4}
 
-\subsection{Evaluation}\label{evaluation-9}
+\subsection{Evaluation}\label{evaluation-8}
 
 \subsection{Pros/Cons}\label{proscons-9}
 
@@ -1750,7 +1636,7 @@ effcient run-time wise.
 
 \subsection{Characteristics}\label{characteristics-5}
 
-\subsection{Evaluation}\label{evaluation-10}
+\subsection{Evaluation}\label{evaluation-9}
 
 \subsection{Pros/Cons}\label{proscons-10}
 
@@ -1879,7 +1765,7 @@ smaller k means smaller training error, ut larger k is more stable.
 
 \subsection{Characteristics}\label{characteristics-6}
 
-\subsection{Evaluation}\label{evaluation-11}
+\subsection{Evaluation}\label{evaluation-10}
 
 \subsection{Pros/Cons}\label{proscons-11}
 
@@ -2017,7 +1903,7 @@ classifier with the largest function value.
 
 \subsection{Characteristics}\label{characteristics-7}
 
-\subsection{Evaluation}\label{evaluation-12}
+\subsection{Evaluation}\label{evaluation-11}
 
 \subsection{Pros/Cons}\label{proscons-12}
 
@@ -2117,7 +2003,7 @@ simpler.
 
 \subsection{Characteristics}\label{characteristics-8}
 
-\subsection{Evaluation}\label{evaluation-13}
+\subsection{Evaluation}\label{evaluation-12}
 
 \subsection{Pros/Cons}\label{proscons-13}
 
@@ -2190,7 +2076,7 @@ variance and prevent overfitting
 
 \subsection{Characteristics}\label{characteristics-9}
 
-\subsection{Evaluation}\label{evaluation-14}
+\subsection{Evaluation}\label{evaluation-13}
 
 \subsection{Pros/Cons}\label{proscons-14}
 
@@ -2280,7 +2166,7 @@ single trees.
 
 \subsection{Characteristics}\label{characteristics-10}
 
-\subsection{Evaluation}\label{evaluation-15}
+\subsection{Evaluation}\label{evaluation-14}
 
 \subsection{Pros/Cons}\label{proscons-15}
 
@@ -2342,7 +2228,7 @@ trees
 
 \subsection{Characteristics}\label{characteristics-11}
 
-\subsection{Evaluation}\label{evaluation-16}
+\subsection{Evaluation}\label{evaluation-15}
 
 \subsection{Pros/Cons}\label{proscons-16}
 
@@ -2433,7 +2319,7 @@ Factorization, Alternating Least Squares.
 
 \subsection{Characteristics}\label{characteristics-12}
 
-\subsection{Evaluation}\label{evaluation-17}
+\subsection{Evaluation}\label{evaluation-16}
 
 \subsection{Pros/Cons}\label{proscons-17}
 
@@ -2516,7 +2402,8 @@ Factorization, Alternating Least Squares.
   previous two time periods.
 \end{itemize}
 
-\chapter{Udacity: TS Fundamentals}\label{udacity-ts-fundamentals}
+\subsection{Other - TS Fundamentals
+(Udacity)}\label{other---ts-fundamentals-udacity}
 
 Naive vs Seasonal Naive vs Exponential Smooothing
 
@@ -2655,7 +2542,7 @@ for error measurement.
 
 Can use AIC for model selection. Also use confidence intervals.
 
-\section{DL}\label{dl}
+\section{Deep Learning}\label{deep-learning}
 
 \begin{itemize}
 \item
@@ -2802,166 +2689,6 @@ Can use AIC for model selection. Also use confidence intervals.
   Dying neuron + vanishing gradient: Change activation function
 \end{itemize}
 
-\section{TensorFlow}\label{tensorflow}
-
-\begin{itemize}
-\item
-  In TensorFlow, we indicate a feature's data type using a construct
-  called a feature column. Feature columns store only a description of
-  the feature data; they do not contain the feature data itself.
-\item
-  Amazingly enough, performing gradient descent on a small batch or even
-  a batch of one example is usually more efficient than the full batch.
-  After all, finding the gradient of one example is far cheaper than
-  finding the gradient of millions of examples. To ensure a good
-  representative sample, the algorithm scoops up another random small
-  batch (or batch of one) on every iteration.
-\item
-  SGD \& Mini-Batch Gradient Descent
-\end{itemize}
-
-Could compute gradient over entire data set on each step, but this turns
-out to be unnecessary. Computing gradient on small data samples works
-well. On every step, get a new random sample
-
-Stochastic Gradient Descent: one example at a time
-
-Mini-Batch Gradient Descent: batches of 10-1000. Loss \& gradients are
-averaged over the batch
-
-\section{Keras}\label{keras}
-
-Here's a
-\href{https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb}{Hello
-World} and the general framework:
-
-\begin{itemize}
-\item
-  declare: sequential
-\item
-  add layers input-hidden-output
-\item
-  compile
-\item
-  fit
-\end{itemize}
-
-Keras only uses numpy arrays.
-
-\begin{itemize}
-\tightlist
-\item
-  keras.callbacks.EarlyStopping: Stop training when validation score
-  stop improving after a certain number of epochs (baches?)
-\end{itemize}
-
-\subsection{Regression}\label{regression}
-
-\begin{itemize}
-\item
-  loss = mean\_squared\_error
-\item
-  metric: rmse
-\item
-  activation\_function = relu
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ keras}
-\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
-\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
-\CommentTok{# Specify the model: Two hidden layers}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
-\CommentTok{## Input}
-\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
-\CommentTok{# Hidden}
-\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
-\CommentTok{# Output}
-\NormalTok{model.add(Dense(}\DecValTok{1}\NormalTok{))}
-\CommentTok{# Compile the model}
-\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'adam'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'mean_squared_error'}\NormalTok{) }
-\CommentTok{# Fit the model}
-\NormalTok{model.fit(predictors, target)}
-\CommentTok{#Look at summary}
-\NormalTok{model.summary()}
-\CommentTok{# Calculate predictions: predictions}
-\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Classification}\label{classification}
-
-\begin{itemize}
-\item
-  loss = categorical\_crossentropy
-\item
-  metric = accuracy
-\item
-  activation\_function = softmax
-\item
-  output layer with stuff equal to number of categorical groups
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ keras}
-\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
-\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
-\CommentTok{# Specify the model: Two hidden layers}
-\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
-\CommentTok{## Input}
-\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
-\CommentTok{# Hidden}
-\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
-\CommentTok{# Output}
-\NormalTok{model.add(Dense(}\DecValTok{2}\NormalTok{, activation }\OperatorTok{=} \StringTok{'softmax'}\NormalTok{))}
-\CommentTok{# Compile the model}
-\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'sgd'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{, metrics }\OperatorTok{=}\NormalTok{ [}\StringTok{'accuracy'}\NormalTok{])}
-\CommentTok{# Fit the model}
-\NormalTok{model.fit(predictors, target)}
-\CommentTok{#Look at summary}
-\NormalTok{model.summary()}
-\CommentTok{#Calculate predictions: predictions}
-\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
-\CommentTok{#Calculate predicted probability of survival}
-\NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Another Example}\label{another-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Import the SGD optimizer}
-\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ SGD}
-\CommentTok{# Create list of learning rates: lr_to_test}
-\NormalTok{lr_to_test }\OperatorTok{=}\NormalTok{ [.}\DecValTok{000001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\DecValTok{1}\NormalTok{]}
-\CommentTok{# Loop over learning rates}
-\ControlFlowTok{for}\NormalTok{ lr }\KeywordTok{in}\NormalTok{ lr_to_test:}
-    \BuiltInTok{print}\NormalTok{(}\StringTok{'Testing model with learning rate: '}\NormalTok{)}
-    
-    \CommentTok{# Build new model to test, unaffected by previous models}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ get_new_model()}
-    
-    \CommentTok{# Create SGD optimizer with specified learning rate: my_optimizer}
-\NormalTok{    my_optimizer }\OperatorTok{=}\NormalTok{ SGD(lr }\OperatorTok{=}\NormalTok{ lr)}
-    
-    \CommentTok{# Compile the model}
-\NormalTok{    model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=}\NormalTok{ my_optimizer, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{)}
-    
-    \CommentTok{# Fit the model}
-\NormalTok{    model.fit(predictors, }
-\NormalTok{              target, }
-\NormalTok{              validation_split }\OperatorTok{=} \FloatTok{0.3}\NormalTok{, }
-\NormalTok{              epochs }\OperatorTok{=} \DecValTok{20}\NormalTok{, }
-\NormalTok{              callbacks }\OperatorTok{=}\NormalTok{ [early_stopping_monitor], }
-\NormalTok{              verbose }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Association Rule Mining}\label{association-rule-mining}
 
 \subsection{Intro}\label{intro-18}
@@ -3001,7 +2728,7 @@ Keras only uses numpy arrays.
 
 \subsection{Characteristics}\label{characteristics-13}
 
-\subsection{Evaluation}\label{evaluation-18}
+\subsection{Evaluation}\label{evaluation-17}
 
 \subsection{Pros/Cons}\label{proscons-18}
 
@@ -3319,7 +3046,7 @@ Keras only uses numpy arrays.
 
 \section{Other}\label{other-2}
 
-\subsection{General}\label{general-2}
+\subsection{General}\label{general-3}
 
 \begin{itemize}
 \item
@@ -3543,20 +3270,19 @@ Reframe as Anomaly Detection
   hidden within the data
 \end{itemize}
 
-\chapter{CDM}\label{cdm}
+\chapter{Communicate, Deploy,
+Maintain}\label{communicate-deploy-maintain}
 
 \section{Shiny}\label{shiny}
 
 \begin{itemize}
-\tightlist
 \item
   1 r process: 30 users \textbar{} shiny scales linearly
+\item
+  eventreactive()
 \end{itemize}
 
-eventreactive()
-
-\chapter*{Frameworks}\label{frameworks}
-\addcontentsline{toc}{chapter}{Frameworks}
+\chapter{Frameworks}\label{frameworks}
 
 \section{PySpark}\label{pyspark}
 
@@ -3575,6 +3301,19 @@ Setup
 \ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
 \NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.appName(}\StringTok{'example'}\NormalTok{).getOrCreate()}
+\ImportTok{import}\NormalTok{ findspark}
+\NormalTok{findspark.init()}
+\ImportTok{import}\NormalTok{ pyspark}
+\ImportTok{import}\NormalTok{ random}
+\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
+\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
+\KeywordTok{def}\NormalTok{ inside(p):     }
+\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
+    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
+\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
+\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
+\BuiltInTok{print}\NormalTok{(pi)}
+\NormalTok{sc.stop()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3930,7 +3669,7 @@ Pig.
 
 attributes(clf\_lr): results, finalModel
 
-\section{Preprocessing}\label{preprocessing}
+\subsection{Preprocessing}\label{preprocessing}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3946,11 +3685,7 @@ attributes(clf\_lr): results, finalModel
 \KeywordTok{dotplot}\NormalTok{(resamples, }\DataTypeTok{metric =} \StringTok{"ROC"}\NormalTok{)}
 
 \KeywordTok{min}\NormalTok{(model}\OperatorTok{$}\NormalTok{results}\OperatorTok{$}\NormalTok{RSME)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Identify near zero variance predictors: remove_cols}
 \NormalTok{remove_cols <-}\StringTok{ }\KeywordTok{nearZeroVar}\NormalTok{(bloodbrain_x, }\DataTypeTok{names =} \OtherTok{TRUE}\NormalTok{, }
                            \DataTypeTok{freqCut =} \DecValTok{2}\NormalTok{, }\DataTypeTok{uniqueCut =} \DecValTok{20}\NormalTok{)}
@@ -3963,7 +3698,7 @@ attributes(clf\_lr): results, finalModel
 \end{Highlighting}
 \end{Shaded}
 
-\section{LM}\label{lm}
+\subsection{LM}\label{lm}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3981,11 +3716,7 @@ attributes(clf\_lr): results, finalModel
 
 \CommentTok{# Calculate RMSE}
 \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{(error}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Fit lm model using 5 x 5-fold CV: model}
 \NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
 \NormalTok{  medv }\OperatorTok{~}\StringTok{ }\NormalTok{., }
@@ -3999,7 +3730,7 @@ attributes(clf\_lr): results, finalModel
 \end{Highlighting}
 \end{Shaded}
 
-\section{Lasso/Ridge}\label{lassoridge}
+\subsection{Lasso/Ridge}\label{lassoridge}
 
 Alpha controls balance between lasso and ridge. Lambda controls penalty.
 
@@ -4028,7 +3759,7 @@ Alpha controls balance between lasso and ridge. Lambda controls penalty.
 \end{Highlighting}
 \end{Shaded}
 
-\section{LogReg}\label{logreg}
+\subsection{Logistic Regression}\label{logistic-regression-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4046,7 +3777,7 @@ Alpha controls balance between lasso and ridge. Lambda controls penalty.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Train-Test Split, Folds, \&
+\subsection{Train-Test Split, Folds, \&
 CV}\label{train-test-split-folds-cv}
 
 \begin{Shaded}
@@ -4080,7 +3811,7 @@ CV}\label{train-test-split-folds-cv}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Random Forest}\label{random-forest-1}
+\subsection{Random Forest}\label{random-forest-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4102,7 +3833,7 @@ CV}\label{train-test-split-folds-cv}
 \end{Highlighting}
 \end{Shaded}
 
-\section{SVM}\label{svm-1}
+\subsection{SVM}\label{svm-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4115,7 +3846,7 @@ CV}\label{train-test-split-folds-cv}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Model Selection}\label{model-selection-1}
+\subsection{Model Selection}\label{model-selection-1}
 
 Now that you have fit two models to the churn dataset, it's time to
 compare their out-of-sample predictions and choose which one is the best
@@ -4143,11 +3874,7 @@ this case you are only comparing two models).
 
 \CommentTok{# Create xyplot}
 \KeywordTok{xyplot}\NormalTok{(resamples)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# Predict on test: p}
 \NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, test, }\DataTypeTok{type =} \StringTok{'response'}\NormalTok{)}
 
@@ -4162,7 +3889,7 @@ this case you are only comparing two models).
   caret: finalModel of model object
 \end{itemize}
 
-\section{Stacking}\label{stacking}
+\subsection{Stacking}\label{stacking}
 
 caretEnsemble provides the caretList() function for creating multiple
 caret models at once on the same dataset, using the same resampling
@@ -4183,10 +3910,230 @@ accurate!) caret model.
 
 \& caretEnnsemble
 
-\chapter*{Code Snippets}\label{code-snippets}
-\addcontentsline{toc}{chapter}{Code Snippets}
+\section{Data Table}\label{data-table}
+
+\begin{itemize}
+\item
+  Operations done by reference
+\item
+  dt{[}i, j, by{]} : subset by i calculate by j grouped using by
+\item
+  1: numeric \textbar{} 1L: integer
+\item
+  NA\_integer\_: integer
+\item
+  DT{[}.N{]} : prints last row
+\item
+  names(DT): colnames
+\item
+  dim(DT): dimensions
+\item
+  DT{[}, .(A, B){]}: returns two columns
+\item
+  DT{[}, c(A, B){]}: returns a concatenated vector
+\item
+  DT{[}, .(sum\_c = sum(C){]}
+\item
+  DT{[}, plot(A, C){]}
+\item
+  DT{[}, A:=NULL{]}: Remove column A
+\item
+  DT{[}, .(sumB = sum(B)), by = .(Grp = A\%\%2){]}
+\item
+  DT{[}, .N, by = Sepal.Width{]}: .N is the count of each group
+\item
+  DT{[}, lapply(.SD, median){]}: .SD is a placeholder for all the
+  columns
+\item
+  dogs{[}, lapply(.SD, mean), .SDcols = 2:3{]}: Find mean of columns 2
+  \& 3
+\item
+  for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+\item
+  setnames(DT, `y', `z'): changes colname from y to z
+\item
+  setkey(DT, A, B)
+\item
+  DT{[}.(`b'){]}
+\item
+  DT{[}.(c(`b', `c')){]}
+\item
+  DT{[}.(c(`b', `c')), mult=``first''{]}
+\item
+  DT{[}c(``b'', ``c''), .SD{[}c(1, .N){]}, by = .EACHI{]}: First and
+  last row of the ``b'' and ``c'' groups
+\item
+  DT{[}c(``b'', ``c''), \{ print(.SD); .SD{[}c(1, .N){]} \}, by =
+  .EACHI{]}
+\item
+  roll=TRUE, `nearest', -Inf, Inf \textbar{} rollends=FALSE
+\end{itemize}
+
+\section{TensorFlow}\label{tensorflow}
+
+\begin{itemize}
+\item
+  In TensorFlow, we indicate a feature's data type using a construct
+  called a feature column. Feature columns store only a description of
+  the feature data; they do not contain the feature data itself.
+\item
+  Amazingly enough, performing gradient descent on a small batch or even
+  a batch of one example is usually more efficient than the full batch.
+  After all, finding the gradient of one example is far cheaper than
+  finding the gradient of millions of examples. To ensure a good
+  representative sample, the algorithm scoops up another random small
+  batch (or batch of one) on every iteration.
+\item
+  SGD \& Mini-Batch Gradient Descent
+\end{itemize}
+
+Could compute gradient over entire data set on each step, but this turns
+out to be unnecessary. Computing gradient on small data samples works
+well. On every step, get a new random sample
+
+Stochastic Gradient Descent: one example at a time
+
+Mini-Batch Gradient Descent: batches of 10-1000. Loss \& gradients are
+averaged over the batch
+
+\section{Keras}\label{keras}
+
+Here's a
+\href{https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb}{Hello
+World} and the general framework:
+
+\begin{itemize}
+\item
+  declare: sequential
+\item
+  add layers input-hidden-output
+\item
+  compile
+\item
+  fit
+\end{itemize}
+
+Keras only uses numpy arrays.
+
+\begin{itemize}
+\tightlist
+\item
+  keras.callbacks.EarlyStopping: Stop training when validation score
+  stop improving after a certain number of epochs (baches?)
+\end{itemize}
+
+\subsection{Regression}\label{regression}
+
+\begin{itemize}
+\item
+  loss = mean\_squared\_error
+\item
+  metric: rmse
+\item
+  activation\_function = relu
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ keras}
+\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
+\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
+\CommentTok{# Specify the model: Two hidden layers}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
+\CommentTok{## Input}
+\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
+\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
+\CommentTok{# Hidden}
+\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
+\CommentTok{# Output}
+\NormalTok{model.add(Dense(}\DecValTok{1}\NormalTok{))}
+\CommentTok{# Compile the model}
+\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'adam'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'mean_squared_error'}\NormalTok{) }
+\CommentTok{# Fit the model}
+\NormalTok{model.fit(predictors, target)}
+\CommentTok{#Look at summary}
+\NormalTok{model.summary()}
+\CommentTok{# Calculate predictions: predictions}
+\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Classification}\label{classification}
+
+\begin{itemize}
+\item
+  loss = categorical\_crossentropy
+\item
+  metric = accuracy
+\item
+  activation\_function = softmax
+\item
+  output layer with stuff equal to number of categorical groups
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ keras}
+\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
+\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
+\CommentTok{# Specify the model: Two hidden layers}
+\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
+\CommentTok{## Input}
+\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
+\CommentTok{# Hidden}
+\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
+\CommentTok{# Output}
+\NormalTok{model.add(Dense(}\DecValTok{2}\NormalTok{, activation }\OperatorTok{=} \StringTok{'softmax'}\NormalTok{))}
+\CommentTok{# Compile the model}
+\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'sgd'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{, metrics }\OperatorTok{=}\NormalTok{ [}\StringTok{'accuracy'}\NormalTok{])}
+\CommentTok{# Fit the model}
+\NormalTok{model.fit(predictors, target)}
+\CommentTok{#Look at summary}
+\NormalTok{model.summary()}
+\CommentTok{#Calculate predictions: predictions}
+\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
+\CommentTok{#Calculate predicted probability of survival}
+\NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Another Example}\label{another-example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Import the SGD optimizer}
+\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ SGD}
+\CommentTok{# Create list of learning rates: lr_to_test}
+\NormalTok{lr_to_test }\OperatorTok{=}\NormalTok{ [.}\DecValTok{000001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\CommentTok{# Loop over learning rates}
+\ControlFlowTok{for}\NormalTok{ lr }\KeywordTok{in}\NormalTok{ lr_to_test:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{'Testing model with learning rate: '}\NormalTok{)}
+    
+    \CommentTok{# Build new model to test, unaffected by previous models}
+\NormalTok{    model }\OperatorTok{=}\NormalTok{ get_new_model()}
+    
+    \CommentTok{# Create SGD optimizer with specified learning rate: my_optimizer}
+\NormalTok{    my_optimizer }\OperatorTok{=}\NormalTok{ SGD(lr }\OperatorTok{=}\NormalTok{ lr)}
+    
+    \CommentTok{# Compile the model}
+\NormalTok{    model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=}\NormalTok{ my_optimizer, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{)}
+    
+    \CommentTok{# Fit the model}
+\NormalTok{    model.fit(predictors, }
+\NormalTok{              target, }
+\NormalTok{              validation_split }\OperatorTok{=} \FloatTok{0.3}\NormalTok{, }
+\NormalTok{              epochs }\OperatorTok{=} \DecValTok{20}\NormalTok{, }
+\NormalTok{              callbacks }\OperatorTok{=}\NormalTok{ [early_stopping_monitor], }
+\NormalTok{              verbose }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Code Snippets}\label{code-snippets}
 
 \section{Python}\label{python}
+
+\subsection{General}\label{general-4}
 
 \begin{itemize}
 \item
@@ -4206,6 +4153,8 @@ accurate!) caret model.
   \end{itemize}
 \end{itemize}
 
+\subsection{Masking Array}\label{masking-array}
+
 You can mask your array using the numpy.ma.array function and
 subsequently apply any numpy operation:
 
@@ -4221,6 +4170,8 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
+\section{Showing Data With Plotly}\label{showing-data-with-plotly}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# plotly display data}
@@ -4234,12 +4185,16 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
+\section{Hyperband Cross Validation}\label{hyperband-cross-validation}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{from}\NormalTok{ civismlext.hyperband }\ImportTok{import}\NormalTok{ HyperbandSearchCV}
 \CommentTok{#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py}
 \end{Highlighting}
 \end{Shaded}
+
+\section{Pandas Display Options}\label{pandas-display-options}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4252,24 +4207,7 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Pyspark}
-\ImportTok{import}\NormalTok{ findspark}
-\NormalTok{findspark.init()}
-\ImportTok{import}\NormalTok{ pyspark}
-\ImportTok{import}\NormalTok{ random}
-\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
-\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
-\KeywordTok{def}\NormalTok{ inside(p):     }
-\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
-    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
-\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
-\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
-\BuiltInTok{print}\NormalTok{(pi)}
-\NormalTok{sc.stop()}
-\end{Highlighting}
-\end{Shaded}
+\section{Infix Operators}\label{infix-operators}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4292,6 +4230,8 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
+\section{Generators}\label{generators}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Generators Error}
@@ -4306,6 +4246,9 @@ subsequently apply any numpy operation:
     \KeywordTok{del}\NormalTok{ iterator}
 \end{Highlighting}
 \end{Shaded}
+
+\section{Rowwise Operations In
+Pandas}\label{rowwise-operations-in-pandas}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4323,6 +4266,9 @@ subsequently apply any numpy operation:
 \NormalTok{df[}\StringTok{'SAL-RATE'}\NormalTok{].}\BuiltInTok{apply}\NormalTok{(money_to_float)}
 \end{Highlighting}
 \end{Shaded}
+
+\section{Additional Functions Args In
+Map}\label{additional-functions-args-in-map}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4367,6 +4313,8 @@ subsequently apply any numpy operation:
 
 \section{R}\label{r}
 
+\subsubsection{General}\label{general-5}
+
 \begin{itemize}
 \item
   ctrl + shift + a: reformat code in rstudio
@@ -4377,7 +4325,7 @@ subsequently apply any numpy operation:
 \item
   ctrl + shift + o: toggle table of contents
 \item
-  ctrl shift enter" run chunk
+  ctrl shift enter: run chunk
 \item
   ctrl pageup/down: navigate chunks
 \item
@@ -4390,7 +4338,7 @@ subsequently apply any numpy operation:
   df\_print: kable in yaml rmrkdown header
 \end{itemize}
 
-\section{Shiny Reactive}\label{shiny-reactive}
+\subsection{Shiny Reactive}\label{shiny-reactive}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4400,7 +4348,7 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Custom Theme}\label{custom-theme}
+\subsection{Custom Theme}\label{custom-theme}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4412,7 +4360,7 @@ subsequently apply any numpy operation:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Create Factor}\label{create-factor}
+\subsection{Create Factor}\label{create-factor}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4546,8 +4494,7 @@ script to do joining of dummied csvs
 \end{Highlighting}
 \end{Shaded}
 
-\chapter*{General}\label{general-3}
-\addcontentsline{toc}{chapter}{General}
+\chapter{General}\label{general-6}
 
 \section{Python}\label{python-1}
 
@@ -4787,7 +4734,7 @@ estimate diff: experimental prop - control prop margin of error = z*se
 
 conf int: estimated diff +/- margin of error
 
-\subsubsection{Policy \& Ethics}\label{policy-ethics}
+\subsection{Policy \& Ethics}\label{policy-ethics}
 
 In the study, what risk is the participant undertaking? The main
 threshold is whether the risk exceeds that of ``minimal risk''.
@@ -4832,7 +4779,7 @@ or data sensitivity issues.
 
 rate better for usability test than prob
 
-\subsubsection{Choosing \& Characterizing
+\subsection{Choosing \& Characterizing
 Metrics}\label{choosing-characterizing-metrics}
 
 \textbf{Define}
@@ -4898,7 +4845,7 @@ A vs A test: Std proportional to square root of number of samples.
 Diminishing returns for many tests. Can use bootstrap if don't have
 enough traffic for a big A v A test.
 
-\section{Designing An Experiment}\label{designing-an-experiment}
+\subsection{Designing An Experiment}\label{designing-an-experiment}
 
 \textbf{Choose Subject}
 
@@ -4962,7 +4909,7 @@ Analyzing results, and draw valid conclusions.
 proximity, similarity, centrality, brokerage, positional measures,
 equivalence, etc. (Statistical Analysis of Complete Social Networks
 
-\section{Networkx}\label{networkx}
+\subsection{Networkx}\label{networkx}
 
 Import necessary modules and draw graph.
 
@@ -5155,22 +5102,22 @@ estimated sample size to 300.
   threshold.
 \end{itemize}
 
-\subsection{Infer Package}\label{infer-package}
+\subsection{\texorpdfstring{\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
+Package}}{Inference Package}}\label{inference-package}
 
-Main verbs:
+Main verbs: specify() variables, hypothesize(), generate() data,
+calculate() metrics, visualize() results
 
-\begin{itemize}
-\item
-  specify() vars
-\item
-  hypothesize()
-\item
-  generate() data
-\item
-  calculate() metrics
-\item
-  visualize() results
-\end{itemize}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4747}\NormalTok{)}
+\NormalTok{perm_slope <-}\StringTok{ }\NormalTok{twins }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{specify}\NormalTok{(Foster }\OperatorTok{~}\StringTok{ }\NormalTok{Biological) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{hypothesize}\NormalTok{(}\DataTypeTok{null =} \StringTok{"independence"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{generate}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10}\NormalTok{, }\DataTypeTok{type =} \StringTok{"permute"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{calculate}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"slope"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Statistical Tests}\label{statistical-tests}
 
@@ -5315,35 +5262,6 @@ Given any three, we can determine the fourth.
   Transform all values to their percentile ranks. This leads to the
   Spearman coefficient.
 \end{enumerate}
-
-\section{Other}\label{other-4}
-
-\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
-package}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4747}\NormalTok{)}
-\NormalTok{perm_slope <-}\StringTok{ }\NormalTok{twins }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{specify}\NormalTok{(Foster }\OperatorTok{~}\StringTok{ }\NormalTok{Biological) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{hypothesize}\NormalTok{(}\DataTypeTok{null =} \StringTok{"independence"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{generate}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10}\NormalTok{, }\DataTypeTok{type =} \StringTok{"permute"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{calculate}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"slope"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Linear Regression by Year
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(purrr)}
-\NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(score.avg }\OperatorTok{~}\StringTok{ }\NormalTok{driveavg }\OperatorTok{+}\StringTok{ }\NormalTok{drivepct, }\DataTypeTok{data=}\NormalTok{.)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(summary)}
-\end{Highlighting}
-\end{Shaded}
 
 \bibliography{book.bib,packages.bib}
 
