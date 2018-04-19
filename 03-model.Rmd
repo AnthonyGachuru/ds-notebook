@@ -246,6 +246,12 @@ Standardization isn't required for logistic regression. The main goal of standar
 
 * There is no influential values (extreme values or outliers) in the continuous predictors
 
+Notice the points fall along a line in the middle of the graph, but curve off in the extremities. Normal Q-Q plots that exhibit this behavior usually mean your data have more extreme values than would be expected if they truly came from a Normal distribution.
+
+The Durbin-Watson test is used to test the null hypothesis that linear regression residuals are uncorrelated, against the alternative that autocorrelation exists
+
+https://data.library.virginia.edu/diagnostic-plots/
+
 ### Evaluation
 
 * Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.

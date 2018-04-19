@@ -194,6 +194,21 @@ plt.show()
 
 * df_print: kable in yaml rmrkdown header
 
+### Make Formula
+
+```{r}
+make_formula <- function(target, additions, subtractions = NULL, powers = NULL){
+  
+  add_sub_sep = ifelse(is.null(subtractions), '', '-')
+  add <- paste0(additions, collapse = ' + ')
+  subtract <- paste0(subtractions, collapse = ' - ')
+  add_subtract <- paste(add, subtract, sep = add_sub_sep)
+  
+  return(as.formula(paste(target, add_subtract, sep = '~')))
+  
+}
+```
+
 ### Shiny Reactive
 
 ```{r, eval = FALSE}

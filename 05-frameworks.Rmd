@@ -793,3 +793,28 @@ for lr in lr_to_test:
               verbose = False)
 ```
 
+## LME4
+
+```{r, eval = F}
+
+# Include the AverageAgeofMother as a correlated random-effect slope parameter
+ageMotherModelRandomCorrelated <- lmer( BirthRate ~ AverageAgeofMother + (AverageAgeofMother | State),
+                       countyBirthsData)
+
+ assumed that observations within each group were correlated.
+
+# Include the AverageAgeofMother as a correlated random-effect slope parameter
+ageMotherModelRandomUncorrelated <- lmer( BirthRate ~ AverageAgeofMother + (AverageAgeofMother || State),
+                       countyBirthsData)
+
+
+# Extract the fixed-effect coefficients
+fixef(out)
+
+# Extract the random-effect coefficients
+ranef(out)
+
+# Estimate the confidence intervals 
+confint(out)
+```
+

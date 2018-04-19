@@ -921,6 +921,21 @@ R.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# general check}
+\KeywordTok{plot}\NormalTok{(rgr_lr_st1)}
+
+\CommentTok{# linearity check}
+\KeywordTok{avPlots}\NormalTok{(rgr_lr_st1)}
+
+\CommentTok{# repeat of outlier analysis}
+\CommentTok{#influencePlot(rgr_lr_st1)}
+
+\CommentTok{# multi-colinearity}
+\KeywordTok{vif}\NormalTok{(rgr_lr_st1)}
+
+\CommentTok{# Test for Autocorrelated Errors}
+\KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
+
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
 
 \NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
@@ -1180,6 +1195,17 @@ standardization treatment on the features.
   There is no influential values (extreme values or outliers) in the
   continuous predictors
 \end{itemize}
+
+Notice the points fall along a line in the middle of the graph, but
+curve off in the extremities. Normal Q-Q plots that exhibit this
+behavior usually mean your data have more extreme values than would be
+expected if they truly came from a Normal distribution.
+
+The Durbin-Watson test is used to test the null hypothesis that linear
+regression residuals are uncorrelated, against the alternative that
+autocorrelation exists
+
+\url{https://data.library.virginia.edu/diagnostic-plots/}
 
 \subsection{Evaluation}\label{evaluation-1}
 
@@ -4129,6 +4155,32 @@ Keras only uses numpy arrays.
 \end{Highlighting}
 \end{Shaded}
 
+\section{LME4}\label{lme4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Include the AverageAgeofMother as a correlated random-effect slope parameter}
+\NormalTok{ageMotherModelRandomCorrelated <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{( BirthRate }\OperatorTok{~}\StringTok{ }\NormalTok{AverageAgeofMother }\OperatorTok{+}\StringTok{ }\NormalTok{(AverageAgeofMother }\OperatorTok{|}\StringTok{ }\NormalTok{State),}
+\NormalTok{                       countyBirthsData)}
+
+\NormalTok{ assumed that observations within each group were correlated.}
+
+\CommentTok{# Include the AverageAgeofMother as a correlated random-effect slope parameter}
+\NormalTok{ageMotherModelRandomUncorrelated <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{( BirthRate }\OperatorTok{~}\StringTok{ }\NormalTok{AverageAgeofMother }\OperatorTok{+}\StringTok{ }\NormalTok{(AverageAgeofMother }\OperatorTok{||}\StringTok{ }\NormalTok{State),}
+\NormalTok{                       countyBirthsData)}
+
+
+\CommentTok{# Extract the fixed-effect coefficients}
+\KeywordTok{fixef}\NormalTok{(out)}
+
+\CommentTok{# Extract the random-effect coefficients}
+\KeywordTok{ranef}\NormalTok{(out)}
+
+\CommentTok{# Estimate the confidence intervals }
+\KeywordTok{confint}\NormalTok{(out)}
+\end{Highlighting}
+\end{Shaded}
+
 \chapter{Code Snippets}\label{code-snippets}
 
 \section{Python}\label{python}
@@ -4337,6 +4389,23 @@ Map}\label{additional-functions-args-in-map}
 \item
   df\_print: kable in yaml rmrkdown header
 \end{itemize}
+
+\subsection{Make Formula}\label{make-formula}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make_formula <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(target, additions, }\DataTypeTok{subtractions =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{powers =} \OtherTok{NULL}\NormalTok{)\{}
+  
+\NormalTok{  add_sub_sep =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.null}\NormalTok{(subtractions), }\StringTok{''}\NormalTok{, }\StringTok{'-'}\NormalTok{)}
+\NormalTok{  add <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(additions, }\DataTypeTok{collapse =} \StringTok{' + '}\NormalTok{)}
+\NormalTok{  subtract <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(subtractions, }\DataTypeTok{collapse =} \StringTok{' - '}\NormalTok{)}
+\NormalTok{  add_subtract <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(add, subtract, }\DataTypeTok{sep =}\NormalTok{ add_sub_sep)}
+  
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste}\NormalTok{(target, add_subtract, }\DataTypeTok{sep =} \StringTok{'~'}\NormalTok{)))}
+  
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Shiny Reactive}\label{shiny-reactive}
 
