@@ -103,7 +103,7 @@ avPlots(rgr_lr_st1)
 #influencePlot(rgr_lr_st1)
 
 # multi-colinearity
-vif(rgr_lr_st1)
+vif(model) %>% data.frame() %>% mutate(VIF = `GVIF..1..2.Df..`, VIF = VIF^2)
 
 # Test for Autocorrelated Errors
 durbinWatsonTest(rgr_lr_st1)
@@ -211,6 +211,12 @@ Note: In both ridge and lasso regression, is important to select an appropriate 
 ## Logistic Regression
 
 ### Intro
+
+logistic is the same as probit
+
+wilkinson rogers logistic regression 
+
+weighted logistic regression
 
 The right-hand predictor side of the equation must be linear with the left-hand outcome side of the equation. You must test for linearity in the logit (in logistic regression the logit is the outcome side). This is commonly done with the Box-Tidwell Transformation (Test): Add to the logistic model interaction terms which are the crossproduct of each independent times its natural logarithm [(X)ln(X)]. If these terms are significant, then there is nonlinearity in the logit. This method is not sensitive to small nonlinearities.
 

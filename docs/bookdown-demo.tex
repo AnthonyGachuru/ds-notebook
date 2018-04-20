@@ -931,7 +931,7 @@ R.
 \CommentTok{#influencePlot(rgr_lr_st1)}
 
 \CommentTok{# multi-colinearity}
-\KeywordTok{vif}\NormalTok{(rgr_lr_st1)}
+\KeywordTok{vif}\NormalTok{(model) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 
 \CommentTok{# Test for Autocorrelated Errors}
 \KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
@@ -1121,6 +1121,12 @@ appropriate value of lambda by means of cross-validation.
 \section{Logistic Regression}\label{logistic-regression}
 
 \subsection{Intro}\label{intro-2}
+
+logistic is the same as probit
+
+wilkinson rogers logistic regression
+
+weighted logistic regression
 
 The right-hand predictor side of the equation must be linear with the
 left-hand outcome side of the equation. You must test for linearity in
@@ -1333,6 +1339,21 @@ as.numeric() to convert the matrix to a vector.
 \textbf{Pros}
 
 \textbf{Cons}
+
+\section{Hierarchical \& Mixed Models}\label{hierarchical-mixed-models}
+
+``Across counties, as the average mother's age increases the birth rate
+decreases while correcting for state-level impacts'' BirthRate
+\textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
+
+lmerTest
+
+Analysis of Variance, or ANOVA, can be used to compare two different
+lmer models and test if one model explains more variability than the
+other model. We can use this to compare two lmer models. For example, if
+we wanted to see if Year is important for predicting Crime in Maryland,
+we can build a null model with only County as a random-effect and a year
+model that includes Year.
 
 \section{Bayesian}\label{bayesian}
 
@@ -4157,6 +4178,19 @@ Keras only uses numpy arrays.
 
 \section{LME4}\label{lme4}
 
+Run a glmer with poisson family error term, predicting count as a
+function of fixed effects age and year, and include year as a random
+effect of county as well.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelOut <-}\StringTok{ }\KeywordTok{glmer}\NormalTok{(count }\OperatorTok{~}\StringTok{ }\NormalTok{age }\OperatorTok{+}\StringTok{ }\NormalTok{year }\OperatorTok{+}\StringTok{ }\NormalTok{(year}\OperatorTok{|}\NormalTok{county), }\DataTypeTok{family =} \StringTok{'poisson'}\NormalTok{,}
+                  \DataTypeTok{data =}\NormalTok{ ILdata)}
+\end{Highlighting}
+\end{Shaded}
+
+glmer can be an alternative to chi-squared tests
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Include the AverageAgeofMother as a correlated random-effect slope parameter}
@@ -4178,6 +4212,54 @@ Keras only uses numpy arrays.
 
 \CommentTok{# Estimate the confidence intervals }
 \KeywordTok{confint}\NormalTok{(out)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{\texorpdfstring{\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
+Package}}{Inference Package}}\label{inference-package}
+
+Main verbs: specify() variables, hypothesize(), generate() data,
+calculate() metrics, visualize() results
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4747}\NormalTok{)}
+\NormalTok{perm_slope <-}\StringTok{ }\NormalTok{twins }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{specify}\NormalTok{(Foster }\OperatorTok{~}\StringTok{ }\NormalTok{Biological) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{hypothesize}\NormalTok{(}\DataTypeTok{null =} \StringTok{"independence"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{generate}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10}\NormalTok{, }\DataTypeTok{type =} \StringTok{"permute"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{calculate}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"slope"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Networkx}\label{networkx}
+
+Import necessary modules and draw graph.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ networkx }\ImportTok{as}\NormalTok{ nx}
+\NormalTok{nx.draw(T_sub)}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+Get the nodes of interest.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{noi }\OperatorTok{=}\NormalTok{ [n }\ControlFlowTok{for}\NormalTok{ n, d }\KeywordTok{in}\NormalTok{ T.nodes(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'occupation'}\NormalTok{] }\OperatorTok{==} \StringTok{'scientist'}\NormalTok{]}
+\CommentTok{### Use a list comprehension to get the edges of interest: eoi}
+\NormalTok{eoi }\OperatorTok{=}\NormalTok{ [(u, v) }\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'date'}\NormalTok{] }\OperatorTok{<}\NormalTok{ date(}\DecValTok{2010}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)]}
+\CommentTok{### Set the weight of the edge}
+\NormalTok{weight }\OperatorTok{=} \DecValTok{2}
+\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{):}
+  \CommentTok{# Check if node 293 is involved}
+  \ControlFlowTok{if} \DecValTok{293} \KeywordTok{in}\NormalTok{ [u,v]:}
+    
+    \CommentTok{# Set the weight to 1.1}
+\NormalTok{    T[u][v][}\StringTok{'weight'}\NormalTok{] }\OperatorTok{=} \FloatTok{1.1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4750,266 +4832,18 @@ environment from an environment file use:
 This will create a new environment with the same name listed in
 environment.yaml.
 
-\section{AB Testing Overview}\label{ab-testing-overview}
-
-Guide: Choose metric (CTR), review stats (Hypothesis Testing), design,
-analyse
-
-Need to have clear control and thing to test. Also need time. Frequency
-of customer interaqction is important.
-
-shopping and searching not independent events.
-
-Point estimate of CTR (users who clicked)/users. Need margin of error
-for estimate. Approximate binomial by normal if N*p \& N(1-p)
-\textgreater{} 5.
-
-marin of error = Z*(stndad error)
-
-se = sqrt(p(1-p)/n)
-
-Z for 95\% s 1.96 and 2.58 for 99\%.
-
-for Two samples calculate a pooled CTR point estimate and standard
-error.
-
-Need to be substantive (a worthy difference) in addition to being
-statistically significant. Some changes might not be useful due to the
-resources one might want to allocate.
-
-Result are repeatable (stat sig) bar should be lower than business
-interesting (practically sig)
-
-Stat Power: How many page view necessary to get a stat sig result.
-
-Size v Power: The smaller the effect or increased confidence you want to
-detect/have (greater power of experiment), the larger the sample you
-need to use.
-
-alpha = P(reject null when true) beta = P(accept null when false)
-
-small sample: low alpha, high beta larger sample: low alpha, low beta
-
-1- alpha = confidence level 1 - beta = sensitivity (often 80\%)
-
-practical significance: 2\%, alpha = 0.05, beta = 0.2
-
-sample size dp\_to ctr (increase in se), confidence level, sensitivity
-sample size invp\_to practical sig (larger changes easier to detect)
-
-above is design of experiment. below is analysis:
-
-estimate diff: experimental prop - control prop margin of error = z*se
-
-conf int: estimated diff +/- margin of error
-
-\subsection{Policy \& Ethics}\label{policy-ethics}
-
-In the study, what risk is the participant undertaking? The main
-threshold is whether the risk exceeds that of ``minimal risk''.
-
-Next, what benefits might result from the study? Even if the risk is
-minimal, how might the results help?
-
-Third, what other choices do participants have? For example, if you are
-testing out changes to a search engine, participants always have the
-choice to use another search engine.
-
-Finally, what data is being collected, and what is the expectation of
-privacy and confidentiality? This last question is quite nuanced,
-encompassing numerous questions: Do participants understand what data is
-being collected about them? What harm would befall them should that data
-be made public? Would they expect that data to be considered private and
-confidential?
-
-Our recommendation is that there should be internal reviews of all
-proposed studies by experts regarding the questions:
-
-Are participants facing more than minimal risk? Do participants
-understand what data is being gathered? Is that data identifiable? How
-is the data handled?
-
-Internal process recommendations Finally, regarding internal process of
-data handling, we recommend that:
-
-Every employee who might be involved in A/B test be educated about the
-ethics and the protection of the participants. Clearly there are other
-areas of ethics beyond what we've covered that discuss integrity,
-competence, and responsibility, but those generally are broader than
-protecting participants of A/B tests (cite ACM code of ethics).
-
-All data, identified or not, be stored securely, with access limited to
-those who need it to complete their job. Access should be time limited.
-There should be clear policies of what data usages are acceptable and
-not acceptable. Moreover, all usage of the data should be logged and
-audited regularly for violations. You create a clear escalation path for
-how to handle cases where there is even possibly more than minimal risk
-or data sensitivity issues.
-
-rate better for usability test than prob
-
-\subsection{Choosing \& Characterizing
-Metrics}\label{choosing-characterizing-metrics}
-
-\textbf{Define}
-
-Make sure to granularize funnel
-
-\textbf{Intuition}
-
-NA
-
-\textbf{Characterize}
-
-Focus groups, UER (user experience study), survey, experiments,
-retrospective analysis, external data
-
-temporal effects across hours, days, weeks are important
-
-different browsers screw with the CTR depending on how they deal with JS
-
-Can use cookies to track users
-
-Metric definitions
-
-Def \#1 (Cookie probability): For each , number of cookies that click
-divided by number of cookies
-
-Def \#2 (Pageview probability): Number of pageviews with a click within
-divided by number of pageviews
-
-Def \#3 (Rate): Number of clicks divided by number of pageviews
-
-CTR vs CTP: The first can be \textgreater{}1.
-
-Take into consideration mean and median. Median is robust but might not
-be useful so look at percentiles.
-
-Measuring sensitiviyt and robustness: 1) Running experiments to see if
-metrics move as predicted. A vs A experiments: Measure people who saw
-the same thing to see if there is a difference between them according to
-the metric or its too sensitive. Look at previous experiments. 2)
-Retrospective analysis of logs to see how the metrics responded in the
-past.
-
-Metric For Loading Vid: Look at distribution of load times for vid. Want
-a robust metric that doesn't really change for comparable vids. But wnat
-a metric that is sensitive to a change that you care about like
-resolution.
-
-How to compare experiment vs control: difference or relative change.
-Relative change allows you to keep same significance boundary.
-
-Check that praticial sig level is good for metric. Need to have handle
-on variability for confidence interval.
-
-sign test: Good for looking to implement a change, but doesn't give
-effect size.
-
-empirical vs analytic: underlying distribution could be weird so do
-empirical. Analyticcal for simple metrics. If empirical and anlytical
-don't agree then run AvA test.
-
-A vs A test: Std proportional to square root of number of samples.
-Diminishing returns for many tests. Can use bootstrap if don't have
-enough traffic for a big A v A test.
-
-\subsection{Designing An Experiment}\label{designing-an-experiment}
-
-\textbf{Choose Subject}
-
-Unit of Diversion: How to indentify a person. Cookie (could clear so
-change), userid, deviceid, and address (changes all the time).
-
-Intra-user vs inter-user experiment.
-
-\textbf{Choose Population}
-
-Size
-
-Duration
-
-Cohort: People who enter the experiment at the same time.
-
-Cohort \textgreater{} Population: Learning effects, user retention
-
-Can reduce sample if just targeting english speaking traffic
-
-When going to run experiment: holiday or not? How many people to put
-through experiment and control?
-
-\textbf{Analyzing Results}
-
-Sanity Checks:
-
-Pass all before move on
-
-Good invariants: \# of events, video load time (user has no control over
-it). Want these to be about the same for experiment and control.
-
-Single Metric:
-
-sign test
-
-Multiple Metrics:
-
-More metrics increase false positive chance. Use Bonferroni assumption:
-makes no independence assumption and is conservative.
-
-margin of error smaller than observed diff so the confidence interval
-won't include 0.
-
-Different strategies: family-wise error rate, false discovery rate,
-
-Gotchas:
-
-Simpson's Paradox
-
-Usually A/B testing works for testing changes in elements in the web
-page. A/B testing framework is following sequence:
-
-Design a research question. Choose test statistics method or metrics to
-evaluate experiment. Designing the control group and experiment group.
-Analyzing results, and draw valid conclusions.
-
 \section{Networks}\label{networks}
 
 `Classical SNA' is mainly about descriptive network statistics:
 proximity, similarity, centrality, brokerage, positional measures,
 equivalence, etc. (Statistical Analysis of Complete Social Networks
 
-\subsection{Networkx}\label{networkx}
-
-Import necessary modules and draw graph.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{import}\NormalTok{ networkx }\ImportTok{as}\NormalTok{ nx}
-\NormalTok{nx.draw(T_sub)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-Get the nodes of interest.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{noi }\OperatorTok{=}\NormalTok{ [n }\ControlFlowTok{for}\NormalTok{ n, d }\KeywordTok{in}\NormalTok{ T.nodes(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'occupation'}\NormalTok{] }\OperatorTok{==} \StringTok{'scientist'}\NormalTok{]}
-\CommentTok{### Use a list comprehension to get the edges of interest: eoi}
-\NormalTok{eoi }\OperatorTok{=}\NormalTok{ [(u, v) }\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'date'}\NormalTok{] }\OperatorTok{<}\NormalTok{ date(}\DecValTok{2010}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)]}
-\CommentTok{### Set the weight of the edge}
-\NormalTok{weight }\OperatorTok{=} \DecValTok{2}
-\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{):}
-  \CommentTok{# Check if node 293 is involved}
-  \ControlFlowTok{if} \DecValTok{293} \KeywordTok{in}\NormalTok{ [u,v]:}
-    
-    \CommentTok{# Set the weight to 1.1}
-\NormalTok{    T[u][v][}\StringTok{'weight'}\NormalTok{] }\OperatorTok{=} \FloatTok{1.1}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Stats}\label{stats}
+
+\subsection{General}\label{general-7}
+
+A t test (t.test in R) is a special case of an ANOVA and a paired t test
+(parameter paired = T) is a special case of a repeated measures ANOVA.
 
 Sample size: A good formula is: if your sample is picked uniformly at
 random and is of size at least:
@@ -5171,22 +5005,42 @@ estimated sample size to 300.
   threshold.
 \end{itemize}
 
-\subsection{\texorpdfstring{\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
-Package}}{Inference Package}}\label{inference-package}
+\subsection*{Introduction to Data}\label{introduction-to-data}
+\addcontentsline{toc}{subsection}{Introduction to Data}
 
-Main verbs: specify() variables, hypothesize(), generate() data,
-calculate() metrics, visualize() results
+There is no random sampling since the subjects of the study were
+volunteers, so the results cannot be generalized to all people. However,
+due to random assignment, we are able to infer a causal link between the
+belief information is stored and the ability to recall that same
+information.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4747}\NormalTok{)}
-\NormalTok{perm_slope <-}\StringTok{ }\NormalTok{twins }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{specify}\NormalTok{(Foster }\OperatorTok{~}\StringTok{ }\NormalTok{Biological) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{hypothesize}\NormalTok{(}\DataTypeTok{null =} \StringTok{"independence"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{generate}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10}\NormalTok{, }\DataTypeTok{type =} \StringTok{"permute"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{calculate}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"slope"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Explanatory variables are conditions you can impose on the experimental
+units, while blocking variables are characteristics that the
+experimental units come with that you would like to control for.
+
+In random sampling, you use stratifying to control for a variable. In
+random assignment, you use blocking to achieve the same goal.
+
+Control: compare treatment of interest to a control group
+
+Randomize: randomly assign subjects to treatments
+
+Replicate: collect a sufficiently large sample within a study, or
+replicate the entire study
+
+Block: account for the potential effect of confounding variables
+
+Group subjects into blocks based on these variations, and randomize
+within each block to treatment groups
+
+Random Sampling + Random Assignment: Causal + generalizable
+
+No Random Sampling + Random Assignment: Causal + not generalizable
+
+Random Sampling + No Random Assignment: Not causal + generalizable
+
+No Random Sampling + No Random Assignment: Not causal + not
+generalizable
 
 \subsection{Statistical Tests}\label{statistical-tests}
 
@@ -5331,6 +5185,231 @@ Given any three, we can determine the fourth.
   Transform all values to their percentile ranks. This leads to the
   Spearman coefficient.
 \end{enumerate}
+
+\subsection{AB Testing Overview}\label{ab-testing-overview}
+
+Guide: Choose metric (CTR), review stats (Hypothesis Testing), design,
+analyse
+
+Need to have clear control and thing to test. Also need time. Frequency
+of customer interaqction is important.
+
+shopping and searching not independent events.
+
+Point estimate of CTR (users who clicked)/users. Need margin of error
+for estimate. Approximate binomial by normal if N*p \& N(1-p)
+\textgreater{} 5.
+
+marin of error = Z*(stndad error)
+
+se = sqrt(p(1-p)/n)
+
+Z for 95\% s 1.96 and 2.58 for 99\%.
+
+for Two samples calculate a pooled CTR point estimate and standard
+error.
+
+Need to be substantive (a worthy difference) in addition to being
+statistically significant. Some changes might not be useful due to the
+resources one might want to allocate.
+
+Result are repeatable (stat sig) bar should be lower than business
+interesting (practically sig)
+
+Stat Power: How many page view necessary to get a stat sig result.
+
+Size v Power: The smaller the effect or increased confidence you want to
+detect/have (greater power of experiment), the larger the sample you
+need to use.
+
+alpha = P(reject null when true) beta = P(accept null when false)
+
+small sample: low alpha, high beta larger sample: low alpha, low beta
+
+1- alpha = confidence level 1 - beta = sensitivity (often 80\%)
+
+practical significance: 2\%, alpha = 0.05, beta = 0.2
+
+sample size dp\_to ctr (increase in se), confidence level, sensitivity
+sample size invp\_to practical sig (larger changes easier to detect)
+
+above is design of experiment. below is analysis:
+
+estimate diff: experimental prop - control prop margin of error = z*se
+
+conf int: estimated diff +/- margin of error
+
+\textbf{Policy \& Ethics}
+
+In the study, what risk is the participant undertaking? The main
+threshold is whether the risk exceeds that of ``minimal risk''.
+
+Next, what benefits might result from the study? Even if the risk is
+minimal, how might the results help?
+
+Third, what other choices do participants have? For example, if you are
+testing out changes to a search engine, participants always have the
+choice to use another search engine.
+
+Finally, what data is being collected, and what is the expectation of
+privacy and confidentiality? This last question is quite nuanced,
+encompassing numerous questions: Do participants understand what data is
+being collected about them? What harm would befall them should that data
+be made public? Would they expect that data to be considered private and
+confidential?
+
+Our recommendation is that there should be internal reviews of all
+proposed studies by experts regarding the questions:
+
+Are participants facing more than minimal risk? Do participants
+understand what data is being gathered? Is that data identifiable? How
+is the data handled?
+
+Internal process recommendations Finally, regarding internal process of
+data handling, we recommend that:
+
+Every employee who might be involved in A/B test be educated about the
+ethics and the protection of the participants. Clearly there are other
+areas of ethics beyond what we've covered that discuss integrity,
+competence, and responsibility, but those generally are broader than
+protecting participants of A/B tests (cite ACM code of ethics).
+
+All data, identified or not, be stored securely, with access limited to
+those who need it to complete their job. Access should be time limited.
+There should be clear policies of what data usages are acceptable and
+not acceptable. Moreover, all usage of the data should be logged and
+audited regularly for violations. You create a clear escalation path for
+how to handle cases where there is even possibly more than minimal risk
+or data sensitivity issues.
+
+rate better for usability test than prob
+
+\textbf{Choosing \& Characterizing Metrics}
+
+\textbf{Define}
+
+Make sure to granularize funnel
+
+\textbf{Intuition}
+
+NA
+
+\textbf{Characterize}
+
+Focus groups, UER (user experience study), survey, experiments,
+retrospective analysis, external data
+
+temporal effects across hours, days, weeks are important
+
+different browsers screw with the CTR depending on how they deal with JS
+
+Can use cookies to track users
+
+Metric definitions
+
+Def \#1 (Cookie probability): For each , number of cookies that click
+divided by number of cookies
+
+Def \#2 (Pageview probability): Number of pageviews with a click within
+divided by number of pageviews
+
+Def \#3 (Rate): Number of clicks divided by number of pageviews
+
+CTR vs CTP: The first can be \textgreater{}1.
+
+Take into consideration mean and median. Median is robust but might not
+be useful so look at percentiles.
+
+Measuring sensitiviyt and robustness: 1) Running experiments to see if
+metrics move as predicted. A vs A experiments: Measure people who saw
+the same thing to see if there is a difference between them according to
+the metric or its too sensitive. Look at previous experiments. 2)
+Retrospective analysis of logs to see how the metrics responded in the
+past.
+
+Metric For Loading Vid: Look at distribution of load times for vid. Want
+a robust metric that doesn't really change for comparable vids. But wnat
+a metric that is sensitive to a change that you care about like
+resolution.
+
+How to compare experiment vs control: difference or relative change.
+Relative change allows you to keep same significance boundary.
+
+Check that praticial sig level is good for metric. Need to have handle
+on variability for confidence interval.
+
+sign test: Good for looking to implement a change, but doesn't give
+effect size.
+
+empirical vs analytic: underlying distribution could be weird so do
+empirical. Analyticcal for simple metrics. If empirical and anlytical
+don't agree then run AvA test.
+
+A vs A test: Std proportional to square root of number of samples.
+Diminishing returns for many tests. Can use bootstrap if don't have
+enough traffic for a big A v A test.
+
+\textbf{Designing An Experiment}
+
+\textbf{Choose Subject}
+
+Unit of Diversion: How to indentify a person. Cookie (could clear so
+change), userid, deviceid, and address (changes all the time).
+
+Intra-user vs inter-user experiment.
+
+\textbf{Choose Population}
+
+Size
+
+Duration
+
+Cohort: People who enter the experiment at the same time.
+
+Cohort \textgreater{} Population: Learning effects, user retention
+
+Can reduce sample if just targeting english speaking traffic
+
+When going to run experiment: holiday or not? How many people to put
+through experiment and control?
+
+\textbf{Analyzing Results}
+
+Sanity Checks:
+
+Pass all before move on
+
+Good invariants: \# of events, video load time (user has no control over
+it). Want these to be about the same for experiment and control.
+
+Single Metric:
+
+sign test
+
+Multiple Metrics:
+
+More metrics increase false positive chance. Use Bonferroni assumption:
+makes no independence assumption and is conservative.
+
+margin of error smaller than observed diff so the confidence interval
+won't include 0.
+
+Different strategies: family-wise error rate, false discovery rate,
+
+Gotchas:
+
+Simpson's Paradox
+
+Usually A/B testing works for testing changes in elements in the web
+page. A/B testing framework is following sequence:
+
+Design a research question.
+
+Choose test statistics method or metrics to evaluate experiment.
+
+Designing the control group and experiment group.
+
+Analyzing results, and draw valid conclusions.
 
 \bibliography{book.bib,packages.bib}
 

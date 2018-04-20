@@ -795,6 +795,17 @@ for lr in lr_to_test:
 
 ## LME4
 
+Run a glmer with poisson family error term, predicting count as a function of fixed effects age and year, and include year as a random effect of county as well.
+
+```{r, eval = F}
+modelOut <- glmer(count ~ age + year + (year|county), family = 'poisson',
+                  data = ILdata)
+```
+
+
+
+glmer can be an alternative to chi-squared tests
+
 ```{r, eval = F}
 
 # Include the AverageAgeofMother as a correlated random-effect slope parameter
@@ -818,3 +829,44 @@ ranef(out)
 confint(out)
 ```
 
+## [Inference Package](https://cran.r-project.org/web/packages/infer/infer.pdf)
+
+Main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results
+
+```{r, eval = FALSE}
+set.seed(4747)
+perm_slope <- twins %>%
+  specify(Foster ~ Biological) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 10, type = "permute") %>%
+  calculate(stat = "slope")
+```
+
+## Networkx
+
+Import necessary modules and draw graph.
+
+```{python, eval = FALSE}
+import matplotlib.pyplot as plt
+import networkx as nx
+nx.draw(T_sub)
+plt.show()
+```
+
+Get the nodes of interest.
+
+```{python, eval = FALSE}
+noi = [n for n, d in T.nodes(data=True) if d['occupation'] == 'scientist']
+
+### Use a list comprehension to get the edges of interest: eoi
+eoi = [(u, v) for u, v, d in T.edges(data=True) if d['date'] < date(2010, 1, 1)]
+
+### Set the weight of the edge
+weight = 2
+for u, v, d in T.edges(data=True):
+  # Check if node 293 is involved
+  if 293 in [u,v]:
+    
+    # Set the weight to 1.1
+    T[u][v]['weight'] = 1.1
+```
