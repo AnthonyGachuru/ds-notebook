@@ -1213,6 +1213,65 @@ autocorrelation exists
 
 \url{https://data.library.virginia.edu/diagnostic-plots/}
 
+\textbf{No Multicolinearity}
+
+\texttt{multicol} shows which columns could be removed for
+multi-collinearity. (The vif is not working because of
+multicolinearity.)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# vif(clf_lr$finalModel)}
+\CommentTok{# multicol <- alias(clf_lr$finalModel)$Complete}
+\CommentTok{# multicol}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Linear With The Logit Of Predictions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# box tidwell doesn't work since features have negative values.}
+
+\CommentTok{# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))}
+\CommentTok{# }
+\CommentTok{# df_num_selected <- df2 %>% }
+\CommentTok{#   select(}
+\CommentTok{#     OverallMap,}
+\CommentTok{#     StrandMap,}
+\CommentTok{#     lesson_length,}
+\CommentTok{#     g_avg_overall_map,}
+\CommentTok{#     g_avg_strand_map,}
+\CommentTok{#     g_avg_score,}
+\CommentTok{#     g_num_students,}
+\CommentTok{#     cohort_avg_overall_map,}
+\CommentTok{#     cohort_avg_strand_map}
+\CommentTok{#   ) %>%}
+\CommentTok{#   map(min_max_scaler) %>% }
+\CommentTok{#   data.frame() %>% }
+\CommentTok{# }
+\CommentTok{# formula_all_num_features <- as.formula(glue('pass ~ \{paste(df_num_selected %>% names, collapse = " + ")\}'))}
+\CommentTok{# car::boxTidwell(formula_all_num_features, data = df_num_selected )}
+
+\CommentTok{# Visual test too many features to work well}
+
+\CommentTok{# lin_test <- df2 %>%}
+\CommentTok{#   dplyr::select_if(is.numeric) }
+\CommentTok{# }
+\CommentTok{# predictors <- colnames(lin_test)}
+\CommentTok{# }
+\CommentTok{# lin_test <- lin_test %>%}
+\CommentTok{#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%}
+\CommentTok{#   gather(key = "predictors", value = "predictor.value", -logit)}
+\CommentTok{# }
+\CommentTok{# ggplot(lin_test, aes(logit, predictor.value))+}
+\CommentTok{#   geom_point(size = 0.5, alpha = 0.5) +}
+\CommentTok{#   geom_smooth(method = "loess") + }
+\CommentTok{#   theme_bw() + }
+\CommentTok{#   facet_wrap(~predictors, scales = "free_y")}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Evaluation}\label{evaluation-1}
 
 \begin{itemize}
@@ -1355,219 +1414,9 @@ we wanted to see if Year is important for predicting Crime in Maryland,
 we can build a null model with only County as a random-effect and a year
 model that includes Year.
 
-\section{Bayesian}\label{bayesian}
-
-Bayes Rule:
-
-old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
-{[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob
-{[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
-
-\begin{quote}
-Models have a lot of parameters classical methods that use simple point
-estimates of the parameters don't adequately capture uncertainty so we
-turn to Bayesian methods because Bayesian inference is one way of
-finding a large model with metadata.
-\end{quote}
-
-\begin{quote}
-The second reason we use Bayesian inference is for combining information
-you might have experimental data on the drug under one condition and
-aggregate data under another condition we can combine polls and election
-forecast of public opinion data from multiple poles and environmental
-statistics we have measurements of different quality Bayesian methods
-are particularly adapted tocombining information.
-\end{quote}
-
-\begin{quote}
-The third appeal of Bayesian methods and the sort of applications that I
-work on is that the inferences can map directly to decisions based on
-inferences express not its estimates and standard errors but rather as
-probability distributions we can take these probability distributions
-and pipe them directly into decision analysis for these reasons.
-\end{quote}
-
-\begin{itemize}
-\tightlist
-\item
-  An advantage of recognizing that the prior distribution is a testable
-  part of a Bayesian model is that it clarifies the role of the prior
-  inference, and where it comes from.
-\end{itemize}
-
-\section{Naïve Bayes}\label{naive-bayes}
+\section{K-Means Clustering {[}US{]}}\label{k-means-clustering-us}
 
 \subsection{Intro}\label{intro-5}
-
-Practitioners do use Naive Bayes regularly for ranking, where the actual
-values of the probabilities are not relevant---only the relative values
-for examples in the different classes. Another advantage of Naive Bayes
-is that it is naturally an ``incremental learner.'' An incremental
-learner is an induction technique that can update its model one training
-example at a time. It does not need to reprocess all past training
-examples when new training data become available.
-
-Document/spam classification is one use. Assumptions are that all the
-features are equally likely and are all important. Would be
-computational expensive without these assumptions with having to track
-all the joint probabilities. Gaussian for continuous variables,
-Bernoulli for binary input, and Multinomial for binary and more input.
-Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used
-for spam classification.The Laplace Estimator (usually chosen to be 1)
-is a corrective measure that adds a small amount of error to each of the
-counts in the frequency table of words. The addition of error ensures
-that each resulting probability of each event will necessarily be
-nonzero, even if the event did not appear in the training data.
-
-Note: In addition, we can use function ``partial\_fit'' to fit on a
-batch of samples incrementally while we are using. MultinomialNB and
-Bernoulli NB also support sample weighting.
-
-\subsection{Assumptions}\label{assumptions-5}
-
-\subsection{Characteristics}\label{characteristics}
-
-\subsection{Evaluation}\label{evaluation-4}
-
-\subsection{Pros/Cons}\label{proscons-5}
-
-\textbf{Pros}
-
-\begin{itemize}
-\item
-  It is relatively simple to understand. Training the classifier does
-  not require many observations, and the method also works well with
-  large amounts of data. It is easy to obtain the estimated
-  probabilityfor a classification prediction.
-\item
-  Computationally fast
-\item
-  Simple to implement
-\item
-  Works well with high dimensions
-\end{itemize}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  Relies on independence assumption and will perform badly if this
-  assumption is not met
-\item
-  While easily attainable, the estimated probabilities are often less
-  reliable than the predicted class labels themselves.
-\end{itemize}
-
-\section{LDA}\label{lda}
-
-\subsection{Intro}\label{intro-6}
-
-Before we take a look into the inner workings of LDA in the following
-subsections, let's summarize the key steps of the LDA approach:
-
-Standardize the -dimensional dataset ( is the number of features).
-
-For each class, compute the -dimensional mean vector.
-
-Construct the between-class scatter matrix and the within-class scatter
-matrix .
-
-Compute the eigenvectors and corresponding eigenvalues of the matrix .
-
-Choose the eigenvectors that correspond to the largest eigenvalues to
-construct a -dimensional transformation matrix ; the eigenvectors are
-the columns of this matrix.
-
-Project the samples onto the new feature subspace using the
-transformation matrix.
-
-LDA similar to Naive Bayes but doesn't assume variables are independent,
-assumes that p(x\textbar{}y) is a multivariate normal distribution, and
-assumes gaussian distributions for each class share the same covariance
-matrix. If they don't share the same covariance matrix, then we use
-Quadratic Discriminant Analysis which assumes each class has its own.
-
-\subsection{Assumptions}\label{assumptions-6}
-
-\subsection{Characteristics}\label{characteristics-1}
-
-\subsection{Evaluation}\label{evaluation-5}
-
-\subsection{Pros/Cons}\label{proscons-6}
-
-\section{QDA}\label{qda}
-
-\subsection{Intro}\label{intro-7}
-
-TBD
-
-\subsection{Assumptions}\label{assumptions-7}
-
-\subsection{Characteristics}\label{characteristics-2}
-
-\subsection{Evaluation}\label{evaluation-6}
-
-\subsection{Pros/Cons}\label{proscons-7}
-
-\section{Advanced Bayesian}\label{advanced-bayesian}
-
-\begin{itemize}
-\item
-  Approximate Bayesian Computation
-\item
-  Laplace approximation: Approximate the posterior of a non-conjugate
-  model
-\item
-  When one uses likelihood to get point estimates of model parameters,
-  it's called maximum-likelihood estimation, or MLE. If one also takes
-  the prior into account, then it's maximum a posteriori estimation
-  (MAP). MLE and MAP are the same if the prior is uniform.
-\item
-  Beta conjugacy: Beta for prior \& binomial for likelihoood implies
-  beta for posterior. Update: beta(alpha + successes, beta + failures).
-  Mean: alpha/(alpha + beta)
-\item
-  Small alpha and beta means the prior is less informative
-\item
-  Empirical Bayes is an approximation to more exact Bayesian methods.
-  With a lot of data it is a very good approximation.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
-\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
-\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
-\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
-\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
-\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
-\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
-\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\end{Highlighting}
-\end{Shaded}
-
-Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
-np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
-relative to B is \textgreater{}=3\%:
-np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
-
-\section{Clustering}\label{clustering}
-
-\begin{itemize}
-\item
-  \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison}
-\item
-  \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
-\item
-  \url{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}
-\end{itemize}
-
-\section{K-Means}\label{k-means}
-
-\subsection{Intro}\label{intro-8}
 
 K-Means clustering method considers two assumptions regarding the
 clusters -- first that the clusters are spherical and second that the
@@ -1618,11 +1467,11 @@ We can set K to optimally cluster the data by starting with a small
 number of clusters, and then iteratively splitting them until all
 clusters fit a normal distribution.
 
-\subsection{Assumptions}\label{assumptions-8}
+\subsection{Assumptions}\label{assumptions-5}
 
-\subsection{Characteristics}\label{characteristics-3}
+\subsection{Characteristics}\label{characteristics}
 
-\subsection{Evaluation}\label{evaluation-7}
+\subsection{Evaluation}\label{evaluation-4}
 
 Davies--Bouldin index: This is an internal evaluation scheme, where the
 validation of how well the clustering has been done is made using
@@ -1630,7 +1479,7 @@ quantities and features inherent to the dataset. This has a drawback
 that a good value reported by this method does not imply the best
 information retrieval.
 
-\subsection{Pros/Cons}\label{proscons-8}
+\subsection{Pros/Cons}\label{proscons-5}
 
 \textbf{Pros}
 
@@ -1644,7 +1493,7 @@ centers.
 
 \section{Hierarchical Clustering}\label{hierarchical-clustering}
 
-\subsection{Intro}\label{intro-9}
+\subsection{Intro}\label{intro-6}
 
 Generates dendrograms. The lower down a fusion occurs the more similar
 the group of observations and vice versa. Begin with n observations and
@@ -1667,25 +1516,25 @@ of clusters to be speciﬁed. Hierarchical clustering doesn't need the
 number of clusters to be speciﬁed. K-means clustering is usually more
 effcient run-time wise.
 
-\subsection{Assumptions}\label{assumptions-9}
+\subsection{Assumptions}\label{assumptions-6}
 
-\subsection{Characteristics}\label{characteristics-4}
+\subsection{Characteristics}\label{characteristics-1}
 
-\subsection{Evaluation}\label{evaluation-8}
+\subsection{Evaluation}\label{evaluation-5}
 
-\subsection{Pros/Cons}\label{proscons-9}
+\subsection{Pros/Cons}\label{proscons-6}
 
 \section{PCA}\label{pca}
 
-\subsection{Intro}\label{intro-10}
+\subsection{Intro}\label{intro-7}
 
-\subsection{Assumptions}\label{assumptions-10}
+\subsection{Assumptions}\label{assumptions-7}
 
-\subsection{Characteristics}\label{characteristics-5}
+\subsection{Characteristics}\label{characteristics-2}
 
-\subsection{Evaluation}\label{evaluation-9}
+\subsection{Evaluation}\label{evaluation-6}
 
-\subsection{Pros/Cons}\label{proscons-10}
+\subsection{Pros/Cons}\label{proscons-7}
 
 \begin{itemize}
 \item
@@ -1788,7 +1637,7 @@ of the original data.
 
 \section{KNN}\label{knn}
 
-\subsection{Intro}\label{intro-11}
+\subsection{Intro}\label{intro-8}
 
 Calculate distance between each observation and all the others.
 Determine the k nearest observations to the observation. Classify the
@@ -1808,13 +1657,13 @@ update, sensitivity of distance metrics
 
 smaller k means smaller training error, ut larger k is more stable.
 
-\subsection{Assumptions}\label{assumptions-11}
+\subsection{Assumptions}\label{assumptions-8}
 
-\subsection{Characteristics}\label{characteristics-6}
+\subsection{Characteristics}\label{characteristics-3}
 
-\subsection{Evaluation}\label{evaluation-10}
+\subsection{Evaluation}\label{evaluation-7}
 
-\subsection{Pros/Cons}\label{proscons-11}
+\subsection{Pros/Cons}\label{proscons-8}
 
 \textbf{Pros}
 
@@ -1859,7 +1708,7 @@ space it takes to store the computations increases dramatically.
 
 \section{SVM}\label{svm}
 
-\subsection{Intro}\label{intro-12}
+\subsection{Intro}\label{intro-9}
 
 Selection of margin in SVM is a convex optimization problem. What is the
 objective of the maximum margin approach? To ensure small prediction
@@ -1946,13 +1795,13 @@ classifiers vote on the prediction for each observation.
 against all other categories combined. Assign the observation to the
 classifier with the largest function value.
 
-\subsection{Assumptions}\label{assumptions-12}
+\subsection{Assumptions}\label{assumptions-9}
 
-\subsection{Characteristics}\label{characteristics-7}
+\subsection{Characteristics}\label{characteristics-4}
 
-\subsection{Evaluation}\label{evaluation-11}
+\subsection{Evaluation}\label{evaluation-8}
 
-\subsection{Pros/Cons}\label{proscons-12}
+\subsection{Pros/Cons}\label{proscons-9}
 
 \textbf{Pros}
 
@@ -1986,7 +1835,7 @@ classifier with the largest function value.
 
 \section{Decision Tree}\label{decision-tree}
 
-\subsection{Intro}\label{intro-13}
+\subsection{Intro}\label{intro-10}
 
 So should you use Gini impurity or entropy? The truth is, most of the
 time it does not make a big difference: they lead to similar trees. Gini
@@ -2046,13 +1895,13 @@ pruning reduces the variance of the overall tree model upon repeated
 builds with different datasets, we induce biasbecause the trees are much
 simpler.
 
-\subsection{Assumptions}\label{assumptions-13}
+\subsection{Assumptions}\label{assumptions-10}
 
-\subsection{Characteristics}\label{characteristics-8}
+\subsection{Characteristics}\label{characteristics-5}
 
-\subsection{Evaluation}\label{evaluation-12}
+\subsection{Evaluation}\label{evaluation-9}
 
-\subsection{Pros/Cons}\label{proscons-13}
+\subsection{Pros/Cons}\label{proscons-10}
 
 \textbf{Pros}
 
@@ -2078,7 +1927,7 @@ simpler.
 
 \section{Bagging}\label{bagging}
 
-\subsection{Intro}\label{intro-14}
+\subsection{Intro}\label{intro-11}
 
 used to decrease variance in decision trees
 
@@ -2119,13 +1968,13 @@ get rid of the high variance by averaging. Con is that the trees are
 correlation. train multiple trees using bootstrapped data to reduce
 variance and prevent overfitting
 
-\subsection{Assumptions}\label{assumptions-14}
+\subsection{Assumptions}\label{assumptions-11}
 
-\subsection{Characteristics}\label{characteristics-9}
+\subsection{Characteristics}\label{characteristics-6}
 
-\subsection{Evaluation}\label{evaluation-13}
+\subsection{Evaluation}\label{evaluation-10}
 
-\subsection{Pros/Cons}\label{proscons-14}
+\subsection{Pros/Cons}\label{proscons-11}
 
 \textbf{Pros}
 
@@ -2152,7 +2001,7 @@ variance and prevent overfitting
 
 \section{Random Forest}\label{random-forest}
 
-\subsection{Intro}\label{intro-15}
+\subsection{Intro}\label{intro-12}
 
 Build a number of decision trees using bootstrapped samples
 
@@ -2209,13 +2058,13 @@ is worse), strength of single trees (higher is better). Increasing
 number of features for each split increases correlation and strength of
 single trees.
 
-\subsection{Assumptions}\label{assumptions-15}
+\subsection{Assumptions}\label{assumptions-12}
 
-\subsection{Characteristics}\label{characteristics-10}
+\subsection{Characteristics}\label{characteristics-7}
 
-\subsection{Evaluation}\label{evaluation-14}
+\subsection{Evaluation}\label{evaluation-11}
 
-\subsection{Pros/Cons}\label{proscons-15}
+\subsection{Pros/Cons}\label{proscons-12}
 
 \textbf{Pros}
 
@@ -2236,7 +2085,7 @@ Not as easy to visually interpret
 
 \section{Boosting}\label{boosting}
 
-\subsection{Intro}\label{intro-16}
+\subsection{Intro}\label{intro-13}
 
 Unlike boosting and random forests, can overfit if number of trees is
 too large
@@ -2271,13 +2120,13 @@ variables are relatively important predictors.
 Similar to bagging, but learns sequentially and builds off previous
 trees
 
-\subsection{Assumptions}\label{assumptions-16}
+\subsection{Assumptions}\label{assumptions-13}
 
-\subsection{Characteristics}\label{characteristics-11}
+\subsection{Characteristics}\label{characteristics-8}
 
-\subsection{Evaluation}\label{evaluation-15}
+\subsection{Evaluation}\label{evaluation-12}
 
-\subsection{Pros/Cons}\label{proscons-16}
+\subsection{Pros/Cons}\label{proscons-13}
 
 \textbf{Pros}
 
@@ -2360,15 +2209,15 @@ Factorization, Alternating Least Squares.
 
 \section{Time Series}\label{time-series}
 
-\subsection{Intro}\label{intro-17}
+\subsection{Intro}\label{intro-14}
 
-\subsection{Assumptions}\label{assumptions-17}
+\subsection{Assumptions}\label{assumptions-14}
 
-\subsection{Characteristics}\label{characteristics-12}
+\subsection{Characteristics}\label{characteristics-9}
 
-\subsection{Evaluation}\label{evaluation-16}
+\subsection{Evaluation}\label{evaluation-13}
 
-\subsection{Pros/Cons}\label{proscons-17}
+\subsection{Pros/Cons}\label{proscons-14}
 
 \textbf{Pros}
 
@@ -2589,9 +2438,273 @@ for error measurement.
 
 Can use AIC for model selection. Also use confidence intervals.
 
+\section{Association Rule Mining}\label{association-rule-mining}
+
+\subsection{Intro}\label{intro-15}
+
+\begin{itemize}
+\item
+  Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical
+  rule might be: if someone buys peanut butter and jelly, then that
+  person is likely to buy bread as well.
+\item
+  Incredibly big feature space (2\^{}k-1).
+\item
+  The Apriori algorithm employs a simple a priori belief as a guideline
+  for reducing the association rule space.
+\item
+  Support: the fraction of which each item appears within the dataset as
+  a whole. Support(item) = count(item)/N. Higher support is better.
+\item
+  nfidence: the likelihood that a constructed rule is correct given the
+  items on the left hand side of the transaction. A higher level of
+  confidence implies a higher likelihood that Y appears alongside
+  transactions in which X appears.
+\item
+  ft: the ratio by which the confidence of a rule exceeds the expected
+  outcome. When lift \textgreater{} 1, the presence of X seems to have
+  increasedthe probability of Y occurring in the transaction. When lift
+  \textless{} 1, the presence of X seems to have decreasedthe
+  probability of Y occurring in the transaction. When lift = 1, X and Y
+  are independent.
+\item
+  t thresholds for support and confidence and then the algorithm goes
+  from all 1-combinations to 2-combinations and up. Those subset below
+  the threshold don't make it to the higher iterations.
+\end{itemize}
+
+\subsection{Assumptions}\label{assumptions-15}
+
+\subsection{Characteristics}\label{characteristics-10}
+
+\subsection{Evaluation}\label{evaluation-14}
+
+\subsection{Pros/Cons}\label{proscons-15}
+
+\textbf{Pros}
+
+\begin{itemize}
+\item
+  Ideally suited for working with very large amounts of transactional
+  data.
+\item
+  The results are rules that are generally easy to understand and have a
+  high amount of interpretability.
+\item
+  The process is useful for data mining and uncovering unexpected
+  knowledge within a dataset.
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  The outcome is usually not interesting when applied to smaller
+  datasets.
+\item
+  It is difficult to separate actual insights from common sense notions.
+\item
+  The analyst might be compelled to draw spurious conclusions--remember
+  that correlation doesn't imply causation!
+\end{itemize}
+
+\section{General Bayesian Framework}\label{general-bayesian-framework}
+
+Bayes Rule:
+
+old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
+{[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob
+{[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
+
+\begin{itemize}
+\item
+  Models have a lot of parameters classical methods that use simple
+  point estimates of the parameters don't adequately capture uncertainty
+  so we turn to Bayesian methods because Bayesian inference is one way
+  of finding a large model with metadata.
+\item
+  The second reason we use Bayesian inference is for combining
+  information you might have experimental data on the drug under one
+  condition and aggregate data under another condition we can combine
+  polls and election forecast of public opinion data from multiple poles
+  and environmental statistics we have measurements of different quality
+  Bayesian methods are particularly adapted tocombining information.
+\item
+  The third appeal of Bayesian methods and the sort of applications that
+  I work on is that the inferences can map directly to decisions based
+  on inferences express not its estimates and standard errors but rather
+  as probability distributions we can take these probability
+  distributions and pipe them directly into decision analysis for these
+  reasons.
+\item
+  An advantage of recognizing that the prior distribution is a testable
+  part of a Bayesian model is that it clarifies the role of the prior
+  inference, and where it comes from.
+\item
+  Approximate Bayesian Computation
+\item
+  Laplace approximation: Approximate the posterior of a non-conjugate
+  model
+\item
+  When one uses likelihood to get point estimates of model parameters,
+  it's called maximum-likelihood estimation, or MLE. If one also takes
+  the prior into account, then it's maximum a posteriori estimation
+  (MAP). MLE and MAP are the same if the prior is uniform.
+\item
+  Beta conjugacy: Beta for prior \& binomial for likelihoood implies
+  beta for posterior. Update: beta(alpha + successes, beta + failures).
+  Mean: alpha/(alpha + beta)
+\item
+  Small alpha and beta means the prior is less informative
+\item
+  Empirical Bayes is an approximation to more exact Bayesian methods.
+  With a lot of data it is a very good approximation.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
+\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
+\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
+\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
+\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
+\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
+\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
+\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\end{Highlighting}
+\end{Shaded}
+
+Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
+np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
+relative to B is \textgreater{}=3\%:
+np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
+
+\section{Naïve Bayes}\label{naive-bayes}
+
+\subsection{Intro}\label{intro-16}
+
+Practitioners do use Naive Bayes regularly for ranking, where the actual
+values of the probabilities are not relevant---only the relative values
+for examples in the different classes. Another advantage of Naive Bayes
+is that it is naturally an ``incremental learner.'' An incremental
+learner is an induction technique that can update its model one training
+example at a time. It does not need to reprocess all past training
+examples when new training data become available.
+
+Document/spam classification is one use. Assumptions are that all the
+features are equally likely and are all important. Would be
+computational expensive without these assumptions with having to track
+all the joint probabilities. Gaussian for continuous variables,
+Bernoulli for binary input, and Multinomial for binary and more input.
+Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used
+for spam classification.The Laplace Estimator (usually chosen to be 1)
+is a corrective measure that adds a small amount of error to each of the
+counts in the frequency table of words. The addition of error ensures
+that each resulting probability of each event will necessarily be
+nonzero, even if the event did not appear in the training data.
+
+Note: In addition, we can use function ``partial\_fit'' to fit on a
+batch of samples incrementally while we are using. MultinomialNB and
+Bernoulli NB also support sample weighting.
+
+\subsection{Assumptions}\label{assumptions-16}
+
+\subsection{Characteristics}\label{characteristics-11}
+
+\subsection{Evaluation}\label{evaluation-15}
+
+\subsection{Pros/Cons}\label{proscons-16}
+
+\textbf{Pros}
+
+\begin{itemize}
+\item
+  It is relatively simple to understand. Training the classifier does
+  not require many observations, and the method also works well with
+  large amounts of data. It is easy to obtain the estimated
+  probabilityfor a classification prediction.
+\item
+  Computationally fast
+\item
+  Simple to implement
+\item
+  Works well with high dimensions
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  Relies on independence assumption and will perform badly if this
+  assumption is not met
+\item
+  While easily attainable, the estimated probabilities are often less
+  reliable than the predicted class labels themselves.
+\end{itemize}
+
+\section{LDA}\label{lda}
+
+\subsection{Intro}\label{intro-17}
+
+Before we take a look into the inner workings of LDA in the following
+subsections, let's summarize the key steps of the LDA approach:
+
+Standardize the -dimensional dataset ( is the number of features).
+
+For each class, compute the -dimensional mean vector.
+
+Construct the between-class scatter matrix and the within-class scatter
+matrix .
+
+Compute the eigenvectors and corresponding eigenvalues of the matrix .
+
+Choose the eigenvectors that correspond to the largest eigenvalues to
+construct a -dimensional transformation matrix ; the eigenvectors are
+the columns of this matrix.
+
+Project the samples onto the new feature subspace using the
+transformation matrix.
+
+LDA similar to Naive Bayes but doesn't assume variables are independent,
+assumes that p(x\textbar{}y) is a multivariate normal distribution, and
+assumes gaussian distributions for each class share the same covariance
+matrix. If they don't share the same covariance matrix, then we use
+Quadratic Discriminant Analysis which assumes each class has its own.
+
+\subsection{Assumptions}\label{assumptions-17}
+
+\subsection{Characteristics}\label{characteristics-12}
+
+\subsection{Evaluation}\label{evaluation-16}
+
+\subsection{Pros/Cons}\label{proscons-17}
+
+\section{QDA}\label{qda}
+
+\subsection{Intro}\label{intro-18}
+
+TBD
+
+\subsection{Assumptions}\label{assumptions-18}
+
+\subsection{Characteristics}\label{characteristics-13}
+
+\subsection{Evaluation}\label{evaluation-17}
+
+\subsection{Pros/Cons}\label{proscons-18}
+
+\section{Bayesian Linear Regression}\label{bayesian-linear-regression}
+
+\url{https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7}
+
 \section{Deep Learning}\label{deep-learning}
 
 \begin{itemize}
+\item
+  restnet, attention \textgreater{} RNN / LSTM
 \item
   \href{https://hackernoon.com/deep-learning-cheat-sheet-25421411e460}{DL
   Cheatsheet}
@@ -2736,81 +2849,11 @@ Can use AIC for model selection. Also use confidence intervals.
   Dying neuron + vanishing gradient: Change activation function
 \end{itemize}
 
-\section{Association Rule Mining}\label{association-rule-mining}
-
-\subsection{Intro}\label{intro-18}
-
-\begin{itemize}
-\item
-  Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical
-  rule might be: if someone buys peanut butter and jelly, then that
-  person is likely to buy bread as well.
-\item
-  Incredibly big feature space (2\^{}k-1).
-\item
-  The Apriori algorithm employs a simple a priori belief as a guideline
-  for reducing the association rule space.
-\item
-  Support: the fraction of which each item appears within the dataset as
-  a whole. Support(item) = count(item)/N. Higher support is better.
-\item
-  nfidence: the likelihood that a constructed rule is correct given the
-  items on the left hand side of the transaction. A higher level of
-  confidence implies a higher likelihood that Y appears alongside
-  transactions in which X appears.
-\item
-  ft: the ratio by which the confidence of a rule exceeds the expected
-  outcome. When lift \textgreater{} 1, the presence of X seems to have
-  increasedthe probability of Y occurring in the transaction. When lift
-  \textless{} 1, the presence of X seems to have decreasedthe
-  probability of Y occurring in the transaction. When lift = 1, X and Y
-  are independent.
-\item
-  t thresholds for support and confidence and then the algorithm goes
-  from all 1-combinations to 2-combinations and up. Those subset below
-  the threshold don't make it to the higher iterations.
-\end{itemize}
-
-\subsection{Assumptions}\label{assumptions-18}
-
-\subsection{Characteristics}\label{characteristics-13}
-
-\subsection{Evaluation}\label{evaluation-17}
-
-\subsection{Pros/Cons}\label{proscons-18}
-
-\textbf{Pros}
-
-\begin{itemize}
-\item
-  Ideally suited for working with very large amounts of transactional
-  data.
-\item
-  The results are rules that are generally easy to understand and have a
-  high amount of interpretability.
-\item
-  The process is useful for data mining and uncovering unexpected
-  knowledge within a dataset.
-\end{itemize}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  The outcome is usually not interesting when applied to smaller
-  datasets.
-\item
-  It is difficult to separate actual insights from common sense notions.
-\item
-  The analyst might be compelled to draw spurious conclusions--remember
-  that correlation doesn't imply causation!
-\end{itemize}
-
 \section{Model Selection}\label{model-selection}
 
+\subsection{General}\label{general-3}
+
 \begin{itemize}
-\item
-  \url{http://hunch.net/?p=224}
 \item
   Linear SVM often outperforms logistic regression and is explainable as
   well.
@@ -3091,9 +3134,22 @@ Can use AIC for model selection. Also use confidence intervals.
   dataset), whereas Naive Bayes does.
 \end{itemize}
 
+\subsection{Clustering}\label{clustering}
+
+\begin{itemize}
+\item
+  \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison}
+\item
+  \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
+\item
+  \url{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}
+\item
+  \url{http://hunch.net/?p=224}
+\end{itemize}
+
 \section{Other}\label{other-2}
 
-\subsection{General}\label{general-3}
+\subsection{General}\label{general-4}
 
 \begin{itemize}
 \item
@@ -4267,7 +4323,7 @@ Get the nodes of interest.
 
 \section{Python}\label{python}
 
-\subsection{General}\label{general-4}
+\subsection{General}\label{general-5}
 
 \begin{itemize}
 \item
@@ -4447,7 +4503,7 @@ Map}\label{additional-functions-args-in-map}
 
 \section{R}\label{r}
 
-\subsubsection{General}\label{general-5}
+\subsubsection{General}\label{general-6}
 
 \begin{itemize}
 \item
@@ -4471,6 +4527,22 @@ Map}\label{additional-functions-args-in-map}
 \item
   df\_print: kable in yaml rmrkdown header
 \end{itemize}
+
+\section{Binarize Predictions}\label{binarize-predictions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clf_lr_final <-}\StringTok{ }\NormalTok{clf_lr}\OperatorTok{$}\NormalTok{finalModel}
+\NormalTok{model_tidy <-}\StringTok{ }\NormalTok{broom}\OperatorTok{::}\KeywordTok{tidy}\NormalTok{(clf_lr_final)}
+\NormalTok{df2}\OperatorTok{$}\NormalTok{pass_predicted <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
+  \KeywordTok{ifelse}\NormalTok{(clf_lr_final}\OperatorTok{$}\NormalTok{fitted.values }\OperatorTok{>=}\StringTok{ }\NormalTok{.}\DecValTok{5}\NormalTok{, }\StringTok{'pass'}\NormalTok{, }\StringTok{'fail'}\NormalTok{)}
+\NormalTok{  )}
+\KeywordTok{metrics}\NormalTok{(df2, pass, pass_predicted)}
+
+\NormalTok{var_imp <-}\StringTok{ }\KeywordTok{varImp}\NormalTok{(clf_lr_final) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{row.names}\NormalTok{(.)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\OperatorTok{-}\NormalTok{Overall) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(cols, Overall)}
+\NormalTok{var_imp}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Make Formula}\label{make-formula}
 
@@ -4645,7 +4717,7 @@ script to do joining of dummied csvs
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{General}\label{general-6}
+\chapter{General}\label{general-7}
 
 \section{Python}\label{python-1}
 
@@ -4840,7 +4912,7 @@ equivalence, etc. (Statistical Analysis of Complete Social Networks
 
 \section{Stats}\label{stats}
 
-\subsection{General}\label{general-7}
+\subsection{General}\label{general-8}
 
 A t test (t.test in R) is a special case of an ANOVA and a paired t test
 (parameter paired = T) is a special case of a repeated measures ANOVA.

@@ -194,6 +194,20 @@ plt.show()
 
 * df_print: kable in yaml rmrkdown header
 
+## Binarize  Predictions
+
+```{r, eval = F}
+clf_lr_final <- clf_lr$finalModel
+model_tidy <- broom::tidy(clf_lr_final)
+df2$pass_predicted <- as.factor(
+  ifelse(clf_lr_final$fitted.values >= .5, 'pass', 'fail')
+  )
+metrics(df2, pass, pass_predicted)
+
+var_imp <- varImp(clf_lr_final) %>% mutate(cols = row.names(.)) %>% arrange(-Overall) %>% select(cols, Overall)
+var_imp
+```
+
 ### Make Formula
 
 ```{r}
