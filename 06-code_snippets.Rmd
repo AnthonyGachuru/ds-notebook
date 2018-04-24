@@ -178,6 +178,12 @@ plt.show()
 
 * rowwise in R: purrr::pmap
 
+* str_split + unnest()
+
+* na_if: Replace certain values by na
+
+* purrr::map_df - map over columns
+
 * studio multiple cursors, snippets,  addins
 
 * ctrl + shift + o: toggle table of contents
