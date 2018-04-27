@@ -1149,6 +1149,8 @@ https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60
 
 * restnet, attention > RNN / LSTM
 
+* "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun
+
 * [DL Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
 
 * By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.

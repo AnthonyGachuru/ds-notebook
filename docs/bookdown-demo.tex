@@ -2706,6 +2706,10 @@ TBD
 \item
   restnet, attention \textgreater{} RNN / LSTM
 \item
+  ``Training with large minibatches is bad for your health. More
+  importantly, it's bad for your test error. Friends dont let friends
+  use minibatches larger than 32.'' - Yann Le Cun
+\item
   \href{https://hackernoon.com/deep-learning-cheat-sheet-25421411e460}{DL
   Cheatsheet}
 \item
@@ -4513,6 +4517,8 @@ Map}\label{additional-functions-args-in-map}
 \item
   str\_split + unnest()
 \item
+  \url{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html}
+\item
   na\_if: Replace certain values by na
 \item
   purrr::map\_df - map over columns
@@ -4533,6 +4539,21 @@ Map}\label{additional-functions-args-in-map}
 \item
   df\_print: kable in yaml rmrkdown header
 \end{itemize}
+
+\section{Pipe Anonymous Function}\label{pipe-anonymous-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{(}\ControlFlowTok{function}\NormalTok{(input.object) \{}
+\NormalTok{    complex}
+\NormalTok{    logic}
+\NormalTok{    goes}
+\NormalTok{    here}
+\NormalTok{    output.object}
+\NormalTok{  \})}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Binarize Predictions}\label{binarize-predictions}
 

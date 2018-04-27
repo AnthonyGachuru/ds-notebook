@@ -180,6 +180,8 @@ plt.show()
 
 * str_split + unnest()
 
+* https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html
+
 * na_if: Replace certain values by na
 
 * purrr::map_df - map over columns
@@ -199,6 +201,19 @@ plt.show()
 * ctrl + alt + R: run all chunks
 
 * df_print: kable in yaml rmrkdown header
+
+## Pipe Anonymous Function
+
+```{r,eval = F}
+data %>%
+  (function(input.object) {
+    complex
+    logic
+    goes
+    here
+    output.object
+  })
+```
 
 ## Binarize  Predictions
 
