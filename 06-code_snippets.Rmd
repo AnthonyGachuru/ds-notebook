@@ -32,7 +32,7 @@ a_norm2 = a / np.std(a) # The std function ignores the masked values.
 a.data
 ```
 
-## Showing Data With Plotly
+### Showing Data With Plotly
 
 ```{python, eval = FALSE}
 # plotly display data
@@ -46,14 +46,14 @@ table = ff.create_table(df.iloc[1:10, 1:5])
 plotly.offline.plot(table, output_type = 'div', show_link = False, include_plotlyjs = False)
 ```
 
-## Hyperband Cross Validation
+### Hyperband Cross Validation
 
 ```{python, eval = FALSE}
 from civismlext.hyperband import HyperbandSearchCV
 #https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
 ```
 
-## Pandas Display Options
+### Pandas Display Options
 
 ```{python, eval = FALSE}
 # Display floats with 2 decimal places
@@ -64,7 +64,7 @@ pd.options.display.max_rows = 200
 pd.options.display.max_columns = 100
 ```
 
-## Infix Operators
+### Infix Operators
 
 ```{python, eval = FALSE}
 # Define new operator
@@ -87,7 +87,7 @@ pipe = Infix(lambda x,y: y(x))
 4 |pipe| (lambda z: z**2)
 ```
 
-## Generators
+### Generators
 
 ```{python, eval = FALSE}
 # Generators Error
@@ -103,7 +103,7 @@ finally:
     del iterator
 ```
 
-## Rowwise Operations In Pandas
+### Rowwise Operations In Pandas
 
 ```{python, eval = FALSE}
 # Apply a function to every row in a pandas dataframe
@@ -126,7 +126,7 @@ rectangles_df.apply(calculate_area, axis=1)
 df['SAL-RATE'].apply(money_to_float)
 ```
 
-## Additional Functions Args In Map
+### Additional Functions Args In Map
 
 ```{python, eval = FALSE}
 # Extra arguments to function
@@ -204,7 +204,7 @@ plt.show()
 
 * df_print: kable in yaml rmrkdown header
 
-## Pipe Anonymous Function
+### Pipe Anonymous Function
 
 ```{r,eval = F}
 data %>%
@@ -217,7 +217,7 @@ data %>%
   })
 ```
 
-## Binarize  Predictions
+### Binarize  Predictions
 
 ```{r, eval = F}
 clf_lr_final <- clf_lr$finalModel
@@ -362,7 +362,7 @@ dbExistsTable(con, "iris")
 dbRemoveTable(con, "iris")
 ```
 
-## Knitr
+### Knitr
 
 ```{r, eval = F}
 knitr::include_graphics(rep("./assets/ml_trading/portfolio.png", 3))
