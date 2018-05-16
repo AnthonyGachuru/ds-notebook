@@ -14,6 +14,8 @@ df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
 df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 ```
 
+* robust scaler python: median & quantiles
+
 ## Feature Selection
 
 * Variance Threshold: Use this to exclude features that don't meet a variance threshold.
