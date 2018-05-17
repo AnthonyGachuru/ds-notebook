@@ -664,6 +664,25 @@ can be found on this
   the better known polychoric correlation. Note the latter is defined
   based on the correlation between the numerical variable and a
   continuous latent trait underlying the categorical variable.
+\item
+  Use runif to do sampling
+\item
+  You should use a logarithmic scale when percent change, or change in
+  orders of magnitude, is more important than changes in absolute units.
+  You should also use a log scale to better visualize data that is
+  heavily skewed. Taking the logarithm only works if the data is
+  non-negative. There are other transforms, such as arcsinh or signed
+  log, that you can use to decrease data range if you have zero or
+  negative values.
+\item
+  Normalizing by mean and standard deviation is most meaningful when the
+  data distribution is roughly symmetric.
+\item
+  Monetary amounts are often
+  log-\url{https://github.com/ColinFay/erum2018normally}
+  distributed---the log of the data is normally distributed. This leads
+  us to the idea that taking the log of the data can restore symmetry to
+  it.
 \end{itemize}
 
 \subsection{Imputation}\label{imputation}
@@ -3166,6 +3185,9 @@ TBD
   R uses class encoded as 1 in classification to make predictions. Use
   levels() function on factor to determine what 1 is.
 \item
+  y = b\_0 + b\_1x\_1 + b\_2x\_2 + b\_3x\_1x\_2. ( b\_1 + b\_2x\_2 ) is
+  the increase in y with a unit increase in x\_1.
+\item
   \url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
 \item
   For example, multilevel models themselves may be referred to as
@@ -4337,6 +4359,33 @@ Get the nodes of interest.
 
 \begin{itemize}
 \item
+  \url{https://chrisalbon.com/}
+\item
+  pandas: isin \textbar{} crosstab
+\item
+  pd.group\_by aggregate functions: size, count, sum, mean, median, sd,
+  var, min, max, prod, first, last
+\item
+  The only float that isn't equal to itself is nan.
+\item
+  \%matplotlib notebook: interactive plots
+\item
+  Memory storage: use pd.copy to create a deep copy instead of a shallow
+  copy
+\item
+  IPy: \%who or \%whos shows defined variables \& \%reset resets them
+\item
+  Append dict to df: use ignore\_index = True. eg. films\_df =
+  films\_df.append(film\_dict, ignore\_index=1)
+\item
+  Debugging: import pdb \textbar{} pdb.set\_trace(),
+\item
+  dir() gives a list of in scope variables
+\item
+  globals() gives a dictionary of global variables
+\item
+  locals() gives a dictionary of local variables
+\item
   \url{https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/}
 \item
   np.dot = np.multiply \%\textgreater{}\% np.sum
@@ -4352,6 +4401,42 @@ Get the nodes of interest.
     \url{https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10}
   \end{itemize}
 \end{itemize}
+
+\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
+
+\begin{itemize}
+\item
+  create helper functions and units tests as R/py for Rmd/ipynb
+\item
+  pytest/hypothesis for testing
+\item
+  use makefile to run cmd commands
+\item
+  Write file with date:
+  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
+\item
+  Make package for workflow with data (\textbf{init}.py) and use this
+  formation for function docs:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ fun(a):}
+  \CommentTok{#Role}
+  \CommentTok{#-----}
+  \CommentTok{#Does something}
+  
+  \CommentTok{#Parameters}
+  \CommentTok{#---------}
+  \CommentTok{#Accepts something}
+  
+  \CommentTok{#Returns}
+  \CommentTok{#-------}
+  \CommentTok{#Returns something}
+  
+  \ControlFlowTok{return}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Masking Array}\label{masking-array}
 
@@ -4514,7 +4599,7 @@ Map}\label{additional-functions-args-in-map}
 
 \section{R}\label{r}
 
-\subsubsection{General}\label{general-6}
+\subsection{General}\label{general-6}
 
 \begin{itemize}
 \item
@@ -4548,6 +4633,32 @@ Map}\label{additional-functions-args-in-map}
   ctrl + alt + R: run all chunks
 \item
   df\_print: kable in yaml rmrkdown header
+\item
+  rm(list = ls()): Remove all objects in the current workspace
+\item
+  cut(): Transform a numeric variable into a categorical variable.
+\item
+  car: recode (good for dummying)
+\item
+  Examine the objects in the workspace: ls.str()
+\item
+  This is how you dynamically update a value in Rmarkdown: x =
+  \emph{backtick} r x \emph{backtick}.
+\end{itemize}
+
+\subsection{R for Everything Talk}\label{r-for-everything-talk}
+
+\begin{itemize}
+\item
+  dir.exists \textbar{} dir.create \textbar{} download.file
+\item
+  untar \textbar{} unlink \textbar{} file.info
+\item
+  dir \textbar{} file.rename \textbar{} file.copy
+\item
+  count.fields \textbar{} system
+\item
+  dplyr five main actions: select, filter, arrange, mutate, summarize.
 \end{itemize}
 
 \subsection{Pipe Anonymous Function}\label{pipe-anonymous-function}
@@ -4755,105 +4866,6 @@ script to do joining of dummied csvs
 \end{Shaded}
 
 \chapter{General}\label{general-7}
-
-\section{Python}\label{python-1}
-
-\begin{itemize}
-\item
-  \url{https://chrisalbon.com/}
-\item
-  pandas: isin \textbar{} crosstab
-\item
-  pd.group\_by aggregate functions: size, count, sum, mean, median, sd,
-  var, min, max, prod, first, last
-\item
-  The only float that isn't equal to itself is nan.
-\item
-  \%matplotlib notebook: interactive plots
-\item
-  Memory storage: use pd.copy to create a deep copy instead of a shallow
-  copy
-\item
-  IPy: \%who or \%whos shows defined variables \& \%reset resets them
-\item
-  Append dict to df: use ignore\_index = True. eg. films\_df =
-  films\_df.append(film\_dict, ignore\_index=1)
-\item
-  Debugging: import pdb \textbar{} pdb.set\_trace(),
-\item
-  dir() gives a list of in scope variables
-\item
-  globals() gives a dictionary of global variables
-\item
-  locals() gives a dictionary of local variables
-\end{itemize}
-
-\textbf{Vanderplas Jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Write file with date:
-  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ fun(a):}
-  \CommentTok{#Role}
-  \CommentTok{#-----}
-  \CommentTok{#Does something}
-  
-  \CommentTok{#Parameters}
-  \CommentTok{#---------}
-  \CommentTok{#Accepts something}
-  
-  \CommentTok{#Returns}
-  \CommentTok{#-------}
-  \CommentTok{#Returns something}
-  
-  \ControlFlowTok{return}\NormalTok{(a)}
-\end{Highlighting}
-\end{Shaded}
-
-\section{R}\label{r-1}
-
-\begin{itemize}
-\item
-  rm(list = ls()): Remove all objects in the current workspace
-\item
-  cut(): Transform a numeric variable into a categorical variable.
-\item
-  car: recode (good for dummying)
-\item
-  Examine the objects in the workspace: ls.str()
-\item
-  This is how you dynamically update a value in Rmarkdown: x =
-  \emph{backtick} r x \emph{backtick}.
-\end{itemize}
-
-\textbf{R for Everything Talk}
-
-\begin{itemize}
-\item
-  dir.exists \textbar{} dir.create \textbar{} download.file
-\item
-  untar \textbar{} unlink \textbar{} file.info
-\item
-  dir \textbar{} file.rename \textbar{} file.copy
-\item
-  count.fields \textbar{} system
-\item
-  dplyr five main actions: select, filter, arrange, mutate, summarize.
-\end{itemize}
 
 \section{Git}\label{git}
 

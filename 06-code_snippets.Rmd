@@ -4,6 +4,30 @@
 
 ### General
 
+* https://chrisalbon.com/
+
+* pandas: isin | crosstab
+
+* pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last
+
+* The only float that isn't equal to itself is nan.
+
+* %matplotlib notebook: interactive plots
+
+* Memory storage: use pd.copy to create a deep copy instead of a shallow copy
+
+* IPy: %who or %whos shows defined variables & %reset resets them
+
+* Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)
+
+* Debugging: import pdb | pdb.set_trace(), 
+
+* dir() gives a list of in scope variables
+
+* globals() gives a dictionary of global variables
+
+* locals() gives a dictionary of local variables
+
 * https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/
 
 * np.dot = np.multiply %>% np.sum
@@ -13,6 +37,38 @@
     * pd.io.json.json_normalize(stuff)
     *https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055
     * https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10
+    
+
+### Vanderplas Jupyter
+
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+```{python, eval = FALSE}
+def fun(a):
+
+  #Role
+  #-----
+  #Does something
+  
+  #Parameters
+  #---------
+  #Accepts something
+  
+  #Returns
+  #-------
+  #Returns something
+  
+  return(a)
+```
+
     
 ### Masking Array
     
@@ -172,7 +228,7 @@ plt.show()
 
 ## R
 
-#### General
+### General
 
 * ctrl + shift + a: reformat code in rstudio
 
@@ -203,6 +259,28 @@ plt.show()
 * ctrl + alt + R: run all chunks
 
 * df_print: kable in yaml rmrkdown header
+
+* rm(list = ls()): Remove all objects in the current workspace
+
+* cut(): Transform a numeric variable into a categorical variable.
+
+* car: recode (good for dummying)
+
+* Examine the objects in the workspace: ls.str()
+
+* This is how you dynamically update a value in Rmarkdown: x = *backtick* r x *backtick*. 
+
+### R for Everything Talk
+
+* dir.exists | dir.create | download.file
+
+* untar | unlink | file.info
+
+* dir | file.rename | file.copy
+
+* count.fields | system
+
+* dplyr five main actions: select, filter, arrange, mutate, summarize.
 
 ### Pipe Anonymous Function
 
