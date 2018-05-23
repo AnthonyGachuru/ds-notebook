@@ -232,6 +232,8 @@ plt.show()
 
 * ctrl + shift + a: reformat code in rstudio
 
+* purrr::p/map_dfr/c
+
 * rowwise in R: purrr::pmap
 
 * YearMonth = firstScheduledDay %>% strftime(format="%Y-%m")

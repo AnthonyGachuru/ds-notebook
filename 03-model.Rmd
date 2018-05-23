@@ -1415,6 +1415,8 @@ term memory). LSTM replaced the rectified linear units by continuous functions. 
 
 ### Unbalanced Classes
 
+Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. 
+
 That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
 
 Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.

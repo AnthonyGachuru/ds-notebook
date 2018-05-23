@@ -1,5 +1,22 @@
 # Communicate, Deploy, Maintain
 
+To cover these considerations, we recommend a structure similar to the following:   
+
+1. Summarize the motivation behind the project, and its goals.
+
+2. State the project’s results.   
+
+3. Back up the results with details, as needed. 
+
+4. Discuss recommendations, outstanding issues, and possible future work.
+
+For an end user presentation, we recommend a structure similar to the following: 
+
+1. Summarize the motivation behind the project, and its goals.       
+
+2. Show how the model fits into the users’ workflow (and how it improves that workflow).                                             
+3. Show how to use the model.
+
 ## Shiny
 
 * 1 r process: 30 users | shiny scales linearly

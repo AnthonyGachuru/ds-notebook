@@ -275,14 +275,14 @@ can be found on this
   \end{itemize}
 \end{itemize}
 
-\subsection{uTransform}\label{utransform}
+\subsection{Transform}\label{transform}
 
 \begin{itemize}
 \item
   Imputation. Options include the Mean, Mode, KNN, Random, and
-  Regression. A package for imputation
-  \href{https://cran.r-project.org/web/packages/simputation/index.html}{in
-  R}
+  Regression.
+\item
+  r imputation: mice, hmisc, alice
 \item
   Look at missingness. IN Python there are
   \href{https://github.com/njtierney/naniar}{naniar} and
@@ -307,9 +307,11 @@ can be found on this
 \item
   \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned
   Stats}
+\item
+  Anomalies: xda::num/catSummary(.) \textbar{} xray::anomalies(.)
 \end{itemize}
 
-\subsection{uVisualize}\label{uvisualize}
+\subsection{Visualize}\label{visualize}
 
 \begin{itemize}
 \item
@@ -329,7 +331,7 @@ can be found on this
   dimensional structure.
 \end{itemize}
 
-\subsection{uModel}\label{umodel}
+\subsection{Model}\label{model}
 
 \begin{itemize}
 \item
@@ -632,7 +634,7 @@ can be found on this
 
 \chapter{Transform \& Visualize}\label{transform-visualize}
 
-\section{Transform}\label{transform}
+\section{Transform}\label{transform-1}
 
 \subsection{General}\label{general-2}
 
@@ -704,7 +706,7 @@ Some types:
   variables. Must make assumptions and can badly extrapolate.
 \end{itemize}
 
-\section{Visualize}\label{visualize}
+\section{Visualize}\label{visualize-1}
 
 \begin{itemize}
 \item
@@ -720,7 +722,7 @@ Some types:
   \texttt{ggplot()\ +\ geom\_histogram(aes(x),\ binwidth\ =\ diff(range(x))\ /\ (2\ *\ IQR(x)\ /\ length(x)\^{}(1/3)))}.
 \end{itemize}
 
-\chapter{Model}\label{model}
+\chapter{Model}\label{model-1}
 
 \section{Pre-processing}\label{pre-processing}
 
@@ -3355,6 +3357,9 @@ TBD
 
 \subsection{Unbalanced Classes}\label{unbalanced-classes}
 
+Research on imbalanced classes often considers imbalanced to mean a
+minority class of 10\% to 20\%.
+
 That said, here is a rough outline of useful approaches. These are
 listed approximately in order of effort:
 
@@ -3407,6 +3412,35 @@ Reframe as Anomaly Detection
 
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
+
+To cover these considerations, we recommend a structure similar to the
+following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Summarize the motivation behind the project, and its goals.
+\item
+  State the project's results.
+\item
+  Back up the results with details, as needed.
+\item
+  Discuss recommendations, outstanding issues, and possible future work.
+\end{enumerate}
+
+For an end user presentation, we recommend a structure similar to the
+following:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Summarize the motivation behind the project, and its goals.
+\item
+  Show how the model fits into the users' workflow (and how it improves
+  that workflow).\\
+\item
+  Show how to use the model.
+\end{enumerate}
 
 \section{Shiny}\label{shiny}
 
@@ -4604,6 +4638,8 @@ Map}\label{additional-functions-args-in-map}
 \begin{itemize}
 \item
   ctrl + shift + a: reformat code in rstudio
+\item
+  purrr::p/map\_dfr/c
 \item
   rowwise in R: purrr::pmap
 \item

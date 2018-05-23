@@ -84,9 +84,11 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
     * scipy.stats.describe()
     * outlier detection: interquartile range, kernel density estimation, bonferroni test
 
-### uTransform
+### Transform
 
-* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. A package for imputation [in R](https://cran.r-project.org/web/packages/simputation/index.html)
+* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. 
+   * r imputation: mice, hmisc, alice
+
 
 * Look at missingness. IN Python there are [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) packages. In R there is the [VIM library](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html).
 
@@ -102,7 +104,9 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
 
-### uVisualize
+* Anomalies: xda::num/catSummary(.) | xray::anomalies(.)
+
+### Visualize
 
 * Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
 
@@ -116,7 +120,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
 
-### uModel
+### Model
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
