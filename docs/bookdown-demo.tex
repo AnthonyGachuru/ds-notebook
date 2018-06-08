@@ -4697,6 +4697,33 @@ Map}\label{additional-functions-args-in-map}
   dplyr five main actions: select, filter, arrange, mutate, summarize.
 \end{itemize}
 
+\subsection{Pairwise Scatterplot}\label{pairwise-scatterplot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GGally}\OperatorTok{::}\KeywordTok{ggpairs}\NormalTok{(data, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ category))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{MAP Model}\label{map-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{model <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
+  \KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ df)}
+\NormalTok{\}}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{mtcars}
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ .))}
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{map}\NormalTok{(data, model))}
+
+\NormalTok{chickweight }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Diet) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mod =}\NormalTok{ data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(weight }\OperatorTok{~}\StringTok{ }\NormalTok{Time, }\DataTypeTok{data=}\NormalTok{.)))}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Pipe Anonymous Function}\label{pipe-anonymous-function}
 
 \begin{Shaded}

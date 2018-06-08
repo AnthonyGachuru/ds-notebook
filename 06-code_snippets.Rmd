@@ -284,6 +284,31 @@ plt.show()
 
 * dplyr five main actions: select, filter, arrange, mutate, summarize.
 
+### Pairwise Scatterplot
+
+```{r, eval = FALSE}
+GGally::ggpairs(data, mapping = aes(colour = category))
+```
+
+
+### MAP Model
+
+```{r, eval = FALSE}
+library(tidyverse)
+
+model <- function(df) {
+  lm(mpg ~ ., data = df)
+}
+
+df <- mtcars
+df %>% group_by(cyl) %>% split(.$cyl) %>% purrr::map(~ lm(mpg ~ ., data = .))
+df %>% group_by(cyl) %>% nest() %>% mutate(model = map(data, model))
+
+chickweight %>% group_by(Diet) %>% nest() %>% 
+mutate(mod = data %>% map(~ lm(weight ~ Time, data=.)))
+```
+
+
 ### Pipe Anonymous Function
 
 ```{r,eval = F}
