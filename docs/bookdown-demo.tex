@@ -4472,6 +4472,23 @@ Get the nodes of interest.
 \end{Highlighting}
 \end{Shaded}
 
+\section{DF To HTML Table}\label{df-to-html-table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ flask }\ImportTok{import}\NormalTok{ Flask}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\NormalTok{app }\OperatorTok{=}\NormalTok{ Flask(}\VariableTok{__name__}\NormalTok{)}
+\NormalTok{pd.set_option(}\StringTok{'display.max_colwidth'}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\AttributeTok{@app.route}\NormalTok{(}\StringTok{"/"}\NormalTok{)}
+\KeywordTok{def}\NormalTok{ show_tables():}
+\NormalTok{    data }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'squads.csv'}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ data.to_html(escape }\OperatorTok{=} \VariableTok{False}\NormalTok{, index_names }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
+\ControlFlowTok{if} \VariableTok{__name__} \OperatorTok{==} \StringTok{"__main__"}\NormalTok{:}
+\NormalTok{    app.run(debug}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Masking Array}\label{masking-array}
 
 You can mask your array using the numpy.ma.array function and
@@ -4705,6 +4722,8 @@ Map}\label{additional-functions-args-in-map}
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Shut Up, R}\label{shut-up-r}
+
 \subsection{MAP Model}\label{map-model}
 
 \begin{Shaded}
@@ -4721,6 +4740,19 @@ Map}\label{additional-functions-args-in-map}
 
 \NormalTok{chickweight }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Diet) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mod =}\NormalTok{ data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(weight }\OperatorTok{~}\StringTok{ }\NormalTok{Time, }\DataTypeTok{data=}\NormalTok{.)))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Plotly MAP}\label{plotly-map}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplotly}\NormalTok{(}
+    \KeywordTok{ggplot}\NormalTok{(df_master2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(skl_group}\OperatorTok{==}\NormalTok{x),}
+       \KeywordTok{aes}\NormalTok{(SkillId, correct_rate, }\DataTypeTok{label =}\NormalTok{ Master, }\DataTypeTok{color =}\NormalTok{ SkillId)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =}\NormalTok{ .}\DecValTok{2}\NormalTok{),}
+    \DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{'y'}\NormalTok{, }\StringTok{'label'}\NormalTok{)}
+\NormalTok{    )}
 \end{Highlighting}
 \end{Shaded}
 

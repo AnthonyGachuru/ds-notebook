@@ -2,6 +2,12 @@
 
 ## General
 
+* In tidy data:
+
+    * Each variable forms a column.
+    * Each observation forms a row.
+    * Each type of observational unit forms a table.
+
 * A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
 
 * conda create -n yourenvname python=x.x anaconda

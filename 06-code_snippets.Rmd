@@ -69,7 +69,23 @@ def fun(a):
   return(a)
 ```
 
-    
+## DF To HTML Table
+
+```{python, eval = F}
+from flask import Flask
+import pandas as pd
+app = Flask(__name__)
+pd.set_option('display.max_colwidth', -1)
+
+@app.route("/")
+def show_tables():
+    data = pd.read_csv('squads.csv')
+    return data.to_html(escape = False, index_names = False)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
 ### Masking Array
     
 You can mask your array using the numpy.ma.array function and subsequently apply any numpy operation:
@@ -290,6 +306,11 @@ plt.show()
 GGally::ggpairs(data, mapping = aes(colour = category))
 ```
 
+### Shut Up, R
+
+```{r, echo = F, warning=F, error=F, message=F, results='hide'}
+
+```
 
 ### MAP Model
 
@@ -308,6 +329,31 @@ chickweight %>% group_by(Diet) %>% nest() %>%
 mutate(mod = data %>% map(~ lm(weight ~ Time, data=.)))
 ```
 
+### DT Option
+
+```{r}
+datatable(
+  df_version_check,
+  options = list(filter = 'top',
+                 searching = T,
+                 pageLength = 10, lengthChange = FALSE, ordering = FALSE,
+                 scrollCollapse = T,
+                 scrollY = '1500',
+                 paging = T
+                 )
+  )
+```
+
+### Plotly MAP
+
+```{r, eval=F}
+ggplotly(
+    ggplot(df_master2 %>% filter(skl_group==x),
+       aes(SkillId, correct_rate, label = Master, color = SkillId)) +
+  geom_jitter(width = .2),
+    tooltip = c('y', 'label')
+    )
+```
 
 ### Pipe Anonymous Function
 
