@@ -116,7 +116,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Compare the distributions of variables with overlayed density plots 
 
-* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships
+* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships. GGally::ggpairs() or seaborn. 
 
 * Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
 
@@ -137,7 +137,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
     * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
     * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
     
-* Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize
+* Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, featuretools for automation. 
 
 * Model Selection
 
