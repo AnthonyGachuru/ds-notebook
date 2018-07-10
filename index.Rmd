@@ -174,6 +174,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Look at learning curves: https://www.dataquest.io/blog/learning-curves-machine-learning/
 
+* Use SHAP for model explanability
+
 ### Communicate
 
 * Usually an R Markdown document.

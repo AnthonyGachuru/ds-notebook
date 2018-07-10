@@ -426,6 +426,8 @@ can be found on this
 \item
   Look at learning curves:
   \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
+\item
+  Use SHAP for model explanability
 \end{itemize}
 
 \subsection{Communicate}\label{communicate}
@@ -1329,6 +1331,8 @@ multicolinearity.)
   McFadden's Pseudo R\^{}2.
 \item
   A.I.C / B.I.C
+\item
+  Absolute scale odds instead of relative
 \end{itemize}
 
 \subsection{Pros/Cons}\label{proscons-2}
@@ -2338,146 +2342,6 @@ Factorization, Alternating Least Squares.
   period is retained in the current time period. MA(2) refers to the
   previous two time periods.
 \end{itemize}
-
-\subsection{Other - TS Fundamentals
-(Udacity)}\label{other---ts-fundamentals-udacity}
-
-Naive vs Seasonal Naive vs Exponential Smooothing
-
-Seasonal Naive: Assumes magnitude of the seasonal pattern is constant.
-
-cyclical vs seasonal patterns: longer, harder to predicit, don't follow
-seasonl patterns
-
-ETS: Error-Trend-Seasonality
-
-The possible time series (TS) scenarios can be recognized by asking the
-following questions:
-
-TS has a trend? If yes, is the trend increasing linearly or
-exponentially?
-
-TS has seasonality? If yes, do the seasonal components increase in
-magnitude over time?
-
-We are going to explore four ETS models that can help forecast these
-possible time-series scenarios.
-
-Simple Exponential Smoothing Method
-
-Holt's Linear Trend Method
-
-Exponential Trend Method
-
-Holt-Winters Seasonal Method
-
-Time series does not have a trend line and does not have seasonality
-component. We would use a Simple Exponential Smoothing model.
-
-Time Seies: level, trend, seasonal compoent
-
-Methods
-
-There are several methods we need to pick in order to model any given
-time series appropriately:
-
-Simple Exponential Smoothing: Finds the level of the time series
-
-Holt's Linear Trend: Finds the level of the time series
-
-Additive model for linear trend
-
-Exponential Trend: Finds the level of the time series
-
-Multiplicative model for exponential trend
-
-Holt-Winters Seasonal: Finds the level of the time series
-
-Additive for trend
-
-Multiplicative and Additive for seasonal components
-
-These methods help deal with different scenarios in our time series
-involving:
-
-Linear or exponential trend
-
-Constant or increasing seasonality components
-
-For trends that are exponential, we would need to use a multiplicative
-model.
-
-For increasing seasonality components, we would need to use a
-multiplicative model model as well.
-
-ETS
-
-Therefore we can generalize all of these models using a naming system
-for ETS:
-
-ETS (Error, Trend, Seasonality)
-
-Error is the error line we saw in the time series decomposition part
-earlier in the course. If the error is increasing similar to an
-increasing seasonal components, we would need to consider a
-multiplicative design for the exponential model.
-
-Therefore, for each component in the ETS system, we can assign None,
-Multiplicative, or Additive (or N, M, A) for each of the three
-components in our time series.
-
-Examples
-
-A time series model that has a constant error, linear trend, and
-increasing seasonal components means we would need to use an ETS model
-of:
-
-ETS(N,A,M)
-
-A time series model that has increasing error, exponential trend, and no
-seasonality means we would need to use an ETS model of:
-
-ARIMA; Seasnoanl:ARIMA(p,d,q)(P,D,Q)M vs non-seasonal: ARIMA(p,d,q)
-
-non-=statipjary: This plot shows an upward trend and seasonality.
-
-stationaey: This plot revolves around a constant mean of 0 and shows
-contained variance.
-
-Evluated withhold set and residual plots, should have mean of 0.
-
-is less sensitive to the occasional very large error because it does not
-square the errors in the calculation.
-
-Percentage Errors
-
-Percentage errors, like MAPE, are useful because they are scale
-independent, so they can be used to compare forecasts between different
-data series, unlike scale dependent errors. The disadvantage is that it
-cannot be used if the series has zero values.
-
-Mean Absolute Percentage Error (MAPE) is also often useful for purposes
-of reporting, because it is expressed in generic percentage terms it
-will make sense even to someone who has no idea what constitutes a
-``big'' error in terms of dollars spent or widgets sold.
-
-Scale-Free Errors
-
-Scale-free errors were introduced more recently to offer a
-scale-independent measure that doesn't have many of the problems of
-other errors like percentage errors.
-
-Mean Absolute Scaled Error (MASE) is another relative measure of error
-that is applicable only to time series data. It is defined as the mean
-absolute error of the model divided by the the mean absolute value of
-the first difference of the series. Thus, it measures the relative
-reduction in error compared to a naive model. Ideally its value will be
-significantly less than 1 but is relative to comparison across other
-models for the same series. Since this error measurement is relative and
-can be applied across models, it is accepted as one of the best metrics
-for error measurement.
-
-Can use AIC for model selection. Also use confidence intervals.
 
 \section{Association Rule Mining}\label{association-rule-mining}
 
@@ -4700,6 +4564,8 @@ Map}\label{additional-functions-args-in-map}
 \item
   purrr::p/map\_dfr/c
 \item
+  e \textless{}- matrix(NA\_real\_, nrow = 1000, ncol = 8)
+\item
   rowwise in R: purrr::pmap
 \item
   YearMonth = firstScheduledDay \%\textgreater{}\%
@@ -4739,7 +4605,98 @@ Map}\label{additional-functions-args-in-map}
 \item
   This is how you dynamically update a value in Rmarkdown: x =
   \emph{backtick} r x \emph{backtick}.
+\item
+  df{[}setdiff(names(df), ``z''){]}: remove column z
+\item
+  purrr::walk
+\item
+  purr::keep/discard for is.factor
+\item
+  choroplethr \textbar{} choroplethrMaps \textbar{}\textbar{} d3r
+  \textbar{} d3treeR \textbar{} data.tree
 \end{itemize}
+
+\subsection{Knitting A GHub Doc}\label{knitting-a-ghub-doc}
+
+output: github\_document: default html\_notebook: default
+
+\section{Various}\label{various}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(Summary_Variable, Group_Variable, Function)}
+
+\KeywordTok{boxplot}\NormalTok{(frequency }\OperatorTok{~}\StringTok{ }\NormalTok{attitude}\OperatorTok{*}\NormalTok{gender,}
+\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{,}\StringTok{"lightgray"}\NormalTok{), politeness)}
+
+\CommentTok{#corrplot package in r}
+\KeywordTok{cor}\NormalTok{(Carseats[}\KeywordTok{sapply}\NormalTok{(Carseats, }\ControlFlowTok{function}\NormalTok{(x) }\OperatorTok{!}\KeywordTok{is.factor}\NormalTok{(x))])}
+
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\StringTok{"pROC"}\NormalTok{), }\DataTypeTok{dependencies =} \KeywordTok{c}\NormalTok{(}\StringTok{"Depends"}\NormalTok{, }\StringTok{"Imports"}\NormalTok{, }\StringTok{"Suggests"}\NormalTok{))}
+
+\KeywordTok{library}\NormalTok{(knitr)}
+\KeywordTok{kable}\NormalTok{(pause_sum, }\DataTypeTok{caption =} \StringTok{"Summary Statistics Table for Exit Slip Dataset"}\NormalTok{,}
+      \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Mean"}\NormalTok{, }\StringTok{"Median"}\NormalTok{, }\StringTok{"SD"}\NormalTok{, }\StringTok{"Min"}\NormalTok{, }\StringTok{"Max"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"NAs"}\NormalTok{))}
+
+\KeywordTok{typeof}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{#"double"}
+\KeywordTok{typeof}\NormalTok{(1L) }\CommentTok{#"integer"}
+
+\CommentTok{#Prints out the first 4 multiples of 3.}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\OperatorTok{*}\DecValTok{3}\NormalTok{) \{}\KeywordTok{cat}\NormalTok{(i)\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Create Package}\label{create-package}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/}
+
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{library}\NormalTok{(roxygen2)}
+
+\CommentTok{# Navigate to parent folder}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'../Desktop/me'}\NormalTok{)}
+
+\CommentTok{# Name and create package}
+\KeywordTok{create}\NormalTok{(}\StringTok{"sansor"}\NormalTok{)}
+
+\CommentTok{# Add file with function}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'sansor/R'}\NormalTok{)}
+\KeywordTok{file.create}\NormalTok{(}\StringTok{'test.R'}\NormalTok{) }\CommentTok{# test <- function()\{print('This is a test')\}}
+
+\CommentTok{# Back to package dir}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{".."}\NormalTok{)}
+
+\CommentTok{# Generate auto docs}
+\KeywordTok{document}\NormalTok{()}
+
+\CommentTok{# Install package for use}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'..'}\NormalTok{)}
+\KeywordTok{install}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Create Operator}\label{create-operator}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringr)}
+\StringTok{`}\DataTypeTok{%[]%}\StringTok{`}\NormalTok{ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(string, subset)\{}
+  \KeywordTok{return}\NormalTok{(}\KeywordTok{str_sub}\NormalTok{(string, subset[}\DecValTok{1}\NormalTok{], subset[}\DecValTok{2}\NormalTok{]))}
+\NormalTok{\}}
+\StringTok{'test'}\OperatorTok{%[]%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Useful Date Manipulation}\label{useful-date-manipulation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{year =}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{format}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(TestEndTime, }\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{),}\StringTok{"%Y"}\NormalTok{))}
+\NormalTok{date <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017/09/01"}\NormalTok{), }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017/09/25"}\NormalTok{), }\DataTypeTok{by=}\StringTok{"day"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{R for Everything Talk}\label{r-for-everything-talk}
 
@@ -4756,6 +4713,16 @@ Map}\label{additional-functions-args-in-map}
   dplyr five main actions: select, filter, arrange, mutate, summarize.
 \end{itemize}
 
+\subsection{Grid Plot}\label{grid-plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gridExtra}\OperatorTok{::}\KeywordTok{grid.arrange}\NormalTok{(}
+\NormalTok{  plots[[}\DecValTok{1}\NormalTok{]],plots[[}\DecValTok{2}\NormalTok{]],plots[[}\DecValTok{3}\NormalTok{]],}
+\NormalTok{  plots[[}\DecValTok{4}\NormalTok{]],plots[[}\DecValTok{5}\NormalTok{]],plots[[}\DecValTok{6}\NormalTok{]], }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Pairwise Scatterplot}\label{pairwise-scatterplot}
 
 \begin{Shaded}
@@ -4764,7 +4731,156 @@ Map}\label{additional-functions-args-in-map}
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Deploy Shiny App}\label{deploy-shiny-app}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(shinyapps)}
+\KeywordTok{library}\NormalTok{(shiny)}
+
+\NormalTok{working_dir <-}\StringTok{ ''}
+\KeywordTok{setwd}\NormalTok{(working_dir)}
+
+\NormalTok{shinyapps}\OperatorTok{::}\KeywordTok{setAccountInfo}\NormalTok{(}\DataTypeTok{name=}\StringTok{"<ACCOUNT>"}\NormalTok{, }
+                          \DataTypeTok{token=}\StringTok{"<TOKEN>"}\NormalTok{, }
+                          \DataTypeTok{secret=}\StringTok{"<SECRET>"}\NormalTok{)}
+
+\KeywordTok{runApp}\NormalTok{()}
+\KeywordTok{deployApp}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Shut Up, R}\label{shut-up-r}
+
+\subsection{Plotting}\label{plotting}
+
+Stuff I did while testing Bundesliga xG data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(openxlsx)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(ggvis)}
+\KeywordTok{library}\NormalTok{(rCharts)}
+
+\NormalTok{bund_xg <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"data/bundesliga_xg_2015_2016.xlsx"}\NormalTok{)}
+
+\NormalTok{bund_xg.long <-}\StringTok{ }\KeywordTok{gather}\NormalTok{(bund_xg, Status, Team, Home}\OperatorTok{:}\NormalTok{Away)}
+\NormalTok{bund_xg.long}\OperatorTok{$}\NormalTok{xG <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(bund_xg.long}\OperatorTok{$}\NormalTok{Status }\OperatorTok{==}\StringTok{ 'Home'}\NormalTok{, }
+\NormalTok{                          bund_xg.long}\OperatorTok{$}\NormalTok{xG_H, }
+\NormalTok{                          bund_xg.long}\OperatorTok{$}\NormalTok{xG_A)}
+\NormalTok{bund_xg.long.team <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(bund_xg.long, Team)}
+
+\NormalTok{xg.plot <-}\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ bund_xg.long, }
+       \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ GW, }\DataTypeTok{y =}\NormalTok{ xG, }\DataTypeTok{group =}\NormalTok{ Status, }\DataTypeTok{color =}\NormalTok{ Status)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{'Bundesliga 15/16'}\NormalTok{, }\DataTypeTok{x =} \StringTok{'Game Week'}\NormalTok{, }\DataTypeTok{y =}\StringTok{'Expected Goals For'}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Team)}
+
+\KeywordTok{ggsave}\NormalTok{(}\DataTypeTok{plot =}\NormalTok{ xg.plot, }\DataTypeTok{filename =} \StringTok{'bund_xg_plot.png'}\NormalTok{)}
+
+\NormalTok{bund_xg.long[bund_xg.long}\OperatorTok{$}\NormalTok{Team }\OperatorTok{==}\StringTok{ 'Bayern'}\NormalTok{,] }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggvis}\NormalTok{(}\OperatorTok{~}\NormalTok{GW, }\OperatorTok{~}\NormalTok{xG) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{layer_points}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{layer_lines}\NormalTok{()}
+  \CommentTok{#add_tooltip(function(df) df$GW)}
+
+\NormalTok{p =}\StringTok{ }\KeywordTok{rPlot}\NormalTok{(xG }\OperatorTok{~}\StringTok{ }\NormalTok{GW, }
+      \DataTypeTok{data =}\NormalTok{ bund_xg.long[bund_xg.long}\OperatorTok{$}\NormalTok{Team }\OperatorTok{==}\StringTok{ 'Bayern'}\NormalTok{,], }
+      \DataTypeTok{color =} \StringTok{'Status'}\NormalTok{, }
+      \DataTypeTok{type =} \StringTok{'line'}\NormalTok{)}
+
+\NormalTok{p}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{title =} \StringTok{'Bayern Munich (Bundesliga 15/16)'}\NormalTok{)}
+\NormalTok{p}\OperatorTok{$}\KeywordTok{guides}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Game Week"}\NormalTok{))}
+\NormalTok{p}\OperatorTok{$}\KeywordTok{guides}\NormalTok{(}\DataTypeTok{y =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Expected Goals"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Nested Tree}\label{nested-tree}
+
+Stuff I did while testing tree viz for ODSC DS tools.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(googleVis)}
+\NormalTok{test.data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'C:/Users/Gordon/Downloads/test.csv'}\NormalTok{, }\DataTypeTok{header =}\NormalTok{ T)}
+
+\NormalTok{Org <-}\StringTok{ }\KeywordTok{gvisOrgChart}\NormalTok{(test.data, }
+                    \DataTypeTok{options=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{width=}\DecValTok{600}\NormalTok{, }\DataTypeTok{height=}\DecValTok{250}\NormalTok{,}
+                                 \DataTypeTok{size=}\StringTok{'large'}\NormalTok{, }\DataTypeTok{allowCollapse=}\OtherTok{TRUE}\NormalTok{))}
+\NormalTok{Org}\OperatorTok{$}\NormalTok{html}\OperatorTok{$}\NormalTok{footer  <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{Org}\OperatorTok{$}\NormalTok{html}\OperatorTok{$}\NormalTok{caption  <-}\StringTok{ }\OtherTok{NULL}
+\KeywordTok{plot}\NormalTok{(Org)}
+
+\NormalTok{test.data}\OperatorTok{$}\NormalTok{Val  <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(test.data), }\DecValTok{1}\NormalTok{)}
+\NormalTok{test.data}\OperatorTok{$}\NormalTok{Fac  <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(test.data), }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{Tree <-}\StringTok{ }\KeywordTok{gvisTreeMap}\NormalTok{(test.data,  }
+                    \StringTok{"Node"}\NormalTok{, }\StringTok{"Parent"}\NormalTok{, }
+                    \CommentTok{#"Val", "Fac", }
+                    \DataTypeTok{options=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{fontSize=}\DecValTok{16}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(Tree)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Setup Project}\label{setup-project}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(knitr)}
+
+\CommentTok{#Create top level folder}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'my-data-project'}\NormalTok{)}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'./my-data-project/'}\NormalTok{)}
+
+\CommentTok{#Create child folders}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'code'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'visualizations'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'reports'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'data'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'deploy_maintain'}\NormalTok{)}
+
+\CommentTok{#Create trackers}
+\KeywordTok{file.create}\NormalTok{(}\StringTok{'README.md'}\NormalTok{)}
+\KeywordTok{file.create}\NormalTok{(}\StringTok{'CHANGELOG.md'}\NormalTok{)}
+
+\CommentTok{#Create grandchildren folders for data}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'./data'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'raw'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'refined'}\NormalTok{)}
+
+\CommentTok{#Create grandchildren folders for visualizations}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{'../visualizations'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'exploratory'}\NormalTok{)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{'communication'}\NormalTok{)}
+
+\CommentTok{#Initialize git repo}
+\NormalTok{git2r}\OperatorTok{::}\KeywordTok{init}\NormalTok{(}\StringTok{'.'}\NormalTok{)}
+
+\CommentTok{# CHANGELOG.md Example}
+
+\NormalTok{## Logs}
+
+\NormalTok{## Excluded processes should be assumed to be the same as version 0.1.}
+
+\NormalTok{## Current Best Model:}
+\NormalTok{## Current Best Score / Metric:}
+
+\NormalTok{## 0.1}
+
+\NormalTok{## 1_import_tidy.Rmd}
+
+\NormalTok{## 2_transform_visualize.Rmd}
+
+\NormalTok{## 3_modeling.ipynb}
+
+\CommentTok{# Layout}
+
+\NormalTok{## libs, functions, imports, preprocessing, feature engineering, feature selection, model building}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{MAP Model}\label{map-model}
 
