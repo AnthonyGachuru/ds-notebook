@@ -60,6 +60,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ### Import
 
+* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+
 * Sampling from data if its too large
 
     * [subsample package](https://pypi.python.org/pypi/subsample) in Python
@@ -69,36 +71,27 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
 
+* [Writing sql in pandas](https://github.com/yhat/pandasql)
+
 ### Tidy
 
-* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). In R: widyr, tidyr, dplyr.
+* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). widyr, tidyr, dplyr in R and pandas in Python.
 
 * Figure out what you're trying to do with the data.
 
-* See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+* See what the data looks like: types of variables, the first and last few observations, missing values or outliers. [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/), [skimr](https://github.com/ropenscilabs/skimr), [xda](https://github.com/ujjwalkarn/xda), and [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html) in R. pandas and scipy.stats.describe() in Python.
 
-    * [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/)
-    * [skimr](https://github.com/ropenscilabs/skimr)
-    * [xda](https://github.com/ujjwalkarn/xda)
-    * [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html)
-    * scipy.stats.describe()
-    * outlier detection: interquartile range, kernel density estimation, bonferroni test
+* Outlier Detection: interquartile range, kernel density estimation, bonferroni test
 
 ### Transform
 
-* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. 
-   * r imputation: mice, hmisc, alice
+* Look at missingness. [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) in Python. [VIM](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html) and hmisc::naclus/naplot() in R.
 
-
-* Look at missingness. IN Python there are [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) packages. In R there is the [VIM library](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html).
+* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice in R.
 
 * An R library for [categorical dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
 
 * [Easy Regex](https://github.com/VerbalExpressions/PythonVerbalExpressions)
-
-* Writing sql in pandas: https://github.com/yhat/pandasql
-
-* Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
 * Check for blank spaces and replace with NA. In R: `df[df==""] = NA`.
 
@@ -118,44 +111,27 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships. GGally::ggpairs() or seaborn. 
 
-* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierachical clustering for multivariate data to get a feel for high dimensional structure. 
+* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure. 
 
 ### Model
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
-* Pre-processing: https://github.com/WinVector/vtreat
+* Pre-processing: vtreat in R.
 
-* Pipelines & Feature Unions
+* Pipelines & Feature Unions: sklearn in Python, recipes in R.
 
-* Do feature selection
-
-    * Variance Threshold
-    * Univariate Feature Selection: skl_fs.chi2 | f_regression | f_classification
-    * SelectKBest/SelectPercentile
-    * sklearn: feature_selection.RFE(CV)
-    * [Rebate](https://github.com/EpistasisLab/scikit-rebate)
-    * [Boruta](https://github.com/scikit-learn-contrib/boruta_py)
+* Feature Selection: Variance Threshold, Univariate Feature Selection (skl_fs.chi2 | f_regression | f_classification in sklearn), Multivariate Feature Selection (SelectKBest, SelectPercentile, feature_selection.RFECV in sklearn). See also the [Rebate](https://github.com/EpistasisLab/scikit-rebate) and [Boruta](https://github.com/scikit-learn-contrib/boruta_py) packages in Python.
     
-* Do feature engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, featuretools for automation. 
+* Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
 
-* Model Selection
+* Model Selection: yellowbrick, [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/), and [skl-plot](https://github.com/reiinakano/scikit-plot) in Python.
 
-    * https://github.com/DistrictDataLabs/yellowbrick
-    * [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/)
-    * [skl-plot](https://github.com/reiinakano/scikit-plot)
+* Model Explanability: eli5 or [SHAP](https://github.com/slundberg/shap) in Python but concentrate on the latter. SHAP also exists in R's xgboost library.
 
-* Model Explanability
+* Tuning: Do directed tuning instead of grid or random search. hyperopt-sklearn, sklearn-deap, and 
 
-    * [lime](https://github.com/marcotcr/lime)
-    * [eli5](https://github.com/TeamHG-Memex/eli5)
-
-* Tuning
-
-    * https://github.com/hyperopt/hyperopt-sklearn
-    * https://github.com/rsteca/sklearn-deap
-
-* Deal with potential class imbalance
+* Deal with potential class imbalance: 
 
    * Gradient boosting
    * http://contrib.scikit-learn.org/imbalanced-learn/stable/
@@ -182,15 +158,23 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ### Deployment /  Maintenance
 
-* Write tests
+Write tests and helper functions.
 
-    * [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
-    * [2](http://www.tdda.info/)
-    * [3](http://stochasticsolutions.com/)
-    * [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
-    * [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
-    * [Data Validation](https://github.com/data-cleaning/validate)
-    * pytest | hypothesis | testthat
-    * [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
+* [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
+* [2](http://www.tdda.info/)
+* [3](http://stochasticsolutions.com/)
+* [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
+* [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
+* [Data Validation](https://github.com/data-cleaning/validate)
+* pytest | hypothesis | testthat
+* [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
 
-* Write helper functions.
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
+
+`conda env export > environment.yaml`
+
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:
+
+`conda env create -f environment.yaml`
+
+This will create a new environment with the same name listed in environment.yaml.

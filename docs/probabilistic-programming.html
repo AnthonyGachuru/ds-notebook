@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="import-tidy.html">
+<link rel="prev" href="deep-learning.html">
+<link rel="next" href="nlp.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -387,151 +387,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Cribsheeet</h1>
-</div>
-<div id="workflow" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Workflow</h1>
-<div id="preamble" class="section level2">
-<h2><span class="header-section-number">1.1</span> Preamble</h2>
-<p>A typical data science workflow can be framed as following these steps:</p>
+<div id="probabilistic-programming" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Probabilistic Programming</h1>
+<p><a href="https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7" class="uri">https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7</a></p>
+<p>Bayes Rule:</p>
+<p>old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]</p>
 <ul>
-<li><p>Business: start with a business question, define the goal and measure of success</p></li>
-<li><p>Data: find, access and explore the data</p></li>
-<li><p>Features: extract, assess and evaluate, select and sort</p></li>
-<li><p>Models: find the right model for the problem at hand, compare, optimize, and fine tune</p></li>
-<li><p>Communication: Interpret and communicate the results</p></li>
-<li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
-<li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
+<li><p>Models have a lot of parameters classical methods that use simple point estimates of the parameters don’t adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata.</p></li>
+<li><p>The second reason we use Bayesian inference is for combining information you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted tocombining information.</p></li>
+<li><p>The third appeal of Bayesian methods and the sort of applications that I work on is that the inferences can map directly to decisions based on inferences express not its estimates and standard errors but rather as probability distributions we can take these probability distributions and pipe them directly into decision analysis for these reasons.</p></li>
+<li><p>An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.</p></li>
+<li><p>Approximate Bayesian Computation</p></li>
+<li><p>Laplace approximation: Approximate the posterior of a non-conjugate model</p></li>
+<li><p>When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.</p></li>
+<li><p>Beta conjugacy: Beta for prior &amp; binomial for likelihoood implies beta for posterior. Update: beta(alpha + successes, beta + failures). Mean: alpha/(alpha + beta)</p></li>
+<li><p>Small alpha and beta means the prior is less informative</p></li>
+<li><p>Empirical Bayes is an approximation to more exact Bayesian methods. With a lot of data it is a very good approximation.</p></li>
 </ul>
-<p>More succinctly, as per Hadley Wickham:</p>
-<p>import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
-<p>My combination of the two:</p>
-<p>preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
-<p>Another note is that one way to structure projects is to write user stories a la software engineering.</p>
-<p>What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this <a href="https://gfleetwood.github.io/noted-resources/data_science.html">page</a>.</p>
-</div>
-<div id="annotated-checklist" class="section level2">
-<h2><span class="header-section-number">1.2</span> Annotated Checklist</h2>
-<div id="preparation" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Preparation</h3>
-<ul>
-<li><p>Understand the business question, goals, and measures of success</p></li>
-<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
-<li><p>Structure project as user stories</p></li>
-<li><p>Initiliaze <a href="https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R">base project directory</a> and set up versioning.</p></li>
-<li><p>Initialize report to track and summarise work and to do list.</p></li>
-<li><p>Remember to use atomic commit messages</p></li>
-</ul>
-</div>
-<div id="import" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Import</h3>
-<ul>
-<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
-<li><p>Sampling from data if its too large</p>
-<ul>
-<li><a href="https://pypi.python.org/pypi/subsample">subsample package</a> in Python</li>
-<li><a href="https://stackoverflow.com/a/22262726/6627726">sqldf library</a> in R</li>
-</ul></li>
-<li><p><a href="https://github.com/thombashi/sqlitebiter">Sqlite Converter</a></p></li>
-<li><p><a href="https://dataset.readthedocs.io/en/latest/">Easy Database Management</a></p></li>
-<li><p><a href="https://github.com/yhat/pandasql">Writing sql in pandas</a></p></li>
-</ul>
-</div>
-<div id="tidy" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Tidy</h3>
-<ul>
-<li><p><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>. widyr, tidyr, dplyr in R and pandas in Python.</p></li>
-<li><p>Figure out what you’re trying to do with the data.</p></li>
-<li><p>See what the data looks like: types of variables, the first and last few observations, missing values or outliers. <a href="https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/">xray</a>, <a href="https://github.com/ropenscilabs/skimr">skimr</a>, <a href="https://github.com/ujjwalkarn/xda">xda</a>, and <a href="https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html">janitor</a> in R. pandas and scipy.stats.describe() in Python.</p></li>
-<li><p>Outlier Detection: interquartile range, kernel density estimation, bonferroni test</p></li>
-</ul>
-</div>
-<div id="transform" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> Transform</h3>
-<ul>
-<li><p>Look at missingness. <a href="https://github.com/njtierney/naniar">naniar</a> and <a href="https://github.com/ResidentMario/missingno">missingno</a> in Python. <a href="https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html">VIM</a> and hmisc::naclus/naplot() in R.</p></li>
-<li><p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice in R.</p></li>
-<li><p>An R library for <a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist">categorical dissimilarity</a></p></li>
-<li><p><a href="https://github.com/VerbalExpressions/PythonVerbalExpressions">Easy Regex</a></p></li>
-<li><p>Check for blank spaces and replace with NA. In R: <code>df[df==&quot;&quot;] = NA</code>.</p></li>
-<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
-<li><p>Anomalies: xda::num/catSummary(.) | xray::anomalies(.)</p></li>
-</ul>
-</div>
-<div id="visualize" class="section level3">
-<h3><span class="header-section-number">1.2.5</span> Visualize</h3>
-<ul>
-<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
-<li><p>Trendlines &amp; Histograms</p></li>
-<li><p>Confidence intervals</p></li>
-<li><p>Compare the distributions of variables with overlayed density plots</p></li>
-<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships. GGally::ggpairs() or seaborn.</p></li>
-<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
-</ul>
-</div>
-<div id="model" class="section level3">
-<h3><span class="header-section-number">1.2.6</span> Model</h3>
-<ul>
-<li><p>Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
-<li><p>Pre-processing: vtreat in R.</p></li>
-<li><p>Pipelines &amp; Feature Unions: sklearn in Python, recipes in R.</p></li>
-<li><p>Feature Selection: Variance Threshold, Univariate Feature Selection (skl_fs.chi2 | f_regression | f_classification in sklearn), Multivariate Feature Selection (SelectKBest, SelectPercentile, feature_selection.RFECV in sklearn). See also the <a href="https://github.com/EpistasisLab/scikit-rebate">Rebate</a> and <a href="https://github.com/scikit-learn-contrib/boruta_py">Boruta</a> packages in Python.</p></li>
-<li><p>Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.</p></li>
-<li><p>Model Selection: yellowbrick, <a href="https://edublancas.github.io/sklearn-evaluation/">Sklearn Evaluation</a>, and <a href="https://github.com/reiinakano/scikit-plot">skl-plot</a> in Python.</p></li>
-<li><p>Model Explanability: eli5 or <a href="https://github.com/slundberg/shap">SHAP</a> in Python but concentrate on the latter. SHAP also exists in R’s xgboost library.</p></li>
-<li><p>Tuning: Do directed tuning instead of grid or random search. hyperopt-sklearn, sklearn-deap, and</p></li>
-<li><p>Deal with potential class imbalance:</p></li>
-<li>Gradient boosting</li>
-<li><p><a href="http://contrib.scikit-learn.org/imbalanced-learn/stable/" class="uri">http://contrib.scikit-learn.org/imbalanced-learn/stable/</a></p></li>
-<li><p>Create ensembles: mlxtend in Python</p></li>
-<li><p>Choose Statistical Test</p>
-<ul>
-<li><a href="http://www.ats.ucla.edu/stat/mult_pkg/whatstat/">1</a></li>
-<li><a href="http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt">2</a></li>
-<li>infer library</li>
-</ul></li>
-<li><p>Check for correlations: <a href="https://github.com/drsimonj/corrr" class="uri">https://github.com/drsimonj/corrr</a></p></li>
-<li><p>Ensembling: mlxtend in Python, and caretEnsemble in R.</p></li>
-<li><p>Look at learning curves: <a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" class="uri">https://www.dataquest.io/blog/learning-curves-machine-learning/</a></p></li>
-<li><p>Use SHAP for model explanability</p></li>
-</ul>
-</div>
-<div id="communicate" class="section level3">
-<h3><span class="header-section-number">1.2.7</span> Communicate</h3>
-<ul>
-<li>Usually an R Markdown document.</li>
-</ul>
-</div>
-<div id="deployment-maintenance" class="section level3">
-<h3><span class="header-section-number">1.2.8</span> Deployment / Maintenance</h3>
-<p>Write tests and helper functions.</p>
-<ul>
-<li><a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a></li>
-<li><a href="http://www.tdda.info/">2</a></li>
-<li><a href="http://stochasticsolutions.com/">3</a></li>
-<li><a href="https://github.com/ericmjl/data-testing-tutorial">Data Testing</a></li>
-<li><a href="https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765">ML Testing</a></li>
-<li><a href="https://github.com/data-cleaning/validate">Data Validation</a></li>
-<li>pytest | hypothesis | testthat</li>
-<li><a href="https://rdrr.io/cran/checkmate/">Argument Checks</a><a href="https://github.com/shawnbrown/datatest">PyValidation</a></li>
-</ul>
-<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:</p>
-<p><code>conda env export &gt; environment.yaml</code></p>
-<p>The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:</p>
-<p><code>conda env create -f environment.yaml</code></p>
-<p>This will create a new environment with the same name listed in environment.yaml.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> numpy.random <span class="im">import</span> beta <span class="im">as</span> beta_dist
+<span class="im">import</span> numpy <span class="im">as</span> np
+N_samp <span class="op">=</span> <span class="dv">10000</span> <span class="co">#number of samples to draw</span>
+clicks_A <span class="op">=</span> <span class="dv">450</span>
+views_A <span class="op">=</span> <span class="dv">56000</span>
+clicks_B <span class="op">=</span> <span class="dv">345</span>
+views_B <span class="op">=</span> <span class="dv">49000</span>
+alpha <span class="op">=</span> <span class="fl">1.1</span>
+beta <span class="op">=</span> <span class="fl">14.2</span>
+A_samples <span class="op">=</span> beta_dist(clicks_A <span class="op">+</span> alpha, views_A <span class="op">-</span> clicks_A <span class="op">+</span> beta, N_samp)
+B_samples <span class="op">=</span> beta_dist(clicks_B <span class="op">+</span> alpha, views_B <span class="op">-</span> clicks_B <span class="op">+</span> beta, N_samp)</code></pre></div>
+<p>Posterior prob that CTR_A &gt; CTR_B given data is np.mean(A_samples &gt; B_samples). Prob that lift of A relative to B is &gt;=3%: np.mean(100*(A_samples-B_samples)/B_samples &gt; 3)</p>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="import-tidy.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="deep-learning.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nlp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -561,7 +454,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-probabilistic-programming.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

@@ -648,20 +648,6 @@ summary(stack)
 
 * roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
 
-## TensorFlow
-
-* In TensorFlow, we indicate a feature's data type using a construct called a feature column. Feature columns store only a description of the feature data; they do not contain the feature data itself.
-
-* Amazingly enough, performing gradient descent on a small batch or even a batch of one example is usually more efficient than the full batch. After all, finding the gradient of one example is far cheaper than finding the gradient of millions of examples. To ensure a good representative sample, the algorithm scoops up another random small batch (or batch of one) on every iteration.
-
-* SGD & Mini-Batch Gradient Descent
-
-Could compute gradient over entire data set on each step, but this turns out to be unnecessary. Computing gradient on small data samples works well. On every step, get a new random sample
-
-Stochastic Gradient Descent: one example at a time
-
-Mini-Batch Gradient Descent: batches of 10-1000. Loss & gradients are averaged over the batch
-
 ## Keras 
 
 Here's a [Hello World](https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb) and the general framework:
@@ -829,9 +815,9 @@ ranef(out)
 confint(out)
 ```
 
-## [Inference Package](https://cran.r-project.org/web/packages/infer/infer.pdf)
-
-Main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results
+## Infer Package
+ 
+The [infer](https://cran.r-project.org/web/packages/infer/infer.pdf) library has  the main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results
 
 ```{r, eval = FALSE}
 set.seed(4747)
@@ -842,7 +828,9 @@ perm_slope <- twins %>%
   calculate(stat = "slope")
 ```
 
-## Networkx
+## Networks
+
+‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc.
 
 Import necessary modules and draw graph.
 

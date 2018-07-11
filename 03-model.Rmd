@@ -1,5 +1,89 @@
 # Model
 
+## General
+
+* Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
+
+* R uses class encoded as 1 in classification to make predictions. Use levels() function on factor to determine what 1 is.
+
+* y = b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2. ( b_1 + b_2x_2 ) is the increase in y with a unit increase in x_1.
+
+* http://ml-cheatsheet.readthedocs.io/en/latest/index.html
+
+* Algorithms for Rec Systems: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matrix Factorization, Alternating Least Squares.
+
+* For example, multilevel models themselves may be referred to as hierarchical linear models, random effects models, multilevel models, random intercept models, random slope models, or pooling models.
+
+* https://www.listendata.com/2018/03/regression-analysis.html
+
+* In general, raising the classification threshold reduces false positives, thus raising precision.
+
+* Multi-Modal Classification: In the machine learning community, the term Multi-Modal is used to refer to multiple kinds of data. For example, consider a YouTube video. It can be thought to contain 3 different modalities: 1) The video frames (visual modality), 2) The audio clip of what's being spoken (audio modality), 3) Some videos also come with the transcription of the words spoken in the form of subtitles (textual modality)
+
+* Less samples and more features increase the chance of overfitting.
+
+* You can choose either of the following inference strategies: offline inference, meaning that you make all possible predictions in a batch, using a MapReduce or something similar. You then write the predictions to an SSTable or Bigtable, and then feed these to a cache/lookup table. online inference, meaning that you predict on demand, using a server.
+
+* A static model is trained offline. That is, we train the model exactly once and then use that trained model for a while. A dynamic model is trained online. That is, data is continually entering the system and we're incorporating that data into the model through continuous updates.
+
+* How would multiplying all of the predictions from a given model by 2.0 (for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8) change the model's performance as measured by AUC? No change. AUC only cares about relative prediction scores. Yes, AUC is based on the relative predictions, so any transformation of the predictions that preserves the relative ranking has no effect on AUC. This is clearly not the case for other metrics such as squared error, log loss, or prediction bias (discussed later).
+
+* AUC is desirable for the following two reasons: AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values. UC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen. However, both these reasons come with caveats, which may limit the usefulness of AUC in certain use cases: Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that. Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
+
+* Raising our classification threshold will cause the number of true positives to decrease or stay the same and will cause the number of false negatives to increase or stay the same. Thus, recall will either stay constant or decrease.
+
+* https://www.dataquest.io/blog/learning-curves-machine-learning/
+
+* A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
+
+* Bias: Error Introduced by approximating real-life problem by using a simple method
+
+* Imagine a linear model with two strongly correlated features; that is, these two features are nearly identical copies of one another but one feature contains a small amount of random noise. If we train this model with L2 regularization, what will happen to the weights for these two features? L2 regularization will force the features towards roughly equivalent weights that are approximately half of what they would have been had only one of the two features been in the model.
+
+* L2 regularization will encourage many of the non-informative weights to be nearly (but not exactly) 0.0.
+
+* F1 Score = TP/(TP + FP + FN). Essentially how good you are at identifying the positive class.
+
+* Active Learning: Finding the optimal data to manually label
+
+* Simulated Annealing: Gradient descent extension
+
+* A variable that is completely useless by itself can provide a significant performance improvement when taken with others.
+
+* So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
+
+* Variance: The amount the model output will change if the model was trained using a different data
+
+* Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
+
+* Inflexible Methods: low variance, high bias, Example: Linear regression
+
+* Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
+
+* Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+
+* Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression
+
+* Non-Parametric: No assumption about model form is made, Example: KNN
+
+* Set Random state by hand in sklearn.
+
+* Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]
+
+* Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]
+
+* Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I'm going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).
+
+* We can also tell that our input, smart_1_normalized, doesn't have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).
+
+* The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.
+
+* The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn't change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User's purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.
+
+* empirical risk minimization: In supervised learning, a machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss.
+
+* Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model's prediction was on a single example. If the model's prediction is perfect, the loss is zero; otherwise, the loss is greater. 
+
 ## Pre-processing
 
 ## Feature Engineering
@@ -28,15 +112,40 @@ df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
 
 * To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.
 
-* Make sure that your test set meets the following two conditions:
-
-    * Is large enough to yield statistically meaningful results.
-
-    * Is representative of the data set as a whole. In other words, don't pick a test set with different characteristics than the training set.
+* Make sure that your test set meets the following two conditions: 1) Is large enough to yield statistically meaningful results, 2) Is representative of the data set as a whole. In other words, don't pick a test set with different characteristics than the training set.
     
 * Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply "cap" or "clip" the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
 
 * Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).
+
+## Unbalanced Classes
+
+Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. 
+
+That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
+
+Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
+
+Balance the training set in some way: Oversample the minority class. Undersample the majority class.
+Synthesize new minority classes.
+
+Throw away minority examples and switch to an anomaly detection framework.
+
+At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
+
+Construct an entirely new algorithm to perform well on imbalanced data.
+
+Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.
+
+Use probability estimates and not the default .5 threshold. 
+
+Undersampling, oversampling, increase weight of minority class
+
+Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
+
+Reframe as Anomaly Detection
+
+* Sklearn Eg: wclf = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')
 
 ## Linear Regression
 
@@ -411,14 +520,6 @@ For GAM models, the predict() method returns a matrix, so use as.numeric() to co
 **Pros**
 
 **Cons**
-
-## Hierarchical & Mixed Models
-
-"Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
-
-lmerTest 
-
-Analysis of Variance, or ANOVA, can be used to compare two different lmer models and test if one model explains more variability than the other model. We can use this to compare two lmer models. For example, if we wanted to see if Year is important for predicting Crime in Maryland, we can build a null model with only County as a random-effect and a year model that includes Year. 
 
 ## K-Means Clustering [US]
 
@@ -797,87 +898,6 @@ Can easily handle qualitative (categorical) features
 
 **Cons**
 
-## NLP
-
-* TF-IDF: A feature vectorization method widely used in text mining to reflect the importance of a term to a document in the corpus. Denote a term by t, a document by d, and the corpus by D. TF(i,d) is the number of times the term t appears in document d while document frequency DF(t,D) is the number of documents which contain the term t. If a term appears very often across the corpus it doesn't carry any special info about the document. Inverse document frequency is a numerical measure of how much info a term provides. If a term appears in all documents its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF uses a hash function to transform input into text.
-
-**Basic Py NLP Pipeline**
-
-* Converting text to numerical data is vectorization.
-
-* Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.
-
-* Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.
-
-* Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance within that document. CountVectorizer or TF-IDF.
-
-* tf-idf & cosine similarity
-
-## Topic Modeling
-
-* Pointwise mutual information is any way to evaluate topic models. Uses joint probabilities to evaluate how much a word tells you a label.
-
-* Mutual information generalized pointwise mutual information averaged over all events.
-
-* If you're just using the probability vectors that come out of a topic model you are selecting a probability metric. If you want to do post-processing you something like mutual information or point was mutual information you're selecting another metric. Metrics always have a point of view. 
-
-* They're just like human writers. Probability says I like really common words, pointwise mutual information as I like really really really discerning words and I don't care how common they are. Mutual information is sort of a balance between the two. 
-
-* In topic modeling using latent Dirichlet distribution, how are “topics” represented? As distributions over words. 
-
-
-## Recommendation Systems
-
-Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix Factorization, Alternating Least Squares.
-
-## Time Series
-
-### Intro
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
-**Pros**
-
-**Cons**
-
-* Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn't vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.
-
-* White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.
-
-**ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models**
-
-* AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.
-
-* I(d): Integrated component for a series that needs to be differenced.
-
-* MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.
-
-* In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.
-
-* Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.
-
-* Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.
-
-* Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q). 
-
-**Assess Model Fit**
-
-* Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.
-
-* Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero. 
-
-* Overfit model with extra AR/MA terms and compare using AIC/BIC.
-
-* Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.
-
-* MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.
-
 ## Association Rule Mining
 
 ### Intro
@@ -919,52 +939,6 @@ Algorithms for Personalization: Linear/Logistic/Elastic Net Regression, Restrict
 * It is difficult to separate actual insights from common sense notions. 
 
 * The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
-
-## General Bayesian Framework
-
-Bayes Rule:
-
-old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
-
-* Models have a lot of parameters classical methods that use simple point estimates of the parameters don't adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata. 
-
-* The second reason we use Bayesian inference is for combining information you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted tocombining information. 
-
-* The third appeal of Bayesian methods and the sort of applications that I work on is that the inferences can map directly to decisions based on inferences express not its estimates and standard errors but rather as probability distributions we can take these probability distributions and pipe them directly into decision analysis for these reasons.
-
-* An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.
-
-* Approximate Bayesian Computation
-
-* Laplace approximation: Approximate the posterior of a non-conjugate model
-
-* When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.
-
-* Beta conjugacy: Beta for prior & binomial for likelihoood implies beta for posterior. Update: beta(alpha + successes, beta + failures). Mean: alpha/(alpha + beta)
-
-* Small alpha and beta means the prior is less informative 
-
-* Empirical Bayes is an approximation to more exact Bayesian methods. With a lot of data it is a very good approximation.
-
-```{python, eval = FALSE}
-
-from numpy.random import beta as beta_dist
-import numpy as np
-
-N_samp = 10000 #number of samples to draw
-clicks_A = 450
-views_A = 56000
-clicks_B = 345
-views_B = 49000
-alpha = 1.1
-beta = 14.2
-
-A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
-B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
-```
-
-Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
-
 
 ## Naïve Bayes
 
@@ -1042,90 +1016,6 @@ TBD
 
 ### Pros/Cons
 
-## Bayesian Linear Regression
-
-https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7
-
-## Deep Learning
-
-* restnet, attention > RNN / LSTM
-
-* "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun
-
-* [DL Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
-
-* By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.
-
-* Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).
-
-* There are several activation functions you may encounter in practice:
-
-    * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
-
-    * Softmax: Same end result as sigmoid, but different function.
-
-    * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
-
-   * ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. $f(x) = max(0, x)$
-
-* softmax doesn't like multi-label classification
-
-* Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days. 
-
-* Advised to scale features
-
-* [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
-
-* Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.
-
-* Momentum and learning rate decay are good for knowing which way to go in gradient descent.
-
-* Always try to lower your learning rate for improvement. 
-
-* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
-
-* n inputs and k outputs gives you $(n+1)*k$ parameters. 
-
-* Back propogation takes about twice the memory as forward propogation. 
-
-* Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn't work, go deeper.
-
-* Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn't matter then use translation invariance. Use weight sharing if this occurs in text. 
-
-* Things that don't chnage across time, space, etc are called statistical invariants.
-
-* RNN's use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier. 
-
-* Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn't remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short
-term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.
-
-* Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.
-
-* Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.
-
-* The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.
-
-* BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
-
-* The last layer of a neural network captures the most complex interactions.
-
-* When plotting the mean-squared error loss function against predictions, the slope is $2x(y-xb)$, or $2input_data error$.
-
-* weights_updated = weights - slope*learning_rate
-
-* This is exactly what's happening in the vanishing gradient problem -- the gradients of the network's output with respect to the parameters in the early layers become extremely small. That's a fancy way of saying that even a large change in the value of parameters for the early layers doesn't have a big effect on the output. 
-
-* Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.
-
-* Epoch: One full pass through all the batches in the training data.
-
-* Stochastic gradient descent calculates slopes one batch at a time.
-
-* This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.
-
-* Few people use kfold cv in deep learning because of the large datasets in play. 
-
-* Dying neuron + vanishing gradient: Change activation function
 
 ## Model Selection
 
@@ -1228,120 +1118,3 @@ term memory). LSTM replaced the rectified linear units by continuous functions. 
 * https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68
 
 * http://hunch.net/?p=224
-
-## Other
-
-### General
-
-* R uses class encoded as 1 in classification to make predictions. Use levels() function on factor to determine what 1 is.
-
-* y = b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2. ( b_1 + b_2x_2 ) is the increase in y with a unit increase in x_1.
-
-* http://ml-cheatsheet.readthedocs.io/en/latest/index.html
-
-* For example, multilevel models themselves may be referred to as hierarchical linear models, random effects models, multilevel models, random intercept models, random slope models, or pooling models.
-
-* https://www.listendata.com/2018/03/regression-analysis.html
-
-* In general, raising the classification threshold reduces false positives, thus raising precision.
-
-* Multi-Modal Classification: In the machine learning community, the term Multi-Modal is used to refer to multiple kinds of data. For example, consider a YouTube video. It can be thought to contain 3 different modalities: 1) The video frames (visual modality), 2) The audio clip of what's being spoken (audio modality), 3) Some videos also come with the transcription of the words spoken in the form of subtitles (textual modality)
-
-* Less samples and more features increase the chance of overfitting.
-
-* You can choose either of the following inference strategies: offline inference, meaning that you make all possible predictions in a batch, using a MapReduce or something similar. You then write the predictions to an SSTable or Bigtable, and then feed these to a cache/lookup table. online inference, meaning that you predict on demand, using a server.
-
-* A static model is trained offline. That is, we train the model exactly once and then use that trained model for a while. A dynamic model is trained online. That is, data is continually entering the system and we're incorporating that data into the model through continuous updates.
-
-* How would multiplying all of the predictions from a given model by 2.0 (for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8) change the model's performance as measured by AUC? No change. AUC only cares about relative prediction scores. Yes, AUC is based on the relative predictions, so any transformation of the predictions that preserves the relative ranking has no effect on AUC. This is clearly not the case for other metrics such as squared error, log loss, or prediction bias (discussed later).
-
-* AUC is desirable for the following two reasons: AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values. UC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen. However, both these reasons come with caveats, which may limit the usefulness of AUC in certain use cases: Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that. Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
-
-* Raising our classification threshold will cause the number of true positives to decrease or stay the same and will cause the number of false negatives to increase or stay the same. Thus, recall will either stay constant or decrease.
-
-* https://www.dataquest.io/blog/learning-curves-machine-learning/
-
-* A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
-
-* Bias: Error Introduced by approximating real-life problem by using a simple method
-
-* Imagine a linear model with two strongly correlated features; that is, these two features are nearly identical copies of one another but one feature contains a small amount of random noise. If we train this model with L2 regularization, what will happen to the weights for these two features? L2 regularization will force the features towards roughly equivalent weights that are approximately half of what they would have been had only one of the two features been in the model.
-
-* L2 regularization will encourage many of the non-informative weights to be nearly (but not exactly) 0.0.
-
-* F1 Score = TP/(TP + FP + FN). Essentially how good you are at identifying the positive class.
-
-* Active Learning: Finding the optimal data to manually label
-
-* Simulated Annealing: Gradient descent extension
-
-* A variable that is completely useless by itself can provide a significant performance improvement when taken with others.
-
-* So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
-
-* Variance: The amount the model output will change if the model was trained using a different data
-
-* Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
-
-* Inflexible Methods: low variance, high bias, Example: Linear regression
-
-* Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
-
-* Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
-
-* Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression
-
-* Non-Parametric: No assumption about model form is made, Example: KNN
-
-* Set Random state by hand in sklearn.
-
-* Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]
-
-* Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]
-
-* Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I'm going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).
-
-* We can also tell that our input, smart_1_normalized, doesn't have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).
-
-* The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.
-
-* The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn't change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User's purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.
-
-* empirical risk minimization: In supervised learning, a machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss.
-
-* Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model's prediction was on a single example. If the model's prediction is perfect, the loss is zero; otherwise, the loss is greater. 
-
-### Unbalanced Classes
-
-Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. 
-
-That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
-
-Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
-
-Balance the training set in some way: Oversample the minority class. Undersample the majority class.
-Synthesize new minority classes.
-
-Throw away minority examples and switch to an anomaly detection framework.
-
-At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
-
-Construct an entirely new algorithm to perform well on imbalanced data.
-
-Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.
-
-Use probability estimates and not the default .5 threshold. 
-
-Undersampling, oversampling, increase weight of minority class
-
-Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
-
-Reframe as Anomaly Detection
-
-* Sklearn Eg: wclf = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')
-
-### Longitudinal Data
-
-* One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
-
-* Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data

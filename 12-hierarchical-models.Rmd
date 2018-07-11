@@ -1,0 +1,11 @@
+# Hierarchical Models
+
+"Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
+
+lmerTest 
+
+Analysis of Variance, or ANOVA, can be used to compare two different lmer models and test if one model explains more variability than the other model. We can use this to compare two lmer models. For example, if we wanted to see if Year is important for predicting Crime in Maryland, we can build a null model with only County as a random-effect and a year model that includes Year. 
+
+* One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
+
+* Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data

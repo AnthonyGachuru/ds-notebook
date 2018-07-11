@@ -1,8 +1,8 @@
 # Communicate, Deploy, Maintain
 
-To cover these considerations, we recommend a structure similar to the following:   
+To cover these considerations, we recommend a structure similar to the following: 
 
-1. Summarize the motivation behind the project, and its goals.
+1. Summarize the motivation behind the project, and its goals. It should either be an executive summary or a technical abstract.
 
 2. State the project’s results.   
 

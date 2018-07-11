@@ -227,6 +227,8 @@ can be found on this
 
 \begin{itemize}
 \item
+  Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+\item
   Sampling from data if its too large
 
   \begin{itemize}
@@ -243,6 +245,8 @@ can be found on this
 \item
   \href{https://dataset.readthedocs.io/en/latest/}{Easy Database
   Management}
+\item
+  \href{https://github.com/yhat/pandasql}{Writing sql in pandas}
 \end{itemize}
 
 \subsection{Tidy}\label{tidy}
@@ -250,46 +254,35 @@ can be found on this
 \begin{itemize}
 \item
   \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data
-  principles}. In R: widyr, tidyr, dplyr.
+  principles}. widyr, tidyr, dplyr in R and pandas in Python.
 \item
   Figure out what you're trying to do with the data.
 \item
   See what the data looks like: types of variables, the first and last
   few observations, missing values or outliers.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/}{xray}
-  \item
-    \href{https://github.com/ropenscilabs/skimr}{skimr}
-  \item
-    \href{https://github.com/ujjwalkarn/xda}{xda}
-  \item
-    \href{https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html}{janitor}
-  \item
-    scipy.stats.describe()
-  \item
-    outlier detection: interquartile range, kernel density estimation,
-    bonferroni test
-  \end{itemize}
+  \href{https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/}{xray},
+  \href{https://github.com/ropenscilabs/skimr}{skimr},
+  \href{https://github.com/ujjwalkarn/xda}{xda}, and
+  \href{https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html}{janitor}
+  in R. pandas and scipy.stats.describe() in Python.
+\item
+  Outlier Detection: interquartile range, kernel density estimation,
+  bonferroni test
 \end{itemize}
 
 \subsection{Transform}\label{transform}
 
 \begin{itemize}
 \item
-  Imputation. Options include the Mean, Mode, KNN, Random, and
-  Regression.
-\item
-  r imputation: mice, hmisc, alice
-\item
-  Look at missingness. IN Python there are
+  Look at missingness.
   \href{https://github.com/njtierney/naniar}{naniar} and
-  \href{https://github.com/ResidentMario/missingno}{missingno} packages.
-  In R there is the
-  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM
-  library}.
+  \href{https://github.com/ResidentMario/missingno}{missingno} in
+  Python.
+  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM}
+  and hmisc::naclus/naplot() in R.
+\item
+  Imputation. Options include the Mean, Mode, KNN, Random, and
+  Regression. mice, hmisc, alice in R.
 \item
   An R library for
   \href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{categorical
@@ -297,10 +290,6 @@ can be found on this
 \item
   \href{https://github.com/VerbalExpressions/PythonVerbalExpressions}{Easy
   Regex}
-\item
-  Writing sql in pandas: \url{https://github.com/yhat/pandasql}
-\item
-  Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
   Check for blank spaces and replace with NA. In R:
   \texttt{df{[}df==""{]}\ =\ NA}.
@@ -328,7 +317,7 @@ can be found on this
   seaborn.
 \item
   Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or
-  hierachical clustering for multivariate data to get a feel for high
+  hierarchical clustering for multivariate data to get a feel for high
   dimensional structure.
 \end{itemize}
 
@@ -340,67 +329,35 @@ can be found on this
   assumptions and tune appropriately. If using Python leverage
   statsmodels.
 \item
-  Pre-processing: \url{https://github.com/WinVector/vtreat}
+  Pre-processing: vtreat in R.
 \item
-  Pipelines \& Feature Unions
+  Pipelines \& Feature Unions: sklearn in Python, recipes in R.
 \item
-  Do feature selection
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Variance Threshold
-  \item
-    Univariate Feature Selection: skl\_fs.chi2 \textbar{} f\_regression
-    \textbar{} f\_classification
-  \item
-    SelectKBest/SelectPercentile
-  \item
-    sklearn: feature\_selection.RFE(CV)
-  \item
-    \href{https://github.com/EpistasisLab/scikit-rebate}{Rebate}
-  \item
-    \href{https://github.com/scikit-learn-contrib/boruta_py}{Boruta}
-  \end{itemize}
+  Feature Selection: Variance Threshold, Univariate Feature Selection
+  (skl\_fs.chi2 \textbar{} f\_regression \textbar{} f\_classification in
+  sklearn), Multivariate Feature Selection (SelectKBest,
+  SelectPercentile, feature\_selection.RFECV in sklearn). See also the
+  \href{https://github.com/EpistasisLab/scikit-rebate}{Rebate} and
+  \href{https://github.com/scikit-learn-contrib/boruta_py}{Boruta}
+  packages in Python.
 \item
-  Do feature engineering: Standardization, dimensionality reduction,
-  dummying. sklearn.preprocessing.binarize, pandas.factorize,
-  featuretools for automation.
+  Feature Engineering: Standardization, dimensionality reduction,
+  dummying. sklearn.preprocessing.binarize, pandas.factorize, and
+  featuretools for automation in Python.
 \item
-  Model Selection
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \url{https://github.com/DistrictDataLabs/yellowbrick}
-  \item
-    \href{https://edublancas.github.io/sklearn-evaluation/}{Sklearn
-    Evaluation}
-  \item
-    \href{https://github.com/reiinakano/scikit-plot}{skl-plot}
-  \end{itemize}
+  Model Selection: yellowbrick,
+  \href{https://edublancas.github.io/sklearn-evaluation/}{Sklearn
+  Evaluation}, and
+  \href{https://github.com/reiinakano/scikit-plot}{skl-plot} in Python.
 \item
-  Model Explanability
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://github.com/marcotcr/lime}{lime}
-  \item
-    \href{https://github.com/TeamHG-Memex/eli5}{eli5}
-  \end{itemize}
+  Model Explanability: eli5 or
+  \href{https://github.com/slundberg/shap}{SHAP} in Python but
+  concentrate on the latter. SHAP also exists in R's xgboost library.
 \item
-  Tuning
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \url{https://github.com/hyperopt/hyperopt-sklearn}
-  \item
-    \url{https://github.com/rsteca/sklearn-deap}
-  \end{itemize}
+  Tuning: Do directed tuning instead of grid or random search.
+  hyperopt-sklearn, sklearn-deap, and
 \item
-  Deal with potential class imbalance
+  Deal with potential class imbalance:
 \item
   Gradient boosting
 \item
@@ -440,35 +397,49 @@ can be found on this
 
 \subsection{Deployment / Maintenance}\label{deployment-maintenance}
 
-\begin{itemize}
-\item
-  Write tests
+Write tests and helper functions.
 
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
-  \item
-    \href{http://www.tdda.info/}{2}
-  \item
-    \href{http://stochasticsolutions.com/}{3}
-  \item
-    \href{https://github.com/ericmjl/data-testing-tutorial}{Data
-    Testing}
-  \item
-    \href{https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765}{ML
-    Testing}
-  \item
-    \href{https://github.com/data-cleaning/validate}{Data Validation}
-  \item
-    pytest \textbar{} hypothesis \textbar{} testthat
-  \item
-    \href{https://rdrr.io/cran/checkmate/}{Argument
-    Checks}\href{https://github.com/shawnbrown/datatest}{PyValidation}
-  \end{itemize}
+\begin{itemize}
+\tightlist
 \item
-  Write helper functions.
+  \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
+\item
+  \href{http://www.tdda.info/}{2}
+\item
+  \href{http://stochasticsolutions.com/}{3}
+\item
+  \href{https://github.com/ericmjl/data-testing-tutorial}{Data Testing}
+\item
+  \href{https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765}{ML
+  Testing}
+\item
+  \href{https://github.com/data-cleaning/validate}{Data Validation}
+\item
+  pytest \textbar{} hypothesis \textbar{} testthat
+\item
+  \href{https://rdrr.io/cran/checkmate/}{Argument
+  Checks}\href{https://github.com/shawnbrown/datatest}{PyValidation}
 \end{itemize}
+
+A really useful feature is sharing environments so others can install
+all the packages used in your code, with the correct versions. You can
+save the packages to a YAML file with:
+
+\texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}
+
+The first part conda env export writes out all the packages in the
+environment, including the Python version. Above you can see the name of
+the environment and all the dependencies (along with versions) are
+listed. The second part of the export command, \textgreater{}
+environment.yaml writes the exported text to a YAML file
+environment.yaml. This file can now be shared and others will be able to
+create the same environment you used for the project. To create an
+environment from an environment file use:
+
+\texttt{conda\ env\ create\ -f\ environment.yaml}
+
+This will create a new environment with the same name listed in
+environment.yaml.
 
 \chapter{Import \& Tidy}\label{import-tidy}
 
@@ -740,6 +711,189 @@ Some types:
 
 \chapter{Model}\label{model-1}
 
+\section{General}\label{general-3}
+
+\begin{itemize}
+\item
+  Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
+\item
+  R uses class encoded as 1 in classification to make predictions. Use
+  levels() function on factor to determine what 1 is.
+\item
+  y = b\_0 + b\_1x\_1 + b\_2x\_2 + b\_3x\_1x\_2. ( b\_1 + b\_2x\_2 ) is
+  the increase in y with a unit increase in x\_1.
+\item
+  \url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
+\item
+  Algorithms for Rec Systems: Linear/Logistic/Elastic Net Regression,
+  Restricted Boltzmann Machines, Singular Value Decomposition, Makov
+  Chains, Latent Dirichlet Allocation, Association Rules, Gradient
+  Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means,
+  Matrix Factorization, Alternating Least Squares.
+\item
+  For example, multilevel models themselves may be referred to as
+  hierarchical linear models, random effects models, multilevel models,
+  random intercept models, random slope models, or pooling models.
+\item
+  \url{https://www.listendata.com/2018/03/regression-analysis.html}
+\item
+  In general, raising the classification threshold reduces false
+  positives, thus raising precision.
+\item
+  Multi-Modal Classification: In the machine learning community, the
+  term Multi-Modal is used to refer to multiple kinds of data. For
+  example, consider a YouTube video. It can be thought to contain 3
+  different modalities: 1) The video frames (visual modality), 2) The
+  audio clip of what's being spoken (audio modality), 3) Some videos
+  also come with the transcription of the words spoken in the form of
+  subtitles (textual modality)
+\item
+  Less samples and more features increase the chance of overfitting.
+\item
+  You can choose either of the following inference strategies: offline
+  inference, meaning that you make all possible predictions in a batch,
+  using a MapReduce or something similar. You then write the predictions
+  to an SSTable or Bigtable, and then feed these to a cache/lookup
+  table. online inference, meaning that you predict on demand, using a
+  server.
+\item
+  A static model is trained offline. That is, we train the model exactly
+  once and then use that trained model for a while. A dynamic model is
+  trained online. That is, data is continually entering the system and
+  we're incorporating that data into the model through continuous
+  updates.
+\item
+  How would multiplying all of the predictions from a given model by 2.0
+  (for example, if the model predicts 0.4, we multiply by 2.0 to get a
+  prediction of 0.8) change the model's performance as measured by AUC?
+  No change. AUC only cares about relative prediction scores. Yes, AUC
+  is based on the relative predictions, so any transformation of the
+  predictions that preserves the relative ranking has no effect on AUC.
+  This is clearly not the case for other metrics such as squared error,
+  log loss, or prediction bias (discussed later).
+\item
+  AUC is desirable for the following two reasons: AUC is
+  scale-invariant. It measures how well predictions are ranked, rather
+  than their absolute values. UC is classification-threshold-invariant.
+  It measures the quality of the model's predictions irrespective of
+  what classification threshold is chosen. However, both these reasons
+  come with caveats, which may limit the usefulness of AUC in certain
+  use cases: Scale invariance is not always desirable. For example,
+  sometimes we really do need well calibrated probability outputs, and
+  AUC won't tell us about that. Classification-threshold invariance is
+  not always desirable. In cases where there are wide disparities in the
+  cost of false negatives vs.~false positives, it may be critical to
+  minimize one type of classification error. For example, when doing
+  email spam detection, you likely want to prioritize minimizing false
+  positives (even if that results in a significant increase of false
+  negatives). AUC isn't a useful metric for this type of optimization.
+\item
+  Raising our classification threshold will cause the number of true
+  positives to decrease or stay the same and will cause the number of
+  false negatives to increase or stay the same. Thus, recall will either
+  stay constant or decrease.
+\item
+  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
+\item
+  A feature cross is a synthetic feature formed by multiplying
+  (crossing) two or more features. Crossing combinations of features can
+  provide predictive abilities beyond what those features can provide
+  individually.
+\item
+  Bias: Error Introduced by approximating real-life problem by using a
+  simple method
+\item
+  Imagine a linear model with two strongly correlated features; that is,
+  these two features are nearly identical copies of one another but one
+  feature contains a small amount of random noise. If we train this
+  model with L2 regularization, what will happen to the weights for
+  these two features? L2 regularization will force the features towards
+  roughly equivalent weights that are approximately half of what they
+  would have been had only one of the two features been in the model.
+\item
+  L2 regularization will encourage many of the non-informative weights
+  to be nearly (but not exactly) 0.0.
+\item
+  F1 Score = TP/(TP + FP + FN). Essentially how good you are at
+  identifying the positive class.
+\item
+  Active Learning: Finding the optimal data to manually label
+\item
+  Simulated Annealing: Gradient descent extension
+\item
+  A variable that is completely useless by itself can provide a
+  significant performance improvement when taken with others.
+\item
+  So, if your problem involves kind of searching a needle in the
+  haystack when for ex: the positive class samples are very rare
+  compared to the negative classes, use a precision recall curve.
+  Otherwise use a ROC curve because a ROC curve remains the same
+  regardless of the baseline prior probability of your positive class
+  (the important rare class).
+\item
+  Variance: The amount the model output will change if the model was
+  trained using a different data
+\item
+  Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
+\item
+  Inflexible Methods: low variance, high bias, Example: Linear
+  regression
+\item
+  Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
+\item
+  Network models: graphical lasso, ising model, granger causality test,
+  network hypothesis testing, bayesian networks
+\item
+  Parametric: Model has a function shape and form, Model is trained/fit
+  using training data to determine parameter values, reduces the problem
+  of training a model down to training a set of parameter values,
+  Examples: linear regression
+\item
+  Non-Parametric: No assumption about model form is made, Example: KNN
+\item
+  Set Random state by hand in sklearn.
+\item
+  Generally need 3 rows of data per variable (to prevent model from
+  seeing signal where there is only noise) {[}Nina Zumel{]}
+\item
+  Domain knowledge for feature selection and random forest feature
+  importance (5-10) best variables. {[}Nina Zumel{]}
+\item
+  Because we have a couple thousand data points, even though salary can
+  best be represented by a Poisson distribution, I'm going to use
+  Gaussian distribution. (With bigger datasets, these two distribution
+  start to become very similar).
+\item
+  We can also tell that our input, smart\_1\_normalized, doesn't have a
+  very strong relationship to our output because the standard error
+  (0.009) is more than 1/10 of our estimate (0.02).
+\item
+  The less complex an ML model, the more likely that a good empirical
+  result is not just due to the peculiarities of the sample.
+\item
+  The ML Fine Print: Three basic assumptions: 1) We draw examples
+  independently and identically (i.i.d.) at random from the
+  distribution, 2) The distribution is stationary: It doesn't change
+  over time, 3) We always pull from the same distribution: Including
+  training, validation, and test sets. In practice, we sometimes violate
+  these assumptions. For example: 1) Consider a model that chooses ads
+  to display. The i.i.d. assumption would be violated if the model bases
+  its choice of ads, in part, on what ads the user has previously seen.
+  2) Consider a data set that contains retail sales information for a
+  year. User's purchases change seasonally, which would violate
+  stationarity. When we know that any of the preceding three basic
+  assumptions are violated, we must pay careful attention to metrics.
+\item
+  empirical risk minimization: In supervised learning, a machine
+  learning algorithm builds a model by examining many examples and
+  attempting to find a model that minimizes loss.
+\item
+  Loss is the penalty for a bad prediction. That is, loss is a number
+  indicating how bad the model's prediction was on a single example. If
+  the model's prediction is perfect, the loss is zero; otherwise, the
+  loss is greater.
+\end{itemize}
+
 \section{Pre-processing}\label{pre-processing}
 
 \section{Feature Engineering}\label{feature-engineering}
@@ -798,16 +952,10 @@ Some types:
   quality\_rating was supplied. Give this boolean feature a name like
   is\_quality\_rating\_defined.
 \item
-  Make sure that your test set meets the following two conditions:
-
-  \begin{itemize}
-  \item
-    Is large enough to yield statistically meaningful results.
-  \item
-    Is representative of the data set as a whole. In other words, don't
-    pick a test set with different characteristics than the training
-    set.
-  \end{itemize}
+  Make sure that your test set meets the following two conditions: 1) Is
+  large enough to yield statistically meaningful results, 2) Is
+  representative of the data set as a whole. In other words, don't pick
+  a test set with different characteristics than the training set.
 \item
   Handling extreme outliers: Given data with a very long tail, log
   scaling does a slightly better job, but there's still a significant
@@ -824,6 +972,49 @@ Some types:
   expectations (or that you can explain why it doesn't). 3) Double-check
   that the training data agrees with other sources (for example,
   dashboards).
+\end{itemize}
+
+\section{Unbalanced Classes}\label{unbalanced-classes}
+
+Research on imbalanced classes often considers imbalanced to mean a
+minority class of 10\% to 20\%.
+
+That said, here is a rough outline of useful approaches. These are
+listed approximately in order of effort:
+
+Do nothing. Sometimes you get lucky and nothing needs to be done. You
+can train on the so-called natural (or stratified) distribution and
+sometimes it works without need for modification.
+
+Balance the training set in some way: Oversample the minority class.
+Undersample the majority class. Synthesize new minority classes.
+
+Throw away minority examples and switch to an anomaly detection
+framework.
+
+At the algorithm level, or after it: Adjust the class weight
+(misclassification costs). Adjust the decision threshold. Modify an
+existing algorithm to be more sensitive to rare classes.
+
+Construct an entirely new algorithm to perform well on imbalanced data.
+
+Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a
+lift curve, or a profit (gain) curve for evaluation.
+
+Use probability estimates and not the default .5 threshold.
+
+Undersampling, oversampling, increase weight of minority class
+
+Decision trees often perform well on imbalanced datasets because their
+hierarchical structure allows them to learn signals from both classes.
+
+Reframe as Anomaly Detection
+
+\begin{itemize}
+\tightlist
+\item
+  Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
+  \& svm.SVC(kernel=`linear', class\_weight=`balanced')
 \end{itemize}
 
 \section{Linear Regression}\label{linear-regression}
@@ -1443,21 +1634,6 @@ as.numeric() to convert the matrix to a vector.
 \textbf{Pros}
 
 \textbf{Cons}
-
-\section{Hierarchical \& Mixed Models}\label{hierarchical-mixed-models}
-
-``Across counties, as the average mother's age increases the birth rate
-decreases while correcting for state-level impacts'' BirthRate
-\textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
-
-lmerTest
-
-Analysis of Variance, or ANOVA, can be used to compare two different
-lmer models and test if one model explains more variability than the
-other model. We can use this to compare two lmer models. For example, if
-we wanted to see if Year is important for predicting Crime in Maryland,
-we can build a null model with only County as a random-effect and a year
-model that includes Year.
 
 \section{K-Means Clustering {[}US{]}}\label{k-means-clustering-us}
 
@@ -2183,169 +2359,9 @@ Can easily handle qualitative (categorical) features
 
 \textbf{Cons}
 
-\section{NLP}\label{nlp}
-
-\begin{itemize}
-\tightlist
-\item
-  TF-IDF: A feature vectorization method widely used in text mining to
-  reflect the importance of a term to a document in the corpus. Denote a
-  term by t, a document by d, and the corpus by D. TF(i,d) is the number
-  of times the term t appears in document d while document frequency
-  DF(t,D) is the number of documents which contain the term t. If a term
-  appears very often across the corpus it doesn't carry any special info
-  about the document. Inverse document frequency is a numerical measure
-  of how much info a term provides. If a term appears in all documents
-  its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF
-  uses a hash function to transform input into text.
-\end{itemize}
-
-\textbf{Basic Py NLP Pipeline}
-
-\begin{itemize}
-\item
-  Converting text to numerical data is vectorization.
-\item
-  Tokenize: A token is an individual word (or group of words) extracted
-  from a document, using whitespace or punctuation as separators.
-\item
-  Create bag of words: Count tokens within a document and normalised to
-  de-emphasise tokens that appear frequently within a document.
-\item
-  Vectorization: Corpus represented as a large matrix, each row of which
-  represents one of the documents and each column represents token
-  occurance within that document. CountVectorizer or TF-IDF.
-\item
-  tf-idf \& cosine similarity
-\end{itemize}
-
-\section{Topic Modeling}\label{topic-modeling}
-
-\begin{itemize}
-\item
-  Pointwise mutual information is any way to evaluate topic models. Uses
-  joint probabilities to evaluate how much a word tells you a label.
-\item
-  Mutual information generalized pointwise mutual information averaged
-  over all events.
-\item
-  If you're just using the probability vectors that come out of a topic
-  model you are selecting a probability metric. If you want to do
-  post-processing you something like mutual information or point was
-  mutual information you're selecting another metric. Metrics always
-  have a point of view.
-\item
-  They're just like human writers. Probability says I like really common
-  words, pointwise mutual information as I like really really really
-  discerning words and I don't care how common they are. Mutual
-  information is sort of a balance between the two.
-\item
-  In topic modeling using latent Dirichlet distribution, how are
-  ``topics'' represented? As distributions over words.
-\end{itemize}
-
-\section{Recommendation Systems}\label{recommendation-systems}
-
-Algorithms for Personalization: Linear/Logistic/Elastic Net Regression,
-Restricted Boltzmann Machines, Singular Value Decomposition, Makov
-Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted
-Decision Trees, Random Forests, Affinity Propagation, K-Means, Matix
-Factorization, Alternating Least Squares.
-
-\section{Time Series}\label{time-series}
-
-\subsection{Intro}\label{intro-14}
-
-\subsection{Assumptions}\label{assumptions-14}
-
-\subsection{Characteristics}\label{characteristics-9}
-
-\subsection{Evaluation}\label{evaluation-13}
-
-\subsection{Pros/Cons}\label{proscons-14}
-
-\textbf{Pros}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  Seasonal Decomposition; Use additive model when the magnitude of the
-  seasonal fluctuations surrounding the general trend doesn't vary over
-  time. Use the multiplicative model when the magnitude of the seasonal
-  fluctuations surrounding the general trend appear to change in a
-  proportional manner over time. Go from additive to multiplicative with
-  a log transformation.
-\item
-  White noise: Describes the assumption that each element in the time
-  series is a random draw from N(0, constant variance). Also called a
-  stationary series. Time series with trends or seasonality are not
-  stationary.
-\end{itemize}
-
-\textbf{ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models}
-
-\begin{itemize}
-\item
-  AR(p): auto-regressive component for lags on the stationary series.
-  The AR models sayd that the value of a variable at a specific time is
-  related to the value of the variable at previous times.
-\item
-  I(d): Integrated component for a series that needs to be differenced.
-\item
-  MA(q): Moving average component for lag of the forecast errors. In a
-  moving average model of order q, each value in a time series is
-  predicted from the linear combination of the previous q errors. The
-  value of a variable at a specific time is related to the residuals of
-  prediction at previous times.
-\item
-  In an auto-regressive model of order p, each valeu in a time series is
-  predicted from a linear combination of the previous p values.
-\item
-  Procedure: Make stationary if necessary by differencing. Determine
-  possible values of p and q. Assess model fit and try other values of p
-  and q to overfit. Make forecasts with the final model.
-\item
-  Augmented Dicky-Fuller Test: This tests whether or not a time series
-  is stationary. h0: series is not stationary, ha: the series is
-  stationary.
-\item
-  Determine p and q: Look at autocorrelation (AC) and partial
-  correlation (PAC) functions. AC measures the way observations relate
-  to each other. PAC measure the way observations relate to each other
-  after accounting for all other intervening observations. Plot of the
-  autocorrelation function (ACF) displays correlation of the series with
-  itself at different lags. A plot of the PAC displays the amount of
-  autocorrelation not explained by lower order correlations. Spikes in
-  the PACF will choose for AR(p). Spikes in the ACF will choose MA(q).
-\end{itemize}
-
-\textbf{Assess Model Fit}
-
-\begin{itemize}
-\item
-  Appropriate model should resemble white noise. Check scatterplot of
-  residuals vs fit to check constant variance and qqplot to check
-  normality. Autocorrelations should be zero to check for violation of
-  independent errors.
-\item
-  Box-Ljung Test: Check if all autocorrelations are zero, i.e the series
-  is of white noise. H0: autocorrelations are all 0. ha: At least one is
-  nonzero.
-\item
-  Overfit model with extra AR/MA terms and compare using AIC/BIC.
-\item
-  Interpretation: AR coefficient closer to 1 means series returns to
-  mean slowly, vice versa for closer to 0.
-\item
-  MA(1) coefficient indicates how much the shock of the previous time
-  period is retained in the current time period. MA(2) refers to the
-  previous two time periods.
-\end{itemize}
-
 \section{Association Rule Mining}\label{association-rule-mining}
 
-\subsection{Intro}\label{intro-15}
+\subsection{Intro}\label{intro-14}
 
 \begin{itemize}
 \item
@@ -2378,13 +2394,13 @@ Factorization, Alternating Least Squares.
   the threshold don't make it to the higher iterations.
 \end{itemize}
 
-\subsection{Assumptions}\label{assumptions-15}
+\subsection{Assumptions}\label{assumptions-14}
 
-\subsection{Characteristics}\label{characteristics-10}
+\subsection{Characteristics}\label{characteristics-9}
 
-\subsection{Evaluation}\label{evaluation-14}
+\subsection{Evaluation}\label{evaluation-13}
 
-\subsection{Pros/Cons}\label{proscons-15}
+\subsection{Pros/Cons}\label{proscons-14}
 
 \textbf{Pros}
 
@@ -2413,83 +2429,9 @@ Factorization, Alternating Least Squares.
   that correlation doesn't imply causation!
 \end{itemize}
 
-\section{General Bayesian Framework}\label{general-bayesian-framework}
-
-Bayes Rule:
-
-old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
-{[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob
-{[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
-
-\begin{itemize}
-\item
-  Models have a lot of parameters classical methods that use simple
-  point estimates of the parameters don't adequately capture uncertainty
-  so we turn to Bayesian methods because Bayesian inference is one way
-  of finding a large model with metadata.
-\item
-  The second reason we use Bayesian inference is for combining
-  information you might have experimental data on the drug under one
-  condition and aggregate data under another condition we can combine
-  polls and election forecast of public opinion data from multiple poles
-  and environmental statistics we have measurements of different quality
-  Bayesian methods are particularly adapted tocombining information.
-\item
-  The third appeal of Bayesian methods and the sort of applications that
-  I work on is that the inferences can map directly to decisions based
-  on inferences express not its estimates and standard errors but rather
-  as probability distributions we can take these probability
-  distributions and pipe them directly into decision analysis for these
-  reasons.
-\item
-  An advantage of recognizing that the prior distribution is a testable
-  part of a Bayesian model is that it clarifies the role of the prior
-  inference, and where it comes from.
-\item
-  Approximate Bayesian Computation
-\item
-  Laplace approximation: Approximate the posterior of a non-conjugate
-  model
-\item
-  When one uses likelihood to get point estimates of model parameters,
-  it's called maximum-likelihood estimation, or MLE. If one also takes
-  the prior into account, then it's maximum a posteriori estimation
-  (MAP). MLE and MAP are the same if the prior is uniform.
-\item
-  Beta conjugacy: Beta for prior \& binomial for likelihoood implies
-  beta for posterior. Update: beta(alpha + successes, beta + failures).
-  Mean: alpha/(alpha + beta)
-\item
-  Small alpha and beta means the prior is less informative
-\item
-  Empirical Bayes is an approximation to more exact Bayesian methods.
-  With a lot of data it is a very good approximation.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
-\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
-\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
-\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
-\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
-\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
-\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
-\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\end{Highlighting}
-\end{Shaded}
-
-Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
-np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
-relative to B is \textgreater{}=3\%:
-np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
-
 \section{Naïve Bayes}\label{naive-bayes}
 
-\subsection{Intro}\label{intro-16}
+\subsection{Intro}\label{intro-15}
 
 Practitioners do use Naive Bayes regularly for ranking, where the actual
 values of the probabilities are not relevant---only the relative values
@@ -2515,13 +2457,13 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a
 batch of samples incrementally while we are using. MultinomialNB and
 Bernoulli NB also support sample weighting.
 
-\subsection{Assumptions}\label{assumptions-16}
+\subsection{Assumptions}\label{assumptions-15}
 
-\subsection{Characteristics}\label{characteristics-11}
+\subsection{Characteristics}\label{characteristics-10}
 
-\subsection{Evaluation}\label{evaluation-15}
+\subsection{Evaluation}\label{evaluation-14}
 
-\subsection{Pros/Cons}\label{proscons-16}
+\subsection{Pros/Cons}\label{proscons-15}
 
 \textbf{Pros}
 
@@ -2552,7 +2494,7 @@ Bernoulli NB also support sample weighting.
 
 \section{LDA}\label{lda}
 
-\subsection{Intro}\label{intro-17}
+\subsection{Intro}\label{intro-16}
 
 Before we take a look into the inner workings of LDA in the following
 subsections, let's summarize the key steps of the LDA approach:
@@ -2579,6 +2521,20 @@ assumes gaussian distributions for each class share the same covariance
 matrix. If they don't share the same covariance matrix, then we use
 Quadratic Discriminant Analysis which assumes each class has its own.
 
+\subsection{Assumptions}\label{assumptions-16}
+
+\subsection{Characteristics}\label{characteristics-11}
+
+\subsection{Evaluation}\label{evaluation-15}
+
+\subsection{Pros/Cons}\label{proscons-16}
+
+\section{QDA}\label{qda}
+
+\subsection{Intro}\label{intro-17}
+
+TBD
+
 \subsection{Assumptions}\label{assumptions-17}
 
 \subsection{Characteristics}\label{characteristics-12}
@@ -2587,180 +2543,9 @@ Quadratic Discriminant Analysis which assumes each class has its own.
 
 \subsection{Pros/Cons}\label{proscons-17}
 
-\section{QDA}\label{qda}
-
-\subsection{Intro}\label{intro-18}
-
-TBD
-
-\subsection{Assumptions}\label{assumptions-18}
-
-\subsection{Characteristics}\label{characteristics-13}
-
-\subsection{Evaluation}\label{evaluation-17}
-
-\subsection{Pros/Cons}\label{proscons-18}
-
-\section{Bayesian Linear Regression}\label{bayesian-linear-regression}
-
-\url{https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7}
-
-\section{Deep Learning}\label{deep-learning}
-
-\begin{itemize}
-\item
-  restnet, attention \textgreater{} RNN / LSTM
-\item
-  ``Training with large minibatches is bad for your health. More
-  importantly, it's bad for your test error. Friends dont let friends
-  use minibatches larger than 32.'' - Yann Le Cun
-\item
-  \href{https://hackernoon.com/deep-learning-cheat-sheet-25421411e460}{DL
-  Cheatsheet}
-\item
-  By reducing learning rate (for example, to 0.001), Test loss drops to
-  a value much closer to Training loss. In most runs, increasing Batch
-  size does not influence Training loss or Test loss significantly.
-  However, in a small percentage of runs, increasing Batch size to 20 or
-  greater causes Test loss to drop slightly below Training loss.
-\item
-  Reducing the ratio of training to test data from 50\% to 10\%
-  dramatically lowers the number of data points in the training set.
-  With so little data, high batch size and high learning rate cause the
-  training model to jump around chaotically (jumping repeatedly over the
-  minimum point).
-\item
-  There are several activation functions you may encounter in practice:
-
-  \begin{itemize}
-  \item
-    Sigmoid: Takes a real-valued input and squashes it to range between
-    0 and 1 (\(σ(x) = 1 / (1 + exp(−x))\))
-  \item
-    Softmax: Same end result as sigmoid, but different function.
-  \item
-    tanh: Takes a real-valued input and squashes it to the range {[}-1,
-    1{]} (\(tanh(x) = 2σ(2x) − 1\))
-  \end{itemize}
-\item
-  ReLU: The rectified linear activation function (called ReLU) has been
-  shown to lead to very high-performance networks. This function takes a
-  single number as an input, returning 0 if the input is negative, and
-  the input if the input is positive. \(f(x) = max(0, x)\)
-\item
-  softmax doesn't like multi-label classification
-\item
-  Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot
-  Encodings because it allows for relationships to be shown between
-  days.
-\item
-  Advised to scale features
-\item
-  \href{https://www.youtube.com/watch?v=nqEYVzJLR_c\&feature=youtu.be\&t=31}{Rule
-  of 30}: A change that affects at least 30 data points in your
-  validation set is usually significant and not just noise.
-\item
-  Gradient descent takes about 3 times longer than the loss function.
-  Stochastic gradient descent works off an estimate of the loss function
-  from a sample of the training set. Scales better than normal gradient
-  descent.
-\item
-  Momentum and learning rate decay are good for knowing which way to go
-  in gradient descent.
-\item
-  Always try to lower your learning rate for improvement.
-\item
-  ADAGRAD is another optimization option that takes care of some of the
-  hyperparameters for you.
-\item
-  n inputs and k outputs gives you \((n+1)*k\) parameters.
-\item
-  Back propogation takes about twice the memory as forward propogation.
-\item
-  Stop model from overoptimizing on training set: early termination
-  (stop as soon as performance on validation set drops) and
-  regularization which applies artifical constraints to reduce the
-  number of free parameters while making it difficult to optimize. Uses
-  l2 regularization or dropout. Dropout works by randomly setting
-  activations from one layer to the next to 0 repeatly. Forces the
-  network to learn redundant representations, and takes average
-  consensus for final prediction. Makes things more robust and prevents
-  overfitting. Scale the non-zero activates by 2 to get the right
-  average. If it doesn't work, go deeper.
-\item
-  Two ways are to average the yellow, blue, and green channels or to use
-  YUV representation. If position on the screen doesn't matter then use
-  translation invariance. Use weight sharing if this occurs in text.
-\item
-  Things that don't chnage across time, space, etc are called
-  statistical invariants.
-\item
-  RNN's use shared parameters over time to extract patterns. Uses a
-  recurrent connection to provide a summary of the past and pass this
-  info to the classifier.
-\item
-  Backpropagation occurs throw time to the beginning. All derivative
-  applied to same parameters, so very correlated. Bad for stochastic
-  gradient descent and makes math very unstable. Gradients are either
-  zero (doesn't remember the past well) or infinity. The latter is fixed
-  by gradient clipping and the former by LSTM (long-short term memory).
-  LSTM replaced the rectified linear units by continuous functions. You
-  can use dropout or L2 regularization with an LSTM.
-\item
-  Generally dealing with images, Convolutional Neural Network is used
-  mostly because of its better accuracy results.
-\item
-  Model capacity: Same as underfitting and overfitting in bias-variance.
-  Less nodes and hidden layers corresponds to simpler model and vice
-  versa.
-\item
-  The perceptron is the simplest neural network. The perceptron is an
-  iterative classification method.The perceptron starts with a random
-  hyperplane then adjust its weights to separate the data.
-\item
-  BackProp Algorithm: Initially all the edge weights are randomly
-  assigned. For every input in the training dataset, the ANN is
-  activated and its output is observed. This output is compared with the
-  desired output that we already know, and the error is ``propagated''
-  back to the previous layer. This error is noted and the weights are
-  ``adjusted'' accordingly. This process is repeated until the output
-  error is below a predetermined threshold.
-\item
-  The last layer of a neural network captures the most complex
-  interactions.
-\item
-  When plotting the mean-squared error loss function against
-  predictions, the slope is \(2x(y-xb)\), or \(2input_data error\).
-\item
-  weights\_updated = weights - slope*learning\_rate
-\item
-  This is exactly what's happening in the vanishing gradient problem --
-  the gradients of the network's output with respect to the parameters
-  in the early layers become extremely small. That's a fancy way of
-  saying that even a large change in the value of parameters for the
-  early layers doesn't have a big effect on the output.
-\item
-  Batch: Subset of the data used to calculate slopes during back
-  propagation. Different batches are used to calculate different
-  updates.
-\item
-  Epoch: One full pass through all the batches in the training data.
-\item
-  Stochastic gradient descent calculates slopes one batch at a time.
-\item
-  This network again uses the ReLU activation function, so the slope of
-  the activation function is 1 for any node receiving a positive value
-  as input.
-\item
-  Few people use kfold cv in deep learning because of the large datasets
-  in play.
-\item
-  Dying neuron + vanishing gradient: Change activation function
-\end{itemize}
-
 \section{Model Selection}\label{model-selection}
 
-\subsection{General}\label{general-3}
+\subsection{General}\label{general-4}
 
 \begin{itemize}
 \item
@@ -3056,238 +2841,6 @@ TBD
   \url{http://hunch.net/?p=224}
 \end{itemize}
 
-\section{Other}\label{other-2}
-
-\subsection{General}\label{general-4}
-
-\begin{itemize}
-\item
-  R uses class encoded as 1 in classification to make predictions. Use
-  levels() function on factor to determine what 1 is.
-\item
-  y = b\_0 + b\_1x\_1 + b\_2x\_2 + b\_3x\_1x\_2. ( b\_1 + b\_2x\_2 ) is
-  the increase in y with a unit increase in x\_1.
-\item
-  \url{http://ml-cheatsheet.readthedocs.io/en/latest/index.html}
-\item
-  For example, multilevel models themselves may be referred to as
-  hierarchical linear models, random effects models, multilevel models,
-  random intercept models, random slope models, or pooling models.
-\item
-  \url{https://www.listendata.com/2018/03/regression-analysis.html}
-\item
-  In general, raising the classification threshold reduces false
-  positives, thus raising precision.
-\item
-  Multi-Modal Classification: In the machine learning community, the
-  term Multi-Modal is used to refer to multiple kinds of data. For
-  example, consider a YouTube video. It can be thought to contain 3
-  different modalities: 1) The video frames (visual modality), 2) The
-  audio clip of what's being spoken (audio modality), 3) Some videos
-  also come with the transcription of the words spoken in the form of
-  subtitles (textual modality)
-\item
-  Less samples and more features increase the chance of overfitting.
-\item
-  You can choose either of the following inference strategies: offline
-  inference, meaning that you make all possible predictions in a batch,
-  using a MapReduce or something similar. You then write the predictions
-  to an SSTable or Bigtable, and then feed these to a cache/lookup
-  table. online inference, meaning that you predict on demand, using a
-  server.
-\item
-  A static model is trained offline. That is, we train the model exactly
-  once and then use that trained model for a while. A dynamic model is
-  trained online. That is, data is continually entering the system and
-  we're incorporating that data into the model through continuous
-  updates.
-\item
-  How would multiplying all of the predictions from a given model by 2.0
-  (for example, if the model predicts 0.4, we multiply by 2.0 to get a
-  prediction of 0.8) change the model's performance as measured by AUC?
-  No change. AUC only cares about relative prediction scores. Yes, AUC
-  is based on the relative predictions, so any transformation of the
-  predictions that preserves the relative ranking has no effect on AUC.
-  This is clearly not the case for other metrics such as squared error,
-  log loss, or prediction bias (discussed later).
-\item
-  AUC is desirable for the following two reasons: AUC is
-  scale-invariant. It measures how well predictions are ranked, rather
-  than their absolute values. UC is classification-threshold-invariant.
-  It measures the quality of the model's predictions irrespective of
-  what classification threshold is chosen. However, both these reasons
-  come with caveats, which may limit the usefulness of AUC in certain
-  use cases: Scale invariance is not always desirable. For example,
-  sometimes we really do need well calibrated probability outputs, and
-  AUC won't tell us about that. Classification-threshold invariance is
-  not always desirable. In cases where there are wide disparities in the
-  cost of false negatives vs.~false positives, it may be critical to
-  minimize one type of classification error. For example, when doing
-  email spam detection, you likely want to prioritize minimizing false
-  positives (even if that results in a significant increase of false
-  negatives). AUC isn't a useful metric for this type of optimization.
-\item
-  Raising our classification threshold will cause the number of true
-  positives to decrease or stay the same and will cause the number of
-  false negatives to increase or stay the same. Thus, recall will either
-  stay constant or decrease.
-\item
-  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
-\item
-  A feature cross is a synthetic feature formed by multiplying
-  (crossing) two or more features. Crossing combinations of features can
-  provide predictive abilities beyond what those features can provide
-  individually.
-\item
-  Bias: Error Introduced by approximating real-life problem by using a
-  simple method
-\item
-  Imagine a linear model with two strongly correlated features; that is,
-  these two features are nearly identical copies of one another but one
-  feature contains a small amount of random noise. If we train this
-  model with L2 regularization, what will happen to the weights for
-  these two features? L2 regularization will force the features towards
-  roughly equivalent weights that are approximately half of what they
-  would have been had only one of the two features been in the model.
-\item
-  L2 regularization will encourage many of the non-informative weights
-  to be nearly (but not exactly) 0.0.
-\item
-  F1 Score = TP/(TP + FP + FN). Essentially how good you are at
-  identifying the positive class.
-\item
-  Active Learning: Finding the optimal data to manually label
-\item
-  Simulated Annealing: Gradient descent extension
-\item
-  A variable that is completely useless by itself can provide a
-  significant performance improvement when taken with others.
-\item
-  So, if your problem involves kind of searching a needle in the
-  haystack when for ex: the positive class samples are very rare
-  compared to the negative classes, use a precision recall curve.
-  Otherwise use a ROC curve because a ROC curve remains the same
-  regardless of the baseline prior probability of your positive class
-  (the important rare class).
-\item
-  Variance: The amount the model output will change if the model was
-  trained using a different data
-\item
-  Flexible Methods: higher variance, low bias, Example: KNN (k = 1)
-\item
-  Inflexible Methods: low variance, high bias, Example: Linear
-  regression
-\item
-  Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
-\item
-  Network models: graphical lasso, ising model, granger causality test,
-  network hypothesis testing, bayesian networks
-\item
-  Parametric: Model has a function shape and form, Model is trained/fit
-  using training data to determine parameter values, reduces the problem
-  of training a model down to training a set of parameter values,
-  Examples: linear regression
-\item
-  Non-Parametric: No assumption about model form is made, Example: KNN
-\item
-  Set Random state by hand in sklearn.
-\item
-  Generally need 3 rows of data per variable (to prevent model from
-  seeing signal where there is only noise) {[}Nina Zumel{]}
-\item
-  Domain knowledge for feature selection and random forest feature
-  importance (5-10) best variables. {[}Nina Zumel{]}
-\item
-  Because we have a couple thousand data points, even though salary can
-  best be represented by a Poisson distribution, I'm going to use
-  Gaussian distribution. (With bigger datasets, these two distribution
-  start to become very similar).
-\item
-  We can also tell that our input, smart\_1\_normalized, doesn't have a
-  very strong relationship to our output because the standard error
-  (0.009) is more than 1/10 of our estimate (0.02).
-\item
-  The less complex an ML model, the more likely that a good empirical
-  result is not just due to the peculiarities of the sample.
-\item
-  The ML Fine Print: Three basic assumptions: 1) We draw examples
-  independently and identically (i.i.d.) at random from the
-  distribution, 2) The distribution is stationary: It doesn't change
-  over time, 3) We always pull from the same distribution: Including
-  training, validation, and test sets. In practice, we sometimes violate
-  these assumptions. For example: 1) Consider a model that chooses ads
-  to display. The i.i.d. assumption would be violated if the model bases
-  its choice of ads, in part, on what ads the user has previously seen.
-  2) Consider a data set that contains retail sales information for a
-  year. User's purchases change seasonally, which would violate
-  stationarity. When we know that any of the preceding three basic
-  assumptions are violated, we must pay careful attention to metrics.
-\item
-  empirical risk minimization: In supervised learning, a machine
-  learning algorithm builds a model by examining many examples and
-  attempting to find a model that minimizes loss.
-\item
-  Loss is the penalty for a bad prediction. That is, loss is a number
-  indicating how bad the model's prediction was on a single example. If
-  the model's prediction is perfect, the loss is zero; otherwise, the
-  loss is greater.
-\end{itemize}
-
-\subsection{Unbalanced Classes}\label{unbalanced-classes}
-
-Research on imbalanced classes often considers imbalanced to mean a
-minority class of 10\% to 20\%.
-
-That said, here is a rough outline of useful approaches. These are
-listed approximately in order of effort:
-
-Do nothing. Sometimes you get lucky and nothing needs to be done. You
-can train on the so-called natural (or stratified) distribution and
-sometimes it works without need for modification.
-
-Balance the training set in some way: Oversample the minority class.
-Undersample the majority class. Synthesize new minority classes.
-
-Throw away minority examples and switch to an anomaly detection
-framework.
-
-At the algorithm level, or after it: Adjust the class weight
-(misclassification costs). Adjust the decision threshold. Modify an
-existing algorithm to be more sensitive to rare classes.
-
-Construct an entirely new algorithm to perform well on imbalanced data.
-
-Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a
-lift curve, or a profit (gain) curve for evaluation.
-
-Use probability estimates and not the default .5 threshold.
-
-Undersampling, oversampling, increase weight of minority class
-
-Decision trees often perform well on imbalanced datasets because their
-hierarchical structure allows them to learn signals from both classes.
-
-Reframe as Anomaly Detection
-
-\begin{itemize}
-\tightlist
-\item
-  Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
-  \& svm.SVC(kernel=`linear', class\_weight=`balanced')
-\end{itemize}
-
-\subsection{Longitudinal Data}\label{longitudinal-data}
-
-\begin{itemize}
-\item
-  One far out suggestion in one of the links is to do PCA and then
-  regress the original variables against the new axis.
-\item
-  Account for longitudinal data: random selection of one event from each
-  student, partition cross validation by dates, pca finds major trends
-  hidden within the data
-\end{itemize}
-
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
 
@@ -3297,7 +2850,8 @@ following:
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  Summarize the motivation behind the project, and its goals.
+  Summarize the motivation behind the project, and its goals. It should
+  either be an executive summary or a technical abstract.
 \item
   State the project's results.
 \item
@@ -4016,33 +3570,6 @@ accurate!) caret model.
   roll=TRUE, `nearest', -Inf, Inf \textbar{} rollends=FALSE
 \end{itemize}
 
-\section{TensorFlow}\label{tensorflow}
-
-\begin{itemize}
-\item
-  In TensorFlow, we indicate a feature's data type using a construct
-  called a feature column. Feature columns store only a description of
-  the feature data; they do not contain the feature data itself.
-\item
-  Amazingly enough, performing gradient descent on a small batch or even
-  a batch of one example is usually more efficient than the full batch.
-  After all, finding the gradient of one example is far cheaper than
-  finding the gradient of millions of examples. To ensure a good
-  representative sample, the algorithm scoops up another random small
-  batch (or batch of one) on every iteration.
-\item
-  SGD \& Mini-Batch Gradient Descent
-\end{itemize}
-
-Could compute gradient over entire data set on each step, but this turns
-out to be unnecessary. Computing gradient on small data samples works
-well. On every step, get a new random sample
-
-Stochastic Gradient Descent: one example at a time
-
-Mini-Batch Gradient Descent: batches of 10-1000. Loss \& gradients are
-averaged over the batch
-
 \section{Keras}\label{keras}
 
 Here's a
@@ -4215,11 +3742,12 @@ glmer can be an alternative to chi-squared tests
 \end{Highlighting}
 \end{Shaded}
 
-\section{\texorpdfstring{\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{Inference
-Package}}{Inference Package}}\label{inference-package}
+\section{Infer Package}\label{infer-package}
 
-Main verbs: specify() variables, hypothesize(), generate() data,
-calculate() metrics, visualize() results
+The
+\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{infer}
+library has the main verbs: specify() variables, hypothesize(),
+generate() data, calculate() metrics, visualize() results
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4232,7 +3760,11 @@ calculate() metrics, visualize() results
 \end{Highlighting}
 \end{Shaded}
 
-\section{Networkx}\label{networkx}
+\section{Networks}\label{networks}
+
+`Classical SNA' is mainly about descriptive network statistics:
+proximity, similarity, centrality, brokerage, positional measures,
+equivalence, etc.
 
 Import necessary modules and draw graph.
 
@@ -5135,103 +4667,574 @@ script to do joining of dummied csvs
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{General}\label{general-7}
+\chapter{Time Series}\label{time-series}
 
-\section{Git}\label{git}
+Intro
 
-\begin{itemize}
-\item
-  ``Just learned something cool- when you screw up a git merge, you can
-  use git reset --hard master@\{''300 minutes ago``\} with any time
-  quantity you want in there to get back to where things were a period
-  of time ago.''
-  \href{https://twitter.com/data_stephanie/status/968226587547258886}{{[}source{]}}
-\item
-  Add upstream to update a forked repo with the original: remote add
-  upstream repo\_url
-\item
-  To undo git add . use git reset (no dot)
-\item
-  git config --global credential.helper `cache --timeout=10000000'
-\item
-  Update chnages from original repo, put in new branch: git fetch
-  upstream
-\item
-  Merge the upstream chnages to master on your local machine: git merge
-  upstream/master
-\item
-  Update local repo with master changes: git pull origin master
-\item
-  git diff (--cache) \textbar{} git rm --cached `t.py' //remove from
-  staging area
-\item
-  git show version\_name + git branch (--merged, --no-merged) + git
-  merge fix20
-\item
-  never rebase commits to public repo + rebase: branch working with
-  behind in commit
-\item
-  use revert (change commit and log the change) + dont use reset: erases
-  commit and doesnt log.
-\item
-  get fork url use: git clone url + git remote add upstream url: ref
-  original repo
-\item
-  git fetch upstream: pull changes fro original repo + git push origin
-  master: push stuff to clone
-\item
-  git merge upstream/master: merge github and local + make pull request,
-  send pull request
-\item
-  Reset: Move master and working directory.
-\item
-  Revert: Less harsh version of reset, maintains commit history but
-  moves forward by one from most recent commit.
-\end{itemize}
-
-\section{Other}\label{other-3}
+A stationary time series is one whose properties do not depend on the
+time at which the series is observed.
 
 \begin{itemize}
 \tightlist
 \item
-  Cheatsheets:
-  \href{https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5}{1}
-  \textbar{} \href{https://github.com/kailashahirwar/cheatsheets-ai}{2}
-  \textbar{}
-  \href{https://github.com/juliangaal/python-cheat-sheet}{3}:\href{http://www.datasciencefree.com/cheatsheets.html}{4}
+  Packages
 \end{itemize}
 
-\section{YAML}\label{yaml}
+\url{https://github.com/robjhyndman/forecast}
+\url{https://facebook.github.io/prophet/docs/quick_start.html}
+\url{https://keras.rstudio.com/articles/examples/index.html}
+\url{http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html}
+\url{https://www.rdocumentation.org/packages/bsts/versions/0.8.0}
 
-A really useful feature is sharing environments so others can install
-all the packages used in your code, with the correct versions. You can
-save the packages to a YAML file with:
+\begin{itemize}
+\tightlist
+\item
+  Models
+\end{itemize}
 
-\texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}
+Exponential smoothing and ARIMA models are the two most widely used
+approaches to time series forecasting, and provide complementary
+approaches to the problem. While exponential smoothing models are based
+on a description of the trend and seasonality in the data, ARIMA models
+aim to describe the autocorrelations in the data.
 
-The first part conda env export writes out all the packages in the
-environment, including the Python version. Above you can see the name of
-the environment and all the dependencies (along with versions) are
-listed. The second part of the export command, \textgreater{}
-environment.yaml writes the exported text to a YAML file
-environment.yaml. This file can now be shared and others will be able to
-create the same environment you used for the project. To create an
-environment from an environment file use:
+Benchmark models: Mean, naive, seasonal naive
 
-\texttt{conda\ env\ create\ -f\ environment.yaml}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\item
+  Mean
+\item
+  Naive: Set all forecasts to be the value of the last observation. This
+  method works remarkably well for many economic and financial time
+  series. Because a naive forecast is optimal when data follow a random
+  walk, these are also called random walk forecasts. naive()
+\item
+  Seasonal Naive: Assumes magnitude of the seasonal pattern is constant.
+  snaive()
+\end{enumerate}
 
-This will create a new environment with the same name listed in
-environment.yaml.
+Linear
 
-\section{Networks}\label{networks}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\item
+  regression: tslm(): trend and season are not objects in the R
+  workspace; they are created automatically by tslm() when specified in
+  this way: tslm(beer2 \textasciitilde{} trend + season). It is not
+  recommended that quadratic or higher order trends be used in
+  forecasting. When they are extrapolated, the resulting forecasts are
+  often unrealistic.
+\item
+  harmonic regression: An alternative to using seasonal dummy variables,
+  especially for long seasonal periods, is to use Fourier terms. ith
+  Fourier terms, we often need fewer predictors than with dummy
+  variables, especially when m is large. This makes them useful for
+  weekly data, for example, where m ≈ 52. For short seasonal periods
+  (e.g., quarterly data), there is little advantage in using Fourier
+  terms over seasonal dummy variables. fourier() - tslm(beer2
+  \textasciitilde{} trend + fourier(beer2, K=2))
+\item
+  Dynamic Regression
+\end{enumerate}
 
-`Classical SNA' is mainly about descriptive network statistics:
-proximity, similarity, centrality, brokerage, positional measures,
-equivalence, etc. (Statistical Analysis of Complete Social Networks
+The R function Arima() will fit a regression model with ARIMA errors if
+the argument xreg is used. The order argument specifies the order of the
+ARIMA error model. If differencing is specified, then the differencing
+is applied to all variables in the regression model before the model is
+estimated.
 
-\section{Stats}\label{stats}
+Arima(y, xreg=x, order=c(1,1,0))
+auto.arima(uschange{[},``Consumption''{]},
+xreg=uschange{[},``Income''{]})
 
-\subsection{General}\label{general-8}
+There are two different ways of modelling a linear trend: deterministic
+and stochastic.
+
+deterministic: fit1 \textless{}- auto.arima(austa, d=0, xreg=trend)
+
+stochastic: fit2 \textless{}- auto.arima(austa, d=1)
+
+There is an implicit assumption with deterministic trends that the slope
+of the trend is not going to change over time. On the other hand,
+stochastic trends can change, and the estimated growth is only assumed
+to be the average growth over the historical period, not necessarily the
+rate of growth that will be observed into the future. Consequently, it
+is safer to forecast with stochastic trends, especially for longer
+forecast horizons, as the prediction intervals allow for greater
+uncertainty in future growth.
+
+When there are long seasonal periods, a dynamic regression with Fourier
+terms is often better than other models we have considered in this book.
+
+Seasonal differencing of high order does not make a lot of sense --- for
+daily data it involves comparing what happened today with what happened
+exactly a year ago and there is no constraint that the seasonal pattern
+is smooth.
+
+So for such time series, we prefer a harmonic regression approach where
+the seasonal pattern is modelled using Fourier terms with short-term
+time series dynamics handled by an ARMA error.
+
+fit \textless{}- auto.arima(cafe04, xreg = fourier(cafe04, K = i),
+seasonal = FALSE, lambda = 0)
+
+ETS (Error-Trend-Seasonality) Models
+
+This label can also be thought of as ExponenTial Smoothing. The
+possibilities for each component are: Error = \{a.m\}, Trend =
+\{n,a,a\_d\}, and Seasonal = \{n,a,m\}. Therefore, for each component in
+the ETS system, we can assign None, Multiplicative, or Additive (or N,
+M, A) for each of the three components in our time series.
+
+Three of the combinations of (Error, Trend, Seasonal) can lead to
+numerical difficulties. Specifically, the models that can cause such
+instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to
+division by values potentially close to zero in the state equations. We
+normally do not consider these particular combinations when selecting a
+model.
+
+Models with multiplicative errors are useful when the data are strictly
+positive, but are not numerically stable when the data contain zeros or
+negative values. Therefore, multiplicative error models will not be
+considered if the time series is not strictly positive. In that case,
+only the six fully additive models will be applied.
+
+The ets() function does not produce forecasts. Rather, it estimates the
+model parameters and returns information about the fitted model. By
+default it uses the AICc to select an appropriate model
+
+ETS point forecasts are equal to the medians of the forecast
+distributions. For models with only additive components, the forecast
+distributions are normal, so the medians and means are equal. For ETS
+models with multiplicative errors, or with multiplicative seasonality,
+the point forecasts will not be equal to the means of the forecast
+distributions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Simple Exponential Smoothing Method: Time series does not have a trend
+  line and does not have seasonality component. We would use a Simple
+  Exponential Smoothing model.\\
+  ETS(A,N,N): simple exponential smoothing with additive errors
+  \textbar{} ETS(M,N,N): simple exponential smoothing with
+  multiplicative errors
+\item
+  Holt's Linear Trend Method: Damped Holt's method is best whether you
+  compare MAE or MSE values. So we will proceed with using the damped
+  Holt's method and apply it to the whole data set to get forecasts for
+  future years. Forecasts account for trend \& continue at the same
+  trend indefinitely into the future: holt(damped = T) . A damped trend
+  makes it level off after time: holt(damped = F) (phi = 1 is Holt's
+  method).
+\end{enumerate}
+
+holt() \textbar{} ETS(A,A,N): Holt's linear method with additive errors
+\textbar{} ETS(M,A,N): Holt's linear method with multiplicative errors
+\textbar{} (a,a) Additive Holt-Winters' method \textbar{} (a,m)
+Multiplicative Holt-Winters' method \textbar{} (a\_d,m) Holt-Winters'
+damped method \textbar{} (a,n) Holt's linear method \textbar{} (a\_d,n)
+Additive damped trend method
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Holt-Winters Seasonal Method: hw(aust,seasonal=``additive''). Accounts
+  for trend and seasonality. In the additive version the seasonality
+  averages to 0 but this changes to 1 in the multiplicative version
+\end{enumerate}
+
+ARIMA(p,d,q): non-seasonal: White noise: ARIMA(0,0,0) Random walk:
+ARIMA(0,1,0) with no constant Random walk with drift: ARIMA(0,1,0) with
+a constant Autoregression: ARIMA(p,0,0) Moving average: ARIMA(0,0,q)
+
+Seasonal ARIMA(p,d,q)(P,D,Q)\_m
+
+auto.arima() does an auto fit.
+
+When fitting an ARIMA model to a set of (non-seasonal) time series data,
+the following procedure provides a useful general approach.
+
+Plot the data and identify any unusual observations.
+
+If necessary, transform the data (using a Box-Cox transformation) to
+stabilize the variance.
+
+If the data are non-stationary, take first differences of the data until
+the data are stationary.
+
+Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model
+appropriate?
+
+Try your chosen model(s), and use the AICc to search for a better model.
+
+Check the residuals from your chosen model by plotting the ACF of the
+residuals, and doing a portmanteau test of the residuals. If they do not
+look like white noise, try a modified model.
+
+Once the residuals look like white noise, calculate forecasts.
+
+auto.arima only does steps 3-5.
+
+arima()
+
+ggAcf() \textbar{} ggPacf()
+
+If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF
+and PACF plots can be helpful in determining the value of p/q. If p and
+q are both positive, then the plots do not help in finding suitable
+values of p and q.
+
+The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+the ACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag p in the PACF, but none beyond lag p.
+
+The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+the PACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag q in the ACF, but none beyond lag q.
+
+seaosnal arima: arima(p,d,q) (P,Q,D)\_m, m = num of observations per
+year
+
+The seasonal part of an AR or MA model will be seen in the seasonal lags
+of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)\_12 model will
+show:
+
+a spike at lag 12 in the ACF but no other significant spikes;
+exponential decay in the seasonal lags of the PACF (i.e., at lags 12,
+24, 36, \ldots{}).
+
+Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))
+
+auto.arima(euretail, stepwise=FALSE, approximation=FALSE)
+
+comparing information criteria is only valid for ARIMA models of the
+same orders of differencing.
+
+Other
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ma
+\item
+  wma
+\item
+  X11 method: seasonal::seas(x11 = ''). from this output seasonal() will
+  extract the seasonal component, trendcycle() will extract the
+  trend-cycle component, remainder() will extract the remainder
+  component, and seasadj() will compute the seasonally adjusted time
+  series.
+\item
+  SEATS: seasonal::seas()
+\item
+  STL: best so far but only uses additive decomposition.
+  stl(t.window=13, s.window=``periodic'', robust=TRUE). automate picking
+  of first 2 params with mstl(). A short-cut approach is to use the
+  stlf() function. The following code will decompose the time series
+  using STL, forecast the seasonally adjusted series, and return
+  reseasonalize the forecasts: stlf(elecequip, method=`naive')
+\end{enumerate}
+
+msts \textbar{} mstsl \textbar{} tbats \textbar{} bld.mbb.bootstrap
+
+Auto Model:
+
+forecast(): You can use this directly if you have no idea which model to
+use, or use it to produce forecasts after fitting a model.
+
+Hierarchical:
+
+gts() \textbar{} hts() \textbar{} aggts()
+
+\begin{itemize}
+\tightlist
+\item
+  Feature Engineering
+\end{itemize}
+
+\url{https://github.com/robjhyndman/tsfeatures}
+
+There are several useful predictors that occur frequently when using
+regression for time series data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  A trend variable can be specified in the tslm() function using the
+  trend predictor.
+\item
+  dummy variables for time like day of week. The tslm() function will
+  automatically handle this situation if you specify the predictor
+  season.
+\item
+  interventions, eg. competitor activity
+\item
+  trading days: bizdays()
+\item
+  distirbuted lags
+\item
+  easter()
+\end{enumerate}
+
+Use lagged values of predictors
+
+A log-log functional form is specified as log(y) = beta\_0 +
+beta\_1*log(x) + epsilon
+
+scaling by monthday() by population or by inflation for money
+
+Logarithms are useful because they are interpretable: changes in a log
+value are relative (or percentage) changes on the original scale. So if
+log base 10 is used, then an increase of 1 on the log scale corresponds
+to a multiplication of 10 on the original scale. Another useful feature
+of log transformations is that they constrain the forecasts to stay
+positive on the original scale. A log transformation can address
+heteroskedasticity.
+
+boxCox()/boxCox.lambda(), power transforms,
+
+bias adjustments: mean of forecast distribution instead of median for
+back-transformed forecast. Bias adjustment is not done by default in the
+forecast package. If you want your forecasts to be means rather than
+medians, use the argument biasadj=TRUE when you select your Box-Cox
+transformation parameter.
+
+\begin{itemize}
+\tightlist
+\item
+  Model Evaluation
+\end{itemize}
+
+train-test split: window() / subset()
+
+accuracy()
+
+tsCV()
+
+A great advantage of the ETS statistical framework is that information
+criteria can be used for model selection - AIC, AIC\_c, and BIC
+
+leave-one-out cross-validation statistic : CV(fit.consMR) for model
+selection
+
+we recommend that one of the AICc, AIC, or CV statistics be used, each
+of which has forecasting as their objective.
+
+When comparing forecast methods applied to a single time series, or to
+several time series with the same units, the MAE is popular as it is
+easy to both understand and compute. A forecast method that minimizes
+the MAE will lead to forecasts of the median, while minimizing the RMSE
+will lead to forecasts of the mean. Consequently, the RMSE is also
+widely used, despite being more difficult to interpret. Percentage
+errors have the advantage of being unit-free, and so are frequently used
+to compare forecast performances between data sets. The most commonly
+used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE.
+forecast errors are different from residuals in two ways. First,
+residuals are calculated on the training set while forecast errors are
+calculated on the test set. Second, residuals are based on one-step
+forecasts while forecast errors can involve multi-step forecasts.
+
+A good forecasting method will yield residuals with the following
+properties:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  The residuals are uncorrelated. If there are correlations between
+  residuals, then there is information left in the residuals which
+  should be used in computing forecasts.
+\item
+  The residuals have zero mean. If the residuals have a mean other than
+  zero, then the forecasts are biased. (Adjusting for bias is easy: if
+  the residuals have mean m then add m to all forecasts and the bias
+  problem is solved.)
+\item
+  It is useful (but not necessary) for the residuals to also have the
+  following two properties: the residuals have constant variance and are
+  normally distributed.
+\end{enumerate}
+
+use the Box-ljung test to test for autocorrelations: h\_0: no
+autocorrelation, h\_a: autocorrelation.
+
+checkresiduals() which will produce a time plot, ACF plot and histogram
+of the residuals (with an overlayed normal distribution for comparison),
+and do a Ljung-Box test with the correct degrees of freedom.
+
+-Notes
+
+Fourier terms in lm good for intraday data.
+
+Methods with multiplicative trend produce poor forecasts.
+
+For stock market prices and indexes, the best forecasting method is
+often the naïve method. Use also dynamic regression.
+
+Create time series with ts(mydata{[}-1{]}, start = c(1981, 1), frequency
+= 4)
+
+Time series that show no auto-correlation are called white noise. For
+white noise series, we expect each auto-correlation to be close to zero.
+For a white noise series, we expect 95\% of the spikes in the ACF to lie
+within +/- 2 * sqrt(T) where T is the length of the time series.
+
+The possible time series (TS) scenarios can be recognized by asking the
+following questions: 1) TS has a trend? If yes, is the trend increasing
+linearly or exponentially? 2) TS has seasonality? If yes, do the
+seasonal components increase in magnitude over time?
+
+Additive model for linear trend and multiplicative model for exponential
+trend. Additive for trend and Multiplicative and Additive for seasonal
+components. For trends that are exponential, we would need to use a
+multiplicative model. For increasing seasonality components, we would
+need to use a multiplicative model model as well.
+
+Therefore we can generalize all of these models using a naming system
+for ETS:
+
+Error is the error line we saw in the time series decomposition part
+earlier in the course. If the error is increasing similar to an
+increasing seasonal components, we would need to consider a
+multiplicative design for the exponential model.
+
+A time series model that has a constant error, linear trend, and
+increasing seasonal components means we would need to use an ETS model
+of ETS(N,A,M)
+
+A time series model that has increasing error, exponential trend, and no
+seasonality means we would need to use an ETS model of:
+
+non-stationary: This plot shows an upward trend and seasonality.
+
+stationary: This plot revolves around a constant mean of 0 and shows
+contained variance.
+
+-Metrics
+
+Percentage errors, like MAPE, are useful because they are scale
+independent, so they can be used to compare forecasts between different
+data series, unlike scale dependent errors. The disadvantage is that it
+cannot be used if the series has zero values.
+
+Mean Absolute Percentage Error (MAPE) is also often useful for purposes
+of reporting, because it is expressed in generic percentage terms it
+will make sense even to someone who has no idea what constitutes a
+``big'' error in terms of dollars spent or widgets sold.
+
+Mean Absolute Scaled Error (MASE) is another relative measure of error
+that is applicable only to time series data. It is defined as the mean
+absolute error of the model divided by the the mean absolute value of
+the first difference of the series. Thus, it measures the relative
+reduction in error compared to a naive model. Ideally its value will be
+significantly less than 1 but is relative to comparison across other
+models for the same series. Since this error measurement is relative and
+can be applied across models, it is accepted as one of the best metrics
+for error measurement.
+
+AIC\_c for model selection.
+
+\subsection{Intro}\label{intro-18}
+
+\subsection{Assumptions}\label{assumptions-18}
+
+\subsection{Characteristics}\label{characteristics-13}
+
+\subsection{Evaluation}\label{evaluation-17}
+
+\subsection{Pros/Cons}\label{proscons-18}
+
+\textbf{Pros}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  Seasonal Decomposition; Use additive model when the magnitude of the
+  seasonal fluctuations surrounding the general trend doesn't vary over
+  time. Use the multiplicative model when the magnitude of the seasonal
+  fluctuations surrounding the general trend appear to change in a
+  proportional manner over time. Go from additive to multiplicative with
+  a log transformation.
+\item
+  White noise: Describes the assumption that each element in the time
+  series is a random draw from N(0, constant variance). Also called a
+  stationary series. Time series with trends or seasonality are not
+  stationary.
+\end{itemize}
+
+\textbf{ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models}
+
+\begin{itemize}
+\item
+  AR(p): auto-regressive component for lags on the stationary series.
+  The AR models sayd that the value of a variable at a specific time is
+  related to the value of the variable at previous times.
+\item
+  I(d): Integrated component for a series that needs to be differenced.
+\item
+  MA(q): Moving average component for lag of the forecast errors. In a
+  moving average model of order q, each value in a time series is
+  predicted from the linear combination of the previous q errors. The
+  value of a variable at a specific time is related to the residuals of
+  prediction at previous times.
+\item
+  In an auto-regressive model of order p, each valeu in a time series is
+  predicted from a linear combination of the previous p values.
+\item
+  Procedure: Make stationary if necessary by differencing. Determine
+  possible values of p and q. Assess model fit and try other values of p
+  and q to overfit. Make forecasts with the final model.
+\item
+  Augmented Dicky-Fuller Test: This tests whether or not a time series
+  is stationary. h0: series is not stationary, ha: the series is
+  stationary.
+\item
+  Determine p and q: Look at autocorrelation (AC) and partial
+  correlation (PAC) functions. AC measures the way observations relate
+  to each other. PAC measure the way observations relate to each other
+  after accounting for all other intervening observations. Plot of the
+  autocorrelation function (ACF) displays correlation of the series with
+  itself at different lags. A plot of the PAC displays the amount of
+  autocorrelation not explained by lower order correlations. Spikes in
+  the PACF will choose for AR(p). Spikes in the ACF will choose MA(q).
+\end{itemize}
+
+\textbf{Assess Model Fit}
+
+\begin{itemize}
+\item
+  Appropriate model should resemble white noise. Check scatterplot of
+  residuals vs fit to check constant variance and qqplot to check
+  normality. Autocorrelations should be zero to check for violation of
+  independent errors.
+\item
+  Box-Ljung Test: Check if all autocorrelations are zero, i.e the series
+  is of white noise. H0: autocorrelations are all 0. ha: At least one is
+  nonzero.
+\item
+  Overfit model with extra AR/MA terms and compare using AIC/BIC.
+\item
+  Interpretation: AR coefficient closer to 1 means series returns to
+  mean slowly, vice versa for closer to 0.
+\item
+  MA(1) coefficient indicates how much the shock of the previous time
+  period is retained in the current time period. MA(2) refers to the
+  previous two time periods.
+\end{itemize}
+
+\chapter{Stats}\label{stats}
+
+\subsection{General}\label{general-7}
 
 Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood
 
@@ -5844,6 +5847,321 @@ Choose test statistics method or metrics to evaluate experiment.
 Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
+
+\chapter{Deep Learning}\label{deep-learning}
+
+\begin{itemize}
+\item
+  restnet, attention \textgreater{} RNN / LSTM
+\item
+  ``Training with large minibatches is bad for your health. More
+  importantly, it's bad for your test error. Friends dont let friends
+  use minibatches larger than 32.'' - Yann Le Cun
+\item
+  \href{https://hackernoon.com/deep-learning-cheat-sheet-25421411e460}{DL
+  Cheatsheet}
+\item
+  By reducing learning rate (for example, to 0.001), Test loss drops to
+  a value much closer to Training loss. In most runs, increasing Batch
+  size does not influence Training loss or Test loss significantly.
+  However, in a small percentage of runs, increasing Batch size to 20 or
+  greater causes Test loss to drop slightly below Training loss.
+\item
+  Reducing the ratio of training to test data from 50\% to 10\%
+  dramatically lowers the number of data points in the training set.
+  With so little data, high batch size and high learning rate cause the
+  training model to jump around chaotically (jumping repeatedly over the
+  minimum point).
+\item
+  There are several activation functions you may encounter in practice:
+
+  \begin{itemize}
+  \item
+    Sigmoid: Takes a real-valued input and squashes it to range between
+    0 and 1 (\(σ(x) = 1 / (1 + exp(−x))\))
+  \item
+    Softmax: Same end result as sigmoid, but different function.
+  \item
+    tanh: Takes a real-valued input and squashes it to the range {[}-1,
+    1{]} (\(tanh(x) = 2σ(2x) − 1\))
+  \end{itemize}
+\item
+  ReLU: The rectified linear activation function (called ReLU) has been
+  shown to lead to very high-performance networks. This function takes a
+  single number as an input, returning 0 if the input is negative, and
+  the input if the input is positive. \(f(x) = max(0, x)\)
+\item
+  softmax doesn't like multi-label classification
+\item
+  Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot
+  Encodings because it allows for relationships to be shown between
+  days.
+\item
+  Advised to scale features
+\item
+  \href{https://www.youtube.com/watch?v=nqEYVzJLR_c\&feature=youtu.be\&t=31}{Rule
+  of 30}: A change that affects at least 30 data points in your
+  validation set is usually significant and not just noise.
+\item
+  Gradient descent takes about 3 times longer than the loss function.
+  Stochastic gradient descent works off an estimate of the loss function
+  from a sample of the training set. Scales better than normal gradient
+  descent.
+\item
+  Momentum and learning rate decay are good for knowing which way to go
+  in gradient descent.
+\item
+  Always try to lower your learning rate for improvement.
+\item
+  ADAGRAD is another optimization option that takes care of some of the
+  hyperparameters for you.
+\item
+  n inputs and k outputs gives you \((n+1)*k\) parameters.
+\item
+  Back propogation takes about twice the memory as forward propogation.
+\item
+  Stop model from overoptimizing on training set: early termination
+  (stop as soon as performance on validation set drops) and
+  regularization which applies artifical constraints to reduce the
+  number of free parameters while making it difficult to optimize. Uses
+  l2 regularization or dropout. Dropout works by randomly setting
+  activations from one layer to the next to 0 repeatly. Forces the
+  network to learn redundant representations, and takes average
+  consensus for final prediction. Makes things more robust and prevents
+  overfitting. Scale the non-zero activates by 2 to get the right
+  average. If it doesn't work, go deeper.
+\item
+  Two ways are to average the yellow, blue, and green channels or to use
+  YUV representation. If position on the screen doesn't matter then use
+  translation invariance. Use weight sharing if this occurs in text.
+\item
+  Things that don't chnage across time, space, etc are called
+  statistical invariants.
+\item
+  RNN's use shared parameters over time to extract patterns. Uses a
+  recurrent connection to provide a summary of the past and pass this
+  info to the classifier.
+\item
+  Backpropagation occurs throw time to the beginning. All derivative
+  applied to same parameters, so very correlated. Bad for stochastic
+  gradient descent and makes math very unstable. Gradients are either
+  zero (doesn't remember the past well) or infinity. The latter is fixed
+  by gradient clipping and the former by LSTM (long-short term memory).
+  LSTM replaced the rectified linear units by continuous functions. You
+  can use dropout or L2 regularization with an LSTM.
+\item
+  Generally dealing with images, Convolutional Neural Network is used
+  mostly because of its better accuracy results.
+\item
+  Model capacity: Same as underfitting and overfitting in bias-variance.
+  Less nodes and hidden layers corresponds to simpler model and vice
+  versa.
+\item
+  The perceptron is the simplest neural network. The perceptron is an
+  iterative classification method.The perceptron starts with a random
+  hyperplane then adjust its weights to separate the data.
+\item
+  BackProp Algorithm: Initially all the edge weights are randomly
+  assigned. For every input in the training dataset, the ANN is
+  activated and its output is observed. This output is compared with the
+  desired output that we already know, and the error is ``propagated''
+  back to the previous layer. This error is noted and the weights are
+  ``adjusted'' accordingly. This process is repeated until the output
+  error is below a predetermined threshold.
+\item
+  The last layer of a neural network captures the most complex
+  interactions.
+\item
+  When plotting the mean-squared error loss function against
+  predictions, the slope is \(2x(y-xb)\), or \(2input_data error\).
+\item
+  weights\_updated = weights - slope*learning\_rate
+\item
+  This is exactly what's happening in the vanishing gradient problem --
+  the gradients of the network's output with respect to the parameters
+  in the early layers become extremely small. That's a fancy way of
+  saying that even a large change in the value of parameters for the
+  early layers doesn't have a big effect on the output.
+\item
+  Batch: Subset of the data used to calculate slopes during back
+  propagation. Different batches are used to calculate different
+  updates.
+\item
+  Epoch: One full pass through all the batches in the training data.
+\item
+  Stochastic gradient descent calculates slopes one batch at a time.
+\item
+  This network again uses the ReLU activation function, so the slope of
+  the activation function is 1 for any node receiving a positive value
+  as input.
+\item
+  Few people use kfold cv in deep learning because of the large datasets
+  in play.
+\item
+  Dying neuron + vanishing gradient: Change activation function
+\end{itemize}
+
+\chapter{Probabilistic Programming}\label{probabilistic-programming}
+
+\url{https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7}
+
+Bayes Rule:
+
+old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
+{[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob
+{[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
+
+\begin{itemize}
+\item
+  Models have a lot of parameters classical methods that use simple
+  point estimates of the parameters don't adequately capture uncertainty
+  so we turn to Bayesian methods because Bayesian inference is one way
+  of finding a large model with metadata.
+\item
+  The second reason we use Bayesian inference is for combining
+  information you might have experimental data on the drug under one
+  condition and aggregate data under another condition we can combine
+  polls and election forecast of public opinion data from multiple poles
+  and environmental statistics we have measurements of different quality
+  Bayesian methods are particularly adapted tocombining information.
+\item
+  The third appeal of Bayesian methods and the sort of applications that
+  I work on is that the inferences can map directly to decisions based
+  on inferences express not its estimates and standard errors but rather
+  as probability distributions we can take these probability
+  distributions and pipe them directly into decision analysis for these
+  reasons.
+\item
+  An advantage of recognizing that the prior distribution is a testable
+  part of a Bayesian model is that it clarifies the role of the prior
+  inference, and where it comes from.
+\item
+  Approximate Bayesian Computation
+\item
+  Laplace approximation: Approximate the posterior of a non-conjugate
+  model
+\item
+  When one uses likelihood to get point estimates of model parameters,
+  it's called maximum-likelihood estimation, or MLE. If one also takes
+  the prior into account, then it's maximum a posteriori estimation
+  (MAP). MLE and MAP are the same if the prior is uniform.
+\item
+  Beta conjugacy: Beta for prior \& binomial for likelihoood implies
+  beta for posterior. Update: beta(alpha + successes, beta + failures).
+  Mean: alpha/(alpha + beta)
+\item
+  Small alpha and beta means the prior is less informative
+\item
+  Empirical Bayes is an approximation to more exact Bayesian methods.
+  With a lot of data it is a very good approximation.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
+\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
+\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
+\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
+\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
+\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
+\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
+\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\end{Highlighting}
+\end{Shaded}
+
+Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
+np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
+relative to B is \textgreater{}=3\%:
+np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
+
+\chapter{NLP}\label{nlp}
+
+\begin{itemize}
+\tightlist
+\item
+  TF-IDF: A feature vectorization method widely used in text mining to
+  reflect the importance of a term to a document in the corpus. Denote a
+  term by t, a document by d, and the corpus by D. TF(i,d) is the number
+  of times the term t appears in document d while document frequency
+  DF(t,D) is the number of documents which contain the term t. If a term
+  appears very often across the corpus it doesn't carry any special info
+  about the document. Inverse document frequency is a numerical measure
+  of how much info a term provides. If a term appears in all documents
+  its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF
+  uses a hash function to transform input into text.
+\end{itemize}
+
+\textbf{Basic Py NLP Pipeline}
+
+\begin{itemize}
+\item
+  Converting text to numerical data is vectorization.
+\item
+  Tokenize: A token is an individual word (or group of words) extracted
+  from a document, using whitespace or punctuation as separators.
+\item
+  Create bag of words: Count tokens within a document and normalised to
+  de-emphasise tokens that appear frequently within a document.
+\item
+  Vectorization: Corpus represented as a large matrix, each row of which
+  represents one of the documents and each column represents token
+  occurance within that document. CountVectorizer or TF-IDF.
+\item
+  tf-idf \& cosine similarity
+\end{itemize}
+
+\subsection{Topic Modeling}\label{topic-modeling}
+
+\begin{itemize}
+\item
+  Pointwise mutual information is any way to evaluate topic models. Uses
+  joint probabilities to evaluate how much a word tells you a label.
+\item
+  Mutual information generalized pointwise mutual information averaged
+  over all events.
+\item
+  If you're just using the probability vectors that come out of a topic
+  model you are selecting a probability metric. If you want to do
+  post-processing you something like mutual information or point was
+  mutual information you're selecting another metric. Metrics always
+  have a point of view.
+\item
+  They're just like human writers. Probability says I like really common
+  words, pointwise mutual information as I like really really really
+  discerning words and I don't care how common they are. Mutual
+  information is sort of a balance between the two.
+\item
+  In topic modeling using latent Dirichlet distribution, how are
+  ``topics'' represented? As distributions over words.
+\end{itemize}
+
+\chapter{Hierarchical Models}\label{hierarchical-models}
+
+``Across counties, as the average mother's age increases the birth rate
+decreases while correcting for state-level impacts'' BirthRate
+\textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
+
+lmerTest
+
+Analysis of Variance, or ANOVA, can be used to compare two different
+lmer models and test if one model explains more variability than the
+other model. We can use this to compare two lmer models. For example, if
+we wanted to see if Year is important for predicting Crime in Maryland,
+we can build a null model with only County as a random-effect and a year
+model that includes Year.
+
+\begin{itemize}
+\item
+  One far out suggestion in one of the links is to do PCA and then
+  regress the original variables against the new axis.
+\item
+  Account for longitudinal data: random selection of one event from each
+  student, partition cross validation by dates, pca finds major trends
+  hidden within the data
+\end{itemize}
 
 \bibliography{book.bib,packages.bib}
 

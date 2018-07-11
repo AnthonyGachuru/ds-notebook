@@ -1,0 +1,80 @@
+# Deep Learning
+
+* restnet, attention > RNN / LSTM
+
+* "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun
+
+* [DL Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
+
+* By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.
+
+* Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).
+
+* There are several activation functions you may encounter in practice:
+
+    * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
+
+    * Softmax: Same end result as sigmoid, but different function.
+
+    * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
+
+   * ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. $f(x) = max(0, x)$
+
+* softmax doesn't like multi-label classification
+
+* Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days. 
+
+* Advised to scale features
+
+* [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
+
+* Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.
+
+* Momentum and learning rate decay are good for knowing which way to go in gradient descent.
+
+* Always try to lower your learning rate for improvement. 
+
+* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
+
+* n inputs and k outputs gives you $(n+1)*k$ parameters. 
+
+* Back propogation takes about twice the memory as forward propogation. 
+
+* Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn't work, go deeper.
+
+* Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn't matter then use translation invariance. Use weight sharing if this occurs in text. 
+
+* Things that don't chnage across time, space, etc are called statistical invariants.
+
+* RNN's use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier. 
+
+* Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn't remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short
+term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.
+
+* Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.
+
+* Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.
+
+* The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.
+
+* BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.
+
+* The last layer of a neural network captures the most complex interactions.
+
+* When plotting the mean-squared error loss function against predictions, the slope is $2x(y-xb)$, or $2input_data error$.
+
+* weights_updated = weights - slope*learning_rate
+
+* This is exactly what's happening in the vanishing gradient problem -- the gradients of the network's output with respect to the parameters in the early layers become extremely small. That's a fancy way of saying that even a large change in the value of parameters for the early layers doesn't have a big effect on the output. 
+
+* Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.
+
+* Epoch: One full pass through all the batches in the training data.
+
+* Stochastic gradient descent calculates slopes one batch at a time.
+
+* This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.
+
+* Few people use kfold cv in deep learning because of the large datasets in play. 
+
+* Dying neuron + vanishing gradient: Change activation function

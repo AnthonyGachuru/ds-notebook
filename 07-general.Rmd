@@ -1,451 +1,294 @@
-# General
+# Time Series
 
-## Git
+Intro
 
-* "Just learned something cool- when you screw up a git merge, you can use git reset --hard master@{"300 minutes ago"} with any time quantity you want in there to get back to where things were a period of time ago." [[source]](https://twitter.com/data_stephanie/status/968226587547258886)
+A stationary time series is one whose properties do not depend on the time at which the series is observed. 
 
-* Add upstream to update a forked repo with the original: remote add upstream repo_url 
+- Packages
 
-* To undo git add . use git reset (no dot)
+https://github.com/robjhyndman/forecast
+https://facebook.github.io/prophet/docs/quick_start.html
+https://keras.rstudio.com/articles/examples/index.html
+http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html
+https://www.rdocumentation.org/packages/bsts/versions/0.8.0
 
-* git config --global credential.helper 'cache --timeout=10000000'
+- Models
 
-* Update chnages from original repo, put in new branch: git fetch upstream
+Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.
 
-* Merge the upstream chnages to master on your local machine: git merge upstream/master
+Benchmark models: Mean, naive, seasonal naive
 
-* Update local repo with master changes: git pull origin master
+0. Mean
 
-* git diff (--cache) | git rm --cached 't.py' //remove from staging area
+1. Naive: Set all forecasts to be the value of the last observation. This method works remarkably well for many economic and financial time series. Because a naive forecast is optimal when data follow a random walk, these are also called random walk forecasts. naive()
 
-* git show version_name + git branch (--merged, --no-merged) + git merge fix20
+2. Seasonal Naive: Assumes magnitude of the seasonal pattern is constant. snaive()
 
-* never rebase commits to public repo + rebase: branch working with behind in commit
+Linear
 
-* use revert (change commit and log the change) + dont use reset: erases commit and doesnt log.
+10. regression: tslm(): trend and season are not objects in the R workspace; they are created automatically by tslm() when specified in this way: tslm(beer2 ~ trend + season). It is not recommended that quadratic or higher order trends be used in forecasting. When they are extrapolated, the resulting forecasts are often unrealistic.
 
-* get fork url use: git clone url + git remote add upstream url: ref original repo
+11. harmonic regression: An alternative to using seasonal dummy variables, especially for long seasonal periods, is to use Fourier terms. ith Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where m ≈ 52. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables. fourier() - tslm(beer2 ~ trend + fourier(beer2, K=2))
 
-* git fetch upstream: pull changes fro original repo + git push origin master: push stuff to clone
+3. Dynamic Regression
 
-* git merge upstream/master: merge github and local + make pull request, send pull request
+The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated.
 
-* Reset: Move master and working directory.
+Arima(y, xreg=x, order=c(1,1,0)) auto.arima(uschange[,“Consumption”], xreg=uschange[,“Income”])
 
-* Revert: Less harsh version of reset, maintains commit history but moves forward by one from most recent commit.
+There are two different ways of modelling a linear trend: deterministic and stochastic.
 
-## Other
+deterministic: fit1 <- auto.arima(austa, d=0, xreg=trend)
 
-* Cheatsheets: [1](https://startupsventurecapital.com/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5) | [2](https://github.com/kailashahirwar/cheatsheets-ai) | [3](https://github.com/juliangaal/python-cheat-sheet):[4](http://www.datasciencefree.com/cheatsheets.html)
+stochastic: fit2 <- auto.arima(austa, d=1)
 
-## YAML
+There is an implicit assumption with deterministic trends that the slope of the trend is not going to change over time. On the other hand, stochastic trends can change, and the estimated growth is only assumed to be the average growth over the historical period, not necessarily the rate of growth that will be observed into the future. Consequently, it is safer to forecast with stochastic trends, especially for longer forecast horizons, as the prediction intervals allow for greater uncertainty in future growth.
 
-A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
+When there are long seasonal periods, a dynamic regression with Fourier terms is often better than other models we have considered in this book.
 
-`conda env export > environment.yaml`
+Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.
 
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:
+So for such time series, we prefer a harmonic regression approach where the seasonal pattern is modelled using Fourier terms with short-term time series dynamics handled by an ARMA error.
 
-`conda env create -f environment.yaml`
+fit <- auto.arima(cafe04, xreg = fourier(cafe04, K = i), seasonal = FALSE, lambda = 0)
 
-This will create a new environment with the same name listed in environment.yaml.
+ETS (Error-Trend-Seasonality) Models
 
-## Networks
+This label can also be thought of as ExponenTial Smoothing. The possibilities for each component are: Error = {a.m}, Trend = {n,a,a_d}, and Seasonal = {n,a,m}. Therefore, for each component in the ETS system, we can assign None, Multiplicative, or Additive (or N, M, A) for each of the three components in our time series. 
 
-‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc. (Statistical Analysis of Complete Social Networks 
+Three of the combinations of (Error, Trend, Seasonal) can lead to numerical difficulties. Specifically, the models that can cause such instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to division by values potentially close to zero in the state equations. We normally do not consider these particular combinations when selecting a model.
 
-## Stats
+Models with multiplicative errors are useful when the data are strictly positive, but are not numerically stable when the data contain zeros or negative values. Therefore, multiplicative error models will not be considered if the time series is not strictly positive. In that case, only the six fully additive models will be applied.
 
-### General
+The ets() function does not produce forecasts. Rather, it estimates the model parameters and returns information about the fitted model. By default it uses the AICc to select an appropriate model
 
-Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood
+ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.
 
-Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)
+1. Simple Exponential Smoothing Method: Time series does not have a trend line and does not have seasonality component. We would use a Simple Exponential Smoothing model.  
+ETS(A,N,N): simple exponential smoothing with additive errors | ETS(M,N,N): simple exponential smoothing with multiplicative errors
 
-Prior P(theta): Probability of parameter value
+6. Holt's Linear Trend Method: Damped Holt’s method is best whether you compare MAE or MSE values. So we will proceed with using the damped Holt’s method and apply it to the whole data set to get forecasts for future years.  Forecasts account for trend & continue at the same trend indefinitely into the future: holt(damped = T) . A damped trend makes it level off after time: holt(damped = F) (phi = 1 is Holt’s method).
 
-Posterior P(theta|D):  Credibility of the parameter value with the data taken into account.
+holt() | ETS(A,A,N): Holt’s linear method with additive errors | ETS(M,A,N): Holt’s linear method with multiplicative errors | (a,a)	Additive Holt-Winters’ method | (a,m)	Multiplicative Holt-Winters’ method | (a_d,m) Holt-Winters’ damped method | (a,n)	Holt’s linear method | (a_d,n)	Additive damped trend method
 
-Marginal Likelihood (Evidence): Probability of evidence
+8. Holt-Winters Seasonal Method: hw(aust,seasonal=“additive”). Accounts for trend and seasonality. In the additive version the seasonality averages to 0 but this changes to 1 in the multiplicative version
 
-Variance:  Spread of the data | Distance from the mean
+ARIMA(p,d,q): non-seasonal:  White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant Random walk with drift: ARIMA(0,1,0) with a constant Autoregression: ARIMA(p,0,0) Moving average: ARIMA(0,0,q)
 
-Standard Deviation: Square root of the variance | Same units as the data
+Seasonal ARIMA(p,d,q)(P,D,Q)_m
 
-Mean: Average/Expected Value
+auto.arima() does an auto fit.
 
-Covariance: Measure of how two random values change together. Negative - variables show opposite behavior ( As A increases B decreases). Positive - variables show similar behavior (As A increases B increases)
+When fitting an ARIMA model to a set of (non-seasonal) time series data, the following procedure provides a useful general approach.
 
-Pearson Correlation: Normalized version of covariance 
+Plot the data and identify any unusual observations.
 
-Median: Number at the halfway point of the dataset, found through sorting data into ascending order and selecting middle point
+If necessary, transform the data (using a Box-Cox transformation) to stabilize the variance.
 
-Mode: Most frequent value in dataset
+If the data are non-stationary, take first differences of the data until the data are stationary.
 
-Note about Populations and Samples: Populations have parameters. Samples have statistics.
+Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model appropriate?
 
-Distributions:
+Try your chosen model(s), and use the AICc to search for a better model.
 
-Normal/Gaussian: Parameters are mean and standard deviation.  Bell shaped. z-score: indicates how many standard deviations an element is 	from the mean
+Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.
 
-Student t: used to estimate the mean of a normally distributed population where the sample size is small and the standard deviation is unknown
+Once the residuals look like white noise, calculate forecasts.
 
+auto.arima only does steps 3-5.
 
-A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.
+arima()
 
-Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:
+ggAcf() | ggPacf()
 
-$\frac{-log(\frac{d}{2})}{2e^2}$
+If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of p/q. If p and q are both positive, then the plots do not help in finding suitable values of p and q.
 
-then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
+The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:
 
-* Type I Error: Saying there is an effect when there isn't one. Type II error: concluding there is no effect when, in fact, there is one.
+the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag
+p in the PACF, but none beyond lag p.
 
-* The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.
+The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:
 
-* Probably the most useful types of statistics for skewed probability distributions are quantiles. 
+the PACF is exponentially decaying or sinusoidal; there is a significant spike at lag
+q in the ACF, but none beyond lag q.
 
-* Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!
+seaosnal arima: arima(p,d,q) (P,Q,D)_m, m = num of observations per year
 
-* Random sampling & random assignment: generalizable & causal
+The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12 model will show:
 
-* Get 95% ci around p-value
+a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).
 
-* There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
+Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))
 
-* Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
+auto.arima(euretail, stepwise=FALSE, approximation=FALSE)
 
-* [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
+comparing information criteria is only valid for ARIMA models of the same orders of differencing.
 
-* jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics	
+Other
 
-* box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series			
+1. ma
 
-* shapiro.test: Test for normality		
+1. wma
 
-* Sum of normally distributed random variables: sum of means & sum of variances
+1.  X11 method: seasonal::seas(x11 = ’’). from this output seasonal() will extract the seasonal component, trendcycle() will extract the trend-cycle component, remainder() will extract the remainder component, and seasadj() will compute the seasonally adjusted time series.
 
-* Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+1. SEATS: seasonal::seas()
 
-* test heteroscedaticity: breusch-pagan or ncv test
+1. STL: best so far but only uses additive decomposition. stl(t.window=13, s.window=“periodic”, robust=TRUE). automate picking of first 2 params with mstl(). A short-cut approach is to use the stlf() function. The following code will decompose the time series using STL, forecast the seasonally adjusted series, and return reseasonalize the forecasts: stlf(elecequip, method=‘naive’)
 
-* Test Normality: Shapiro–Wilk test is a test of normality
+msts | mstsl | tbats | bld.mbb.bootstrap
 
-* Bypass inferential stats if features at least 1/10 of data points. 
+Auto Model:
 
-* The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+forecast(): You can use this directly if you have no idea which model to use, or use it to produce forecasts after fitting a model.
 
-* One Sample T-test: To examine the average difference between a sample and the known value 
-of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
+Hierarchical:
 
-* Two Sample T-test: To examine the average difference between two samples drawn from two 
-different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
+gts() | hts() | aggts()
 
-* One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+- Feature Engineering
 
-* Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+https://github.com/robjhyndman/tsfeatures
 
-* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+There are several useful predictors that occur frequently when using regression for time series data:
 
-* Barlett Test: F-Test for more than two populations. 
+1) A trend variable can be specified in the tslm() function using the trend predictor.
 
-* If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won't. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.
+2) dummy variables for time like day of week. The tslm() function will automatically handle this situation if you specify the predictor season.
 
-* Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.
+3) interventions, eg. competitor activity
 
-* Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.
+4) trading days: bizdays()
 
-* Independent rvs are uncorrelated. That is Cor (X,Y)=0
+5) distirbuted lags
 
-* Don’t sum sd’s, sum variances.
+6) easter()
 
-* One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.
+Use lagged values of predictors
 
-* When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.
+A log-log functional form is specified as log(y) = beta_0 + beta_1*log(x) + epsilon
 
-* When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.
+scaling by monthday()  by population or by inflation for money
 
-* When do we use One-Way ANOVA?  To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist.  The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.
+Logarithms are useful because they are interpretable: changes in a log value are relative (or percentage) changes on the original scale. So if log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale. Another useful feature of log transformations is that they constrain the forecasts to stay positive on the original scale. A log transformation can address heteroskedasticity.
 
-* When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.
+boxCox()/boxCox.lambda(), power transforms, 
 
-* To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.
+bias adjustments: mean of forecast distribution instead of median for back-transformed forecast. Bias adjustment is not done by default in the forecast package. If you want your forecasts to be means rather than medians, use the argument biasadj=TRUE when you select your Box-Cox transformation parameter.
 
-* The degrees of freedom is the number of data rows minus the number of coefficients fit.
+- Model Evaluation
 
-* Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
+train-test split: window() / subset()
 
-### Introduction to Data {-}
+accuracy()
 
-There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.
+tsCV()
 
-Explanatory variables are conditions you can impose on the experimental units, while blocking variables are characteristics that the experimental units come with that you would like to control for.
+A great advantage of the ETS statistical framework is that information criteria can be used for model selection - AIC, AIC_c, and BIC
 
-In random sampling, you use stratifying to control for a variable. In random assignment, you use blocking to achieve the same goal.
+leave-one-out cross-validation statistic : CV(fit.consMR) for model selection
 
-Control: compare treatment of interest to a control group 
+we recommend that one of the AICc, AIC, or CV statistics be used, each of which has forecasting as their objective.
 
-Randomize: randomly assign subjects to treatments 
+When comparing forecast methods applied to a single time series, or to several time series with the same units, the MAE is popular as it is easy to both understand and compute. A forecast method that minimizes the MAE will lead to forecasts of the median, while minimizing the RMSE will lead to forecasts of the mean. Consequently, the RMSE is also widely used, despite being more difficult to interpret. Percentage errors have the advantage of being unit-free, and so are frequently used to compare forecast performances between data sets. The most commonly used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE. forecast errors are different from residuals in two ways. First, residuals are calculated on the training set while forecast errors are calculated on the test set. Second, residuals are based on one-step forecasts while forecast errors can involve multi-step forecasts.
 
-Replicate: collect a sufficiently large sample within a study, or replicate the entire study 
+A good forecasting method will yield residuals with the following properties:
 
-Block: account for the potential effect of confounding variables 
+1) The residuals are uncorrelated. If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.
 
-Group subjects into blocks based on these variations, and randomize within each block to treatment groups 
+2) The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased. (Adjusting for bias is easy: if the residuals have mean m then add m to all forecasts and the bias problem is solved.)
 
-Random Sampling + Random Assignment: Causal + generalizable
+3) It is useful (but not necessary) for the residuals to also have the following two properties: the residuals have constant variance and are normally distributed.
 
-No Random Sampling + Random Assignment: Causal + not generalizable
+use the Box-ljung test to test for autocorrelations: h_0: no autocorrelation, h_a: autocorrelation.
 
-Random Sampling + No Random Assignment: Not causal + generalizable
+checkresiduals() which will produce a time plot, ACF plot and histogram of the residuals (with an overlayed normal distribution for comparison), and do a Ljung-Box test with the correct degrees of freedom.
 
-No Random Sampling + No Random Assignment: Not causal + not generalizable
+-Notes
 
-### Statistical Tests
+Fourier terms in lm good for intraday data.
 
-The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 
+Methods with multiplicative trend produce poor forecasts.
 
-1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]
+For stock market prices and indexes, the best forecasting method is often the naïve method. Use also dynamic regression. 
 
-2) The approximation becomes better with larger n, given other things remaining the same.
+Create time series with ts(mydata[-1], start = c(1981, 1), frequency = 4)
 
-However if you are wondering why 30 ? why not 25 or 40 or something else ? Note that actual answer will depend:
+Time series that show no auto-correlation are called white noise. For white noise series, we expect each auto-correlation to be close to zero. For a white noise series, we expect 95% of the spikes in the ACF to lie within +/- 2 * sqrt(T) where T is the length of the time series.
 
-1) how much error are you going to tolerate
+The possible time series (TS) scenarios can be recognized by asking the following questions: 1) TS has a trend? If yes, is the trend increasing linearly or exponentially? 2) TS has seasonality? If yes, do the seasonal components increase in magnitude over time?
 
-2) size of the effect
+Additive model for linear trend and multiplicative model for exponential trend. Additive for trend and Multiplicative and Additive for seasonal components. For trends that are exponential, we would need to use a multiplicative model. For increasing seasonality components, we would need to use a multiplicative model model as well.
 
-3) exact distribution family (like t vs chi-square vs gamma)
+Therefore we can generalize all of these models using a naming system for ETS:
 
-The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β. In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down. Statistical power is affected chiefly by the size of the effect and the size of the sample used to detect it. Bigger effects are easier to detect than smaller effects, while large samples offer greater test sensitivity than small samples.
+Error is the error line we saw in the time series decomposition part earlier in the course. If the error is increasing similar to an increasing seasonal components, we would need to consider a multiplicative design for the exponential model.
 
-The following four quantities have an intimate relationship:
+A time series model that has a constant error, linear trend, and increasing seasonal components means we would need to use an ETS model of ETS(N,A,M)
 
-* sample size
+A time series model that has increasing error, exponential trend, and no seasonality means we would need to use an ETS model of:
 
-* effect size
+non-stationary: This plot shows an upward trend and seasonality.
 
-* significance level = P(Type I error) = probability of finding an effect that is not there
+stationary: This plot revolves around a constant mean of 0 and shows contained variance.
 
-* power = 1 - P(Type II error) = probability of finding an effect that is there
+-Metrics
 
-Given any three, we can determine the fourth.
+Percentage errors, like MAPE, are useful because they are scale independent, so they can be used to compare forecasts between different data series, unlike scale dependent errors. The disadvantage is that it cannot be used if the series has zero values.
 
-**Other**
+Mean Absolute Percentage Error (MAPE) is also often useful for purposes of reporting, because it is expressed in generic percentage terms it will make sense even to someone who has no idea what constitutes a "big" error in terms of dollars spent or widgets sold.
 
-* The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.
+Mean Absolute Scaled Error (MASE) is another relative measure of error that is applicable only to time series data. It is defined as the mean absolute error of the model divided by the the mean absolute value of the first difference of the series. Thus, it measures the relative reduction in error compared to a naive model. Ideally its value will be significantly less than 1 but is relative to comparison across other models for the same series. Since this error measurement is relative and can be applied across models, it is accepted as one of the best metrics for error measurement.
 
-* For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.
+AIC_c for model selection.
 
-* [Power Analysis Calculator](http://www.evanmiller.org/ab-testing/sample-size.html)
+### Intro
 
-### Stats For Hackers
- 
-* Methods: Simluation, Boostrapping (with replacement, not good with ranks), Shuffling (Works when assumption is that the data are the same, representative samples, non-longitudinal data), & Cross Validation.
+### Assumptions
 
-* Assumes iid.
+### Characteristics
 
-### Think Stats
+### Evaluation
 
-* Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.
+### Pros/Cons
 
-* The sampling distribution is the distribution of the samples mean.
+**Pros**
 
-* The CDF is the function that maps values to their percentile rank in a distribution.
+**Cons**
 
-* I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
+* Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn't vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.
 
-* CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).
+* White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.
 
-* Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.
+**ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models**
 
-* Statistical power is the probability that the test will be positive if the null
-hypothesis is false. In general, the power of a test depends on the sample
-size, the magnitude of the effect, and the threshold α.
+* AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.
 
-* If there are no outliers, the sample mean minimizes the mean squared error
+* I(d): Integrated component for a series that needs to be differenced.
 
-* An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
+* MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.
 
-* A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
-units, they come from different distributions. There are two common solutions to these problems:
+* In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.
 
-1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation.
+* Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.
 
-2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
+* Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.
 
-### AB Testing Overview
+* Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q). 
 
-Guide: Choose metric (CTR), review stats (Hypothesis Testing), design, analyse
+**Assess Model Fit**
 
-Need to have clear control and thing to test. Also need time. Frequency of customer interaqction is important.
+* Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.
 
-shopping and searching not independent events.
+* Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero. 
 
-Point estimate of CTR (users who clicked)/users. Need margin of error for estimate. Approximate binomial by normal if N*p & N(1-p) > 5. 
+* Overfit model with extra AR/MA terms and compare using AIC/BIC.
 
-marin of error = Z*(stndad error)
+* Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.
 
-se = sqrt(p(1-p)/n)
+* MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.
 
-Z for 95% s 1.96 and 2.58 for 99%.
 
-for Two samples calculate a pooled CTR point estimate and standard error. 
 
-Need to be substantive (a worthy difference) in addition to being statistically significant. Some changes might not be useful due to the resources one might want to allocate.
-
-Result are repeatable (stat sig) bar should be lower than business interesting (practically sig)
-
-Stat Power: How many page view necessary to get a stat sig result. 
-
-Size v Power: The smaller the effect or increased confidence you want to detect/have (greater power of experiment), the larger the sample you need to use.
-
-alpha = P(reject null when true) 
-beta = P(accept null when false)
-
-small sample: low alpha, high beta
-larger sample: low alpha, low beta
-
-1- alpha = confidence level
-1 - beta = sensitivity (often 80%)
-
-practical significance: 2%, alpha = 0.05, beta = 0.2
-
-sample size dp_to ctr (increase in se), confidence level, sensitivity
-sample size invp_to practical sig (larger changes easier to detect)
-
-above is design of experiment. below is analysis:
-
-estimate diff:  experimental prop - control prop
-margin of error = z*se
-
-conf int: estimated diff +/- margin of error
-
-**Policy & Ethics**
-
-In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.
-
-Next, what benefits might result from the study? Even if the risk is minimal, how might the results help? 
-
-Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.
-
-Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?
-
-Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:
-
-Are participants facing more than minimal risk?
-Do participants understand what data is being gathered?
-Is that data identifiable?
-How is the data handled?
-
-Internal process recommendations
-Finally, regarding internal process of data handling, we recommend that:
-
-Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).
-
-All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.
-
-rate better for usability test than prob
-
-**Choosing & Characterizing Metrics**
-
-**Define**
-
-Make sure to granularize funnel
-
-**Intuition**
-
-NA
-
-**Characterize**
-
-Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data
-
-temporal effects across hours, days, weeks are important
-
-different browsers screw with the CTR depending on how they deal with JS
-
-Can use cookies to track users
-
-Metric definitions
-
-Def #1 (Cookie probability): For each <time interval>, number of cookies that click divided by number of cookies
-
-Def #2 (Pageview probability): Number of pageviews with a click within <time interval> divided by number of pageviews
-
-Def #3 (Rate): Number of clicks divided by number of pageviews
-
-CTR vs CTP: The first can be >1. 
-
-Take into consideration mean and median. Median is robust but might not be useful so look at percentiles. 
-
-Measuring sensitiviyt and robustness: 1) Running experiments to see if metrics move as predicted. A vs A experiments: Measure people who saw the same thing to see if there is a difference between them according to the metric or its too sensitive. Look at previous experiments. 2) Retrospective analysis of logs to see how the metrics responded in the past.
-
-Metric For Loading Vid: Look at distribution of load times for vid. Want a robust metric that doesn't really change for comparable vids. But wnat a metric that is sensitive to a change that you care about like resolution.
-
-How to compare experiment vs control: difference or relative change. Relative change allows you to keep same significance boundary. 
-
-Check that praticial sig level is good for metric. Need to have handle on variability for confidence interval.
-
-sign test: Good for looking to implement a change, but doesn't give effect size.
-
-empirical vs analytic: underlying distribution could be weird so do empirical. Analyticcal for simple metrics. If empirical and anlytical don't agree then run AvA test.
-
-A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don't have enough traffic for a big A v A test.
-
-**Designing An Experiment**
-
-**Choose Subject**
-
-Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).
-
-Intra-user vs inter-user experiment.
-
-**Choose Population**
-
-Size
-
-Duration
-
-Cohort: People who enter the experiment at the same time.
-
-Cohort > Population: Learning effects, user retention
-
-Can reduce sample if just targeting english speaking traffic
-
-When going to run experiment: holiday or not? How many people to put through experiment and control?
-
-**Analyzing Results**
-
-Sanity Checks:
-
-Pass all before move on
-
-Good invariants: # of events, video load time (user has no control over it). Want these to  be about the same for experiment and control.
-
-Single Metric:
-
-sign test
-
-Multiple Metrics:
-
-More metrics increase false positive chance. Use Bonferroni assumption: makes no independence assumption and is conservative. 
-
-margin of error smaller than observed diff so the confidence interval won't include 0. 
-
-Different strategies: family-wise error rate, false discovery rate, 
-
-Gotchas: 
-
-Simpson's Paradox
-
-Usually A/B testing works for testing changes in elements in the web page. A/B testing framework is following sequence:
-
-Design a research question.
-
-Choose test statistics method or metrics to evaluate experiment.
-
-Designing the control group and experiment group.
-
-Analyzing results, and draw valid conclusions.
 

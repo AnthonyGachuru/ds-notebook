@@ -1,0 +1,46 @@
+# Probabilistic Programming
+
+https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7
+
+Bayes Rule:
+
+old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
+
+* Models have a lot of parameters classical methods that use simple point estimates of the parameters don't adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata. 
+
+* The second reason we use Bayesian inference is for combining information you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted tocombining information. 
+
+* The third appeal of Bayesian methods and the sort of applications that I work on is that the inferences can map directly to decisions based on inferences express not its estimates and standard errors but rather as probability distributions we can take these probability distributions and pipe them directly into decision analysis for these reasons.
+
+* An advantage of recognizing that the prior distribution is a testable part of a Bayesian model is that it clarifies the role of the prior inference, and where it comes from.
+
+* Approximate Bayesian Computation
+
+* Laplace approximation: Approximate the posterior of a non-conjugate model
+
+* When one uses likelihood to get point estimates of model parameters, it’s called maximum-likelihood estimation, or MLE. If one also takes the prior into account, then it’s maximum a posteriori estimation (MAP). MLE and MAP are the same if the prior is uniform.
+
+* Beta conjugacy: Beta for prior & binomial for likelihoood implies beta for posterior. Update: beta(alpha + successes, beta + failures). Mean: alpha/(alpha + beta)
+
+* Small alpha and beta means the prior is less informative 
+
+* Empirical Bayes is an approximation to more exact Bayesian methods. With a lot of data it is a very good approximation.
+
+```{python, eval = FALSE}
+
+from numpy.random import beta as beta_dist
+import numpy as np
+
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
+Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)

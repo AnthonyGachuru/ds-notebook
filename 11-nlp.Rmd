@@ -1,0 +1,27 @@
+# NLP
+
+* TF-IDF: A feature vectorization method widely used in text mining to reflect the importance of a term to a document in the corpus. Denote a term by t, a document by d, and the corpus by D. TF(i,d) is the number of times the term t appears in document d while document frequency DF(t,D) is the number of documents which contain the term t. If a term appears very often across the corpus it doesn't carry any special info about the document. Inverse document frequency is a numerical measure of how much info a term provides. If a term appears in all documents its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF uses a hash function to transform input into text.
+
+**Basic Py NLP Pipeline**
+
+* Converting text to numerical data is vectorization.
+
+* Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.
+
+* Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.
+
+* Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance within that document. CountVectorizer or TF-IDF.
+
+* tf-idf & cosine similarity
+
+### Topic Modeling
+
+* Pointwise mutual information is any way to evaluate topic models. Uses joint probabilities to evaluate how much a word tells you a label.
+
+* Mutual information generalized pointwise mutual information averaged over all events.
+
+* If you're just using the probability vectors that come out of a topic model you are selecting a probability metric. If you want to do post-processing you something like mutual information or point was mutual information you're selecting another metric. Metrics always have a point of view. 
+
+* They're just like human writers. Probability says I like really common words, pointwise mutual information as I like really really really discerning words and I don't care how common they are. Mutual information is sort of a balance between the two. 
+
+* In topic modeling using latent Dirichlet distribution, how are “topics” represented? As distributions over words. 
