@@ -4669,28 +4669,36 @@ script to do joining of dummied csvs
 
 \chapter{Time Series}\label{time-series}
 
-Intro
+\section{Notes}\label{notes}
 
 A stationary time series is one whose properties do not depend on the
 time at which the series is observed.
 
-\begin{itemize}
-\tightlist
-\item
-  Packages
-\end{itemize}
+\section{Packages}\label{packages}
 
+\url{https://robjhyndman.com/seminars/user-fable/}
 \url{https://github.com/robjhyndman/forecast}
 \url{https://facebook.github.io/prophet/docs/quick_start.html}
 \url{https://keras.rstudio.com/articles/examples/index.html}
 \url{http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html}
 \url{https://www.rdocumentation.org/packages/bsts/versions/0.8.0}
 
-\begin{itemize}
-\tightlist
-\item
-  Models
-\end{itemize}
+\section{Data Conversion}\label{data-conversion}
+
+\url{https://robjhyndman.com/hyndsight/seasonal-periods/}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dt =}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(StockData}\OperatorTok{$}\NormalTok{Date, }\DataTypeTok{format=}\StringTok{"%m/%d/%Y"}\NormalTok{) }\OperatorTok{>}\NormalTok{Stockdataz =}\StringTok{ }\KeywordTok{zoo}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{cbind}\NormalTok{(StockData}\OperatorTok{$}\NormalTok{Volume,StockData}\OperatorTok{$}\NormalTok{Adj.Close), }\DataTypeTok{order.by=}\NormalTok{dt)}
+
+\NormalTok{ts}\OperatorTok{:}\StringTok{ }\NormalTok{frequency =}\StringTok{ }\DecValTok{5}\NormalTok{ means that data is at daily level business days}
+\KeywordTok{ts}\NormalTok{(completed_example_data}\OperatorTok{$}\NormalTok{Wind,}\DataTypeTok{start =} \KeywordTok{c}\NormalTok{(}\DecValTok{1973}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DataTypeTok{frequency =} \FloatTok{365.25}\NormalTok{)}
+
+\KeywordTok{xts}\NormalTok{(df[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{order.by=}\KeywordTok{as.Date}\NormalTok{(df[,}\DecValTok{1}\NormalTok{], }\StringTok{"%m/%d/%Y"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Models}\label{models}
 
 Exponential smoothing and ARIMA models are the two most widely used
 approaches to time series forecasting, and provide complementary

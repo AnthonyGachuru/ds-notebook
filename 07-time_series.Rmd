@@ -1,18 +1,33 @@
 # Time Series
 
-Intro
+## Notes
 
 A stationary time series is one whose properties do not depend on the time at which the series is observed. 
 
-- Packages
+## Packages
 
+https://robjhyndman.com/seminars/user-fable/
 https://github.com/robjhyndman/forecast
 https://facebook.github.io/prophet/docs/quick_start.html
 https://keras.rstudio.com/articles/examples/index.html
 http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html
 https://www.rdocumentation.org/packages/bsts/versions/0.8.0
 
-- Models
+## Data Conversion
+
+https://robjhyndman.com/hyndsight/seasonal-periods/
+
+```{r, eval = F}
+dt = as.Date(StockData$Date, format="%m/%d/%Y") >Stockdataz = zoo(x=cbind(StockData$Volume,StockData$Adj.Close), order.by=dt)
+
+ts: frequency = 5 means that data is at daily level business days
+ts(completed_example_data$Wind,start = c(1973,5,1), frequency = 365.25)
+
+xts(df[,-1], order.by=as.Date(df[,1], "%m/%d/%Y"))
+
+```
+
+## Models
 
 Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.
 
