@@ -281,6 +281,8 @@ plt.show()
 
 * ctrl + shift + a: reformat code in rstudio
 
+* library(rethinking) | data(UCBadmit) | d <- UCBadmit
+
 * purrr::p/map_dfr/c
 
 * e <- matrix(NA_real_, nrow = 1000, ncol = 8)

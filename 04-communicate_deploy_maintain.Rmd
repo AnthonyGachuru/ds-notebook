@@ -1,24 +1,15 @@
 # Communicate, Deploy, Maintain
 
-To cover these considerations, we recommend a structure similar to the following: 
+## Communicate
 
-1. Summarize the motivation behind the project, and its goals. It should either be an executive summary or a technical abstract.
+Summarize the motivation and goals of the project. It should either be an executive summary or a technical abstract.
 
-2. State the project’s results.   
+State results with details as needed. For an end user presentation show how the model fits into and improves the user's workflow, and how to use it.
 
-3. Back up the results with details, as needed. 
+Discuss recommendations, outstanding issues, and possible future work.
 
-4. Discuss recommendations, outstanding issues, and possible future work.
+Introduction | Motivation | Summary | Results | Conclusion
 
-For an end user presentation, we recommend a structure similar to the following: 
+## Deploy
 
-1. Summarize the motivation behind the project, and its goals.       
-
-2. Show how the model fits into the users’ workflow (and how it improves that workflow).                                             
-3. Show how to use the model.
-
-## Shiny
-
-* 1 r process: 30 users | shiny scales linearly
-
-* eventreactive()
+## Maintain

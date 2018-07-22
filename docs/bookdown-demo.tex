@@ -2844,44 +2844,23 @@ TBD
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
 
-To cover these considerations, we recommend a structure similar to the
-following:
+\section{Communicate}\label{communicate-1}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Summarize the motivation behind the project, and its goals. It should
-  either be an executive summary or a technical abstract.
-\item
-  State the project's results.
-\item
-  Back up the results with details, as needed.
-\item
-  Discuss recommendations, outstanding issues, and possible future work.
-\end{enumerate}
+Summarize the motivation and goals of the project. It should either be
+an executive summary or a technical abstract.
 
-For an end user presentation, we recommend a structure similar to the
-following:
+State results with details as needed. For an end user presentation show
+how the model fits into and improves the user's workflow, and how to use
+it.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Summarize the motivation behind the project, and its goals.
-\item
-  Show how the model fits into the users' workflow (and how it improves
-  that workflow).\\
-\item
-  Show how to use the model.
-\end{enumerate}
+Discuss recommendations, outstanding issues, and possible future work.
 
-\section{Shiny}\label{shiny}
+Introduction \textbar{} Motivation \textbar{} Summary \textbar{} Results
+\textbar{} Conclusion
 
-\begin{itemize}
-\item
-  1 r process: 30 users \textbar{} shiny scales linearly
-\item
-  eventreactive()
-\end{itemize}
+\section{Deploy}\label{deploy}
+
+\section{Maintain}\label{maintain}
 
 \chapter{Frameworks}\label{frameworks}
 
@@ -4093,6 +4072,9 @@ Map}\label{additional-functions-args-in-map}
 \begin{itemize}
 \item
   ctrl + shift + a: reformat code in rstudio
+\item
+  library(rethinking) \textbar{} data(UCBadmit) \textbar{} d
+  \textless{}- UCBadmit
 \item
   purrr::p/map\_dfr/c
 \item
