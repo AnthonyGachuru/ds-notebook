@@ -4,6 +4,8 @@
 
 ### General
 
+* use spatial sign to transform data with outliers.
+
 * Too many levels for a category?
 
     * limit number of categories through feature selection

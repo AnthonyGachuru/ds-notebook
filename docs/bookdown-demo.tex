@@ -627,6 +627,8 @@ environment.yaml.
 
 \begin{itemize}
 \item
+  use spatial sign to transform data with outliers.
+\item
   Too many levels for a category?
 
   \begin{itemize}
@@ -719,6 +721,8 @@ Some types:
 \item
   R uses class encoded as 1 in classification to make predictions. Use
   levels() function on factor to determine what 1 is.
+\item
+  20 observations per feature is pretty good for making predictions.
 \item
   y = b\_0 + b\_1x\_1 + b\_2x\_2 + b\_3x\_1x\_2. ( b\_1 + b\_2x\_2 ) is
   the increase in y with a unit increase in x\_1.
@@ -974,7 +978,9 @@ Some types:
   dashboards).
 \end{itemize}
 
-\section{Unbalanced Classes}\label{unbalanced-classes}
+\section{Other}\label{other}
+
+\subsection{Unbalanced Classes}\label{unbalanced-classes}
 
 Research on imbalanced classes often considers imbalanced to mean a
 minority class of 10\% to 20\%.
@@ -1016,6 +1022,8 @@ Reframe as Anomaly Detection
   Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
   \& svm.SVC(kernel=`linear', class\_weight=`balanced')
 \end{itemize}
+
+\chapter{Model}\label{model-2}
 
 \section{Linear Regression}\label{linear-regression}
 
@@ -1276,7 +1284,7 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   the inputs
 \end{itemize}
 
-\subsection{Other}\label{other}
+\subsection{Other}\label{other-1}
 
 \begin{itemize}
 \item
@@ -1788,7 +1796,7 @@ effcient run-time wise.
   orthogonal to the preceding component.
 \end{itemize}
 
-\subsection{Other}\label{other-1}
+\subsection{Other}\label{other-2}
 
 \begin{itemize}
 \item
