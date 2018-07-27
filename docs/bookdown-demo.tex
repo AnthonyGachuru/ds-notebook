@@ -214,10 +214,6 @@ can be found on this
 \item
   Structure project as user stories
 \item
-  Initiliaze
-  \href{https://github.com/gfleetwood/ds-crib-sheet/blob/master/other/setup_project.R}{base
-  project directory} and set up versioning.
-\item
   Initialize report to track and summarise work and to do list.
 \item
   Remember to use atomic commit messages
@@ -229,17 +225,10 @@ can be found on this
 \item
   Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
-  Sampling from data if its too large
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{https://pypi.python.org/pypi/subsample}{subsample package} in
-    Python
-  \item
-    \href{https://stackoverflow.com/a/22262726/6627726}{sqldf library}
-    in R
-  \end{itemize}
+  Sampling from data if its too large:
+  \href{https://pypi.python.org/pypi/subsample}{subsample package} in
+  Python, \href{https://stackoverflow.com/a/22262726/6627726}{sqldf
+  library} in R
 \item
   \href{https://github.com/thombashi/sqlitebiter}{Sqlite Converter}
 \item
@@ -273,6 +262,8 @@ can be found on this
 \subsection{Transform}\label{transform}
 
 \begin{itemize}
+\item
+  library(DataExplorer)
 \item
   Look at missingness.
   \href{https://github.com/njtierney/naniar}{naniar} and
@@ -330,6 +321,9 @@ can be found on this
   statsmodels.
 \item
   Pre-processing: vtreat in R.
+\item
+  Use binning + chisquare / mutual information to see correlation
+  between feature and target.
 \item
   Pipelines \& Feature Unions: sklearn in Python, recipes in R.
 \item
@@ -718,6 +712,8 @@ Some types:
 \begin{itemize}
 \item
   Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
+\item
+  Don't use brier loss for ordinal predictions
 \item
   R uses class encoded as 1 in classification to make predictions. Use
   levels() function on factor to determine what 1 is.
@@ -4242,6 +4238,15 @@ output: github\_document: default html\_notebook: default
 \NormalTok{gridExtra}\OperatorTok{::}\KeywordTok{grid.arrange}\NormalTok{(}
 \NormalTok{  plots[[}\DecValTok{1}\NormalTok{]],plots[[}\DecValTok{2}\NormalTok{]],plots[[}\DecValTok{3}\NormalTok{]],}
 \NormalTok{  plots[[}\DecValTok{4}\NormalTok{]],plots[[}\DecValTok{5}\NormalTok{]],plots[[}\DecValTok{6}\NormalTok{]], }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Classification Target
+Comparison}\label{classification-target-comparison}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{chisq.test}\NormalTok{(}\KeywordTok{table}\NormalTok{(}\KeywordTok{cut}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Sepal.Length, }\DecValTok{3}\NormalTok{), iris}\OperatorTok{$}\NormalTok{Species))}
 \end{Highlighting}
 \end{Shaded}
 

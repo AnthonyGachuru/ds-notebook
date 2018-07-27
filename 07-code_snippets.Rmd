@@ -429,6 +429,11 @@ gridExtra::grid.arrange(
   plots[[4]],plots[[5]],plots[[6]], nrow=3)
 ```
 
+### Classification Target Comparison
+
+```{r, eval = FALSE}
+chisq.test(table(cut(iris$Sepal.Length, 3), iris$Species))
+```
 
 ### Pairwise Scatterplot
 
