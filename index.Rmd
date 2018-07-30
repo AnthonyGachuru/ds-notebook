@@ -84,7 +84,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Look at missingness. [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) in Python. [VIM](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html) and hmisc::naclus/naplot() in R.
 
-* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice in R.
+* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice, and [zoo](https://www.rdocumentation.org/packages/zoo/versions/1.8-2/topics/na.locf) in R.
 
 * An R library for [categorical dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
 
@@ -128,45 +128,28 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Model Explanability: eli5 or [SHAP](https://github.com/slundberg/shap) in Python but concentrate on the latter. SHAP also exists in R's xgboost library.
 
-* Tuning: Do directed tuning instead of grid or random search. hyperopt-sklearn, sklearn-deap, and 
+* Tuning: Do bayesian tuning instead of grid or random search. hyperopt-sklearn, sklearn-deap, and scikit-optimize. 
 
-* Deal with potential class imbalance: 
-
-   * Gradient boosting
-   * http://contrib.scikit-learn.org/imbalanced-learn/stable/
+* Deal with potential class imbalance: Gradient boosting or [inbalanced learn](http://contrib.scikit-learn.org/imbalanced-learn/stable/).
 
 * Create ensembles: mlxtend in Python
     
-* Choose Statistical Test
-
-    * [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/)
-    * [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
-    * infer library
-    
-* Check for correlations: https://github.com/drsimonj/corrr
+* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt) | infer library
     
 * Ensembling: mlxtend in Python, and caretEnsemble in R.
 
-* Look at learning curves: https://www.dataquest.io/blog/learning-curves-machine-learning/
+* Look at learning curves: [1](https://www.dataquest.io/blog/learning-curves-machine-learning/) | [2](http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html)
 
 * Use SHAP for model explanability
 
 ### Communicate
 
-* Usually an R Markdown document.
+Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
 
 ### Deployment /  Maintenance
 
-Write tests and helper functions.
-
-* [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/)
-* [2](http://www.tdda.info/)
-* [3](http://stochasticsolutions.com/)
-* [Data Testing](https://github.com/ericmjl/data-testing-tutorial)
-* [ML Testing](https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765)
-* [Data Validation](https://github.com/data-cleaning/validate)
-* pytest | hypothesis | testthat
-* [Argument Checks](https://rdrr.io/cran/checkmate/)[PyValidation](https://github.com/shawnbrown/datatest)
+Write helper functions, do testin ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
+ | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) and validation ([1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest) ). Testing libraries include: pytest, hypothesis, and testthat.
 
 A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
 

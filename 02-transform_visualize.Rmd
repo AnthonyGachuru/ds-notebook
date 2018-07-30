@@ -28,9 +28,17 @@
 
 ### Imputation
 
-Pros include helping to retain a larger data set, potentially avoiding bias, and the resulting standard errors tend to be too small.
+### Missingness & Imputation
 
-Some types:
+There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
+
+* The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.
+
+* The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.
+
+* Other: 1) dplyr::case_when, 2) mean of each column = df.mean(axis = 0) || df.mean(axis = 'index' ), 3) mean of each row = df .mean(axis = 1) || df .mean(axis = 'columns' ) 
+
+Some solutions:
 
 * Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
 

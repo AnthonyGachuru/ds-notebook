@@ -1,6 +1,6 @@
 # Import & Tidy
 
-## General
+## Import
 
 * In tidy data:
 
@@ -23,7 +23,7 @@
 
     * gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
 
-## SQL
+### SQL
 
 * CSV to DB V1: 
 
@@ -47,7 +47,7 @@
 
 * If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
 
-## Scraping
+### Scraping
 
 * Access robots.txt: website_url.domain/robots.txt
 
@@ -67,45 +67,12 @@ browser.get('http://www.google.com')
 print(browser.title)
 ```
 
-## Exploration
+## Tidy
 
-### General
+* Tidy Data: [R](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) | [Py1](https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb) | [Py2](http://www.jeannicholashould.com/tidy-data-in-python.html)
 
 * import pandas_profiling; pandas_profiling.ProfileReport(data)
 
 * [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
 
 * **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
-
-### Missingness & Imputation
-
-* There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
-
-* The pros of imputation:
-
-
-    * Helps retain a larger sample size of your data.
-
-    * Does not sacrifice all the available information in an observation because of sparse missingness.
-
-    * Can potentially avoid unwanted bias.
-
-* The cons of imputation:
-
-
-    * The standard errors of any estimates made during analyses following imputation can tend to be too small.
-
-    * The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed.
-
-    * Can potentially induce unwanted bias.
-
-* Other:
-
-
-    * dplyr::case_when
-
-    * na.omit(): Similar to complete cases.
-
-    * mean of each column = df.mean(axis = 0) || df.mean(axis = 'index' )
-
-    * mean of each row = df .mean(axis = 1) || df .mean(axis = 'columns' ) 

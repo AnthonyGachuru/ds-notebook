@@ -273,7 +273,9 @@ can be found on this
   and hmisc::naclus/naplot() in R.
 \item
   Imputation. Options include the Mean, Mode, KNN, Random, and
-  Regression. mice, hmisc, alice in R.
+  Regression. mice, hmisc, alice, and
+  \href{https://www.rdocumentation.org/packages/zoo/versions/1.8-2/topics/na.locf}{zoo}
+  in R.
 \item
   An R library for
   \href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{categorical
@@ -348,72 +350,46 @@ can be found on this
   \href{https://github.com/slundberg/shap}{SHAP} in Python but
   concentrate on the latter. SHAP also exists in R's xgboost library.
 \item
-  Tuning: Do directed tuning instead of grid or random search.
-  hyperopt-sklearn, sklearn-deap, and
+  Tuning: Do bayesian tuning instead of grid or random search.
+  hyperopt-sklearn, sklearn-deap, and scikit-optimize.
 \item
-  Deal with potential class imbalance:
-\item
-  Gradient boosting
-\item
-  \url{http://contrib.scikit-learn.org/imbalanced-learn/stable/}
+  Deal with potential class imbalance: Gradient boosting or
+  \href{http://contrib.scikit-learn.org/imbalanced-learn/stable/}{inbalanced
+  learn}.
 \item
   Create ensembles: mlxtend in Python
 \item
-  Choose Statistical Test
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \href{http://www.ats.ucla.edu/stat/mult_pkg/whatstat/}{1}
-  \item
-    \href{http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt}{2}
-  \item
-    infer library
-  \end{itemize}
-\item
-  Check for correlations: \url{https://github.com/drsimonj/corrr}
+  Choose Statistical Test:
+  \href{http://www.ats.ucla.edu/stat/mult_pkg/whatstat/}{1} \textbar{}
+  \href{http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt}{2}
+  \textbar{} infer library
 \item
   Ensembling: mlxtend in Python, and caretEnsemble in R.
 \item
   Look at learning curves:
-  \url{https://www.dataquest.io/blog/learning-curves-machine-learning/}
+  \href{https://www.dataquest.io/blog/learning-curves-machine-learning/}{1}
+  \textbar{}
+  \href{http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html}{2}
 \item
   Use SHAP for model explanability
 \end{itemize}
 
 \subsection{Communicate}\label{communicate}
 
-\begin{itemize}
-\tightlist
-\item
-  Usually an R Markdown document.
-\end{itemize}
+Reference this
+\href{https://www.dataquest.io/blog/data-science-project-style-guide/}{blog}.
 
 \subsection{Deployment / Maintenance}\label{deployment-maintenance}
 
-Write tests and helper functions.
-
-\begin{itemize}
-\tightlist
-\item
-  \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
-\item
-  \href{http://www.tdda.info/}{2}
-\item
-  \href{http://stochasticsolutions.com/}{3}
-\item
-  \href{https://github.com/ericmjl/data-testing-tutorial}{Data Testing}
-\item
-  \href{https://medium.com/@keeper6928/how-to-unit-test-machine-learning-code-57cf6fd81765}{ML
-  Testing}
-\item
-  \href{https://github.com/data-cleaning/validate}{Data Validation}
-\item
-  pytest \textbar{} hypothesis \textbar{} testthat
-\item
-  \href{https://rdrr.io/cran/checkmate/}{Argument
-  Checks}\href{https://github.com/shawnbrown/datatest}{PyValidation}
-\end{itemize}
+Write helper functions, do testin (
+\href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
+\textbar{} \href{http://www.tdda.info/}{2} \textbar{}
+\href{http://stochasticsolutions.com/}{3} \textbar{}
+\href{https://github.com/ericmjl/data-testing-tutorial}{4}) and
+validation (\href{https://github.com/data-cleaning/validate}{1}
+\textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{}
+\href{https://github.com/shawnbrown/datatest}{3} ). Testing libraries
+include: pytest, hypothesis, and testthat.
 
 A really useful feature is sharing environments so others can install
 all the packages used in your code, with the correct versions. You can
@@ -437,7 +413,7 @@ environment.yaml.
 
 \chapter{Import \& Tidy}\label{import-tidy}
 
-\section{General}\label{general}
+\section{Import}\label{import-1}
 
 \begin{itemize}
 \item
@@ -475,7 +451,7 @@ environment.yaml.
   \end{itemize}
 \end{itemize}
 
-\section{SQL}\label{sql}
+\subsection{SQL}\label{sql}
 
 \begin{itemize}
 \item
@@ -519,7 +495,7 @@ environment.yaml.
   results will contain all of the unique pairs of those two columns
 \end{itemize}
 
-\section{Scraping}\label{scraping}
+\subsection{Scraping}\label{scraping}
 
 \begin{itemize}
 \item
@@ -549,11 +525,16 @@ environment.yaml.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Exploration}\label{exploration}
-
-\subsection{General}\label{general-1}
+\section{Tidy}\label{tidy-1}
 
 \begin{itemize}
+\item
+  Tidy Data:
+  \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{R}
+  \textbar{}
+  \href{https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb}{Py1}
+  \textbar{}
+  \href{http://www.jeannicholashould.com/tidy-data-in-python.html}{Py2}
 \item
   import pandas\_profiling; pandas\_profiling.ProfileReport(data)
 \item
@@ -565,59 +546,11 @@ environment.yaml.
   to 1. The higher the value, the more unalike the data are.
 \end{itemize}
 
-\subsection{Missingness \& Imputation}\label{missingness-imputation}
-
-\begin{itemize}
-\item
-  There are three types of missingness: 1) Completely at Random, 2) At
-  Random, 3) Not at random
-\item
-  The pros of imputation:
-
-  \begin{itemize}
-  \item
-    Helps retain a larger sample size of your data.
-  \item
-    Does not sacrifice all the available information in an observation
-    because of sparse missingness.
-  \item
-    Can potentially avoid unwanted bias.
-  \end{itemize}
-\item
-  The cons of imputation:
-
-  \begin{itemize}
-  \item
-    The standard errors of any estimates made during analyses following
-    imputation can tend to be too small.
-  \item
-    The methods are under the assumption that all measurements are
-    actually ``known,'' when in fact some were imputed.
-  \item
-    Can potentially induce unwanted bias.
-  \end{itemize}
-\item
-  Other:
-
-  \begin{itemize}
-  \item
-    dplyr::case\_when
-  \item
-    na.omit(): Similar to complete cases.
-  \item
-    mean of each column = df.mean(axis = 0) \textbar{}\textbar{}
-    df.mean(axis = `index' )
-  \item
-    mean of each row = df .mean(axis = 1) \textbar{}\textbar{} df
-    .mean(axis = `columns' )
-  \end{itemize}
-\end{itemize}
-
 \chapter{Transform \& Visualize}\label{transform-visualize}
 
 \section{Transform}\label{transform-1}
 
-\subsection{General}\label{general-2}
+\subsection{General}\label{general}
 
 \begin{itemize}
 \item
@@ -672,10 +605,30 @@ environment.yaml.
 
 \subsection{Imputation}\label{imputation}
 
-Pros include helping to retain a larger data set, potentially avoiding
-bias, and the resulting standard errors tend to be too small.
+\subsection{Missingness \& Imputation}\label{missingness-imputation}
 
-Some types:
+There are three types of missingness: 1) Completely at Random, 2) At
+Random, 3) Not at random
+
+\begin{itemize}
+\item
+  The pros of imputation: 1) Helps retain a larger sample size of your
+  data, 2) Does not sacrifice all the available information in an
+  observation because of sparse missingness, 3) Can potentially avoid
+  unwanted bias.
+\item
+  The cons of imputation: 1) The standard errors of any estimates made
+  during analyses following imputation can tend to be too small, 2) The
+  methods are under the assumption that all measurements are actually
+  ``known,'' when in fact some were imputed, 3) Can potentially induce
+  unwanted bias.
+\item
+  Other: 1) dplyr::case\_when, 2) mean of each column = df.mean(axis =
+  0) \textbar{}\textbar{} df.mean(axis = `index' ), 3) mean of each row
+  = df .mean(axis = 1) \textbar{}\textbar{} df .mean(axis = `columns' )
+\end{itemize}
+
+Some solutions:
 
 \begin{itemize}
 \item
@@ -707,7 +660,7 @@ Some types:
 
 \chapter{Model}\label{model-1}
 
-\section{General}\label{general-3}
+\section{General}\label{general-1}
 
 \begin{itemize}
 \item
@@ -2549,7 +2502,7 @@ TBD
 
 \section{Model Selection}\label{model-selection}
 
-\subsection{General}\label{general-4}
+\subsection{General}\label{general-2}
 
 \begin{itemize}
 \item
@@ -3782,7 +3735,7 @@ Get the nodes of interest.
 
 \section{Python}\label{python}
 
-\subsection{General}\label{general-5}
+\subsection{General}\label{general-3}
 
 \begin{itemize}
 \item
@@ -4071,7 +4024,7 @@ Map}\label{additional-functions-args-in-map}
 
 \section{R}\label{r}
 
-\subsection{General}\label{general-6}
+\subsection{General}\label{general-4}
 
 \begin{itemize}
 \item
@@ -5237,7 +5190,7 @@ AIC\_c for model selection.
 
 \chapter{Stats}\label{stats}
 
-\subsection{General}\label{general-7}
+\subsection{General}\label{general-5}
 
 Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood
 
