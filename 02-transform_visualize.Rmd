@@ -4,6 +4,14 @@
 
 ### General
 
+* There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
+
+A good formula is: if your sample is picked uniformly at random and is of size at least:
+
+$\frac{-log(\frac{d}{2})}{2e^2}$
+
+then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
+
 * use spatial sign to transform data with outliers.
 
 * Too many levels for a category?

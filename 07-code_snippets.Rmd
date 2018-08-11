@@ -102,6 +102,19 @@ _, features2 = ft.dfs(
 # produces no new features
 ```
 
+### SHAP Explainer
+
+```{python, eval = F}
+clf.fit(X_train, y_train)
+
+explainer = shap.TreeExplainer(clf)
+shap_values = explainer.shap_values(X_train)
+
+shap.force_plot(explainer.expected_value, shap_values[0,:], X.iloc[0,:]) # one record explained
+shap.summary_plot(shap_values, X_train, plot_type = "bar") # all records explained
+shap.summary_plot(shap_values, X_train, plot_type = "bar") # shap mae for features across all records
+```
+
 ### DF To HTML Table
 
 ```{python, eval = F}

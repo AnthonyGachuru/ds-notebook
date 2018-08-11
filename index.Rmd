@@ -82,7 +82,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * library(DataExplorer)
 
-* Look at missingness. [naniar](https://github.com/njtierney/naniar) and [missingno](https://github.com/ResidentMario/missingno) in Python. [VIM](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html) and hmisc::naclus/naplot() in R.
+* Look at missingness. [missingno](https://github.com/ResidentMario/missingno) in Python. [VIM](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html), hmisc::naclus/naplot(), [naniar](https://github.com/njtierney/naniar), visdat::vis_dat() in R.
 
 * Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice, and [zoo](https://www.rdocumentation.org/packages/zoo/versions/1.8-2/topics/na.locf) in R.
 
@@ -160,3 +160,9 @@ The first part conda env export writes out all the packages in the environment, 
 `conda env create -f environment.yaml`
 
 This will create a new environment with the same name listed in environment.yaml.
+
+https://github.com/Quartz/bad-data-guide#margin-of-error-is-too-large
+
+https://github.com/ianozsvald/data_science_delivered
+
+https://github.com/jtleek/datasharing

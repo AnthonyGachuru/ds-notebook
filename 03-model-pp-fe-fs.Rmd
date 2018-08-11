@@ -6,6 +6,8 @@
 
 * Don't use brier loss for ordinal predictions
 
+* brier score: .25 if say .5 and .33 if randomly assign probs 
+
 * R uses class encoded as 1 in classification to make predictions. Use levels() function on factor to determine what 1 is.
 
 * 20 observations per feature is pretty good for making predictions.

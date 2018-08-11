@@ -266,11 +266,12 @@ can be found on this
   library(DataExplorer)
 \item
   Look at missingness.
-  \href{https://github.com/njtierney/naniar}{naniar} and
   \href{https://github.com/ResidentMario/missingno}{missingno} in
   Python.
-  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM}
-  and hmisc::naclus/naplot() in R.
+  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM},
+  hmisc::naclus/naplot(),
+  \href{https://github.com/njtierney/naniar}{naniar}, visdat::vis\_dat()
+  in R.
 \item
   Imputation. Options include the Mean, Mode, KNN, Random, and
   Regression. mice, hmisc, alice, and
@@ -411,6 +412,12 @@ environment from an environment file use:
 This will create a new environment with the same name listed in
 environment.yaml.
 
+\url{https://github.com/Quartz/bad-data-guide\#margin-of-error-is-too-large}
+
+\url{https://github.com/ianozsvald/data_science_delivered}
+
+\url{https://github.com/jtleek/datasharing}
+
 \chapter{Import \& Tidy}\label{import-tidy}
 
 \section{Import}\label{import-1}
@@ -449,6 +456,13 @@ environment.yaml.
     gzcat ginormous.csv.gz \textbar{} subsample -n 100000 \textgreater{}
     sampled.csv.gz
   \end{itemize}
+\item
+  Codebook
+\item
+  Data file naming convention:
+  \{iso-date\}\_\{concise\_description\}.\{file\_extension\}
+\item
+  Variable naming conventions: Consistency and balance are important
 \end{itemize}
 
 \subsection{SQL}\label{sql}
@@ -551,6 +565,28 @@ environment.yaml.
 \section{Transform}\label{transform-1}
 
 \subsection{General}\label{general}
+
+\begin{itemize}
+\tightlist
+\item
+  There is no one rule about when a number is not accurate enough to
+  use, but as a rule of thumb, you should be cautious about using any
+  number with a MOE (Margin-of-error) over 10\%.
+\end{itemize}
+
+A good formula is: if your sample is picked uniformly at random and is
+of size at least:
+
+\(\frac{-log(\frac{d}{2})}{2e^2}\)
+
+then with probability at least 1-d your sample measured proportion q is
+no further away than e from the unknown true population proportion p
+(what you are trying to estimate). Need to estimate with 99\% certainty
+the unknown true population rate to +- 10\% precision? That is d=0.01,
+e=0.1 and a sample of size 265 should be enough. A stricter precision of
++-0.05 causes the estimated sample size to increase to 1060, but
+increasing the certainty requirement to 99.5\% only increases the
+estimated sample size to 300.
 
 \begin{itemize}
 \item
@@ -667,6 +703,8 @@ Some solutions:
   Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
 \item
   Don't use brier loss for ordinal predictions
+\item
+  brier score: .25 if say .5 and .33 if randomly assign probs
 \item
   R uses class encoded as 1 in classification to make predictions. Use
   levels() function on factor to determine what 1 is.
@@ -3843,6 +3881,19 @@ Get the nodes of interest.
 \NormalTok{    max_depth }\OperatorTok{=} \DecValTok{2}
 \NormalTok{)}
 \CommentTok{# produces no new features}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{SHAP Explainer}\label{shap-explainer}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clf.fit(X_train, y_train)}
+\NormalTok{explainer }\OperatorTok{=}\NormalTok{ shap.TreeExplainer(clf)}
+\NormalTok{shap_values }\OperatorTok{=}\NormalTok{ explainer.shap_values(X_train)}
+\NormalTok{shap.force_plot(explainer.expected_value, shap_values[}\DecValTok{0}\NormalTok{,:], X.iloc[}\DecValTok{0}\NormalTok{,:]) }\CommentTok{# one record explained}
+\NormalTok{shap.summary_plot(shap_values, X_train, plot_type }\OperatorTok{=} \StringTok{"bar"}\NormalTok{) }\CommentTok{# all records explained}
+\NormalTok{shap.summary_plot(shap_values, X_train, plot_type }\OperatorTok{=} \StringTok{"bar"}\NormalTok{) }\CommentTok{# shap mae for features across all records}
 \end{Highlighting}
 \end{Shaded}
 
