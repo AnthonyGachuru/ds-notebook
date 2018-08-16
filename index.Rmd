@@ -1,5 +1,5 @@
 --- 
-title: "Data Science Cribsheeet"
+title: "Data Science Cribsheet"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book

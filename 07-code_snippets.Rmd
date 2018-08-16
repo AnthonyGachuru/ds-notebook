@@ -434,6 +434,14 @@ date <- seq(as.Date("2017/09/01"), as.Date("2017/09/25"), by="day")
 
 * dplyr five main actions: select, filter, arrange, mutate, summarize.
 
+### Multi Character To Numeric Casting
+
+```{r, eval = F}
+char_to_num_cols <- df %>% select(starts_with('MMR')) %>% names
+df[, char_to_num_cols] <- sapply(df[, char_to_num_cols], as.numeric)
+```
+
+
 ### Grid Plot
 
 ```{r, eval=FALSE}
@@ -473,8 +481,8 @@ deployApp()
 
 ### Shut Up, R
 
-```{r, echo = F, warning=F, error=F, message=F, results='hide'}
-
+```{r}
+#chunk options: echo = F, warning=F, error=F, message=F, results='hide'
 ```
 
 ### Plotting

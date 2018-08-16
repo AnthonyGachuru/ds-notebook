@@ -24,7 +24,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Data Science Cribsheeet},
+            pdftitle={Data Science Cribsheet},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -115,7 +115,7 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{Data Science Cribsheeet}
+  \title{Data Science Cribsheet}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
   \author{}
@@ -4235,6 +4235,16 @@ output: github\_document: default html\_notebook: default
   dplyr five main actions: select, filter, arrange, mutate, summarize.
 \end{itemize}
 
+\subsection{Multi Character To Numeric
+Casting}\label{multi-character-to-numeric-casting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{char_to_num_cols <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{'MMR'}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\NormalTok{names}
+\NormalTok{df[, char_to_num_cols] <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(df[, char_to_num_cols], as.numeric)}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Grid Plot}\label{grid-plot}
 
 \begin{Shaded}
@@ -4282,6 +4292,12 @@ Comparison}\label{classification-target-comparison}
 \end{Shaded}
 
 \subsection{Shut Up, R}\label{shut-up-r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#chunk options: echo = F, warning=F, error=F, message=F, results='hide'}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Plotting}\label{plotting}
 
