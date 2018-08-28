@@ -131,6 +131,8 @@ If H_0 is true then the population mean of Y would be ? 0 no matter what the val
 
 ### Other
 
+* https://twitter.com/alexpghayes/status/1033824995905077250
+
 * [Quantile regression](https://en.wikipedia.org/wiki/Quantile_regression) is an alternative for quantiles.
 
 * Type 1 Error: Accept ha when h0 is true.

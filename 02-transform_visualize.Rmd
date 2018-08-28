@@ -60,4 +60,6 @@ Some solutions:
 
 * swarmplot
 
+* https://www.jumpingrivers.com/blog/styling-ggplot2-r-graphics/
+
 * Rule of thumb for bins in histogram: `ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))`.

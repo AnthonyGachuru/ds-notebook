@@ -115,14 +115,15 @@
 }
 
 \setlength{\droptitle}{-2em}
-  \title{Data Science Cribsheet}
-  \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-  \author{}
-  \preauthor{}\postauthor{}
-  \date{}
-  \predate{}\postdate{}
 
+  \title{Data Science Cribsheet}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -689,6 +690,8 @@ Some solutions:
   time, we can often explain their behavior with linear models.
 \item
   swarmplot
+\item
+  \url{https://www.jumpingrivers.com/blog/styling-ggplot2-r-graphics/}
 \item
   Rule of thumb for bins in histogram:
   \texttt{ggplot()\ +\ geom\_histogram(aes(x),\ binwidth\ =\ diff(range(x))\ /\ (2\ *\ IQR(x)\ /\ length(x)\^{}(1/3)))}.
@@ -1274,6 +1277,8 @@ constant value. Use Box-Cox transformations when predictions are skewed.
 \subsection{Other}\label{other-1}
 
 \begin{itemize}
+\item
+  \url{https://twitter.com/alexpghayes/status/1033824995905077250}
 \item
   \href{https://en.wikipedia.org/wiki/Quantile_regression}{Quantile
   regression} is an alternative for quantiles.
