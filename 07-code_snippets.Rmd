@@ -479,9 +479,21 @@ runApp()
 deployApp()
 ```
 
+## Tidy Evaluation Example
+
+```{r, eval = F}
+# tidy evaluation
+df %>%
+    filter(
+      !is.na((!!as.symbol("col1"))),
+      (!!as.symbol("col2")) == 1
+      ) %>%
+    select(c(1, 2, 4))
+```
+
 ### Shut Up, R
 
-```{r}
+```{r, eval = F}
 #chunk options: echo = F, warning=F, error=F, message=F, results='hide'
 ```
 
