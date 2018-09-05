@@ -4099,9 +4099,6 @@ Map}\label{additional-functions-args-in-map}
 \item
   rowwise in R: purrr::pmap
 \item
-  YearMonth = firstScheduledDay \%\textgreater{}\%
-  strftime(format=``\%Y-\%m'')
-\item
   str\_split + unnest()
 \item
   \url{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html}
@@ -4300,7 +4297,7 @@ Comparison}\label{classification-target-comparison}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Tidy Evaluation Example}\label{tidy-evaluation-example}
+\subsection{Tidy Evaluation Example}\label{tidy-evaluation-example}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4471,7 +4468,7 @@ Stuff I did while testing tree viz for ODSC DS tools.
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{DT Option}\label{dt-option}
+\subsection{DT Options}\label{dt-options}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4590,7 +4587,8 @@ Stuff I did while testing tree viz for ODSC DS tools.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{LessonStartTime }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{)}
+\NormalTok{StartTime }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{)}
+\NormalTok{YearMonth =}\StringTok{ }\NormalTok{Day }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

@@ -302,8 +302,6 @@ plt.show()
 
 * rowwise in R: purrr::pmap
 
-* YearMonth = firstScheduledDay %>% strftime(format="%Y-%m")
-
 * str_split + unnest()
 
 * https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html
@@ -479,7 +477,7 @@ runApp()
 deployApp()
 ```
 
-## Tidy Evaluation Example
+### Tidy Evaluation Example
 
 ```{r, eval = F}
 # tidy evaluation
@@ -566,7 +564,6 @@ Tree <- gvisTreeMap(test.data,
 plot(Tree)
 ```
 
-
 ### Setup Project
 
 ```{r, eval = F}
@@ -623,7 +620,6 @@ git2r::init('.')
 
 ```
 
-
 ### MAP Model
 
 ```{r, eval = FALSE}
@@ -641,7 +637,7 @@ chickweight %>% group_by(Diet) %>% nest() %>%
 mutate(mod = data %>% map(~ lm(weight ~ Time, data=.)))
 ```
 
-### DT Option
+### DT Options
 
 ```{r, eval = FALSE}
 datatable(
@@ -743,7 +739,8 @@ mons = factor(
 ### Extract Date
 
 ```{r, eval = F}
-LessonStartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
+StartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
+YearMonth = Day %>% strftime(format="%Y-%m")
 ```
 
 ### Geom_Path
