@@ -148,6 +148,8 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 ### Deployment /  Maintenance
 
+[Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
+
 Write helper functions, do testin ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
  | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) and validation ([1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest) ). Testing libraries include: pytest, hypothesis, and testthat.
 
