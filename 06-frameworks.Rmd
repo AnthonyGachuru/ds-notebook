@@ -660,6 +660,10 @@ Here's a [Hello World](https://github.com/fastforwardlabs/keras-hello-world/blob
 
 * fit
 
+keras: declare model | compile with loss, optimizer, and scoring metric | fit
+
+keras::to_categorical
+
 Keras only uses numpy arrays. 
 
 * keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)

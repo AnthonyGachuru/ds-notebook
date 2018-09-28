@@ -8,6 +8,8 @@ Beta Distribution: The larger the alpha parameter is the closer the resulting di
 
 Fisher's Exact Test: Test for proportions
 
+cohen's f^2 | https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression | https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis
+
 Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood
 
 https://www.rdocumentation.org/packages/effsize/versions/0.7.1/topics/cohen.d

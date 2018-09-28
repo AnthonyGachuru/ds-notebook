@@ -3572,6 +3572,11 @@ World} and the general framework:
   fit
 \end{itemize}
 
+keras: declare model \textbar{} compile with loss, optimizer, and
+scoring metric \textbar{} fit
+
+keras::to\_categorical
+
 Keras only uses numpy arrays.
 
 \begin{itemize}
@@ -4097,6 +4102,10 @@ Map}\label{additional-functions-args-in-map}
 \item
   purrr::p/map\_dfr/c
 \item
+  date = date \%\textgreater{}\% as.POSIXct() \%\textgreater{}\%
+  strptime(`\%Y-\%m-\%d') \%\textgreater{}\%
+  strftime(format=``\%Y-\%m-\%d'')
+\item
   e \textless{}- matrix(NA\_real\_, nrow = 1000, ncol = 8)
 \item
   rowwise in R: purrr::pmap
@@ -4318,6 +4327,16 @@ Comparison}\label{classification-target-comparison}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#chunk options: echo = F, warning=F, error=F, message=F, results='hide'}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{EBB}\label{ebb}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_ebb <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{successes =} \KeywordTok{sum}\NormalTok{(success), }\DataTypeTok{sample_size =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{add_ebb_estimate}\NormalTok{(num_passed, sample_size)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5300,6 +5319,11 @@ resulting distribution is to 1.0 and the larger the beta the closer it
 is to 0.
 
 Fisher's Exact Test: Test for proportions
+
+cohen's f\^{}2 \textbar{}
+\url{https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression}
+\textbar{}
+\url{https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis}
 
 Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood
 

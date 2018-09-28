@@ -298,6 +298,8 @@ plt.show()
 
 * purrr::p/map_dfr/c
 
+* date = date %>% as.POSIXct() %>% strptime('%Y-%m-%d') %>% strftime(format="%Y-%m-%d")
+
 * e <- matrix(NA_real_, nrow = 1000, ncol = 8)
 
 * rowwise in R: purrr::pmap
@@ -494,6 +496,15 @@ df %>%
 ```{r, eval = F}
 #chunk options: echo = F, warning=F, error=F, message=F, results='hide'
 ```
+
+### EBB
+
+```{r, eval = F}
+df_ebb <- df %>%
+  summarise(successes = sum(success), sample_size = n()) %>%
+  add_ebb_estimate(num_passed, sample_size)
+```
+
 
 ### Plotting
 
