@@ -470,6 +470,21 @@ environment.yaml.
 
 \subsection{SQL}\label{sql}
 
+--Find tables with a given column name
+
+SELECT TABLE\_SCHEMA, TABLE\_NAME --TABLE\_CATALOG, TABLE\_SCHEMA,
+TABLE\_NAME, COLUMN\_NAME FROM INFORMATION\_SCHEMA.COLUMNS WHERE
+COLUMN\_NAME LIKE `\%Test\%'
+
+--get schema info SELECT table\_schema, table\_name, column\_name,
+data\_type, character\_maximum\_length, is\_nullable, column\_default,
+numeric\_precision, numeric\_scale FROM information\_schema.columns
+WHERE table\_name = `Results' use this\_schema SELECT table\_schema,
+table\_name, column\_name, data\_type, character\_maximum\_length,
+is\_nullable, column\_default, numeric\_precision, numeric\_scale FROM
+information\_schema.columns ORDER BY table\_schema, table\_name,
+ordinal\_position
+
 \begin{itemize}
 \item
   CSV to DB V1:
@@ -639,10 +654,14 @@ estimated sample size to 300.
   log-\url{https://github.com/ColinFay/erum2018normally}
   distributed---the log of the data is normally distributed. This leads
   us to the idea that taking the log of the data can restore symmetry to
-  it.
+  it. \#\#\# Outlier Detection
 \end{itemize}
 
-\subsection{Imputation}\label{imputation}
+\url{https://www.rdocumentation.org/packages/DMwR/versions/0.4.1/topics/lofactor}
+
+DIXON AND CHI SQUARED TESTS FOR OUTLIERS
+
+\url{http://r-statistics.co/Outlier-Treatment-With-R.html}
 
 \subsection{Missingness \& Imputation}\label{missingness-imputation}
 
@@ -4228,6 +4247,21 @@ output: github\_document: default html\_notebook: default
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Create List Column}\label{create-list-column}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2 }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Id) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}
+    \DataTypeTok{unq =} \KeywordTok{list}\NormalTok{(}\KeywordTok{unique}\NormalTok{(SId))}
+\NormalTok{  )}
+
+\NormalTok{eng_rivalries <-}\StringTok{ }\NormalTok{eng_rivalries }\OperatorTok{%>%}\StringTok{ }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{rivalry =} \KeywordTok{map2}\NormalTok{(team1_match, team2_match, }\ControlFlowTok{function}\NormalTok{(x, y) }\KeywordTok{c}\NormalTok{(x, y)))}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Useful Date Manipulation}\label{useful-date-manipulation}
 
 \begin{Shaded}
@@ -5300,6 +5334,11 @@ AIC\_c for model selection.
 \chapter{Stats}\label{stats}
 
 \subsection{General}\label{general-5}
+
+Since all outcomes are 0 or 1, and drawn with the same (unknown)
+probability, we know that the number of ones and zeros follows a
+binomial distribution. This means that the confidence interval of a ``k
+out of n'' scenario is a Beta distribution.
 
 Another common measure of effect size is d, sometimes known as Cohen's d
 (as you might have guessed by now, Cohen was quite influential in the

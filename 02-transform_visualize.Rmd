@@ -33,8 +33,13 @@ then with probability at least 1-d your sample measured proportion q is no furth
 * Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.
 
 * Monetary amounts are often log-https://github.com/ColinFay/erum2018normally distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it. 
+### Outlier Detection
 
-### Imputation
+https://www.rdocumentation.org/packages/DMwR/versions/0.4.1/topics/lofactor
+
+DIXON AND CHI SQUARED TESTS FOR OUTLIERS
+
+http://r-statistics.co/Outlier-Treatment-With-R.html
 
 ### Missingness & Imputation
 

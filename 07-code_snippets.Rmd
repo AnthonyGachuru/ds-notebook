@@ -415,6 +415,19 @@ library(stringr)
 'test'%[]%c(1,3)
 ```
 
+### Create List Column
+
+```{r, eval = F}
+df2 %>% 
+  group_by(Id) %>%
+  summarise(
+    unq = list(unique(SId))
+  )
+
+eng_rivalries <- eng_rivalries %>% drop_na() %>%
+  mutate(rivalry = map2(team1_match, team2_match, function(x, y) c(x, y)))
+```
+
 ### Useful Date Manipulation
 
 ```{r, eval = F}

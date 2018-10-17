@@ -31,6 +31,27 @@
 
 ### SQL
 
+--Find tables with a given column name
+
+SELECT TABLE_SCHEMA, TABLE_NAME --TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS 
+WHERE COLUMN_NAME LIKE '%Test%'
+
+--get schema info 
+SELECT 
+table_schema, table_name, column_name, data_type, 
+character_maximum_length, is_nullable, column_default,
+numeric_precision, numeric_scale
+FROM information_schema.columns
+WHERE table_name = 'Results'
+use this_schema
+SELECT 
+table_schema, table_name, column_name, 
+data_type, character_maximum_length,
+is_nullable, column_default, numeric_precision, numeric_scale
+FROM information_schema.columns
+ORDER BY table_schema, table_name, ordinal_position
+
 * CSV to DB V1: 
 
     * $ sqlite3 db_name.db
