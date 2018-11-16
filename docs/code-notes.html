@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="probabilistic-programming.html">
-<link rel="next" href="hierarchical-models.html">
+<link rel="prev" href="hierarchical-models.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -353,28 +353,119 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="nlp" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> NLP</h1>
+<div id="code-notes" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Code Notes</h1>
+<div id="python" class="section level2">
+<h2><span class="header-section-number">14.1</span> Python</h2>
+<div id="general-4" class="section level3">
+<h3><span class="header-section-number">14.1.1</span> General</h3>
 <ul>
-<li>TF-IDF: A feature vectorization method widely used in text mining to reflect the importance of a term to a document in the corpus. Denote a term by t, a document by d, and the corpus by D. TF(i,d) is the number of times the term t appears in document d while document frequency DF(t,D) is the number of documents which contain the term t. If a term appears very often across the corpus it doesn’t carry any special info about the document. Inverse document frequency is a numerical measure of how much info a term provides. If a term appears in all documents its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF uses a hash function to transform input into text.</li>
-</ul>
-<p><strong>Basic Py NLP Pipeline</strong></p>
+<li><p><a href="https://chrisalbon.com/" class="uri">https://chrisalbon.com/</a></p></li>
+<li><p>pandas: isin | crosstab</p></li>
+<li><p>pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last</p></li>
+<li><p>The only float that isn’t equal to itself is nan.</p></li>
+<li><p>%matplotlib notebook: interactive plots</p></li>
+<li><p>Memory storage: use pd.copy to create a deep copy instead of a shallow copy</p></li>
+<li><p>IPy: %who or %whos shows defined variables &amp; %reset resets them</p></li>
+<li><p>Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)</p></li>
+<li><p>Debugging: import pdb | pdb.set_trace(),</p></li>
+<li><p>dir() gives a list of in scope variables</p></li>
+<li><p>globals() gives a dictionary of global variables</p></li>
+<li><p>locals() gives a dictionary of local variables</p></li>
+<li><p><a href="https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/" class="uri">https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/</a></p></li>
+<li><p>np.dot = np.multiply %&gt;% np.sum</p></li>
+<li><p>flatten dict</p>
 <ul>
-<li><p>Converting text to numerical data is vectorization.</p></li>
-<li><p>Tokenize: A token is an individual word (or group of words) extracted from a document, using whitespace or punctuation as separators.</p></li>
-<li><p>Create bag of words: Count tokens within a document and normalised to de-emphasise tokens that appear frequently within a document.</p></li>
-<li><p>Vectorization: Corpus represented as a large matrix, each row of which represents one of the documents and each column represents token occurance within that document. CountVectorizer or TF-IDF.</p></li>
-<li><p>tf-idf &amp; cosine similarity</p></li>
+<li>pd.io.json.json_normalize(stuff) *<a href="https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055" class="uri">https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055</a></li>
+<li><a href="https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10" class="uri">https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10</a></li>
+</ul></li>
 </ul>
-<div id="topic-modeling" class="section level3">
-<h3><span class="header-section-number">12.0.1</span> Topic Modeling</h3>
+</div>
+<div id="vanderplas-jupyter" class="section level3">
+<h3><span class="header-section-number">14.1.2</span> Vanderplas Jupyter</h3>
 <ul>
-<li><p>Pointwise mutual information is any way to evaluate topic models. Uses joint probabilities to evaluate how much a word tells you a label.</p></li>
-<li><p>Mutual information generalized pointwise mutual information averaged over all events.</p></li>
-<li><p>If you’re just using the probability vectors that come out of a topic model you are selecting a probability metric. If you want to do post-processing you something like mutual information or point was mutual information you’re selecting another metric. Metrics always have a point of view.</p></li>
-<li><p>They’re just like human writers. Probability says I like really common words, pointwise mutual information as I like really really really discerning words and I don’t care how common they are. Mutual information is sort of a balance between the two.</p></li>
-<li><p>In topic modeling using latent Dirichlet distribution, how are “topics” represented? As distributions over words.</p></li>
+<li><p>create helper functions and units tests as R/py for Rmd/ipynb</p></li>
+<li><p>pytest/hypothesis for testing</p></li>
+<li><p>use makefile to run cmd commands</p></li>
+<li><p>Write file with date: df.to_csv(’{}_model.csv’.format(str(datetime.datetime.now()).split(‘’)[0]))</p></li>
+<li><p>Make package for workflow with data (<strong>init</strong>.py) and use this formation for function docs:</p></li>
 </ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fun(a):
+  <span class="co">#Role</span>
+  <span class="co">#-----</span>
+  <span class="co">#Does something</span>
+  
+  <span class="co">#Parameters</span>
+  <span class="co">#---------</span>
+  <span class="co">#Accepts something</span>
+  
+  <span class="co">#Returns</span>
+  <span class="co">#-------</span>
+  <span class="co">#Returns something</span>
+  
+  <span class="cf">return</span>(a)</code></pre></div>
+</div>
+</div>
+<div id="r" class="section level2">
+<h2><span class="header-section-number">14.2</span> R</h2>
+<div id="general-5" class="section level3">
+<h3><span class="header-section-number">14.2.1</span> General</h3>
+<ul>
+<li><p>ctrl + shift + a: reformat code in rstudio</p></li>
+<li><p>library(rethinking) | data(UCBadmit) | d &lt;- UCBadmit</p></li>
+<li><p>purrr::p/map_dfr/c</p></li>
+<li><p>date = date %&gt;% as.POSIXct() %&gt;% strptime(‘%Y-%m-%d’) %&gt;% strftime(format=“%Y-%m-%d”)</p></li>
+<li><p>e &lt;- matrix(NA_real_, nrow = 1000, ncol = 8)</p></li>
+<li><p>rowwise in R: purrr::pmap</p></li>
+<li><p>str_split + unnest()</p></li>
+<li><p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html</a></p></li>
+<li><p>na_if: Replace certain values by na</p></li>
+<li><p>purrr::map_df - map over columns</p></li>
+<li><p>studio multiple cursors, snippets, addins</p></li>
+<li><p>ctrl + shift + o: toggle table of contents</p></li>
+<li><p>ctrl shift enter: run chunk</p></li>
+<li><p>ctrl pageup/down: navigate chunks</p></li>
+<li><p>atl shift k: shortcuts</p></li>
+<li><p>ctrl + shift + R: label sections</p></li>
+<li><p>ctrl + alt + R: run all chunks</p></li>
+<li><p>df_print: kable in yaml rmrkdown header</p></li>
+<li><p>rm(list = ls()): Remove all objects in the current workspace</p></li>
+<li><p>cut(): Transform a numeric variable into a categorical variable.</p></li>
+<li><p>car: recode (good for dummying)</p></li>
+<li><p>Examine the objects in the workspace: ls.str()</p></li>
+<li><p>This is how you dynamically update a value in Rmarkdown: x = <em>backtick</em> r x <em>backtick</em>.</p></li>
+<li><p>df[setdiff(names(df), “z”)]: remove column z</p></li>
+<li><p>purrr::walk</p></li>
+<li><p>purr::keep/discard for is.factor</p></li>
+<li><p>choroplethr | choroplethrMaps || d3r | d3treeR | data.tree</p></li>
+</ul>
+</div>
+<div id="knitting-a-ghub-doc" class="section level3">
+<h3><span class="header-section-number">14.2.2</span> Knitting A GHub Doc</h3>
+<p>output: github_document: default html_notebook: default</p>
+</div>
+</div>
+<div id="various" class="section level2">
+<h2><span class="header-section-number">14.3</span> Various</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(Summary_Variable, Group_Variable, Function)
+
+<span class="kw">boxplot</span>(frequency <span class="op">~</span><span class="st"> </span>attitude<span class="op">*</span>gender,
+<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;white&quot;</span>,<span class="st">&quot;lightgray&quot;</span>), politeness)
+
+<span class="co">#corrplot package in r</span>
+<span class="kw">cor</span>(Carseats[<span class="kw">sapply</span>(Carseats, <span class="cf">function</span>(x) <span class="op">!</span><span class="kw">is.factor</span>(x))])
+
+<span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;caret&quot;</span>, <span class="st">&quot;pROC&quot;</span>), <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">&quot;Depends&quot;</span>, <span class="st">&quot;Imports&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))
+
+<span class="kw">library</span>(knitr)
+<span class="kw">kable</span>(pause_sum, <span class="dt">caption =</span> <span class="st">&quot;Summary Statistics Table for Exit Slip Dataset&quot;</span>,
+      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Median&quot;</span>, <span class="st">&quot;SD&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;Max&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;NAs&quot;</span>))
+
+<span class="kw">typeof</span>(<span class="dv">1</span>) <span class="co">#&quot;double&quot;</span>
+<span class="kw">typeof</span>(1L) <span class="co">#&quot;integer&quot;</span>
+
+<span class="co">#Prints out the first 4 multiples of 3.</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span><span class="op">*</span><span class="dv">3</span>) {<span class="kw">cat</span>(i)}</code></pre></div>
 
 </div>
 </div>
@@ -383,8 +474,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="probabilistic-programming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="hierarchical-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="hierarchical-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -414,7 +505,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/11-nlp.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13-code_snippets.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

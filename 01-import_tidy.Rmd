@@ -2,6 +2,8 @@
 
 ## Import
 
+* cross apply = inner join | outer apply = full join
+
 * In tidy data:
 
     * Each variable forms a column.
@@ -30,6 +32,8 @@
 * Variable naming conventions: Consistency and balance are important
 
 ### SQL
+
+* df <- dbGetQuery(con, statement = read_file('query.sql'))
 
 --Find tables with a given column name
 
@@ -97,6 +101,8 @@ print(browser.title)
 ## Tidy
 
 * Tidy Data: [R](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) | [Py1](https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb) | [Py2](http://www.jeannicholashould.com/tidy-data-in-python.html)
+
+* Round a pandas time stamp to nearest minute: tstamp.round('min')
 
 * import pandas_profiling; pandas_profiling.ProfileReport(data)
 

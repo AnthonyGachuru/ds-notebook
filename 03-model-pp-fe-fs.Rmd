@@ -4,6 +4,10 @@
 
 * Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
 
+* confint (R)
+
+* precision: how good were you at something being true when you said it was true,recall: how many of the true values did you catch. f1: harmonic mean of the two
+
 * Don't use brier loss for ordinal predictions
 
 * brier score: .25 if say .5 and .33 if randomly assign probs 
@@ -93,6 +97,8 @@
 ## Pre-processing
 
 ## Feature Engineering
+
+* encode missingness a a feature
 
 * Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
 

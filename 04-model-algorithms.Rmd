@@ -759,6 +759,8 @@ Can easily handle qualitative (categorical) features
 
 * Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
 
+* Tutorial: http://pbpython.com/market-basket-analysis.html
+
 * Incredibly big feature space (2^k-1). 
 
 * The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space. 

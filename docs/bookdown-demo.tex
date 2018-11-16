@@ -427,6 +427,8 @@ environment.yaml.
 
 \begin{itemize}
 \item
+  cross apply = inner join \textbar{} outer apply = full join
+\item
   In tidy data:
 
   \begin{itemize}
@@ -469,6 +471,12 @@ environment.yaml.
 \end{itemize}
 
 \subsection{SQL}\label{sql}
+
+\begin{itemize}
+\tightlist
+\item
+  df \textless{}- dbGetQuery(con, statement = read\_file(`query.sql'))
+\end{itemize}
 
 --Find tables with a given column name
 
@@ -567,6 +575,8 @@ ordinal\_position
   \href{https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb}{Py1}
   \textbar{}
   \href{http://www.jeannicholashould.com/tidy-data-in-python.html}{Py2}
+\item
+  Round a pandas time stamp to nearest minute: tstamp.round(`min')
 \item
   import pandas\_profiling; pandas\_profiling.ProfileReport(data)
 \item
@@ -708,6 +718,10 @@ multiple stochastic regression imputation: mice
 
 \begin{itemize}
 \item
+  ggplot(df, aes(fitted\_probability, binary\_class\_indicator)) +
+  geom\_smooth(): a quick way of visualizing model calibration without
+  having to manually bin any observations
+\item
   logging converts multiplicative relationships to additive
   relationships, and by the same token it converts exponential (compound
   growth) trends to linear trends. By taking logarithms of variables
@@ -729,6 +743,12 @@ multiple stochastic regression imputation: mice
 \begin{itemize}
 \item
   Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
+\item
+  confint (R)
+\item
+  precision: how good were you at something being true when you said it
+  was true,recall: how many of the true values did you catch. f1:
+  harmonic mean of the two
 \item
   Don't use brier loss for ordinal predictions
 \item
@@ -918,7 +938,8 @@ multiple stochastic regression imputation: mice
 \section{Feature Engineering}\label{feature-engineering}
 
 \begin{itemize}
-\tightlist
+\item
+  encode missingness a a feature
 \item
   Dealing with cyclical features: Hours of the day, days of the week,
   months in a year, and wind direction are all examples of features that
@@ -2394,6 +2415,8 @@ Can easily handle qualitative (categorical) features
   rule might be: if someone buys peanut butter and jelly, then that
   person is likely to buy bread as well.
 \item
+  Tutorial: \url{http://pbpython.com/market-basket-analysis.html}
+\item
   Incredibly big feature space (2\^{}k-1).
 \item
   The Apriori algorithm employs a simple a priori belief as a guideline
@@ -3804,960 +3827,6 @@ Get the nodes of interest.
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{Code Snippets}\label{code-snippets}
-
-\hypertarget{python}{\section{Python}\label{python}}
-
-\subsection{General}\label{general-3}
-
-\begin{itemize}
-\item
-  \url{https://chrisalbon.com/}
-\item
-  pandas: isin \textbar{} crosstab
-\item
-  pd.group\_by aggregate functions: size, count, sum, mean, median, sd,
-  var, min, max, prod, first, last
-\item
-  The only float that isn't equal to itself is nan.
-\item
-  \%matplotlib notebook: interactive plots
-\item
-  Memory storage: use pd.copy to create a deep copy instead of a shallow
-  copy
-\item
-  IPy: \%who or \%whos shows defined variables \& \%reset resets them
-\item
-  Append dict to df: use ignore\_index = True. eg. films\_df =
-  films\_df.append(film\_dict, ignore\_index=1)
-\item
-  Debugging: import pdb \textbar{} pdb.set\_trace(),
-\item
-  dir() gives a list of in scope variables
-\item
-  globals() gives a dictionary of global variables
-\item
-  locals() gives a dictionary of local variables
-\item
-  \url{https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/}
-\item
-  np.dot = np.multiply \%\textgreater{}\% np.sum
-\item
-  flatten dict
-
-  \begin{itemize}
-  \tightlist
-  \item
-    pd.io.json.json\_normalize(stuff)
-    *\url{https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055\#41689055}
-  \item
-    \url{https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10}
-  \end{itemize}
-\end{itemize}
-
-\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Write file with date:
-  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ fun(a):}
-  \CommentTok{#Role}
-  \CommentTok{#-----}
-  \CommentTok{#Does something}
-  
-  \CommentTok{#Parameters}
-  \CommentTok{#---------}
-  \CommentTok{#Accepts something}
-  
-  \CommentTok{#Returns}
-  \CommentTok{#-------}
-  \CommentTok{#Returns something}
-  
-  \ControlFlowTok{return}\NormalTok{(a)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Auto Feature Engineering}\label{auto-feature-engineering}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\ImportTok{import}\NormalTok{ featuretools }\ImportTok{as}\NormalTok{ ft}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'iris.csv'}\NormalTok{)}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ df.reset_index()}
-\NormalTok{es }\OperatorTok{=}\NormalTok{ ft.EntitySet(}\BuiltInTok{id} \OperatorTok{=} \StringTok{"test"}\NormalTok{) }\CommentTok{#.drop(columns = ['species'], axis = 1)}
-\NormalTok{es }\OperatorTok{=}\NormalTok{ es.entity_from_dataframe(entity_id }\OperatorTok{=} \StringTok{'d'}\NormalTok{, dataframe }\OperatorTok{=}\NormalTok{ df, make_index}\OperatorTok{=}\VariableTok{True}\NormalTok{, index}\OperatorTok{=}\StringTok{'ind'}\NormalTok{)}
-\NormalTok{fm, features }\OperatorTok{=}\NormalTok{ ft.dfs(}
-\NormalTok{    entityset }\OperatorTok{=}\NormalTok{ es, }
-\NormalTok{    target_entity }\OperatorTok{=} \StringTok{'d'}\NormalTok{,}
-\NormalTok{    agg_primitives }\OperatorTok{=}\NormalTok{ [}\StringTok{'mean'}\NormalTok{, }\StringTok{'max'}\NormalTok{, }\StringTok{'percent_true'}\NormalTok{, }\StringTok{'last'}\NormalTok{],}
-\NormalTok{    trans_primitives }\OperatorTok{=}\NormalTok{ [}\StringTok{'subtract'}\NormalTok{, }\StringTok{'divide'}\NormalTok{]}
-\NormalTok{)}
-\CommentTok{# produces 626 features}
-\NormalTok{_, features2 }\OperatorTok{=}\NormalTok{ ft.dfs(}
-\NormalTok{    entityset }\OperatorTok{=}\NormalTok{ es, }
-\NormalTok{    target_entity }\OperatorTok{=} \StringTok{'d'}\NormalTok{,}
-\NormalTok{    max_depth }\OperatorTok{=} \DecValTok{2}
-\NormalTok{)}
-\CommentTok{# produces no new features}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{SHAP Explainer}\label{shap-explainer}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{clf.fit(X_train, y_train)}
-\NormalTok{explainer }\OperatorTok{=}\NormalTok{ shap.TreeExplainer(clf)}
-\NormalTok{shap_values }\OperatorTok{=}\NormalTok{ explainer.shap_values(X_train)}
-\NormalTok{shap.force_plot(explainer.expected_value, shap_values[}\DecValTok{0}\NormalTok{,:], X.iloc[}\DecValTok{0}\NormalTok{,:]) }\CommentTok{# one record explained}
-\NormalTok{shap.summary_plot(shap_values, X_train, plot_type }\OperatorTok{=} \StringTok{"bar"}\NormalTok{) }\CommentTok{# all records explained}
-\NormalTok{shap.summary_plot(shap_values, X_train, plot_type }\OperatorTok{=} \StringTok{"bar"}\NormalTok{) }\CommentTok{# shap mae for features across all records}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{DF To HTML Table}\label{df-to-html-table}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ flask }\ImportTok{import}\NormalTok{ Flask}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\NormalTok{app }\OperatorTok{=}\NormalTok{ Flask(}\VariableTok{__name__}\NormalTok{)}
-\NormalTok{pd.set_option(}\StringTok{'display.max_colwidth'}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
-\AttributeTok{@app.route}\NormalTok{(}\StringTok{"/"}\NormalTok{)}
-\KeywordTok{def}\NormalTok{ show_tables():}
-\NormalTok{    data }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'squads.csv'}\NormalTok{)}
-    \ControlFlowTok{return}\NormalTok{ data.to_html(escape }\OperatorTok{=} \VariableTok{False}\NormalTok{, index_names }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
-\ControlFlowTok{if} \VariableTok{__name__} \OperatorTok{==} \StringTok{"__main__"}\NormalTok{:}
-\NormalTok{    app.run(debug}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Masking Array}\label{masking-array}
-
-You can mask your array using the numpy.ma.array function and
-subsequently apply any numpy operation:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{a }\OperatorTok{=}\NormalTok{ np.random.rand(}\DecValTok{10}\NormalTok{)            }\CommentTok{# Generate random data.}
-\NormalTok{a }\OperatorTok{=}\NormalTok{ np.where(a }\OperatorTok{>} \FloatTok{0.8}\NormalTok{, np.nan, a)  }\CommentTok{# Set all data larger than 0.8 to NaN}
-\NormalTok{a }\OperatorTok{=}\NormalTok{ np.ma.array(a, mask}\OperatorTok{=}\NormalTok{np.isnan(a)) }\CommentTok{# Use a mask to mark the NaNs}
-\NormalTok{a_norm  }\OperatorTok{=}\NormalTok{ a }\OperatorTok{/}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(a) }\CommentTok{# The sum function ignores the masked values.}
-\NormalTok{a_norm2 }\OperatorTok{=}\NormalTok{ a }\OperatorTok{/}\NormalTok{ np.std(a) }\CommentTok{# The std function ignores the masked values.}
-\NormalTok{a.data}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Showing Data With Plotly}\label{showing-data-with-plotly}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# plotly display data}
-\ImportTok{from}\NormalTok{ plotly.tools }\ImportTok{import}\NormalTok{ FigureFactory }\ImportTok{as}\NormalTok{ ff}
-\ImportTok{import}\NormalTok{ plotly}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\NormalTok{plotly.offline.init_notebook_mode()}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'https://raw.githubusercontent.com/plotly/datasets/master/2014_usa_states.csv'}\NormalTok{)}
-\NormalTok{table }\OperatorTok{=}\NormalTok{ ff.create_table(df.iloc[}\DecValTok{1}\NormalTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{:}\DecValTok{5}\NormalTok{])}
-\NormalTok{plotly.offline.plot(table, output_type }\OperatorTok{=} \StringTok{'div'}\NormalTok{, show_link }\OperatorTok{=} \VariableTok{False}\NormalTok{, include_plotlyjs }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Hyperband Cross
-Validation}\label{hyperband-cross-validation}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ civismlext.hyperband }\ImportTok{import}\NormalTok{ HyperbandSearchCV}
-\CommentTok{#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Pandas Display Options}\label{pandas-display-options}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Display floats with 2 decimal places}
-\NormalTok{pd.options.display.float_format }\OperatorTok{=} \StringTok{'\{:,.2f\}'}\NormalTok{.}\BuiltInTok{format}
- 
-\CommentTok{# Expand display limits}
-\NormalTok{pd.options.display.max_rows }\OperatorTok{=} \DecValTok{200}
-\NormalTok{pd.options.display.max_columns }\OperatorTok{=} \DecValTok{100}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Infix Operators}\label{infix-operators}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Define new operator}
-\KeywordTok{class}\NormalTok{ Infix:}
-    \KeywordTok{def} \FunctionTok{__init__}\NormalTok{(}\VariableTok{self}\NormalTok{, function):}
-        \VariableTok{self}\NormalTok{.function }\OperatorTok{=}\NormalTok{ function}
-    \KeywordTok{def} \FunctionTok{__ror__}\NormalTok{(}\VariableTok{self}\NormalTok{, other):}
-        \ControlFlowTok{return}\NormalTok{ Infix(}\KeywordTok{lambda}\NormalTok{ x, }\VariableTok{self} \OperatorTok{=} \VariableTok{self}\NormalTok{, other }\OperatorTok{=}\NormalTok{ other: }\VariableTok{self}\NormalTok{.function(other, x))}
-    \KeywordTok{def} \FunctionTok{__or__}\NormalTok{(}\VariableTok{self}\NormalTok{, other):}
-        \ControlFlowTok{return} \VariableTok{self}\NormalTok{.function(other)}
-    \KeywordTok{def} \FunctionTok{__rlshift__}\NormalTok{(}\VariableTok{self}\NormalTok{, other):}
-        \ControlFlowTok{return}\NormalTok{ Infix(}\KeywordTok{lambda}\NormalTok{ x, }\VariableTok{self}\OperatorTok{=}\VariableTok{self}\NormalTok{, other}\OperatorTok{=}\NormalTok{other: }\VariableTok{self}\NormalTok{.function(other, x))}
-    \KeywordTok{def} \FunctionTok{__rshift__}\NormalTok{(}\VariableTok{self}\NormalTok{, other):}
-        \ControlFlowTok{return} \VariableTok{self}\NormalTok{.function(other)}
-    \KeywordTok{def} \FunctionTok{__call__}\NormalTok{(}\VariableTok{self}\NormalTok{, value1, value2):}
-        \ControlFlowTok{return} \VariableTok{self}\NormalTok{.function(value1, value2)}
-\NormalTok{pipe }\OperatorTok{=}\NormalTok{ Infix(}\KeywordTok{lambda}\NormalTok{ x,y: y(x))}
-\DecValTok{4} \OperatorTok{|}\NormalTok{pipe}\OperatorTok{|}\NormalTok{ (}\KeywordTok{lambda}\NormalTok{ z: z}\OperatorTok{**}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Generators}\label{generators}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Generators Error}
-\NormalTok{iterator }\OperatorTok{=} \BuiltInTok{iter}\NormalTok{(iterable)}
-\ControlFlowTok{try}\NormalTok{:}
-    \ControlFlowTok{while} \VariableTok{True}\NormalTok{:}
-\NormalTok{        item }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(iterator)}
-\NormalTok{        do_stuff(item)}
-\ControlFlowTok{except} \PreprocessorTok{StopIteration}\NormalTok{:}
-    \ControlFlowTok{pass}
-\ControlFlowTok{finally}\NormalTok{:}
-    \KeywordTok{del}\NormalTok{ iterator}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Rowwise Operations In
-Pandas}\label{rowwise-operations-in-pandas}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Apply a function to every row in a pandas dataframe}
-\NormalTok{rectangles }\OperatorTok{=}\NormalTok{ [}
-\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\DecValTok{40}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{10}\NormalTok{ \},}
-\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\DecValTok{20}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{9}\NormalTok{ \},}
-\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\FloatTok{3.4}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{4}\NormalTok{ \}}
-\NormalTok{]}
-\NormalTok{rectangles_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(rectangles)}
-\KeywordTok{def}\NormalTok{ calculate_area(row):}
-    \ControlFlowTok{return}\NormalTok{ row[}\StringTok{'height'}\NormalTok{] }\OperatorTok{*}\NormalTok{ row[}\StringTok{'width'}\NormalTok{]}
-\NormalTok{rectangles_df.}\BuiltInTok{apply}\NormalTok{(calculate_area, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
-\CommentTok{# Apply to single column}
-\NormalTok{df[}\StringTok{'SAL-RATE'}\NormalTok{].}\BuiltInTok{apply}\NormalTok{(money_to_float)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Additional Functions Args In
-Map}\label{additional-functions-args-in-map}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Extra arguments to function}
-\ImportTok{import}\NormalTok{ functools}
-\KeywordTok{def}\NormalTok{ add(x, y):}
-    \ControlFlowTok{return}\NormalTok{ x }\OperatorTok{+}\NormalTok{ y}
-    
-\NormalTok{a }\OperatorTok{=}\NormalTok{ [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{]}
-\BuiltInTok{map}\NormalTok{(functools.partial(add, y}\OperatorTok{=}\DecValTok{2}\NormalTok{), a)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Check CSV Encoding}\label{check-csv-encoding}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(}\StringTok{"../input/kickstarter-projects/ks-projects-201801.csv"}\NormalTok{, }\StringTok{'rb'}\NormalTok{) }\ImportTok{as}\NormalTok{ rawdata:}
-\NormalTok{    result }\OperatorTok{=}\NormalTok{ chardet.detect(rawdata.read(}\DecValTok{10000}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{MNIST Example}\label{mnist-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ sklearn }\ImportTok{import}\NormalTok{ datasets}
-\ImportTok{from}\NormalTok{ sklearn }\ImportTok{import}\NormalTok{ svm}
-\NormalTok{digits }\OperatorTok{=}\NormalTok{ datasets.load_digits()}
-\CommentTok{#print(digits.data)}
-\CommentTok{#print(digits.target)}
-\BuiltInTok{print}\NormalTok{(digits.images[}\DecValTok{0}\NormalTok{])}
-\NormalTok{clf }\OperatorTok{=}\NormalTok{ svm.SVC(gamma}\OperatorTok{=}\NormalTok{.}\DecValTok{001}\NormalTok{,C}\OperatorTok{=}\DecValTok{100}\NormalTok{)}
-\NormalTok{x, y }\OperatorTok{=}\NormalTok{ digits.data[:}\OperatorTok{-}\DecValTok{10}\NormalTok{], digits.target[:}\OperatorTok{-}\DecValTok{10}\NormalTok{]}
-\NormalTok{clf.fit(x,y)}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"Prediction: "}\NormalTok{, clf.predict(digits.data[}\OperatorTok{-}\DecValTok{2}\NormalTok{].reshape(}\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{)))}
-\NormalTok{plt.imshow(digits.images[}\OperatorTok{-}\DecValTok{2}\NormalTok{], cmap}\OperatorTok{=}\NormalTok{plt.cm.gray_r, interpolation}\OperatorTok{=}\StringTok{"nearest"}\NormalTok{)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{r}{\section{R}\label{r}}
-
-\subsection{General}\label{general-4}
-
-\begin{itemize}
-\item
-  ctrl + shift + a: reformat code in rstudio
-\item
-  library(rethinking) \textbar{} data(UCBadmit) \textbar{} d
-  \textless{}- UCBadmit
-\item
-  purrr::p/map\_dfr/c
-\item
-  date = date \%\textgreater{}\% as.POSIXct() \%\textgreater{}\%
-  strptime(`\%Y-\%m-\%d') \%\textgreater{}\%
-  strftime(format=``\%Y-\%m-\%d'')
-\item
-  e \textless{}- matrix(NA\_real\_, nrow = 1000, ncol = 8)
-\item
-  rowwise in R: purrr::pmap
-\item
-  str\_split + unnest()
-\item
-  \url{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html}
-\item
-  na\_if: Replace certain values by na
-\item
-  purrr::map\_df - map over columns
-\item
-  studio multiple cursors, snippets, addins
-\item
-  ctrl + shift + o: toggle table of contents
-\item
-  ctrl shift enter: run chunk
-\item
-  ctrl pageup/down: navigate chunks
-\item
-  atl shift k: shortcuts
-\item
-  ctrl + shift + R: label sections
-\item
-  ctrl + alt + R: run all chunks
-\item
-  df\_print: kable in yaml rmrkdown header
-\item
-  rm(list = ls()): Remove all objects in the current workspace
-\item
-  cut(): Transform a numeric variable into a categorical variable.
-\item
-  car: recode (good for dummying)
-\item
-  Examine the objects in the workspace: ls.str()
-\item
-  This is how you dynamically update a value in Rmarkdown: x =
-  \emph{backtick} r x \emph{backtick}.
-\item
-  df{[}setdiff(names(df), ``z''){]}: remove column z
-\item
-  purrr::walk
-\item
-  purr::keep/discard for is.factor
-\item
-  choroplethr \textbar{} choroplethrMaps \textbar{}\textbar{} d3r
-  \textbar{} d3treeR \textbar{} data.tree
-\end{itemize}
-
-\subsection{Knitting A GHub Doc}\label{knitting-a-ghub-doc}
-
-output: github\_document: default html\_notebook: default
-
-\section{Various}\label{various}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tapply}\NormalTok{(Summary_Variable, Group_Variable, Function)}
-
-\KeywordTok{boxplot}\NormalTok{(frequency }\OperatorTok{~}\StringTok{ }\NormalTok{attitude}\OperatorTok{*}\NormalTok{gender,}
-\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{,}\StringTok{"lightgray"}\NormalTok{), politeness)}
-
-\CommentTok{#corrplot package in r}
-\KeywordTok{cor}\NormalTok{(Carseats[}\KeywordTok{sapply}\NormalTok{(Carseats, }\ControlFlowTok{function}\NormalTok{(x) }\OperatorTok{!}\KeywordTok{is.factor}\NormalTok{(x))])}
-
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\StringTok{"pROC"}\NormalTok{), }\DataTypeTok{dependencies =} \KeywordTok{c}\NormalTok{(}\StringTok{"Depends"}\NormalTok{, }\StringTok{"Imports"}\NormalTok{, }\StringTok{"Suggests"}\NormalTok{))}
-
-\KeywordTok{library}\NormalTok{(knitr)}
-\KeywordTok{kable}\NormalTok{(pause_sum, }\DataTypeTok{caption =} \StringTok{"Summary Statistics Table for Exit Slip Dataset"}\NormalTok{,}
-      \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Mean"}\NormalTok{, }\StringTok{"Median"}\NormalTok{, }\StringTok{"SD"}\NormalTok{, }\StringTok{"Min"}\NormalTok{, }\StringTok{"Max"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"NAs"}\NormalTok{))}
-
-\KeywordTok{typeof}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{#"double"}
-\KeywordTok{typeof}\NormalTok{(1L) }\CommentTok{#"integer"}
-
-\CommentTok{#Prints out the first 4 multiples of 3.}
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\OperatorTok{*}\DecValTok{3}\NormalTok{) \{}\KeywordTok{cat}\NormalTok{(i)\}}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Create Package}\label{create-package}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/}
-
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{library}\NormalTok{(roxygen2)}
-
-\CommentTok{# Navigate to parent folder}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'../Desktop/me'}\NormalTok{)}
-
-\CommentTok{# Name and create package}
-\KeywordTok{create}\NormalTok{(}\StringTok{"sansor"}\NormalTok{)}
-
-\CommentTok{# Add file with function}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'sansor/R'}\NormalTok{)}
-\KeywordTok{file.create}\NormalTok{(}\StringTok{'test.R'}\NormalTok{) }\CommentTok{# test <- function()\{print('This is a test')\}}
-
-\CommentTok{# Back to package dir}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{".."}\NormalTok{)}
-
-\CommentTok{# Generate auto docs}
-\KeywordTok{document}\NormalTok{()}
-
-\CommentTok{# Install package for use}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'..'}\NormalTok{)}
-\KeywordTok{install}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Create Operator}\label{create-operator}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(stringr)}
-\StringTok{`}\DataTypeTok{%[]%}\StringTok{`}\NormalTok{ <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(string, subset)\{}
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{str_sub}\NormalTok{(string, subset[}\DecValTok{1}\NormalTok{], subset[}\DecValTok{2}\NormalTok{]))}
-\NormalTok{\}}
-\StringTok{'test'}\OperatorTok{%[]%}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Create List Column}\label{create-list-column}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df2 }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Id) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}
-    \DataTypeTok{unq =} \KeywordTok{list}\NormalTok{(}\KeywordTok{unique}\NormalTok{(SId))}
-\NormalTok{  )}
-
-\NormalTok{eng_rivalries <-}\StringTok{ }\NormalTok{eng_rivalries }\OperatorTok{%>%}\StringTok{ }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{rivalry =} \KeywordTok{map2}\NormalTok{(team1_match, team2_match, }\ControlFlowTok{function}\NormalTok{(x, y) }\KeywordTok{c}\NormalTok{(x, y)))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Useful Date Manipulation}\label{useful-date-manipulation}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{year =}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{format}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(TestEndTime, }\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{),}\StringTok{"%Y"}\NormalTok{))}
-\NormalTok{date <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017/09/01"}\NormalTok{), }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2017/09/25"}\NormalTok{), }\DataTypeTok{by=}\StringTok{"day"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{R for Everything Talk}\label{r-for-everything-talk}
-
-\begin{itemize}
-\item
-  dir.exists \textbar{} dir.create \textbar{} download.file
-\item
-  untar \textbar{} unlink \textbar{} file.info
-\item
-  dir \textbar{} file.rename \textbar{} file.copy
-\item
-  count.fields \textbar{} system
-\item
-  dplyr five main actions: select, filter, arrange, mutate, summarize.
-\end{itemize}
-
-\subsection{Multi Character To Numeric
-Casting}\label{multi-character-to-numeric-casting}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{char_to_num_cols <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{'MMR'}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\NormalTok{names}
-\NormalTok{df[, char_to_num_cols] <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(df[, char_to_num_cols], as.numeric)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Grid Plot}\label{grid-plot}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{gridExtra}\OperatorTok{::}\KeywordTok{grid.arrange}\NormalTok{(}
-\NormalTok{  plots[[}\DecValTok{1}\NormalTok{]],plots[[}\DecValTok{2}\NormalTok{]],plots[[}\DecValTok{3}\NormalTok{]],}
-\NormalTok{  plots[[}\DecValTok{4}\NormalTok{]],plots[[}\DecValTok{5}\NormalTok{]],plots[[}\DecValTok{6}\NormalTok{]], }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Classification Target
-Comparison}\label{classification-target-comparison}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{chisq.test}\NormalTok{(}\KeywordTok{table}\NormalTok{(}\KeywordTok{cut}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Sepal.Length, }\DecValTok{3}\NormalTok{), iris}\OperatorTok{$}\NormalTok{Species))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Pairwise Scatterplot}\label{pairwise-scatterplot}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{GGally}\OperatorTok{::}\KeywordTok{ggpairs}\NormalTok{(data, }\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ category))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Deploy Shiny App}\label{deploy-shiny-app}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(shinyapps)}
-\KeywordTok{library}\NormalTok{(shiny)}
-
-\NormalTok{working_dir <-}\StringTok{ ''}
-\KeywordTok{setwd}\NormalTok{(working_dir)}
-
-\NormalTok{shinyapps}\OperatorTok{::}\KeywordTok{setAccountInfo}\NormalTok{(}\DataTypeTok{name=}\StringTok{"<ACCOUNT>"}\NormalTok{, }
-                          \DataTypeTok{token=}\StringTok{"<TOKEN>"}\NormalTok{, }
-                          \DataTypeTok{secret=}\StringTok{"<SECRET>"}\NormalTok{)}
-
-\KeywordTok{runApp}\NormalTok{()}
-\KeywordTok{deployApp}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Tidy Evaluation Example}\label{tidy-evaluation-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# tidy evaluation}
-\NormalTok{df }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{filter}\NormalTok{(}
-      \OperatorTok{!}\KeywordTok{is.na}\NormalTok{((}\OperatorTok{!!}\KeywordTok{as.symbol}\NormalTok{(}\StringTok{"col1"}\NormalTok{))),}
-\NormalTok{      (}\OperatorTok{!!}\KeywordTok{as.symbol}\NormalTok{(}\StringTok{"col2"}\NormalTok{)) }\OperatorTok{==}\StringTok{ }\DecValTok{1}
-\NormalTok{      ) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{select}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Shut Up, R}\label{shut-up-r}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#chunk options: echo = F, warning=F, error=F, message=F, results='hide'}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{EBB}\label{ebb}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df_ebb <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{successes =} \KeywordTok{sum}\NormalTok{(success), }\DataTypeTok{sample_size =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{add_ebb_estimate}\NormalTok{(num_passed, sample_size)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Plotting}\label{plotting}
-
-Stuff I did while testing Bundesliga xG data.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(openxlsx)}
-\KeywordTok{library}\NormalTok{(tidyr)}
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(ggvis)}
-\KeywordTok{library}\NormalTok{(rCharts)}
-
-\NormalTok{bund_xg <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"data/bundesliga_xg_2015_2016.xlsx"}\NormalTok{)}
-
-\NormalTok{bund_xg.long <-}\StringTok{ }\KeywordTok{gather}\NormalTok{(bund_xg, Status, Team, Home}\OperatorTok{:}\NormalTok{Away)}
-\NormalTok{bund_xg.long}\OperatorTok{$}\NormalTok{xG <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(bund_xg.long}\OperatorTok{$}\NormalTok{Status }\OperatorTok{==}\StringTok{ 'Home'}\NormalTok{, }
-\NormalTok{                          bund_xg.long}\OperatorTok{$}\NormalTok{xG_H, }
-\NormalTok{                          bund_xg.long}\OperatorTok{$}\NormalTok{xG_A)}
-\NormalTok{bund_xg.long.team <-}\StringTok{ }\KeywordTok{group_by}\NormalTok{(bund_xg.long, Team)}
-
-\NormalTok{xg.plot <-}\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ bund_xg.long, }
-       \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ GW, }\DataTypeTok{y =}\NormalTok{ xG, }\DataTypeTok{group =}\NormalTok{ Status, }\DataTypeTok{color =}\NormalTok{ Status)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{'Bundesliga 15/16'}\NormalTok{, }\DataTypeTok{x =} \StringTok{'Game Week'}\NormalTok{, }\DataTypeTok{y =}\StringTok{'Expected Goals For'}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Team)}
-
-\KeywordTok{ggsave}\NormalTok{(}\DataTypeTok{plot =}\NormalTok{ xg.plot, }\DataTypeTok{filename =} \StringTok{'bund_xg_plot.png'}\NormalTok{)}
-
-\NormalTok{bund_xg.long[bund_xg.long}\OperatorTok{$}\NormalTok{Team }\OperatorTok{==}\StringTok{ 'Bayern'}\NormalTok{,] }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ggvis}\NormalTok{(}\OperatorTok{~}\NormalTok{GW, }\OperatorTok{~}\NormalTok{xG) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{layer_points}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{layer_lines}\NormalTok{()}
-  \CommentTok{#add_tooltip(function(df) df$GW)}
-
-\NormalTok{p =}\StringTok{ }\KeywordTok{rPlot}\NormalTok{(xG }\OperatorTok{~}\StringTok{ }\NormalTok{GW, }
-      \DataTypeTok{data =}\NormalTok{ bund_xg.long[bund_xg.long}\OperatorTok{$}\NormalTok{Team }\OperatorTok{==}\StringTok{ 'Bayern'}\NormalTok{,], }
-      \DataTypeTok{color =} \StringTok{'Status'}\NormalTok{, }
-      \DataTypeTok{type =} \StringTok{'line'}\NormalTok{)}
-
-\NormalTok{p}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{title =} \StringTok{'Bayern Munich (Bundesliga 15/16)'}\NormalTok{)}
-\NormalTok{p}\OperatorTok{$}\KeywordTok{guides}\NormalTok{(}\DataTypeTok{x =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Game Week"}\NormalTok{))}
-\NormalTok{p}\OperatorTok{$}\KeywordTok{guides}\NormalTok{(}\DataTypeTok{y =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Expected Goals"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Nested Tree}\label{nested-tree}
-
-Stuff I did while testing tree viz for ODSC DS tools.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(googleVis)}
-\NormalTok{test.data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'C:/Users/Gordon/Downloads/test.csv'}\NormalTok{, }\DataTypeTok{header =}\NormalTok{ T)}
-
-\NormalTok{Org <-}\StringTok{ }\KeywordTok{gvisOrgChart}\NormalTok{(test.data, }
-                    \DataTypeTok{options=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{width=}\DecValTok{600}\NormalTok{, }\DataTypeTok{height=}\DecValTok{250}\NormalTok{,}
-                                 \DataTypeTok{size=}\StringTok{'large'}\NormalTok{, }\DataTypeTok{allowCollapse=}\OtherTok{TRUE}\NormalTok{))}
-\NormalTok{Org}\OperatorTok{$}\NormalTok{html}\OperatorTok{$}\NormalTok{footer  <-}\StringTok{ }\OtherTok{NULL}
-\NormalTok{Org}\OperatorTok{$}\NormalTok{html}\OperatorTok{$}\NormalTok{caption  <-}\StringTok{ }\OtherTok{NULL}
-\KeywordTok{plot}\NormalTok{(Org)}
-
-\NormalTok{test.data}\OperatorTok{$}\NormalTok{Val  <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(test.data), }\DecValTok{1}\NormalTok{)}
-\NormalTok{test.data}\OperatorTok{$}\NormalTok{Fac  <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{nrow}\NormalTok{(test.data), }\DecValTok{1}\NormalTok{)}
-
-\NormalTok{Tree <-}\StringTok{ }\KeywordTok{gvisTreeMap}\NormalTok{(test.data,  }
-                    \StringTok{"Node"}\NormalTok{, }\StringTok{"Parent"}\NormalTok{, }
-                    \CommentTok{#"Val", "Fac", }
-                    \DataTypeTok{options=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{fontSize=}\DecValTok{16}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(Tree)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Setup Project}\label{setup-project}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(knitr)}
-
-\CommentTok{#Create top level folder}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'my-data-project'}\NormalTok{)}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'./my-data-project/'}\NormalTok{)}
-
-\CommentTok{#Create child folders}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'code'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'visualizations'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'reports'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'data'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'deploy_maintain'}\NormalTok{)}
-
-\CommentTok{#Create trackers}
-\KeywordTok{file.create}\NormalTok{(}\StringTok{'README.md'}\NormalTok{)}
-\KeywordTok{file.create}\NormalTok{(}\StringTok{'CHANGELOG.md'}\NormalTok{)}
-
-\CommentTok{#Create grandchildren folders for data}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'./data'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'raw'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'refined'}\NormalTok{)}
-
-\CommentTok{#Create grandchildren folders for visualizations}
-\KeywordTok{setwd}\NormalTok{(}\StringTok{'../visualizations'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'exploratory'}\NormalTok{)}
-\KeywordTok{dir.create}\NormalTok{(}\StringTok{'communication'}\NormalTok{)}
-
-\CommentTok{#Initialize git repo}
-\NormalTok{git2r}\OperatorTok{::}\KeywordTok{init}\NormalTok{(}\StringTok{'.'}\NormalTok{)}
-
-\CommentTok{# CHANGELOG.md Example}
-
-\NormalTok{## Logs}
-
-\NormalTok{## Excluded processes should be assumed to be the same as version 0.1.}
-
-\NormalTok{## Current Best Model:}
-\NormalTok{## Current Best Score / Metric:}
-
-\NormalTok{## 0.1}
-
-\NormalTok{## 1_import_tidy.Rmd}
-
-\NormalTok{## 2_transform_visualize.Rmd}
-
-\NormalTok{## 3_modeling.ipynb}
-
-\CommentTok{# Layout}
-
-\NormalTok{## libs, functions, imports, preprocessing, feature engineering, feature selection, model building}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{MAP Model}\label{map-model}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-
-\NormalTok{model <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df) \{}
-  \KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ df)}
-\NormalTok{\}}
-
-\NormalTok{df <-}\StringTok{ }\NormalTok{mtcars}
-\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ .))}
-\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{map}\NormalTok{(data, model))}
-
-\NormalTok{chickweight }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Diet) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mod =}\NormalTok{ data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(weight }\OperatorTok{~}\StringTok{ }\NormalTok{Time, }\DataTypeTok{data=}\NormalTok{.)))}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{DT Options}\label{dt-options}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{datatable}\NormalTok{(}
-\NormalTok{  df_version_check,}
-  \DataTypeTok{options =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{filter =} \StringTok{'top'}\NormalTok{,}
-                 \DataTypeTok{searching =}\NormalTok{ T,}
-                 \DataTypeTok{pageLength =} \DecValTok{10}\NormalTok{, }\DataTypeTok{lengthChange =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{ordering =} \OtherTok{FALSE}\NormalTok{,}
-                 \DataTypeTok{scrollCollapse =}\NormalTok{ T,}
-                 \DataTypeTok{scrollY =} \StringTok{'1500'}\NormalTok{,}
-                 \DataTypeTok{paging =}\NormalTok{ T}
-\NormalTok{                 )}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Plotly MAP}\label{plotly-map}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplotly}\NormalTok{(}
-    \KeywordTok{ggplot}\NormalTok{(df_master2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(skl_group}\OperatorTok{==}\NormalTok{x),}
-       \KeywordTok{aes}\NormalTok{(SkillId, correct_rate, }\DataTypeTok{label =}\NormalTok{ Master, }\DataTypeTok{color =}\NormalTok{ SkillId)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_jitter}\NormalTok{(}\DataTypeTok{width =}\NormalTok{ .}\DecValTok{2}\NormalTok{),}
-    \DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{'y'}\NormalTok{, }\StringTok{'label'}\NormalTok{)}
-\NormalTok{    )}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Pipe Anonymous Function}\label{pipe-anonymous-function}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{(}\ControlFlowTok{function}\NormalTok{(input.object) \{}
-\NormalTok{    complex}
-\NormalTok{    logic}
-\NormalTok{    goes}
-\NormalTok{    here}
-\NormalTok{    output.object}
-\NormalTok{  \})}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Binarize Predictions}\label{binarize-predictions}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{clf_lr_final <-}\StringTok{ }\NormalTok{clf_lr}\OperatorTok{$}\NormalTok{finalModel}
-\NormalTok{model_tidy <-}\StringTok{ }\NormalTok{broom}\OperatorTok{::}\KeywordTok{tidy}\NormalTok{(clf_lr_final)}
-\NormalTok{df2}\OperatorTok{$}\NormalTok{pass_predicted <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}
-  \KeywordTok{ifelse}\NormalTok{(clf_lr_final}\OperatorTok{$}\NormalTok{fitted.values }\OperatorTok{>=}\StringTok{ }\NormalTok{.}\DecValTok{5}\NormalTok{, }\StringTok{'pass'}\NormalTok{, }\StringTok{'fail'}\NormalTok{)}
-\NormalTok{  )}
-\KeywordTok{metrics}\NormalTok{(df2, pass, pass_predicted)}
-
-\NormalTok{var_imp <-}\StringTok{ }\KeywordTok{varImp}\NormalTok{(clf_lr_final) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{row.names}\NormalTok{(.)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{arrange}\NormalTok{(}\OperatorTok{-}\NormalTok{Overall) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(cols, Overall)}
-\NormalTok{var_imp}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Make Formula}\label{make-formula}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{make_formula <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(target, additions, }\DataTypeTok{subtractions =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{powers =} \OtherTok{NULL}\NormalTok{)\{}
-  
-\NormalTok{  add_sub_sep =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.null}\NormalTok{(subtractions), }\StringTok{''}\NormalTok{, }\StringTok{'-'}\NormalTok{)}
-\NormalTok{  add <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(additions, }\DataTypeTok{collapse =} \StringTok{' + '}\NormalTok{)}
-\NormalTok{  subtract <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(subtractions, }\DataTypeTok{collapse =} \StringTok{' - '}\NormalTok{)}
-\NormalTok{  add_subtract <-}\StringTok{ }\KeywordTok{paste}\NormalTok{(add, subtract, }\DataTypeTok{sep =}\NormalTok{ add_sub_sep)}
-  
-  \KeywordTok{return}\NormalTok{(}\KeywordTok{as.formula}\NormalTok{(}\KeywordTok{paste}\NormalTok{(target, add_subtract, }\DataTypeTok{sep =} \StringTok{'~'}\NormalTok{)))}
-  
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Shiny Reactive}\label{shiny-reactive}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df_labeled =}\StringTok{ }\KeywordTok{eventReactive}\NormalTok{(\{}\KeywordTok{c}\NormalTok{(input}\OperatorTok{$}\NormalTok{good, input}\OperatorTok{$}\NormalTok{bad)\}, \{    }
-\NormalTok{    df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{==}\StringTok{ }\NormalTok{input}\OperatorTok{$}\NormalTok{value)}
-\NormalTok{  \})}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Custom Theme}\label{custom-theme}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{theme}\NormalTok{(}
-     \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{65}\NormalTok{, }\DataTypeTok{vjust =} \FloatTok{0.6}\NormalTok{),}
-     \DataTypeTok{axis.title.x =} \KeywordTok{element_blank}\NormalTok{(),}
-     \DataTypeTok{panel.background =} \KeywordTok{element_blank}\NormalTok{()}
-\NormalTok{     )}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Create Factor}\label{create-factor}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mons =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}
-   \KeywordTok{c}\NormalTok{(}\StringTok{"August"}\NormalTok{,}\StringTok{"September"}\NormalTok{, }\StringTok{"October"}\NormalTok{,}\StringTok{"November"}\NormalTok{,}
-           \StringTok{"December"}\NormalTok{, }\StringTok{"January"}\NormalTok{,}\StringTok{"February"}\NormalTok{,}\StringTok{"March"}\NormalTok{,}
-               \StringTok{"April"}\NormalTok{,}\StringTok{"May"}\NormalTok{,}\StringTok{"June"}\NormalTok{,}\StringTok{"July"}\NormalTok{),}
-  \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"August"}\NormalTok{,}\StringTok{"September"}\NormalTok{, }\StringTok{"October"}\NormalTok{,}\StringTok{"November"}\NormalTok{,}
-           \StringTok{"December"}\NormalTok{, }\StringTok{"January"}\NormalTok{,}\StringTok{"February"}\NormalTok{,}\StringTok{"March"}\NormalTok{,}
-               \StringTok{"April"}\NormalTok{,}\StringTok{"May"}\NormalTok{,}\StringTok{"June"}\NormalTok{,}\StringTok{"July"}\NormalTok{),}
-  \DataTypeTok{ordered =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Extract Date}\label{extract-date}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{StartTime }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m-%d"}\NormalTok{)}
-\NormalTok{YearMonth =}\StringTok{ }\NormalTok{Day }\OperatorTok{%>%}\StringTok{ }\KeywordTok{strftime}\NormalTok{(}\DataTypeTok{format=}\StringTok{"%Y-%m"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Geom\_Path}\label{geom_path}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(ilo_data) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_path}\NormalTok{(}
-            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ working_hours, }\DataTypeTok{y =}\NormalTok{ country),}
-            \DataTypeTok{arrow =} \KeywordTok{arrow}\NormalTok{(}\DataTypeTok{length =} \KeywordTok{unit}\NormalTok{(}\FloatTok{1.5}\NormalTok{, }\StringTok{"mm"}\NormalTok{), }\DataTypeTok{type =} \StringTok{"closed"}\NormalTok{)}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Theme Template}\label{theme-template}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{theme_ilo <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{() \{}
-  \KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme}\NormalTok{(}
-    \DataTypeTok{text =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{family =} \StringTok{"Bookman"}\NormalTok{, }\DataTypeTok{color =} \StringTok{"gray25"}\NormalTok{),}
-    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{12}\NormalTok{),}
-    \DataTypeTok{plot.caption =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{color =} \StringTok{"gray30"}\NormalTok{),}
-    \DataTypeTok{plot.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"gray95"}\NormalTok{),}
-    \DataTypeTok{plot.margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{units =} \StringTok{"mm"}\NormalTok{)}
-\NormalTok{  )}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Heatmap}\label{heatmap}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(corrplot)}
-\NormalTok{df_fltrd }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select_if}\NormalTok{(is.numeric) }\OperatorTok{%>%}\StringTok{  }
-\KeywordTok{cor}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{corrplot}\NormalTok{(}\DataTypeTok{method =} \StringTok{"circle"}\NormalTok{, }\DataTypeTok{is.corr =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Calculate Accuracy}\label{calculate-accuracy}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{calc_accuracy <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(labels, preds)\{}
-  
-\NormalTok{  results <-}\StringTok{ }\KeywordTok{table}\NormalTok{(labels, preds) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\NormalTok{data.frame }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{correct =} \KeywordTok{ifelse}\NormalTok{(labels}\OperatorTok{==}\NormalTok{preds, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{group_by}\NormalTok{(correct) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{freq =} \KeywordTok{sum}\NormalTok{(Freq)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{prop =}\NormalTok{ freq}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(freq)) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{filter}\NormalTok{(correct }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
-  
-  \KeywordTok{return}\NormalTok{(results)}
-
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Replace NA}\label{replace-na}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{replace_na}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\DataTypeTok{x =} \DecValTok{0}\NormalTok{, }\DataTypeTok{y =} \StringTok{"unknown"}\NormalTok{))}
-\NormalTok{df2 }\OperatorTok{%>%}\StringTok{ }\KeywordTok{replace}\NormalTok{(., }\KeywordTok{is.na}\NormalTok{(.), }\StringTok{""}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Filter By Row}\label{filter-by-row}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}
-    \OperatorTok{!}\KeywordTok{grepl}\NormalTok{(}\StringTok{'Schedules'}\NormalTok{, issues)}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{DB Functions}\label{db-functions}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# DB Functions}
-
-\NormalTok{data <-}\StringTok{ }\KeywordTok{dbGetQuery}\NormalTok{(con, }\StringTok{'select * from iris'}\NormalTok{)}
-\KeywordTok{dbListTables}\NormalTok{(con) }\OperatorTok{%>%}\StringTok{ }\NormalTok{sort}
-\KeywordTok{dbExistsTable}\NormalTok{(con, }\StringTok{"iris"}\NormalTok{)}
-\KeywordTok{dbRemoveTable}\NormalTok{(con, }\StringTok{"iris"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Knitr}\label{knitr}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\KeywordTok{rep}\NormalTok{(}\StringTok{"./assets/ml_trading/portfolio.png"}\NormalTok{, }\DecValTok{3}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Bash}\label{bash}
-
-script to do joining of dummied csvs
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ExtensionTok{paste}\NormalTok{ -d=}\StringTok{','}\NormalTok{ file1.csv file2.csv file3.csv }\OperatorTok{>}\NormalTok{ file_final.csv}
-\end{Highlighting}
-\end{Shaded}
-
 \chapter{Time Series}\label{time-series}
 
 \section{Notes}\label{notes}
@@ -5333,7 +4402,7 @@ AIC\_c for model selection.
 
 \chapter{Stats}\label{stats}
 
-\subsection{General}\label{general-5}
+\subsection{General}\label{general-3}
 
 Since all outcomes are 0 or 1, and drawn with the same (unknown)
 probability, we know that the number of ones and zeros follows a
@@ -6292,6 +5361,189 @@ model that includes Year.
   student, partition cross validation by dates, pca finds major trends
   hidden within the data
 \end{itemize}
+
+\chapter{Code Notes}\label{code-notes}
+
+\hypertarget{python}{\section{Python}\label{python}}
+
+\subsection{General}\label{general-4}
+
+\begin{itemize}
+\item
+  \url{https://chrisalbon.com/}
+\item
+  pandas: isin \textbar{} crosstab
+\item
+  pd.group\_by aggregate functions: size, count, sum, mean, median, sd,
+  var, min, max, prod, first, last
+\item
+  The only float that isn't equal to itself is nan.
+\item
+  \%matplotlib notebook: interactive plots
+\item
+  Memory storage: use pd.copy to create a deep copy instead of a shallow
+  copy
+\item
+  IPy: \%who or \%whos shows defined variables \& \%reset resets them
+\item
+  Append dict to df: use ignore\_index = True. eg. films\_df =
+  films\_df.append(film\_dict, ignore\_index=1)
+\item
+  Debugging: import pdb \textbar{} pdb.set\_trace(),
+\item
+  dir() gives a list of in scope variables
+\item
+  globals() gives a dictionary of global variables
+\item
+  locals() gives a dictionary of local variables
+\item
+  \url{https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/}
+\item
+  np.dot = np.multiply \%\textgreater{}\% np.sum
+\item
+  flatten dict
+
+  \begin{itemize}
+  \tightlist
+  \item
+    pd.io.json.json\_normalize(stuff)
+    *\url{https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055\#41689055}
+  \item
+    \url{https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
+
+\begin{itemize}
+\item
+  create helper functions and units tests as R/py for Rmd/ipynb
+\item
+  pytest/hypothesis for testing
+\item
+  use makefile to run cmd commands
+\item
+  Write file with date:
+  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
+\item
+  Make package for workflow with data (\textbf{init}.py) and use this
+  formation for function docs:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ fun(a):}
+  \CommentTok{#Role}
+  \CommentTok{#-----}
+  \CommentTok{#Does something}
+  
+  \CommentTok{#Parameters}
+  \CommentTok{#---------}
+  \CommentTok{#Accepts something}
+  
+  \CommentTok{#Returns}
+  \CommentTok{#-------}
+  \CommentTok{#Returns something}
+  
+  \ControlFlowTok{return}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r}{\section{R}\label{r}}
+
+\subsection{General}\label{general-5}
+
+\begin{itemize}
+\item
+  ctrl + shift + a: reformat code in rstudio
+\item
+  library(rethinking) \textbar{} data(UCBadmit) \textbar{} d
+  \textless{}- UCBadmit
+\item
+  purrr::p/map\_dfr/c
+\item
+  date = date \%\textgreater{}\% as.POSIXct() \%\textgreater{}\%
+  strptime(`\%Y-\%m-\%d') \%\textgreater{}\%
+  strftime(format=``\%Y-\%m-\%d'')
+\item
+  e \textless{}- matrix(NA\_real\_, nrow = 1000, ncol = 8)
+\item
+  rowwise in R: purrr::pmap
+\item
+  str\_split + unnest()
+\item
+  \url{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html}
+\item
+  na\_if: Replace certain values by na
+\item
+  purrr::map\_df - map over columns
+\item
+  studio multiple cursors, snippets, addins
+\item
+  ctrl + shift + o: toggle table of contents
+\item
+  ctrl shift enter: run chunk
+\item
+  ctrl pageup/down: navigate chunks
+\item
+  atl shift k: shortcuts
+\item
+  ctrl + shift + R: label sections
+\item
+  ctrl + alt + R: run all chunks
+\item
+  df\_print: kable in yaml rmrkdown header
+\item
+  rm(list = ls()): Remove all objects in the current workspace
+\item
+  cut(): Transform a numeric variable into a categorical variable.
+\item
+  car: recode (good for dummying)
+\item
+  Examine the objects in the workspace: ls.str()
+\item
+  This is how you dynamically update a value in Rmarkdown: x =
+  \emph{backtick} r x \emph{backtick}.
+\item
+  df{[}setdiff(names(df), ``z''){]}: remove column z
+\item
+  purrr::walk
+\item
+  purr::keep/discard for is.factor
+\item
+  choroplethr \textbar{} choroplethrMaps \textbar{}\textbar{} d3r
+  \textbar{} d3treeR \textbar{} data.tree
+\end{itemize}
+
+\subsection{Knitting A GHub Doc}\label{knitting-a-ghub-doc}
+
+output: github\_document: default html\_notebook: default
+
+\section{Various}\label{various}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(Summary_Variable, Group_Variable, Function)}
+
+\KeywordTok{boxplot}\NormalTok{(frequency }\OperatorTok{~}\StringTok{ }\NormalTok{attitude}\OperatorTok{*}\NormalTok{gender,}
+\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{,}\StringTok{"lightgray"}\NormalTok{), politeness)}
+
+\CommentTok{#corrplot package in r}
+\KeywordTok{cor}\NormalTok{(Carseats[}\KeywordTok{sapply}\NormalTok{(Carseats, }\ControlFlowTok{function}\NormalTok{(x) }\OperatorTok{!}\KeywordTok{is.factor}\NormalTok{(x))])}
+
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\StringTok{"pROC"}\NormalTok{), }\DataTypeTok{dependencies =} \KeywordTok{c}\NormalTok{(}\StringTok{"Depends"}\NormalTok{, }\StringTok{"Imports"}\NormalTok{, }\StringTok{"Suggests"}\NormalTok{))}
+
+\KeywordTok{library}\NormalTok{(knitr)}
+\KeywordTok{kable}\NormalTok{(pause_sum, }\DataTypeTok{caption =} \StringTok{"Summary Statistics Table for Exit Slip Dataset"}\NormalTok{,}
+      \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Mean"}\NormalTok{, }\StringTok{"Median"}\NormalTok{, }\StringTok{"SD"}\NormalTok{, }\StringTok{"Min"}\NormalTok{, }\StringTok{"Max"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"NAs"}\NormalTok{))}
+
+\KeywordTok{typeof}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{#"double"}
+\KeywordTok{typeof}\NormalTok{(1L) }\CommentTok{#"integer"}
+
+\CommentTok{#Prints out the first 4 multiples of 3.}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\OperatorTok{*}\DecValTok{3}\NormalTok{) \{}\KeywordTok{cat}\NormalTok{(i)\}}
+\end{Highlighting}
+\end{Shaded}
 
 \bibliography{book.bib,packages.bib}
 
