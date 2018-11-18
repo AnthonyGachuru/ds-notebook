@@ -6,6 +6,8 @@
 
 * confint (R)
 
+* hamming distance for categorical data
+
 * precision: how good were you at something being true when you said it was true,recall: how many of the true values did you catch. f1: harmonic mean of the two
 
 * Don't use brier loss for ordinal predictions
