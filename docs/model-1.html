@@ -323,6 +323,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>12.0.1</b> Topic Modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>13</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="14" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>14</b> Notes</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -348,54 +349,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="general-1" class="section level2">
 <h2><span class="header-section-number">4.1</span> General</h2>
 <ul>
-<li><p>can use hamming distance with DBSCAN in sklearn</p></li>
-<li><p>Model Template: intro/packages, fs/fe, tuning, pros/cons, notes</p></li>
-<li><p>confint (R)</p></li>
-<li><p>hamming distance for categorical data</p></li>
-<li><p>precision: how good were you at something being true when you said it was true,recall: how many of the true values did you catch. f1: harmonic mean of the two</p></li>
-<li><p>Don’t use brier loss for ordinal predictions</p></li>
-<li><p>brier score: .25 if say .5 and .33 if randomly assign probs</p></li>
+<li><p>hamming distance for categorical data. Available in sklearn DBSCAN.</p></li>
+<li><p>precision: how good were you at something being true when you said it was true. recall: how many of the true values did you catch. f1: harmonic mean of the two</p></li>
+<li><p>Brier score: Don’t use for ordinal predictions. 0.25 if say .5 and .33 if randomly assign probs.</p></li>
 <li><p>R uses class encoded as 1 in classification to make predictions. Use levels() function on factor to determine what 1 is.</p></li>
 <li><p>20 observations per feature is pretty good for making predictions.</p></li>
 <li><p>y = b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2. ( b_1 + b_2x_2 ) is the increase in y with a unit increase in x_1.</p></li>
-<li><p><a href="http://ml-cheatsheet.readthedocs.io/en/latest/index.html" class="uri">http://ml-cheatsheet.readthedocs.io/en/latest/index.html</a></p></li>
 <li><p>Algorithms for Rec Systems: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matrix Factorization, Alternating Least Squares.</p></li>
 <li><p>For example, multilevel models themselves may be referred to as hierarchical linear models, random effects models, multilevel models, random intercept models, random slope models, or pooling models.</p></li>
-<li><p><a href="https://www.listendata.com/2018/03/regression-analysis.html" class="uri">https://www.listendata.com/2018/03/regression-analysis.html</a></p></li>
-<li><p>In general, raising the classification threshold reduces false positives, thus raising precision.</p></li>
 <li><p>Multi-Modal Classification: In the machine learning community, the term Multi-Modal is used to refer to multiple kinds of data. For example, consider a YouTube video. It can be thought to contain 3 different modalities: 1) The video frames (visual modality), 2) The audio clip of what’s being spoken (audio modality), 3) Some videos also come with the transcription of the words spoken in the form of subtitles (textual modality)</p></li>
 <li><p>Less samples and more features increase the chance of overfitting.</p></li>
 <li><p>You can choose either of the following inference strategies: offline inference, meaning that you make all possible predictions in a batch, using a MapReduce or something similar. You then write the predictions to an SSTable or Bigtable, and then feed these to a cache/lookup table. online inference, meaning that you predict on demand, using a server.</p></li>
 <li><p>A static model is trained offline. That is, we train the model exactly once and then use that trained model for a while. A dynamic model is trained online. That is, data is continually entering the system and we’re incorporating that data into the model through continuous updates.</p></li>
 <li><p>How would multiplying all of the predictions from a given model by 2.0 (for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8) change the model’s performance as measured by AUC? No change. AUC only cares about relative prediction scores. Yes, AUC is based on the relative predictions, so any transformation of the predictions that preserves the relative ranking has no effect on AUC. This is clearly not the case for other metrics such as squared error, log loss, or prediction bias (discussed later).</p></li>
 <li><p>AUC is desirable for the following two reasons: AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values. UC is classification-threshold-invariant. It measures the quality of the model’s predictions irrespective of what classification threshold is chosen. However, both these reasons come with caveats, which may limit the usefulness of AUC in certain use cases: Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that. Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn’t a useful metric for this type of optimization.</p></li>
-<li><p>Raising our classification threshold will cause the number of true positives to decrease or stay the same and will cause the number of false negatives to increase or stay the same. Thus, recall will either stay constant or decrease.</p></li>
-<li><p><a href="https://www.dataquest.io/blog/learning-curves-machine-learning/" class="uri">https://www.dataquest.io/blog/learning-curves-machine-learning/</a></p></li>
+<li><p>Raising our classification threshold will cause the number of true positives to decrease or stay the same and will cause the number of false negatives to increase or stay the same. Thus, recall will either stay constant or decrease. In general, raising the classification threshold reduces false positives, thus raising precision.</p></li>
 <li><p>A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.</p></li>
 <li><p>Bias: Error Introduced by approximating real-life problem by using a simple method</p></li>
 <li><p>Imagine a linear model with two strongly correlated features; that is, these two features are nearly identical copies of one another but one feature contains a small amount of random noise. If we train this model with L2 regularization, what will happen to the weights for these two features? L2 regularization will force the features towards roughly equivalent weights that are approximately half of what they would have been had only one of the two features been in the model.</p></li>
 <li><p>L2 regularization will encourage many of the non-informative weights to be nearly (but not exactly) 0.0.</p></li>
 <li><p>F1 Score = TP/(TP + FP + FN). Essentially how good you are at identifying the positive class.</p></li>
-<li><p>Active Learning: Finding the optimal data to manually label</p></li>
-<li><p>Simulated Annealing: Gradient descent extension</p></li>
 <li><p>A variable that is completely useless by itself can provide a significant performance improvement when taken with others.</p></li>
-<li><p>So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).</p></li>
 <li><p>Variance: The amount the model output will change if the model was trained using a different data</p></li>
-<li><p>Flexible Methods: higher variance, low bias, Example: KNN (k = 1)</p></li>
-<li><p>Inflexible Methods: low variance, high bias, Example: Linear regression</p></li>
-<li><p>Sequence mining Algorithms: spade, gsp, freespan; hmmlearn</p></li>
-<li><p>Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks</p></li>
-<li><p>Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression</p></li>
-<li><p>Non-Parametric: No assumption about model form is made, Example: KNN</p></li>
+<li><p>Flexible Methods: higher variance, low bias, Example: KNN (k = 1). * Inflexible Methods: low variance, high bias, Example: Linear regression</p></li>
 <li><p>Set Random state by hand in sklearn.</p></li>
 <li><p>Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]</p></li>
 <li><p>Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]</p></li>
 <li><p>Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I’m going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).</p></li>
 <li><p>We can also tell that our input, smart_1_normalized, doesn’t have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).</p></li>
 <li><p>The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.</p></li>
-<li><p>The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn’t change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User’s purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.</p></li>
-<li><p>empirical risk minimization: In supervised learning, a machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss.</p></li>
-<li><p>Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model’s prediction was on a single example. If the model’s prediction is perfect, the loss is zero; otherwise, the loss is greater.</p></li>
 </ul>
 </div>
 <div id="pre-processing" class="section level2">
@@ -424,7 +406,6 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <li><p>SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions.</p></li>
 <li><p>sklearn.feature_selection.RFE(CV)</p></li>
 <li><p>To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.</p></li>
-<li><p>Make sure that your test set meets the following two conditions: 1) Is large enough to yield statistically meaningful results, 2) Is representative of the data set as a whole. In other words, don’t pick a test set with different characteristics than the training set.</p></li>
 <li><p>Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there’s still a significant tail of outlier values. Let’s pick yet another approach. What if we simply “cap” or “clip” the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn’t mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.</p></li>
 <li><p>Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).</p></li>
 </ul>
@@ -435,18 +416,19 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <h3><span class="header-section-number">4.5.1</span> Unbalanced Classes</h3>
 <p>Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%.</p>
 <p>That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:</p>
-<p>Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.</p>
-<p>Balance the training set in some way: Oversample the minority class. Undersample the majority class. Synthesize new minority classes.</p>
-<p>Throw away minority examples and switch to an anomaly detection framework.</p>
-<p>At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.</p>
-<p>Construct an entirely new algorithm to perform well on imbalanced data.</p>
-<p>Use AUC, F1 Score, Cohen’s Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.</p>
-<p>Use probability estimates and not the default .5 threshold.</p>
-<p>Undersampling, oversampling, increase weight of minority class</p>
-<p>Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.</p>
-<p>Reframe as Anomaly Detection</p>
 <ul>
-<li>Sklearn Eg: wclf = svm.SVC(kernel=‘linear’, class_weight={1: 10}) &amp; svm.SVC(kernel=‘linear’, class_weight=‘balanced’)</li>
+<li><p>Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.</p></li>
+<li><p>Balance the training set in some way: Oversample the minority class. Undersample the majority class. Synthesize new minority classes.</p></li>
+</ul>
+<p>*Throw away minority examples and switch to an anomaly detection framework.</p>
+<ul>
+<li><p>At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.</p></li>
+<li><p>Construct an entirely new algorithm to perform well on imbalanced data.</p></li>
+<li><p>Use AUC, F1 Score, Cohen’s Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.</p></li>
+<li><p>Use probability estimates and not the default .5 threshold.</p></li>
+<li><p>Undersampling, oversampling, increase weight of minority class</p></li>
+<li><p>Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.</p></li>
+<li><p>Sklearn Eg: wclf = svm.SVC(kernel=‘linear’, class_weight={1: 10}) &amp; svm.SVC(kernel=‘linear’, class_weight=‘balanced’)</p></li>
 </ul>
 </div>
 </div>
@@ -455,24 +437,21 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <div id="general-2" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> General</h3>
 <ul>
+<li><p>Make sure that your test set meets the following two conditions: 1) Is large enough to yield statistically meaningful results, 2) Is representative of the data set as a whole. In other words, don’t pick a test set with different characteristics than the training set.</p></li>
 <li><p>Linear SVM often outperforms logistic regression and is explainable as well.</p></li>
 <li><p>However, the problem with cross-validation is that it is rarely applicable to real world problems, for all the reasons described in the above sections. Cross-validation only works in the same cases where you can randomly shuffle your data to choose a validation set.</p></li>
 <li><p>If the performance of a classification model on the test set (out-of-sample) error is poor, you can’t just re-calibrate your model parameters to achieve a better model. This is cheating.</p></li>
 <li><p>When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suffer from this problem. If n is small and the distribution of the predictors X is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.</p></li>
 <li><p>Roughly speaking, LDA tends to be a better bet than QDA if there are relatively few training observations and so reducing variance is crucial. In contrast, QDA is recommended if the training set is very large, so that the variance of the classifier is not a major concern, or if the assumption of a common covariance matrix for the K classes is clearly untenable.</p></li>
 <li><p>Two features interact if the effect on the prediction of one feature depends on the value of the other feature</p></li>
-<li><p>“No Free Lunch” theorem: no single classifier works best across all possible scenarios</p></li>
 <li><p>Warning PolynomialFeatures(degree=d) transforms an array containing n features into an array containing features, where n! is the factorial of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial explosion of the number of features!</p></li>
-<li><p>If a model suffers from overfitting, we also say that the model has a high variance, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. Similarly, our model can also suffer from underfitting (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.</p></li>
 <li><p>It appears that each feature has modestly improved our model. There are certainly more features that we could add to our model. For example, we could add the day of the week and the hour of the posting, we could determine if the article is a listicle by running a regex on the headline, or we could examine the sentiment of each article. This only begins to touch on the features that could be important to model virality. We would certainly need to go much further to continue reducing the error in our model.</p></li>
 <li><p>Suppose Fixitol reduces symptoms by 20% over a placebo, but the trial you’re using to test it is too small to have adequate statistical power to detect this difference reliably. We know that small trials tend to have varying results; it’s easy to get 10 lucky patients who have shorter colds than usual but much harder to get 10,000 who all do.</p></li>
 <li><p>As I mentioned earlier, one drawback of the Bonferroni correction is that it greatly decreases the statistical power of your experiments, making it more likely that you’ll miss true effects. More sophisticated procedures than Bonferroni correction exist, ones with less of an impact on statistical power, but even these are not magic bullets. Worse, they don’t spare you from the base rate fallacy. You can still be misled by your p threshold and falsely claim there’s “only a 5% chance I’m wrong.” Procedures like the Bonferroni correction only help you eliminate some false positives.</p></li>
 <li><p>In step 1, we find where missing values are located. The md.pattern() function from the mice package is a really useful function. It gives you a clear view of where missing values are located, helping you in decisions regarding exclusions or substitution. You can refer to the next recipe for missing value substitution.</p></li>
-<li><p>“Product classification is an example of multicategory or multinomial classification. Most classification problems and most classification algorithms are specialized for two-category, or binomial, classification. There are tricks to using binary classifiers to solve multicategory problems (for example, building one classifier for each category, called a “one versus rest” classifier). But in most cases it’s worth the effort to find a suitable multiple-category implementation, as they tend to work better than multiple binary classifiers (for example, using the package mlogit instead of the base method glm() for logistic regression).”</p></li>
 <li><p>Another possible indication of collinearity in the inputs is seeing coefficients with an unexpected sign: for example, seeing that income is negatively correlated with years in the workforce.</p></li>
 <li><p>The overall model can still predict income quite well, even when the inputs are correlated; it just can’t determine which variable deserves the credit for the prediction. Using regularization (especially ridge regression as found in lm.ridge() in the package MASS) is helpful in collinear situations (we prefer it to “x-alone” variable preprocessing, such as principal components analysis). If you want to use the coefficient values as advice as well as to make good predictions.</p></li>
 <li><p>The degrees of freedom is thought of as the number of training data rows you have after correcting for the number of coefficients you tried to solve for. You want the degrees of freedom to be large compared to the number of coefficients fit to avoid overfitting.</p></li>
-<li><p>Overfitting is when you find chance relations in your training data that aren’t present in the general population. Overfitting is bad: you think you have a good model when you don’t.</p></li>
 <li><p>The probable reason for nonconvergence is separation or quasi-separation: one of the model variables or some combination of the model variables predicts the outcome perfectly for at least a subset of the training data. You’d think this would be a good thing, but ironically logistic regression fails when the variables are too powerful.</p></li>
 <li><p>For categorical variables (male/female, or small/medium/large), you can define the distance as 0 if two points are in the same category, and 1 otherwise. If all the variables are categorical, then you can use Hamming distance, which counts the number of mismatches.</p></li>
 <li><p>Your next step is to select a performance measure. A typical performance measure for regression problems is the Root Mean Square Error (RMSE). It measures the standard deviation of the errors the system makes in its predictions.</p></li>
@@ -491,15 +470,14 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <li><p>When building, testing, and validating a suite of models, the optimal model (i.e., the optimal point in the ROC curve) is the spot where the overall accuracy of the model is essentially unchanged as we make small adjustments in the choice of model. That is to say, the change (from one model to the next) in the model’s precision (specificity) is exactly offset by the change in the model’s recall (sensitivity). Consequently, allowing for some imperfection, where the false positive rate and the false negative rate are in proper balance (so that neither one has too great of an impact on the overall accuracy and effectiveness of the model), is good fruit from your big data labors. The metric I used to guide my cross-validation is the F-score. This is a good metric when we have a lot more samples from one category than from the other categories.</p></li>
 <li><p>The cost of the holdout method comes in the amount of data that is removed from the model training process. For instance, in the illustrative example here, we removed 30% of our data. This means that our model is trained on a smaller data set and its error is likely to be higher than if we trained it on the full data set. The standard procedure in this case is to report your error using the holdout set, and then train a final model using all your data.</p></li>
 <li><p>A metric that minimizes false positives, by rarely flagging players and teams that fail to achieve the desired outcome, is specific. A metric that minimizes false negatives, by rarely failing to flag players and teams that achieve the desired outcome, is sensitive.</p></li>
-<li><p>Although the previous code example was useful to illustrate how k-fold cross-validation works, scikit-learn also implements a k-fold cross-validation scorer, which allows us to evaluate our model using stratified k-fold cross-validation more efficiently</p></li>
 <li><p>Sometimes it may be more useful to report the coefficient of determination (), which can be understood as a standardized version of the MSE, for better interpretability of the model performance. In other words, is the fraction of response variance that is captured by the model. The value is defined as follows:Here, SSE is the sum of squared errors and SST is the total sum of squares , or in other words, it is simply the variance of the response.</p></li>
-<li><p>Most people start working with data from exactly the wrong end. They begin with a data set, then apply their favorite tools and techniques to it. The result is narrow questions and shallow arguments. Starting with data, without first doing a lot of thinking, without having any structure, is a short road to simple questions and unsurprising results. We don’t want unsurprising—we want knowledge.</p></li>
+<li><p>Most people start working with data from exactly the wrong end. They begin with a data set, then apply their favorite tools and techniques to it. The result is narrow questions and shallow arguments. Starting with data, without first doing a lot of thinking, without having any structure, is a short road to simple questions and unsurprising results. We don’t want unsurprising - we want knowledge.</p></li>
 <li><p>Remember that the positive class in scikit-learn is the class that is labeled as class 1. If we want to specify a different positive label, we can construct our own scorer via the make_scorer function, which we can then directly provide as an argument to the scoring parameter in GridSearchCV</p></li>
 <li><p>While the weighted macro-average is the default for multiclass problems in scikit-learn, we can specify the averaging method via the average parameter inside the different scoring functions that we import from the sklean.metrics module, for example, the precision_score or make_scorer functions</p></li>
 <li><p>Transforming words into feature vectorsTo construct a bag-of-words model based on the word counts in the respective documents, we can use the CountVectorizer class implemented in scikit-learn. As we will see in the following code section, the CountVectorizer class takes an array of text data, which can be documents or just sentences, and constructs the bag-of-words model for us:</p></li>
-<li><p>Scikit-learn implements yet another transformer, the TfidfTransformer, that takes the raw term frequencies from CountVectorizer as input and transforms them into tf-idfs.</p></li>
-<li><p>Naive Bayes is a linear classifier, while k-NN is not. The curse of dimensionality and large feature sets are a problem for k-NN, while Naive Bayes performs well. k-NN requires no training (just load in the dataset), whereas Naive Bayes does.</p></li>
+<li><p>Naive Bayes is a linear classifier, while KNN is not. The curse of dimensionality and large feature sets are a problem for KNN, while Naive Bayes performs well. KNN requires no training (just load in the dataset), whereas Naive Bayes does.</p></li>
 <li><p>The McNemar test, introduced by Quinn McNemar in 1947 (McNemar 1947), is a non-parametric statistical test for paired comparisons that can be applied to compare the performance of two machine learning classifiers. Cochran’s Q Test or F Test for &gt;2.</p></li>
+<li><p><a href="http://hunch.net/?p=224">Model Comparison</a></p></li>
 </ul>
 </div>
 <div id="clustering" class="section level3">
@@ -507,8 +485,6 @@ df[<span class="st">&#39;mnth_cos&#39;</span>] <span class="op">=</span> np.cos(
 <ul>
 <li><p><a href="http://scikit-learn.org/stable/modules/clustering.html#clustering">Comparison</a></p></li>
 <li><p><a href="https://twitter.com/thomaswdinsmore/status/965223193043718145">Rules</a></p></li>
-<li><p><a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68" class="uri">https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68</a></p></li>
-<li><p><a href="http://hunch.net/?p=224" class="uri">http://hunch.net/?p=224</a></p></li>
 </ul>
 
 </div>

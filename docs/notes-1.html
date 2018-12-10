@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="frameworks.html">
-<link rel="next" href="stats.html">
+<link rel="prev" href="hierarchical-models.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -344,209 +344,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="time-series" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Time Series</h1>
-<div id="notes" class="section level2">
-<h2><span class="header-section-number">8.1</span> Notes</h2>
-<p>A stationary time series is one whose properties do not depend on the time at which the series is observed.</p>
-</div>
-<div id="packages" class="section level2">
-<h2><span class="header-section-number">8.2</span> Packages</h2>
-<p><a href="https://robjhyndman.com/seminars/user-fable/" class="uri">https://robjhyndman.com/seminars/user-fable/</a> <a href="https://github.com/robjhyndman/forecast" class="uri">https://github.com/robjhyndman/forecast</a> <a href="https://facebook.github.io/prophet/docs/quick_start.html" class="uri">https://facebook.github.io/prophet/docs/quick_start.html</a> <a href="https://keras.rstudio.com/articles/examples/index.html" class="uri">https://keras.rstudio.com/articles/examples/index.html</a> <a href="http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html" class="uri">http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html</a> <a href="https://www.rdocumentation.org/packages/bsts/versions/0.8.0" class="uri">https://www.rdocumentation.org/packages/bsts/versions/0.8.0</a></p>
-</div>
-<div id="data-conversion" class="section level2">
-<h2><span class="header-section-number">8.3</span> Data Conversion</h2>
-<p><a href="https://robjhyndman.com/hyndsight/seasonal-periods/" class="uri">https://robjhyndman.com/hyndsight/seasonal-periods/</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt =<span class="st"> </span><span class="kw">as.Date</span>(StockData<span class="op">$</span>Date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>) <span class="op">&gt;</span>Stockdataz =<span class="st"> </span><span class="kw">zoo</span>(<span class="dt">x=</span><span class="kw">cbind</span>(StockData<span class="op">$</span>Volume,StockData<span class="op">$</span>Adj.Close), <span class="dt">order.by=</span>dt)
-
-ts<span class="op">:</span><span class="st"> </span>frequency =<span class="st"> </span><span class="dv">5</span> means that data is at daily level business days
-<span class="kw">ts</span>(completed_example_data<span class="op">$</span>Wind,<span class="dt">start =</span> <span class="kw">c</span>(<span class="dv">1973</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="dt">frequency =</span> <span class="fl">365.25</span>)
-
-<span class="kw">xts</span>(df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span><span class="kw">as.Date</span>(df[,<span class="dv">1</span>], <span class="st">&quot;%m/%d/%Y&quot;</span>))</code></pre></div>
-</div>
-<div id="models" class="section level2">
-<h2><span class="header-section-number">8.4</span> Models</h2>
-<p>Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.</p>
-<p>Benchmark models: Mean, naive, seasonal naive</p>
-<ol start="0" style="list-style-type: decimal">
-<li><p>Mean</p></li>
-<li><p>Naive: Set all forecasts to be the value of the last observation. This method works remarkably well for many economic and financial time series. Because a naive forecast is optimal when data follow a random walk, these are also called random walk forecasts. naive()</p></li>
-<li><p>Seasonal Naive: Assumes magnitude of the seasonal pattern is constant. snaive()</p></li>
-</ol>
-<p>Linear</p>
-<ol start="10" style="list-style-type: decimal">
-<li><p>regression: tslm(): trend and season are not objects in the R workspace; they are created automatically by tslm() when specified in this way: tslm(beer2 ~ trend + season). It is not recommended that quadratic or higher order trends be used in forecasting. When they are extrapolated, the resulting forecasts are often unrealistic.</p></li>
-<li><p>harmonic regression: An alternative to using seasonal dummy variables, especially for long seasonal periods, is to use Fourier terms. ith Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where m ≈ 52. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables. fourier() - tslm(beer2 ~ trend + fourier(beer2, K=2))</p></li>
-<li><p>Dynamic Regression</p></li>
-</ol>
-<p>The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated.</p>
-<p>Arima(y, xreg=x, order=c(1,1,0)) auto.arima(uschange[,“Consumption”], xreg=uschange[,“Income”])</p>
-<p>There are two different ways of modelling a linear trend: deterministic and stochastic.</p>
-<p>deterministic: fit1 &lt;- auto.arima(austa, d=0, xreg=trend)</p>
-<p>stochastic: fit2 &lt;- auto.arima(austa, d=1)</p>
-<p>There is an implicit assumption with deterministic trends that the slope of the trend is not going to change over time. On the other hand, stochastic trends can change, and the estimated growth is only assumed to be the average growth over the historical period, not necessarily the rate of growth that will be observed into the future. Consequently, it is safer to forecast with stochastic trends, especially for longer forecast horizons, as the prediction intervals allow for greater uncertainty in future growth.</p>
-<p>When there are long seasonal periods, a dynamic regression with Fourier terms is often better than other models we have considered in this book.</p>
-<p>Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.</p>
-<p>So for such time series, we prefer a harmonic regression approach where the seasonal pattern is modelled using Fourier terms with short-term time series dynamics handled by an ARMA error.</p>
-<p>fit &lt;- auto.arima(cafe04, xreg = fourier(cafe04, K = i), seasonal = FALSE, lambda = 0)</p>
-<p>ETS (Error-Trend-Seasonality) Models</p>
-<p>This label can also be thought of as ExponenTial Smoothing. The possibilities for each component are: Error = {a.m}, Trend = {n,a,a_d}, and Seasonal = {n,a,m}. Therefore, for each component in the ETS system, we can assign None, Multiplicative, or Additive (or N, M, A) for each of the three components in our time series.</p>
-<p>Three of the combinations of (Error, Trend, Seasonal) can lead to numerical difficulties. Specifically, the models that can cause such instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to division by values potentially close to zero in the state equations. We normally do not consider these particular combinations when selecting a model.</p>
-<p>Models with multiplicative errors are useful when the data are strictly positive, but are not numerically stable when the data contain zeros or negative values. Therefore, multiplicative error models will not be considered if the time series is not strictly positive. In that case, only the six fully additive models will be applied.</p>
-<p>The ets() function does not produce forecasts. Rather, it estimates the model parameters and returns information about the fitted model. By default it uses the AICc to select an appropriate model</p>
-<p>ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.</p>
-<ol style="list-style-type: decimal">
-<li><p>Simple Exponential Smoothing Method: Time series does not have a trend line and does not have seasonality component. We would use a Simple Exponential Smoothing model.<br />
-ETS(A,N,N): simple exponential smoothing with additive errors | ETS(M,N,N): simple exponential smoothing with multiplicative errors</p></li>
-<li><p>Holt’s Linear Trend Method: Damped Holt’s method is best whether you compare MAE or MSE values. So we will proceed with using the damped Holt’s method and apply it to the whole data set to get forecasts for future years. Forecasts account for trend &amp; continue at the same trend indefinitely into the future: holt(damped = T) . A damped trend makes it level off after time: holt(damped = F) (phi = 1 is Holt’s method).</p></li>
-</ol>
-<p>holt() | ETS(A,A,N): Holt’s linear method with additive errors | ETS(M,A,N): Holt’s linear method with multiplicative errors | (a,a) Additive Holt-Winters’ method | (a,m) Multiplicative Holt-Winters’ method | (a_d,m) Holt-Winters’ damped method | (a,n) Holt’s linear method | (a_d,n) Additive damped trend method</p>
-<ol start="8" style="list-style-type: decimal">
-<li>Holt-Winters Seasonal Method: hw(aust,seasonal=“additive”). Accounts for trend and seasonality. In the additive version the seasonality averages to 0 but this changes to 1 in the multiplicative version</li>
-</ol>
-<p>ARIMA(p,d,q): non-seasonal: White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant Random walk with drift: ARIMA(0,1,0) with a constant Autoregression: ARIMA(p,0,0) Moving average: ARIMA(0,0,q)</p>
-<p>Seasonal ARIMA(p,d,q)(P,D,Q)_m</p>
-<p>auto.arima() does an auto fit.</p>
-<p>When fitting an ARIMA model to a set of (non-seasonal) time series data, the following procedure provides a useful general approach.</p>
-<p>Plot the data and identify any unusual observations.</p>
-<p>If necessary, transform the data (using a Box-Cox transformation) to stabilize the variance.</p>
-<p>If the data are non-stationary, take first differences of the data until the data are stationary.</p>
-<p>Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model appropriate?</p>
-<p>Try your chosen model(s), and use the AICc to search for a better model.</p>
-<p>Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.</p>
-<p>Once the residuals look like white noise, calculate forecasts.</p>
-<p>auto.arima only does steps 3-5.</p>
-<p>arima()</p>
-<p>ggAcf() | ggPacf()</p>
-<p>If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of p/q. If p and q are both positive, then the plots do not help in finding suitable values of p and q.</p>
-<p>The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
-<p>the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag p in the PACF, but none beyond lag p.</p>
-<p>The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
-<p>the PACF is exponentially decaying or sinusoidal; there is a significant spike at lag q in the ACF, but none beyond lag q.</p>
-<p>seaosnal arima: arima(p,d,q) (P,Q,D)_m, m = num of observations per year</p>
-<p>The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12 model will show:</p>
-<p>a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).</p>
-<p>Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))</p>
-<p>auto.arima(euretail, stepwise=FALSE, approximation=FALSE)</p>
-<p>comparing information criteria is only valid for ARIMA models of the same orders of differencing.</p>
-<p>Other</p>
-<ol style="list-style-type: decimal">
-<li><p>ma</p></li>
-<li><p>wma</p></li>
-<li><p>X11 method: seasonal::seas(x11 = ’’). from this output seasonal() will extract the seasonal component, trendcycle() will extract the trend-cycle component, remainder() will extract the remainder component, and seasadj() will compute the seasonally adjusted time series.</p></li>
-<li><p>SEATS: seasonal::seas()</p></li>
-<li><p>STL: best so far but only uses additive decomposition. stl(t.window=13, s.window=“periodic”, robust=TRUE). automate picking of first 2 params with mstl(). A short-cut approach is to use the stlf() function. The following code will decompose the time series using STL, forecast the seasonally adjusted series, and return reseasonalize the forecasts: stlf(elecequip, method=‘naive’)</p></li>
-</ol>
-<p>msts | mstsl | tbats | bld.mbb.bootstrap</p>
-<p>Auto Model:</p>
-<p>forecast(): You can use this directly if you have no idea which model to use, or use it to produce forecasts after fitting a model.</p>
-<p>Hierarchical:</p>
-<p>gts() | hts() | aggts()</p>
+<div id="notes-1" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Notes</h1>
 <ul>
-<li>Feature Engineering</li>
-</ul>
-<p><a href="https://github.com/robjhyndman/tsfeatures" class="uri">https://github.com/robjhyndman/tsfeatures</a></p>
-<p>There are several useful predictors that occur frequently when using regression for time series data:</p>
-<ol style="list-style-type: decimal">
-<li><p>A trend variable can be specified in the tslm() function using the trend predictor.</p></li>
-<li><p>dummy variables for time like day of week. The tslm() function will automatically handle this situation if you specify the predictor season.</p></li>
-<li><p>interventions, eg. competitor activity</p></li>
-<li><p>trading days: bizdays()</p></li>
-<li><p>distirbuted lags</p></li>
-<li><p>easter()</p></li>
-</ol>
-<p>Use lagged values of predictors</p>
-<p>A log-log functional form is specified as log(y) = beta_0 + beta_1*log(x) + epsilon</p>
-<p>scaling by monthday() by population or by inflation for money</p>
-<p>Logarithms are useful because they are interpretable: changes in a log value are relative (or percentage) changes on the original scale. So if log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale. Another useful feature of log transformations is that they constrain the forecasts to stay positive on the original scale. A log transformation can address heteroskedasticity.</p>
-<p>boxCox()/boxCox.lambda(), power transforms,</p>
-<p>bias adjustments: mean of forecast distribution instead of median for back-transformed forecast. Bias adjustment is not done by default in the forecast package. If you want your forecasts to be means rather than medians, use the argument biasadj=TRUE when you select your Box-Cox transformation parameter.</p>
-<ul>
-<li>Model Evaluation</li>
-</ul>
-<p>train-test split: window() / subset()</p>
-<p>accuracy()</p>
-<p>tsCV()</p>
-<p>A great advantage of the ETS statistical framework is that information criteria can be used for model selection - AIC, AIC_c, and BIC</p>
-<p>leave-one-out cross-validation statistic : CV(fit.consMR) for model selection</p>
-<p>we recommend that one of the AICc, AIC, or CV statistics be used, each of which has forecasting as their objective.</p>
-<p>When comparing forecast methods applied to a single time series, or to several time series with the same units, the MAE is popular as it is easy to both understand and compute. A forecast method that minimizes the MAE will lead to forecasts of the median, while minimizing the RMSE will lead to forecasts of the mean. Consequently, the RMSE is also widely used, despite being more difficult to interpret. Percentage errors have the advantage of being unit-free, and so are frequently used to compare forecast performances between data sets. The most commonly used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE. forecast errors are different from residuals in two ways. First, residuals are calculated on the training set while forecast errors are calculated on the test set. Second, residuals are based on one-step forecasts while forecast errors can involve multi-step forecasts.</p>
-<p>A good forecasting method will yield residuals with the following properties:</p>
-<ol style="list-style-type: decimal">
-<li><p>The residuals are uncorrelated. If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.</p></li>
-<li><p>The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased. (Adjusting for bias is easy: if the residuals have mean m then add m to all forecasts and the bias problem is solved.)</p></li>
-<li><p>It is useful (but not necessary) for the residuals to also have the following two properties: the residuals have constant variance and are normally distributed.</p></li>
-</ol>
-<p>use the Box-ljung test to test for autocorrelations: h_0: no autocorrelation, h_a: autocorrelation.</p>
-<p>checkresiduals() which will produce a time plot, ACF plot and histogram of the residuals (with an overlayed normal distribution for comparison), and do a Ljung-Box test with the correct degrees of freedom.</p>
-<p>-Notes</p>
-<p>Fourier terms in lm good for intraday data.</p>
-<p>Methods with multiplicative trend produce poor forecasts.</p>
-<p>For stock market prices and indexes, the best forecasting method is often the naïve method. Use also dynamic regression.</p>
-<p>Create time series with ts(mydata[-1], start = c(1981, 1), frequency = 4)</p>
-<p>Time series that show no auto-correlation are called white noise. For white noise series, we expect each auto-correlation to be close to zero. For a white noise series, we expect 95% of the spikes in the ACF to lie within +/- 2 * sqrt(T) where T is the length of the time series.</p>
-<p>The possible time series (TS) scenarios can be recognized by asking the following questions: 1) TS has a trend? If yes, is the trend increasing linearly or exponentially? 2) TS has seasonality? If yes, do the seasonal components increase in magnitude over time?</p>
-<p>Additive model for linear trend and multiplicative model for exponential trend. Additive for trend and Multiplicative and Additive for seasonal components. For trends that are exponential, we would need to use a multiplicative model. For increasing seasonality components, we would need to use a multiplicative model model as well.</p>
-<p>Therefore we can generalize all of these models using a naming system for ETS:</p>
-<p>Error is the error line we saw in the time series decomposition part earlier in the course. If the error is increasing similar to an increasing seasonal components, we would need to consider a multiplicative design for the exponential model.</p>
-<p>A time series model that has a constant error, linear trend, and increasing seasonal components means we would need to use an ETS model of ETS(N,A,M)</p>
-<p>A time series model that has increasing error, exponential trend, and no seasonality means we would need to use an ETS model of:</p>
-<p>non-stationary: This plot shows an upward trend and seasonality.</p>
-<p>stationary: This plot revolves around a constant mean of 0 and shows contained variance.</p>
-<p>-Metrics</p>
-<p>Percentage errors, like MAPE, are useful because they are scale independent, so they can be used to compare forecasts between different data series, unlike scale dependent errors. The disadvantage is that it cannot be used if the series has zero values.</p>
-<p>Mean Absolute Percentage Error (MAPE) is also often useful for purposes of reporting, because it is expressed in generic percentage terms it will make sense even to someone who has no idea what constitutes a “big” error in terms of dollars spent or widgets sold.</p>
-<p>Mean Absolute Scaled Error (MASE) is another relative measure of error that is applicable only to time series data. It is defined as the mean absolute error of the model divided by the the mean absolute value of the first difference of the series. Thus, it measures the relative reduction in error compared to a naive model. Ideally its value will be significantly less than 1 but is relative to comparison across other models for the same series. Since this error measurement is relative and can be applied across models, it is accepted as one of the best metrics for error measurement.</p>
-<p>AIC_c for model selection.</p>
-<div id="intro-18" class="section level3">
-<h3><span class="header-section-number">8.4.1</span> Intro</h3>
-</div>
-<div id="assumptions-18" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> Assumptions</h3>
-</div>
-<div id="characteristics-13" class="section level3">
-<h3><span class="header-section-number">8.4.3</span> Characteristics</h3>
-</div>
-<div id="evaluation-17" class="section level3">
-<h3><span class="header-section-number">8.4.4</span> Evaluation</h3>
-</div>
-<div id="proscons-18" class="section level3">
-<h3><span class="header-section-number">8.4.5</span> Pros/Cons</h3>
-<p><strong>Pros</strong></p>
-<p><strong>Cons</strong></p>
-<ul>
-<li><p>Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn’t vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.</p></li>
-<li><p>White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.</p></li>
-</ul>
-<p><strong>ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models</strong></p>
-<ul>
-<li><p>AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.</p></li>
-<li><p>I(d): Integrated component for a series that needs to be differenced.</p></li>
-<li><p>MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.</p></li>
-<li><p>In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.</p></li>
-<li><p>Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.</p></li>
-<li><p>Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.</p></li>
-<li><p>Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q).</p></li>
-</ul>
-<p><strong>Assess Model Fit</strong></p>
-<ul>
-<li><p>Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.</p></li>
-<li><p>Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero.</p></li>
-<li><p>Overfit model with extra AR/MA terms and compare using AIC/BIC.</p></li>
-<li><p>Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.</p></li>
-<li><p>MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.</p></li>
+<li><p>Active Learning: Finding the optimal data to manually label</p></li>
+<li><p>Simulated Annealing: Gradient descent extension</p></li>
+<li><p>“No Free Lunch” theorem: no single classifier works best across all possible scenarios</p></li>
+<li><p>So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).</p></li>
+<li><p>Sequence mining Algorithms: spade, gsp, freespan; hmmlearn</p></li>
+<li><p>Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks</p></li>
+<li><p>Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN</p></li>
+<li><p>The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn’t change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User’s purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.</p></li>
+<li><p>empirical risk minimization: In supervised learning, a machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss.</p></li>
+<li><p>Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model’s prediction was on a single example. If the model’s prediction is perfect, the loss is zero; otherwise, the loss is greater.</p></li>
+<li><p>If a model suffers from overfitting, we also say that the model has a high variance, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. Similarly, our model can also suffer from underfitting (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.</p></li>
+<li><p>“Product classification is an example of multicategory or multinomial classification. Most classification problems and most classification algorithms are specialized for two-category, or binomial, classification. There are tricks to using binary classifiers to solve multicategory problems (for example, building one classifier for each category, called a “one versus rest” classifier). But in most cases it’s worth the effort to find a suitable multiple-category implementation, as they tend to work better than multiple binary classifiers (for example, using the package mlogit instead of the base method glm() for logistic regression).”</p></li>
 </ul>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="frameworks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="hierarchical-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -576,7 +398,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-time_series.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/13-long-form-notes.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

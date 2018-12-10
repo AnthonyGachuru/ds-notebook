@@ -323,6 +323,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="12.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>12.0.1</b> Topic Modeling</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>13</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="14" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>14</b> Notes</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -357,49 +358,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
 <ul>
 <li><p>use spatial sign to transform data with outliers.</p></li>
-<li><p>Too many levels for a category?</p>
+<li>Too many levels for a category:
 <ul>
 <li>limit number of categories through feature selection</li>
-<li><a href="https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables" class="uri">https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables</a></li>
-<li>bucket groups by number of samples</li>
+<li><a href="https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables" class="uri">https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables</a> * bucket groups by number of samples</li>
 </ul></li>
-<li><p><a href="https://cran.r-project.org/web/packages/vtreat/index.html" class="uri">https://cran.r-project.org/web/packages/vtreat/index.html</a></p></li>
 <li><p>Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.</p></li>
 <li><p>Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.</p></li>
 <li><p>Use runif to do sampling</p></li>
-<li><p>You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values.</p></li>
+<li>You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values.</li>
 <li><p>Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.</p></li>
-<li><p>Monetary amounts are often log-<a href="https://github.com/ColinFay/erum2018normally" class="uri">https://github.com/ColinFay/erum2018normally</a> distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it. ### Outlier Detection</p></li>
+<li><p>Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it.</p></li>
 </ul>
-<p><a href="https://www.rdocumentation.org/packages/DMwR/versions/0.4.1/topics/lofactor" class="uri">https://www.rdocumentation.org/packages/DMwR/versions/0.4.1/topics/lofactor</a></p>
-<p>DIXON AND CHI SQUARED TESTS FOR OUTLIERS</p>
-<p><a href="http://r-statistics.co/Outlier-Treatment-With-R.html" class="uri">http://r-statistics.co/Outlier-Treatment-With-R.html</a></p>
+<p>&amp; Dxon and Chi-squared tests for outlier detection</p>
 </div>
 <div id="missingness-imputation" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Missingness &amp; Imputation</h3>
-<p>There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random</p>
 <ul>
+<li><p>There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random</p></li>
+<li>Types of imputation</li>
+<li>Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.</li>
+<li>Random: Can amplify outlier observation and induce bias.</li>
+<li><p>Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate. &amp; multiple stochastic regression imputation</p></li>
 <li><p>The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.</p></li>
 <li><p>The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.</p></li>
-<li><p>Other: 1) dplyr::case_when, 2) mean of each column = df.mean(axis = 0) || df.mean(axis = ‘index’ ), 3) mean of each row = df .mean(axis = 1) || df .mean(axis = ‘columns’ )</p></li>
+<li><p>logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.</p></li>
 </ul>
-<p>Some solutions:</p>
-<ul>
-<li><p>Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.</p></li>
-<li><p>Random: Can amplify outlier observation and induce bias.</p></li>
-<li><p>Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.</p></li>
-</ul>
-<p>multiple stochastic regression imputation: mice [R], fancy impute [Python]</p>
 </div>
 </div>
 <div id="visualize-1" class="section level2">
 <h2><span class="header-section-number">3.2</span> Visualize</h2>
 <ul>
-<li><p>ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth(): a quick way of visualizing model calibration without having to manually bin any observations</p></li>
-<li><p>logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.</p></li>
-<li><p>swarmplot</p></li>
-<li><p><a href="https://www.jumpingrivers.com/blog/styling-ggplot2-r-graphics/" class="uri">https://www.jumpingrivers.com/blog/styling-ggplot2-r-graphics/</a></p></li>
-<li><p>Rule of thumb for bins in histogram: <code>ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))</code>.</p></li>
+<li>swarmplot</li>
 </ul>
 
 </div>
