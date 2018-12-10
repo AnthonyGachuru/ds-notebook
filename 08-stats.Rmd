@@ -2,6 +2,8 @@
 
 ### General
 
+Outliers in small samples: https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617
+
 Since all outcomes are 0 or 1, and drawn with the same (unknown) probability, we know that the number of ones and zeros follows a binomial distribution. This means that the confidence interval of a “k out of n ” scenario is a Beta distribution.
 
 Another common measure of effect size is d, sometimes known as Cohen's d (as you might have guessed by now, Cohen was quite influential in the field of effect sizes). This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups' means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups' means differ by one standard deviation; a d of .5 tells us that the two groups' means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a 'small' effect size, 0.5 represents a 'medium' effect size and 0.8 a 'large' effect size. This means that if two groups' means don't differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant. 

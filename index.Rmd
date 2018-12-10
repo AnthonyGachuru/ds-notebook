@@ -42,7 +42,7 @@ Another note is that one way to structure projects is to write user stories a la
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
-## Annotated Checklist
+## Checklist
 
 ### Preparation
 
@@ -60,41 +60,29 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
-* Sampling from data if its too large:  [subsample package](https://pypi.python.org/pypi/subsample) in Python, [sqldf library](https://stackoverflow.com/a/22262726/6627726) in R
-    
-* [Sqlite Converter](https://github.com/thombashi/sqlitebiter)
-
-* [Easy Database Management](https://dataset.readthedocs.io/en/latest/)
-
-* [Writing sql in pandas](https://github.com/yhat/pandasql)
+* Sampling from data if its too large
 
 ### Tidy
 
-* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). widyr, tidyr, dplyr in R and pandas in Python.
+* [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). 
 
 * Figure out what you're trying to do with the data.
 
-* See what the data looks like: types of variables, the first and last few observations, missing values or outliers. [xray](https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/), [skimr](https://github.com/ropenscilabs/skimr), [xda](https://github.com/ujjwalkarn/xda), and [janitor](https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html) in R. pandas and scipy.stats.describe() in Python.
+* See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
 
 * Outlier Detection: interquartile range, kernel density estimation, bonferroni test
 
 ### Transform
 
-* library(DataExplorer)
+* Look at missingness.
 
-* Look at missingness. [missingno](https://github.com/ResidentMario/missingno) in Python. [VIM](https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html), hmisc::naclus/naplot(), [naniar](https://github.com/njtierney/naniar), visdat::vis_dat() in R.
+* Imputation. Options include the Mean, Mode, KNN, Random, and Regression.
 
-* Imputation. Options include the Mean, Mode, KNN, Random, and Regression. mice, hmisc, alice, and [zoo](https://www.rdocumentation.org/packages/zoo/versions/1.8-2/topics/na.locf) in R.
-
-* An R library for [categorical dissimilarity](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist)
-
-* [Easy Regex](https://github.com/VerbalExpressions/PythonVerbalExpressions)
+* Use the Gower distance for categorical dissimilarity.
 
 * Check for blank spaces and replace with NA. In R: `df[df==""] = NA`.
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
-
-* Anomalies: xda::num/catSummary(.) | xray::anomalies(.)
 
 ### Visualize
 
@@ -106,7 +94,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Compare the distributions of variables with overlayed density plots 
 
-* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships. GGally::ggpairs() or seaborn. 
+* Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
 
 * Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure. 
 
@@ -114,33 +102,29 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
-* Pre-processing: vtreat in R.
+* Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.
 
-* Use binning + chisquare / mutual information to see correlation between feature and target.
+* Pipelines & Feature Unions
 
-* Pipelines & Feature Unions: sklearn in Python, recipes in R.
-
-* Feature Selection: Variance Threshold, Univariate Feature Selection (skl_fs.chi2 | f_regression | f_classification in sklearn), Multivariate Feature Selection (SelectKBest, SelectPercentile, feature_selection.RFECV in sklearn). See also the [Rebate](https://github.com/EpistasisLab/scikit-rebate) and [Boruta](https://github.com/scikit-learn-contrib/boruta_py) packages in Python.
+* Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.
     
 * Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
 
-* Model Selection: yellowbrick, [Sklearn Evaluation](https://edublancas.github.io/sklearn-evaluation/), and [skl-plot](https://github.com/reiinakano/scikit-plot) in Python.
+* Model Selection
 
-* Model Explanability: eli5 or [SHAP](https://github.com/slundberg/shap) in Python but concentrate on the latter. SHAP also exists in R's xgboost library.
+* Model Explanability: SHAP
 
-* Tuning: Do bayesian tuning instead of grid or random search. hyperopt-sklearn, sklearn-deap, and scikit-optimize. 
+* Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize. 
 
-* Deal with potential class imbalance: Gradient boosting or [inbalanced learn](http://contrib.scikit-learn.org/imbalanced-learn/stable/).
+* Deal with potential class imbalance: Gradient boosting is one option.
 
-* Create ensembles: mlxtend in Python
+* Create ensembles
     
-* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt) | infer library
+* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
     
 * Ensembling: mlxtend in Python, and caretEnsemble in R.
 
 * Look at learning curves: [1](https://www.dataquest.io/blog/learning-curves-machine-learning/) | [2](http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html)
-
-* Use SHAP for model explanability
 
 ### Communicate
 
@@ -150,21 +134,44 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
 
-Write helper functions, do testin ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
+Write helper functions, do testing ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
  | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) and validation ([1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest) ). Testing libraries include: pytest, hypothesis, and testthat.
 
-A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with:
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`
 
-`conda env export > environment.yaml`
-
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use:
-
-`conda env create -f environment.yaml`
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`
 
 This will create a new environment with the same name listed in environment.yaml.
 
-https://github.com/Quartz/bad-data-guide#margin-of-error-is-too-large
+## Other
 
-https://github.com/ianozsvald/data_science_delivered
+### Vanderplas Jupyter
 
-https://github.com/jtleek/datasharing
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+```{python, eval = FALSE}
+def fun(a):
+
+  #Role
+  #-----
+  #Does something
+  
+  #Parameters
+  #---------
+  #Accepts something
+  
+  #Returns
+  #-------
+  #Returns something
+  
+  return(a)
+```
+

@@ -4,15 +4,14 @@
 
 * cross apply = inner join | outer apply = full join
 
-* In tidy data:
+* sql: SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
 
+* In tidy data:
     * Each variable forms a column.
     * Each observation forms a row.
     * Each type of observational unit forms a table.
 
 * A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
-
-* conda create -n yourenvname python=x.x anaconda
 
 * [json normalize](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html)
 
@@ -20,44 +19,15 @@
 
 * Sampling a massive CSV file:
 
-
     * pip install subsample
 
     * gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
     
-* Codebook 
+* Make codebooks
 
-* Data file naming convention: {iso-date}_{concise_description}.{file_extension}
-
-* Variable naming conventions: Consistency and balance are important
-
-### SQL
-
-* df <- dbGetQuery(con, statement = read_file('query.sql'))
-
---Find tables with a given column name
-
-SELECT TABLE_SCHEMA, TABLE_NAME --TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME
-FROM INFORMATION_SCHEMA.COLUMNS 
-WHERE COLUMN_NAME LIKE '%Test%'
-
---get schema info 
-SELECT 
-table_schema, table_name, column_name, data_type, 
-character_maximum_length, is_nullable, column_default,
-numeric_precision, numeric_scale
-FROM information_schema.columns
-WHERE table_name = 'Results'
-use this_schema
-SELECT 
-table_schema, table_name, column_name, 
-data_type, character_maximum_length,
-is_nullable, column_default, numeric_precision, numeric_scale
-FROM information_schema.columns
-ORDER BY table_schema, table_name, ordinal_position
+## SQL
 
 * CSV to DB V1: 
-
     * $ sqlite3 db_name.db
     * sqlite> .mode csv db_name
     * sqlite> .import data.csv db_name
@@ -66,46 +36,16 @@ ORDER BY table_schema, table_name, ordinal_position
 
 * SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.
 
-* List tables: SELECT name FROM sqlite_master WHERE type='table'; [sqllite]
-
-* Show columns: .headers ON [sqllite]
-
-* ROW_NUMBER(), RANK(), DENSE_RANK(), NOW(), INTERVAL, x IS (NOT) NULL
-
 * COUNT(DISTINCT month): returns count of non-null values like table in R
 
 * The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = 'SR' THEN 'yes' ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like
 
 * If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
 
-### Scraping
-
-* Access robots.txt: website_url.domain/robots.txt
-
-* Tips: 1) Use bot net, 2) user agent switching
-
-* Try polling in your wait about every 500 milliseconds. Also use presence of element located. I generally have better luck with that expected condition than visibility. Also, submit the search using the search button.
-
-* Selenium: save_screenshot, forward(), back(), maximize(), use action_chains to do stuff like scroll find_element_by_link_name, element_to_be_clickable, visibility_of_element_located
-
-```{python, eval = FALSE}
-from pyvirtualdisplay import Display  
-from selenium import webdriver  
-display = Display(visible=0, size=(800, 600))  
-display.start()  
-browser = webdriver.Firefox()  
-browser.get('http://www.google.com')  
-print(browser.title)
-```
-
 ## Tidy
 
-* Tidy Data: [R](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) | [Py1](https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb) | [Py2](http://www.jeannicholashould.com/tidy-data-in-python.html)
-
-* Round a pandas time stamp to nearest minute: tstamp.round('min')
-
-* import pandas_profiling; pandas_profiling.ProfileReport(data)
+* Make data tidy: See tidy data paper
 
 * [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
 
-* **The Coefficient of Unalikeability**: (Unalikeability is defined as how often observations differ from one another). It varies from 0 to 1. The higher the value, the more unalike the data are.
+* **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.

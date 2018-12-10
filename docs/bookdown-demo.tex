@@ -203,7 +203,7 @@ cribsheets, and libraries or packages to use not included in the Stack
 can be found on this
 \href{https://gfleetwood.github.io/noted-resources/data_science.html}{page}.
 
-\section{Annotated Checklist}\label{annotated-checklist}
+\section{Checklist}\label{checklist}
 
 \subsection{Preparation}\label{preparation}
 
@@ -226,17 +226,7 @@ can be found on this
 \item
   Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
-  Sampling from data if its too large:
-  \href{https://pypi.python.org/pypi/subsample}{subsample package} in
-  Python, \href{https://stackoverflow.com/a/22262726/6627726}{sqldf
-  library} in R
-\item
-  \href{https://github.com/thombashi/sqlitebiter}{Sqlite Converter}
-\item
-  \href{https://dataset.readthedocs.io/en/latest/}{Easy Database
-  Management}
-\item
-  \href{https://github.com/yhat/pandasql}{Writing sql in pandas}
+  Sampling from data if its too large
 \end{itemize}
 
 \subsection{Tidy}\label{tidy}
@@ -244,17 +234,12 @@ can be found on this
 \begin{itemize}
 \item
   \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data
-  principles}. widyr, tidyr, dplyr in R and pandas in Python.
+  principles}.
 \item
   Figure out what you're trying to do with the data.
 \item
   See what the data looks like: types of variables, the first and last
   few observations, missing values or outliers.
-  \href{https://blog.datascienceheroes.com/x-ray-vision-on-your-datasets/}{xray},
-  \href{https://github.com/ropenscilabs/skimr}{skimr},
-  \href{https://github.com/ujjwalkarn/xda}{xda}, and
-  \href{https://cran.r-project.org/web/packages/janitor/vignettes/introduction.html}{janitor}
-  in R. pandas and scipy.stats.describe() in Python.
 \item
   Outlier Detection: interquartile range, kernel density estimation,
   bonferroni test
@@ -264,35 +249,18 @@ can be found on this
 
 \begin{itemize}
 \item
-  library(DataExplorer)
-\item
   Look at missingness.
-  \href{https://github.com/ResidentMario/missingno}{missingno} in
-  Python.
-  \href{https://rstudio-pubs-static.s3.amazonaws.com/4625_fa990d611f024ea69e7e2b10dd228fe7.html}{VIM},
-  hmisc::naclus/naplot(),
-  \href{https://github.com/njtierney/naniar}{naniar}, visdat::vis\_dat()
-  in R.
 \item
   Imputation. Options include the Mean, Mode, KNN, Random, and
-  Regression. mice, hmisc, alice, and
-  \href{https://www.rdocumentation.org/packages/zoo/versions/1.8-2/topics/na.locf}{zoo}
-  in R.
+  Regression.
 \item
-  An R library for
-  \href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{categorical
-  dissimilarity}
-\item
-  \href{https://github.com/VerbalExpressions/PythonVerbalExpressions}{Easy
-  Regex}
+  Use the Gower distance for categorical dissimilarity.
 \item
   Check for blank spaces and replace with NA. In R:
   \texttt{df{[}df==""{]}\ =\ NA}.
 \item
   \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned
   Stats}
-\item
-  Anomalies: xda::num/catSummary(.) \textbar{} xray::anomalies(.)
 \end{itemize}
 
 \subsection{Visualize}\label{visualize}
@@ -308,8 +276,7 @@ can be found on this
   Compare the distributions of variables with overlayed density plots
 \item
   Scatterplots: Pairwise and color/size the dots by other variables to
-  try to identify any confounding relationships. GGally::ggpairs() or
-  seaborn.
+  try to identify any confounding relationships.
 \item
   Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or
   hierarchical clustering for multivariate data to get a feel for high
@@ -324,47 +291,32 @@ can be found on this
   assumptions and tune appropriately. If using Python leverage
   statsmodels.
 \item
-  Pre-processing: vtreat in R.
+  Pre-processing: Use binning + chisquare / mutual information to see
+  correlation between feature and target.
 \item
-  Use binning + chisquare / mutual information to see correlation
-  between feature and target.
+  Pipelines \& Feature Unions
 \item
-  Pipelines \& Feature Unions: sklearn in Python, recipes in R.
-\item
-  Feature Selection: Variance Threshold, Univariate Feature Selection
-  (skl\_fs.chi2 \textbar{} f\_regression \textbar{} f\_classification in
-  sklearn), Multivariate Feature Selection (SelectKBest,
-  SelectPercentile, feature\_selection.RFECV in sklearn). See also the
-  \href{https://github.com/EpistasisLab/scikit-rebate}{Rebate} and
-  \href{https://github.com/scikit-learn-contrib/boruta_py}{Boruta}
-  packages in Python.
+  Feature Selection: Variance Threshold, Univariate Feature Selection,
+  Multivariate Feature Selection.
 \item
   Feature Engineering: Standardization, dimensionality reduction,
   dummying. sklearn.preprocessing.binarize, pandas.factorize, and
   featuretools for automation in Python.
 \item
-  Model Selection: yellowbrick,
-  \href{https://edublancas.github.io/sklearn-evaluation/}{Sklearn
-  Evaluation}, and
-  \href{https://github.com/reiinakano/scikit-plot}{skl-plot} in Python.
+  Model Selection
 \item
-  Model Explanability: eli5 or
-  \href{https://github.com/slundberg/shap}{SHAP} in Python but
-  concentrate on the latter. SHAP also exists in R's xgboost library.
+  Model Explanability: SHAP
 \item
-  Tuning: Do bayesian tuning instead of grid or random search.
+  Tuning: Do bayesian tuning instead of grid or random search. Also use
   hyperopt-sklearn, sklearn-deap, and scikit-optimize.
 \item
-  Deal with potential class imbalance: Gradient boosting or
-  \href{http://contrib.scikit-learn.org/imbalanced-learn/stable/}{inbalanced
-  learn}.
+  Deal with potential class imbalance: Gradient boosting is one option.
 \item
-  Create ensembles: mlxtend in Python
+  Create ensembles
 \item
   Choose Statistical Test:
   \href{http://www.ats.ucla.edu/stat/mult_pkg/whatstat/}{1} \textbar{}
   \href{http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt}{2}
-  \textbar{} infer library
 \item
   Ensembling: mlxtend in Python, and caretEnsemble in R.
 \item
@@ -372,8 +324,6 @@ can be found on this
   \href{https://www.dataquest.io/blog/learning-curves-machine-learning/}{1}
   \textbar{}
   \href{http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html}{2}
-\item
-  Use SHAP for model explanability
 \end{itemize}
 
 \subsection{Communicate}\label{communicate}
@@ -385,7 +335,7 @@ Reference this
 
 \href{https://blog.osteele.com/2008/05/my-git-workflow/}{Git Workflow}
 
-Write helper functions, do testin (
+Write helper functions, do testing (
 \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
 \textbar{} \href{http://www.tdda.info/}{2} \textbar{}
 \href{http://stochasticsolutions.com/}{3} \textbar{}
@@ -398,7 +348,6 @@ include: pytest, hypothesis, and testthat.
 A really useful feature is sharing environments so others can install
 all the packages used in your code, with the correct versions. You can
 save the packages to a YAML file with:
-
 \texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}
 
 The first part conda env export writes out all the packages in the
@@ -409,17 +358,48 @@ environment.yaml writes the exported text to a YAML file
 environment.yaml. This file can now be shared and others will be able to
 create the same environment you used for the project. To create an
 environment from an environment file use:
-
 \texttt{conda\ env\ create\ -f\ environment.yaml}
 
 This will create a new environment with the same name listed in
 environment.yaml.
 
-\url{https://github.com/Quartz/bad-data-guide\#margin-of-error-is-too-large}
+\section{Other}\label{other}
 
-\url{https://github.com/ianozsvald/data_science_delivered}
+\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
 
-\url{https://github.com/jtleek/datasharing}
+\begin{itemize}
+\item
+  create helper functions and units tests as R/py for Rmd/ipynb
+\item
+  pytest/hypothesis for testing
+\item
+  use makefile to run cmd commands
+\item
+  Write file with date:
+  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
+\item
+  Make package for workflow with data (\textbf{init}.py) and use this
+  formation for function docs:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ fun(a):}
+  \CommentTok{#Role}
+  \CommentTok{#-----}
+  \CommentTok{#Does something}
+  
+  \CommentTok{#Parameters}
+  \CommentTok{#---------}
+  \CommentTok{#Accepts something}
+  
+  \CommentTok{#Returns}
+  \CommentTok{#-------}
+  \CommentTok{#Returns something}
+  
+  \ControlFlowTok{return}\NormalTok{(a)}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Import \& Tidy}\label{import-tidy}
 
@@ -428,6 +408,8 @@ environment.yaml.
 \begin{itemize}
 \item
   cross apply = inner join \textbar{} outer apply = full join
+\item
+  sql: SELECT `Dummy Column Text' as DUMMYCOL FROM tbl
 \item
   In tidy data:
 
@@ -443,8 +425,6 @@ environment.yaml.
 \item
   A schema is a blueprint for storing data. For a table every row has
   same number of columns, and each column is of the same type.
-\item
-  conda create -n yourenvname python=x.x anaconda
 \item
   \href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html}{json
   normalize}
@@ -462,36 +442,10 @@ environment.yaml.
     sampled.csv.gz
   \end{itemize}
 \item
-  Codebook
-\item
-  Data file naming convention:
-  \{iso-date\}\_\{concise\_description\}.\{file\_extension\}
-\item
-  Variable naming conventions: Consistency and balance are important
+  Make codebooks
 \end{itemize}
 
-\subsection{SQL}\label{sql}
-
-\begin{itemize}
-\tightlist
-\item
-  df \textless{}- dbGetQuery(con, statement = read\_file(`query.sql'))
-\end{itemize}
-
---Find tables with a given column name
-
-SELECT TABLE\_SCHEMA, TABLE\_NAME --TABLE\_CATALOG, TABLE\_SCHEMA,
-TABLE\_NAME, COLUMN\_NAME FROM INFORMATION\_SCHEMA.COLUMNS WHERE
-COLUMN\_NAME LIKE `\%Test\%'
-
---get schema info SELECT table\_schema, table\_name, column\_name,
-data\_type, character\_maximum\_length, is\_nullable, column\_default,
-numeric\_precision, numeric\_scale FROM information\_schema.columns
-WHERE table\_name = `Results' use this\_schema SELECT table\_schema,
-table\_name, column\_name, data\_type, character\_maximum\_length,
-is\_nullable, column\_default, numeric\_precision, numeric\_scale FROM
-information\_schema.columns ORDER BY table\_schema, table\_name,
-ordinal\_position
+\section{SQL}\label{sql}
 
 \begin{itemize}
 \item
@@ -516,13 +470,6 @@ ordinal\_position
   identical to rows in the first table are dropped. If you'd like to
   append all the values from the second table, use UNION ALL.
 \item
-  List tables: SELECT name FROM sqlite\_master WHERE type=`table';
-  {[}sqllite{]}
-\item
-  Show columns: .headers ON {[}sqllite{]}
-\item
-  ROW\_NUMBER(), RANK(), DENSE\_RANK(), NOW(), INTERVAL, x IS (NOT) NULL
-\item
   COUNT(DISTINCT month): returns count of non-null values like table in
   R
 \item
@@ -535,57 +482,18 @@ ordinal\_position
   results will contain all of the unique pairs of those two columns
 \end{itemize}
 
-\subsection{Scraping}\label{scraping}
-
-\begin{itemize}
-\item
-  Access robots.txt: website\_url.domain/robots.txt
-\item
-  Tips: 1) Use bot net, 2) user agent switching
-\item
-  Try polling in your wait about every 500 milliseconds. Also use
-  presence of element located. I generally have better luck with that
-  expected condition than visibility. Also, submit the search using the
-  search button.
-\item
-  Selenium: save\_screenshot, forward(), back(), maximize(), use
-  action\_chains to do stuff like scroll find\_element\_by\_link\_name,
-  element\_to\_be\_clickable, visibility\_of\_element\_located
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ pyvirtualdisplay }\ImportTok{import}\NormalTok{ Display  }
-\ImportTok{from}\NormalTok{ selenium }\ImportTok{import}\NormalTok{ webdriver  }
-\NormalTok{display }\OperatorTok{=}\NormalTok{ Display(visible}\OperatorTok{=}\DecValTok{0}\NormalTok{, size}\OperatorTok{=}\NormalTok{(}\DecValTok{800}\NormalTok{, }\DecValTok{600}\NormalTok{))  }
-\NormalTok{display.start()  }
-\NormalTok{browser }\OperatorTok{=}\NormalTok{ webdriver.Firefox()  }
-\NormalTok{browser.get(}\StringTok{'http://www.google.com'}\NormalTok{)  }
-\BuiltInTok{print}\NormalTok{(browser.title)}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Tidy}\label{tidy-1}
 
 \begin{itemize}
 \item
-  Tidy Data:
-  \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{R}
-  \textbar{}
-  \href{https://github.com/jfpuget/Tidy-Data/blob/master/Tidy-Data.ipynb}{Py1}
-  \textbar{}
-  \href{http://www.jeannicholashould.com/tidy-data-in-python.html}{Py2}
-\item
-  Round a pandas time stamp to nearest minute: tstamp.round(`min')
-\item
-  import pandas\_profiling; pandas\_profiling.ProfileReport(data)
+  Make data tidy: See tidy data paper
 \item
   \href{https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862\#862}{Optimal
   Bins For Histogram}
 \item
-  \textbf{The Coefficient of Unalikeability}: (Unalikeability is defined
-  as how often observations differ from one another). It varies from 0
-  to 1. The higher the value, the more unalike the data are.
+  \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
+  as how often observations differ from one another. It varies from 0 to
+  1. The higher the value, the more unalike the data are.
 \end{itemize}
 
 \chapter{Transform \& Visualize}\label{transform-visualize}
@@ -710,9 +618,8 @@ Some solutions:
   variables. Must make assumptions and can badly extrapolate.
 \end{itemize}
 
-multiple stochastic regression imputation: mice
-\protect\hyperlink{r}{R}, fancy impute
-\protect\hyperlink{python}{Python}
+multiple stochastic regression imputation: mice {[}R{]}, fancy impute
+{[}Python{]}
 
 \section{Visualize}\label{visualize-1}
 
@@ -741,6 +648,8 @@ multiple stochastic regression imputation: mice
 \section{General}\label{general-1}
 
 \begin{itemize}
+\item
+  can use hamming distance with DBSCAN in sklearn
 \item
   Model Template: intro/packages, fs/fe, tuning, pros/cons, notes
 \item
@@ -1016,7 +925,7 @@ multiple stochastic regression imputation: mice
   dashboards).
 \end{itemize}
 
-\section{Other}\label{other}
+\section{Other}\label{other-1}
 
 \subsection{Unbalanced Classes}\label{unbalanced-classes}
 
@@ -1059,6 +968,309 @@ Reframe as Anomaly Detection
 \item
   Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\})
   \& svm.SVC(kernel=`linear', class\_weight=`balanced')
+\end{itemize}
+
+\section{Model Selection}\label{model-selection}
+
+\subsection{General}\label{general-2}
+
+\begin{itemize}
+\item
+  Linear SVM often outperforms logistic regression and is explainable as
+  well.
+\item
+  However, the problem with cross-validation is that it is rarely
+  applicable to real world problems, for all the reasons described in
+  the above sections. Cross-validation only works in the same cases
+  where you can randomly shuffle your data to choose a validation set.
+\item
+  If the performance of a classification model on the test set
+  (out-of-sample) error is poor, you can't just re-calibrate your model
+  parameters to achieve a better model. This is cheating.
+\item
+  When the classes are well-separated, the parameter estimates for the
+  logistic regression model are surprisingly unstable. Linear
+  discriminant analysis does not suffer from this problem. If n is small
+  and the distribution of the predictors X is approximately normal in
+  each of the classes, the linear discriminant model is again more
+  stable than the logistic regression model.
+\item
+  Roughly speaking, LDA tends to be a better bet than QDA if there are
+  relatively few training observations and so reducing variance is
+  crucial. In contrast, QDA is recommended if the training set is very
+  large, so that the variance of the classifier is not a major concern,
+  or if the assumption of a common covariance matrix for the K classes
+  is clearly untenable.
+\item
+  Two features interact if the effect on the prediction of one feature
+  depends on the value of the other feature
+\item
+  ``No Free Lunch'' theorem: no single classifier works best across all
+  possible scenarios
+\item
+  Warning PolynomialFeatures(degree=d) transforms an array containing n
+  features into an array containing features, where n! is the factorial
+  of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial
+  explosion of the number of features!
+\item
+  If a model suffers from overfitting, we also say that the model has a
+  high variance, which can be caused by having too many parameters that
+  lead to a model that is too complex given the underlying data.
+  Similarly, our model can also suffer from underfitting (high bias),
+  which means that our model is not complex enough to capture the
+  pattern in the training data well and therefore also suffers from low
+  performance on unseen data.
+\item
+  It appears that each feature has modestly improved our model. There
+  are certainly more features that we could add to our model. For
+  example, we could add the day of the week and the hour of the posting,
+  we could determine if the article is a listicle by running a regex on
+  the headline, or we could examine the sentiment of each article. This
+  only begins to touch on the features that could be important to model
+  virality. We would certainly need to go much further to continue
+  reducing the error in our model.
+\item
+  Suppose Fixitol reduces symptoms by 20\% over a placebo, but the trial
+  you're using to test it is too small to have adequate statistical
+  power to detect this difference reliably. We know that small trials
+  tend to have varying results; it's easy to get 10 lucky patients who
+  have shorter colds than usual but much harder to get 10,000 who all
+  do.
+\item
+  As I mentioned earlier, one drawback of the Bonferroni correction is
+  that it greatly decreases the statistical power of your experiments,
+  making it more likely that you'll miss true effects. More
+  sophisticated procedures than Bonferroni correction exist, ones with
+  less of an impact on statistical power, but even these are not magic
+  bullets. Worse, they don't spare you from the base rate fallacy. You
+  can still be misled by your p threshold and falsely claim there's
+  ``only a 5\% chance I'm wrong.'' Procedures like the Bonferroni
+  correction only help you eliminate some false positives.
+\item
+  In step 1, we find where missing values are located. The md.pattern()
+  function from the mice package is a really useful function. It gives
+  you a clear view of where missing values are located, helping you in
+  decisions regarding exclusions or substitution. You can refer to the
+  next recipe for missing value substitution.
+\item
+  ``Product classification is an example of multicategory or multinomial
+  classification. Most classification problems and most classification
+  algorithms are specialized for two-category, or binomial,
+  classification. There are tricks to using binary classifiers to solve
+  multicategory problems (for example, building one classifier for each
+  category, called a ``one versus rest'' classifier). But in most cases
+  it's worth the effort to find a suitable multiple-category
+  implementation, as they tend to work better than multiple binary
+  classifiers (for example, using the package mlogit instead of the base
+  method glm() for logistic regression).''
+\item
+  Another possible indication of collinearity in the inputs is seeing
+  coefficients with an unexpected sign: for example, seeing that income
+  is negatively correlated with years in the workforce.
+\item
+  The overall model can still predict income quite well, even when the
+  inputs are correlated; it just can't determine which variable deserves
+  the credit for the prediction. Using regularization (especially ridge
+  regression as found in lm.ridge() in the package MASS) is helpful in
+  collinear situations (we prefer it to ``x-alone'' variable
+  preprocessing, such as principal components analysis). If you want to
+  use the coefficient values as advice as well as to make good
+  predictions.
+\item
+  The degrees of freedom is thought of as the number of training data
+  rows you have after correcting for the number of coefficients you
+  tried to solve for. You want the degrees of freedom to be large
+  compared to the number of coefficients fit to avoid overfitting.
+\item
+  Overfitting is when you find chance relations in your training data
+  that aren't present in the general population. Overfitting is bad: you
+  think you have a good model when you don't.
+\item
+  The probable reason for nonconvergence is separation or
+  quasi-separation: one of the model variables or some combination of
+  the model variables predicts the outcome perfectly for at least a
+  subset of the training data. You'd think this would be a good thing,
+  but ironically logistic regression fails when the variables are too
+  powerful.
+\item
+  For categorical variables (male/female, or small/medium/large), you
+  can define the distance as 0 if two points are in the same category,
+  and 1 otherwise. If all the variables are categorical, then you can
+  use Hamming distance, which counts the number of mismatches.
+\item
+  Your next step is to select a performance measure. A typical
+  performance measure for regression problems is the Root Mean Square
+  Error (RMSE). It measures the standard deviation of the errors the
+  system makes in its predictions.
+\item
+  You should save every model you experiment with, so you can come back
+  easily to any model you want. Make sure you save both the
+  hyperparameters and the trained parameters, as well as the
+  cross-validation scores and perhaps the actual predictions as well.
+  This will allow you to easily compare scores across model types, and
+  compare the types of errors they make. You can easily save
+  Scikit-Learn models by using Python's pickle module, or using
+  sklearn.externals.joblib, which is more efficient at serializing large
+  NumPy arrays.
+\item
+  If all classifiers are able to estimate class probabilities (i.e.,
+  they have a predict\_proba() method), then you can tell Scikit-Learn
+  to predict the class with the highest class probability, averaged over
+  all the individual classifiers. This is called soft voting. It often
+  achieves higher performance than hard voting because it gives more
+  weight to highly confident votes. All you need to do is replace
+  voting=``hard'' with voting=``soft'' and ensure that all classifiers
+  can estimate class probabilities.
+\item
+  The standard value for k in k-fold cross-validation is 10, which is
+  typically a reasonable choice for most applications. However, if we
+  are working with relatively small training sets, it can be useful to
+  increase the number of folds. If we increase the value of k, more
+  training data will be used in each iteration, which results in a lower
+  bias towards estimating the generalization performance by averaging
+  the individual model estimates. However, large values of k will also
+  increase the runtime of the cross-validation algorithm and yield
+  estimates with higher variance since the training folds will be more
+  similar to each other. On the other hand, if we are working with large
+  datasets, we can choose a smaller value for k.
+\item
+  Distance Metrics: Hamming distance for categorical variables, Cosine
+  distance for text data, Gower distance for categorical data
+\item
+  AIC x BIC: Explanatory power x Parsimonious
+\item
+  Bias is how far offon the average the model is from the truth.
+  Variance is how much the estimate varies about its average. With low
+  model complexity bias is high because predictions are more likely to
+  stray from the truth, and variance is low because there are only few
+  parameters being fit. With high model complexity bias is low because
+  the model can adapt to more subtleties in the data, and variance is
+  high because we have more parameters to estimate from the same amount
+  of data.
+\item
+  The mean of highly correlated quantities has higher variance than the
+  mean of uncorrelated quantities. The smaller the number of folds, the
+  more biased the error estimates (they will be biased to be
+  conservative indicating higher error than there is in reality) but the
+  less variable they will be. On the extreme end you can have one fold
+  for each data point which is known as Leave-One-Out-Cross-Validation.
+  In this case, your error estimate is essentially unbiased but it could
+  potentially have high variance.
+\item
+  LDA vs Logistic Regression: When the classes are well-separated
+  parameters of logistic regression are unstable and LDA doesn't have
+  this problem. If the distribution of X is approximately normal then
+  LDA is more stable again. LDA doesn't need to fit multiple models for
+  multiclass classification.
+\item
+  SVM vs Logistic Regression: SVM is likely to overfit the data and can
+  dominated LR on the training set. Kernel method makes SVM more
+  flexible.
+\item
+  Decision Tree vs Linear Model: Tree has non-linear boundary, selects
+  important features, easier to intepret but unstable especially for
+  small data.
+\item
+  Naive Bayes vs LDA: Both use Bayes theorem, both assume gaussian
+  distribution, but LDA takes care of the correlations. LDA might
+  out-perform Naive Bayes when the features are highly correlated.
+\item
+  KNN vs Other Classification Methods: KNN is completely non-parametic,
+  doesn't tell which features are important. Dominates LDA and Logistic
+  Regression when the decision boundary is highly non-linear.
+\item
+  When building, testing, and validating a suite of models, the optimal
+  model (i.e., the optimal point in the ROC curve) is the spot where the
+  overall accuracy of the model is essentially unchanged as we make
+  small adjustments in the choice of model. That is to say, the change
+  (from one model to the next) in the model's precision (specificity) is
+  exactly offset by the change in the model's recall (sensitivity).
+  Consequently, allowing for some imperfection, where the false positive
+  rate and the false negative rate are in proper balance (so that
+  neither one has too great of an impact on the overall accuracy and
+  effectiveness of the model), is good fruit from your big data labors.
+  The metric I used to guide my cross-validation is the F-score. This is
+  a good metric when we have a lot more samples from one category than
+  from the other categories.
+\item
+  The cost of the holdout method comes in the amount of data that is
+  removed from the model training process. For instance, in the
+  illustrative example here, we removed 30\% of our data. This means
+  that our model is trained on a smaller data set and its error is
+  likely to be higher than if we trained it on the full data set. The
+  standard procedure in this case is to report your error using the
+  holdout set, and then train a final model using all your data.
+\item
+  A metric that minimizes false positives, by rarely flagging players
+  and teams that fail to achieve the desired outcome, is specific. A
+  metric that minimizes false negatives, by rarely failing to flag
+  players and teams that achieve the desired outcome, is sensitive.
+\item
+  Although the previous code example was useful to illustrate how k-fold
+  cross-validation works, scikit-learn also implements a k-fold
+  cross-validation scorer, which allows us to evaluate our model using
+  stratified k-fold cross-validation more efficiently
+\item
+  Sometimes it may be more useful to report the coefficient of
+  determination (), which can be understood as a standardized version of
+  the MSE, for better interpretability of the model performance. In
+  other words, is the fraction of response variance that is captured by
+  the model. The value is defined as follows:Here, SSE is the sum of
+  squared errors and SST is the total sum of squares , or in other
+  words, it is simply the variance of the response.
+\item
+  Most people start working with data from exactly the wrong end. They
+  begin with a data set, then apply their favorite tools and techniques
+  to it. The result is narrow questions and shallow arguments. Starting
+  with data, without first doing a lot of thinking, without having any
+  structure, is a short road to simple questions and unsurprising
+  results. We don't want unsurprising---we want knowledge.
+\item
+  Remember that the positive class in scikit-learn is the class that is
+  labeled as class 1. If we want to specify a different positive label,
+  we can construct our own scorer via the make\_scorer function, which
+  we can then directly provide as an argument to the scoring parameter
+  in GridSearchCV
+\item
+  While the weighted macro-average is the default for multiclass
+  problems in scikit-learn, we can specify the averaging method via the
+  average parameter inside the different scoring functions that we
+  import from the sklean.metrics module, for example, the
+  precision\_score or make\_scorer functions
+\item
+  Transforming words into feature vectorsTo construct a bag-of-words
+  model based on the word counts in the respective documents, we can use
+  the CountVectorizer class implemented in scikit-learn. As we will see
+  in the following code section, the CountVectorizer class takes an
+  array of text data, which can be documents or just sentences, and
+  constructs the bag-of-words model for us:
+\item
+  Scikit-learn implements yet another transformer, the TfidfTransformer,
+  that takes the raw term frequencies from CountVectorizer as input and
+  transforms them into tf-idfs.
+\item
+  Naive Bayes is a linear classifier, while k-NN is not. The curse of
+  dimensionality and large feature sets are a problem for k-NN, while
+  Naive Bayes performs well. k-NN requires no training (just load in the
+  dataset), whereas Naive Bayes does.
+\item
+  The McNemar test, introduced by Quinn McNemar in 1947 (McNemar 1947),
+  is a non-parametric statistical test for paired comparisons that can
+  be applied to compare the performance of two machine learning
+  classifiers. Cochran's Q Test or F Test for \textgreater{}2.
+\end{itemize}
+
+\subsection{Clustering}\label{clustering}
+
+\begin{itemize}
+\item
+  \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison}
+\item
+  \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
+\item
+  \url{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}
+\item
+  \url{http://hunch.net/?p=224}
 \end{itemize}
 
 \chapter{Model}\label{model-2}
@@ -1322,7 +1534,7 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   the inputs
 \end{itemize}
 
-\subsection{Other}\label{other-1}
+\subsection{Other}\label{other-2}
 
 \begin{itemize}
 \item
@@ -1836,7 +2048,7 @@ effcient run-time wise.
   orthogonal to the preceding component.
 \end{itemize}
 
-\subsection{Other}\label{other-2}
+\subsection{Other}\label{other-3}
 
 \begin{itemize}
 \item
@@ -2592,304 +2804,6 @@ TBD
 \subsection{Evaluation}\label{evaluation-16}
 
 \subsection{Pros/Cons}\label{proscons-17}
-
-\section{Model Selection}\label{model-selection}
-
-\subsection{General}\label{general-2}
-
-\begin{itemize}
-\item
-  Linear SVM often outperforms logistic regression and is explainable as
-  well.
-\item
-  However, the problem with cross-validation is that it is rarely
-  applicable to real world problems, for all the reasons described in
-  the above sections. Cross-validation only works in the same cases
-  where you can randomly shuffle your data to choose a validation set.
-\item
-  If the performance of a classification model on the test set
-  (out-of-sample) error is poor, you can't just re-calibrate your model
-  parameters to achieve a better model. This is cheating.
-\item
-  When the classes are well-separated, the parameter estimates for the
-  logistic regression model are surprisingly unstable. Linear
-  discriminant analysis does not suffer from this problem. If n is small
-  and the distribution of the predictors X is approximately normal in
-  each of the classes, the linear discriminant model is again more
-  stable than the logistic regression model.
-\item
-  Roughly speaking, LDA tends to be a better bet than QDA if there are
-  relatively few training observations and so reducing variance is
-  crucial. In contrast, QDA is recommended if the training set is very
-  large, so that the variance of the classifier is not a major concern,
-  or if the assumption of a common covariance matrix for the K classes
-  is clearly untenable.
-\item
-  Two features interact if the effect on the prediction of one feature
-  depends on the value of the other feature
-\item
-  ``No Free Lunch'' theorem: no single classifier works best across all
-  possible scenarios
-\item
-  Warning PolynomialFeatures(degree=d) transforms an array containing n
-  features into an array containing features, where n! is the factorial
-  of n, equal to 1 × 2 × 3 × ⋯ × n. Beware of the combinatorial
-  explosion of the number of features!
-\item
-  If a model suffers from overfitting, we also say that the model has a
-  high variance, which can be caused by having too many parameters that
-  lead to a model that is too complex given the underlying data.
-  Similarly, our model can also suffer from underfitting (high bias),
-  which means that our model is not complex enough to capture the
-  pattern in the training data well and therefore also suffers from low
-  performance on unseen data.
-\item
-  It appears that each feature has modestly improved our model. There
-  are certainly more features that we could add to our model. For
-  example, we could add the day of the week and the hour of the posting,
-  we could determine if the article is a listicle by running a regex on
-  the headline, or we could examine the sentiment of each article. This
-  only begins to touch on the features that could be important to model
-  virality. We would certainly need to go much further to continue
-  reducing the error in our model.
-\item
-  Suppose Fixitol reduces symptoms by 20\% over a placebo, but the trial
-  you're using to test it is too small to have adequate statistical
-  power to detect this difference reliably. We know that small trials
-  tend to have varying results; it's easy to get 10 lucky patients who
-  have shorter colds than usual but much harder to get 10,000 who all
-  do.
-\item
-  As I mentioned earlier, one drawback of the Bonferroni correction is
-  that it greatly decreases the statistical power of your experiments,
-  making it more likely that you'll miss true effects. More
-  sophisticated procedures than Bonferroni correction exist, ones with
-  less of an impact on statistical power, but even these are not magic
-  bullets. Worse, they don't spare you from the base rate fallacy. You
-  can still be misled by your p threshold and falsely claim there's
-  ``only a 5\% chance I'm wrong.'' Procedures like the Bonferroni
-  correction only help you eliminate some false positives.
-\item
-  In step 1, we find where missing values are located. The md.pattern()
-  function from the mice package is a really useful function. It gives
-  you a clear view of where missing values are located, helping you in
-  decisions regarding exclusions or substitution. You can refer to the
-  next recipe for missing value substitution.
-\item
-  ``Product classification is an example of multicategory or multinomial
-  classification. Most classification problems and most classification
-  algorithms are specialized for two-category, or binomial,
-  classification. There are tricks to using binary classifiers to solve
-  multicategory problems (for example, building one classifier for each
-  category, called a ``one versus rest'' classifier). But in most cases
-  it's worth the effort to find a suitable multiple-category
-  implementation, as they tend to work better than multiple binary
-  classifiers (for example, using the package mlogit instead of the base
-  method glm() for logistic regression).''
-\item
-  Another possible indication of collinearity in the inputs is seeing
-  coefficients with an unexpected sign: for example, seeing that income
-  is negatively correlated with years in the workforce.
-\item
-  The overall model can still predict income quite well, even when the
-  inputs are correlated; it just can't determine which variable deserves
-  the credit for the prediction. Using regularization (especially ridge
-  regression as found in lm.ridge() in the package MASS) is helpful in
-  collinear situations (we prefer it to ``x-alone'' variable
-  preprocessing, such as principal components analysis). If you want to
-  use the coefficient values as advice as well as to make good
-  predictions.
-\item
-  The degrees of freedom is thought of as the number of training data
-  rows you have after correcting for the number of coefficients you
-  tried to solve for. You want the degrees of freedom to be large
-  compared to the number of coefficients fit to avoid overfitting.
-\item
-  Overfitting is when you find chance relations in your training data
-  that aren't present in the general population. Overfitting is bad: you
-  think you have a good model when you don't.
-\item
-  The probable reason for nonconvergence is separation or
-  quasi-separation: one of the model variables or some combination of
-  the model variables predicts the outcome perfectly for at least a
-  subset of the training data. You'd think this would be a good thing,
-  but ironically logistic regression fails when the variables are too
-  powerful.
-\item
-  For categorical variables (male/female, or small/medium/large), you
-  can define the distance as 0 if two points are in the same category,
-  and 1 otherwise. If all the variables are categorical, then you can
-  use Hamming distance, which counts the number of mismatches.
-\item
-  Your next step is to select a performance measure. A typical
-  performance measure for regression problems is the Root Mean Square
-  Error (RMSE). It measures the standard deviation of the errors the
-  system makes in its predictions.
-\item
-  You should save every model you experiment with, so you can come back
-  easily to any model you want. Make sure you save both the
-  hyperparameters and the trained parameters, as well as the
-  cross-validation scores and perhaps the actual predictions as well.
-  This will allow you to easily compare scores across model types, and
-  compare the types of errors they make. You can easily save
-  Scikit-Learn models by using Python's pickle module, or using
-  sklearn.externals.joblib, which is more efficient at serializing large
-  NumPy arrays.
-\item
-  If all classifiers are able to estimate class probabilities (i.e.,
-  they have a predict\_proba() method), then you can tell Scikit-Learn
-  to predict the class with the highest class probability, averaged over
-  all the individual classifiers. This is called soft voting. It often
-  achieves higher performance than hard voting because it gives more
-  weight to highly confident votes. All you need to do is replace
-  voting=``hard'' with voting=``soft'' and ensure that all classifiers
-  can estimate class probabilities.
-\item
-  The standard value for k in k-fold cross-validation is 10, which is
-  typically a reasonable choice for most applications. However, if we
-  are working with relatively small training sets, it can be useful to
-  increase the number of folds. If we increase the value of k, more
-  training data will be used in each iteration, which results in a lower
-  bias towards estimating the generalization performance by averaging
-  the individual model estimates. However, large values of k will also
-  increase the runtime of the cross-validation algorithm and yield
-  estimates with higher variance since the training folds will be more
-  similar to each other. On the other hand, if we are working with large
-  datasets, we can choose a smaller value for k.
-\item
-  Distance Metrics: Hamming distance for categorical variables, Cosine
-  distance for text data, Gower distance for categorical data
-\item
-  AIC x BIC: Explanatory power x Parsimonious
-\item
-  Bias is how far offon the average the model is from the truth.
-  Variance is how much the estimate varies about its average. With low
-  model complexity bias is high because predictions are more likely to
-  stray from the truth, and variance is low because there are only few
-  parameters being fit. With high model complexity bias is low because
-  the model can adapt to more subtleties in the data, and variance is
-  high because we have more parameters to estimate from the same amount
-  of data.
-\item
-  The mean of highly correlated quantities has higher variance than the
-  mean of uncorrelated quantities. The smaller the number of folds, the
-  more biased the error estimates (they will be biased to be
-  conservative indicating higher error than there is in reality) but the
-  less variable they will be. On the extreme end you can have one fold
-  for each data point which is known as Leave-One-Out-Cross-Validation.
-  In this case, your error estimate is essentially unbiased but it could
-  potentially have high variance.
-\item
-  LDA vs Logistic Regression: When the classes are well-separated
-  parameters of logistic regression are unstable and LDA doesn't have
-  this problem. If the distribution of X is approximately normal then
-  LDA is more stable again. LDA doesn't need to fit multiple models for
-  multiclass classification.
-\item
-  SVM vs Logistic Regression: SVM is likely to overfit the data and can
-  dominated LR on the training set. Kernel method makes SVM more
-  flexible.
-\item
-  Decision Tree vs Linear Model: Tree has non-linear boundary, selects
-  important features, easier to intepret but unstable especially for
-  small data.
-\item
-  Naive Bayes vs LDA: Both use Bayes theorem, both assume gaussian
-  distribution, but LDA takes care of the correlations. LDA might
-  out-perform Naive Bayes when the features are highly correlated.
-\item
-  KNN vs Other Classification Methods: KNN is completely non-parametic,
-  doesn't tell which features are important. Dominates LDA and Logistic
-  Regression when the decision boundary is highly non-linear.
-\item
-  When building, testing, and validating a suite of models, the optimal
-  model (i.e., the optimal point in the ROC curve) is the spot where the
-  overall accuracy of the model is essentially unchanged as we make
-  small adjustments in the choice of model. That is to say, the change
-  (from one model to the next) in the model's precision (specificity) is
-  exactly offset by the change in the model's recall (sensitivity).
-  Consequently, allowing for some imperfection, where the false positive
-  rate and the false negative rate are in proper balance (so that
-  neither one has too great of an impact on the overall accuracy and
-  effectiveness of the model), is good fruit from your big data labors.
-  The metric I used to guide my cross-validation is the F-score. This is
-  a good metric when we have a lot more samples from one category than
-  from the other categories.
-\item
-  The cost of the holdout method comes in the amount of data that is
-  removed from the model training process. For instance, in the
-  illustrative example here, we removed 30\% of our data. This means
-  that our model is trained on a smaller data set and its error is
-  likely to be higher than if we trained it on the full data set. The
-  standard procedure in this case is to report your error using the
-  holdout set, and then train a final model using all your data.
-\item
-  A metric that minimizes false positives, by rarely flagging players
-  and teams that fail to achieve the desired outcome, is specific. A
-  metric that minimizes false negatives, by rarely failing to flag
-  players and teams that achieve the desired outcome, is sensitive.
-\item
-  Although the previous code example was useful to illustrate how k-fold
-  cross-validation works, scikit-learn also implements a k-fold
-  cross-validation scorer, which allows us to evaluate our model using
-  stratified k-fold cross-validation more efficiently
-\item
-  Sometimes it may be more useful to report the coefficient of
-  determination (), which can be understood as a standardized version of
-  the MSE, for better interpretability of the model performance. In
-  other words, is the fraction of response variance that is captured by
-  the model. The value is defined as follows:Here, SSE is the sum of
-  squared errors and SST is the total sum of squares , or in other
-  words, it is simply the variance of the response.
-\item
-  Most people start working with data from exactly the wrong end. They
-  begin with a data set, then apply their favorite tools and techniques
-  to it. The result is narrow questions and shallow arguments. Starting
-  with data, without first doing a lot of thinking, without having any
-  structure, is a short road to simple questions and unsurprising
-  results. We don't want unsurprising---we want knowledge.
-\item
-  Remember that the positive class in scikit-learn is the class that is
-  labeled as class 1. If we want to specify a different positive label,
-  we can construct our own scorer via the make\_scorer function, which
-  we can then directly provide as an argument to the scoring parameter
-  in GridSearchCV
-\item
-  While the weighted macro-average is the default for multiclass
-  problems in scikit-learn, we can specify the averaging method via the
-  average parameter inside the different scoring functions that we
-  import from the sklean.metrics module, for example, the
-  precision\_score or make\_scorer functions
-\item
-  Transforming words into feature vectorsTo construct a bag-of-words
-  model based on the word counts in the respective documents, we can use
-  the CountVectorizer class implemented in scikit-learn. As we will see
-  in the following code section, the CountVectorizer class takes an
-  array of text data, which can be documents or just sentences, and
-  constructs the bag-of-words model for us:
-\item
-  Scikit-learn implements yet another transformer, the TfidfTransformer,
-  that takes the raw term frequencies from CountVectorizer as input and
-  transforms them into tf-idfs.
-\item
-  Naive Bayes is a linear classifier, while k-NN is not. The curse of
-  dimensionality and large feature sets are a problem for k-NN, while
-  Naive Bayes performs well. k-NN requires no training (just load in the
-  dataset), whereas Naive Bayes does.
-\end{itemize}
-
-\subsection{Clustering}\label{clustering}
-
-\begin{itemize}
-\item
-  \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison}
-\item
-  \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
-\item
-  \url{https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68}
-\item
-  \url{http://hunch.net/?p=224}
-\end{itemize}
 
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
@@ -4406,6 +4320,9 @@ AIC\_c for model selection.
 
 \subsection{General}\label{general-3}
 
+Outliers in small samples:
+\url{https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617\#78617}
+
 Since all outcomes are 0 or 1, and drawn with the same (unknown)
 probability, we know that the number of ones and zeros follows a
 binomial distribution. This means that the confidence interval of a ``k
@@ -5363,189 +5280,6 @@ model that includes Year.
   student, partition cross validation by dates, pca finds major trends
   hidden within the data
 \end{itemize}
-
-\chapter{Code Notes}\label{code-notes}
-
-\hypertarget{python}{\section{Python}\label{python}}
-
-\subsection{General}\label{general-4}
-
-\begin{itemize}
-\item
-  \url{https://chrisalbon.com/}
-\item
-  pandas: isin \textbar{} crosstab
-\item
-  pd.group\_by aggregate functions: size, count, sum, mean, median, sd,
-  var, min, max, prod, first, last
-\item
-  The only float that isn't equal to itself is nan.
-\item
-  \%matplotlib notebook: interactive plots
-\item
-  Memory storage: use pd.copy to create a deep copy instead of a shallow
-  copy
-\item
-  IPy: \%who or \%whos shows defined variables \& \%reset resets them
-\item
-  Append dict to df: use ignore\_index = True. eg. films\_df =
-  films\_df.append(film\_dict, ignore\_index=1)
-\item
-  Debugging: import pdb \textbar{} pdb.set\_trace(),
-\item
-  dir() gives a list of in scope variables
-\item
-  globals() gives a dictionary of global variables
-\item
-  locals() gives a dictionary of local variables
-\item
-  \url{https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/}
-\item
-  np.dot = np.multiply \%\textgreater{}\% np.sum
-\item
-  flatten dict
-
-  \begin{itemize}
-  \tightlist
-  \item
-    pd.io.json.json\_normalize(stuff)
-    *\url{https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055\#41689055}
-  \item
-    \url{https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10}
-  \end{itemize}
-\end{itemize}
-
-\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Write file with date:
-  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ fun(a):}
-  \CommentTok{#Role}
-  \CommentTok{#-----}
-  \CommentTok{#Does something}
-  
-  \CommentTok{#Parameters}
-  \CommentTok{#---------}
-  \CommentTok{#Accepts something}
-  
-  \CommentTok{#Returns}
-  \CommentTok{#-------}
-  \CommentTok{#Returns something}
-  
-  \ControlFlowTok{return}\NormalTok{(a)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{r}{\section{R}\label{r}}
-
-\subsection{General}\label{general-5}
-
-\begin{itemize}
-\item
-  ctrl + shift + a: reformat code in rstudio
-\item
-  library(rethinking) \textbar{} data(UCBadmit) \textbar{} d
-  \textless{}- UCBadmit
-\item
-  purrr::p/map\_dfr/c
-\item
-  date = date \%\textgreater{}\% as.POSIXct() \%\textgreater{}\%
-  strptime(`\%Y-\%m-\%d') \%\textgreater{}\%
-  strftime(format=``\%Y-\%m-\%d'')
-\item
-  e \textless{}- matrix(NA\_real\_, nrow = 1000, ncol = 8)
-\item
-  rowwise in R: purrr::pmap
-\item
-  str\_split + unnest()
-\item
-  \url{https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html}
-\item
-  na\_if: Replace certain values by na
-\item
-  purrr::map\_df - map over columns
-\item
-  studio multiple cursors, snippets, addins
-\item
-  ctrl + shift + o: toggle table of contents
-\item
-  ctrl shift enter: run chunk
-\item
-  ctrl pageup/down: navigate chunks
-\item
-  atl shift k: shortcuts
-\item
-  ctrl + shift + R: label sections
-\item
-  ctrl + alt + R: run all chunks
-\item
-  df\_print: kable in yaml rmrkdown header
-\item
-  rm(list = ls()): Remove all objects in the current workspace
-\item
-  cut(): Transform a numeric variable into a categorical variable.
-\item
-  car: recode (good for dummying)
-\item
-  Examine the objects in the workspace: ls.str()
-\item
-  This is how you dynamically update a value in Rmarkdown: x =
-  \emph{backtick} r x \emph{backtick}.
-\item
-  df{[}setdiff(names(df), ``z''){]}: remove column z
-\item
-  purrr::walk
-\item
-  purr::keep/discard for is.factor
-\item
-  choroplethr \textbar{} choroplethrMaps \textbar{}\textbar{} d3r
-  \textbar{} d3treeR \textbar{} data.tree
-\end{itemize}
-
-\subsection{Knitting A GHub Doc}\label{knitting-a-ghub-doc}
-
-output: github\_document: default html\_notebook: default
-
-\section{Various}\label{various}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tapply}\NormalTok{(Summary_Variable, Group_Variable, Function)}
-
-\KeywordTok{boxplot}\NormalTok{(frequency }\OperatorTok{~}\StringTok{ }\NormalTok{attitude}\OperatorTok{*}\NormalTok{gender,}
-\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"white"}\NormalTok{,}\StringTok{"lightgray"}\NormalTok{), politeness)}
-
-\CommentTok{#corrplot package in r}
-\KeywordTok{cor}\NormalTok{(Carseats[}\KeywordTok{sapply}\NormalTok{(Carseats, }\ControlFlowTok{function}\NormalTok{(x) }\OperatorTok{!}\KeywordTok{is.factor}\NormalTok{(x))])}
-
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\StringTok{"pROC"}\NormalTok{), }\DataTypeTok{dependencies =} \KeywordTok{c}\NormalTok{(}\StringTok{"Depends"}\NormalTok{, }\StringTok{"Imports"}\NormalTok{, }\StringTok{"Suggests"}\NormalTok{))}
-
-\KeywordTok{library}\NormalTok{(knitr)}
-\KeywordTok{kable}\NormalTok{(pause_sum, }\DataTypeTok{caption =} \StringTok{"Summary Statistics Table for Exit Slip Dataset"}\NormalTok{,}
-      \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Mean"}\NormalTok{, }\StringTok{"Median"}\NormalTok{, }\StringTok{"SD"}\NormalTok{, }\StringTok{"Min"}\NormalTok{, }\StringTok{"Max"}\NormalTok{, }\StringTok{"N"}\NormalTok{, }\StringTok{"NAs"}\NormalTok{))}
-
-\KeywordTok{typeof}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{#"double"}
-\KeywordTok{typeof}\NormalTok{(1L) }\CommentTok{#"integer"}
-
-\CommentTok{#Prints out the first 4 multiples of 3.}
-\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{4}\OperatorTok{*}\DecValTok{3}\NormalTok{) \{}\KeywordTok{cat}\NormalTok{(i)\}}
-\end{Highlighting}
-\end{Shaded}
 
 \bibliography{book.bib,packages.bib}
 
