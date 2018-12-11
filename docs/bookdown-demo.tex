@@ -486,10 +486,13 @@ environment.yaml.
 
 \begin{itemize}
 \item
-  Make data tidy: See tidy data paper
+  There are three interrelated rules which make a dataset tidy:
 \item
-  \href{https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862\#862}{Optimal
-  Bins For Histogram}
+  Each variable must have its own column.
+\item
+  Each observation must have its own row.
+\item
+  Each value must have its own cell.
 \item
   \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
   as how often observations differ from one another. It varies from 0 to
@@ -568,9 +571,9 @@ estimated sample size to 300.
   Monetary amounts are often log- distributed---the log of the data is
   normally distributed. This leads us to the idea that taking the log of
   the data can restore symmetry to it.
+\item
+  Dixon and Chi-squared tests for outlier detection plus LOF Algorithm.
 \end{itemize}
-
-\& Dxon and Chi-squared tests for outlier detection
 
 \subsection{Missingness \& Imputation}\label{missingness-imputation}
 
@@ -612,9 +615,18 @@ estimated sample size to 300.
 \section{Visualize}\label{visualize-1}
 
 \begin{itemize}
-\tightlist
 \item
   swarmplot
+\item
+  ggplot(df, aes(fitted\_probability, binary\_class\_indicator)) +
+  geom\_smooth(): a quick way of visualizing model calibration without
+  having to manually bin any observations
+\item
+  Rule of thumb for bins in histogram:
+  \texttt{ggplot()\ +\ geom\_histogram(aes(x),\ binwidth\ =\ diff(range(x))\ /\ (2\ *\ IQR(x)\ /\ length(x)\^{}(1/3)))}.
+\item
+  \href{https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862\#862}{Optimal
+  Bins For Histogram}
 \end{itemize}
 
 \chapter{Model}\label{model-1}
@@ -1789,15 +1801,17 @@ has roughly equal number of observations;
 Must choose k for clusters. Initialize cluster centes randomly, assign
 each point to its closest cluster by a distance metric. Recalculate
 centroids. Halt when cluster assignments no longer change. Clusters will
-be distinct and non-overlapping. Goal to minimize within-cluster
-variation. The within-cluster variation for the kth cluster is the sum
-of all of the pairwise squared Euclidean distances between the
-observations in the kth cluster divided by the total number of
-observations in the kth cluster. Limitation is that it depends on
-initialization of centroids. Guaranteed convergence but only to a local
-minima. Run the algorithm several times and pick the solution that
-yields the smallest within-cluster variance. Increasing k will decrease
-variance and increase bias and vice versa. K-means: Jaccard coefficient.
+be distinct and non-overlapping.
+
+Goal to minimize within-cluster variation. The within-cluster variation
+for the kth cluster is the sum of all of the pairwise squared Euclidean
+distances between the observations in the kth cluster divided by the
+total number of observations in the kth cluster. Limitation is that it
+depends on initialization of centroids. Guaranteed convergence but only
+to a local minima. Run the algorithm several times and pick the solution
+that yields the smallest within-cluster variance. Increasing k will
+decrease variance and increase bias and vice versa. K-means: Jaccard
+coefficient.
 
 Note: Not enough to use within-cluster variance as this decreases as one
 increases k. Use elbow method or scree plot to choose optimal k where
