@@ -1,5 +1,7 @@
 # Deep Learning
 
+## General
+
 * restnet, attention > RNN / LSTM
 
 * "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun
@@ -78,3 +80,29 @@ term memory). LSTM replaced the rectified linear units by continuous functions. 
 * Few people use kfold cv in deep learning because of the large datasets in play. 
 
 * Dying neuron + vanishing gradient: Change activation function
+
+## LSTMs
+
+Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. LSTMs are essentially the same thing as the RNN we will develop in this tutorial, they just have a different way of computing the hidden state. 
+
+The default activation function for LSTMs is the hyperbolic tangent (tanh), which outputs values between -1 and 1. This is the preferred range for the time series data: MinMaxScaler(feature_range=(-1, 1)).
+
+Keras LSTM expects the input as well as the target data to be in a specific shape. The input has to be a 3-d array of size num_samples, num_timesteps, num_features.
+
+The way we can do this, with Keras, is by wiring the LSTM hidden states to sets of consecutive outputs of the same length. Thus, if we want to produce predictions for 12 months, our LSTM should have a hidden state length of 12.
+
+Keras - stateful vs stateless LSTMs
+
+One major issue with layer_simple_rnn is that although it should theoretically be able to retain at time t information about inputs seen many time steps before, in practice, such long-term dependencies are impossible to learn. This is due to the vanishing gradient problem, an effect that is similar to what is observed with non-recurrent networks (feed forward networks) that are many layers deep: as you keep adding layers to a network, the network eventually becomes un-trainable. 
+
+A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way.
+
+```{r, eval = F}
+network <- keras_model_sequential() %>%  layer_dense(units = 512, activation = "relu", input_shape = c(28 * 28)) %>%  layer_dense(units = 10, activation = "softmax")
+
+network %>% compile(  optimizer = "rmsprop",  loss = "categorical_crossentropy",  metrics = c("accuracy"))
+
+network %>% fit(train_images, train_labels, epochs = 5, batch_size = 128)
+
+metrics <- network %>% evaluate(test_images, test_labels)
+```

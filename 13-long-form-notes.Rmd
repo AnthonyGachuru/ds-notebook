@@ -1,5 +1,15 @@
 # Notes
 
+* Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate
+
+* **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
+
+Consequently, practical decision-tree learning algorithms are based on heuristics such as the greedy algorithm where locally optimal decisions are made at each node. Such algorithms cannot guarantee to return the globally optimal decision tree. To reduce the greedy effect of local optimality, some methods such as the dual information distance (DID) tree were proposed
+
+Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.
+
+Zero correlation doesn't imply independence
+
 * Active Learning: Finding the optimal data to manually label
 
 * Simulated Annealing: Gradient descent extension

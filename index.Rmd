@@ -62,6 +62,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Sampling from data if its too large
 
+* query library
+
 ### Tidy
 
 * [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). 
@@ -120,8 +122,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Create ensembles
     
-* Choose Statistical Test: [1](http://www.ats.ucla.edu/stat/mult_pkg/whatstat/) | [2](http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt)
-    
 * Ensembling: mlxtend in Python, and caretEnsemble in R.
 
 * Look at learning curves: [1](https://www.dataquest.io/blog/learning-curves-machine-learning/) | [2](http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html)
@@ -133,6 +133,8 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 ### Deployment /  Maintenance
 
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
+
+checklists | agendas | code books | appendices | post-mortems | tests | gacp
 
 Write helper functions, do testing ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
  | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) and validation ([1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest) ). Testing libraries include: pytest, hypothesis, and testthat.
@@ -157,21 +159,19 @@ This will create a new environment with the same name listed in environment.yaml
 
 * Make package for workflow with data (__init__.py) and use this formation for function docs:
 
-```{python, eval = FALSE}
-def fun(a):
+* `def fun(a): return(a) #Role Parameters Returns`
 
-  #Role
-  #-----
-  #Does something
-  
-  #Parameters
-  #---------
-  #Accepts something
-  
-  #Returns
-  #-------
-  #Returns something
-  
-  return(a)
-```
+### Sample R Pipeline
 
+[Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
+
+IO: odbc readxl httr 
+EDA: DataExplorer
+Prep: tidyverse
+Sampling: rsample modelr
+Feature Engineering: recipes
+Modeling: glmnet h2o FFTrees
+Evaluation: broom yardstick
+Deployment: sqlrutils AzureML opencpu
+Monitoring: flexdashboard
+Docs: rmarkdown

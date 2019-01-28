@@ -133,20 +133,6 @@
 }
 \makeatother
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -227,6 +213,8 @@ can be found on this
   Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
   Sampling from data if its too large
+\item
+  query library
 \end{itemize}
 
 \subsection{Tidy}\label{tidy}
@@ -314,10 +302,6 @@ can be found on this
 \item
   Create ensembles
 \item
-  Choose Statistical Test:
-  \href{http://www.ats.ucla.edu/stat/mult_pkg/whatstat/}{1} \textbar{}
-  \href{http://www.qnamarkup.org/i/?source=http://colarusso.github.io/QnAMarkup/examples/source/WhatStats.txt}{2}
-\item
   Ensembling: mlxtend in Python, and caretEnsemble in R.
 \item
   Look at learning curves:
@@ -334,6 +318,9 @@ Reference this
 \subsection{Deployment / Maintenance}\label{deployment-maintenance}
 
 \href{https://blog.osteele.com/2008/05/my-git-workflow/}{Git Workflow}
+
+checklists \textbar{} agendas \textbar{} code books \textbar{}
+appendices \textbar{} post-mortems \textbar{} tests \textbar{} gacp
 
 Write helper functions, do testing (
 \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
@@ -380,26 +367,18 @@ environment.yaml.
 \item
   Make package for workflow with data (\textbf{init}.py) and use this
   formation for function docs:
+\item
+  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{def}\NormalTok{ fun(a):}
-  \CommentTok{#Role}
-  \CommentTok{#-----}
-  \CommentTok{#Does something}
-  
-  \CommentTok{#Parameters}
-  \CommentTok{#---------}
-  \CommentTok{#Accepts something}
-  
-  \CommentTok{#Returns}
-  \CommentTok{#-------}
-  \CommentTok{#Returns something}
-  
-  \ControlFlowTok{return}\NormalTok{(a)}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Sample R Pipeline}\label{sample-r-pipeline}
+
+\href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
+
+IO: odbc readxl httr EDA: DataExplorer Prep: tidyverse Sampling: rsample
+modelr Feature Engineering: recipes Modeling: glmnet h2o FFTrees
+Evaluation: broom yardstick Deployment: sqlrutils AzureML opencpu
+Monitoring: flexdashboard Docs: rmarkdown
 
 \chapter{Import \& Tidy}\label{import-tidy}
 
@@ -411,23 +390,11 @@ environment.yaml.
 \item
   sql: SELECT `Dummy Column Text' as DUMMYCOL FROM tbl
 \item
-  In tidy data:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Each variable forms a column.
-  \item
-    Each observation forms a row.
-  \item
-    Each type of observational unit forms a table.
-  \end{itemize}
+  In tidy data: Each variable forms a column. Each observation forms a
+  row. Each type of observational unit forms a table.
 \item
   A schema is a blueprint for storing data. For a table every row has
   same number of columns, and each column is of the same type.
-\item
-  \href{http://pandas.pydata.org/pandas-docs/stable/generated/pandas.io.json.json_normalize.html}{json
-  normalize}
 \item
   \href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temporary
   pandas Columns}
@@ -449,20 +416,7 @@ environment.yaml.
 
 \begin{itemize}
 \item
-  CSV to DB V1:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \$ sqlite3 db\_name.db
-  \item
-    sqlite\textgreater{} .mode csv db\_name
-  \item
-    sqlite\textgreater{} .import data.csv db\_name
-  \end{itemize}
-\item
-  \href{https://gist.github.com/gfleetwood/c2ea91da4a8ab1a77f777e28e0b2949c}{CSV
-  to DB V2}
+  Common Table Expressions
 \item
   SQL UNION stacks one dataset on top of the other. It only appends
   distinct values. More specifically, when you use UNION, the dataset is
@@ -485,6 +439,7 @@ environment.yaml.
 \section{Tidy}\label{tidy-1}
 
 \begin{itemize}
+\tightlist
 \item
   There are three interrelated rules which make a dataset tidy:
 \item
@@ -493,10 +448,6 @@ environment.yaml.
   Each observation must have its own row.
 \item
   Each value must have its own cell.
-\item
-  \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
-  as how often observations differ from one another. It varies from 0 to
-  1. The higher the value, the more unalike the data are.
 \end{itemize}
 
 \chapter{Transform \& Visualize}\label{transform-visualize}
@@ -4859,6 +4810,8 @@ Analyzing results, and draw valid conclusions.
 
 \chapter{Deep Learning}\label{deep-learning}
 
+\section{General}\label{general-4}
+
 \begin{itemize}
 \item
   restnet, attention \textgreater{} RNN / LSTM
@@ -5009,6 +4962,52 @@ Analyzing results, and draw valid conclusions.
 \item
   Dying neuron + vanishing gradient: Change activation function
 \end{itemize}
+
+\section{LSTMs}\label{lstms}
+
+Long Short Term Memory networks -- usually just called ``LSTMs'' -- are
+a special kind of RNN, capable of learning long-term dependencies. LSTMs
+are essentially the same thing as the RNN we will develop in this
+tutorial, they just have a different way of computing the hidden state.
+
+The default activation function for LSTMs is the hyperbolic tangent
+(tanh), which outputs values between -1 and 1. This is the preferred
+range for the time series data: MinMaxScaler(feature\_range=(-1, 1)).
+
+Keras LSTM expects the input as well as the target data to be in a
+specific shape. The input has to be a 3-d array of size num\_samples,
+num\_timesteps, num\_features.
+
+The way we can do this, with Keras, is by wiring the LSTM hidden states
+to sets of consecutive outputs of the same length. Thus, if we want to
+produce predictions for 12 months, our LSTM should have a hidden state
+length of 12.
+
+Keras - stateful vs stateless LSTMs
+
+One major issue with layer\_simple\_rnn is that although it should
+theoretically be able to retain at time t information about inputs seen
+many time steps before, in practice, such long-term dependencies are
+impossible to learn. This is due to the vanishing gradient problem, an
+effect that is similar to what is observed with non-recurrent networks
+(feed forward networks) that are many layers deep: as you keep adding
+layers to a network, the network eventually becomes un-trainable.
+
+A loss function is used to optimize a machine learning algorithm. An
+accuracy metric is used to measure the algorithm's performance
+(accuracy) in an interpretable way.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{network <-}\StringTok{ }\KeywordTok{keras_model_sequential}\NormalTok{() }\OperatorTok{%>%}\StringTok{  }\KeywordTok{layer_dense}\NormalTok{(}\DataTypeTok{units =} \DecValTok{512}\NormalTok{, }\DataTypeTok{activation =} \StringTok{"relu"}\NormalTok{, }\DataTypeTok{input_shape =} \KeywordTok{c}\NormalTok{(}\DecValTok{28} \OperatorTok{*}\StringTok{ }\DecValTok{28}\NormalTok{)) }\OperatorTok{%>%}\StringTok{  }\KeywordTok{layer_dense}\NormalTok{(}\DataTypeTok{units =} \DecValTok{10}\NormalTok{, }\DataTypeTok{activation =} \StringTok{"softmax"}\NormalTok{)}
+
+\NormalTok{network }\OperatorTok{%>%}\StringTok{ }\KeywordTok{compile}\NormalTok{(  }\DataTypeTok{optimizer =} \StringTok{"rmsprop"}\NormalTok{,  }\DataTypeTok{loss =} \StringTok{"categorical_crossentropy"}\NormalTok{,  }\DataTypeTok{metrics =} \KeywordTok{c}\NormalTok{(}\StringTok{"accuracy"}\NormalTok{))}
+
+\NormalTok{network }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fit}\NormalTok{(train_images, train_labels, }\DataTypeTok{epochs =} \DecValTok{5}\NormalTok{, }\DataTypeTok{batch_size =} \DecValTok{128}\NormalTok{)}
+
+\NormalTok{metrics <-}\StringTok{ }\NormalTok{network }\OperatorTok{%>%}\StringTok{ }\KeywordTok{evaluate}\NormalTok{(test_images, test_labels)}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Probabilistic Programming}\label{probabilistic-programming}
 
@@ -5173,6 +5172,30 @@ model that includes Year.
 \end{itemize}
 
 \chapter{Notes}\label{notes-1}
+
+\begin{itemize}
+\item
+  Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem
+  \textbar{} Importance sampling \textbar{} Bayes Error Rate
+\item
+  \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
+  as how often observations differ from one another. It varies from 0 to
+  1. The higher the value, the more unalike the data are.
+\end{itemize}
+
+Consequently, practical decision-tree learning algorithms are based on
+heuristics such as the greedy algorithm where locally optimal decisions
+are made at each node. Such algorithms cannot guarantee to return the
+globally optimal decision tree. To reduce the greedy effect of local
+optimality, some methods such as the dual information distance (DID)
+tree were proposed
+
+Laplace smoothing/estimator in Naive Bayes: To see why consider the
+worst case where none of the words in the training sample appear in the
+test sentence. In this case, under your model we would conclude that the
+sentence is impossible but it clearly exists creating a contradiction.
+
+Zero correlation doesn't imply independence
 
 \begin{itemize}
 \item

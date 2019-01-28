@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Cribsheet</title>
+  <title>Chapter 4 Model | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 4 Model | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 4 Model | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -34,6 +34,7 @@
 <link rel="next" href="model-2.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -115,6 +116,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.3</b> Other</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.3.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.3.2</b> Sample R Pipeline</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="import-tidy.html"><a href="import-tidy.html"><i class="fa fa-check"></i><b>2</b> Import &amp; Tidy</a><ul>
@@ -317,7 +319,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.0.4" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>9.0.4</b> Think Stats</a></li>
 <li class="chapter" data-level="9.0.5" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>9.0.5</b> AB Testing Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#general-4"><i class="fa fa-check"></i><b>10.1</b> General</a></li>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#lstms"><i class="fa fa-check"></i><b>10.2</b> LSTMs</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>11</b> Probabilistic Programming</a></li>
 <li class="chapter" data-level="12" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>12</b> NLP</a><ul>
 <li class="chapter" data-level="12.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>12.0.1</b> Topic Modeling</a></li>
@@ -516,7 +521,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -528,6 +533,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/03-model-pp-fe-fs.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
 "toc": {
@@ -543,7 +552,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
