@@ -1,5 +1,13 @@
 # Notes
 
+* But map allows us to bypass the function function. Using a tilda (~) in place of function and a dot (.) in place of x, we can do this: map(dat, ~mean(.$Open))
+
+confint
+
+Quantile Regression models the median while Linear Regression models the mean
+
+Linear Regression - BLUE: Best Linear Unbiased (average amount wrong by is error) Estimator
+
 * Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate
 
 * **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
