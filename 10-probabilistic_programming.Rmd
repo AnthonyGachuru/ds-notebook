@@ -76,3 +76,13 @@ But the prior on β is narrower and is meant to regularize. The prior β ~ Norma
 metrics: dic, waic
 
 Sampling from the posterior now and plotting the model’s predictions would help immensely with interpretation. And that’s the course I want to encourage and provide code for. In general, it’s not safe to interpret interactions without plotting them.
+
+bayesian model: generative model (binomial number of success) + prior (eg. sample of probabilities of success from uniform)
+
+bayesian inference: bayesian model + data
+
+bayesian inference is conditioning on the data to learn the parameter values.
+
+The reason that we call it posterior is because it represents the uncertainty after (that is, posterior to) having included the information in the data. 
+
+Bayesian Inference Methods: Sampling, Grid Approximation
