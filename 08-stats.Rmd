@@ -2,6 +2,16 @@
 
 ### General
 
+http://www.stat.umn.edu/geyer/old/5101/rlook.html
+
+https://stats.idre.ucla.edu/other/mult-pkg/whatstat/
+
+categorical dissimilairty https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist
+ 
+http://frog.oerc.ox.ac.uk:8080/stato-app/
+
+Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Numeric-Categorical Correlation https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor
+
 Outliers in small samples: https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617
 
 Since all outcomes are 0 or 1, and drawn with the same (unknown) probability, we know that the number of ones and zeros follows a binomial distribution. This means that the confidence interval of a “k out of n ” scenario is a Beta distribution.
@@ -406,3 +416,40 @@ Choose test statistics method or metrics to evaluate experiment.
 Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
+
+## DataCamp: Experimental Design
+
+Randomized Complete Block Design (RCBD) experiment
+
+Power usually @ 80%. power effect size & sample size all inter-related (with 2 can calculate 3rd). 
+
+power: prob that test correctly rejects null hypo when alt hypo is true
+
+effect size: standardized measure of the difference you're trying to detect
+
+sample size: how many experimental units needed to survey to detect the desired diff at the desired power
+
+pwr::pwr.anova.test() [exactly one of n, d, power, and sig.level must be NULL]
+
+aov = lm + anova
+aov + tukey hsd
+
+Another assumption of ANOVA and linear modeling is homogeneity of variance. Homogeneity means "same", and here that would mean that the variance of int_rate is the same for each level of grade. We can test for homogeneity of variances using bartlett.test(), which takes a formula and a dataset as inputs.
+
+One non-parametric alternative to ANOVA is the Kruskal-Wallis rank sum test. For those with some statistics knowledge, it is an extension of the Mann-Whitney U test for when there are more than two groups, such as with our grade variable.
+
+Use the correct function from pwr to find the sample size (d is the effect size)
+pwr::pwr.t.test(n = NULL, d = .2,  power = .8,  sig.level  =.05, alternative = "two.sided")
+
+multivariable experiment:
+
+lendingclub_multi <- lm(loan_amnt ~ Group + grade + verification_status, lendingclub_ab)
+tidy(lendingclub_multi)
+
+The sampling package's cluster() creates cluster samples. It takes in a dataset name, the variable in the set to be used as the cluster variable, passed as a vector with the name as a string, e.g. c("variable"), a number of clusters to select, and a method
+
+Randomized Complete Block Designs
+
+the purpose of blocking an experiment is to make the experimental groups more like one another. 
+
+A rule of thumb in experimental design is often "block what you can, randomize what you cannot", which means you should aim to block the effects you can control for (e.g. sex) randomize on those you cannot (e.g. smoking status). Variability inside a block is expected to be fairly small, but variability between blocks will be larger.

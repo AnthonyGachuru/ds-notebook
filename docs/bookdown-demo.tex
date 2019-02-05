@@ -399,16 +399,6 @@ Monitoring: flexdashboard Docs: rmarkdown
   \href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temporary
   pandas Columns}
 \item
-  Sampling a massive CSV file:
-
-  \begin{itemize}
-  \item
-    pip install subsample
-  \item
-    gzcat ginormous.csv.gz \textbar{} subsample -n 100000 \textgreater{}
-    sampled.csv.gz
-  \end{itemize}
-\item
   Make codebooks
 \end{itemize}
 
@@ -569,15 +559,10 @@ estimated sample size to 300.
 \item
   swarmplot
 \item
-  ggplot(df, aes(fitted\_probability, binary\_class\_indicator)) +
-  geom\_smooth(): a quick way of visualizing model calibration without
-  having to manually bin any observations
+  marimekko charts \textbar{} radviz \textbar{} Marey Chart
 \item
-  Rule of thumb for bins in histogram:
-  \texttt{ggplot()\ +\ geom\_histogram(aes(x),\ binwidth\ =\ diff(range(x))\ /\ (2\ *\ IQR(x)\ /\ length(x)\^{}(1/3)))}.
-\item
-  \href{https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862\#862}{Optimal
-  Bins For Histogram}
+  \url{http://www.ericmjl.com/blog/2018/7/14/ecdfs/} \textbar{}
+  \url{https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf}
 \end{itemize}
 
 \chapter{Model}\label{model-1}
@@ -585,6 +570,9 @@ estimated sample size to 300.
 \section{General}\label{general-1}
 
 \begin{itemize}
+\item
+  sklearn log\_loss \textbar{} brier score\textbar{} cross entropy
+  \textbar{} youdens j
 \item
   hamming distance for categorical data. Available in sklearn DBSCAN.
 \item
@@ -2647,6 +2635,121 @@ TBD
 
 \subsection{Pros/Cons}\label{proscons-17}
 
+\section{DataCamp: Nonlinear Modeling in R with
+GAMs}\label{datacamp-nonlinear-modeling-in-r-with-gams}
+
+Wiggleness affected by smoothing factor (sp) and number of basis
+functions (k)
+
+gam(y \textasciitilde{} s(x, k = 3), data = df, sp = .1) gam(y
+\textasciitilde{} s(x, k = 3), data = df, method = ``REML'')
+
+Categorical features must be included as factors.
+
+gam(hw.mpg \textasciitilde{} s(weight) + fuel, data = mpg, method =
+``REML'')
+
+A factor smooth interaction fits different models for different
+categorical vars.
+
+gam(hw.mpg \textasciitilde{} s(weight, by = fuel) + fuel, data = mpg,
+method = ``REML'')
+
+Summary:
+
+edf=1 is a straight line
+
+Visualize:
+
+plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod){[}1{]})
+
+Model Evaluation:
+
+gam.check: Bad if model hasn't converged. Likely due to too many
+features. Small p-values indicate residuals not randomly distributed
+which is often due to not enough basis functions.
+
+first do concurvity(mod, full = T) then do concurvity(mod, full = F).
+check co-linearity. worst case is bad over 0.8.
+
+interaction b/w x \& y: mod2d \textless{}- gam(cadmium \textasciitilde{}
+s(x, y), data = meuse, method = ``REML'')
+
+vis.gam for visualization
+
+vis.gam(mod2d, view = c(``x'', ``y''), plot.type = ``persp'', se = 2,
+theta = 135)
+
+vis.gam(mod2d, view = c(``x'', ``y''), plot.type = ``contour'', too.far
+= 0.05)
+
+vis.gam(mod2d, view = c(``x'', ``y''), plot.type = ``contour'', too.far
+= .1)
+
+Make plot with 25\% extrapolation vis.gam(mod2d, view = c(``x'', ``y''),
+plot.type = ``contour'', too.far = .25)
+
+Overlay data points(meuse)
+
+Nonlinear Modeling in R with GAMs:
+
+Fit a model with a factor-smooth interaction: mod\_fs \textless{}-
+gam(copper \textasciitilde{} s(dist, landuse, bs = ``fs''), data =
+meuse, method = ``REML'')
+
+Plot both models making 3D perspective plots: vis.gam(mod\_sep, view =
+c(``dist'', ``landuse''), plot.type = ``persp'')
+
+2-way interactions: 2d interaction smooths, categorical-continuous
+interaction, tensor smooths: allow to model on different scales (space
+\& time)
+
+tensor\_mod \textless{}- gam(cadmium \textasciitilde{} te(x, y, elev),
+data = meuse, method = ``REML'')
+
+Single-variable smooths use s(). Smooths in which multiple variables
+interact on the same scale also use s(). Smooths that have only
+interactions, but have multiple lambda terms or scales, use ti().
+
+te() must be used along. if you include s() switch to ti()
+
+classification:
+
+outputs on the log odds scale
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot with intercept uncertainty}
+\KeywordTok{plot}\NormalTok{(log_mod2, }\DataTypeTok{pages =} \DecValTok{1}\NormalTok{, }\DataTypeTok{trans =}\NormalTok{ plogis, }\DataTypeTok{shift =} \KeywordTok{coef}\NormalTok{(log_mod2)[}\DecValTok{1}\NormalTok{], }\DataTypeTok{seWithMean =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{#log odds scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{) }
+
+\CommentTok{#probability scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{) }
+
+\CommentTok{#construct se.fit on log odds scale than transform to probs with plogis}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =}\NormalTok{ T)}
+
+\CommentTok{#granular for each record on log odds scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"terms"}\NormalTok{)}
+
+\CommentTok{# Calculate predictions and errors}
+\NormalTok{predictions <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(log_mod2, }\DataTypeTok{newdata =}\NormalTok{ new_credit_data, }
+                       \DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# Calculate high and low predictions intervals}
+\NormalTok{high_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{low_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# Convert intervals to probability scale}
+\NormalTok{high_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(high_pred)}
+\NormalTok{low_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(low_pred)}
+\end{Highlighting}
+\end{Shaded}
+
+gams work with broom and caret.
+
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
 
@@ -4158,9 +4261,276 @@ AIC\_c for model selection.
   previous two time periods.
 \end{itemize}
 
+\section{DSP}\label{dsp}
+
+FFT: time x amplitude to frequency x strength of signal domain
+
+y(t) = Amplitude * sin(2pi\emph{freq}time + phase\_shift)
+
+The reduction of a continuous time signal to a discrete time signal is
+known as sampling
+
+wavelets: continuous (time frequency analysis) vs discrete (data
+compression \& noise reduction).
+
+pipeline: signal -\textgreater{} wavelet transform -\textgreater{} pca
+-\textgreater{} features to classifier
+
+\section{Forecasting Datacamp}\label{forecasting-datacamp}
+
+annual data can't be seasonal. seasonal has fixed lengths, cyclical
+doesn't.
+
+When data are either seasonal or cyclic, the ACF will peak around the
+seasonal lags or at the average cycle length.
+
+white noise is iid data. 95\% of autocorrelations should be within blue
+lines of acf plot.
+
+There is a well-known result in economics called the ``Efficient Market
+Hypothesis'' that states that asset prices reflect all available
+information. A consequence of this is that the daily changes in stock
+prices should behave like white noise (ignoring dividends, interest
+rates and transaction costs). The consequence for forecasters is that
+the best forecast of the future price is the current price.
+
+diff() for daily changes
+
+Time series forecasting is typically discussed where only a one-step
+prediction is required.
+
+What about when you need to predict multiple time steps into the future?
+
+Predicting multiple time steps into the future is called multi-step time
+series forecasting. There are four main strategies that you can use for
+multi-step forecasting.
+
+Generally, time series forecasting describes predicting the observation
+at the next time step. This is called a one-step forecast, as only one
+time step is to be predicted. There are some time series problems where
+multiple time steps must be predicted. Contrasted to the one-step
+forecast, these are called multiple-step or multi-step time series
+forecasting problems.
+
+A good model forecasts well (so has low RMSE on the test set) and uses
+all available information in the training data (so has white noise
+residuals).
+
+subset.ts() \textbar{} meanf \textbar{} mape allows for cross model
+comparison
+
+simple exponential smoothing: large alpha puts more weight on recent
+values and the weights decay quickly. ses(). Has the same value for all
+forecasts.
+
+Let's review the process:
+
+First, import and load your data. Determine how much of your data you
+want to allocate to training, and how much to testing; the sets should
+not overlap.
+
+Subset the data to create a training set, which you will use as an
+argument in your forecasting function(s). Optionally, you can also
+create a test set to use later.
+
+Compute forecasts of the training set using whichever forecasting
+function(s) you choose, and set h equal to the number of values you want
+to forecast, which is also the length of the test set.
+
+To view the results, use the accuracy() function with the forecast as
+the first argument and original data (or test set) as the second.
+
+Pick a measure in the output, such as RMSE or MAE, to evaluate the
+forecast(s); a smaller error indicates higher accuracy.
+
+Holt's Linear Trend: Forecasts account for trend \& continue at the same
+trend indefinitely into the future: holt(damped = T) . A damped trend
+makes it level off after time: holt(damped = F) (phi = 1 is Holt's
+method).
+
+Holt-Winters Method: Accounds for trend and seasonality. In the additive
+version the seasonality averages to 0 but this changes to 1 in the
+multiplicative version: hw(df, seasonal = `additive')
+
+Methods with multiplicative trend produce poor forecasts.
+
+Innovation State Space Models
+
+trends = \{n, a, a\_d\} \{none, additive, damped\}
+
+seasons = \{n, a, m\} \{none, additive, multiplicative\}
+
+So there are 9 possible exponential smoothing methods. Add:
+
+error = \{a,m\}
+
+And there are 18 possible state space models. Known as ets models.
+Estimated using likelihood. Choose model by minimizing AIC\_c (biased
+correct AIC). Roughly the same as time series CV but is much faster:
+ets()
+
+transforms: square root, cube root, log, inverse (increasing strength of
+transformation from left to right). Equal to lambda = 1/2, L = 1/3, L =
+0, L = -1 for Box-Cox. (L=0 is no transformation.)
+
+Not common to use box-cox with ets since ets can handle seasons \&
+trends. Use box-cox with arima models when there is increasing
+variation.
+
+BoxCox.lambda()
+
+Differencing is a way of making a time series stationary; this means
+that you remove any systematic patterns such as trend and seasonality
+from the data. A white noise series is considered a special case of a
+stationary time series. With non-seasonal data, you use lag-1
+differences to model changes between observations rather than the
+observations directly. You have done this before by using the diff()
+function.
+
+With seasonal data, differences are often taken between observations in
+the same season of consecutive years, rather than in consecutive
+periods. For example, with quarterly data, one would take the difference
+between Q1 in one year and Q1 in the previous year. This is called
+seasonal differencing. Sometimes you need to apply both seasonal
+differences and lag-1 differences to the same series, thus, calculating
+the differences in the differences.
+
+auto.arima()
+
+Don't compare an arima AIC\_c with one from an ets. Comparisons only
+work within models of the same type.
+
+The Arima() function can be used to select a specific ARIMA model. Its
+first argument, order, is set to a vector that specifies the values of
+p, d and q. The second argument, include.constant, is a boolean that
+determines if the constant c, or drift, should be included.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Set up forecast functions for ETS and ARIMA models}
+\NormalTok{fets <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, h) \{}
+  \KeywordTok{forecast}\NormalTok{(}\KeywordTok{ets}\NormalTok{(x), }\DataTypeTok{h =}\NormalTok{ h)}
+\NormalTok{\}}
+\NormalTok{farima <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, h) \{}
+  \KeywordTok{forecast}\NormalTok{(___, ___)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The AICc statistic is useful for selecting between models in the same
+class. For example, you can use it to select an ETS model or to select
+an ARIMA model. However, you cannot use it to compare ETS and ARIMA
+models because they are in different model classes. Instead, you can use
+time series cross-validation to compare an ARIMA model and an ETS model
+on the austa data. Because tsCV() requires functions that return
+forecast objects, you will set up some simple functions that fit the
+models and return the forecasts.
+
+seasonal arima: arima (p,d,q) (P,D,Q)\_m. Coefficients are hard to
+interpret for original data.
+
+austa \%\textgreater{}\% Arima(order = c(2,1,3), include.constant = T)
+\%\textgreater{}\% forecast() \%\textgreater{}\% autoplot()
+
+To make auto.arima() work harder to find a good model, add the optional
+argument stepwise = FALSE to look at a much larger collection of models.
+
+What happens when you want to create training and test sets for data
+that is more frequent than yearly? If needed, you can use a vector in
+form c(year, period) for the start and/or end keywords in the window()
+function. You must also ensure that you're using the appropriate values
+of h in forecasting functions. Recall that h should be equal to the
+length of the data that makes up your test
+
+In dynamic regression the error term is an arima process.
+
+autoplot(advert, facets = TRUE) \#2nd param scales vars to be comparable
+coefficients(fit){[}3{]}
+
+dynamic harmonic regression uses Fourier series: e\_t is non-seasonal
+since Fourier handles that. Assumes seasonality doesn't change. Only
+need to select k for compliexty. Start from k=1 and choose model with
+lowest aic\_c. k \textless{}= m/2 where m is the seasonal period. Good
+when the seasonality is very large, weekly, daily, sub-daily, etc. The
+higher the order (K), the more ``wiggly'' the seasonal pattern is
+allowed to be. With K=1, it is a simple sine curve.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Set up harmonic regressors of order 13}
+\NormalTok{harmonics <-}\StringTok{ }\KeywordTok{fourier}\NormalTok{(gasoline, }\DataTypeTok{K =} \DecValTok{13}\NormalTok{)}
+\CommentTok{# Fit regression model with ARIMA errors}
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{auto.arima}\NormalTok{(gasoline, }\DataTypeTok{xreg =}\NormalTok{ harmonics, }\DataTypeTok{seasonal =} \OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# Forecasts next 3 years}
+\NormalTok{fc <-}\StringTok{ }\KeywordTok{forecast}\NormalTok{(fit, }\DataTypeTok{xreg =} \KeywordTok{fourier}\NormalTok{(gasoline, }\DataTypeTok{K =} \DecValTok{13}\NormalTok{, }\DataTypeTok{h =} \DecValTok{156}\NormalTok{))}
+\CommentTok{# Plot forecasts fc}
+\KeywordTok{autoplot}\NormalTok{(fc)}
+\end{Highlighting}
+\end{Shaded}
+
+Harmonic regressions are also useful when time series have multiple
+seasonal patterns.
+
+tslm()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Fit a harmonic regression using order 10 for each type of seasonality}
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{tslm}\NormalTok{(taylor }\OperatorTok{~}\StringTok{ }\KeywordTok{fourier}\NormalTok{(taylor, }\DataTypeTok{K =} \KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{)))}
+\CommentTok{# Forecast 20 working days ahead}
+\NormalTok{fc <-}\StringTok{ }\KeywordTok{forecast}\NormalTok{(fit, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\KeywordTok{fourier}\NormalTok{(taylor, }\DataTypeTok{K =} \KeywordTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{), }\DataTypeTok{h =} \DecValTok{960}\NormalTok{)))}
+\CommentTok{# Plot the forecasts}
+\KeywordTok{autoplot}\NormalTok{(fc)}
+\CommentTok{# Check the residuals of fit}
+\KeywordTok{checkresiduals}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+Another time series with multiple seasonal periods is calls, which
+contains 20 consecutive days of 5-minute call volume data for a large
+North American bank. There are 169 5-minute periods in a working day,
+and so the weekly seasonal frequency is 5 x 169 = 845. The weekly
+seasonality is relatively weak, so here you will just model daily
+seasonality.
+
+The residuals in this case still fail the white noise tests, but their
+autocorrelations are tiny, even though they are significant. This is
+because the series is so long. It is often unrealistic to have residuals
+that pass the tests for such long series. The effect of the remaining
+correlations on the forecasts will be negligible.
+
+tbats model: automates everything. tbats(), Good for data with large and
+multiple seasonal periods.
+
+Let's break down elements of a TBATS model in TBATS(1, \{0,0\}, -,
+\{\textless{}51.18,14\textgreater{}\}), one of the graph titles from the
+video (Component: Meaning):
+
+1: Box-Cox transformation parameter
+
+\{0,0\}: ARMA error
+
+-:Damping parameter
+
+\{\textless{}51.18,14\textgreater{}\}: Seasonal period, Fourier terms
+
 \chapter{Stats}\label{stats}
 
 \subsection{General}\label{general-3}
+
+\url{http://www.stat.umn.edu/geyer/old/5101/rlook.html}
+
+\url{https://stats.idre.ucla.edu/other/mult-pkg/whatstat/}
+
+categorical dissimilairty
+\url{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}
+
+\url{http://frog.oerc.ox.ac.uk:8080/stato-app/}
+
+Pearson's Coefficient of Skewness \textbar{} Bayes factor \textbar{}
+Correction methods for non representative samples \textbar{}
+Numeric-Categorical Correlation
+\url{https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor}
 
 Outliers in small samples:
 \url{https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617\#78617}
@@ -4808,6 +5178,63 @@ Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
 
+\section{DataCamp: Experimental
+Design}\label{datacamp-experimental-design}
+
+Randomized Complete Block Design (RCBD) experiment
+
+Power usually @ 80\%. power effect size \& sample size all inter-related
+(with 2 can calculate 3rd).
+
+power: prob that test correctly rejects null hypo when alt hypo is true
+
+effect size: standardized measure of the difference you're trying to
+detect
+
+sample size: how many experimental units needed to survey to detect the
+desired diff at the desired power
+
+pwr::pwr.anova.test() {[}exactly one of n, d, power, and sig.level must
+be NULL{]}
+
+aov = lm + anova aov + tukey hsd
+
+Another assumption of ANOVA and linear modeling is homogeneity of
+variance. Homogeneity means ``same'', and here that would mean that the
+variance of int\_rate is the same for each level of grade. We can test
+for homogeneity of variances using bartlett.test(), which takes a
+formula and a dataset as inputs.
+
+One non-parametric alternative to ANOVA is the Kruskal-Wallis rank sum
+test. For those with some statistics knowledge, it is an extension of
+the Mann-Whitney U test for when there are more than two groups, such as
+with our grade variable.
+
+Use the correct function from pwr to find the sample size (d is the
+effect size) pwr::pwr.t.test(n = NULL, d = .2, power = .8, sig.level
+=.05, alternative = ``two.sided'')
+
+multivariable experiment:
+
+lendingclub\_multi \textless{}- lm(loan\_amnt \textasciitilde{} Group +
+grade + verification\_status, lendingclub\_ab) tidy(lendingclub\_multi)
+
+The sampling package's cluster() creates cluster samples. It takes in a
+dataset name, the variable in the set to be used as the cluster
+variable, passed as a vector with the name as a string,
+e.g.~c(``variable''), a number of clusters to select, and a method
+
+Randomized Complete Block Designs
+
+the purpose of blocking an experiment is to make the experimental groups
+more like one another.
+
+A rule of thumb in experimental design is often ``block what you can,
+randomize what you cannot'', which means you should aim to block the
+effects you can control for (e.g.~sex) randomize on those you cannot
+(e.g.~smoking status). Variability inside a block is expected to be
+fairly small, but variability between blocks will be larger.
+
 \chapter{Deep Learning}\label{deep-learning}
 
 \section{General}\label{general-4}
@@ -5009,6 +5436,371 @@ accuracy metric is used to measure the algorithm's performance
 \end{Highlighting}
 \end{Shaded}
 
+\section{DL.AI: Intro}\label{dl.ai-intro}
+
+ng thinks dl easier of matrix is n x m instead of m x n so target is a
+row vector instead of a column vector
+
+Loss function applies to a single training example while the cost
+function applies to many. The loss function computes the error for a
+single training example; the cost function is the average of the loss
+functions of the entire training set.
+
+A trick when you want to flatten a matrix X of shape (a,b,c,d) to a
+matrix X\_flatten of shape (b ∗∗ c ∗∗ d, a) is to use:
+
+X\_flatten = X.reshape(X.shape{[}0{]}, -1).T
+
+One common preprocessing step in machine learning is to center and
+standardize your dataset, meaning that you substract the mean of the
+whole numpy array from each example, and then divide each example by the
+standard deviation of the whole numpy array. But for picture datasets,
+it is simpler and more convenient and works almost as well to just
+divide every row of the dataset by 255 (the maximum value of a pixel
+channel).
+
+Scale images: train\_set\_x = train\_set\_x\_flatten/255.
+
+Common steps for pre-processing a new dataset are:
+
+\begin{itemize}
+\tightlist
+\item
+  Figure out the dimensions and shapes of the problem (m\_train,
+  m\_test, num\_px, \ldots{})
+\item
+  Reshape the datasets such that each example is now a vector of size
+  (num\_px * num\_px * 3, 1)
+\item
+  ``Standardize'' the data
+\end{itemize}
+
+Preprocessing the dataset is important.
+
+You implemented each function separately: initialize(), propagate(),
+optimize(). Then you built a model().
+
+Tuning the learning rate (which is an example of a ``hyperparameter'')
+can make a big difference to the algorithm. You will see more examples
+of this later in this course!
+
+The tanh activation usually works better than sigmoid activation
+function for hidden units because the mean of its output is closer to
+zero, and so it centers the data better for the next layer.
+
+Initialize weights randomly but set bias to zero.
+
+You have built a network using the tanh activation for all the hidden
+units. You initialize the weights to relative large values, using
+np.random.randn(..,..)*1000. What will happen? This will cause the
+inputs of the tanh to also be very large, thus causing gradients to be
+close to zero. The optimization algorithm will thus become slow.
+
+a4\href{12}{2}: 4th neuron of the 2nd layer for the 12th training
+example.
+
+No. Sigmoid outputs a value between 0 and 1 which makes it a very good
+choice for binary classification. You can classify as 0 if the output is
+less than 0.5 and classify as 1 if the output is more than 0.5. It can
+be done with tanh as well but it is less convenient as the output is
+between -1 and 1.
+
+random initialization of weights for logreg
+
+What is the ``cache'' used for in our implementation of forward
+propagation and backward propagation? We use it to pass variables
+computed during forward propagation to the corresponding backward
+propagation step. It contains useful values for backward propagation to
+compute derivatives.
+
+The deeper layers of a neural network are typically computing more
+complex features of the input than the earlier layers.
+
+During backpropagation, the corresponding backward function also needs
+to know what is the activation function for layer l, since the gradient
+depends on it.
+
+\begin{enumerate}
+\def\labelenumi{(\roman{enumi})}
+\tightlist
+\item
+  To compute the function using a shallow network circuit, you will need
+  a large network (where we measure size by the number of logic gates in
+  the network), but (ii) To compute it using a deep network circuit, you
+  need only an exponentially smaller network.
+\end{enumerate}
+
+gradient checking
+
+vanishing/exploding gradients
+
+data augmentation for images: rotate and crop
+
+ng doesn't like dropout bc it couples optimization with regularization
+
+early stopping
+
+dropout is a regularization technique to prevent over-fitting.
+
+\section{DL.AI: Improving Deep Neural
+Network}\label{dl.ai-improving-deep-neural-network}
+
+If you have 10,000,000 examples, how would you split the train/dev/test
+set? 98\% train . 1\% dev . 1\% test
+
+The dev and test set should: Come from the same distribution
+
+If your Neural Network model seems to have high variance, what of the
+following would be promising things to try? Add regularization \& Get
+more training data. For high bias, make a bigger and deeper network.
+
+What is weight decay? A regularization technique (such as L2
+regularization) that results in gradient descent shrinking the weights
+on every iteration. As a rule of thumb, the more training examples you
+have, the weaker this term should be. The more parameters you have the
+higher this term should be.
+
+With the inverted dropout technique, at test time: You do not apply
+dropout (do not randomly eliminate units) and do not keep the
+1/keep\_prob factor in the calculations used in training.
+
+With the inverted dropout technique, at test time: You do not apply
+dropout (do not randomly eliminate units) and do not keep the
+1/keep\_prob factor in the calculations used in training
+
+Increasing the parameter keep\_prob from (say) 0.5 to 0.6 will likely
+cause the following: Reducing the regularization effect \& Causing the
+neural network to end up with a lower training set error
+
+Normalization makes the cost function faster to optimize
+
+Which of these techniques are useful for reducing variance (reducing
+overfitting)? Dropout, L2 regularization Data augmentation
+
+Different initializations lead to different results
+
+Random initialization is used to break symmetry and make sure different
+hidden units can learn different things
+
+Don't intialize to values that are too large
+
+He initialization works well for networks with ReLU activations.
+
+\textbf{Fast.AI}
+
+Do a loss vs learning rate plot to pick a good one. It's the key thing
+to set.
+
+learning rate annealing: decrease learning rate as you reach the
+minimum.
+
+If you try training for more epochs, you'll notice that we start to
+overfit, which means that our model is learning to recognize the
+specific images in the training set, rather than generalizing such that
+we also get good results on the validation set. One way to fix this is
+to effectively create more data, through data augmentation. This refers
+to randomly changing the images in ways that shouldn't impact their
+interpretation, such as horizontal flipping, zooming, and rotating.
+
+mse: loss function for regression
+
+Cross-entropy: loss function for classification
+
+Gradient descent: a generic method that can optimize any differentiable
+loss function
+
+Analtycial soltion for linear modela nd MSE effectivr when: Small number
+of features
+
+There is an analytical solution for linear regression parameters and MSE
+loss, but we usually prefer gradient descent optimization over it. What
+are the reasons?
+
+\begin{itemize}
+\tightlist
+\item
+  Gradient descent doesn't require to invert a matrix
+\item
+  Gradient descent is more scalable and can be applied for problems with
+  high number of features
+\end{itemize}
+
+Number of params in logistic regression: k*d where k is the number of
+classes and d is the size of the dimensional space.
+
+Large model weights can indicate that model is overfitted
+
+Weight penalty drives model parameters closer to zero and prevents the
+model from being too sensitive to small changes in features
+
+disadvantages do model validation on holdout sample can give biased
+quality estimates for small samples
+
+Stochastic gradient descent: Noisy but evntually converge to minimum.
+Needs only one example at each step. Can be used online. Choose the
+learning rate carefully.
+
+mini-batch gradient descent
+
+Gradient descent extensions: adagrad, rms prop,adam
+
+The best nonlinearity functions to use in a Multilayer perceptron are
+step functions as they allow to reconstruct the decision boundary with
+better precision? No. Step function gradient with the respect to its
+input is zero almost everywhere - thus the resulting network can't be
+trained via backpropagation.
+
+A dense layer applies a linear transformation to its input
+
+For an MLP to work, the nonlinearity function must have a finite upper
+bound? No, widely used ReLu has no upper bound.
+
+How many dimensions will a derivative of a 1-D vector by a 2-D matrix
+have? 3. The rule of thumb is that the final derivative will consist of
+derivatives of each component of the output by each component of input.
+So, for each element of the output vector there will be a 2-D matrix of
+derivatives, 3 dimensions in total.
+
+Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU
+better. Leaky ReLU best to avoid non-activation.
+
+Dropout is a regularization technique.
+
+Convulations and pooling layes are invariant to translation of images.
+
+We have reviewed the activation function, weights initializations, and a
+bunch of new techniques that help to train better networks. What are the
+takeaways? First, always use ReLU activation because it doesn't saturate
+and it converges faster. Use He et al initialization which is square
+root of two divided by square root of number of inputs. Try to add bash
+normalization or dropout, maybe it will converge better. Try to augment
+your training data.
+
+Transfer learning
+
+You should use dropout (randomly eliminate nodes) only in training.
+
+Apply dropout both during forward and backward propagation.
+
+During training time, divide each dropout layer by keep\_prob to keep
+the same expected value for the activations. For example, if keep\_prob
+is 0.5, then we will on average shut down half the nodes, so the output
+will be scaled by 0.5 since only the remaining half are contributing to
+the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence,
+the output now has the same expected value. You can check that this
+works even when keep\_prob is other values than 0.5.
+
+inverted dropout
+
+Gradient checking verifies closeness between the gradients from
+backpropagation and the numerical approximation of the gradient
+(computed using forward propagation).
+
+Gradient checking is slow, so we don't run it in every iteration of
+training. You would usually run it only to make sure your code is
+correct, then turn it off and use backprop for the actual learning
+process.
+
+\subsection{Optimization Algorithms}\label{optimization-algorithms}
+
+In batch GD the cost should be monotone decreasing. In mini-batch it
+doesn't have to be since it's like training on a different training set
+every time. It should still be trending downwards.
+
+For small training set use ( \textless{} 2000) use batch GD. Use batches
+of 64, 128, 256, 512 otherwise which should speed up training. Make sure
+it fits in meemory. MIni-batch size is another hyperparameter.
+
+RMS PRop
+
+ADAM: Adam combines the advantages of RMSProp and momentum, We usually
+use ``default'' values for the hyperparameters, The learning rate
+hyperparameter α in Adam usually needs to be tuned.
+
+Learning rate decay
+
+epoch: one pass through the training set
+
+If batch gradient descent in a deep network is taking excessively long
+to find a value of the parameters that achieves a small value for the
+cost function: Try mini-batch gradient descent, Try better random
+initialization for the weights, Try Adam, Try tuning the learning rate.
+
+A variant of this is Stochastic Gradient Descent (SGD), which is
+equivalent to mini-batch gradient descent where each mini-batch has just
+1 example. When the training set is large, SGD can be faster. But the
+parameters will ``oscillate'' toward the minimum rather than converge
+smoothly.
+
+In practice, you'll often get faster results if you do not use neither
+the whole training set, nor only one training example, to perform each
+update. Mini-batch gradient descent uses an intermediate number of
+examples for each step. With mini-batch gradient descent, you loop over
+the mini-batches instead of looping over individual training examples.
+
+The difference between gradient descent, mini-batch gradient descent and
+stochastic gradient descent is the number of examples you use to perform
+one update step. You have to tune a learning rate hyperparameter alpha.
+With a well-turned mini-batch size, usually it outperforms either
+gradient descent or stochastic gradient descent (particularly when the
+training set is large).
+
+Shuffling and Partitioning are the two steps required to build
+mini-batches. Powers of two are often chosen to be the mini-batch size,
+e.g., 16, 32, 64, 128.
+
+Momentum takes into account the past gradients to smooth out the update
+
+Momentum takes past gradients into account to smooth out the steps of
+gradient descent. It can be applied with batch gradient descent,
+mini-batch gradient descent or stochastic gradient descent. You have to
+tune a momentum hyperparameter beta and a learning rate alpha.
+
+Mini-batch Gradient descent, Mini-batch Gradient descent with momentum,
+mini-batch with Adam. Adam usually performs best. Some advantages of
+Adam include: Relatively low memory requirements (though higher than
+gradient descent and gradient descent with momentum), usually works well
+even with little tuning of hyperparameters (except alpha).
+
+\subsection{Hyperparameter Tuning}\label{hyperparameter-tuning}
+
+Use random values.
+
+batch normalization
+
+softmax regression
+
+During hyperparameter search, whether you try to babysit one model
+(``Panda'' strategy) or train a lot of models in parallel (``Caviar'')
+is largely determined by computational power
+
+Which of the following statements about γ and β in Batch Norm are true?
+They can be learned using Adam, Gradient descent with momentum, or
+RMSprop, not just with gradient descent. They set the mean and variance
+of the linear variable z{[}l{]} of a given layer.
+
+After training a neural network with Batch Norm, at test time, to
+evaluate the neural network on a new example you should: Perform the
+needed normalizations, use μ and σ2 estimated using an exponentially
+weighted average across mini-batches seen during training
+
+tf: To summarize, remember to initialize your variables, create a
+session and run the operations inside the session.
+
+When you code in tensorflow you have to take the following steps:
+
+\begin{itemize}
+\item
+  Create a graph containing Tensors (Variables, Placeholders \ldots{})
+  and Operations (tf.matmul, tf.add, \ldots{})
+\item
+  Create a session
+\item
+  Initialize the session
+\item
+  Run the session to execute the graph
+\end{itemize}
+
 \chapter{Probabilistic Programming}\label{probabilistic-programming}
 
 \url{https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7}
@@ -5084,6 +5876,70 @@ Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
 np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
 relative to B is \textgreater{}=3\%:
 np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
+
+\section{Doing Bayesian DA}\label{doing-bayesian-da}
+
+In general, Bayesian analysis of data follows these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Identify the data relevant to the research questions. What are the
+  measurement scales of the data? Which data variables are to be
+  predicted, and which data variables are supposed to act as predictors?
+\item
+  Define a descriptive model for the relevant data. The mathematical
+  form and its parameters should be meaningful and appropriate to the
+  theoretical purposes of the analysis.
+\item
+  Specify a prior distribution on the parameters. The prior must pass
+  muster with the audience of the analysis, such as skeptical
+  scientists.
+\item
+  Use Bayesian inference to re-allocate credibility across parameter
+  values. Interpret the posterior distribution with respect to
+  theoretically meaningful issues (assuming that the model is a
+  reasonable description of the data; see next step).
+\item
+  Check that the posterior predictions mimic the data with reasonable
+  accuracy (i.e., conduct a ``posterior predictive check''). If not,
+  then consider a different descriptive model.
+\end{enumerate}
+
+\section{Statistical Rethinking}\label{statistical-rethinking}
+
+bayesian: 1) likelihood: binomial 2) parameters of the likelihood 3)
+prior for each param
+
+Data are measured and known; parameters are unknown and must be
+estimated from data.
+
+Compared to MCMC, variational inference tends to be faster and easier to
+scale to large data
+
+To combat under/overfitting use a regularizing prior or a scoring device
+like information criteria.
+
+As you'll see once you start using AIC and related measures, it is true
+that predictor variables that do improve prediction are not always
+statistically significant. It is also possible for variables that are
+statistically significant to do nothing useful for prediction.
+
+But the prior on β is narrower and is meant to regularize. The prior β
+\textasciitilde{} Normal(0,1) says that, before seeing the data, the
+machine should be very skeptical of values above 2 and below −2, as a
+Gaussian prior with a standard deviation of 1 assigns only 5\%
+plausibility to values above and below 2 standard deviations. Because
+the predictor variable x is standardized, you can interpret this as
+meaning that a change of 1 standard deviation in x is very unlikely to
+produce 2 units of change in the outcome.
+
+metrics: dic, waic
+
+Sampling from the posterior now and plotting the model's predictions
+would help immensely with interpretation. And that's the course I want
+to encourage and provide code for. In general, it's not safe to
+interpret interactions without plotting them.
 
 \chapter{NLP}\label{nlp}
 
@@ -5173,15 +6029,39 @@ model that includes Year.
 
 \chapter{Notes}\label{notes-1}
 
-\begin{itemize}
-\tightlist
-\item
-  But map allows us to bypass the function function. Using a tilda
-  (\textasciitilde{}) in place of function and a dot (.) in place of x,
-  we can do this: map(dat, \textasciitilde{}mean(.\$Open))
-\end{itemize}
+generalized low rank models
 
-confint
+conditional random field
+
+linear probability model
+
+\url{http://r-pkgs.had.co.nz/tests.html}
+
+\url{https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/}
+
+\url{http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/}
+
+\url{https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html}
+
+Power-Of-Test: \url{https://rpsychologist.com/d3/NHST/}
+\url{https://juliasilge.shinyapps.io/power-app/}
+\url{https://www.statmethods.net/stats/power.html}
+\url{https://www.graphpad.com/quickcalcs/binomial1.cfm}
+\url{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html}
+\url{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html}
+
+confint conjoint analysis Incremental PCA fe: Permutation Measure meta
+learning \textbar{} Rasch Model \textbar{} Learning\_to\_rank
+
+ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate
+\textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
+
+foreach + doMC \textbar{} parallel \textbar{} doParallel
+
+ts: Vector autoregression, quantile regression forests
+
+Out-of-Core: pandas chunksize Semantic Style Transfer symbolic
+regression
 
 Quantile Regression models the median while Linear Regression models the
 mean
@@ -5190,6 +6070,39 @@ Linear Regression - BLUE: Best Linear Unbiased (average amount wrong by
 is error) Estimator
 
 \begin{itemize}
+\tightlist
+\item
+  With large data we can to the train x dev x test split of 98 x 1 x 1.
+\end{itemize}
+
+Bayes optimal error: Aim for this. The difference b/w training error and
+BOE is the avoidable bias.
+
+end to end deep learning: an end-to-end approach as it maps directly the
+input (x) to the output (y). end-to-end learning works better in
+practice than multi-task learning, but requires a large amount of data.
+
+new data degrades your model. what should you do? Use the data you have
+to define a new evaluation metric (using a new dev/test set) taking into
+account the new species, and use that to drive further progress for your
+team.
+
+because even though you have higher overall accuracy, you have more
+false negatives (failing to raise an alarm when a bird is in the air).
+What should you do? Rethink the appropriate metric for this task, and
+ask your team to tune to the new metric.
+
+If you overfit to the dev set, get a bigger one.
+
+Spend a few days training a basic model and see what mistakes it makes.
+
+softmax not used for multi-classification
+
+\begin{itemize}
+\item
+  But map allows us to bypass the function function. Using a tilda
+  (\textasciitilde{}) in place of function and a dot (.) in place of x,
+  we can do this: map(dat, \textasciitilde{}mean(.\$Open))
 \item
   Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem
   \textbar{} Importance sampling \textbar{} Bayes Error Rate
@@ -5281,6 +6194,38 @@ Zero correlation doesn't imply independence
   classifiers (for example, using the package mlogit instead of the base
   method glm() for logistic regression).''
 \end{itemize}
+
+\chapter{Code Snippets}\label{code-snippets}
+
+\section{Albon}\label{albon}
+
+\url{http://chrisalbon.com/}
+
+\section{Sampling File}\label{sampling-file}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install subsample}
+\ExtensionTok{gzcat}\NormalTok{ ginormous.csv.gz }\KeywordTok{|} \ExtensionTok{subsample}\NormalTok{ -n 100000 }\OperatorTok{>}\NormalTok{ sampled.csv.gz}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Hold}\label{hold}
+
+\begin{itemize}
+\item
+  ggplot(df, aes(fitted\_probability, binary\_class\_indicator)) +
+  geom\_smooth(): a quick way of visualizing model calibration without
+  having to manually bin any observations
+\item
+  Rule of thumb for bins in histogram:
+  \texttt{ggplot()\ +\ geom\_histogram(aes(x),\ binwidth\ =\ diff(range(x))\ /\ (2\ *\ IQR(x)\ /\ length(x)\^{}(1/3)))}.
+\item
+  \href{https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862\#862}{Optimal
+  Bins For Histogram}
+\end{itemize}
+
+\url{http://blog.rtwilson.com/how-to-rescue-lost-code-from-a-jupyteripython-notebook/}
 
 \bibliography{book.bib,packages.bib}
 

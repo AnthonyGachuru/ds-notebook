@@ -51,9 +51,6 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 * swarmplot
 
-* ggplot(df, aes(fitted_probability, binary_class_indicator)) +
-geom_smooth(): a quick way of visualizing model calibration without having to manually bin any observations
+* marimekko charts | radviz | Marey Chart
 
-* Rule of thumb for bins in histogram: `ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))`.
-
-* [Optimal Bins For Histogram](https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862)
+* http://www.ericmjl.com/blog/2018/7/14/ecdfs/ | https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf

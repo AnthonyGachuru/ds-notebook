@@ -11,12 +11,6 @@
 * A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
 
 * [Temporary pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
-
-* Sampling a massive CSV file:
-
-    * pip install subsample
-
-    * gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
     
 * Make codebooks
 

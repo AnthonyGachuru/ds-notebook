@@ -873,3 +873,104 @@ TBD
 ### Evaluation
 
 ### Pros/Cons
+
+## DataCamp: Nonlinear Modeling in R with GAMs
+
+Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
+
+gam(y ~ s(x, k = 3), data = df, sp = .1)
+gam(y ~ s(x, k = 3), data = df, method = "REML")
+
+Categorical features must be included as factors.
+
+gam(hw.mpg ~ s(weight) + fuel, data = mpg, method = "REML")
+
+A factor smooth interaction fits different models for different categorical vars.
+
+gam(hw.mpg ~ s(weight, by = fuel) + fuel, data = mpg, method = "REML")
+
+Summary:
+
+edf=1 is a straight line
+
+Visualize: 
+
+plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod)[1])
+
+Model Evaluation:
+
+gam.check: Bad if model hasn't converged. Likely due to too many features. Small p-values indicate residuals not randomly distributed which is often due to not enough basis functions. 
+
+first do concurvity(mod, full = T) then do concurvity(mod, full = F). check co-linearity. worst case is bad over 0.8.
+
+interaction b/w x & y: mod2d <- gam(cadmium ~ s(x, y), data = meuse, method = "REML")
+
+vis.gam for visualization
+
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "persp", se = 2, theta = 135)
+
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "contour", too.far = 0.05)
+
+vis.gam(mod2d, view = c("x", "y"), plot.type = "contour", too.far = .1)
+
+Make plot with 25% extrapolation
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "contour", too.far = .25)
+
+Overlay data
+points(meuse)
+
+Nonlinear Modeling in R with GAMs:
+
+Fit a model with a factor-smooth interaction:
+mod_fs <- gam(copper ~ s(dist, landuse, bs = "fs"), data = meuse, method = "REML")
+
+Plot both models making 3D perspective plots:
+vis.gam(mod_sep, view = c("dist", "landuse"), plot.type = "persp")
+
+2-way interactions: 2d interaction smooths, categorical-continuous interaction, tensor smooths: allow to model on different scales (space & time)
+
+tensor_mod <- gam(cadmium ~ te(x, y, elev), data = meuse, method = "REML")
+
+Single-variable smooths use s().
+Smooths in which multiple variables interact on the same scale also use s().
+Smooths that have only interactions, but have multiple lambda terms or scales, use ti().
+
+te() must be used along. if you include s() switch to ti()
+
+classification: 
+
+outputs on the log odds scale
+
+```{r, eval=F}
+#Plot with intercept uncertainty
+plot(log_mod2, pages = 1, trans = plogis, shift = coef(log_mod2)[1], seWithMean = TRUE)
+
+#log odds scale
+predict(mdl, type = "link") 
+
+#probability scale
+predict(mdl, type = "response") 
+
+#construct se.fit on log odds scale than transform to probs with plogis
+predict(mdl, type = "link", se.fit = T)
+
+#granular for each record on log odds scale
+predict(mdl, type = "terms")
+
+# Calculate predictions and errors
+predictions <- predict(log_mod2, newdata = new_credit_data, 
+                       type = "link", se.fit = TRUE)
+
+# Calculate high and low predictions intervals
+high_pred <- predictions$fit + 2*predictions$se.fit
+low_pred <- predictions$fit - 2*predictions$se.fit
+
+# Convert intervals to probability scale
+high_prob <- plogis(high_pred)
+low_prob <- plogis(low_pred)
+```
+
+gams work with broom and caret.

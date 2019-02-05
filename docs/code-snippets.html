@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Cribsheet</title>
+  <title>Chapter 15 Code Snippets | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 15 Code Snippets | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 15 Code Snippets | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,10 +30,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="frameworks.html">
-<link rel="next" href="time-series.html">
+<link rel="prev" href="notes-1.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -103,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workflow</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preamble"><i class="fa fa-check"></i><b>1.1</b> Preamble</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#annotated-checklist"><i class="fa fa-check"></i><b>1.2</b> Annotated Checklist</a><ul>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#preparation"><i class="fa fa-check"></i><b>1.2.1</b> Preparation</a></li>
 <li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#import"><i class="fa fa-check"></i><b>1.2.2</b> Import</a></li>
 <li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#tidy"><i class="fa fa-check"></i><b>1.2.3</b> Tidy</a></li>
@@ -113,13 +114,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
 <li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
 </ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.3</b> Other</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.3.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.3.2</b> Sample R Pipeline</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="import-tidy.html"><a href="import-tidy.html"><i class="fa fa-check"></i><b>2</b> Import &amp; Tidy</a><ul>
-<li class="chapter" data-level="2.1" data-path="import-tidy.html"><a href="import-tidy.html#import-1"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="import-tidy.html"><a href="import-tidy.html#sql"><i class="fa fa-check"></i><b>2.1.1</b> SQL</a></li>
-<li class="chapter" data-level="2.1.2" data-path="import-tidy.html"><a href="import-tidy.html#scraping"><i class="fa fa-check"></i><b>2.1.2</b> Scraping</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="import-tidy.html"><a href="import-tidy.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.1" data-path="import-tidy.html"><a href="import-tidy.html#import-1"><i class="fa fa-check"></i><b>2.1</b> Import</a></li>
+<li class="chapter" data-level="2.2" data-path="import-tidy.html"><a href="import-tidy.html#sql"><i class="fa fa-check"></i><b>2.2</b> SQL</a></li>
+<li class="chapter" data-level="2.3" data-path="import-tidy.html"><a href="import-tidy.html#tidy-1"><i class="fa fa-check"></i><b>2.3</b> Tidy</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="transform-visualize.html"><a href="transform-visualize.html"><i class="fa fa-check"></i><b>3</b> Transform &amp; Visualize</a><ul>
 <li class="chapter" data-level="3.1" data-path="transform-visualize.html"><a href="transform-visualize.html#transform-1"><i class="fa fa-check"></i><b>3.1</b> Transform</a><ul>
@@ -133,8 +136,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2" data-path="model-1.html"><a href="model-1.html#pre-processing"><i class="fa fa-check"></i><b>4.2</b> Pre-processing</a></li>
 <li class="chapter" data-level="4.3" data-path="model-1.html"><a href="model-1.html#feature-engineering"><i class="fa fa-check"></i><b>4.3</b> Feature Engineering</a></li>
 <li class="chapter" data-level="4.4" data-path="model-1.html"><a href="model-1.html#feature-selection"><i class="fa fa-check"></i><b>4.4</b> Feature Selection</a></li>
-<li class="chapter" data-level="4.5" data-path="model-1.html"><a href="model-1.html#other"><i class="fa fa-check"></i><b>4.5</b> Other</a><ul>
+<li class="chapter" data-level="4.5" data-path="model-1.html"><a href="model-1.html#other-1"><i class="fa fa-check"></i><b>4.5</b> Other</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="model-1.html"><a href="model-1.html#unbalanced-classes"><i class="fa fa-check"></i><b>4.5.1</b> Unbalanced Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="model-1.html"><a href="model-1.html#model-selection"><i class="fa fa-check"></i><b>4.6</b> Model Selection</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="model-1.html"><a href="model-1.html#general-2"><i class="fa fa-check"></i><b>4.6.1</b> General</a></li>
+<li class="chapter" data-level="4.6.2" data-path="model-1.html"><a href="model-1.html#clustering"><i class="fa fa-check"></i><b>4.6.2</b> Clustering</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="model-2.html"><a href="model-2.html"><i class="fa fa-check"></i><b>5</b> Model</a><ul>
@@ -143,7 +150,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1.2" data-path="model-2.html"><a href="model-2.html#assumptions"><i class="fa fa-check"></i><b>5.1.2</b> Assumptions</a></li>
 <li class="chapter" data-level="5.1.3" data-path="model-2.html"><a href="model-2.html#selection"><i class="fa fa-check"></i><b>5.1.3</b> Selection</a></li>
 <li class="chapter" data-level="5.1.4" data-path="model-2.html"><a href="model-2.html#proscons"><i class="fa fa-check"></i><b>5.1.4</b> Pros/Cons</a></li>
-<li class="chapter" data-level="5.1.5" data-path="model-2.html"><a href="model-2.html#other-1"><i class="fa fa-check"></i><b>5.1.5</b> Other</a></li>
+<li class="chapter" data-level="5.1.5" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>5.1.5</b> Other</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="model-2.html"><a href="model-2.html#ridgelasso"><i class="fa fa-check"></i><b>5.2</b> Ridge/Lasso</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="model-2.html"><a href="model-2.html#intro-1"><i class="fa fa-check"></i><b>5.2.1</b> Intro</a></li>
@@ -190,7 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.8.3" data-path="model-2.html"><a href="model-2.html#characteristics-2"><i class="fa fa-check"></i><b>5.8.3</b> Characteristics</a></li>
 <li class="chapter" data-level="5.8.4" data-path="model-2.html"><a href="model-2.html#evaluation-6"><i class="fa fa-check"></i><b>5.8.4</b> Evaluation</a></li>
 <li class="chapter" data-level="5.8.5" data-path="model-2.html"><a href="model-2.html#proscons-7"><i class="fa fa-check"></i><b>5.8.5</b> Pros/Cons</a></li>
-<li class="chapter" data-level="5.8.6" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>5.8.6</b> Other</a></li>
+<li class="chapter" data-level="5.8.6" data-path="model-2.html"><a href="model-2.html#other-3"><i class="fa fa-check"></i><b>5.8.6</b> Other</a></li>
 </ul></li>
 <li class="chapter" data-level="5.9" data-path="model-2.html"><a href="model-2.html#knn"><i class="fa fa-check"></i><b>5.9</b> KNN</a><ul>
 <li class="chapter" data-level="5.9.1" data-path="model-2.html"><a href="model-2.html#intro-8"><i class="fa fa-check"></i><b>5.9.1</b> Intro</a></li>
@@ -262,10 +269,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.18.4" data-path="model-2.html"><a href="model-2.html#evaluation-16"><i class="fa fa-check"></i><b>5.18.4</b> Evaluation</a></li>
 <li class="chapter" data-level="5.18.5" data-path="model-2.html"><a href="model-2.html#proscons-17"><i class="fa fa-check"></i><b>5.18.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.19" data-path="model-2.html"><a href="model-2.html#model-selection"><i class="fa fa-check"></i><b>5.19</b> Model Selection</a><ul>
-<li class="chapter" data-level="5.19.1" data-path="model-2.html"><a href="model-2.html#general-2"><i class="fa fa-check"></i><b>5.19.1</b> General</a></li>
-<li class="chapter" data-level="5.19.2" data-path="model-2.html"><a href="model-2.html#clustering"><i class="fa fa-check"></i><b>5.19.2</b> Clustering</a></li>
-</ul></li>
+<li class="chapter" data-level="5.19" data-path="model-2.html"><a href="model-2.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>5.19</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>6</b> Communicate, Deploy, Maintain</a><ul>
 <li class="chapter" data-level="6.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>6.1</b> Communicate</a></li>
@@ -296,92 +300,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.7" data-path="frameworks.html"><a href="frameworks.html#infer-package"><i class="fa fa-check"></i><b>7.7</b> Infer Package</a></li>
 <li class="chapter" data-level="7.8" data-path="frameworks.html"><a href="frameworks.html#networks"><i class="fa fa-check"></i><b>7.8</b> Networks</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="code-snippets.html"><a href="code-snippets.html"><i class="fa fa-check"></i><b>8</b> Code Snippets</a><ul>
-<li class="chapter" data-level="8.1" data-path="code-snippets.html"><a href="code-snippets.html#python"><i class="fa fa-check"></i><b>8.1</b> Python</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="code-snippets.html"><a href="code-snippets.html#general-3"><i class="fa fa-check"></i><b>8.1.1</b> General</a></li>
-<li class="chapter" data-level="8.1.2" data-path="code-snippets.html"><a href="code-snippets.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>8.1.2</b> Vanderplas Jupyter</a></li>
-<li class="chapter" data-level="8.1.3" data-path="code-snippets.html"><a href="code-snippets.html#auto-feature-engineering"><i class="fa fa-check"></i><b>8.1.3</b> Auto Feature Engineering</a></li>
-<li class="chapter" data-level="8.1.4" data-path="code-snippets.html"><a href="code-snippets.html#shap-explainer"><i class="fa fa-check"></i><b>8.1.4</b> SHAP Explainer</a></li>
-<li class="chapter" data-level="8.1.5" data-path="code-snippets.html"><a href="code-snippets.html#df-to-html-table"><i class="fa fa-check"></i><b>8.1.5</b> DF To HTML Table</a></li>
-<li class="chapter" data-level="8.1.6" data-path="code-snippets.html"><a href="code-snippets.html#masking-array"><i class="fa fa-check"></i><b>8.1.6</b> Masking Array</a></li>
-<li class="chapter" data-level="8.1.7" data-path="code-snippets.html"><a href="code-snippets.html#showing-data-with-plotly"><i class="fa fa-check"></i><b>8.1.7</b> Showing Data With Plotly</a></li>
-<li class="chapter" data-level="8.1.8" data-path="code-snippets.html"><a href="code-snippets.html#hyperband-cross-validation"><i class="fa fa-check"></i><b>8.1.8</b> Hyperband Cross Validation</a></li>
-<li class="chapter" data-level="8.1.9" data-path="code-snippets.html"><a href="code-snippets.html#pandas-display-options"><i class="fa fa-check"></i><b>8.1.9</b> Pandas Display Options</a></li>
-<li class="chapter" data-level="8.1.10" data-path="code-snippets.html"><a href="code-snippets.html#infix-operators"><i class="fa fa-check"></i><b>8.1.10</b> Infix Operators</a></li>
-<li class="chapter" data-level="8.1.11" data-path="code-snippets.html"><a href="code-snippets.html#generators"><i class="fa fa-check"></i><b>8.1.11</b> Generators</a></li>
-<li class="chapter" data-level="8.1.12" data-path="code-snippets.html"><a href="code-snippets.html#rowwise-operations-in-pandas"><i class="fa fa-check"></i><b>8.1.12</b> Rowwise Operations In Pandas</a></li>
-<li class="chapter" data-level="8.1.13" data-path="code-snippets.html"><a href="code-snippets.html#additional-functions-args-in-map"><i class="fa fa-check"></i><b>8.1.13</b> Additional Functions Args In Map</a></li>
-<li class="chapter" data-level="8.1.14" data-path="code-snippets.html"><a href="code-snippets.html#check-csv-encoding"><i class="fa fa-check"></i><b>8.1.14</b> Check CSV Encoding</a></li>
-<li class="chapter" data-level="8.1.15" data-path="code-snippets.html"><a href="code-snippets.html#mnist-example"><i class="fa fa-check"></i><b>8.1.15</b> MNIST Example</a></li>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a><ul>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#notes"><i class="fa fa-check"></i><b>8.1</b> Notes</a></li>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#packages"><i class="fa fa-check"></i><b>8.2</b> Packages</a></li>
+<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#data-conversion"><i class="fa fa-check"></i><b>8.3</b> Data Conversion</a></li>
+<li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#models"><i class="fa fa-check"></i><b>8.4</b> Models</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="time-series.html"><a href="time-series.html#intro-18"><i class="fa fa-check"></i><b>8.4.1</b> Intro</a></li>
+<li class="chapter" data-level="8.4.2" data-path="time-series.html"><a href="time-series.html#assumptions-18"><i class="fa fa-check"></i><b>8.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="8.4.3" data-path="time-series.html"><a href="time-series.html#characteristics-13"><i class="fa fa-check"></i><b>8.4.3</b> Characteristics</a></li>
+<li class="chapter" data-level="8.4.4" data-path="time-series.html"><a href="time-series.html#evaluation-17"><i class="fa fa-check"></i><b>8.4.4</b> Evaluation</a></li>
+<li class="chapter" data-level="8.4.5" data-path="time-series.html"><a href="time-series.html#proscons-18"><i class="fa fa-check"></i><b>8.4.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="code-snippets.html"><a href="code-snippets.html#r"><i class="fa fa-check"></i><b>8.2</b> R</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="code-snippets.html"><a href="code-snippets.html#general-4"><i class="fa fa-check"></i><b>8.2.1</b> General</a></li>
-<li class="chapter" data-level="8.2.2" data-path="code-snippets.html"><a href="code-snippets.html#knitting-a-ghub-doc"><i class="fa fa-check"></i><b>8.2.2</b> Knitting A GHub Doc</a></li>
+<li class="chapter" data-level="8.5" data-path="time-series.html"><a href="time-series.html#dsp"><i class="fa fa-check"></i><b>8.5</b> DSP</a></li>
+<li class="chapter" data-level="8.6" data-path="time-series.html"><a href="time-series.html#forecasting-datacamp"><i class="fa fa-check"></i><b>8.6</b> Forecasting Datacamp</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="code-snippets.html"><a href="code-snippets.html#various"><i class="fa fa-check"></i><b>8.3</b> Various</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="code-snippets.html"><a href="code-snippets.html#create-package"><i class="fa fa-check"></i><b>8.3.1</b> Create Package</a></li>
-<li class="chapter" data-level="8.3.2" data-path="code-snippets.html"><a href="code-snippets.html#create-operator"><i class="fa fa-check"></i><b>8.3.2</b> Create Operator</a></li>
-<li class="chapter" data-level="8.3.3" data-path="code-snippets.html"><a href="code-snippets.html#create-list-column"><i class="fa fa-check"></i><b>8.3.3</b> Create List Column</a></li>
-<li class="chapter" data-level="8.3.4" data-path="code-snippets.html"><a href="code-snippets.html#useful-date-manipulation"><i class="fa fa-check"></i><b>8.3.4</b> Useful Date Manipulation</a></li>
-<li class="chapter" data-level="8.3.5" data-path="code-snippets.html"><a href="code-snippets.html#r-for-everything-talk"><i class="fa fa-check"></i><b>8.3.5</b> R for Everything Talk</a></li>
-<li class="chapter" data-level="8.3.6" data-path="code-snippets.html"><a href="code-snippets.html#multi-character-to-numeric-casting"><i class="fa fa-check"></i><b>8.3.6</b> Multi Character To Numeric Casting</a></li>
-<li class="chapter" data-level="8.3.7" data-path="code-snippets.html"><a href="code-snippets.html#grid-plot"><i class="fa fa-check"></i><b>8.3.7</b> Grid Plot</a></li>
-<li class="chapter" data-level="8.3.8" data-path="code-snippets.html"><a href="code-snippets.html#classification-target-comparison"><i class="fa fa-check"></i><b>8.3.8</b> Classification Target Comparison</a></li>
-<li class="chapter" data-level="8.3.9" data-path="code-snippets.html"><a href="code-snippets.html#pairwise-scatterplot"><i class="fa fa-check"></i><b>8.3.9</b> Pairwise Scatterplot</a></li>
-<li class="chapter" data-level="8.3.10" data-path="code-snippets.html"><a href="code-snippets.html#deploy-shiny-app"><i class="fa fa-check"></i><b>8.3.10</b> Deploy Shiny App</a></li>
-<li class="chapter" data-level="8.3.11" data-path="code-snippets.html"><a href="code-snippets.html#tidy-evaluation-example"><i class="fa fa-check"></i><b>8.3.11</b> Tidy Evaluation Example</a></li>
-<li class="chapter" data-level="8.3.12" data-path="code-snippets.html"><a href="code-snippets.html#shut-up-r"><i class="fa fa-check"></i><b>8.3.12</b> Shut Up, R</a></li>
-<li class="chapter" data-level="8.3.13" data-path="code-snippets.html"><a href="code-snippets.html#ebb"><i class="fa fa-check"></i><b>8.3.13</b> EBB</a></li>
-<li class="chapter" data-level="8.3.14" data-path="code-snippets.html"><a href="code-snippets.html#plotting"><i class="fa fa-check"></i><b>8.3.14</b> Plotting</a></li>
-<li class="chapter" data-level="8.3.15" data-path="code-snippets.html"><a href="code-snippets.html#nested-tree"><i class="fa fa-check"></i><b>8.3.15</b> Nested Tree</a></li>
-<li class="chapter" data-level="8.3.16" data-path="code-snippets.html"><a href="code-snippets.html#setup-project"><i class="fa fa-check"></i><b>8.3.16</b> Setup Project</a></li>
-<li class="chapter" data-level="8.3.17" data-path="code-snippets.html"><a href="code-snippets.html#map-model"><i class="fa fa-check"></i><b>8.3.17</b> MAP Model</a></li>
-<li class="chapter" data-level="8.3.18" data-path="code-snippets.html"><a href="code-snippets.html#dt-options"><i class="fa fa-check"></i><b>8.3.18</b> DT Options</a></li>
-<li class="chapter" data-level="8.3.19" data-path="code-snippets.html"><a href="code-snippets.html#plotly-map"><i class="fa fa-check"></i><b>8.3.19</b> Plotly MAP</a></li>
-<li class="chapter" data-level="8.3.20" data-path="code-snippets.html"><a href="code-snippets.html#pipe-anonymous-function"><i class="fa fa-check"></i><b>8.3.20</b> Pipe Anonymous Function</a></li>
-<li class="chapter" data-level="8.3.21" data-path="code-snippets.html"><a href="code-snippets.html#binarize-predictions"><i class="fa fa-check"></i><b>8.3.21</b> Binarize Predictions</a></li>
-<li class="chapter" data-level="8.3.22" data-path="code-snippets.html"><a href="code-snippets.html#make-formula"><i class="fa fa-check"></i><b>8.3.22</b> Make Formula</a></li>
-<li class="chapter" data-level="8.3.23" data-path="code-snippets.html"><a href="code-snippets.html#shiny-reactive"><i class="fa fa-check"></i><b>8.3.23</b> Shiny Reactive</a></li>
-<li class="chapter" data-level="8.3.24" data-path="code-snippets.html"><a href="code-snippets.html#custom-theme"><i class="fa fa-check"></i><b>8.3.24</b> Custom Theme</a></li>
-<li class="chapter" data-level="8.3.25" data-path="code-snippets.html"><a href="code-snippets.html#create-factor"><i class="fa fa-check"></i><b>8.3.25</b> Create Factor</a></li>
-<li class="chapter" data-level="8.3.26" data-path="code-snippets.html"><a href="code-snippets.html#extract-date"><i class="fa fa-check"></i><b>8.3.26</b> Extract Date</a></li>
-<li class="chapter" data-level="8.3.27" data-path="code-snippets.html"><a href="code-snippets.html#geom_path"><i class="fa fa-check"></i><b>8.3.27</b> Geom_Path</a></li>
-<li class="chapter" data-level="8.3.28" data-path="code-snippets.html"><a href="code-snippets.html#theme-template"><i class="fa fa-check"></i><b>8.3.28</b> Theme Template</a></li>
-<li class="chapter" data-level="8.3.29" data-path="code-snippets.html"><a href="code-snippets.html#heatmap"><i class="fa fa-check"></i><b>8.3.29</b> Heatmap</a></li>
-<li class="chapter" data-level="8.3.30" data-path="code-snippets.html"><a href="code-snippets.html#calculate-accuracy"><i class="fa fa-check"></i><b>8.3.30</b> Calculate Accuracy</a></li>
-<li class="chapter" data-level="8.3.31" data-path="code-snippets.html"><a href="code-snippets.html#replace-na"><i class="fa fa-check"></i><b>8.3.31</b> Replace NA</a></li>
-<li class="chapter" data-level="8.3.32" data-path="code-snippets.html"><a href="code-snippets.html#filter-by-row"><i class="fa fa-check"></i><b>8.3.32</b> Filter By Row</a></li>
-<li class="chapter" data-level="8.3.33" data-path="code-snippets.html"><a href="code-snippets.html#db-functions"><i class="fa fa-check"></i><b>8.3.33</b> DB Functions</a></li>
-<li class="chapter" data-level="8.3.34" data-path="code-snippets.html"><a href="code-snippets.html#knitr"><i class="fa fa-check"></i><b>8.3.34</b> Knitr</a></li>
-</ul></li>
-<li class="chapter" data-level="8.4" data-path="code-snippets.html"><a href="code-snippets.html#bash"><i class="fa fa-check"></i><b>8.4</b> Bash</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>9</b> Time Series</a><ul>
-<li class="chapter" data-level="9.1" data-path="time-series.html"><a href="time-series.html#notes"><i class="fa fa-check"></i><b>9.1</b> Notes</a></li>
-<li class="chapter" data-level="9.2" data-path="time-series.html"><a href="time-series.html#packages"><i class="fa fa-check"></i><b>9.2</b> Packages</a></li>
-<li class="chapter" data-level="9.3" data-path="time-series.html"><a href="time-series.html#data-conversion"><i class="fa fa-check"></i><b>9.3</b> Data Conversion</a></li>
-<li class="chapter" data-level="9.4" data-path="time-series.html"><a href="time-series.html#models"><i class="fa fa-check"></i><b>9.4</b> Models</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="time-series.html"><a href="time-series.html#intro-18"><i class="fa fa-check"></i><b>9.4.1</b> Intro</a></li>
-<li class="chapter" data-level="9.4.2" data-path="time-series.html"><a href="time-series.html#assumptions-18"><i class="fa fa-check"></i><b>9.4.2</b> Assumptions</a></li>
-<li class="chapter" data-level="9.4.3" data-path="time-series.html"><a href="time-series.html#characteristics-13"><i class="fa fa-check"></i><b>9.4.3</b> Characteristics</a></li>
-<li class="chapter" data-level="9.4.4" data-path="time-series.html"><a href="time-series.html#evaluation-17"><i class="fa fa-check"></i><b>9.4.4</b> Evaluation</a></li>
-<li class="chapter" data-level="9.4.5" data-path="time-series.html"><a href="time-series.html#proscons-18"><i class="fa fa-check"></i><b>9.4.5</b> Pros/Cons</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>10</b> Stats</a><ul>
-<li class="chapter" data-level="10.0.1" data-path="stats.html"><a href="stats.html#general-5"><i class="fa fa-check"></i><b>10.0.1</b> General</a></li>
+<li class="chapter" data-level="9" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>9</b> Stats</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="stats.html"><a href="stats.html#general-3"><i class="fa fa-check"></i><b>9.0.1</b> General</a></li>
 <li class="chapter" data-level="" data-path="stats.html"><a href="stats.html#introduction-to-data"><i class="fa fa-check"></i>Introduction to Data</a></li>
-<li class="chapter" data-level="10.0.2" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>10.0.2</b> Statistical Tests</a></li>
-<li class="chapter" data-level="10.0.3" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>10.0.3</b> Stats For Hackers</a></li>
-<li class="chapter" data-level="10.0.4" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>10.0.4</b> Think Stats</a></li>
-<li class="chapter" data-level="10.0.5" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>10.0.5</b> AB Testing Overview</a></li>
+<li class="chapter" data-level="9.0.2" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>9.0.2</b> Statistical Tests</a></li>
+<li class="chapter" data-level="9.0.3" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>9.0.3</b> Stats For Hackers</a></li>
+<li class="chapter" data-level="9.0.4" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>9.0.4</b> Think Stats</a></li>
+<li class="chapter" data-level="9.0.5" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>9.0.5</b> AB Testing Overview</a></li>
+<li class="chapter" data-level="9.1" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>9.1</b> DataCamp: Experimental Design</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>11</b> Deep Learning</a></li>
-<li class="chapter" data-level="12" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>12</b> Probabilistic Programming</a></li>
-<li class="chapter" data-level="13" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>13</b> NLP</a><ul>
-<li class="chapter" data-level="13.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>13.0.1</b> Topic Modeling</a></li>
+<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
+<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#general-4"><i class="fa fa-check"></i><b>10.1</b> General</a></li>
+<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#lstms"><i class="fa fa-check"></i><b>10.2</b> LSTMs</a></li>
+<li class="chapter" data-level="10.3" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-intro"><i class="fa fa-check"></i><b>10.3</b> DL.AI: Intro</a></li>
+<li class="chapter" data-level="10.4" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-improving-deep-neural-network"><i class="fa fa-check"></i><b>10.4</b> DL.AI: Improving Deep Neural Network</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="deep-learning.html"><a href="deep-learning.html#optimization-algorithms"><i class="fa fa-check"></i><b>10.4.1</b> Optimization Algorithms</a></li>
+<li class="chapter" data-level="10.4.2" data-path="deep-learning.html"><a href="deep-learning.html#hyperparameter-tuning"><i class="fa fa-check"></i><b>10.4.2</b> Hyperparameter Tuning</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>14</b> Hierarchical Models</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>11</b> Probabilistic Programming</a><ul>
+<li class="chapter" data-level="11.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>11.1</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="11.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>11.2</b> Statistical Rethinking</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>12</b> NLP</a><ul>
+<li class="chapter" data-level="12.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>12.0.1</b> Topic Modeling</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>13</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="14" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>14</b> Notes</a></li>
+<li class="chapter" data-level="15" data-path="code-snippets.html"><a href="code-snippets.html"><i class="fa fa-check"></i><b>15</b> Code Snippets</a><ul>
+<li class="chapter" data-level="15.1" data-path="code-snippets.html"><a href="code-snippets.html#albon"><i class="fa fa-check"></i><b>15.1</b> Albon</a></li>
+<li class="chapter" data-level="15.2" data-path="code-snippets.html"><a href="code-snippets.html#sampling-file"><i class="fa fa-check"></i><b>15.2</b> Sampling File</a></li>
+<li class="chapter" data-level="15.3" data-path="code-snippets.html"><a href="code-snippets.html#hold"><i class="fa fa-check"></i><b>15.3</b> Hold</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -403,686 +367,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="code-snippets" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Code Snippets</h1>
-<div id="python" class="section level2">
-<h2><span class="header-section-number">8.1</span> Python</h2>
-<div id="general-3" class="section level3">
-<h3><span class="header-section-number">8.1.1</span> General</h3>
+<h1><span class="header-section-number">Chapter 15</span> Code Snippets</h1>
+<div id="albon" class="section level2">
+<h2><span class="header-section-number">15.1</span> Albon</h2>
+<p><a href="http://chrisalbon.com/" class="uri">http://chrisalbon.com/</a></p>
+</div>
+<div id="sampling-file" class="section level2">
+<h2><span class="header-section-number">15.2</span> Sampling File</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pip</span> install subsample
+<span class="ex">gzcat</span> ginormous.csv.gz <span class="kw">|</span> <span class="ex">subsample</span> -n 100000 <span class="op">&gt;</span> sampled.csv.gz</code></pre></div>
+</div>
+<div id="hold" class="section level2">
+<h2><span class="header-section-number">15.3</span> Hold</h2>
 <ul>
-<li><p><a href="https://chrisalbon.com/" class="uri">https://chrisalbon.com/</a></p></li>
-<li><p>pandas: isin | crosstab</p></li>
-<li><p>pd.group_by aggregate functions: size, count, sum, mean, median, sd, var, min, max, prod, first, last</p></li>
-<li><p>The only float that isn’t equal to itself is nan.</p></li>
-<li><p>%matplotlib notebook: interactive plots</p></li>
-<li><p>Memory storage: use pd.copy to create a deep copy instead of a shallow copy</p></li>
-<li><p>IPy: %who or %whos shows defined variables &amp; %reset resets them</p></li>
-<li><p>Append dict to df: use ignore_index = True. eg. films_df = films_df.append(film_dict, ignore_index=1)</p></li>
-<li><p>Debugging: import pdb | pdb.set_trace(),</p></li>
-<li><p>dir() gives a list of in scope variables</p></li>
-<li><p>globals() gives a dictionary of global variables</p></li>
-<li><p>locals() gives a dictionary of local variables</p></li>
-<li><p><a href="https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/" class="uri">https://bugra.github.io/work/notes/2015-01-03/i-wish-i-knew-these-things-when-i-first-learned-python/</a></p></li>
-<li><p>np.dot = np.multiply %&gt;% np.sum</p></li>
-<li><p>flatten dict</p>
-<ul>
-<li>pd.io.json.json_normalize(stuff) *<a href="https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055" class="uri">https://stackoverflow.com/questions/6027558/flatten-nested-python-dictionaries-compressing-keys/41689055#41689055</a></li>
-<li><a href="https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10" class="uri">https://towardsdatascience.com/flattening-json-objects-in-python-f5343c794b10</a></li>
-</ul></li>
+<li><p>ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth(): a quick way of visualizing model calibration without having to manually bin any observations</p></li>
+<li><p>Rule of thumb for bins in histogram: <code>ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))</code>.</p></li>
+<li><p><a href="https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862">Optimal Bins For Histogram</a></p></li>
 </ul>
-</div>
-<div id="vanderplas-jupyter" class="section level3">
-<h3><span class="header-section-number">8.1.2</span> Vanderplas Jupyter</h3>
-<ul>
-<li><p>create helper functions and units tests as R/py for Rmd/ipynb</p></li>
-<li><p>pytest/hypothesis for testing</p></li>
-<li><p>use makefile to run cmd commands</p></li>
-<li><p>Write file with date: df.to_csv(’{}_model.csv’.format(str(datetime.datetime.now()).split(‘’)[0]))</p></li>
-<li><p>Make package for workflow with data (<strong>init</strong>.py) and use this formation for function docs:</p></li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> fun(a):
-  <span class="co">#Role</span>
-  <span class="co">#-----</span>
-  <span class="co">#Does something</span>
-  
-  <span class="co">#Parameters</span>
-  <span class="co">#---------</span>
-  <span class="co">#Accepts something</span>
-  
-  <span class="co">#Returns</span>
-  <span class="co">#-------</span>
-  <span class="co">#Returns something</span>
-  
-  <span class="cf">return</span>(a)</code></pre></div>
-</div>
-<div id="auto-feature-engineering" class="section level3">
-<h3><span class="header-section-number">8.1.3</span> Auto Feature Engineering</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table</span>
-<span class="im">import</span> numpy <span class="im">as</span> np
-<span class="im">import</span> pandas <span class="im">as</span> pd
-<span class="im">import</span> featuretools <span class="im">as</span> ft
-df <span class="op">=</span> pd.read_csv(<span class="st">&#39;iris.csv&#39;</span>)
-df <span class="op">=</span> df.reset_index()
-es <span class="op">=</span> ft.EntitySet(<span class="bu">id</span> <span class="op">=</span> <span class="st">&quot;test&quot;</span>) <span class="co">#.drop(columns = [&#39;species&#39;], axis = 1)</span>
-es <span class="op">=</span> es.entity_from_dataframe(entity_id <span class="op">=</span> <span class="st">&#39;d&#39;</span>, dataframe <span class="op">=</span> df, make_index<span class="op">=</span><span class="va">True</span>, index<span class="op">=</span><span class="st">&#39;ind&#39;</span>)
-fm, features <span class="op">=</span> ft.dfs(
-    entityset <span class="op">=</span> es, 
-    target_entity <span class="op">=</span> <span class="st">&#39;d&#39;</span>,
-    agg_primitives <span class="op">=</span> [<span class="st">&#39;mean&#39;</span>, <span class="st">&#39;max&#39;</span>, <span class="st">&#39;percent_true&#39;</span>, <span class="st">&#39;last&#39;</span>],
-    trans_primitives <span class="op">=</span> [<span class="st">&#39;subtract&#39;</span>, <span class="st">&#39;divide&#39;</span>]
-)
-<span class="co"># produces 626 features</span>
-_, features2 <span class="op">=</span> ft.dfs(
-    entityset <span class="op">=</span> es, 
-    target_entity <span class="op">=</span> <span class="st">&#39;d&#39;</span>,
-    max_depth <span class="op">=</span> <span class="dv">2</span>
-)
-<span class="co"># produces no new features</span></code></pre></div>
-</div>
-<div id="shap-explainer" class="section level3">
-<h3><span class="header-section-number">8.1.4</span> SHAP Explainer</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">clf.fit(X_train, y_train)
-explainer <span class="op">=</span> shap.TreeExplainer(clf)
-shap_values <span class="op">=</span> explainer.shap_values(X_train)
-shap.force_plot(explainer.expected_value, shap_values[<span class="dv">0</span>,:], X.iloc[<span class="dv">0</span>,:]) <span class="co"># one record explained</span>
-shap.summary_plot(shap_values, X_train, plot_type <span class="op">=</span> <span class="st">&quot;bar&quot;</span>) <span class="co"># all records explained</span>
-shap.summary_plot(shap_values, X_train, plot_type <span class="op">=</span> <span class="st">&quot;bar&quot;</span>) <span class="co"># shap mae for features across all records</span></code></pre></div>
-</div>
-<div id="df-to-html-table" class="section level3">
-<h3><span class="header-section-number">8.1.5</span> DF To HTML Table</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> flask <span class="im">import</span> Flask
-<span class="im">import</span> pandas <span class="im">as</span> pd
-app <span class="op">=</span> Flask(<span class="va">__name__</span>)
-pd.set_option(<span class="st">&#39;display.max_colwidth&#39;</span>, <span class="op">-</span><span class="dv">1</span>)
-<span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)
-<span class="kw">def</span> show_tables():
-    data <span class="op">=</span> pd.read_csv(<span class="st">&#39;squads.csv&#39;</span>)
-    <span class="cf">return</span> data.to_html(escape <span class="op">=</span> <span class="va">False</span>, index_names <span class="op">=</span> <span class="va">False</span>)
-<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
-    app.run(debug<span class="op">=</span><span class="va">True</span>)</code></pre></div>
-</div>
-<div id="masking-array" class="section level3">
-<h3><span class="header-section-number">8.1.6</span> Masking Array</h3>
-<p>You can mask your array using the numpy.ma.array function and subsequently apply any numpy operation:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
-a <span class="op">=</span> np.random.rand(<span class="dv">10</span>)            <span class="co"># Generate random data.</span>
-a <span class="op">=</span> np.where(a <span class="op">&gt;</span> <span class="fl">0.8</span>, np.nan, a)  <span class="co"># Set all data larger than 0.8 to NaN</span>
-a <span class="op">=</span> np.ma.array(a, mask<span class="op">=</span>np.isnan(a)) <span class="co"># Use a mask to mark the NaNs</span>
-a_norm  <span class="op">=</span> a <span class="op">/</span> np.<span class="bu">sum</span>(a) <span class="co"># The sum function ignores the masked values.</span>
-a_norm2 <span class="op">=</span> a <span class="op">/</span> np.std(a) <span class="co"># The std function ignores the masked values.</span>
-a.data</code></pre></div>
-</div>
-<div id="showing-data-with-plotly" class="section level3">
-<h3><span class="header-section-number">8.1.7</span> Showing Data With Plotly</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># plotly display data</span>
-<span class="im">from</span> plotly.tools <span class="im">import</span> FigureFactory <span class="im">as</span> ff
-<span class="im">import</span> plotly
-<span class="im">import</span> pandas <span class="im">as</span> pd
-plotly.offline.init_notebook_mode()
-df <span class="op">=</span> pd.read_csv(<span class="st">&#39;https://raw.githubusercontent.com/plotly/datasets/master/2014_usa_states.csv&#39;</span>)
-table <span class="op">=</span> ff.create_table(df.iloc[<span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">1</span>:<span class="dv">5</span>])
-plotly.offline.plot(table, output_type <span class="op">=</span> <span class="st">&#39;div&#39;</span>, show_link <span class="op">=</span> <span class="va">False</span>, include_plotlyjs <span class="op">=</span> <span class="va">False</span>)</code></pre></div>
-</div>
-<div id="hyperband-cross-validation" class="section level3">
-<h3><span class="header-section-number">8.1.8</span> Hyperband Cross Validation</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> civismlext.hyperband <span class="im">import</span> HyperbandSearchCV
-<span class="co">#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py</span></code></pre></div>
-</div>
-<div id="pandas-display-options" class="section level3">
-<h3><span class="header-section-number">8.1.9</span> Pandas Display Options</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Display floats with 2 decimal places</span>
-pd.options.display.float_format <span class="op">=</span> <span class="st">&#39;{:,.2f}&#39;</span>.<span class="bu">format</span>
- 
-<span class="co"># Expand display limits</span>
-pd.options.display.max_rows <span class="op">=</span> <span class="dv">200</span>
-pd.options.display.max_columns <span class="op">=</span> <span class="dv">100</span></code></pre></div>
-</div>
-<div id="infix-operators" class="section level3">
-<h3><span class="header-section-number">8.1.10</span> Infix Operators</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Define new operator</span>
-<span class="kw">class</span> Infix:
-    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, function):
-        <span class="va">self</span>.function <span class="op">=</span> function
-    <span class="kw">def</span> <span class="fu">__ror__</span>(<span class="va">self</span>, other):
-        <span class="cf">return</span> Infix(<span class="kw">lambda</span> x, <span class="va">self</span> <span class="op">=</span> <span class="va">self</span>, other <span class="op">=</span> other: <span class="va">self</span>.function(other, x))
-    <span class="kw">def</span> <span class="fu">__or__</span>(<span class="va">self</span>, other):
-        <span class="cf">return</span> <span class="va">self</span>.function(other)
-    <span class="kw">def</span> <span class="fu">__rlshift__</span>(<span class="va">self</span>, other):
-        <span class="cf">return</span> Infix(<span class="kw">lambda</span> x, <span class="va">self</span><span class="op">=</span><span class="va">self</span>, other<span class="op">=</span>other: <span class="va">self</span>.function(other, x))
-    <span class="kw">def</span> <span class="fu">__rshift__</span>(<span class="va">self</span>, other):
-        <span class="cf">return</span> <span class="va">self</span>.function(other)
-    <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, value1, value2):
-        <span class="cf">return</span> <span class="va">self</span>.function(value1, value2)
-pipe <span class="op">=</span> Infix(<span class="kw">lambda</span> x,y: y(x))
-<span class="dv">4</span> <span class="op">|</span>pipe<span class="op">|</span> (<span class="kw">lambda</span> z: z<span class="op">**</span><span class="dv">2</span>)</code></pre></div>
-</div>
-<div id="generators" class="section level3">
-<h3><span class="header-section-number">8.1.11</span> Generators</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Generators Error</span>
-iterator <span class="op">=</span> <span class="bu">iter</span>(iterable)
-<span class="cf">try</span>:
-    <span class="cf">while</span> <span class="va">True</span>:
-        item <span class="op">=</span> <span class="bu">next</span>(iterator)
-        do_stuff(item)
-<span class="cf">except</span> <span class="pp">StopIteration</span>:
-    <span class="cf">pass</span>
-<span class="cf">finally</span>:
-    <span class="kw">del</span> iterator</code></pre></div>
-</div>
-<div id="rowwise-operations-in-pandas" class="section level3">
-<h3><span class="header-section-number">8.1.12</span> Rowwise Operations In Pandas</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Apply a function to every row in a pandas dataframe</span>
-rectangles <span class="op">=</span> [
-    { <span class="st">&#39;height&#39;</span>: <span class="dv">40</span>, <span class="st">&#39;width&#39;</span>: <span class="dv">10</span> },
-    { <span class="st">&#39;height&#39;</span>: <span class="dv">20</span>, <span class="st">&#39;width&#39;</span>: <span class="dv">9</span> },
-    { <span class="st">&#39;height&#39;</span>: <span class="fl">3.4</span>, <span class="st">&#39;width&#39;</span>: <span class="dv">4</span> }
-]
-rectangles_df <span class="op">=</span> pd.DataFrame(rectangles)
-<span class="kw">def</span> calculate_area(row):
-    <span class="cf">return</span> row[<span class="st">&#39;height&#39;</span>] <span class="op">*</span> row[<span class="st">&#39;width&#39;</span>]
-rectangles_df.<span class="bu">apply</span>(calculate_area, axis<span class="op">=</span><span class="dv">1</span>)
-<span class="co"># Apply to single column</span>
-df[<span class="st">&#39;SAL-RATE&#39;</span>].<span class="bu">apply</span>(money_to_float)</code></pre></div>
-</div>
-<div id="additional-functions-args-in-map" class="section level3">
-<h3><span class="header-section-number">8.1.13</span> Additional Functions Args In Map</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Extra arguments to function</span>
-<span class="im">import</span> functools
-<span class="kw">def</span> add(x, y):
-    <span class="cf">return</span> x <span class="op">+</span> y
-    
-a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
-<span class="bu">map</span>(functools.partial(add, y<span class="op">=</span><span class="dv">2</span>), a)</code></pre></div>
-</div>
-<div id="check-csv-encoding" class="section level3">
-<h3><span class="header-section-number">8.1.14</span> Check CSV Encoding</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;../input/kickstarter-projects/ks-projects-201801.csv&quot;</span>, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> rawdata:
-    result <span class="op">=</span> chardet.detect(rawdata.read(<span class="dv">10000</span>))</code></pre></div>
-</div>
-<div id="mnist-example" class="section level3">
-<h3><span class="header-section-number">8.1.15</span> MNIST Example</h3>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
-<span class="im">from</span> sklearn <span class="im">import</span> datasets
-<span class="im">from</span> sklearn <span class="im">import</span> svm
-digits <span class="op">=</span> datasets.load_digits()
-<span class="co">#print(digits.data)</span>
-<span class="co">#print(digits.target)</span>
-<span class="bu">print</span>(digits.images[<span class="dv">0</span>])
-clf <span class="op">=</span> svm.SVC(gamma<span class="op">=</span>.<span class="dv">001</span>,C<span class="op">=</span><span class="dv">100</span>)
-x, y <span class="op">=</span> digits.data[:<span class="op">-</span><span class="dv">10</span>], digits.target[:<span class="op">-</span><span class="dv">10</span>]
-clf.fit(x,y)
-<span class="bu">print</span>(<span class="st">&quot;Prediction: &quot;</span>, clf.predict(digits.data[<span class="op">-</span><span class="dv">2</span>].reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)))
-plt.imshow(digits.images[<span class="op">-</span><span class="dv">2</span>], cmap<span class="op">=</span>plt.cm.gray_r, interpolation<span class="op">=</span><span class="st">&quot;nearest&quot;</span>)
-plt.show()</code></pre></div>
-</div>
-</div>
-<div id="r" class="section level2">
-<h2><span class="header-section-number">8.2</span> R</h2>
-<div id="general-4" class="section level3">
-<h3><span class="header-section-number">8.2.1</span> General</h3>
-<ul>
-<li><p>ctrl + shift + a: reformat code in rstudio</p></li>
-<li><p>library(rethinking) | data(UCBadmit) | d &lt;- UCBadmit</p></li>
-<li><p>purrr::p/map_dfr/c</p></li>
-<li><p>date = date %&gt;% as.POSIXct() %&gt;% strptime(‘%Y-%m-%d’) %&gt;% strftime(format=“%Y-%m-%d”)</p></li>
-<li><p>e &lt;- matrix(NA_real_, nrow = 1000, ncol = 8)</p></li>
-<li><p>rowwise in R: purrr::pmap</p></li>
-<li><p>str_split + unnest()</p></li>
-<li><p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/base/html/Last.value.html</a></p></li>
-<li><p>na_if: Replace certain values by na</p></li>
-<li><p>purrr::map_df - map over columns</p></li>
-<li><p>studio multiple cursors, snippets, addins</p></li>
-<li><p>ctrl + shift + o: toggle table of contents</p></li>
-<li><p>ctrl shift enter: run chunk</p></li>
-<li><p>ctrl pageup/down: navigate chunks</p></li>
-<li><p>atl shift k: shortcuts</p></li>
-<li><p>ctrl + shift + R: label sections</p></li>
-<li><p>ctrl + alt + R: run all chunks</p></li>
-<li><p>df_print: kable in yaml rmrkdown header</p></li>
-<li><p>rm(list = ls()): Remove all objects in the current workspace</p></li>
-<li><p>cut(): Transform a numeric variable into a categorical variable.</p></li>
-<li><p>car: recode (good for dummying)</p></li>
-<li><p>Examine the objects in the workspace: ls.str()</p></li>
-<li><p>This is how you dynamically update a value in Rmarkdown: x = <em>backtick</em> r x <em>backtick</em>.</p></li>
-<li><p>df[setdiff(names(df), “z”)]: remove column z</p></li>
-<li><p>purrr::walk</p></li>
-<li><p>purr::keep/discard for is.factor</p></li>
-<li><p>choroplethr | choroplethrMaps || d3r | d3treeR | data.tree</p></li>
-</ul>
-</div>
-<div id="knitting-a-ghub-doc" class="section level3">
-<h3><span class="header-section-number">8.2.2</span> Knitting A GHub Doc</h3>
-<p>output: github_document: default html_notebook: default</p>
-</div>
-</div>
-<div id="various" class="section level2">
-<h2><span class="header-section-number">8.3</span> Various</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tapply</span>(Summary_Variable, Group_Variable, Function)
-
-<span class="kw">boxplot</span>(frequency <span class="op">~</span><span class="st"> </span>attitude<span class="op">*</span>gender,
-<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;white&quot;</span>,<span class="st">&quot;lightgray&quot;</span>), politeness)
-
-<span class="co">#corrplot package in r</span>
-<span class="kw">cor</span>(Carseats[<span class="kw">sapply</span>(Carseats, <span class="cf">function</span>(x) <span class="op">!</span><span class="kw">is.factor</span>(x))])
-
-<span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;caret&quot;</span>, <span class="st">&quot;pROC&quot;</span>), <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">&quot;Depends&quot;</span>, <span class="st">&quot;Imports&quot;</span>, <span class="st">&quot;Suggests&quot;</span>))
-
-<span class="kw">library</span>(knitr)
-<span class="kw">kable</span>(pause_sum, <span class="dt">caption =</span> <span class="st">&quot;Summary Statistics Table for Exit Slip Dataset&quot;</span>,
-      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Median&quot;</span>, <span class="st">&quot;SD&quot;</span>, <span class="st">&quot;Min&quot;</span>, <span class="st">&quot;Max&quot;</span>, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;NAs&quot;</span>))
-
-<span class="kw">typeof</span>(<span class="dv">1</span>) <span class="co">#&quot;double&quot;</span>
-<span class="kw">typeof</span>(1L) <span class="co">#&quot;integer&quot;</span>
-
-<span class="co">#Prints out the first 4 multiples of 3.</span>
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span><span class="op">*</span><span class="dv">3</span>) {<span class="kw">cat</span>(i)}</code></pre></div>
-<div id="create-package" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Create Package</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/</span>
-
-<span class="kw">library</span>(devtools)
-<span class="kw">library</span>(roxygen2)
-
-<span class="co"># Navigate to parent folder</span>
-<span class="kw">setwd</span>(<span class="st">&#39;../Desktop/me&#39;</span>)
-
-<span class="co"># Name and create package</span>
-<span class="kw">create</span>(<span class="st">&quot;sansor&quot;</span>)
-
-<span class="co"># Add file with function</span>
-<span class="kw">setwd</span>(<span class="st">&#39;sansor/R&#39;</span>)
-<span class="kw">file.create</span>(<span class="st">&#39;test.R&#39;</span>) <span class="co"># test &lt;- function(){print(&#39;This is a test&#39;)}</span>
-
-<span class="co"># Back to package dir</span>
-<span class="kw">setwd</span>(<span class="st">&quot;..&quot;</span>)
-
-<span class="co"># Generate auto docs</span>
-<span class="kw">document</span>()
-
-<span class="co"># Install package for use</span>
-<span class="kw">setwd</span>(<span class="st">&#39;..&#39;</span>)
-<span class="kw">install</span>()</code></pre></div>
-</div>
-<div id="create-operator" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> Create Operator</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
-<span class="st">`</span><span class="dt">%[]%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(string, subset){
-  <span class="kw">return</span>(<span class="kw">str_sub</span>(string, subset[<span class="dv">1</span>], subset[<span class="dv">2</span>]))
-}
-<span class="st">&#39;test&#39;</span><span class="op">%[]%</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)</code></pre></div>
-</div>
-<div id="create-list-column" class="section level3">
-<h3><span class="header-section-number">8.3.3</span> Create List Column</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2 <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Id) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(
-    <span class="dt">unq =</span> <span class="kw">list</span>(<span class="kw">unique</span>(SId))
-  )
-
-eng_rivalries &lt;-<span class="st"> </span>eng_rivalries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rivalry =</span> <span class="kw">map2</span>(team1_match, team2_match, <span class="cf">function</span>(x, y) <span class="kw">c</span>(x, y)))</code></pre></div>
-</div>
-<div id="useful-date-manipulation" class="section level3">
-<h3><span class="header-section-number">8.3.4</span> Useful Date Manipulation</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">year =<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">format</span>(<span class="kw">as.Date</span>(TestEndTime, <span class="dt">format=</span><span class="st">&quot;%Y-%m-%d&quot;</span>),<span class="st">&quot;%Y&quot;</span>))
-date &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/09/01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2017/09/25&quot;</span>), <span class="dt">by=</span><span class="st">&quot;day&quot;</span>)</code></pre></div>
-</div>
-<div id="r-for-everything-talk" class="section level3">
-<h3><span class="header-section-number">8.3.5</span> R for Everything Talk</h3>
-<ul>
-<li><p>dir.exists | dir.create | download.file</p></li>
-<li><p>untar | unlink | file.info</p></li>
-<li><p>dir | file.rename | file.copy</p></li>
-<li><p>count.fields | system</p></li>
-<li><p>dplyr five main actions: select, filter, arrange, mutate, summarize.</p></li>
-</ul>
-</div>
-<div id="multi-character-to-numeric-casting" class="section level3">
-<h3><span class="header-section-number">8.3.6</span> Multi Character To Numeric Casting</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">char_to_num_cols &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&#39;MMR&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>names
-df[, char_to_num_cols] &lt;-<span class="st"> </span><span class="kw">sapply</span>(df[, char_to_num_cols], as.numeric)</code></pre></div>
-</div>
-<div id="grid-plot" class="section level3">
-<h3><span class="header-section-number">8.3.7</span> Grid Plot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(
-  plots[[<span class="dv">1</span>]],plots[[<span class="dv">2</span>]],plots[[<span class="dv">3</span>]],
-  plots[[<span class="dv">4</span>]],plots[[<span class="dv">5</span>]],plots[[<span class="dv">6</span>]], <span class="dt">nrow=</span><span class="dv">3</span>)</code></pre></div>
-</div>
-<div id="classification-target-comparison" class="section level3">
-<h3><span class="header-section-number">8.3.8</span> Classification Target Comparison</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(<span class="kw">table</span>(<span class="kw">cut</span>(iris<span class="op">$</span>Sepal.Length, <span class="dv">3</span>), iris<span class="op">$</span>Species))</code></pre></div>
-</div>
-<div id="pairwise-scatterplot" class="section level3">
-<h3><span class="header-section-number">8.3.9</span> Pairwise Scatterplot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GGally<span class="op">::</span><span class="kw">ggpairs</span>(data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">colour =</span> category))</code></pre></div>
-</div>
-<div id="deploy-shiny-app" class="section level3">
-<h3><span class="header-section-number">8.3.10</span> Deploy Shiny App</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shinyapps)
-<span class="kw">library</span>(shiny)
-
-working_dir &lt;-<span class="st"> &#39;&#39;</span>
-<span class="kw">setwd</span>(working_dir)
-
-shinyapps<span class="op">::</span><span class="kw">setAccountInfo</span>(<span class="dt">name=</span><span class="st">&quot;&lt;ACCOUNT&gt;&quot;</span>, 
-                          <span class="dt">token=</span><span class="st">&quot;&lt;TOKEN&gt;&quot;</span>, 
-                          <span class="dt">secret=</span><span class="st">&quot;&lt;SECRET&gt;&quot;</span>)
-
-<span class="kw">runApp</span>()
-<span class="kw">deployApp</span>()</code></pre></div>
-</div>
-<div id="tidy-evaluation-example" class="section level3">
-<h3><span class="header-section-number">8.3.11</span> Tidy Evaluation Example</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tidy evaluation</span>
-df <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(
-      <span class="op">!</span><span class="kw">is.na</span>((<span class="op">!!</span><span class="kw">as.symbol</span>(<span class="st">&quot;col1&quot;</span>))),
-      (<span class="op">!!</span><span class="kw">as.symbol</span>(<span class="st">&quot;col2&quot;</span>)) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
-      ) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">select</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
-</div>
-<div id="shut-up-r" class="section level3">
-<h3><span class="header-section-number">8.3.12</span> Shut Up, R</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#chunk options: echo = F, warning=F, error=F, message=F, results=&#39;hide&#39;</span></code></pre></div>
-</div>
-<div id="ebb" class="section level3">
-<h3><span class="header-section-number">8.3.13</span> EBB</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_ebb &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">successes =</span> <span class="kw">sum</span>(success), <span class="dt">sample_size =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_ebb_estimate</span>(num_passed, sample_size)</code></pre></div>
-</div>
-<div id="plotting" class="section level3">
-<h3><span class="header-section-number">8.3.14</span> Plotting</h3>
-<p>Stuff I did while testing Bundesliga xG data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(openxlsx)
-<span class="kw">library</span>(tidyr)
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggvis)
-<span class="kw">library</span>(rCharts)
-
-bund_xg &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;data/bundesliga_xg_2015_2016.xlsx&quot;</span>)
-
-bund_xg.long &lt;-<span class="st"> </span><span class="kw">gather</span>(bund_xg, Status, Team, Home<span class="op">:</span>Away)
-bund_xg.long<span class="op">$</span>xG &lt;-<span class="st"> </span><span class="kw">ifelse</span>(bund_xg.long<span class="op">$</span>Status <span class="op">==</span><span class="st"> &#39;Home&#39;</span>, 
-                          bund_xg.long<span class="op">$</span>xG_H, 
-                          bund_xg.long<span class="op">$</span>xG_A)
-bund_xg.long.team &lt;-<span class="st"> </span><span class="kw">group_by</span>(bund_xg.long, Team)
-
-xg.plot &lt;-<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">data =</span> bund_xg.long, 
-       <span class="kw">aes</span>(<span class="dt">x =</span> GW, <span class="dt">y =</span> xG, <span class="dt">group =</span> Status, <span class="dt">color =</span> Status)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Bundesliga 15/16&#39;</span>, <span class="dt">x =</span> <span class="st">&#39;Game Week&#39;</span>, <span class="dt">y =</span><span class="st">&#39;Expected Goals For&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Team)
-
-<span class="kw">ggsave</span>(<span class="dt">plot =</span> xg.plot, <span class="dt">filename =</span> <span class="st">&#39;bund_xg_plot.png&#39;</span>)
-
-bund_xg.long[bund_xg.long<span class="op">$</span>Team <span class="op">==</span><span class="st"> &#39;Bayern&#39;</span>,] <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggvis</span>(<span class="op">~</span>GW, <span class="op">~</span>xG) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">layer_points</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">layer_lines</span>()
-  <span class="co">#add_tooltip(function(df) df$GW)</span>
-
-p =<span class="st"> </span><span class="kw">rPlot</span>(xG <span class="op">~</span><span class="st"> </span>GW, 
-      <span class="dt">data =</span> bund_xg.long[bund_xg.long<span class="op">$</span>Team <span class="op">==</span><span class="st"> &#39;Bayern&#39;</span>,], 
-      <span class="dt">color =</span> <span class="st">&#39;Status&#39;</span>, 
-      <span class="dt">type =</span> <span class="st">&#39;line&#39;</span>)
-
-p<span class="op">$</span><span class="kw">set</span>(<span class="dt">title =</span> <span class="st">&#39;Bayern Munich (Bundesliga 15/16)&#39;</span>)
-p<span class="op">$</span><span class="kw">guides</span>(<span class="dt">x =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;Game Week&quot;</span>))
-p<span class="op">$</span><span class="kw">guides</span>(<span class="dt">y =</span> <span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;Expected Goals&quot;</span>))</code></pre></div>
-</div>
-<div id="nested-tree" class="section level3">
-<h3><span class="header-section-number">8.3.15</span> Nested Tree</h3>
-<p>Stuff I did while testing tree viz for ODSC DS tools.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(googleVis)
-test.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;C:/Users/Gordon/Downloads/test.csv&#39;</span>, <span class="dt">header =</span> T)
-
-Org &lt;-<span class="st"> </span><span class="kw">gvisOrgChart</span>(test.data, 
-                    <span class="dt">options=</span><span class="kw">list</span>(<span class="dt">width=</span><span class="dv">600</span>, <span class="dt">height=</span><span class="dv">250</span>,
-                                 <span class="dt">size=</span><span class="st">&#39;large&#39;</span>, <span class="dt">allowCollapse=</span><span class="ot">TRUE</span>))
-Org<span class="op">$</span>html<span class="op">$</span>footer  &lt;-<span class="st"> </span><span class="ot">NULL</span>
-Org<span class="op">$</span>html<span class="op">$</span>caption  &lt;-<span class="st"> </span><span class="ot">NULL</span>
-<span class="kw">plot</span>(Org)
-
-test.data<span class="op">$</span>Val  &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(test.data), <span class="dv">1</span>)
-test.data<span class="op">$</span>Fac  &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(test.data), <span class="dv">1</span>)
-
-Tree &lt;-<span class="st"> </span><span class="kw">gvisTreeMap</span>(test.data,  
-                    <span class="st">&quot;Node&quot;</span>, <span class="st">&quot;Parent&quot;</span>, 
-                    <span class="co">#&quot;Val&quot;, &quot;Fac&quot;, </span>
-                    <span class="dt">options=</span><span class="kw">list</span>(<span class="dt">fontSize=</span><span class="dv">16</span>))
-<span class="kw">plot</span>(Tree)</code></pre></div>
-</div>
-<div id="setup-project" class="section level3">
-<h3><span class="header-section-number">8.3.16</span> Setup Project</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-
-<span class="co">#Create top level folder</span>
-<span class="kw">dir.create</span>(<span class="st">&#39;my-data-project&#39;</span>)
-<span class="kw">setwd</span>(<span class="st">&#39;./my-data-project/&#39;</span>)
-
-<span class="co">#Create child folders</span>
-<span class="kw">dir.create</span>(<span class="st">&#39;code&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;visualizations&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;reports&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;deploy_maintain&#39;</span>)
-
-<span class="co">#Create trackers</span>
-<span class="kw">file.create</span>(<span class="st">&#39;README.md&#39;</span>)
-<span class="kw">file.create</span>(<span class="st">&#39;CHANGELOG.md&#39;</span>)
-
-<span class="co">#Create grandchildren folders for data</span>
-<span class="kw">setwd</span>(<span class="st">&#39;./data&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;raw&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;refined&#39;</span>)
-
-<span class="co">#Create grandchildren folders for visualizations</span>
-<span class="kw">setwd</span>(<span class="st">&#39;../visualizations&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;exploratory&#39;</span>)
-<span class="kw">dir.create</span>(<span class="st">&#39;communication&#39;</span>)
-
-<span class="co">#Initialize git repo</span>
-git2r<span class="op">::</span><span class="kw">init</span>(<span class="st">&#39;.&#39;</span>)
-
-<span class="co"># CHANGELOG.md Example</span>
-
-## Logs
-
-## Excluded processes should be assumed to be the same as version 0.1.
-
-## Current Best Model:
-## Current Best Score / Metric:
-
-## 0.1
-
-## 1_import_tidy.Rmd
-
-## 2_transform_visualize.Rmd
-
-## 3_modeling.ipynb
-
-<span class="co"># Layout</span>
-
-## libs, functions, imports, preprocessing, feature engineering, feature selection, model building</code></pre></div>
-</div>
-<div id="map-model" class="section level3">
-<h3><span class="header-section-number">8.3.17</span> MAP Model</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-
-model &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
-  <span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> df)
-}
-
-df &lt;-<span class="st"> </span>mtcars
-df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">split</span>(.<span class="op">$</span>cyl) <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> .))
-df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, model))
-
-chickweight <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Diet) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="kw">mutate</span>(<span class="dt">mod =</span> data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(weight <span class="op">~</span><span class="st"> </span>Time, <span class="dt">data=</span>.)))</code></pre></div>
-</div>
-<div id="dt-options" class="section level3">
-<h3><span class="header-section-number">8.3.18</span> DT Options</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">datatable</span>(
-  df_version_check,
-  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">filter =</span> <span class="st">&#39;top&#39;</span>,
-                 <span class="dt">searching =</span> T,
-                 <span class="dt">pageLength =</span> <span class="dv">10</span>, <span class="dt">lengthChange =</span> <span class="ot">FALSE</span>, <span class="dt">ordering =</span> <span class="ot">FALSE</span>,
-                 <span class="dt">scrollCollapse =</span> T,
-                 <span class="dt">scrollY =</span> <span class="st">&#39;1500&#39;</span>,
-                 <span class="dt">paging =</span> T
-                 )
-  )</code></pre></div>
-</div>
-<div id="plotly-map" class="section level3">
-<h3><span class="header-section-number">8.3.19</span> Plotly MAP</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplotly</span>(
-    <span class="kw">ggplot</span>(df_master2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(skl_group<span class="op">==</span>x),
-       <span class="kw">aes</span>(SkillId, correct_rate, <span class="dt">label =</span> Master, <span class="dt">color =</span> SkillId)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> .<span class="dv">2</span>),
-    <span class="dt">tooltip =</span> <span class="kw">c</span>(<span class="st">&#39;y&#39;</span>, <span class="st">&#39;label&#39;</span>)
-    )</code></pre></div>
-</div>
-<div id="pipe-anonymous-function" class="section level3">
-<h3><span class="header-section-number">8.3.20</span> Pipe Anonymous Function</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
-<span class="st">  </span>(<span class="cf">function</span>(input.object) {
-    complex
-    logic
-    goes
-    here
-    output.object
-  })</code></pre></div>
-</div>
-<div id="binarize-predictions" class="section level3">
-<h3><span class="header-section-number">8.3.21</span> Binarize Predictions</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clf_lr_final &lt;-<span class="st"> </span>clf_lr<span class="op">$</span>finalModel
-model_tidy &lt;-<span class="st"> </span>broom<span class="op">::</span><span class="kw">tidy</span>(clf_lr_final)
-df2<span class="op">$</span>pass_predicted &lt;-<span class="st"> </span><span class="kw">as.factor</span>(
-  <span class="kw">ifelse</span>(clf_lr_final<span class="op">$</span>fitted.values <span class="op">&gt;=</span><span class="st"> </span>.<span class="dv">5</span>, <span class="st">&#39;pass&#39;</span>, <span class="st">&#39;fail&#39;</span>)
-  )
-<span class="kw">metrics</span>(df2, pass, pass_predicted)
-
-var_imp &lt;-<span class="st"> </span><span class="kw">varImp</span>(clf_lr_final) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cols =</span> <span class="kw">row.names</span>(.)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="op">-</span>Overall) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(cols, Overall)
-var_imp</code></pre></div>
-</div>
-<div id="make-formula" class="section level3">
-<h3><span class="header-section-number">8.3.22</span> Make Formula</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">make_formula &lt;-<span class="st"> </span><span class="cf">function</span>(target, additions, <span class="dt">subtractions =</span> <span class="ot">NULL</span>, <span class="dt">powers =</span> <span class="ot">NULL</span>){
-  
-  add_sub_sep =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.null</span>(subtractions), <span class="st">&#39;&#39;</span>, <span class="st">&#39;-&#39;</span>)
-  add &lt;-<span class="st"> </span><span class="kw">paste0</span>(additions, <span class="dt">collapse =</span> <span class="st">&#39; + &#39;</span>)
-  subtract &lt;-<span class="st"> </span><span class="kw">paste0</span>(subtractions, <span class="dt">collapse =</span> <span class="st">&#39; - &#39;</span>)
-  add_subtract &lt;-<span class="st"> </span><span class="kw">paste</span>(add, subtract, <span class="dt">sep =</span> add_sub_sep)
-  
-  <span class="kw">return</span>(<span class="kw">as.formula</span>(<span class="kw">paste</span>(target, add_subtract, <span class="dt">sep =</span> <span class="st">&#39;~&#39;</span>)))
-  
-}</code></pre></div>
-</div>
-<div id="shiny-reactive" class="section level3">
-<h3><span class="header-section-number">8.3.23</span> Shiny Reactive</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_labeled =<span class="st"> </span><span class="kw">eventReactive</span>({<span class="kw">c</span>(input<span class="op">$</span>good, input<span class="op">$</span>bad)}, {    
-    df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(value <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>value)
-  })</code></pre></div>
-</div>
-<div id="custom-theme" class="section level3">
-<h3><span class="header-section-number">8.3.24</span> Custom Theme</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">theme</span>(
-     <span class="dt">axis.text.y =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">65</span>, <span class="dt">vjust =</span> <span class="fl">0.6</span>),
-     <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(),
-     <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()
-     )</code></pre></div>
-</div>
-<div id="create-factor" class="section level3">
-<h3><span class="header-section-number">8.3.25</span> Create Factor</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mons =<span class="st"> </span><span class="kw">factor</span>(
-   <span class="kw">c</span>(<span class="st">&quot;August&quot;</span>,<span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>,<span class="st">&quot;November&quot;</span>,
-           <span class="st">&quot;December&quot;</span>, <span class="st">&quot;January&quot;</span>,<span class="st">&quot;February&quot;</span>,<span class="st">&quot;March&quot;</span>,
-               <span class="st">&quot;April&quot;</span>,<span class="st">&quot;May&quot;</span>,<span class="st">&quot;June&quot;</span>,<span class="st">&quot;July&quot;</span>),
-  <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;August&quot;</span>,<span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>,<span class="st">&quot;November&quot;</span>,
-           <span class="st">&quot;December&quot;</span>, <span class="st">&quot;January&quot;</span>,<span class="st">&quot;February&quot;</span>,<span class="st">&quot;March&quot;</span>,
-               <span class="st">&quot;April&quot;</span>,<span class="st">&quot;May&quot;</span>,<span class="st">&quot;June&quot;</span>,<span class="st">&quot;July&quot;</span>),
-  <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</code></pre></div>
-</div>
-<div id="extract-date" class="section level3">
-<h3><span class="header-section-number">8.3.26</span> Extract Date</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">StartTime <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.POSIXct</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strftime</span>(<span class="dt">format=</span><span class="st">&quot;%Y-%m-%d&quot;</span>)
-YearMonth =<span class="st"> </span>Day <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strftime</span>(<span class="dt">format=</span><span class="st">&quot;%Y-%m&quot;</span>)</code></pre></div>
-</div>
-<div id="geom_path" class="section level3">
-<h3><span class="header-section-number">8.3.27</span> Geom_Path</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(ilo_data) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_path</span>(
-            <span class="kw">aes</span>(<span class="dt">x =</span> working_hours, <span class="dt">y =</span> country),
-            <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">1.5</span>, <span class="st">&quot;mm&quot;</span>), <span class="dt">type =</span> <span class="st">&quot;closed&quot;</span>)
-)</code></pre></div>
-</div>
-<div id="theme-template" class="section level3">
-<h3><span class="header-section-number">8.3.28</span> Theme Template</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">theme_ilo &lt;-<span class="st"> </span><span class="cf">function</span>() {
-  <span class="kw">theme_minimal</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(
-    <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">family =</span> <span class="st">&quot;Bookman&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;gray25&quot;</span>),
-    <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>),
-    <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(<span class="dt">color =</span> <span class="st">&quot;gray30&quot;</span>),
-    <span class="dt">plot.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;gray95&quot;</span>),
-    <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>), <span class="dt">units =</span> <span class="st">&quot;mm&quot;</span>)
-  )
-}</code></pre></div>
-</div>
-<div id="heatmap" class="section level3">
-<h3><span class="header-section-number">8.3.29</span> Heatmap</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)
-df_fltrd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_if</span>(is.numeric) <span class="op">%&gt;%</span><span class="st">  </span>
-<span class="kw">cor</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&quot;circle&quot;</span>, <span class="dt">is.corr =</span> <span class="ot">FALSE</span>)</code></pre></div>
-</div>
-<div id="calculate-accuracy" class="section level3">
-<h3><span class="header-section-number">8.3.30</span> Calculate Accuracy</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calc_accuracy &lt;-<span class="st"> </span><span class="cf">function</span>(labels, preds){
-  
-  results &lt;-<span class="st"> </span><span class="kw">table</span>(labels, preds) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>data.frame <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">correct =</span> <span class="kw">ifelse</span>(labels<span class="op">==</span>preds, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">group_by</span>(correct) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">freq =</span> <span class="kw">sum</span>(Freq)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">prop =</span> freq<span class="op">/</span><span class="kw">sum</span>(freq)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(correct <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
-  
-  <span class="kw">return</span>(results)
-
-}</code></pre></div>
-</div>
-<div id="replace-na" class="section level3">
-<h3><span class="header-section-number">8.3.31</span> Replace NA</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace_na</span>(<span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="st">&quot;unknown&quot;</span>))
-df2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">replace</span>(., <span class="kw">is.na</span>(.), <span class="st">&quot;&quot;</span>)</code></pre></div>
-</div>
-<div id="filter-by-row" class="section level3">
-<h3><span class="header-section-number">8.3.32</span> Filter By Row</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(
-    <span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;Schedules&#39;</span>, issues)
-  )</code></pre></div>
-</div>
-<div id="db-functions" class="section level3">
-<h3><span class="header-section-number">8.3.33</span> DB Functions</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DB Functions</span>
-
-data &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from iris&#39;</span>)
-<span class="kw">dbListTables</span>(con) <span class="op">%&gt;%</span><span class="st"> </span>sort
-<span class="kw">dbExistsTable</span>(con, <span class="st">&quot;iris&quot;</span>)
-<span class="kw">dbRemoveTable</span>(con, <span class="st">&quot;iris&quot;</span>)</code></pre></div>
-</div>
-<div id="knitr" class="section level3">
-<h3><span class="header-section-number">8.3.34</span> Knitr</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">rep</span>(<span class="st">&quot;./assets/ml_trading/portfolio.png&quot;</span>, <span class="dv">3</span>))</code></pre></div>
-</div>
-</div>
-<div id="bash" class="section level2">
-<h2><span class="header-section-number">8.4</span> Bash</h2>
-<p>script to do joining of dummied csvs</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">paste</span> -d=<span class="st">&#39;,&#39;</span> file1.csv file2.csv file3.csv <span class="op">&gt;</span> file_final.csv</code></pre></div>
+<p><a href="http://blog.rtwilson.com/how-to-rescue-lost-code-from-a-jupyteripython-notebook/" class="uri">http://blog.rtwilson.com/how-to-rescue-lost-code-from-a-jupyteripython-notebook/</a></p>
 
 </div>
 </div>
@@ -1091,8 +393,8 @@ data &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, <span
           </div>
         </div>
       </div>
-<a href="frameworks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="time-series.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="notes-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1112,7 +414,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -1122,8 +424,12 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-code_snippets.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/14-cook_book.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
 "toc": {
@@ -1139,7 +445,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

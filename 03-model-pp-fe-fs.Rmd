@@ -2,6 +2,8 @@
 
 ## General
 
+* sklearn log_loss | brier score| cross entropy | youdens j
+
 * hamming distance for categorical data. Available in sklearn DBSCAN.
 
 * precision: how good were you at something being true when you said it was true. recall: how many of the true values did you catch. f1: harmonic mean of the two
