@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 8 Empty | Data Science Cribsheet</title>
+  <meta name="description" content="A collection of quick notes on the field.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 8 Empty | Data Science Cribsheet" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A collection of quick notes on the field." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Empty | Data Science Cribsheet" />
+  
+  <meta name="twitter:description" content="A collection of quick notes on the field." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="communicate-deploy-maintain.html">
+<link rel="next" href="time-series.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DS Cribsheet</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workflow</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preamble"><i class="fa fa-check"></i><b>1.1</b> Preamble</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#preparation"><i class="fa fa-check"></i><b>1.2.1</b> Preparation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#import"><i class="fa fa-check"></i><b>1.2.2</b> Import</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#tidy"><i class="fa fa-check"></i><b>1.2.3</b> Tidy</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#transform"><i class="fa fa-check"></i><b>1.2.4</b> Transform</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#visualize"><i class="fa fa-check"></i><b>1.2.5</b> Visualize</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#model"><i class="fa fa-check"></i><b>1.2.6</b> Model</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
+<li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html"><i class="fa fa-check"></i><b>2</b> Import, Tidy, Transform &amp; Visualize</a><ul>
+<li class="chapter" data-level="2.1" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#import-1"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#general"><i class="fa fa-check"></i><b>2.1.1</b> General</a></li>
+<li class="chapter" data-level="2.1.2" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#sql"><i class="fa fa-check"></i><b>2.1.2</b> SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.3" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#transform-1"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#general-1"><i class="fa fa-check"></i><b>2.3.1</b> General</a></li>
+<li class="chapter" data-level="2.3.2" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#missingness-imputation"><i class="fa fa-check"></i><b>2.3.2</b> Missingness &amp; Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="import-tidy-transform-visualize.html"><a href="import-tidy-transform-visualize.html#visualize-1"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="empty.html"><a href="empty.html"><i class="fa fa-check"></i><b>3</b> Empty</a></li>
+<li class="chapter" data-level="4" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html"><i class="fa fa-check"></i><b>4</b> Pre-processing, Feature Selection, and Feature Engineering</a><ul>
+<li class="chapter" data-level="4.1" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#general-2"><i class="fa fa-check"></i><b>4.1</b> General</a></li>
+<li class="chapter" data-level="4.2" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#pre-processing"><i class="fa fa-check"></i><b>4.2</b> Pre-processing</a></li>
+<li class="chapter" data-level="4.3" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#feature-engineering"><i class="fa fa-check"></i><b>4.3</b> Feature Engineering</a></li>
+<li class="chapter" data-level="4.4" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#feature-selection"><i class="fa fa-check"></i><b>4.4</b> Feature Selection</a></li>
+<li class="chapter" data-level="4.5" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#other"><i class="fa fa-check"></i><b>4.5</b> Other</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#unbalanced-classes"><i class="fa fa-check"></i><b>4.5.1</b> Unbalanced Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#model-selection"><i class="fa fa-check"></i><b>4.6</b> Model Selection</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#general-3"><i class="fa fa-check"></i><b>4.6.1</b> General</a></li>
+<li class="chapter" data-level="4.6.2" data-path="pre-processing-feature-selection-and-feature-engineering.html"><a href="pre-processing-feature-selection-and-feature-engineering.html#clustering"><i class="fa fa-check"></i><b>4.6.2</b> Clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="model-1.html"><a href="model-1.html"><i class="fa fa-check"></i><b>5</b> Model</a><ul>
+<li class="chapter" data-level="5.1" data-path="model-1.html"><a href="model-1.html#linear-regression"><i class="fa fa-check"></i><b>5.1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="model-1.html"><a href="model-1.html#intro"><i class="fa fa-check"></i><b>5.1.1</b> Intro</a></li>
+<li class="chapter" data-level="5.1.2" data-path="model-1.html"><a href="model-1.html#assumptions"><i class="fa fa-check"></i><b>5.1.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.1.3" data-path="model-1.html"><a href="model-1.html#selection"><i class="fa fa-check"></i><b>5.1.3</b> Selection</a></li>
+<li class="chapter" data-level="5.1.4" data-path="model-1.html"><a href="model-1.html#proscons"><i class="fa fa-check"></i><b>5.1.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="5.1.5" data-path="model-1.html"><a href="model-1.html#other-1"><i class="fa fa-check"></i><b>5.1.5</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="model-1.html"><a href="model-1.html#ridgelasso"><i class="fa fa-check"></i><b>5.2</b> Ridge/Lasso</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="model-1.html"><a href="model-1.html#intro-1"><i class="fa fa-check"></i><b>5.2.1</b> Intro</a></li>
+<li class="chapter" data-level="5.2.2" data-path="model-1.html"><a href="model-1.html#assumptions-1"><i class="fa fa-check"></i><b>5.2.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.2.3" data-path="model-1.html"><a href="model-1.html#evaluation"><i class="fa fa-check"></i><b>5.2.3</b> Evaluation</a></li>
+<li class="chapter" data-level="5.2.4" data-path="model-1.html"><a href="model-1.html#proscons-1"><i class="fa fa-check"></i><b>5.2.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="model-1.html"><a href="model-1.html#logistic-regression"><i class="fa fa-check"></i><b>5.3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="model-1.html"><a href="model-1.html#intro-2"><i class="fa fa-check"></i><b>5.3.1</b> Intro</a></li>
+<li class="chapter" data-level="5.3.2" data-path="model-1.html"><a href="model-1.html#assumptions-2"><i class="fa fa-check"></i><b>5.3.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.3.3" data-path="model-1.html"><a href="model-1.html#evaluation-1"><i class="fa fa-check"></i><b>5.3.3</b> Evaluation</a></li>
+<li class="chapter" data-level="5.3.4" data-path="model-1.html"><a href="model-1.html#proscons-2"><i class="fa fa-check"></i><b>5.3.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="5.3.5" data-path="model-1.html"><a href="model-1.html#code-example"><i class="fa fa-check"></i><b>5.3.5</b> Code Example</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="model-1.html"><a href="model-1.html#poisson-regression"><i class="fa fa-check"></i><b>5.4</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="model-1.html"><a href="model-1.html#intro-3"><i class="fa fa-check"></i><b>5.4.1</b> Intro</a></li>
+<li class="chapter" data-level="5.4.2" data-path="model-1.html"><a href="model-1.html#assumptions-3"><i class="fa fa-check"></i><b>5.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.4.3" data-path="model-1.html"><a href="model-1.html#evaluation-2"><i class="fa fa-check"></i><b>5.4.3</b> Evaluation</a></li>
+<li class="chapter" data-level="5.4.4" data-path="model-1.html"><a href="model-1.html#proscons-3"><i class="fa fa-check"></i><b>5.4.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="model-1.html"><a href="model-1.html#generalized-additive-models"><i class="fa fa-check"></i><b>5.5</b> Generalized Additive Models</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="model-1.html"><a href="model-1.html#intro-4"><i class="fa fa-check"></i><b>5.5.1</b> Intro</a></li>
+<li class="chapter" data-level="5.5.2" data-path="model-1.html"><a href="model-1.html#assumptions-4"><i class="fa fa-check"></i><b>5.5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.5.3" data-path="model-1.html"><a href="model-1.html#evaluation-3"><i class="fa fa-check"></i><b>5.5.3</b> Evaluation</a></li>
+<li class="chapter" data-level="5.5.4" data-path="model-1.html"><a href="model-1.html#proscons-4"><i class="fa fa-check"></i><b>5.5.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="model-1.html"><a href="model-1.html#k-means-clustering-us"><i class="fa fa-check"></i><b>5.6</b> K-Means Clustering [US]</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="model-1.html"><a href="model-1.html#intro-5"><i class="fa fa-check"></i><b>5.6.1</b> Intro</a></li>
+<li class="chapter" data-level="5.6.2" data-path="model-1.html"><a href="model-1.html#assumptions-5"><i class="fa fa-check"></i><b>5.6.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.6.3" data-path="model-1.html"><a href="model-1.html#characteristics"><i class="fa fa-check"></i><b>5.6.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.6.4" data-path="model-1.html"><a href="model-1.html#evaluation-4"><i class="fa fa-check"></i><b>5.6.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.6.5" data-path="model-1.html"><a href="model-1.html#proscons-5"><i class="fa fa-check"></i><b>5.6.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="model-1.html"><a href="model-1.html#hierarchical-clustering"><i class="fa fa-check"></i><b>5.7</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="model-1.html"><a href="model-1.html#intro-6"><i class="fa fa-check"></i><b>5.7.1</b> Intro</a></li>
+<li class="chapter" data-level="5.7.2" data-path="model-1.html"><a href="model-1.html#assumptions-6"><i class="fa fa-check"></i><b>5.7.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.7.3" data-path="model-1.html"><a href="model-1.html#characteristics-1"><i class="fa fa-check"></i><b>5.7.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.7.4" data-path="model-1.html"><a href="model-1.html#evaluation-5"><i class="fa fa-check"></i><b>5.7.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.7.5" data-path="model-1.html"><a href="model-1.html#proscons-6"><i class="fa fa-check"></i><b>5.7.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="model-1.html"><a href="model-1.html#pca"><i class="fa fa-check"></i><b>5.8</b> PCA</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="model-1.html"><a href="model-1.html#intro-7"><i class="fa fa-check"></i><b>5.8.1</b> Intro</a></li>
+<li class="chapter" data-level="5.8.2" data-path="model-1.html"><a href="model-1.html#assumptions-7"><i class="fa fa-check"></i><b>5.8.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.8.3" data-path="model-1.html"><a href="model-1.html#characteristics-2"><i class="fa fa-check"></i><b>5.8.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.8.4" data-path="model-1.html"><a href="model-1.html#evaluation-6"><i class="fa fa-check"></i><b>5.8.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.8.5" data-path="model-1.html"><a href="model-1.html#proscons-7"><i class="fa fa-check"></i><b>5.8.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="5.8.6" data-path="model-1.html"><a href="model-1.html#other-2"><i class="fa fa-check"></i><b>5.8.6</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="model-1.html"><a href="model-1.html#knn"><i class="fa fa-check"></i><b>5.9</b> KNN</a><ul>
+<li class="chapter" data-level="5.9.1" data-path="model-1.html"><a href="model-1.html#intro-8"><i class="fa fa-check"></i><b>5.9.1</b> Intro</a></li>
+<li class="chapter" data-level="5.9.2" data-path="model-1.html"><a href="model-1.html#assumptions-8"><i class="fa fa-check"></i><b>5.9.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.9.3" data-path="model-1.html"><a href="model-1.html#characteristics-3"><i class="fa fa-check"></i><b>5.9.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.9.4" data-path="model-1.html"><a href="model-1.html#evaluation-7"><i class="fa fa-check"></i><b>5.9.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.9.5" data-path="model-1.html"><a href="model-1.html#proscons-8"><i class="fa fa-check"></i><b>5.9.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="model-1.html"><a href="model-1.html#svm"><i class="fa fa-check"></i><b>5.10</b> SVM</a><ul>
+<li class="chapter" data-level="5.10.1" data-path="model-1.html"><a href="model-1.html#intro-9"><i class="fa fa-check"></i><b>5.10.1</b> Intro</a></li>
+<li class="chapter" data-level="5.10.2" data-path="model-1.html"><a href="model-1.html#assumptions-9"><i class="fa fa-check"></i><b>5.10.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.10.3" data-path="model-1.html"><a href="model-1.html#characteristics-4"><i class="fa fa-check"></i><b>5.10.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.10.4" data-path="model-1.html"><a href="model-1.html#evaluation-8"><i class="fa fa-check"></i><b>5.10.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.10.5" data-path="model-1.html"><a href="model-1.html#proscons-9"><i class="fa fa-check"></i><b>5.10.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.11" data-path="model-1.html"><a href="model-1.html#decision-tree"><i class="fa fa-check"></i><b>5.11</b> Decision Tree</a><ul>
+<li class="chapter" data-level="5.11.1" data-path="model-1.html"><a href="model-1.html#intro-10"><i class="fa fa-check"></i><b>5.11.1</b> Intro</a></li>
+<li class="chapter" data-level="5.11.2" data-path="model-1.html"><a href="model-1.html#assumptions-10"><i class="fa fa-check"></i><b>5.11.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.11.3" data-path="model-1.html"><a href="model-1.html#characteristics-5"><i class="fa fa-check"></i><b>5.11.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.11.4" data-path="model-1.html"><a href="model-1.html#evaluation-9"><i class="fa fa-check"></i><b>5.11.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.11.5" data-path="model-1.html"><a href="model-1.html#proscons-10"><i class="fa fa-check"></i><b>5.11.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.12" data-path="model-1.html"><a href="model-1.html#bagging"><i class="fa fa-check"></i><b>5.12</b> Bagging</a><ul>
+<li class="chapter" data-level="5.12.1" data-path="model-1.html"><a href="model-1.html#intro-11"><i class="fa fa-check"></i><b>5.12.1</b> Intro</a></li>
+<li class="chapter" data-level="5.12.2" data-path="model-1.html"><a href="model-1.html#assumptions-11"><i class="fa fa-check"></i><b>5.12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.12.3" data-path="model-1.html"><a href="model-1.html#characteristics-6"><i class="fa fa-check"></i><b>5.12.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.12.4" data-path="model-1.html"><a href="model-1.html#evaluation-10"><i class="fa fa-check"></i><b>5.12.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.12.5" data-path="model-1.html"><a href="model-1.html#proscons-11"><i class="fa fa-check"></i><b>5.12.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.13" data-path="model-1.html"><a href="model-1.html#random-forest"><i class="fa fa-check"></i><b>5.13</b> Random Forest</a><ul>
+<li class="chapter" data-level="5.13.1" data-path="model-1.html"><a href="model-1.html#intro-12"><i class="fa fa-check"></i><b>5.13.1</b> Intro</a></li>
+<li class="chapter" data-level="5.13.2" data-path="model-1.html"><a href="model-1.html#assumptions-12"><i class="fa fa-check"></i><b>5.13.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.13.3" data-path="model-1.html"><a href="model-1.html#characteristics-7"><i class="fa fa-check"></i><b>5.13.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.13.4" data-path="model-1.html"><a href="model-1.html#evaluation-11"><i class="fa fa-check"></i><b>5.13.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.13.5" data-path="model-1.html"><a href="model-1.html#proscons-12"><i class="fa fa-check"></i><b>5.13.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.14" data-path="model-1.html"><a href="model-1.html#boosting"><i class="fa fa-check"></i><b>5.14</b> Boosting</a><ul>
+<li class="chapter" data-level="5.14.1" data-path="model-1.html"><a href="model-1.html#intro-13"><i class="fa fa-check"></i><b>5.14.1</b> Intro</a></li>
+<li class="chapter" data-level="5.14.2" data-path="model-1.html"><a href="model-1.html#assumptions-13"><i class="fa fa-check"></i><b>5.14.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.14.3" data-path="model-1.html"><a href="model-1.html#characteristics-8"><i class="fa fa-check"></i><b>5.14.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.14.4" data-path="model-1.html"><a href="model-1.html#evaluation-12"><i class="fa fa-check"></i><b>5.14.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.14.5" data-path="model-1.html"><a href="model-1.html#proscons-13"><i class="fa fa-check"></i><b>5.14.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.15" data-path="model-1.html"><a href="model-1.html#association-rule-mining"><i class="fa fa-check"></i><b>5.15</b> Association Rule Mining</a><ul>
+<li class="chapter" data-level="5.15.1" data-path="model-1.html"><a href="model-1.html#intro-14"><i class="fa fa-check"></i><b>5.15.1</b> Intro</a></li>
+<li class="chapter" data-level="5.15.2" data-path="model-1.html"><a href="model-1.html#assumptions-14"><i class="fa fa-check"></i><b>5.15.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.15.3" data-path="model-1.html"><a href="model-1.html#characteristics-9"><i class="fa fa-check"></i><b>5.15.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.15.4" data-path="model-1.html"><a href="model-1.html#evaluation-13"><i class="fa fa-check"></i><b>5.15.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.15.5" data-path="model-1.html"><a href="model-1.html#proscons-14"><i class="fa fa-check"></i><b>5.15.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.16" data-path="model-1.html"><a href="model-1.html#naive-bayes"><i class="fa fa-check"></i><b>5.16</b> Naïve Bayes</a><ul>
+<li class="chapter" data-level="5.16.1" data-path="model-1.html"><a href="model-1.html#intro-15"><i class="fa fa-check"></i><b>5.16.1</b> Intro</a></li>
+<li class="chapter" data-level="5.16.2" data-path="model-1.html"><a href="model-1.html#assumptions-15"><i class="fa fa-check"></i><b>5.16.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.16.3" data-path="model-1.html"><a href="model-1.html#characteristics-10"><i class="fa fa-check"></i><b>5.16.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.16.4" data-path="model-1.html"><a href="model-1.html#evaluation-14"><i class="fa fa-check"></i><b>5.16.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.16.5" data-path="model-1.html"><a href="model-1.html#proscons-15"><i class="fa fa-check"></i><b>5.16.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.17" data-path="model-1.html"><a href="model-1.html#lda"><i class="fa fa-check"></i><b>5.17</b> LDA</a><ul>
+<li class="chapter" data-level="5.17.1" data-path="model-1.html"><a href="model-1.html#intro-16"><i class="fa fa-check"></i><b>5.17.1</b> Intro</a></li>
+<li class="chapter" data-level="5.17.2" data-path="model-1.html"><a href="model-1.html#assumptions-16"><i class="fa fa-check"></i><b>5.17.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.17.3" data-path="model-1.html"><a href="model-1.html#characteristics-11"><i class="fa fa-check"></i><b>5.17.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.17.4" data-path="model-1.html"><a href="model-1.html#evaluation-15"><i class="fa fa-check"></i><b>5.17.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.17.5" data-path="model-1.html"><a href="model-1.html#proscons-16"><i class="fa fa-check"></i><b>5.17.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.18" data-path="model-1.html"><a href="model-1.html#qda"><i class="fa fa-check"></i><b>5.18</b> QDA</a><ul>
+<li class="chapter" data-level="5.18.1" data-path="model-1.html"><a href="model-1.html#intro-17"><i class="fa fa-check"></i><b>5.18.1</b> Intro</a></li>
+<li class="chapter" data-level="5.18.2" data-path="model-1.html"><a href="model-1.html#assumptions-17"><i class="fa fa-check"></i><b>5.18.2</b> Assumptions</a></li>
+<li class="chapter" data-level="5.18.3" data-path="model-1.html"><a href="model-1.html#characteristics-12"><i class="fa fa-check"></i><b>5.18.3</b> Characteristics</a></li>
+<li class="chapter" data-level="5.18.4" data-path="model-1.html"><a href="model-1.html#evaluation-16"><i class="fa fa-check"></i><b>5.18.4</b> Evaluation</a></li>
+<li class="chapter" data-level="5.18.5" data-path="model-1.html"><a href="model-1.html#proscons-17"><i class="fa fa-check"></i><b>5.18.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="5.19" data-path="model-1.html"><a href="model-1.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>5.19</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>6</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="7" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>7</b> Communicate, Deploy, Maintain</a><ul>
+<li class="chapter" data-level="7.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>7.1</b> Communicate</a></li>
+<li class="chapter" data-level="7.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>7.2</b> Deploy</a></li>
+<li class="chapter" data-level="7.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>7.3</b> Maintain</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="empty-1.html"><a href="empty-1.html"><i class="fa fa-check"></i><b>8</b> Empty</a></li>
+<li class="chapter" data-level="9" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>9</b> Time Series</a><ul>
+<li class="chapter" data-level="9.1" data-path="time-series.html"><a href="time-series.html#notes"><i class="fa fa-check"></i><b>9.1</b> Notes</a></li>
+<li class="chapter" data-level="9.2" data-path="time-series.html"><a href="time-series.html#packages"><i class="fa fa-check"></i><b>9.2</b> Packages</a></li>
+<li class="chapter" data-level="9.3" data-path="time-series.html"><a href="time-series.html#data-conversion"><i class="fa fa-check"></i><b>9.3</b> Data Conversion</a></li>
+<li class="chapter" data-level="9.4" data-path="time-series.html"><a href="time-series.html#models"><i class="fa fa-check"></i><b>9.4</b> Models</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="time-series.html"><a href="time-series.html#intro-18"><i class="fa fa-check"></i><b>9.4.1</b> Intro</a></li>
+<li class="chapter" data-level="9.4.2" data-path="time-series.html"><a href="time-series.html#assumptions-18"><i class="fa fa-check"></i><b>9.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="9.4.3" data-path="time-series.html"><a href="time-series.html#characteristics-13"><i class="fa fa-check"></i><b>9.4.3</b> Characteristics</a></li>
+<li class="chapter" data-level="9.4.4" data-path="time-series.html"><a href="time-series.html#evaluation-17"><i class="fa fa-check"></i><b>9.4.4</b> Evaluation</a></li>
+<li class="chapter" data-level="9.4.5" data-path="time-series.html"><a href="time-series.html#proscons-18"><i class="fa fa-check"></i><b>9.4.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="time-series.html"><a href="time-series.html#dsp"><i class="fa fa-check"></i><b>9.5</b> DSP</a></li>
+<li class="chapter" data-level="9.6" data-path="time-series.html"><a href="time-series.html#forecasting-principles-practice"><i class="fa fa-check"></i><b>9.6</b> Forecasting: Principles &amp; Practice</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="time-series.html"><a href="time-series.html#c1-3"><i class="fa fa-check"></i><b>9.6.1</b> C1-3</a></li>
+<li class="chapter" data-level="9.6.2" data-path="time-series.html"><a href="time-series.html#c4"><i class="fa fa-check"></i><b>9.6.2</b> C4</a></li>
+<li class="chapter" data-level="9.6.3" data-path="time-series.html"><a href="time-series.html#c5"><i class="fa fa-check"></i><b>9.6.3</b> C5</a></li>
+<li class="chapter" data-level="9.6.4" data-path="time-series.html"><a href="time-series.html#c6"><i class="fa fa-check"></i><b>9.6.4</b> C6</a></li>
+<li class="chapter" data-level="9.6.5" data-path="time-series.html"><a href="time-series.html#c7"><i class="fa fa-check"></i><b>9.6.5</b> C7</a></li>
+<li class="chapter" data-level="9.6.6" data-path="time-series.html"><a href="time-series.html#c8-arima"><i class="fa fa-check"></i><b>9.6.6</b> C8: arima</a></li>
+<li class="chapter" data-level="9.6.7" data-path="time-series.html"><a href="time-series.html#c9"><i class="fa fa-check"></i><b>9.6.7</b> C9</a></li>
+<li class="chapter" data-level="9.6.8" data-path="time-series.html"><a href="time-series.html#c10"><i class="fa fa-check"></i><b>9.6.8</b> C10</a></li>
+<li class="chapter" data-level="9.6.9" data-path="time-series.html"><a href="time-series.html#c11"><i class="fa fa-check"></i><b>9.6.9</b> C11</a></li>
+<li class="chapter" data-level="9.6.10" data-path="time-series.html"><a href="time-series.html#c12"><i class="fa fa-check"></i><b>9.6.10</b> C12</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="time-series.html"><a href="time-series.html#forecasting-datacamp"><i class="fa fa-check"></i><b>9.7</b> Forecasting Datacamp</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>10</b> Stats</a><ul>
+<li class="chapter" data-level="10.1" data-path="stats.html"><a href="stats.html#general-4"><i class="fa fa-check"></i><b>10.1</b> General</a><ul>
+<li class="chapter" data-level="" data-path="stats.html"><a href="stats.html#introduction-to-data"><i class="fa fa-check"></i>Introduction to Data</a></li>
+<li class="chapter" data-level="10.1.1" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>10.1.1</b> Statistical Tests</a></li>
+<li class="chapter" data-level="10.1.2" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>10.1.2</b> Stats For Hackers</a></li>
+<li class="chapter" data-level="10.1.3" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>10.1.3</b> Think Stats</a></li>
+<li class="chapter" data-level="10.1.4" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>10.1.4</b> AB Testing Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>10.2</b> DataCamp: Experimental Design</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>11</b> Deep Learning</a><ul>
+<li class="chapter" data-level="11.1" data-path="deep-learning.html"><a href="deep-learning.html#general-5"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
+<li class="chapter" data-level="11.2" data-path="deep-learning.html"><a href="deep-learning.html#lstms"><i class="fa fa-check"></i><b>11.2</b> LSTMs</a></li>
+<li class="chapter" data-level="11.3" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-intro"><i class="fa fa-check"></i><b>11.3</b> DL.AI: Intro</a></li>
+<li class="chapter" data-level="11.4" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-improving-deep-neural-network"><i class="fa fa-check"></i><b>11.4</b> DL.AI: Improving Deep Neural Network</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="deep-learning.html"><a href="deep-learning.html#optimization-algorithms"><i class="fa fa-check"></i><b>11.4.1</b> Optimization Algorithms</a></li>
+<li class="chapter" data-level="11.4.2" data-path="deep-learning.html"><a href="deep-learning.html#hyperparameter-tuning"><i class="fa fa-check"></i><b>11.4.2</b> Hyperparameter Tuning</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>12</b> Probabilistic Programming</a><ul>
+<li class="chapter" data-level="12.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>12.1</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="12.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>12.2</b> Statistical Rethinking</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="empty-2.html"><a href="empty-2.html"><i class="fa fa-check"></i><b>13</b> Empty</a></li>
+<li class="chapter" data-level="14" data-path="hierarchical-models-1.html"><a href="hierarchical-models-1.html"><i class="fa fa-check"></i><b>14</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="15" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>15</b> Notes</a><ul>
+<li class="chapter" data-level="15.1" data-path="notes-1.html"><a href="notes-1.html#other-3"><i class="fa fa-check"></i><b>15.1</b> Other</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="notes-1.html"><a href="notes-1.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>15.1.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="15.1.2" data-path="notes-1.html"><a href="notes-1.html#sample-r-pipeline"><i class="fa fa-check"></i><b>15.1.2</b> Sample R Pipeline</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="code-snippets.html"><a href="code-snippets.html"><i class="fa fa-check"></i><b>16</b> Code Snippets</a><ul>
+<li class="chapter" data-level="16.1" data-path="code-snippets.html"><a href="code-snippets.html#albon"><i class="fa fa-check"></i><b>16.1</b> Albon</a></li>
+<li class="chapter" data-level="16.2" data-path="code-snippets.html"><a href="code-snippets.html#sampling-file"><i class="fa fa-check"></i><b>16.2</b> Sampling File</a></li>
+<li class="chapter" data-level="16.3" data-path="code-snippets.html"><a href="code-snippets.html#hold"><i class="fa fa-check"></i><b>16.3</b> Hold</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="frameworks.html"><a href="frameworks.html"><i class="fa fa-check"></i><b>17</b> Frameworks</a><ul>
+<li class="chapter" data-level="17.1" data-path="frameworks.html"><a href="frameworks.html#pyspark"><i class="fa fa-check"></i><b>17.1</b> PySpark</a></li>
+<li class="chapter" data-level="17.2" data-path="frameworks.html"><a href="frameworks.html#sparklyr"><i class="fa fa-check"></i><b>17.2</b> Sparklyr</a></li>
+<li class="chapter" data-level="17.3" data-path="frameworks.html"><a href="frameworks.html#caret"><i class="fa fa-check"></i><b>17.3</b> Caret</a><ul>
+<li class="chapter" data-level="17.3.1" data-path="frameworks.html"><a href="frameworks.html#preprocessing"><i class="fa fa-check"></i><b>17.3.1</b> Preprocessing</a></li>
+<li class="chapter" data-level="17.3.2" data-path="frameworks.html"><a href="frameworks.html#lm"><i class="fa fa-check"></i><b>17.3.2</b> LM</a></li>
+<li class="chapter" data-level="17.3.3" data-path="frameworks.html"><a href="frameworks.html#lassoridge"><i class="fa fa-check"></i><b>17.3.3</b> Lasso/Ridge</a></li>
+<li class="chapter" data-level="17.3.4" data-path="frameworks.html"><a href="frameworks.html#logistic-regression-1"><i class="fa fa-check"></i><b>17.3.4</b> Logistic Regression</a></li>
+<li class="chapter" data-level="17.3.5" data-path="frameworks.html"><a href="frameworks.html#train-test-split-folds-cv"><i class="fa fa-check"></i><b>17.3.5</b> Train-Test Split, Folds, &amp; CV</a></li>
+<li class="chapter" data-level="17.3.6" data-path="frameworks.html"><a href="frameworks.html#random-forest-1"><i class="fa fa-check"></i><b>17.3.6</b> Random Forest</a></li>
+<li class="chapter" data-level="17.3.7" data-path="frameworks.html"><a href="frameworks.html#svm-1"><i class="fa fa-check"></i><b>17.3.7</b> SVM</a></li>
+<li class="chapter" data-level="17.3.8" data-path="frameworks.html"><a href="frameworks.html#model-selection-1"><i class="fa fa-check"></i><b>17.3.8</b> Model Selection</a></li>
+<li class="chapter" data-level="17.3.9" data-path="frameworks.html"><a href="frameworks.html#stacking"><i class="fa fa-check"></i><b>17.3.9</b> Stacking</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="frameworks.html"><a href="frameworks.html#data-table"><i class="fa fa-check"></i><b>17.4</b> Data Table</a></li>
+<li class="chapter" data-level="17.5" data-path="frameworks.html"><a href="frameworks.html#keras"><i class="fa fa-check"></i><b>17.5</b> Keras</a><ul>
+<li class="chapter" data-level="17.5.1" data-path="frameworks.html"><a href="frameworks.html#regression"><i class="fa fa-check"></i><b>17.5.1</b> Regression</a></li>
+<li class="chapter" data-level="17.5.2" data-path="frameworks.html"><a href="frameworks.html#classification"><i class="fa fa-check"></i><b>17.5.2</b> Classification</a></li>
+<li class="chapter" data-level="17.5.3" data-path="frameworks.html"><a href="frameworks.html#more"><i class="fa fa-check"></i><b>17.5.3</b> More</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Cribsheet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="empty-1" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Empty</h1>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="communicate-deploy-maintain.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="time-series.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-empty2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

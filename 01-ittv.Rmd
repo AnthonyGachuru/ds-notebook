@@ -1,5 +1,37 @@
-# Transform & Visualize
+# Import, Tidy, Transform & Visualize
 
+## Import
+
+### General
+
+* A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
+    
+* Make codebooks
+
+### SQL
+
+* Maintain a query library
+
+* Common Table Expressions
+
+* cross apply = inner join | outer apply = full join
+
+* SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.
+
+* COUNT(DISTINCT month): returns count of non-null values like table in R
+
+* The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = 'SR' THEN 'yes' ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like
+
+* If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
+
+## Tidy
+
+* In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy.
+
+  * Each variable must have its own column.
+  * Each observation must have its own row.
+  * Each value must have its own cell.
+  
 ## Transform
 
 ### General
@@ -12,7 +44,7 @@ $\frac{-log(\frac{d}{2})}{2e^2}$
 
 then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
 
-* use spatial sign to transform data with outliers.
+* Use spatial sign to transform data with outliers.
 
 * Too many levels for a category:
     * limit number of categories through feature selection
@@ -22,9 +54,8 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 * Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.
 
-* Use runif to do sampling
-
 * You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values. 
+
 * Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.
 
 * Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it. 
@@ -36,6 +67,7 @@ then with probability at least 1-d your sample measured proportion q is no furth
 * There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
 
 * Types of imputation
+
   * Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
   * Random: Can amplify outlier observation and induce bias.
   * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
@@ -49,8 +81,5 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 ## Visualize
 
-* swarmplot
+* swarmplot | marimekko charts | radviz | Marey Chart
 
-* marimekko charts | radviz | Marey Chart
-
-* http://www.ericmjl.com/blog/2018/7/14/ecdfs/ | https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf

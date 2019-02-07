@@ -1,5 +1,41 @@
 # Notes
 
+measurement theory / decision science, semi-supervised, unsupervised, online, & weak learning
+
+## Other
+
+### Vanderplas Jupyter
+
+* create helper functions and units tests as R/py for Rmd/ipynb
+
+* pytest/hypothesis for testing
+
+* use makefile to run cmd commands
+
+* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+
+* Make package for workflow with data (__init__.py) and use this formation for function docs:
+
+* `def fun(a): return(a) #Role Parameters Returns`
+
+### Sample R Pipeline
+
+[Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
+
+IO: odbc readxl httr 
+EDA: DataExplorer
+Prep: tidyverse
+Sampling: rsample modelr
+Feature Engineering: recipes
+Modeling: glmnet h2o FFTrees
+Evaluation: broom yardstick
+Deployment: sqlrutils AzureML opencpu
+Monitoring: flexdashboard
+Docs: rmarkdown
+
+
+natural log goes from unit change to percentage change
+
 generalized low rank models
 
 conditional random field

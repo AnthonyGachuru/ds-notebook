@@ -4,8 +4,6 @@
 
 A [cheatsheet[(https://www.qubole.com/resources/pyspark-cheatsheet/).
 
-Pipeline
-
 Setup 
 
 ```{python, eval = FALSE}
@@ -660,13 +658,7 @@ Here's a [Hello World](https://github.com/fastforwardlabs/keras-hello-world/blob
 
 * fit
 
-keras: declare model | compile with loss, optimizer, and scoring metric | fit
-
-keras::to_categorical
-
 Keras only uses numpy arrays. 
-
-* keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
 
 ### Regression
 
@@ -752,7 +744,11 @@ predictions = model.predict(pred_data)
 predicted_prob_true = predictions[:, 1]
 ```
 
-### Another Example
+### More
+
+keras: declare model | compile with loss, optimizer, and scoring metric | fit | keras::to_categorical
+
+keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
 
 ```{python, eval = FALSE}
 # Import the SGD optimizer
@@ -783,82 +779,3 @@ for lr in lr_to_test:
               verbose = False)
 ```
 
-## LME4
-
-Run a glmer with poisson family error term, predicting count as a function of fixed effects age and year, and include year as a random effect of county as well.
-
-```{r, eval = F}
-modelOut <- glmer(count ~ age + year + (year|county), family = 'poisson',
-                  data = ILdata)
-```
-
-
-
-glmer can be an alternative to chi-squared tests
-
-```{r, eval = F}
-
-# Include the AverageAgeofMother as a correlated random-effect slope parameter
-ageMotherModelRandomCorrelated <- lmer( BirthRate ~ AverageAgeofMother + (AverageAgeofMother | State),
-                       countyBirthsData)
-
- assumed that observations within each group were correlated.
-
-# Include the AverageAgeofMother as a correlated random-effect slope parameter
-ageMotherModelRandomUncorrelated <- lmer( BirthRate ~ AverageAgeofMother + (AverageAgeofMother || State),
-                       countyBirthsData)
-
-
-# Extract the fixed-effect coefficients
-fixef(out)
-
-# Extract the random-effect coefficients
-ranef(out)
-
-# Estimate the confidence intervals 
-confint(out)
-```
-
-## Infer Package
- 
-The [infer](https://cran.r-project.org/web/packages/infer/infer.pdf) library has  the main verbs: specify() variables, hypothesize(), generate() data, calculate() metrics, visualize() results
-
-```{r, eval = FALSE}
-set.seed(4747)
-perm_slope <- twins %>%
-  specify(Foster ~ Biological) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = 10, type = "permute") %>%
-  calculate(stat = "slope")
-```
-
-## Networks
-
-‘Classical SNA’ is mainly about descriptive network statistics: proximity, similarity, centrality, brokerage, positional measures, equivalence, etc.
-
-Import necessary modules and draw graph.
-
-```{python, eval = FALSE}
-import matplotlib.pyplot as plt
-import networkx as nx
-nx.draw(T_sub)
-plt.show()
-```
-
-Get the nodes of interest.
-
-```{python, eval = FALSE}
-noi = [n for n, d in T.nodes(data=True) if d['occupation'] == 'scientist']
-
-### Use a list comprehension to get the edges of interest: eoi
-eoi = [(u, v) for u, v, d in T.edges(data=True) if d['date'] < date(2010, 1, 1)]
-
-### Set the weight of the edge
-weight = 2
-for u, v, d in T.edges(data=True):
-  # Check if node 293 is involved
-  if 293 in [u,v]:
-    
-    # Set the weight to 1.1
-    T[u][v]['weight'] = 1.1
-```

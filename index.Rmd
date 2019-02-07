@@ -62,8 +62,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Sampling from data if its too large
 
-* query library
-
 ### Tidy
 
 * [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). 
@@ -134,44 +132,19 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
 
-checklists | agendas | code books | appendices | post-mortems | tests | gacp
+Write Tests.
 
-Write helper functions, do testing ( [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
- | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) and validation ([1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest) ). Testing libraries include: pytest, hypothesis, and testthat.
+Write helper functions, do testing: 
+
+[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
+ | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) 
+ 
+And validation:
+
+[1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
 
 A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`
 
 The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`
 
 This will create a new environment with the same name listed in environment.yaml.
-
-## Other
-
-### Vanderplas Jupyter
-
-* create helper functions and units tests as R/py for Rmd/ipynb
-
-* pytest/hypothesis for testing
-
-* use makefile to run cmd commands
-
-* Write file with date: df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
-
-* Make package for workflow with data (__init__.py) and use this formation for function docs:
-
-* `def fun(a): return(a) #Role Parameters Returns`
-
-### Sample R Pipeline
-
-[Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
-
-IO: odbc readxl httr 
-EDA: DataExplorer
-Prep: tidyverse
-Sampling: rsample modelr
-Feature Engineering: recipes
-Modeling: glmnet h2o FFTrees
-Evaluation: broom yardstick
-Deployment: sqlrutils AzureML opencpu
-Monitoring: flexdashboard
-Docs: rmarkdown

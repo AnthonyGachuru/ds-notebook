@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Cribsheet</title>
+  <title>Chapter 2 Import, Tidy, Transform &amp; Visualize | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 2 Import, Tidy, Transform &amp; Visualize | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 2 Import, Tidy, Transform &amp; Visualize | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="import-tidy-transform-visualize.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="pre-processing-feature-selection-and-feature-engineering.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -374,113 +374,84 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Cribsheet</h1>
-</div>
-<div id="workflow" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Workflow</h1>
-<div id="preamble" class="section level2">
-<h2><span class="header-section-number">1.1</span> Preamble</h2>
-<p>A typical data science workflow can be framed as following these steps:</p>
+<div id="import-tidy-transform-visualize" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Import, Tidy, Transform &amp; Visualize</h1>
+<div id="import-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Import</h2>
+<div id="general" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> General</h3>
 <ul>
-<li><p>Business: start with a business question, define the goal and measure of success</p></li>
-<li><p>Data: find, access and explore the data</p></li>
-<li><p>Features: extract, assess and evaluate, select and sort</p></li>
-<li><p>Models: find the right model for the problem at hand, compare, optimize, and fine tune</p></li>
-<li><p>Communication: Interpret and communicate the results</p></li>
-<li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
-<li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
-</ul>
-<p>More succinctly, as per Hadley Wickham:</p>
-<p>import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
-<p>My combination of the two:</p>
-<p>preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
-<p>Another note is that one way to structure projects is to write user stories a la software engineering.</p>
-<p>What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this <a href="https://gfleetwood.github.io/noted-resources/data_science.html">page</a>.</p>
-</div>
-<div id="checklist" class="section level2">
-<h2><span class="header-section-number">1.2</span> Checklist</h2>
-<div id="preparation" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Preparation</h3>
-<ul>
-<li><p>Understand the business question, goals, and measures of success</p></li>
-<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
-<li><p>Structure project as user stories</p></li>
-<li><p>Initialize report to track and summarise work and to do list.</p></li>
-<li><p>Remember to use atomic commit messages</p></li>
+<li><p>A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.</p></li>
+<li><p>Make codebooks</p></li>
 </ul>
 </div>
-<div id="import" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Import</h3>
+<div id="sql" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> SQL</h3>
 <ul>
-<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
-<li><p>Sampling from data if its too large</p></li>
+<li><p>Maintain a query library</p></li>
+<li><p>Common Table Expressions</p></li>
+<li><p>cross apply = inner join | outer apply = full join</p></li>
+<li><p>SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.</p></li>
+<li><p>COUNT(DISTINCT month): returns count of non-null values like table in R</p></li>
+<li><p>The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = ‘SR’ THEN ‘yes’ ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like</p></li>
+<li><p>If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns</p></li>
 </ul>
 </div>
-<div id="tidy" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Tidy</h3>
+</div>
+<div id="tidy-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Tidy</h2>
 <ul>
-<li><p><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>.</p></li>
-<li><p>Figure out what you’re trying to do with the data.</p></li>
-<li><p>See what the data looks like: types of variables, the first and last few observations, missing values or outliers.</p></li>
-<li><p>Outlier Detection: interquartile range, kernel density estimation, bonferroni test</p></li>
+<li><p>In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy.</p></li>
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li><p>Each value must have its own cell.</p></li>
 </ul>
 </div>
-<div id="transform" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> Transform</h3>
+<div id="transform-1" class="section level2">
+<h2><span class="header-section-number">2.3</span> Transform</h2>
+<div id="general-1" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> General</h3>
 <ul>
-<li><p>Look at missingness.</p></li>
-<li><p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression.</p></li>
-<li><p>Use the Gower distance for categorical dissimilarity.</p></li>
-<li><p>Check for blank spaces and replace with NA. In R: <code>df[df==&quot;&quot;] = NA</code>.</p></li>
-<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
+<li>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</li>
+</ul>
+<p>A good formula is: if your sample is picked uniformly at random and is of size at least:</p>
+<p><span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
+<p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
+<ul>
+<li><p>Use spatial sign to transform data with outliers.</p></li>
+<li>Too many levels for a category:
+<ul>
+<li>limit number of categories through feature selection</li>
+<li><a href="https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables" class="uri">https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables</a> * bucket groups by number of samples</li>
+</ul></li>
+<li><p>Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.</p></li>
+<li><p>Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.</p></li>
+<li><p>You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values.</p></li>
+<li><p>Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.</p></li>
+<li><p>Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it.</p></li>
+<li><p>Dixon and Chi-squared tests for outlier detection plus LOF Algorithm.</p></li>
 </ul>
 </div>
-<div id="visualize" class="section level3">
-<h3><span class="header-section-number">1.2.5</span> Visualize</h3>
+<div id="missingness-imputation" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Missingness &amp; Imputation</h3>
 <ul>
-<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
-<li><p>Trendlines &amp; Histograms</p></li>
-<li><p>Confidence intervals</p></li>
-<li><p>Compare the distributions of variables with overlayed density plots</p></li>
-<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.</p></li>
-<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
+<li><p>There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random</p></li>
+<li><p>Types of imputation</p></li>
+<li>Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.</li>
+<li>Random: Can amplify outlier observation and induce bias.</li>
+<li><p>Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate. &amp; multiple stochastic regression imputation</p></li>
+<li><p>The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.</p></li>
+<li><p>The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.</p></li>
+<li><p>logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.</p></li>
 </ul>
 </div>
-<div id="model" class="section level3">
-<h3><span class="header-section-number">1.2.6</span> Model</h3>
+</div>
+<div id="visualize-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Visualize</h2>
 <ul>
-<li><p>Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
-<li><p>Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.</p></li>
-<li><p>Pipelines &amp; Feature Unions</p></li>
-<li><p>Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.</p></li>
-<li><p>Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.</p></li>
-<li><p>Model Selection</p></li>
-<li><p>Model Explanability: SHAP</p></li>
-<li><p>Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.</p></li>
-<li><p>Deal with potential class imbalance: Gradient boosting is one option.</p></li>
-<li><p>Create ensembles</p></li>
-<li><p>Ensembling: mlxtend in Python, and caretEnsemble in R.</p></li>
-<li><p>Look at learning curves: <a href="https://www.dataquest.io/blog/learning-curves-machine-learning/">1</a> | <a href="http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html">2</a></p></li>
+<li>swarmplot | marimekko charts | radviz | Marey Chart</li>
 </ul>
-</div>
-<div id="communicate" class="section level3">
-<h3><span class="header-section-number">1.2.7</span> Communicate</h3>
-<p>Reference this <a href="https://www.dataquest.io/blog/data-science-project-style-guide/">blog</a>.</p>
-</div>
-<div id="deployment-maintenance" class="section level3">
-<h3><span class="header-section-number">1.2.8</span> Deployment / Maintenance</h3>
-<p><a href="https://blog.osteele.com/2008/05/my-git-workflow/">Git Workflow</a></p>
-<p>Write Tests.</p>
-<p>Write helper functions, do testing:</p>
-<p><a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a> | <a href="https://github.com/ericmjl/data-testing-tutorial">4</a>)</p>
-<p>And validation:</p>
-<p><a href="https://github.com/data-cleaning/validate">1</a> | <a href="https://rdrr.io/cran/checkmate/">2</a> | <a href="https://github.com/shawnbrown/datatest">3</a></p>
-<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: <code>conda env export &gt; environment.yaml</code></p>
-<p>The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: <code>conda env create -f environment.yaml</code></p>
-<p>This will create a new environment with the same name listed in environment.yaml.</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -488,8 +459,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="import-tidy-transform-visualize.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pre-processing-feature-selection-and-feature-engineering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -519,7 +490,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-ittv.Rmd",
 "text": "Edit"
 },
 "history": {

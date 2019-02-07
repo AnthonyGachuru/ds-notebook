@@ -213,8 +213,6 @@ can be found on this
   Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 \item
   Sampling from data if its too large
-\item
-  query library
 \end{itemize}
 
 \subsection{Tidy}\label{tidy}
@@ -319,18 +317,20 @@ Reference this
 
 \href{https://blog.osteele.com/2008/05/my-git-workflow/}{Git Workflow}
 
-checklists \textbar{} agendas \textbar{} code books \textbar{}
-appendices \textbar{} post-mortems \textbar{} tests \textbar{} gacp
+Write Tests.
 
-Write helper functions, do testing (
+Write helper functions, do testing:
+
 \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
 \textbar{} \href{http://www.tdda.info/}{2} \textbar{}
 \href{http://stochasticsolutions.com/}{3} \textbar{}
-\href{https://github.com/ericmjl/data-testing-tutorial}{4}) and
-validation (\href{https://github.com/data-cleaning/validate}{1}
-\textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{}
-\href{https://github.com/shawnbrown/datatest}{3} ). Testing libraries
-include: pytest, hypothesis, and testthat.
+\href{https://github.com/ericmjl/data-testing-tutorial}{4})
+
+And validation:
+
+\href{https://github.com/data-cleaning/validate}{1} \textbar{}
+\href{https://rdrr.io/cran/checkmate/}{2} \textbar{}
+\href{https://github.com/shawnbrown/datatest}{3}
 
 A really useful feature is sharing environments so others can install
 all the packages used in your code, with the correct versions. You can
@@ -350,63 +350,30 @@ environment from an environment file use:
 This will create a new environment with the same name listed in
 environment.yaml.
 
-\section{Other}\label{other}
-
-\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Write file with date:
-  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\item
-  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
-\end{itemize}
-
-\subsection{Sample R Pipeline}\label{sample-r-pipeline}
-
-\href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
-
-IO: odbc readxl httr EDA: DataExplorer Prep: tidyverse Sampling: rsample
-modelr Feature Engineering: recipes Modeling: glmnet h2o FFTrees
-Evaluation: broom yardstick Deployment: sqlrutils AzureML opencpu
-Monitoring: flexdashboard Docs: rmarkdown
-
-\chapter{Import \& Tidy}\label{import-tidy}
+\chapter{Import, Tidy, Transform \&
+Visualize}\label{import-tidy-transform-visualize}
 
 \section{Import}\label{import-1}
 
+\subsection{General}\label{general}
+
 \begin{itemize}
-\item
-  cross apply = inner join \textbar{} outer apply = full join
-\item
-  sql: SELECT `Dummy Column Text' as DUMMYCOL FROM tbl
-\item
-  In tidy data: Each variable forms a column. Each observation forms a
-  row. Each type of observational unit forms a table.
 \item
   A schema is a blueprint for storing data. For a table every row has
   same number of columns, and each column is of the same type.
 \item
-  \href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temporary
-  pandas Columns}
-\item
   Make codebooks
 \end{itemize}
 
-\section{SQL}\label{sql}
+\subsection{SQL}\label{sql}
 
 \begin{itemize}
 \item
+  Maintain a query library
+\item
   Common Table Expressions
+\item
+  cross apply = inner join \textbar{} outer apply = full join
 \item
   SQL UNION stacks one dataset on top of the other. It only appends
   distinct values. More specifically, when you use UNION, the dataset is
@@ -429,9 +396,10 @@ Monitoring: flexdashboard Docs: rmarkdown
 \section{Tidy}\label{tidy-1}
 
 \begin{itemize}
-\tightlist
 \item
-  There are three interrelated rules which make a dataset tidy:
+  In tidy data: Each variable forms a column. Each observation forms a
+  row. Each type of observational unit forms a table. There are three
+  interrelated rules which make a dataset tidy.
 \item
   Each variable must have its own column.
 \item
@@ -440,11 +408,9 @@ Monitoring: flexdashboard Docs: rmarkdown
   Each value must have its own cell.
 \end{itemize}
 
-\chapter{Transform \& Visualize}\label{transform-visualize}
-
 \section{Transform}\label{transform-1}
 
-\subsection{General}\label{general}
+\subsection{General}\label{general-1}
 
 \begin{itemize}
 \tightlist
@@ -470,7 +436,7 @@ estimated sample size to 300.
 
 \begin{itemize}
 \item
-  use spatial sign to transform data with outliers.
+  Use spatial sign to transform data with outliers.
 \item
   Too many levels for a category:
 
@@ -495,8 +461,6 @@ estimated sample size to 300.
   the better known polychoric correlation. Note the latter is defined
   based on the correlation between the numerical variable and a
   continuous latent trait underlying the categorical variable.
-\item
-  Use runif to do sampling
 \item
   You should use a logarithmic scale when percent change, or change in
   orders of magnitude, is more important than changes in absolute units.
@@ -556,18 +520,16 @@ estimated sample size to 300.
 \section{Visualize}\label{visualize-1}
 
 \begin{itemize}
+\tightlist
 \item
-  swarmplot
-\item
-  marimekko charts \textbar{} radviz \textbar{} Marey Chart
-\item
-  \url{http://www.ericmjl.com/blog/2018/7/14/ecdfs/} \textbar{}
-  \url{https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf}
+  swarmplot \textbar{} marimekko charts \textbar{} radviz \textbar{}
+  Marey Chart
 \end{itemize}
 
-\chapter{Model}\label{model-1}
+\chapter{Pre-processing, Feature Selection, and Feature
+Engineering}\label{pre-processing-feature-selection-and-feature-engineering}
 
-\section{General}\label{general-1}
+\section{General}\label{general-2}
 
 \begin{itemize}
 \item
@@ -784,7 +746,7 @@ estimated sample size to 300.
   dashboards).
 \end{itemize}
 
-\section{Other}\label{other-1}
+\section{Other}\label{other}
 
 \subsection{Unbalanced Classes}\label{unbalanced-classes}
 
@@ -832,7 +794,7 @@ framework.
 
 \section{Model Selection}\label{model-selection}
 
-\subsection{General}\label{general-2}
+\subsection{General}\label{general-3}
 
 \begin{itemize}
 \item
@@ -1101,7 +1063,7 @@ framework.
   \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
 \end{itemize}
 
-\chapter{Model}\label{model-2}
+\chapter{Model}\label{model-1}
 
 \section{Linear Regression}\label{linear-regression}
 
@@ -1362,7 +1324,7 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   the inputs
 \end{itemize}
 
-\subsection{Other}\label{other-2}
+\subsection{Other}\label{other-1}
 
 \begin{itemize}
 \item
@@ -1878,7 +1840,7 @@ effcient run-time wise.
   orthogonal to the preceding component.
 \end{itemize}
 
-\subsection{Other}\label{other-3}
+\subsection{Other}\label{other-2}
 
 \begin{itemize}
 \item
@@ -2750,6 +2712,31 @@ outputs on the log odds scale
 
 gams work with broom and caret.
 
+\chapter{Hierarchical Models}\label{hierarchical-models}
+
+``Across counties, as the average mother's age increases the birth rate
+decreases while correcting for state-level impacts'' BirthRate
+\textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
+
+lmerTest
+
+Analysis of Variance, or ANOVA, can be used to compare two different
+lmer models and test if one model explains more variability than the
+other model. We can use this to compare two lmer models. For example, if
+we wanted to see if Year is important for predicting Crime in Maryland,
+we can build a null model with only County as a random-effect and a year
+model that includes Year.
+
+\begin{itemize}
+\item
+  One far out suggestion in one of the links is to do PCA and then
+  regress the original variables against the new axis.
+\item
+  Account for longitudinal data: random selection of one event from each
+  student, partition cross validation by dates, pca finds major trends
+  hidden within the data
+\end{itemize}
+
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
 
@@ -2770,923 +2757,6 @@ Introduction \textbar{} Motivation \textbar{} Summary \textbar{} Results
 \section{Deploy}\label{deploy}
 
 \section{Maintain}\label{maintain}
-
-\chapter{Frameworks}\label{frameworks}
-
-\section{PySpark}\label{pyspark}
-
-A
-{[}cheatsheet{[}(\url{https://www.qubole.com/resources/pyspark-cheatsheet/}).
-
-Pipeline
-
-Setup
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ findspark}
-\NormalTok{findspark.init()}
-\ImportTok{import}\NormalTok{ pyspark}
-\ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
-\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
-\NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.appName(}\StringTok{'example'}\NormalTok{).getOrCreate()}
-\ImportTok{import}\NormalTok{ findspark}
-\NormalTok{findspark.init()}
-\ImportTok{import}\NormalTok{ pyspark}
-\ImportTok{import}\NormalTok{ random}
-\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
-\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
-\KeywordTok{def}\NormalTok{ inside(p):     }
-\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
-    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
-\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
-\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
-\BuiltInTok{print}\NormalTok{(pi)}
-\NormalTok{sc.stop()}
-\end{Highlighting}
-\end{Shaded}
-
-Libs
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ pyspark.ml.feature }\ImportTok{import}\NormalTok{ StringIndexer, OneHotEncoder, VectorAssembler}
-\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
-\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
-\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
-\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'data.csv'}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
-\NormalTok{df.show(}\DecValTok{5}\NormalTok{)}
-\NormalTok{df.columns}
-\end{Highlighting}
-\end{Shaded}
-
-Preprocessing
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"label"}\NormalTok{, df[}\StringTok{"target"}\NormalTok{].cast(}\StringTok{'integer'}\NormalTok{))}
-\NormalTok{scf_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{)}
-\NormalTok{scf_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_fact"}\NormalTok{)}
-\NormalTok{feature_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{"some list of column names"}\NormalTok{]}
-\NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols }\OperatorTok{=}\NormalTok{ feature_cols, }
-\NormalTok{                                outputCol }\OperatorTok{=} \StringTok{"features"}\NormalTok{)}
-\NormalTok{pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages }\OperatorTok{=}\NormalTok{ [scf_indexer, scf_encoder, vec_assembler])}
-\NormalTok{piped_data }\OperatorTok{=}\NormalTok{ pipe.fit(df).transform(df)}
-\NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{8}\NormalTok{, .}\DecValTok{2}\NormalTok{])}
-\end{Highlighting}
-\end{Shaded}
-
-Model
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
-\NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName }\OperatorTok{=} \StringTok{"areaUnderROC"}\NormalTok{)}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{01}\NormalTok{))}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
-\NormalTok{clf_lr_cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
-\NormalTok{    estimator }\OperatorTok{=}\NormalTok{ clf_lr,}
-\NormalTok{    estimatorParamMaps }\OperatorTok{=}\NormalTok{ grid,}
-\NormalTok{    evaluator }\OperatorTok{=}\NormalTok{ evaluator,}
-\NormalTok{    numFolds }\OperatorTok{=} \DecValTok{5}
-\NormalTok{               )}
-\NormalTok{best_clf_lr }\OperatorTok{=}\NormalTok{ clf_lr_cv.fit(training).bestModel}
-\NormalTok{results }\OperatorTok{=}\NormalTok{ best_clf_lr.transform(training)}
-\BuiltInTok{print}\NormalTok{(evaluator.evaluate(results))}
-\CommentTok{#stop}
-\NormalTok{sc.stop()}
-\end{Highlighting}
-\end{Shaded}
-
-Quick Test:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ findspark}
-\NormalTok{findspark.init()}
-\ImportTok{import}\NormalTok{ pyspark}
-\ImportTok{import}\NormalTok{ random}
-\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
-\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
-\KeywordTok{def}\NormalTok{ inside(p):     }
-\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
-    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
-\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
-\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
-\BuiltInTok{print}\NormalTok{(pi)}
-\NormalTok{sc.stop()}
-\end{Highlighting}
-\end{Shaded}
-
-First have to create a SparkSession object from your SparkContext. The
-SparkContext is ther connection to the cluster and the SparkSession as
-your interface with that connection.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ pyspark}
-\ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
-\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
-\NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.getOrCreate() }\CommentTok{# SparkSession.builder.appName('chosenName').getOrCreate()}
-\end{Highlighting}
-\end{Shaded}
-
-The rest of my notes:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{## List tables}
-\NormalTok{spark.catalog.listTables()}
-\CommentTok{## Access and display data}
-\NormalTok{query }\OperatorTok{=} \StringTok{"FROM flights SELECT * LIMIT 10"}
-\NormalTok{flights10 }\OperatorTok{=}\NormalTok{ spark.sql(query)}
-\NormalTok{flights10.show()}
-\CommentTok{## Cast}
-\NormalTok{df[}\StringTok{'g'}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{'g'}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{)}
-\CommentTok{## Read from csv}
-\NormalTok{df}\OperatorTok{=}\NormalTok{ spark.read.csv(file_path, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'fileNameWithPath'}\NormalTok{, mode}\OperatorTok{=}\StringTok{"DROPMALFORMED"}\NormalTok{,inferSchema}\OperatorTok{=}\VariableTok{True}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.}\BuiltInTok{format}\NormalTok{(}\StringTok{"csv"}\NormalTok{).option(}\StringTok{"header"}\NormalTok{,}\StringTok{"true"}\NormalTok{).option(}\StringTok{"inferSchema"}\NormalTok{,}\StringTok{"true"}\NormalTok{).load(}\StringTok{"john_doe.csv"}\NormalTok{)}
-\CommentTok{## Spark df to pandas and vice versa}
-\NormalTok{toPandas()}
-\NormalTok{spark_temp }\OperatorTok{=}\NormalTok{ spark.createDataFrame(pd_temp)}
-\CommentTok{## Add to the catalog}
-\NormalTok{spark_temp.createOrReplaceTempView(}\StringTok{"temp"}\NormalTok{)}
-\CommentTok{## Mutate}
-\NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"newCol"}\NormalTok{, df.oldCol }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
-\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"arr_delay"}\NormalTok{, model_data.arr_delay.cast(}\StringTok{'integer'}\NormalTok{))}
-\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"plane_age"}\NormalTok{, model_data.year }\OperatorTok{-}\NormalTok{ model_data.plane_year)}
-\CommentTok{## Create the DataFrame flights}
-\NormalTok{flights }\OperatorTok{=}\NormalTok{ spark.table(}\StringTok{'flights'}\NormalTok{)}
-\CommentTok{## Get column names}
-\NormalTok{spark_df.schema.names}
-\NormalTok{spark_df.printSchema()}
-\CommentTok{## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string}
-\NormalTok{long_flights1 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(}\StringTok{'distance > 1000'}\NormalTok{)}
-\NormalTok{long_flights2 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(flights.distance }\OperatorTok{>} \DecValTok{1000}\NormalTok{)}
-\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.}\BuiltInTok{filter}\NormalTok{(}\StringTok{"arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL"}\NormalTok{)}
-\CommentTok{## Groupby examples}
-\NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.origin }\OperatorTok{==} \StringTok{"PDX"}\NormalTok{).groupBy().}\BuiltInTok{min}\NormalTok{(}\StringTok{"distance"}\NormalTok{).show()}
-\NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.carrier}\OperatorTok{==}\StringTok{'DL'}\NormalTok{).}\BuiltInTok{filter}\NormalTok{(flights.origin}\OperatorTok{==}\StringTok{'SEA'}\NormalTok{).groupBy().avg(}\StringTok{'air_time'}\NormalTok{).show()}
-\NormalTok{flights.withColumn(}\StringTok{"duration_hrs"}\NormalTok{, flights.air_time}\OperatorTok{/}\DecValTok{60}\NormalTok{).groupBy().}\BuiltInTok{sum}\NormalTok{(}\StringTok{'duration_hrs'}\NormalTok{).show()}
-\CommentTok{## Spark functions}
-\ImportTok{import}\NormalTok{ pyspark.sql.functions }\ImportTok{as}\NormalTok{ F}
-\NormalTok{by_month_dest.agg(F.stddev(}\StringTok{'dep_delay'}\NormalTok{)).show()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{## Drop column}
-\NormalTok{final_test_data.drop(}\StringTok{'State'}\NormalTok{)}
-\CommentTok{## Dummying}
-\CommentTok{#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.}
-\CommentTok{#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer}
-\CommentTok{## Create a StringIndexer}
-\NormalTok{carr_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol}\OperatorTok{=}\StringTok{"carrier"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{)}
-\CommentTok{## Create a OneHotEncoder}
-\NormalTok{carr_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_fact"}\NormalTok{)}
-\CommentTok{## Make a VectorAssembler}
-\NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols}\OperatorTok{=}\NormalTok{[}\StringTok{"month"}\NormalTok{, }\StringTok{"air_time"}\NormalTok{, }\StringTok{"carrier_fact"}\NormalTok{, }\StringTok{"dest_fact"}\NormalTok{, }\StringTok{"plane_age"}\NormalTok{], outputCol}\OperatorTok{=}\StringTok{"features"}\NormalTok{)}
-\CommentTok{## Import & Make Pipeline}
-\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
-\NormalTok{flights_pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages}\OperatorTok{=}\NormalTok{[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])}
-\CommentTok{## Fit and transform the data}
-\NormalTok{piped_data }\OperatorTok{=}\NormalTok{ flights_pipe.fit(model_data).transform(model_data)}
-\CommentTok{## Train-test split}
-\NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{6}\NormalTok{, .}\DecValTok{4}\NormalTok{])}
-\CommentTok{## Tuning & Selection}
-\CommentTok{## Import LogisticRegression}
-\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
-\CommentTok{## Create a LogisticRegression Estimator}
-\NormalTok{lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
-\CommentTok{## Import the evaluation submodule}
-\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
-\CommentTok{## Create a BinaryClassificationEvaluator}
-\NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName}\OperatorTok{=}\StringTok{"areaUnderROC"}\NormalTok{)}
-\CommentTok{## Import the tuning submodule}
-\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
-\CommentTok{## Create the parameter grid}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
-\CommentTok{## Add the hyperparameter}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{01}\NormalTok{))}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
-\CommentTok{## Build the grid}
-\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
-\CommentTok{## Create the CrossValidator}
-\NormalTok{cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
-\NormalTok{estimator}\OperatorTok{=}\NormalTok{lr,}
-\NormalTok{estimatorParamMaps}\OperatorTok{=}\NormalTok{grid,}
-\NormalTok{evaluator}\OperatorTok{=}\NormalTok{evaluator}
-\NormalTok{               )}
-\CommentTok{## Fit cross validation models}
-\NormalTok{models }\OperatorTok{=}\NormalTok{ cv.fit(training)}
-\CommentTok{## Extract the best model}
-\NormalTok{best_lr }\OperatorTok{=}\NormalTok{ models.bestModel}
-\CommentTok{## Use the model to predict the test set}
-\NormalTok{test_results }\OperatorTok{=}\NormalTok{ best_lr.transform(test)}
-\CommentTok{## Evaluate the predictions}
-\BuiltInTok{print}\NormalTok{(evaluator.evaluate(test_results))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{itemize}
-\item
-  Spark's assumes the target is called `label' in ML. Everything else is
-  a feature.
-\item
-  alias() method to rename a column you're selecting.
-\item
-  cast() method: nominative determinism on columns
-\item
-  withColumn(): create new column
-\item
-  pyspark.ml.feature
-\item
-  At the core of the pyspark.ml module are the Transformer and Estimator
-  classes. Transformer classes are used for pre-processing and have a
-  .transform() method. eg. PCA
-\item
-  You can create what are called `one-hot vectors' to represent the
-  carrier and the destination of each flight. A one-hot vector is a way
-  of representing a categorical feature where every observation has a
-  vector in which all elements are zero except for at most one element,
-  which has a value of one (1).
-\item
-  Estimator classes are for modeling and all implement a .fit() method.
-  eg. StringIndexerModel for including categorical data saved as strings
-  in your models
-\item
-  selectExpr() takes SQL expressions as a string
-\item
-  show() vs collect()
-\item
-  Spark only handles numeric data
-\item
-  In Spark it's important to make sure you split the data after all the
-  transformations. This is because operations like StringIndexer don't
-  always produce the same index even when given the same list of
-  strings.
-\end{itemize}
-
-\section{Sparklyr}\label{sparklyr}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(sparklyr)}
-
-\NormalTok{## Connect to your Spark cluster}
-\NormalTok{spark_conn <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master =} \StringTok{"local"}\NormalTok{)}
-
-\NormalTok{## Print the version of Spark}
-\KeywordTok{spark_version}\NormalTok{(}\DataTypeTok{sc =}\NormalTok{ spark_conn)}
-
-\NormalTok{## Disconnect from Spark}
-\KeywordTok{spark_disconnect}\NormalTok{(}\DataTypeTok{sc =}\NormalTok{ spark_conn)}
-
-\NormalTok{## See tables}
-\KeywordTok{src_tbls}\NormalTok{(sc)}
-
-\NormalTok{## Copy track_metadata to Spark}
-\NormalTok{track_metadata_tbl <-}\StringTok{ }\KeywordTok{copy_to}\NormalTok{(spark_conn, track_metadata)}
-
-\NormalTok{## Print 5 rows, all columns}
-\KeywordTok{print}\NormalTok{(track_metadata_tbl, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{, }\DataTypeTok{width =} \OtherTok{Inf}\NormalTok{)}
-
-\NormalTok{## Write and run SQL query}
-\NormalTok{query <-}\StringTok{ "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"}
-\NormalTok{(results <-}\StringTok{ }\KeywordTok{dbGetQuery}\NormalTok{(spark_conn, query))}
-
-\NormalTok{## General transformation structure and example}
-\NormalTok{a_tibble }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ft_some_transformation}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{, some_other_args)}
-
-\NormalTok{hotttnesss <-}\StringTok{ }\NormalTok{track_metadata_tbl }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Select artist_hotttnesss}
-\StringTok{  }\KeywordTok{select}\NormalTok{(artist_hotttnesss) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Binarize to is_hottt_or_nottt}
-\StringTok{  }\KeywordTok{ft_binarizer}\NormalTok{(}\StringTok{'artist_hotttnesss'}\NormalTok{, }\StringTok{'is_hottt_or_nottt'}\NormalTok{, }\DataTypeTok{threshold =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Collect the result}
-\StringTok{  }\KeywordTok{collect}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Convert is_hottt_or_nottt to logical}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{is_hottt_or_nottt =} \KeywordTok{as.logical}\NormalTok{(is_hottt_or_nottt))}
-  
-\NormalTok{## Get and transform the schema}
-
-\NormalTok{(schema <-}\StringTok{ }\KeywordTok{sdf_schema}\NormalTok{(track_metadata_tbl))}
-\NormalTok{schema }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{do.call}\NormalTok{(data_frame, x)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{bind_rows}\NormalTok{()}
-
-\NormalTok{## Train-test split}
-\NormalTok{partitioned <-}\StringTok{ }\NormalTok{track_metadata_tbl }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{sdf_partition}\NormalTok{(}\DataTypeTok{training =} \FloatTok{0.7}\NormalTok{, }\DataTypeTok{testing =} \FloatTok{0.3}\NormalTok{)}
-
-\NormalTok{## List ml functions}
-\KeywordTok{ls}\NormalTok{(}\StringTok{"package:sparklyr"}\NormalTok{, }\DataTypeTok{pattern =} \StringTok{"^ml"}\NormalTok{)}
-
-\NormalTok{## GBT Example}
-
-\NormalTok{gradient_boosted_trees_model <-}\StringTok{ }\NormalTok{track_data_to_model_tbl }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Run the gradient boosted trees model}
-\StringTok{   }\KeywordTok{ml_gradient_boosted_trees}\NormalTok{(}\StringTok{'year'}\NormalTok{, feature_colnames)}
-
-\NormalTok{responses <-}\StringTok{ }\NormalTok{track_data_to_predict_tbl }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Select the year column}
-\StringTok{  }\KeywordTok{select}\NormalTok{(year) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Collect the results}
-\StringTok{  }\KeywordTok{collect}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# Add in the predictions}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \DataTypeTok{predicted_year =} \KeywordTok{predict}\NormalTok{(}
-\NormalTok{      gradient_boosted_trees_model,}
-\NormalTok{      track_data_to_predict_tbl}
-\NormalTok{    )}
-\NormalTok{  )}
-\end{Highlighting}
-\end{Shaded}
-
-\textbf{Parquet Aside}
-
-Parquet files are quicker to read and write. parquet files can be used
-with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and
-Pig.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{## The parquet_dir has been pre-defined}
-\NormalTok{parquet_dir}
-
-\NormalTok{## List the files in the parquet dir}
-\NormalTok{filenames <-}\StringTok{ }\KeywordTok{dir}\NormalTok{(parquet_dir, }\DataTypeTok{full.names =} \OtherTok{TRUE}\NormalTok{)}
-
-\NormalTok{## Show the filenames and their sizes}
-\KeywordTok{data_frame}\NormalTok{(}
-  \DataTypeTok{filename =} \KeywordTok{basename}\NormalTok{(filenames),}
-  \DataTypeTok{size_bytes =} \KeywordTok{file.size}\NormalTok{(filenames)}
-\NormalTok{)}
-
-\CommentTok{#Import the data into Spark}
-
-\NormalTok{timbre_tbl <-}\StringTok{ }\KeywordTok{spark_read_parquet}\NormalTok{(spark_conn, }\StringTok{'timbre'}\NormalTok{, parquet_dir)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{itemize}
-\item
-  To collect your data: that is, to move it from Spark to R, you call
-  collect(). copy\_to() moves your data from R to Spark.
-\item
-  Use compute() to compute the calculation, but store the results in a
-  temporary data frame on Spark.
-\item
-  If you want to delay returning the data, you can use dbSendQuery() to
-  execute the query, then dbFetch() to return the results.
-\item
-  feature transforms: ft\_, ml functions: ml\_, spark df functions:
-  sdf\_
-\item
-  ft\_tokenizer(): to lower and split into individual words,
-  ft\_regex\_tokenizer, sdf\_sort
-\end{itemize}
-
-\section{Caret}\label{caret}
-
-attributes(clf\_lr): results, finalModel
-
-\subsection{Preprocessing}\label{preprocessing}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Apply median imputation: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-  \DataTypeTok{x =}\NormalTok{ breast_cancer_x, }
-  \DataTypeTok{y =}\NormalTok{ breast_cancer_y,}
-  \DataTypeTok{method =} \StringTok{'glm'}\NormalTok{,}
-  \DataTypeTok{trControl =}\NormalTok{ myControl,}
-  \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'medianImpute'}\NormalTok{, }\StringTok{"knnImpute"}\NormalTok{, }\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{, }\StringTok{'pca'}\NormalTok{)}
-\NormalTok{)}
-
-\KeywordTok{dotplot}\NormalTok{(resamples, }\DataTypeTok{metric =} \StringTok{"ROC"}\NormalTok{)}
-
-\KeywordTok{min}\NormalTok{(model}\OperatorTok{$}\NormalTok{results}\OperatorTok{$}\NormalTok{RSME)}
-
-\CommentTok{# Identify near zero variance predictors: remove_cols}
-\NormalTok{remove_cols <-}\StringTok{ }\KeywordTok{nearZeroVar}\NormalTok{(bloodbrain_x, }\DataTypeTok{names =} \OtherTok{TRUE}\NormalTok{, }
-                           \DataTypeTok{freqCut =} \DecValTok{2}\NormalTok{, }\DataTypeTok{uniqueCut =} \DecValTok{20}\NormalTok{)}
-
-\CommentTok{# Get all column names from bloodbrain_x: all_cols}
-\NormalTok{all_cols =}\StringTok{ }\KeywordTok{colnames}\NormalTok{(bloodbrain_x)}
-
-\CommentTok{# Remove from data: bloodbrain_x_small}
-\NormalTok{bloodbrain_x_small <-}\StringTok{ }\NormalTok{bloodbrain_x[ , }\KeywordTok{setdiff}\NormalTok{(all_cols, remove_cols)]}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{LM}\label{lm}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Set seed}
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
-
-\CommentTok{# Fit lm model: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ diamonds)}
-
-\CommentTok{# Predict on full data: p}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, diamonds)}
-
-\CommentTok{# Compute errors: error}
-\NormalTok{error <-}\StringTok{ }\NormalTok{p }\OperatorTok{-}\StringTok{ }\NormalTok{diamonds}\OperatorTok{$}\NormalTok{price}
-
-\CommentTok{# Calculate RMSE}
-\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{(error}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-
-\CommentTok{# Fit lm model using 5 x 5-fold CV: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-\NormalTok{  medv }\OperatorTok{~}\StringTok{ }\NormalTok{., }
-\NormalTok{  Boston,}
-  \DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}
-  \DataTypeTok{trControl =} \KeywordTok{trainControl}\NormalTok{(}
-    \DataTypeTok{method =} \StringTok{"cv"}\NormalTok{, }\DataTypeTok{number =} \DecValTok{5}\NormalTok{,}
-    \DataTypeTok{repeats =} \DecValTok{5}\NormalTok{, }\DataTypeTok{verboseIter =} \OtherTok{TRUE}
-\NormalTok{  )}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Lasso/Ridge}\label{lassoridge}
-
-Alpha controls balance between lasso and ridge. Lambda controls penalty.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Fit glmnet model: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-\NormalTok{  y}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ overfit,}
-  \DataTypeTok{method =} \StringTok{"glmnet"}\NormalTok{,}
-  \DataTypeTok{trControl =}\NormalTok{ myControl}
-\NormalTok{)}
-
-\CommentTok{# Train glmnet with custom trainControl and tuning: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-\NormalTok{  y}\OperatorTok{~}\NormalTok{., overfit,}
-  \DataTypeTok{tuneGrid =} \KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{alpha =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.0001}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{length =} \DecValTok{20}\NormalTok{)),}
-  \DataTypeTok{method =} \StringTok{'glmnet'}\NormalTok{,}
-  \DataTypeTok{trControl =}\NormalTok{ myControl}
-\NormalTok{)}
-
-\CommentTok{# Print model to console}
-\NormalTok{model}
-
-\CommentTok{# Print maximum ROC statistic}
-\KeywordTok{max}\NormalTok{(model[[}\StringTok{"results"}\NormalTok{]][[}\StringTok{"ROC"}\NormalTok{]])}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Logistic Regression}\label{logistic-regression-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Fit glm model}
-\NormalTok{model =}\StringTok{ }\KeywordTok{glm}\NormalTok{(Class }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, train)}
-
-\CommentTok{# Predict on test: p}
-\NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, test, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
-
-\CommentTok{# Calculate class probabilities: p_class}
-\NormalTok{p_class <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(p }\OperatorTok{>}\StringTok{ }\FloatTok{0.50}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"R"}\NormalTok{)}
-
-\CommentTok{# Create confusion matrix}
-\KeywordTok{confusionMatrix}\NormalTok{(p_class, test}\OperatorTok{$}\NormalTok{Class)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Train-Test Split, Folds, \&
-CV}\label{train-test-split-folds-cv}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Shuffle row indices: rows}
-\NormalTok{rows =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(Sonar))}
-
-\CommentTok{# Randomly order data: Sonar}
-\NormalTok{Sonar =}\StringTok{ }\NormalTok{Sonar[rows,]}
-
-\CommentTok{# Identify row to split on: split}
-\NormalTok{split <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(Sonar) }\OperatorTok{*}\StringTok{ }\NormalTok{.}\DecValTok{6}\NormalTok{)}
-
-\CommentTok{# Create train: 60%}
-\NormalTok{train =}\StringTok{ }\NormalTok{Sonar[}\DecValTok{1}\OperatorTok{:}\NormalTok{split,]}
-
-\CommentTok{# Create test: 40%}
-\NormalTok{test =}\StringTok{ }\NormalTok{Sonar[(split}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Sonar),]}
-
-\CommentTok{# Create custom indices: myFolds}
-\NormalTok{myFolds <-}\StringTok{ }\KeywordTok{createFolds}\NormalTok{(churn_y, }\DataTypeTok{k =} \DecValTok{5}\NormalTok{)}
-
-\CommentTok{# Create reusable trainControl object: myControl}
-\NormalTok{myControl <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
-  \DataTypeTok{summaryFunction =}\NormalTok{ twoClassSummary, }\CommentTok{#default option is default summary}
-  \DataTypeTok{classProbs =} \OtherTok{TRUE}\NormalTok{, }\CommentTok{# IMPORTANT!}
-  \DataTypeTok{verboseIter =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{savePredictions =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{index =}\NormalTok{ myFolds}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Random Forest}\label{random-forest-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Fit random forest: model}
-\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-\NormalTok{  quality}\OperatorTok{~}\NormalTok{.,}
-  \DataTypeTok{tuneLength =} \DecValTok{3}\NormalTok{,}
-  \CommentTok{#tuneGrid = data.frame(mtry = c(2, 3, 7)),}
-  \DataTypeTok{data =}\NormalTok{ wine, }
-  \DataTypeTok{method =} \StringTok{'ranger'}\NormalTok{,}
-  \DataTypeTok{trControl =} \KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method =} \StringTok{"cv"}\NormalTok{, }\DataTypeTok{number =} \DecValTok{5}\NormalTok{, }\DataTypeTok{verboseIter =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{)}
-
-\CommentTok{# Print model to console}
-\NormalTok{model}
-
-\CommentTok{# Plot model}
-\KeywordTok{plot}\NormalTok{(model)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{SVM}\label{svm-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{clf_svm <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
-\NormalTok{  pass }\OperatorTok{~}\NormalTok{., }
-  \DataTypeTok{data =}\NormalTok{ df3, }
-  \DataTypeTok{method =} \StringTok{"svmLinear"}\NormalTok{,}
-  \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{)}
-\NormalTok{                 )}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Model Selection}\label{model-selection-1}
-
-Now that you have fit two models to the churn dataset, it's time to
-compare their out-of-sample predictions and choose which one is the best
-model for your dataset.
-
-You can compare models in caret using the resamples() function, provided
-they have the same training data and use the same trainControl object
-with preset cross-validation folds. resamples() takes as input a list of
-models and can be used to compare dozens of models at once (though in
-this case you are only comparing two models).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Create model_list}
-\NormalTok{model_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{item1 =}\NormalTok{ model_glmnet, }\DataTypeTok{item2 =}\NormalTok{ model_rf)}
-
-\CommentTok{# Pass model_list to resamples(): resamples}
-\NormalTok{resamples =}\StringTok{ }\KeywordTok{resamples}\NormalTok{(model_list)}
-
-\CommentTok{# Summarize the results}
-\KeywordTok{summary}\NormalTok{(resamples)}
-
-\CommentTok{# Create bwplot}
-\KeywordTok{bwplot}\NormalTok{(resamples, }\DataTypeTok{metric =} \StringTok{'ROC'}\NormalTok{)}
-
-\CommentTok{# Create xyplot}
-\KeywordTok{xyplot}\NormalTok{(resamples)}
-
-\CommentTok{# Predict on test: p}
-\NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, test, }\DataTypeTok{type =} \StringTok{'response'}\NormalTok{)}
-
-\CommentTok{# Make ROC curve}
-\KeywordTok{colAUC}\NormalTok{(p, test}\OperatorTok{$}\NormalTok{Class, }\DataTypeTok{plotROC =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{itemize}
-\tightlist
-\item
-  caret: finalModel of model object
-\end{itemize}
-
-\subsection{Stacking}\label{stacking}
-
-caretEnsemble provides the caretList() function for creating multiple
-caret models at once on the same dataset, using the same resampling
-folds. You can also create your own lists of caret models. Use the
-caretStack() function to make a stack of caret models, with the two
-sub-models (glmnet and ranger) feeding into another (hopefully more
-accurate!) caret model.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Create ensemble model: stack}
-\NormalTok{stack <-}\StringTok{ }\KeywordTok{caretStack}\NormalTok{(model_list, }\DataTypeTok{method =} \StringTok{'glm'}\NormalTok{)}
-
-\CommentTok{# Look at summary}
-\KeywordTok{summary}\NormalTok{(stack)}
-\end{Highlighting}
-\end{Shaded}
-
-\& caretEnnsemble
-
-\section{Data Table}\label{data-table}
-
-\begin{itemize}
-\item
-  Operations done by reference
-\item
-  dt{[}i, j, by{]} : subset by i calculate by j grouped using by
-\item
-  1: numeric \textbar{} 1L: integer
-\item
-  NA\_integer\_: integer
-\item
-  DT{[}.N{]} : prints last row
-\item
-  names(DT): colnames
-\item
-  dim(DT): dimensions
-\item
-  DT{[}, .(A, B){]}: returns two columns
-\item
-  DT{[}, c(A, B){]}: returns a concatenated vector
-\item
-  DT{[}, .(sum\_c = sum(C){]}
-\item
-  DT{[}, plot(A, C){]}
-\item
-  DT{[}, A:=NULL{]}: Remove column A
-\item
-  DT{[}, .(sumB = sum(B)), by = .(Grp = A\%\%2){]}
-\item
-  DT{[}, .N, by = Sepal.Width{]}: .N is the count of each group
-\item
-  DT{[}, lapply(.SD, median){]}: .SD is a placeholder for all the
-  columns
-\item
-  dogs{[}, lapply(.SD, mean), .SDcols = 2:3{]}: Find mean of columns 2
-  \& 3
-\item
-  for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
-\item
-  setnames(DT, `y', `z'): changes colname from y to z
-\item
-  setkey(DT, A, B)
-\item
-  DT{[}.(`b'){]}
-\item
-  DT{[}.(c(`b', `c')){]}
-\item
-  DT{[}.(c(`b', `c')), mult=``first''{]}
-\item
-  DT{[}c(``b'', ``c''), .SD{[}c(1, .N){]}, by = .EACHI{]}: First and
-  last row of the ``b'' and ``c'' groups
-\item
-  DT{[}c(``b'', ``c''), \{ print(.SD); .SD{[}c(1, .N){]} \}, by =
-  .EACHI{]}
-\item
-  roll=TRUE, `nearest', -Inf, Inf \textbar{} rollends=FALSE
-\end{itemize}
-
-\section{Keras}\label{keras}
-
-Here's a
-\href{https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb}{Hello
-World} and the general framework:
-
-\begin{itemize}
-\item
-  declare: sequential
-\item
-  add layers input-hidden-output
-\item
-  compile
-\item
-  fit
-\end{itemize}
-
-keras: declare model \textbar{} compile with loss, optimizer, and
-scoring metric \textbar{} fit
-
-keras::to\_categorical
-
-Keras only uses numpy arrays.
-
-\begin{itemize}
-\tightlist
-\item
-  keras.callbacks.EarlyStopping: Stop training when validation score
-  stop improving after a certain number of epochs (baches?)
-\end{itemize}
-
-\subsection{Regression}\label{regression}
-
-\begin{itemize}
-\item
-  loss = mean\_squared\_error
-\item
-  metric: rmse
-\item
-  activation\_function = relu
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ keras}
-\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
-\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
-\CommentTok{# Specify the model: Two hidden layers}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
-\CommentTok{## Input}
-\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
-\CommentTok{# Hidden}
-\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
-\CommentTok{# Output}
-\NormalTok{model.add(Dense(}\DecValTok{1}\NormalTok{))}
-\CommentTok{# Compile the model}
-\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'adam'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'mean_squared_error'}\NormalTok{) }
-\CommentTok{# Fit the model}
-\NormalTok{model.fit(predictors, target)}
-\CommentTok{#Look at summary}
-\NormalTok{model.summary()}
-\CommentTok{# Calculate predictions: predictions}
-\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Classification}\label{classification}
-
-\begin{itemize}
-\item
-  loss = categorical\_crossentropy
-\item
-  metric = accuracy
-\item
-  activation\_function = softmax
-\item
-  output layer with stuff equal to number of categorical groups
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ keras}
-\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
-\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
-\CommentTok{# Specify the model: Two hidden layers}
-\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
-\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
-\CommentTok{## Input}
-\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
-\CommentTok{# Hidden}
-\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
-\CommentTok{# Output}
-\NormalTok{model.add(Dense(}\DecValTok{2}\NormalTok{, activation }\OperatorTok{=} \StringTok{'softmax'}\NormalTok{))}
-\CommentTok{# Compile the model}
-\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'sgd'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{, metrics }\OperatorTok{=}\NormalTok{ [}\StringTok{'accuracy'}\NormalTok{])}
-\CommentTok{# Fit the model}
-\NormalTok{model.fit(predictors, target)}
-\CommentTok{#Look at summary}
-\NormalTok{model.summary()}
-\CommentTok{#Calculate predictions: predictions}
-\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
-\CommentTok{#Calculate predicted probability of survival}
-\NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Another Example}\label{another-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Import the SGD optimizer}
-\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ SGD}
-\CommentTok{# Create list of learning rates: lr_to_test}
-\NormalTok{lr_to_test }\OperatorTok{=}\NormalTok{ [.}\DecValTok{000001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\DecValTok{1}\NormalTok{]}
-\CommentTok{# Loop over learning rates}
-\ControlFlowTok{for}\NormalTok{ lr }\KeywordTok{in}\NormalTok{ lr_to_test:}
-    \BuiltInTok{print}\NormalTok{(}\StringTok{'Testing model with learning rate: '}\NormalTok{)}
-    
-    \CommentTok{# Build new model to test, unaffected by previous models}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ get_new_model()}
-    
-    \CommentTok{# Create SGD optimizer with specified learning rate: my_optimizer}
-\NormalTok{    my_optimizer }\OperatorTok{=}\NormalTok{ SGD(lr }\OperatorTok{=}\NormalTok{ lr)}
-    
-    \CommentTok{# Compile the model}
-\NormalTok{    model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=}\NormalTok{ my_optimizer, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{)}
-    
-    \CommentTok{# Fit the model}
-\NormalTok{    model.fit(predictors, }
-\NormalTok{              target, }
-\NormalTok{              validation_split }\OperatorTok{=} \FloatTok{0.3}\NormalTok{, }
-\NormalTok{              epochs }\OperatorTok{=} \DecValTok{20}\NormalTok{, }
-\NormalTok{              callbacks }\OperatorTok{=}\NormalTok{ [early_stopping_monitor], }
-\NormalTok{              verbose }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\section{LME4}\label{lme4}
-
-Run a glmer with poisson family error term, predicting count as a
-function of fixed effects age and year, and include year as a random
-effect of county as well.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{modelOut <-}\StringTok{ }\KeywordTok{glmer}\NormalTok{(count }\OperatorTok{~}\StringTok{ }\NormalTok{age }\OperatorTok{+}\StringTok{ }\NormalTok{year }\OperatorTok{+}\StringTok{ }\NormalTok{(year}\OperatorTok{|}\NormalTok{county), }\DataTypeTok{family =} \StringTok{'poisson'}\NormalTok{,}
-                  \DataTypeTok{data =}\NormalTok{ ILdata)}
-\end{Highlighting}
-\end{Shaded}
-
-glmer can be an alternative to chi-squared tests
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Include the AverageAgeofMother as a correlated random-effect slope parameter}
-\NormalTok{ageMotherModelRandomCorrelated <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{( BirthRate }\OperatorTok{~}\StringTok{ }\NormalTok{AverageAgeofMother }\OperatorTok{+}\StringTok{ }\NormalTok{(AverageAgeofMother }\OperatorTok{|}\StringTok{ }\NormalTok{State),}
-\NormalTok{                       countyBirthsData)}
-
-\NormalTok{ assumed that observations within each group were correlated.}
-
-\CommentTok{# Include the AverageAgeofMother as a correlated random-effect slope parameter}
-\NormalTok{ageMotherModelRandomUncorrelated <-}\StringTok{ }\KeywordTok{lmer}\NormalTok{( BirthRate }\OperatorTok{~}\StringTok{ }\NormalTok{AverageAgeofMother }\OperatorTok{+}\StringTok{ }\NormalTok{(AverageAgeofMother }\OperatorTok{||}\StringTok{ }\NormalTok{State),}
-\NormalTok{                       countyBirthsData)}
-
-
-\CommentTok{# Extract the fixed-effect coefficients}
-\KeywordTok{fixef}\NormalTok{(out)}
-
-\CommentTok{# Extract the random-effect coefficients}
-\KeywordTok{ranef}\NormalTok{(out)}
-
-\CommentTok{# Estimate the confidence intervals }
-\KeywordTok{confint}\NormalTok{(out)}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Infer Package}\label{infer-package}
-
-The
-\href{https://cran.r-project.org/web/packages/infer/infer.pdf}{infer}
-library has the main verbs: specify() variables, hypothesize(),
-generate() data, calculate() metrics, visualize() results
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{4747}\NormalTok{)}
-\NormalTok{perm_slope <-}\StringTok{ }\NormalTok{twins }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{specify}\NormalTok{(Foster }\OperatorTok{~}\StringTok{ }\NormalTok{Biological) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{hypothesize}\NormalTok{(}\DataTypeTok{null =} \StringTok{"independence"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{generate}\NormalTok{(}\DataTypeTok{reps =} \DecValTok{10}\NormalTok{, }\DataTypeTok{type =} \StringTok{"permute"}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{calculate}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"slope"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Networks}\label{networks}
-
-`Classical SNA' is mainly about descriptive network statistics:
-proximity, similarity, centrality, brokerage, positional measures,
-equivalence, etc.
-
-Import necessary modules and draw graph.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{import}\NormalTok{ networkx }\ImportTok{as}\NormalTok{ nx}
-\NormalTok{nx.draw(T_sub)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
-Get the nodes of interest.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{noi }\OperatorTok{=}\NormalTok{ [n }\ControlFlowTok{for}\NormalTok{ n, d }\KeywordTok{in}\NormalTok{ T.nodes(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'occupation'}\NormalTok{] }\OperatorTok{==} \StringTok{'scientist'}\NormalTok{]}
-\CommentTok{### Use a list comprehension to get the edges of interest: eoi}
-\NormalTok{eoi }\OperatorTok{=}\NormalTok{ [(u, v) }\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ d[}\StringTok{'date'}\NormalTok{] }\OperatorTok{<}\NormalTok{ date(}\DecValTok{2010}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)]}
-\CommentTok{### Set the weight of the edge}
-\NormalTok{weight }\OperatorTok{=} \DecValTok{2}
-\ControlFlowTok{for}\NormalTok{ u, v, d }\KeywordTok{in}\NormalTok{ T.edges(data}\OperatorTok{=}\VariableTok{True}\NormalTok{):}
-  \CommentTok{# Check if node 293 is involved}
-  \ControlFlowTok{if} \DecValTok{293} \KeywordTok{in}\NormalTok{ [u,v]:}
-    
-    \CommentTok{# Set the weight to 1.1}
-\NormalTok{    T[u][v][}\StringTok{'weight'}\NormalTok{] }\OperatorTok{=} \FloatTok{1.1}
-\end{Highlighting}
-\end{Shaded}
 
 \chapter{Time Series}\label{time-series}
 
@@ -4276,6 +3346,784 @@ compression \& noise reduction).
 pipeline: signal -\textgreater{} wavelet transform -\textgreater{} pca
 -\textgreater{} features to classifier
 
+\section{Forecasting: Principles \&
+Practice}\label{forecasting-principles-practice}
+
+\subsection{C1-3}\label{c1-3}
+
+library(forecast) \textbar{} ts \textbar{} autplot / autolayer
+\textbar{} ggseasonplot \textbar{} ggsubseriesplot \textbar{} gglagplot
+\textbar{} window \textbar{} meanf \textbar{} s/naive \textbar{}
+residuals \textbar{} gghistogram \textbar{} ggAcf \textbar{}
+
+counterfactual plot
+
+myts \textless{}- ts(mydata{[}-1{]}, start = c(1981, 1), frequency = 4)
+
+Time series that show no autocorrelation are called white noise.
+
+For white noise series, we expect each autocorrelation to be close to
+zero. Of course, they will not be exactly equal to zero as there is some
+random variation. For a white noise series, we expect 95\% of the spikes
+in the ACF to lie within\\
++/- 2 * sqrt(T) where T is the length of the time series.
+
+For naïve forecasts, we simply set all forecasts to be the value of the
+last observation. This method works remarkably well for many economic
+and financial time series. Because a naïve forecast is optimal when data
+follow a random walk (see Section 8.1), these are also called random
+walk forecasts.
+
+mean, naive, and seasonal naive are benchmarks.
+
+feature engineering: scaling by monthday(), by population, inflation for
+money, log, boxCox()/boxCox.lambda(), power transforms, bias
+adjustments: mean of forecast distribution instead of median for
+back-transformed forecast,
+
+Bias adjustment is not done by default in the forecast package. If you
+want your forecasts to be means rather than medians, use the argument
+biasadj=TRUE when you select your Box-Cox transformation parameter.
+
+Logarithms are useful because they are interpretable: changes in a log
+value are relative (or percentage) changes on the original scale. So if
+log base 10 is used, then an increase of 1 on the log scale corresponds
+to a multiplication of 10 on the original scale. Another useful feature
+of log transformations is that they constrain the forecasts to stay
+positive on the original scale.
+
+A good forecasting method will yield residuals with the following
+properties:
+
+The residuals are uncorrelated. If there are correlations between
+residuals, then there is information left in the residuals which should
+be used in computing forecasts.
+
+The residuals have zero mean. If the residuals have a mean other than
+zero, then the forecasts are biased.
+
+Adjusting for bias is easy: if the residuals have mean m then add m to
+all forecasts and the bias problem is solved.
+
+It is useful (but not necessary) for the residuals to also have the
+following two properties: the residuals have constant variance and are
+normally distributed.
+
+For stock market prices and indexes, the best forecasting method is
+often the naïve method.
+
+Recall that r\_k is the autocorrelation for lag k . When we look at the
+ACF plot to see whether each spike is within the required limits, we are
+implicitly carrying out multiple hypothesis tests, each one with a small
+probability of giving a false positive. When enough of these tests are
+done, it is likely that at least one will give a false positive, and so
+we may conclude that the residuals have some remaining autocorrelation,
+when in fact they do not. In order to overcome this problem, we test
+whether the first h autocorrelations are significantly different from
+what would be expected from a white noise process. A test for a group of
+autocorrelations is called a portmanteau test, from a French word
+describing a suitcase containing a number of items. Use
+Box-Pierce/Ljung-Box test.
+
+Large values of suggest that the autocorrelations do not come from a
+white noise series.
+
+All of these methods for checking residuals are conveniently packaged
+into one R function checkresiduals(), which will produce a time plot,
+ACF plot and histogram of the residuals (with an overlayed normal
+distribution for comparison), and do a Ljung-Box test with the correct
+degrees of freedom.
+
+train-test split: window()/subset()
+
+forecast errors are different from residuals in two ways. First,
+residuals are calculated on the training set while forecast errors are
+calculated on the test set. Second, residuals are based on one-step
+forecasts while forecast errors can involve multi-step forecasts.
+
+When comparing forecast methods applied to a single time series, or to
+several time series with the same units, the MAE is popular as it is
+easy to both understand and compute. A forecast method that minimizes
+the MAE will lead to forecasts of the median, while minimizing the RMSE
+will lead to forecasts of the mean. Consequently, the RMSE is also
+widely used, despite being more difficult to interpret. Percentage
+errors have the advantage of being unit-free, and so are frequently used
+to compare forecast performances between data sets. The most commonly
+used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE.
+
+accuracy()
+
+With time series forecasting, one-step forecasts may not be as relevant
+as multi-step forecasts. In this case, the cross-validation procedure
+based on a rolling forecasting origin can be modified to allow
+multi-step errors to be used.
+
+tsCV()
+
+a prediction interval gives an interval within which we expect y\_t to
+lie with a specified probability.
+
+When forecasting one step ahead, the standard deviation of the forecast
+distribution is almost the same as the standard deviation of the
+residuals.
+
+forecast(): You can use this directly if you have no idea which model to
+use, or use it to produce forecasts after fitting a model.
+
+checkresiduals()
+
+\subsection{C4}\label{c4}
+
+There are three general settings in which judgmental forecasting is
+used: (i) there are no available data, so that statistical methods are
+not applicable and judgmental forecasting is the only feasible approach;
+(ii) data are available, statistical forecasts are generated, and these
+are then adjusted using judgement; and (iii) data are available and
+statistical and judgmental forecasts are generated independently and
+then combined.
+
+\subsection{C5}\label{c5}
+
+tslm()
+
+Another useful test of autocorrelation in the residuals designed to take
+account for the regression model is the Breusch-Godfrey test, also
+referred to as the LM (Lagrange Multiplier) test for serial correlation.
+It is used to test the joint hypothesis that there is no autocorrelation
+in the residuals up to a certain specified order. A small p-value
+indicates there is significant autocorrelation remaining in the
+residuals. The Breusch-Godfrey test is similar to the Ljung-Box test,
+but it is specifically designed for use with regression models.
+
+More often than not, time series data are ``non-stationary''; that is,
+the values of the time series do not fluctuate around a constant mean or
+with a constant variance.
+
+There are several useful predictors that occur frequently when using
+regression for time series data:
+
+\begin{itemize}
+\item
+  A trend variable can be specified in the tslm() function using the
+  trend predictor.
+\item
+  dummy variables for time like day of week. The tslm() function will
+  automatically handle this situation if you specify the predictor
+  season.
+\end{itemize}
+
+trend and season are not objects in the R workspace; they are created
+automatically by tslm() when specified in this way: tslm(beer2
+\textasciitilde{} trend + season)
+
+\begin{itemize}
+\item
+  interventions, eg. competitor activity
+\item
+  trading days: bizdays()
+\item
+  distirbuted lags
+\item
+  easter()
+\item
+  An alternative to using seasonal dummy variables, especially for long
+  seasonal periods, is to use Fourier terms. ith Fourier terms, we often
+  need fewer predictors than with dummy variables, especially when m is
+  large. This makes them useful for weekly data, for example, where m ≈
+  52. For short seasonal periods (e.g., quarterly data), there is little
+  advantage in using Fourier terms over seasonal dummy variables.
+  fourier() - tslm(beer2 \textasciitilde{} trend + fourier(beer2, K=2))
+\end{itemize}
+
+A regression model containing Fourier terms is often called a harmonic
+regression because the successive Fourier terms represent harmonics of
+the first two Fourier terms.
+
+leave-one-out cross-validation statistic : CV(fit.consMR) for model
+selection
+
+we recommend that one of the AICc, AIC, or CV statistics be used, each
+of which has forecasting as their objective.
+
+Ex-ante forecasts are those that are made using only the information
+that is available in advance. Ex-post forecasts are those that are made
+using later information on the predictors. These are not genuine
+forecasts, but are useful for studying the behavior of forecasting
+models.
+
+Use lagged values of predictors
+
+A log-log functional form is specified as log(y) = beta\_0 +
+beta\_1*log(x) + epsilon
+
+In this model, the slope can be interpreted as an elasticity, and is the
+average percentage change in y resulting from a 1\% increase in x. Other
+useful forms can also be specified. The log-linear form is specified by
+only transforming the forecast variable and the linear-log form is
+obtained by transforming the predictor.
+
+It is not recommended that quadratic or higher order trends be used in
+forecasting. When they are extrapolated, the resulting forecasts are
+often unrealistic.
+
+fit.exp \textless{}- tslm(marathon \textasciitilde{} trend, lambda = 0)
+
+splinef(lambda=0)
+
+A log transformation can address heteroskedasticity.
+
+\subsection{C6}\label{c6}
+
+Thus we think of a time series as comprising three components: a
+trend-cycle component, a seasonal component, and a remainder component
+(containing anything else in the time series).
+
+y = s + t + r or y = str. s is seasonal, t is tend, r is the remainder
+
+The additive decomposition is the most appropriate if the magnitude of
+the seasonal fluctuations, or the variation around the trend-cycle, does
+not vary with the level of the time series. When the variation in the
+seasonal pattern, or the variation around the trend-cycle, appears to be
+proportional to the level of the time series, then a multiplicative
+decomposition is more appropriate. Multiplicative decompositions are
+common with economic time series.
+
+An alternative to using a multiplicative decomposition is to first
+transform the data until the variation in the series appears to be
+stable over time, then use an additive decomposition. When a log
+transformation has been used, this is equivalent to using a
+multiplicative decomposition
+
+Remove seasonality to make data seasonally adjusted. Remove when not
+needed.
+
+simple moving average of order m: ma(elecsales, 5). m is usually odd so
+the sma is symmetric. It is possible to apply a moving average to a
+moving average. One reason for doing this is to make an even-order
+moving average symmetric. The notation ``2x4-MA'' in the last column
+means a 4-MA followed by a 2-MA. Called a centered MA of order 4.
+
+The most common use of centered moving averages is for estimating the
+trend-cycle from seasonal data.
+
+In general, a 2xm-MA is equivalent to a weighted moving average of order
+m+1 where all observations take the weight 1/m except for the first and
+last terms which take weights 1/2m.
+
+wma
+
+additive/multiplicative decomposition
+(decompose(type=``multiplicative'')) not used now because there are
+better methods.
+
+Another popular method for decomposing quarterly and monthly data is the
+X11 method: seasonal::seas(x11 = ''). from this output seasonal() will
+extract the seasonal component, trendcycle() will extract the
+trend-cycle component, remainder() will extract the remainder component,
+and seasadj() will compute the seasonally adjusted time series.
+
+SEATS: seasonal::seas()
+
+STL: best so far but only uses additive decomposition. stl(t.window=13,
+s.window=``periodic'', robust=TRUE). automate picking of first 2 params
+with mstl()
+
+A time series decomposition can be used to measure the strength of trend
+and seasonality in a time series. A series with seasonal strength close
+to 0 exhibits almost no seasonality, while a series with strong
+seasonality will have close to 1
+
+While decomposition is primarily useful for studying time series data,
+and exploring historical changes over time, it can also be used in
+forecasting.
+
+To forecast a decomposed time series, we forecast the seasonal component
+and the seasonally adjusted component separately. It is usually assumed
+that the seasonal component is unchanging, or changing extremely slowly,
+so it is forecast by simply taking the last year of the estimated
+component. In other words, a seasonal naïve method is used for the
+seasonal component.
+
+To forecast the seasonally adjusted component, any non-seasonal
+forecasting method may be used. For example, a random walk with drift
+model, or Holt's method (discussed in the next chapter), or a
+non-seasonal ARIMA model.
+
+A short-cut approach is to use the stlf() function. The following code
+will decompose the time series using STL, forecast the seasonally
+adjusted series, and return reseasonalize the forecasts: stlf(elecequip,
+method=`naive')
+
+\subsection{C7}\label{c7}
+
+simple exponential smoothing: For example, it may be sensible to attach
+larger weights to more recent observations than to observations from the
+distant past. This is exactly the concept behind simple exponential
+smoothing. It has the weighted average form, component form,
+
+exponential smoothing has a ``flat'' forecast function. That is, all
+forecasts take the same value, equal to the last level component.
+Remember that these forecasts will only be suitable if the time series
+has no trend or seasonal component.
+
+The application of every exponential smoothing method requires the
+smoothing parameters and the initial values to be chosen. THis is a
+nonlinear optimization.
+
+holt linear trend: holt(). Damped Holt's method is best whether you
+compare MAE or MSE values. So we will proceed with using the damped
+Holt's method and apply it to the whole data set to get forecasts for
+future years.
+
+holt-winters seasonal method: hw(aust,seasonal=``additive'')
+
+A method that often provides accurate and robust forecasts for seasonal
+data is the Holt-Winters method with a damped trend and multiplicative
+seasonality: hw(y, damped=TRUE, seasonal=``multiplicative'')
+
+Each method is labelled by a pair of letters (T,S) defining the type of
+`Trend' and `Seasonal' components. For example, (A,M) is the method with
+an additive trend and multiplicative seasonality; (A\_d, N) is the
+method with damped trend and no seasonality, and so on.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+short\_hand & method\tabularnewline
+\midrule
+\endhead
+(n,n) & Simple exponential smoothing\tabularnewline
+(a,n) & Holt's linear method\tabularnewline
+(a\_d,n) & Additive damped trend method\tabularnewline
+(a,a) & Additive Holt-Winters' method\tabularnewline
+(a,m) & Multiplicative Holt-Winters' method\tabularnewline
+(a\_d,m) & Holt-Winters' damped method\tabularnewline
+\bottomrule
+\end{longtable}
+
+Each model consists of a measurement equation that describes the
+observed data, and some state equations that describe how the unobserved
+components or states (level, trend, seasonal) change over time. Hence,
+these are referred to as state space models. For each method there exist
+two models: one with additive errors and one with multiplicative errors.
+The point forecasts produced by the models are identical if they use the
+same smoothing parameter values. They will, however, generate different
+prediction intervals.
+
+To distinguish between a model with additive errors and one with
+multiplicative errors (and also to distinguish the models from the
+methods), we add a third letter to the classification of the table
+above. We label each state space model as ETS (Error, Trend, Seasonal).
+This label can also be thought of as ExponenTial Smoothing. The
+possibilities for each component are: Error = \{a.m\}, Trend =
+\{n,a,a\_d\}, and Seasonal = \{n,a,m\}.
+
+ETS(A,N,N): simple exponential smoothing with additive errors
+
+ETS(M,N,N): simple exponential smoothing with multiplicative errors
+
+ETS(A,A,N): Holt's linear method with additive errors
+
+ETS(M,A,N): Holt's linear method with multiplicative errors
+
+An alternative to estimating the parameters by minimizing the sum of
+squared errors is to maximize the ``likelihood''. The likelihood is the
+probability of the data arising from the specified model. Thus, a large
+likelihood is associated with a good model. For an additive error model,
+maximizing the likelihood gives the same results as minimizing the sum
+of squared errors. However, different results will be obtained for
+multiplicative error models.
+
+Model Selection: A great advantage of the ETS statistical framework is
+that information criteria can be used for model selection - AIC, AIC\_c,
+and BIC
+
+Three of the combinations of (Error, Trend, Seasonal) can lead to
+numerical difficulties. Specifically, the models that can cause such
+instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to
+division by values potentially close to zero in the state equations. We
+normally do not consider these particular combinations when selecting a
+model.
+
+Models with multiplicative errors are useful when the data are strictly
+positive, but are not numerically stable when the data contain zeros or
+negative values. Therefore, multiplicative error models will not be
+considered if the time series is not strictly positive. In that case,
+only the six fully additive models will be applied.
+
+The ets() function does not produce forecasts. Rather, it estimates the
+model parameters and returns information about the fitted model. By
+default it uses the AICc to select an appropriate model
+
+ets(y, model=``ZZZ'', damped=NULL, alpha=NULL, beta=NULL, gamma=NULL,
+phi=NULL, lambda=NULL, biasadj=FALSE, additive.only=FALSE,
+restrict=TRUE, allow.multiplicative.trend=FALSE)
+
+Point forecasts are obtained from the models by iterating the equations
+for t = T+1 -\textgreater{} T + h and setting all e\_t = 0 for t
+\textgreater{} T. These forecasts are identical to the forecasts from
+Holt's linear method, and also to those from model ETS(A,A,N). Thus, the
+point forecasts obtained from the method and from the two models that
+underlie the method are identical (assuming that the same parameter
+values are used).
+
+ETS point forecasts are equal to the medians of the forecast
+distributions. For models with only additive components, the forecast
+distributions are normal, so the medians and means are equal. For ETS
+models with multiplicative errors, or with multiplicative seasonality,
+the point forecasts will not be equal to the means of the forecast
+distributions.
+
+forecast: ets\_fit \%\textgreater{}\% forecast(h=8)
+
+\subsection{C8: arima}\label{c8-arima}
+
+Exponential smoothing and ARIMA models are the two most widely used
+approaches to time series forecasting, and provide complementary
+approaches to the problem. While exponential smoothing models are based
+on a description of the trend and seasonality in the data, ARIMA models
+aim to describe the autocorrelations in the data.
+
+A stationary time series is one whose properties do not depend on the
+time at which the series is observed.14 Thus, time series with trends,
+or with seasonality, are not stationary --- the trend and seasonality
+will affect the value of the time series at different times. On the
+other hand, a white noise series is stationary --- it does not matter
+when you observe it, it should look much the same at any point in time.
+
+Some cases can be confusing --- a time series with cyclic behaviour (but
+with no trend or seasonality) is stationary. This is because the cycles
+are not of a fixed length, so before we observe the series we cannot be
+sure where the peaks and troughs of the cycles will be.
+
+In general, a stationary time series will have no predictable patterns
+in the long-term. Time plots will show the series to be roughly
+horizontal (although some cyclic behavior is possible), with constant
+variance.
+
+note that the Google stock price was non-stationary in panel (a), but
+the daily changes were stationary in panel (b). This shows one way to
+make a non-stationary time series stationary --- compute the differences
+between consecutive observations. This is known as differencing.
+
+The ACF of the differenced Google stock price looks just like that of a
+white noise series. There are no autocorrelations lying outside the 95\%
+limits, and the Ljung-Box statistic has a p-value of 0.355 (for h=10 ).
+This suggests that the daily change in the Google stock price is
+essentially a random amount which is uncorrelated with that of previous
+days.
+
+The differenced series is the change between consecutive observations in
+the original series, and can be written as: y\_t* = y\_t - y\_\{t-1\}
+
+When the differenced series is white noise, the model for the original
+series can be written as y\_t - y\_\{t-1\} = e\_t (white noise)
+
+Random walk models are widely used for non-stationary data, particularly
+financial and economic data. Random walks typically have: long periods
+of apparent trends up or down, sudden and unpredictable changes in
+direction.
+
+In practice, it is almost never necessary to go beyond second-order
+differences.
+
+A seasonal difference is the difference between an observation and the
+previous observation from the same season.
+
+If seasonally differenced data appear to be white noise, then an
+appropriate model for the original data is y\_t = y\_\{t-m\} + e\_t.
+Forecasts from this model are equal to the last observation from the
+relevant season. That is, this model gives seasonal naïve forecasts.
+
+Sometimes it is necessary to take both a seasonal difference and a first
+difference to obtain stationary data
+
+When both seasonal and first differences are applied, it makes no
+difference which is done first---the result will be the same. However,
+if the data have a strong seasonal pattern, we recommend that seasonal
+differencing be done first, because the resulting series will sometimes
+be stationary and there will be no need for a further first difference.
+If first differencing is done first, there will still be seasonality
+present.
+
+One way to determine more objectively whether differencing is required
+is to use a unit root test. These are statistical hypothesis tests of
+stationarity that are designed for determining whether differencing is
+required.
+
+A number of unit root tests are available, which are based on different
+assumptions and may lead to conflicting answers. In our analysis, we use
+the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the
+null hypothesis is that the data are stationary, and we look for
+evidence that the null hypothesis is false. Consequently, small p-values
+(e.g., less than 0.05) suggest that differencing is required. The test
+can be computed using the ur.kpss() function from the urca package.
+
+This process of using a sequence of KPSS tests to determine the
+appropriate number of first differences is carried out by the function
+ndiffs()
+
+A similar function for determining whether seasonal differencing is
+required is nsdiffs(), which uses the measure of seasonal strength
+
+The backward shift operator B is a useful notational device when working
+with time series lags. The backward shift operator is convenient for
+describing the process of differencing. A first difference can be
+written as:
+
+y\_t' = y\_t - y\_\{t-\} = y\_t -by\_t = (1-b) y\_t
+
+In general, a d th-order difference can be written as: (y\_t)\^{}d =
+(1-b)\^{}d y\_t
+
+In a multiple regression model, we forecast the variable of interest
+using a linear combination of predictors. In an auto-regression model,
+we forecast the variable of interest using a linear combination of past
+values of the variable. We refer to this as an AR(p) model, an
+autoregressive model of order p.
+
+for ar(1) model, y\_t is white noise when beta\_1 is 0, a random walk
+when beta\_1 is 1 and beta\_0 is 0, a random walk with drift when
+beta\_1 is 1 and beta\_0 is not zero, and y\_t oscillates if beta\_1 is
+negative.
+
+We normally restrict autoregressive models to stationary data, in which
+case some constraints on the values of the parameters are required.
+
+Rather than using past values of the forecast variable in a regression,
+a moving average model uses past forecast errors in a regression-like
+model. We refer to this as an MA(q) model, a moving average model of
+order q.
+
+If we combine differencing with autoregression and a moving average
+model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for
+AutoRegressive Integrated Moving Average
+
+The ``predictors'' include both lagged values of y\_t and lagged errors.
+We call this an ARIMA(p,d,q) model, where p is the order of the
+autoregressive part; d is the degree of first differencing involved, and
+q is the orer of the moving average part.
+
+The same stationarity and invertibility conditions that are used for
+autoregressive and moving average models also apply to an ARIMA model.
+
+White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant
+Random walk with drift: ARIMA(0,1,0) with a constant Autoregression:
+ARIMA(p,0,0) Moving average: ARIMA(0,0,q)
+
+auto.arima() does an auto fit.
+
+The constant c has an important effect on the long-term forecasts
+obtained from these models.
+
+If c=0 and d=0, the long-term forecasts will go to zero. If c=0 and d=1,
+the long-term forecasts will go to a non-zero constant. If c=0 and d=2,
+the long-term forecasts will follow a straight line. If c≠0 and d=0, the
+long-term forecasts will go to the mean of the data. If c≠0 and d=1, the
+long-term forecasts will follow a straight line. If c≠0 and d=2, the
+long-term forecasts will follow a quadratic trend.
+
+The value of d also has an effect on the prediction intervals --- the
+higher the value of d, the more rapidly the prediction intervals
+increase in size. For\\
+d=0, the long-term forecast standard deviation will go to the standard
+deviation of the historical data, so the prediction intervals will all
+be essentially the same.
+
+partial autocorrelations. These measure the relationship between y\_t
+and y\_\{t-k\} after removing the effects of lags 1,2,3,\ldots{}
+
+It is sometimes possible to use the ACF plot, and the closely related
+PACF plot, to determine appropriate values for p \& q.
+
+ggAcf() \textbar{} ggPacf()
+
+If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF
+and PACF plots can be helpful in determining the value of p/q. If p and
+q are both positive, then the plots do not help in finding suitable
+values of p and q.
+
+The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+the ACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag\\
+p in the PACF, but none beyond lag p.
+
+The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+the PACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag\\
+q in the ACF, but none beyond lag q.
+
+Arima()
+
+When fitting an ARIMA model to a set of (non-seasonal) time series data,
+the following procedure provides a useful general approach.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Plot the data and identify any unusual observations.
+\item
+  If necessary, transform the data (using a Box-Cox transformation) to
+  stabilize the variance.
+\item
+  If the data are non-stationary, take first differences of the data
+  until the data are stationary.
+\item
+  Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model
+  appropriate?
+\item
+  Try your chosen model(s), and use the AICc to search for a better
+  model.
+\item
+  Check the residuals from your chosen model by plotting the ACF of the
+  residuals, and doing a portmanteau test of the residuals. If they do
+  not look like white noise, try a modified model.
+\item
+  Once the residuals look like white noise, calculate forecasts.
+\end{enumerate}
+
+auto.arima only does steps 3-5.
+
+eeadj \%\textgreater{}\% diff() \%\textgreater{}\%
+ggtsdisplay(main=``'')
+
+The inclusion of a constant in a non-stationary ARIMA model is
+equivalent to inducing a polynomial trend of order d in the forecast
+function.
+
+seaosnal arima: arima(p,d,q) (P,Q,D)\_m, m = num of observations per
+year
+
+The seasonal part of an AR or MA model will be seen in the seasonal lags
+of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)\_12 model will
+show:
+
+a spike at lag 12 in the ACF but no other significant spikes;
+exponential decay in the seasonal lags of the PACF (i.e., at lags 12,
+24, 36, \ldots{}).
+
+Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))
+
+auto.arima(euretail, stepwise=FALSE, approximation=FALSE)
+
+comparing information criteria is only valid for ARIMA models of the
+same orders of differencing.
+
+\subsection{C9}\label{c9}
+
+The time series models in the previous two chapters allow for the
+inclusion of information from past observations of a series, but not for
+the inclusion of other information that may also be relevant. For
+example, the effects of holidays, competitor activity, changes in the
+law, the wider economy, or other external variables, may explain some of
+the historical variation and may lead to more accurate forecasts. On the
+other hand, the regression models in Chapter 5 allow for the inclusion
+of a lot of relevant information from predictor variables, but do not
+allow for the subtle time series dynamics that can be handled with ARIMA
+models. In this chapter, we consider how to extend ARIMA models in order
+to allow other information to be included in the models.
+
+The R function Arima() will fit a regression model with ARIMA errors if
+the argument xreg is used. The order argument specifies the order of the
+ARIMA error model. If differencing is specified, then the differencing
+is applied to all variables in the regression model before the model is
+estimated.
+
+Arima(y, xreg=x, order=c(1,1,0))
+auto.arima(uschange{[},``Consumption''{]},
+xreg=uschange{[},``Income''{]})
+
+cbind(``Regression Errors'' = residuals(fit, type=``regression''),
+``ARIMA errors'' = residuals(fit, type=``innovation''))
+\%\textgreater{}\% autoplot(facets=TRUE)
+
+\textbf{9.4}
+
+There are two different ways of modelling a linear trend: deterministic
+and stochastic.
+
+deterministic: fit1 \textless{}- auto.arima(austa, d=0, xreg=trend)
+
+stochastic: fit2 \textless{}- auto.arima(austa, d=1)
+
+There is an implicit assumption with deterministic trends that the slope
+of the trend is not going to change over time. On the other hand,
+stochastic trends can change, and the estimated growth is only assumed
+to be the average growth over the historical period, not necessarily the
+rate of growth that will be observed into the future. Consequently, it
+is safer to forecast with stochastic trends, especially for longer
+forecast horizons, as the prediction intervals allow for greater
+uncertainty in future growth.
+
+\textbf{9.5}
+
+When there are long seasonal periods, a dynamic regression with Fourier
+terms is often better than other models we have considered in this book.
+
+Seasonal differencing of high order does not make a lot of sense --- for
+daily data it involves comparing what happened today with what happened
+exactly a year ago and there is no constraint that the seasonal pattern
+is smooth.
+
+So for such time series, we prefer a harmonic regression approach where
+the seasonal pattern is modelled using Fourier terms with short-term
+time series dynamics handled by an ARMA error.
+
+fit \textless{}- auto.arima(cafe04, xreg = fourier(cafe04, K = i),
+seasonal = FALSE, lambda = 0)
+
+\subsection{C10}\label{c10}
+
+\textbf{10.2}
+
+gts() \textbar{} hts() \textbar{} aggts()
+
+\textbf{10.3}
+
+hts::
+
+\subsection{C11}\label{c11}
+
+So far, we have considered relatively simple seasonal patterns such as
+quarterly and monthly data. However, higher frequency time series often
+exhibit more complicated seasonal patterns. For example, daily data may
+have a weekly pattern as well as an annual pattern. Hourly data usually
+has three types of seasonality: a daily pattern, a weekly pattern, and
+an annual pattern
+
+msts \textbar{} mstsl \textbar{} tbats \textbar{}
+
+bld.mbb.bootstrap
+
+\subsection{C12}\label{c12}
+
+stlf
+
+The best way to deal with moving holiday effects is to use dummy
+variables. However, neither STL, ETS nor TBATS models allow for
+covariates. Amongst the models discussed in this book (and implemented
+in the forecast package for R), the only choice is a dynamic regression
+model, where the predictors include any dummy holiday effects (and
+possibly also the seasonality using Fourier terms).
+
+To impose a positivity constraint, simply work on the log scale, by
+specifying the Box-Cox parameter lambda = 0.
+
+we can transform the data using a scaled logit transform which maps
+9a,b) to the whole real line: y = log((x-a)/(b-x))
+
+Most time series models do not work well for very long time series. The
+problem is that real data do not come from the models we use. When the
+number of observations is not large (say up to about 200) the models
+often work well as an approximation to whatever process generated the
+data. But eventually we will have enough data that the difference
+between the true process and the model starts to become more obvious. An
+additional problem is that the optimization of the parameters becomes
+more time consuming because of the number of observations involved.
+
 \section{Forecasting Datacamp}\label{forecasting-datacamp}
 
 annual data can't be seasonal. seasonal has fixed lengths, cyclical
@@ -4516,7 +4364,10 @@ video (Component: Meaning):
 
 \chapter{Stats}\label{stats}
 
-\subsection{General}\label{general-3}
+\section{General}\label{general-4}
+
+ecdf: \href{http://www.ericmjl.com/blog/2018/7/14/ecdfs/}{1} \textbar{}
+\href{https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf}{2}
 
 \url{http://www.stat.umn.edu/geyer/old/5101/rlook.html}
 
@@ -5237,7 +5088,7 @@ fairly small, but variability between blocks will be larger.
 
 \chapter{Deep Learning}\label{deep-learning}
 
-\section{General}\label{general-4}
+\section{General}\label{general-5}
 
 \begin{itemize}
 \item
@@ -5941,93 +5792,56 @@ would help immensely with interpretation. And that's the course I want
 to encourage and provide code for. In general, it's not safe to
 interpret interactions without plotting them.
 
-\chapter{NLP}\label{nlp}
+bayesian model: generative model (binomial number of success) + prior
+(eg. sample of probabilities of success from uniform)
 
-\begin{itemize}
-\tightlist
-\item
-  TF-IDF: A feature vectorization method widely used in text mining to
-  reflect the importance of a term to a document in the corpus. Denote a
-  term by t, a document by d, and the corpus by D. TF(i,d) is the number
-  of times the term t appears in document d while document frequency
-  DF(t,D) is the number of documents which contain the term t. If a term
-  appears very often across the corpus it doesn't carry any special info
-  about the document. Inverse document frequency is a numerical measure
-  of how much info a term provides. If a term appears in all documents
-  its IDF value is 0. TF-IDF is the product of TF and IDF. HashingTF
-  uses a hash function to transform input into text.
-\end{itemize}
+bayesian inference: bayesian model + data
 
-\textbf{Basic Py NLP Pipeline}
+bayesian inference is conditioning on the data to learn the parameter
+values.
 
-\begin{itemize}
-\item
-  Converting text to numerical data is vectorization.
-\item
-  Tokenize: A token is an individual word (or group of words) extracted
-  from a document, using whitespace or punctuation as separators.
-\item
-  Create bag of words: Count tokens within a document and normalised to
-  de-emphasise tokens that appear frequently within a document.
-\item
-  Vectorization: Corpus represented as a large matrix, each row of which
-  represents one of the documents and each column represents token
-  occurance within that document. CountVectorizer or TF-IDF.
-\item
-  tf-idf \& cosine similarity
-\end{itemize}
+The reason that we call it posterior is because it represents the
+uncertainty after (that is, posterior to) having included the
+information in the data.
 
-\subsection{Topic Modeling}\label{topic-modeling}
-
-\begin{itemize}
-\item
-  Pointwise mutual information is any way to evaluate topic models. Uses
-  joint probabilities to evaluate how much a word tells you a label.
-\item
-  Mutual information generalized pointwise mutual information averaged
-  over all events.
-\item
-  If you're just using the probability vectors that come out of a topic
-  model you are selecting a probability metric. If you want to do
-  post-processing you something like mutual information or point was
-  mutual information you're selecting another metric. Metrics always
-  have a point of view.
-\item
-  They're just like human writers. Probability says I like really common
-  words, pointwise mutual information as I like really really really
-  discerning words and I don't care how common they are. Mutual
-  information is sort of a balance between the two.
-\item
-  In topic modeling using latent Dirichlet distribution, how are
-  ``topics'' represented? As distributions over words.
-\end{itemize}
-
-\chapter{Hierarchical Models}\label{hierarchical-models}
-
-``Across counties, as the average mother's age increases the birth rate
-decreases while correcting for state-level impacts'' BirthRate
-\textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
-
-lmerTest
-
-Analysis of Variance, or ANOVA, can be used to compare two different
-lmer models and test if one model explains more variability than the
-other model. We can use this to compare two lmer models. For example, if
-we wanted to see if Year is important for predicting Crime in Maryland,
-we can build a null model with only County as a random-effect and a year
-model that includes Year.
-
-\begin{itemize}
-\item
-  One far out suggestion in one of the links is to do PCA and then
-  regress the original variables against the new axis.
-\item
-  Account for longitudinal data: random selection of one event from each
-  student, partition cross validation by dates, pca finds major trends
-  hidden within the data
-\end{itemize}
+Bayesian Inference Methods: Sampling, Grid Approximation
 
 \chapter{Notes}\label{notes-1}
+
+measurement theory / decision science, semi-supervised, unsupervised,
+online, \& weak learning
+
+\section{Other}\label{other-3}
+
+\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
+
+\begin{itemize}
+\item
+  create helper functions and units tests as R/py for Rmd/ipynb
+\item
+  pytest/hypothesis for testing
+\item
+  use makefile to run cmd commands
+\item
+  Write file with date:
+  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
+\item
+  Make package for workflow with data (\textbf{init}.py) and use this
+  formation for function docs:
+\item
+  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
+\end{itemize}
+
+\subsection{Sample R Pipeline}\label{sample-r-pipeline}
+
+\href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
+
+IO: odbc readxl httr EDA: DataExplorer Prep: tidyverse Sampling: rsample
+modelr Feature Engineering: recipes Modeling: glmnet h2o FFTrees
+Evaluation: broom yardstick Deployment: sqlrutils AzureML opencpu
+Monitoring: flexdashboard Docs: rmarkdown
+
+natural log goes from unit change to percentage change
 
 generalized low rank models
 
@@ -6212,6 +6026,11 @@ Zero correlation doesn't imply independence
 
 \section{Hold}\label{hold}
 
+SELECT `Dummy Column Text' as DUMMYCOL FROM tbl
+
+\href{https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb}{Temporary
+pandas Columns}
+
 \begin{itemize}
 \item
   ggplot(df, aes(fitted\_probability, binary\_class\_indicator)) +
@@ -6226,6 +6045,823 @@ Zero correlation doesn't imply independence
 \end{itemize}
 
 \url{http://blog.rtwilson.com/how-to-rescue-lost-code-from-a-jupyteripython-notebook/}
+
+\chapter{Frameworks}\label{frameworks}
+
+\section{PySpark}\label{pyspark}
+
+A
+{[}cheatsheet{[}(\url{https://www.qubole.com/resources/pyspark-cheatsheet/}).
+
+Setup
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ findspark}
+\NormalTok{findspark.init()}
+\ImportTok{import}\NormalTok{ pyspark}
+\ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
+\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
+\NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.appName(}\StringTok{'example'}\NormalTok{).getOrCreate()}
+\ImportTok{import}\NormalTok{ findspark}
+\NormalTok{findspark.init()}
+\ImportTok{import}\NormalTok{ pyspark}
+\ImportTok{import}\NormalTok{ random}
+\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
+\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
+\KeywordTok{def}\NormalTok{ inside(p):     }
+\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
+    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
+\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
+\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
+\BuiltInTok{print}\NormalTok{(pi)}
+\NormalTok{sc.stop()}
+\end{Highlighting}
+\end{Shaded}
+
+Libs
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ pyspark.ml.feature }\ImportTok{import}\NormalTok{ StringIndexer, OneHotEncoder, VectorAssembler}
+\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
+\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
+\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
+\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'data.csv'}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+\NormalTok{df.show(}\DecValTok{5}\NormalTok{)}
+\NormalTok{df.columns}
+\end{Highlighting}
+\end{Shaded}
+
+Preprocessing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"label"}\NormalTok{, df[}\StringTok{"target"}\NormalTok{].cast(}\StringTok{'integer'}\NormalTok{))}
+\NormalTok{scf_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{)}
+\NormalTok{scf_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_fact"}\NormalTok{)}
+\NormalTok{feature_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{"some list of column names"}\NormalTok{]}
+\NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols }\OperatorTok{=}\NormalTok{ feature_cols, }
+\NormalTok{                                outputCol }\OperatorTok{=} \StringTok{"features"}\NormalTok{)}
+\NormalTok{pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages }\OperatorTok{=}\NormalTok{ [scf_indexer, scf_encoder, vec_assembler])}
+\NormalTok{piped_data }\OperatorTok{=}\NormalTok{ pipe.fit(df).transform(df)}
+\NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{8}\NormalTok{, .}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+Model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
+\NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName }\OperatorTok{=} \StringTok{"areaUnderROC"}\NormalTok{)}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{01}\NormalTok{))}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
+\NormalTok{clf_lr_cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
+\NormalTok{    estimator }\OperatorTok{=}\NormalTok{ clf_lr,}
+\NormalTok{    estimatorParamMaps }\OperatorTok{=}\NormalTok{ grid,}
+\NormalTok{    evaluator }\OperatorTok{=}\NormalTok{ evaluator,}
+\NormalTok{    numFolds }\OperatorTok{=} \DecValTok{5}
+\NormalTok{               )}
+\NormalTok{best_clf_lr }\OperatorTok{=}\NormalTok{ clf_lr_cv.fit(training).bestModel}
+\NormalTok{results }\OperatorTok{=}\NormalTok{ best_clf_lr.transform(training)}
+\BuiltInTok{print}\NormalTok{(evaluator.evaluate(results))}
+\CommentTok{#stop}
+\NormalTok{sc.stop()}
+\end{Highlighting}
+\end{Shaded}
+
+Quick Test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ findspark}
+\NormalTok{findspark.init()}
+\ImportTok{import}\NormalTok{ pyspark}
+\ImportTok{import}\NormalTok{ random}
+\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
+\NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
+\KeywordTok{def}\NormalTok{ inside(p):     }
+\NormalTok{    x, y }\OperatorTok{=}\NormalTok{ random.random(), random.random()}
+    \ControlFlowTok{return}\NormalTok{ x}\OperatorTok{*}\NormalTok{x }\OperatorTok{+}\NormalTok{ y}\OperatorTok{*}\NormalTok{y }\OperatorTok{<} \DecValTok{1}
+\NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
+\NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
+\BuiltInTok{print}\NormalTok{(pi)}
+\NormalTok{sc.stop()}
+\end{Highlighting}
+\end{Shaded}
+
+First have to create a SparkSession object from your SparkContext. The
+SparkContext is ther connection to the cluster and the SparkSession as
+your interface with that connection.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pyspark}
+\ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
+\NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
+\NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.getOrCreate() }\CommentTok{# SparkSession.builder.appName('chosenName').getOrCreate()}
+\end{Highlighting}
+\end{Shaded}
+
+The rest of my notes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## List tables}
+\NormalTok{spark.catalog.listTables()}
+\CommentTok{## Access and display data}
+\NormalTok{query }\OperatorTok{=} \StringTok{"FROM flights SELECT * LIMIT 10"}
+\NormalTok{flights10 }\OperatorTok{=}\NormalTok{ spark.sql(query)}
+\NormalTok{flights10.show()}
+\CommentTok{## Cast}
+\NormalTok{df[}\StringTok{'g'}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{'g'}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{)}
+\CommentTok{## Read from csv}
+\NormalTok{df}\OperatorTok{=}\NormalTok{ spark.read.csv(file_path, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'fileNameWithPath'}\NormalTok{, mode}\OperatorTok{=}\StringTok{"DROPMALFORMED"}\NormalTok{,inferSchema}\OperatorTok{=}\VariableTok{True}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.}\BuiltInTok{format}\NormalTok{(}\StringTok{"csv"}\NormalTok{).option(}\StringTok{"header"}\NormalTok{,}\StringTok{"true"}\NormalTok{).option(}\StringTok{"inferSchema"}\NormalTok{,}\StringTok{"true"}\NormalTok{).load(}\StringTok{"john_doe.csv"}\NormalTok{)}
+\CommentTok{## Spark df to pandas and vice versa}
+\NormalTok{toPandas()}
+\NormalTok{spark_temp }\OperatorTok{=}\NormalTok{ spark.createDataFrame(pd_temp)}
+\CommentTok{## Add to the catalog}
+\NormalTok{spark_temp.createOrReplaceTempView(}\StringTok{"temp"}\NormalTok{)}
+\CommentTok{## Mutate}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"newCol"}\NormalTok{, df.oldCol }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
+\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"arr_delay"}\NormalTok{, model_data.arr_delay.cast(}\StringTok{'integer'}\NormalTok{))}
+\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"plane_age"}\NormalTok{, model_data.year }\OperatorTok{-}\NormalTok{ model_data.plane_year)}
+\CommentTok{## Create the DataFrame flights}
+\NormalTok{flights }\OperatorTok{=}\NormalTok{ spark.table(}\StringTok{'flights'}\NormalTok{)}
+\CommentTok{## Get column names}
+\NormalTok{spark_df.schema.names}
+\NormalTok{spark_df.printSchema()}
+\CommentTok{## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string}
+\NormalTok{long_flights1 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(}\StringTok{'distance > 1000'}\NormalTok{)}
+\NormalTok{long_flights2 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(flights.distance }\OperatorTok{>} \DecValTok{1000}\NormalTok{)}
+\NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.}\BuiltInTok{filter}\NormalTok{(}\StringTok{"arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL"}\NormalTok{)}
+\CommentTok{## Groupby examples}
+\NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.origin }\OperatorTok{==} \StringTok{"PDX"}\NormalTok{).groupBy().}\BuiltInTok{min}\NormalTok{(}\StringTok{"distance"}\NormalTok{).show()}
+\NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.carrier}\OperatorTok{==}\StringTok{'DL'}\NormalTok{).}\BuiltInTok{filter}\NormalTok{(flights.origin}\OperatorTok{==}\StringTok{'SEA'}\NormalTok{).groupBy().avg(}\StringTok{'air_time'}\NormalTok{).show()}
+\NormalTok{flights.withColumn(}\StringTok{"duration_hrs"}\NormalTok{, flights.air_time}\OperatorTok{/}\DecValTok{60}\NormalTok{).groupBy().}\BuiltInTok{sum}\NormalTok{(}\StringTok{'duration_hrs'}\NormalTok{).show()}
+\CommentTok{## Spark functions}
+\ImportTok{import}\NormalTok{ pyspark.sql.functions }\ImportTok{as}\NormalTok{ F}
+\NormalTok{by_month_dest.agg(F.stddev(}\StringTok{'dep_delay'}\NormalTok{)).show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## Drop column}
+\NormalTok{final_test_data.drop(}\StringTok{'State'}\NormalTok{)}
+\CommentTok{## Dummying}
+\CommentTok{#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.}
+\CommentTok{#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer}
+\CommentTok{## Create a StringIndexer}
+\NormalTok{carr_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol}\OperatorTok{=}\StringTok{"carrier"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{)}
+\CommentTok{## Create a OneHotEncoder}
+\NormalTok{carr_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_fact"}\NormalTok{)}
+\CommentTok{## Make a VectorAssembler}
+\NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols}\OperatorTok{=}\NormalTok{[}\StringTok{"month"}\NormalTok{, }\StringTok{"air_time"}\NormalTok{, }\StringTok{"carrier_fact"}\NormalTok{, }\StringTok{"dest_fact"}\NormalTok{, }\StringTok{"plane_age"}\NormalTok{], outputCol}\OperatorTok{=}\StringTok{"features"}\NormalTok{)}
+\CommentTok{## Import & Make Pipeline}
+\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
+\NormalTok{flights_pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages}\OperatorTok{=}\NormalTok{[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])}
+\CommentTok{## Fit and transform the data}
+\NormalTok{piped_data }\OperatorTok{=}\NormalTok{ flights_pipe.fit(model_data).transform(model_data)}
+\CommentTok{## Train-test split}
+\NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{6}\NormalTok{, .}\DecValTok{4}\NormalTok{])}
+\CommentTok{## Tuning & Selection}
+\CommentTok{## Import LogisticRegression}
+\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
+\CommentTok{## Create a LogisticRegression Estimator}
+\NormalTok{lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
+\CommentTok{## Import the evaluation submodule}
+\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
+\CommentTok{## Create a BinaryClassificationEvaluator}
+\NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName}\OperatorTok{=}\StringTok{"areaUnderROC"}\NormalTok{)}
+\CommentTok{## Import the tuning submodule}
+\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
+\CommentTok{## Create the parameter grid}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
+\CommentTok{## Add the hyperparameter}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{01}\NormalTok{))}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+\CommentTok{## Build the grid}
+\NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
+\CommentTok{## Create the CrossValidator}
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
+\NormalTok{estimator}\OperatorTok{=}\NormalTok{lr,}
+\NormalTok{estimatorParamMaps}\OperatorTok{=}\NormalTok{grid,}
+\NormalTok{evaluator}\OperatorTok{=}\NormalTok{evaluator}
+\NormalTok{               )}
+\CommentTok{## Fit cross validation models}
+\NormalTok{models }\OperatorTok{=}\NormalTok{ cv.fit(training)}
+\CommentTok{## Extract the best model}
+\NormalTok{best_lr }\OperatorTok{=}\NormalTok{ models.bestModel}
+\CommentTok{## Use the model to predict the test set}
+\NormalTok{test_results }\OperatorTok{=}\NormalTok{ best_lr.transform(test)}
+\CommentTok{## Evaluate the predictions}
+\BuiltInTok{print}\NormalTok{(evaluator.evaluate(test_results))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  Spark's assumes the target is called `label' in ML. Everything else is
+  a feature.
+\item
+  alias() method to rename a column you're selecting.
+\item
+  cast() method: nominative determinism on columns
+\item
+  withColumn(): create new column
+\item
+  pyspark.ml.feature
+\item
+  At the core of the pyspark.ml module are the Transformer and Estimator
+  classes. Transformer classes are used for pre-processing and have a
+  .transform() method. eg. PCA
+\item
+  You can create what are called `one-hot vectors' to represent the
+  carrier and the destination of each flight. A one-hot vector is a way
+  of representing a categorical feature where every observation has a
+  vector in which all elements are zero except for at most one element,
+  which has a value of one (1).
+\item
+  Estimator classes are for modeling and all implement a .fit() method.
+  eg. StringIndexerModel for including categorical data saved as strings
+  in your models
+\item
+  selectExpr() takes SQL expressions as a string
+\item
+  show() vs collect()
+\item
+  Spark only handles numeric data
+\item
+  In Spark it's important to make sure you split the data after all the
+  transformations. This is because operations like StringIndexer don't
+  always produce the same index even when given the same list of
+  strings.
+\end{itemize}
+
+\section{Sparklyr}\label{sparklyr}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sparklyr)}
+
+\NormalTok{## Connect to your Spark cluster}
+\NormalTok{spark_conn <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master =} \StringTok{"local"}\NormalTok{)}
+
+\NormalTok{## Print the version of Spark}
+\KeywordTok{spark_version}\NormalTok{(}\DataTypeTok{sc =}\NormalTok{ spark_conn)}
+
+\NormalTok{## Disconnect from Spark}
+\KeywordTok{spark_disconnect}\NormalTok{(}\DataTypeTok{sc =}\NormalTok{ spark_conn)}
+
+\NormalTok{## See tables}
+\KeywordTok{src_tbls}\NormalTok{(sc)}
+
+\NormalTok{## Copy track_metadata to Spark}
+\NormalTok{track_metadata_tbl <-}\StringTok{ }\KeywordTok{copy_to}\NormalTok{(spark_conn, track_metadata)}
+
+\NormalTok{## Print 5 rows, all columns}
+\KeywordTok{print}\NormalTok{(track_metadata_tbl, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{, }\DataTypeTok{width =} \OtherTok{Inf}\NormalTok{)}
+
+\NormalTok{## Write and run SQL query}
+\NormalTok{query <-}\StringTok{ "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"}
+\NormalTok{(results <-}\StringTok{ }\KeywordTok{dbGetQuery}\NormalTok{(spark_conn, query))}
+
+\NormalTok{## General transformation structure and example}
+\NormalTok{a_tibble }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ft_some_transformation}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\StringTok{"y"}\NormalTok{, some_other_args)}
+
+\NormalTok{hotttnesss <-}\StringTok{ }\NormalTok{track_metadata_tbl }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Select artist_hotttnesss}
+\StringTok{  }\KeywordTok{select}\NormalTok{(artist_hotttnesss) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Binarize to is_hottt_or_nottt}
+\StringTok{  }\KeywordTok{ft_binarizer}\NormalTok{(}\StringTok{'artist_hotttnesss'}\NormalTok{, }\StringTok{'is_hottt_or_nottt'}\NormalTok{, }\DataTypeTok{threshold =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Collect the result}
+\StringTok{  }\KeywordTok{collect}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Convert is_hottt_or_nottt to logical}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{is_hottt_or_nottt =} \KeywordTok{as.logical}\NormalTok{(is_hottt_or_nottt))}
+  
+\NormalTok{## Get and transform the schema}
+
+\NormalTok{(schema <-}\StringTok{ }\KeywordTok{sdf_schema}\NormalTok{(track_metadata_tbl))}
+\NormalTok{schema }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{do.call}\NormalTok{(data_frame, x)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{bind_rows}\NormalTok{()}
+
+\NormalTok{## Train-test split}
+\NormalTok{partitioned <-}\StringTok{ }\NormalTok{track_metadata_tbl }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{sdf_partition}\NormalTok{(}\DataTypeTok{training =} \FloatTok{0.7}\NormalTok{, }\DataTypeTok{testing =} \FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{## List ml functions}
+\KeywordTok{ls}\NormalTok{(}\StringTok{"package:sparklyr"}\NormalTok{, }\DataTypeTok{pattern =} \StringTok{"^ml"}\NormalTok{)}
+
+\NormalTok{## GBT Example}
+
+\NormalTok{gradient_boosted_trees_model <-}\StringTok{ }\NormalTok{track_data_to_model_tbl }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Run the gradient boosted trees model}
+\StringTok{   }\KeywordTok{ml_gradient_boosted_trees}\NormalTok{(}\StringTok{'year'}\NormalTok{, feature_colnames)}
+
+\NormalTok{responses <-}\StringTok{ }\NormalTok{track_data_to_predict_tbl }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Select the year column}
+\StringTok{  }\KeywordTok{select}\NormalTok{(year) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Collect the results}
+\StringTok{  }\KeywordTok{collect}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# Add in the predictions}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{predicted_year =} \KeywordTok{predict}\NormalTok{(}
+\NormalTok{      gradient_boosted_trees_model,}
+\NormalTok{      track_data_to_predict_tbl}
+\NormalTok{    )}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Parquet Aside}
+
+Parquet files are quicker to read and write. parquet files can be used
+with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and
+Pig.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## The parquet_dir has been pre-defined}
+\NormalTok{parquet_dir}
+
+\NormalTok{## List the files in the parquet dir}
+\NormalTok{filenames <-}\StringTok{ }\KeywordTok{dir}\NormalTok{(parquet_dir, }\DataTypeTok{full.names =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{## Show the filenames and their sizes}
+\KeywordTok{data_frame}\NormalTok{(}
+  \DataTypeTok{filename =} \KeywordTok{basename}\NormalTok{(filenames),}
+  \DataTypeTok{size_bytes =} \KeywordTok{file.size}\NormalTok{(filenames)}
+\NormalTok{)}
+
+\CommentTok{#Import the data into Spark}
+
+\NormalTok{timbre_tbl <-}\StringTok{ }\KeywordTok{spark_read_parquet}\NormalTok{(spark_conn, }\StringTok{'timbre'}\NormalTok{, parquet_dir)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  To collect your data: that is, to move it from Spark to R, you call
+  collect(). copy\_to() moves your data from R to Spark.
+\item
+  Use compute() to compute the calculation, but store the results in a
+  temporary data frame on Spark.
+\item
+  If you want to delay returning the data, you can use dbSendQuery() to
+  execute the query, then dbFetch() to return the results.
+\item
+  feature transforms: ft\_, ml functions: ml\_, spark df functions:
+  sdf\_
+\item
+  ft\_tokenizer(): to lower and split into individual words,
+  ft\_regex\_tokenizer, sdf\_sort
+\end{itemize}
+
+\section{Caret}\label{caret}
+
+attributes(clf\_lr): results, finalModel
+
+\subsection{Preprocessing}\label{preprocessing}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Apply median imputation: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+  \DataTypeTok{x =}\NormalTok{ breast_cancer_x, }
+  \DataTypeTok{y =}\NormalTok{ breast_cancer_y,}
+  \DataTypeTok{method =} \StringTok{'glm'}\NormalTok{,}
+  \DataTypeTok{trControl =}\NormalTok{ myControl,}
+  \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'medianImpute'}\NormalTok{, }\StringTok{"knnImpute"}\NormalTok{, }\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{, }\StringTok{'pca'}\NormalTok{)}
+\NormalTok{)}
+
+\KeywordTok{dotplot}\NormalTok{(resamples, }\DataTypeTok{metric =} \StringTok{"ROC"}\NormalTok{)}
+
+\KeywordTok{min}\NormalTok{(model}\OperatorTok{$}\NormalTok{results}\OperatorTok{$}\NormalTok{RSME)}
+
+\CommentTok{# Identify near zero variance predictors: remove_cols}
+\NormalTok{remove_cols <-}\StringTok{ }\KeywordTok{nearZeroVar}\NormalTok{(bloodbrain_x, }\DataTypeTok{names =} \OtherTok{TRUE}\NormalTok{, }
+                           \DataTypeTok{freqCut =} \DecValTok{2}\NormalTok{, }\DataTypeTok{uniqueCut =} \DecValTok{20}\NormalTok{)}
+
+\CommentTok{# Get all column names from bloodbrain_x: all_cols}
+\NormalTok{all_cols =}\StringTok{ }\KeywordTok{colnames}\NormalTok{(bloodbrain_x)}
+
+\CommentTok{# Remove from data: bloodbrain_x_small}
+\NormalTok{bloodbrain_x_small <-}\StringTok{ }\NormalTok{bloodbrain_x[ , }\KeywordTok{setdiff}\NormalTok{(all_cols, remove_cols)]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{LM}\label{lm}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Set seed}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+
+\CommentTok{# Fit lm model: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ diamonds)}
+
+\CommentTok{# Predict on full data: p}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, diamonds)}
+
+\CommentTok{# Compute errors: error}
+\NormalTok{error <-}\StringTok{ }\NormalTok{p }\OperatorTok{-}\StringTok{ }\NormalTok{diamonds}\OperatorTok{$}\NormalTok{price}
+
+\CommentTok{# Calculate RMSE}
+\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{(error}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# Fit lm model using 5 x 5-fold CV: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  medv }\OperatorTok{~}\StringTok{ }\NormalTok{., }
+\NormalTok{  Boston,}
+  \DataTypeTok{method =} \StringTok{"lm"}\NormalTok{,}
+  \DataTypeTok{trControl =} \KeywordTok{trainControl}\NormalTok{(}
+    \DataTypeTok{method =} \StringTok{"cv"}\NormalTok{, }\DataTypeTok{number =} \DecValTok{5}\NormalTok{,}
+    \DataTypeTok{repeats =} \DecValTok{5}\NormalTok{, }\DataTypeTok{verboseIter =} \OtherTok{TRUE}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Lasso/Ridge}\label{lassoridge}
+
+Alpha controls balance between lasso and ridge. Lambda controls penalty.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Fit glmnet model: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  y}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ overfit,}
+  \DataTypeTok{method =} \StringTok{"glmnet"}\NormalTok{,}
+  \DataTypeTok{trControl =}\NormalTok{ myControl}
+\NormalTok{)}
+
+\CommentTok{# Train glmnet with custom trainControl and tuning: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  y}\OperatorTok{~}\NormalTok{., overfit,}
+  \DataTypeTok{tuneGrid =} \KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{alpha =} \DecValTok{0}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{lambda =} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.0001}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{length =} \DecValTok{20}\NormalTok{)),}
+  \DataTypeTok{method =} \StringTok{'glmnet'}\NormalTok{,}
+  \DataTypeTok{trControl =}\NormalTok{ myControl}
+\NormalTok{)}
+
+\CommentTok{# Print model to console}
+\NormalTok{model}
+
+\CommentTok{# Print maximum ROC statistic}
+\KeywordTok{max}\NormalTok{(model[[}\StringTok{"results"}\NormalTok{]][[}\StringTok{"ROC"}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Logistic Regression}\label{logistic-regression-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Fit glm model}
+\NormalTok{model =}\StringTok{ }\KeywordTok{glm}\NormalTok{(Class }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, train)}
+
+\CommentTok{# Predict on test: p}
+\NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, test, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+
+\CommentTok{# Calculate class probabilities: p_class}
+\NormalTok{p_class <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(p }\OperatorTok{>}\StringTok{ }\FloatTok{0.50}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"R"}\NormalTok{)}
+
+\CommentTok{# Create confusion matrix}
+\KeywordTok{confusionMatrix}\NormalTok{(p_class, test}\OperatorTok{$}\NormalTok{Class)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Train-Test Split, Folds, \&
+CV}\label{train-test-split-folds-cv}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Shuffle row indices: rows}
+\NormalTok{rows =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(Sonar))}
+
+\CommentTok{# Randomly order data: Sonar}
+\NormalTok{Sonar =}\StringTok{ }\NormalTok{Sonar[rows,]}
+
+\CommentTok{# Identify row to split on: split}
+\NormalTok{split <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(Sonar) }\OperatorTok{*}\StringTok{ }\NormalTok{.}\DecValTok{6}\NormalTok{)}
+
+\CommentTok{# Create train: 60%}
+\NormalTok{train =}\StringTok{ }\NormalTok{Sonar[}\DecValTok{1}\OperatorTok{:}\NormalTok{split,]}
+
+\CommentTok{# Create test: 40%}
+\NormalTok{test =}\StringTok{ }\NormalTok{Sonar[(split}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(Sonar),]}
+
+\CommentTok{# Create custom indices: myFolds}
+\NormalTok{myFolds <-}\StringTok{ }\KeywordTok{createFolds}\NormalTok{(churn_y, }\DataTypeTok{k =} \DecValTok{5}\NormalTok{)}
+
+\CommentTok{# Create reusable trainControl object: myControl}
+\NormalTok{myControl <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}
+  \DataTypeTok{summaryFunction =}\NormalTok{ twoClassSummary, }\CommentTok{#default option is default summary}
+  \DataTypeTok{classProbs =} \OtherTok{TRUE}\NormalTok{, }\CommentTok{# IMPORTANT!}
+  \DataTypeTok{verboseIter =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{savePredictions =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{index =}\NormalTok{ myFolds}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Random Forest}\label{random-forest-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Fit random forest: model}
+\NormalTok{model <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  quality}\OperatorTok{~}\NormalTok{.,}
+  \DataTypeTok{tuneLength =} \DecValTok{3}\NormalTok{,}
+  \CommentTok{#tuneGrid = data.frame(mtry = c(2, 3, 7)),}
+  \DataTypeTok{data =}\NormalTok{ wine, }
+  \DataTypeTok{method =} \StringTok{'ranger'}\NormalTok{,}
+  \DataTypeTok{trControl =} \KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method =} \StringTok{"cv"}\NormalTok{, }\DataTypeTok{number =} \DecValTok{5}\NormalTok{, }\DataTypeTok{verboseIter =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{# Print model to console}
+\NormalTok{model}
+
+\CommentTok{# Plot model}
+\KeywordTok{plot}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{SVM}\label{svm-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clf_svm <-}\StringTok{ }\KeywordTok{train}\NormalTok{(}
+\NormalTok{  pass }\OperatorTok{~}\NormalTok{., }
+  \DataTypeTok{data =}\NormalTok{ df3, }
+  \DataTypeTok{method =} \StringTok{"svmLinear"}\NormalTok{,}
+  \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"center"}\NormalTok{, }\StringTok{"scale"}\NormalTok{)}
+\NormalTok{                 )}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Model Selection}\label{model-selection-1}
+
+Now that you have fit two models to the churn dataset, it's time to
+compare their out-of-sample predictions and choose which one is the best
+model for your dataset.
+
+You can compare models in caret using the resamples() function, provided
+they have the same training data and use the same trainControl object
+with preset cross-validation folds. resamples() takes as input a list of
+models and can be used to compare dozens of models at once (though in
+this case you are only comparing two models).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create model_list}
+\NormalTok{model_list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{item1 =}\NormalTok{ model_glmnet, }\DataTypeTok{item2 =}\NormalTok{ model_rf)}
+
+\CommentTok{# Pass model_list to resamples(): resamples}
+\NormalTok{resamples =}\StringTok{ }\KeywordTok{resamples}\NormalTok{(model_list)}
+
+\CommentTok{# Summarize the results}
+\KeywordTok{summary}\NormalTok{(resamples)}
+
+\CommentTok{# Create bwplot}
+\KeywordTok{bwplot}\NormalTok{(resamples, }\DataTypeTok{metric =} \StringTok{'ROC'}\NormalTok{)}
+
+\CommentTok{# Create xyplot}
+\KeywordTok{xyplot}\NormalTok{(resamples)}
+
+\CommentTok{# Predict on test: p}
+\NormalTok{p =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, test, }\DataTypeTok{type =} \StringTok{'response'}\NormalTok{)}
+
+\CommentTok{# Make ROC curve}
+\KeywordTok{colAUC}\NormalTok{(p, test}\OperatorTok{$}\NormalTok{Class, }\DataTypeTok{plotROC =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  caret: finalModel of model object
+\end{itemize}
+
+\subsection{Stacking}\label{stacking}
+
+caretEnsemble provides the caretList() function for creating multiple
+caret models at once on the same dataset, using the same resampling
+folds. You can also create your own lists of caret models. Use the
+caretStack() function to make a stack of caret models, with the two
+sub-models (glmnet and ranger) feeding into another (hopefully more
+accurate!) caret model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create ensemble model: stack}
+\NormalTok{stack <-}\StringTok{ }\KeywordTok{caretStack}\NormalTok{(model_list, }\DataTypeTok{method =} \StringTok{'glm'}\NormalTok{)}
+
+\CommentTok{# Look at summary}
+\KeywordTok{summary}\NormalTok{(stack)}
+\end{Highlighting}
+\end{Shaded}
+
+\& caretEnnsemble
+
+\section{Data Table}\label{data-table}
+
+\begin{itemize}
+\item
+  Operations done by reference
+\item
+  dt{[}i, j, by{]} : subset by i calculate by j grouped using by
+\item
+  1: numeric \textbar{} 1L: integer
+\item
+  NA\_integer\_: integer
+\item
+  DT{[}.N{]} : prints last row
+\item
+  names(DT): colnames
+\item
+  dim(DT): dimensions
+\item
+  DT{[}, .(A, B){]}: returns two columns
+\item
+  DT{[}, c(A, B){]}: returns a concatenated vector
+\item
+  DT{[}, .(sum\_c = sum(C){]}
+\item
+  DT{[}, plot(A, C){]}
+\item
+  DT{[}, A:=NULL{]}: Remove column A
+\item
+  DT{[}, .(sumB = sum(B)), by = .(Grp = A\%\%2){]}
+\item
+  DT{[}, .N, by = Sepal.Width{]}: .N is the count of each group
+\item
+  DT{[}, lapply(.SD, median){]}: .SD is a placeholder for all the
+  columns
+\item
+  dogs{[}, lapply(.SD, mean), .SDcols = 2:3{]}: Find mean of columns 2
+  \& 3
+\item
+  for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+\item
+  setnames(DT, `y', `z'): changes colname from y to z
+\item
+  setkey(DT, A, B)
+\item
+  DT{[}.(`b'){]}
+\item
+  DT{[}.(c(`b', `c')){]}
+\item
+  DT{[}.(c(`b', `c')), mult=``first''{]}
+\item
+  DT{[}c(``b'', ``c''), .SD{[}c(1, .N){]}, by = .EACHI{]}: First and
+  last row of the ``b'' and ``c'' groups
+\item
+  DT{[}c(``b'', ``c''), \{ print(.SD); .SD{[}c(1, .N){]} \}, by =
+  .EACHI{]}
+\item
+  roll=TRUE, `nearest', -Inf, Inf \textbar{} rollends=FALSE
+\end{itemize}
+
+\section{Keras}\label{keras}
+
+Here's a
+\href{https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb}{Hello
+World} and the general framework:
+
+\begin{itemize}
+\item
+  declare: sequential
+\item
+  add layers input-hidden-output
+\item
+  compile
+\item
+  fit
+\end{itemize}
+
+Keras only uses numpy arrays.
+
+\subsection{Regression}\label{regression}
+
+\begin{itemize}
+\item
+  loss = mean\_squared\_error
+\item
+  metric: rmse
+\item
+  activation\_function = relu
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ keras}
+\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
+\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
+\CommentTok{# Specify the model: Two hidden layers}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
+\CommentTok{## Input}
+\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
+\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
+\CommentTok{# Hidden}
+\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
+\CommentTok{# Output}
+\NormalTok{model.add(Dense(}\DecValTok{1}\NormalTok{))}
+\CommentTok{# Compile the model}
+\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'adam'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'mean_squared_error'}\NormalTok{) }
+\CommentTok{# Fit the model}
+\NormalTok{model.fit(predictors, target)}
+\CommentTok{#Look at summary}
+\NormalTok{model.summary()}
+\CommentTok{# Calculate predictions: predictions}
+\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Classification}\label{classification}
+
+\begin{itemize}
+\item
+  loss = categorical\_crossentropy
+\item
+  metric = accuracy
+\item
+  activation\_function = softmax
+\item
+  output layer with stuff equal to number of categorical groups
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ keras}
+\ImportTok{from}\NormalTok{ keras.layers }\ImportTok{import}\NormalTok{ Dense}
+\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Sequential}
+\CommentTok{# Specify the model: Two hidden layers}
+\NormalTok{n_cols }\OperatorTok{=}\NormalTok{ predictors.shape[}\DecValTok{1}\NormalTok{]}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ Sequential()}
+\CommentTok{## Input}
+\NormalTok{model.add(Dense(}\DecValTok{50}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{, input_shape }\OperatorTok{=}\NormalTok{ (n_cols,)))}
+\CommentTok{# Hidden}
+\NormalTok{model.add(Dense(}\DecValTok{32}\NormalTok{, activation}\OperatorTok{=}\StringTok{'relu'}\NormalTok{))}
+\CommentTok{# Output}
+\NormalTok{model.add(Dense(}\DecValTok{2}\NormalTok{, activation }\OperatorTok{=} \StringTok{'softmax'}\NormalTok{))}
+\CommentTok{# Compile the model}
+\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=} \StringTok{'sgd'}\NormalTok{, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{, metrics }\OperatorTok{=}\NormalTok{ [}\StringTok{'accuracy'}\NormalTok{])}
+\CommentTok{# Fit the model}
+\NormalTok{model.fit(predictors, target)}
+\CommentTok{#Look at summary}
+\NormalTok{model.summary()}
+\CommentTok{#Calculate predictions: predictions}
+\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
+\CommentTok{#Calculate predicted probability of survival}
+\NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{More}\label{more}
+
+keras: declare model \textbar{} compile with loss, optimizer, and
+scoring metric \textbar{} fit \textbar{} keras::to\_categorical
+
+keras.callbacks.EarlyStopping: Stop training when validation score stop
+improving after a certain number of epochs (baches?)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Import the SGD optimizer}
+\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ SGD}
+\CommentTok{# Create list of learning rates: lr_to_test}
+\NormalTok{lr_to_test }\OperatorTok{=}\NormalTok{ [.}\DecValTok{000001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\CommentTok{# Loop over learning rates}
+\ControlFlowTok{for}\NormalTok{ lr }\KeywordTok{in}\NormalTok{ lr_to_test:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{'Testing model with learning rate: '}\NormalTok{)}
+    
+    \CommentTok{# Build new model to test, unaffected by previous models}
+\NormalTok{    model }\OperatorTok{=}\NormalTok{ get_new_model()}
+    
+    \CommentTok{# Create SGD optimizer with specified learning rate: my_optimizer}
+\NormalTok{    my_optimizer }\OperatorTok{=}\NormalTok{ SGD(lr }\OperatorTok{=}\NormalTok{ lr)}
+    
+    \CommentTok{# Compile the model}
+\NormalTok{    model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=}\NormalTok{ my_optimizer, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{)}
+    
+    \CommentTok{# Fit the model}
+\NormalTok{    model.fit(predictors, }
+\NormalTok{              target, }
+\NormalTok{              validation_split }\OperatorTok{=} \FloatTok{0.3}\NormalTok{, }
+\NormalTok{              epochs }\OperatorTok{=} \DecValTok{20}\NormalTok{, }
+\NormalTok{              callbacks }\OperatorTok{=}\NormalTok{ [early_stopping_monitor], }
+\NormalTok{              verbose }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \bibliography{book.bib,packages.bib}
 

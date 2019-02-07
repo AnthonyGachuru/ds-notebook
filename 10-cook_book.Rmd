@@ -13,6 +13,10 @@ gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
 
 ## Hold
 
+SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
+
+[Temporary pandas Columns](https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb)
+
 * ggplot(df, aes(fitted_probability, binary_class_indicator)) +
 geom_smooth(): a quick way of visualizing model calibration without having to manually bin any observations
 
