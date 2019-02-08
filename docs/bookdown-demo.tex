@@ -6312,6 +6312,29 @@ The rest of my notes:
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(sparklyr)}
 
+\NormalTok{sc <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master=}\StringTok{"local"}\NormalTok{)}
+\NormalTok{config <-}\StringTok{ }\KeywordTok{spark_config}\NormalTok{()}
+\NormalTok{config}\OperatorTok{$}\NormalTok{spark.executor.cores <-}\StringTok{ }\DecValTok{8}
+\NormalTok{config}\OperatorTok{$}\NormalTok{spark.executor.memory <-}\StringTok{ "25G"}
+
+\NormalTok{flights <-}\StringTok{ }\KeywordTok{copy_to}\NormalTok{(sc, flights, }\StringTok{"flights"}\NormalTok{)}
+\KeywordTok{src_tbls}\NormalTok{(sc)}
+
+\NormalTok{iris_tbl }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{spark_apply}\NormalTok{(}
+    \ControlFlowTok{function}\NormalTok{(e) }\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(Petal_Length }\OperatorTok{~}\StringTok{ }\NormalTok{Petal_Width, e))}\OperatorTok{$}\NormalTok{r.squared,}
+    \DataTypeTok{names =} \StringTok{"r.squared"}\NormalTok{,}
+    \DataTypeTok{group_by =} \StringTok{"Species"}\NormalTok{)}
+
+
+\KeywordTok{spark_disconnect}\NormalTok{(sc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sparklyr)}
+
 \NormalTok{## Connect to your Spark cluster}
 \NormalTok{spark_conn <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master =} \StringTok{"local"}\NormalTok{)}
 

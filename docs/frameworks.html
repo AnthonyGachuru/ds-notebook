@@ -563,6 +563,24 @@ test_results <span class="op">=</span> best_lr.transform(test)
 <h2><span class="header-section-number">13.2</span> Sparklyr</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 
+sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master=</span><span class="st">&quot;local&quot;</span>)
+config &lt;-<span class="st"> </span><span class="kw">spark_config</span>()
+config<span class="op">$</span>spark.executor.cores &lt;-<span class="st"> </span><span class="dv">8</span>
+config<span class="op">$</span>spark.executor.memory &lt;-<span class="st"> &quot;25G&quot;</span>
+
+flights &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, flights, <span class="st">&quot;flights&quot;</span>)
+<span class="kw">src_tbls</span>(sc)
+
+iris_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spark_apply</span>(
+    <span class="cf">function</span>(e) <span class="kw">summary</span>(<span class="kw">lm</span>(Petal_Length <span class="op">~</span><span class="st"> </span>Petal_Width, e))<span class="op">$</span>r.squared,
+    <span class="dt">names =</span> <span class="st">&quot;r.squared&quot;</span>,
+    <span class="dt">group_by =</span> <span class="st">&quot;Species&quot;</span>)
+
+
+<span class="kw">spark_disconnect</span>(sc)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
+
 ## Connect to your Spark cluster
 spark_conn &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)
 

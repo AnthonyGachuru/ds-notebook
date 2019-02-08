@@ -281,6 +281,28 @@ print(evaluator.evaluate(test_results))
 ```{r, eval = FALSE}
 library(sparklyr)
 
+sc <- spark_connect(master="local")
+config <- spark_config()
+config$spark.executor.cores <- 8
+config$spark.executor.memory <- "25G"
+
+flights <- copy_to(sc, flights, "flights")
+src_tbls(sc)
+
+iris_tbl %>%
+  spark_apply(
+    function(e) summary(lm(Petal_Length ~ Petal_Width, e))$r.squared,
+    names = "r.squared",
+    group_by = "Species")
+
+
+spark_disconnect(sc)
+```
+
+
+```{r, eval = FALSE}
+library(sparklyr)
+
 ## Connect to your Spark cluster
 spark_conn <- spark_connect(master = "local")
 
