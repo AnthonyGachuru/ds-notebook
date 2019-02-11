@@ -1,16 +1,14 @@
 # Model
 
-## Linear Regression
+General format: INtro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
-### Intro
+## Supervised
 
-* The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant.
+### Linear Regression
 
-* Used when you’re predicting a continuous value. 
+Discuss Ridge, Lasso, and Elastic here.
 
-* In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. 
-
-* When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
+The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant. Used when you’re predicting a continuous value. In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. When p > n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.
 
 * In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.
 
@@ -25,16 +23,6 @@
 * Okay, so many of the features are strongly correlated. We can make use of this in our model by including polynomial features (e.g. PolynomialFeatures(degree=2) from scikit-learn). Adding these brings our validation loss down to 0.69256 (-0.05% from baseline).
 
 * We prefer natural logs (that is, logarithms base e) because, as described above, coefficients on the natural-log scale are directly interpretable as approximate proportional differences: with a coefficient of 0.06, a difference of 1 in x corresponds to an approximate 6% difference in y, and so forth.
-
-```{python, eval = FALSE}
-import statsmodels.api as sm
-
-X = sm.add_constant(X)
-rgr_lr = sm.OLS(Y, X).fit(disp=False)
-print(results.summary())
-```
-
-### Assumptions
 
 The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]
 
@@ -72,8 +60,6 @@ vif(model) %>% data.frame() %>% mutate(VIF = `GVIF..1..2.Df..`, VIF = VIF^2)
 # Test for Autocorrelated Errors
 durbinWatsonTest(rgr_lr_st1)
 
-set.seed(0)
-
 data = rnorm(100) # Generating data from a standard normal distribution.
 shapiro.test(data) # P-value insignificant; retain H0, conclude data is normally distributed.
 
@@ -83,10 +69,6 @@ qqnorm(normal.data) + qqline(normal.data)
 ```
 
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test & partial f-testr for simple and multiple linear regression.
-
-Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
-
-And a guide for python.
 
 ```{python, eval = F}
 statsmodels.stats.outliers_influence.variance_inflation_factor
@@ -167,12 +149,6 @@ Standardize for ridge/lasso alpha makes them not scale invariant
 Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
 
 Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
-
-### Assumptions
-
-### Evaluation
-
-### Pros/Cons
 
 ## Logistic Regression
 
@@ -400,15 +376,7 @@ In K-means, we assume that each cluster fits a Gaussian distribution (normal dis
 
 We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
 
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
 Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval. 
-
-### Pros/Cons
 
 **Pros** 
 
@@ -419,8 +387,6 @@ Uses simple principle which can be explained in non-statistical terms. It is eff
 Less sophisticated, random choices of centers, and requires guess for centers.
 
 ## Hierarchical Clustering
-
-### Intro
 
 Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
 Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
