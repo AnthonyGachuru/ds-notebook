@@ -2,6 +2,15 @@
 
 measurement theory / decision science, semi-supervised, unsupervised, online, & weak learning
 
+set the seed always
+
+Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
+
+import statsmodels.api as sm
+X = sm.add_constant(X)
+rgr_lr = sm.OLS(Y, X).fit(disp=False)
+print(results.summary())
+
 ## Other
 
 ### Vanderplas Jupyter

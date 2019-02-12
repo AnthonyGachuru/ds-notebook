@@ -1065,29 +1065,29 @@ framework.
 
 \chapter{Model}\label{model-1}
 
-\section{Linear Regression}\label{linear-regression}
+General format: INtro, Assumptions, Evaluation, Interpretation,
+Pros/Cons, Notes
 
-\subsection{Intro}\label{intro}
+\section{Supervised}\label{supervised}
+
+\subsection{Linear Regression}\label{linear-regression}
+
+Discuss Ridge, Lasso, and Elastic here.
+
+The standard least squares coefficient estimates are scale equivariant:
+if we multiply a predictor variable by a constant, the corresponding
+least squares coefficient estimate will be scaled down by the same
+constant. Used when you're predicting a continuous value. In regression,
+it is often recommended to center the variables so that the predictors
+have mean 0. This makes it so the intercept term is interpreted as the
+expected value of Y\_i when the predictor values are set to their means.
+Otherwise, the intercept is interpreted as the expected value of Y\_i
+when the predictors are set to 0, which may not be a realistic or
+interpretable situation. When p \textgreater{} n, we can no longer
+calculate a unique least square coefficient estimate, the variances
+become infinite, so OLS cannot be used at all.
 
 \begin{itemize}
-\item
-  The standard least squares coefficient estimates are scale
-  equivariant: if we multiply a predictor variable by a constant, the
-  corresponding least squares coefficient estimate will be scaled down
-  by the same constant.
-\item
-  Used when you're predicting a continuous value.
-\item
-  In regression, it is often recommended to center the variables so that
-  the predictors have mean 0. This makes it so the intercept term is
-  interpreted as the expected value of Y\_i when the predictor values
-  are set to their means. Otherwise, the intercept is interpreted as the
-  expected value of Y\_i when the predictors are set to 0, which may not
-  be a realistic or interpretable situation.
-\item
-  When p \textgreater{} n, we can no longer calculate a unique least
-  square coefficient estimate, the variances become infinite, so OLS
-  cannot be used at all.
 \item
   In presence of few variables with medium / large sized effect, use
   lasso regression. In presence of many variables with small / medium
@@ -1119,17 +1119,6 @@ framework.
   coefficient of 0.06, a difference of 1 in x corresponds to an
   approximate 6\% difference in y, and so forth.
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
-\NormalTok{rgr_lr }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(results.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Assumptions}\label{assumptions}
 
 The regression assumption that is generally least important is that the
 errors are normally distributed. In fact, for the purpose of estimating
@@ -1218,8 +1207,6 @@ R.
 \CommentTok{# Test for Autocorrelated Errors}
 \KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
 
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
-
 \NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
 \KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
 
@@ -1240,12 +1227,6 @@ prediction intervals. For avplot distinct patterns are indications of
 good contributions. Influence plot to look at hat values (lower is
 better). Use F-test to compare models. F-test \& partial f-testr for
 simple and multiple linear regression.
-
-Shapiro-Wilk Test for Normality: H\_0 says the data is normally
-distributed while H\_a says it is not. To run this test in R, the syntax
-is quite simple:
-
-And a guide for python.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1368,7 +1349,7 @@ constant value. Use Box-Cox transformations when predictions are skewed.
 
 \section{Ridge/Lasso}\label{ridgelasso}
 
-\subsection{Intro}\label{intro-1}
+\subsection{Intro}\label{intro}
 
 Minimizes RSS but also has shrinkage penalty (L2 penalty). A small
 lambda penalizes the RSS more than the shrinkage penalty. A large lambda
@@ -1396,15 +1377,9 @@ cost of higher bias.
 Note: In both ridge and lasso regression, is important to select an
 appropriate value of lambda by means of cross-validation.
 
-\subsection{Assumptions}\label{assumptions-1}
-
-\subsection{Evaluation}\label{evaluation}
-
-\subsection{Pros/Cons}\label{proscons-1}
-
 \section{Logistic Regression}\label{logistic-regression}
 
-\subsection{Intro}\label{intro-2}
+\subsection{Intro}\label{intro-1}
 
 logistic is the same as probit
 
@@ -1459,7 +1434,7 @@ likelihood, standardizing the features makes the convergence faster.
 Otherwise, you can run your logistic regression without any
 standardization treatment on the features.
 
-\subsection{Assumptions}\label{assumptions-2}
+\subsection{Assumptions}\label{assumptions}
 
 \begin{itemize}
 \item
@@ -1556,7 +1531,7 @@ multicolinearity.)
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Evaluation}\label{evaluation-1}
+\subsection{Evaluation}\label{evaluation}
 
 \begin{itemize}
 \item
@@ -1576,7 +1551,7 @@ multicolinearity.)
   Absolute scale odds instead of relative
 \end{itemize}
 
-\subsection{Pros/Cons}\label{proscons-2}
+\subsection{Pros/Cons}\label{proscons-1}
 
 \textbf{Pros}
 
@@ -1627,7 +1602,7 @@ multicolinearity.)
 
 \section{Poisson Regression}\label{poisson-regression}
 
-\subsection{Intro}\label{intro-3}
+\subsection{Intro}\label{intro-2}
 
 Poisson: When you're predicting a count value. (How many dogs will I see
 in the park?)
@@ -1638,7 +1613,7 @@ in count data (that is, data that can equal 0,1,2,\ldots{}).
 Remember that you must specify family = poisson or family = quasipoisson
 when using glm() to fit a count model.
 
-\subsection{Assumptions}\label{assumptions-3}
+\subsection{Assumptions}\label{assumptions-1}
 
 One of the assumptions of Poisson regression to predict counts is that
 the event you are counting is Poisson distributed: the average count per
@@ -1650,9 +1625,9 @@ When the variance is much larger than the mean, the Poisson assumption
 doesn't apply, and one solution is to use quasipoisson regression, which
 does not assume that variance=meanvariance=mean.
 
-\subsection{Evaluation}\label{evaluation-2}
+\subsection{Evaluation}\label{evaluation-1}
 
-\subsection{Pros/Cons}\label{proscons-3}
+\subsection{Pros/Cons}\label{proscons-2}
 
 \textbf{Pros}
 
@@ -1660,7 +1635,7 @@ does not assume that variance=meanvariance=mean.
 
 \section{Generalized Additive Models}\label{generalized-additive-models}
 
-\subsection{Intro}\label{intro-4}
+\subsection{Intro}\label{intro-3}
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on
 larger data sets. use s(var) to denote non-linear relationship. Don't
@@ -1675,11 +1650,11 @@ gaussian (the default).
 For GAM models, the predict() method returns a matrix, so use
 as.numeric() to convert the matrix to a vector.
 
-\subsection{Assumptions}\label{assumptions-4}
+\subsection{Assumptions}\label{assumptions-2}
 
-\subsection{Evaluation}\label{evaluation-3}
+\subsection{Evaluation}\label{evaluation-2}
 
-\subsection{Pros/Cons}\label{proscons-4}
+\subsection{Pros/Cons}\label{proscons-3}
 
 \textbf{Pros}
 
@@ -1687,7 +1662,7 @@ as.numeric() to convert the matrix to a vector.
 
 \section{K-Means Clustering {[}US{]}}\label{k-means-clustering-us}
 
-\subsection{Intro}\label{intro-5}
+\subsection{Intro}\label{intro-4}
 
 K-Means clustering method considers two assumptions regarding the
 clusters -- first that the clusters are spherical and second that the
@@ -1740,19 +1715,11 @@ We can set K to optimally cluster the data by starting with a small
 number of clusters, and then iteratively splitting them until all
 clusters fit a normal distribution.
 
-\subsection{Assumptions}\label{assumptions-5}
-
-\subsection{Characteristics}\label{characteristics}
-
-\subsection{Evaluation}\label{evaluation-4}
-
 Davies--Bouldin index: This is an internal evaluation scheme, where the
 validation of how well the clustering has been done is made using
 quantities and features inherent to the dataset. This has a drawback
 that a good value reported by this method does not imply the best
 information retrieval.
-
-\subsection{Pros/Cons}\label{proscons-5}
 
 \textbf{Pros}
 
@@ -1765,8 +1732,6 @@ Less sophisticated, random choices of centers, and requires guess for
 centers.
 
 \section{Hierarchical Clustering}\label{hierarchical-clustering}
-
-\subsection{Intro}\label{intro-6}
 
 Generates dendrograms. The lower down a fusion occurs the more similar
 the group of observations and vice versa. Begin with n observations and
@@ -1789,25 +1754,25 @@ of clusters to be speciﬁed. Hierarchical clustering doesn't need the
 number of clusters to be speciﬁed. K-means clustering is usually more
 effcient run-time wise.
 
-\subsection{Assumptions}\label{assumptions-6}
+\subsection{Assumptions}\label{assumptions-3}
 
-\subsection{Characteristics}\label{characteristics-1}
+\subsection{Characteristics}\label{characteristics}
 
-\subsection{Evaluation}\label{evaluation-5}
+\subsection{Evaluation}\label{evaluation-3}
 
-\subsection{Pros/Cons}\label{proscons-6}
+\subsection{Pros/Cons}\label{proscons-4}
 
 \section{PCA}\label{pca}
 
-\subsection{Intro}\label{intro-7}
+\subsection{Intro}\label{intro-5}
 
-\subsection{Assumptions}\label{assumptions-7}
+\subsection{Assumptions}\label{assumptions-4}
 
-\subsection{Characteristics}\label{characteristics-2}
+\subsection{Characteristics}\label{characteristics-1}
 
-\subsection{Evaluation}\label{evaluation-6}
+\subsection{Evaluation}\label{evaluation-4}
 
-\subsection{Pros/Cons}\label{proscons-7}
+\subsection{Pros/Cons}\label{proscons-5}
 
 \begin{itemize}
 \item
@@ -1910,7 +1875,7 @@ of the original data.
 
 \section{KNN}\label{knn}
 
-\subsection{Intro}\label{intro-8}
+\subsection{Intro}\label{intro-6}
 
 Calculate distance between each observation and all the others.
 Determine the k nearest observations to the observation. Classify the
@@ -1930,13 +1895,13 @@ update, sensitivity of distance metrics
 
 smaller k means smaller training error, ut larger k is more stable.
 
-\subsection{Assumptions}\label{assumptions-8}
+\subsection{Assumptions}\label{assumptions-5}
 
-\subsection{Characteristics}\label{characteristics-3}
+\subsection{Characteristics}\label{characteristics-2}
 
-\subsection{Evaluation}\label{evaluation-7}
+\subsection{Evaluation}\label{evaluation-5}
 
-\subsection{Pros/Cons}\label{proscons-8}
+\subsection{Pros/Cons}\label{proscons-6}
 
 \textbf{Pros}
 
@@ -1981,7 +1946,7 @@ space it takes to store the computations increases dramatically.
 
 \section{SVM}\label{svm}
 
-\subsection{Intro}\label{intro-9}
+\subsection{Intro}\label{intro-7}
 
 Selection of margin in SVM is a convex optimization problem. What is the
 objective of the maximum margin approach? To ensure small prediction
@@ -2068,13 +2033,13 @@ classifiers vote on the prediction for each observation.
 against all other categories combined. Assign the observation to the
 classifier with the largest function value.
 
-\subsection{Assumptions}\label{assumptions-9}
+\subsection{Assumptions}\label{assumptions-6}
 
-\subsection{Characteristics}\label{characteristics-4}
+\subsection{Characteristics}\label{characteristics-3}
 
-\subsection{Evaluation}\label{evaluation-8}
+\subsection{Evaluation}\label{evaluation-6}
 
-\subsection{Pros/Cons}\label{proscons-9}
+\subsection{Pros/Cons}\label{proscons-7}
 
 \textbf{Pros}
 
@@ -2108,7 +2073,7 @@ classifier with the largest function value.
 
 \section{Decision Tree}\label{decision-tree}
 
-\subsection{Intro}\label{intro-10}
+\subsection{Intro}\label{intro-8}
 
 So should you use Gini impurity or entropy? The truth is, most of the
 time it does not make a big difference: they lead to similar trees. Gini
@@ -2168,13 +2133,13 @@ pruning reduces the variance of the overall tree model upon repeated
 builds with different datasets, we induce biasbecause the trees are much
 simpler.
 
-\subsection{Assumptions}\label{assumptions-10}
+\subsection{Assumptions}\label{assumptions-7}
 
-\subsection{Characteristics}\label{characteristics-5}
+\subsection{Characteristics}\label{characteristics-4}
 
-\subsection{Evaluation}\label{evaluation-9}
+\subsection{Evaluation}\label{evaluation-7}
 
-\subsection{Pros/Cons}\label{proscons-10}
+\subsection{Pros/Cons}\label{proscons-8}
 
 \textbf{Pros}
 
@@ -2200,7 +2165,7 @@ simpler.
 
 \section{Bagging}\label{bagging}
 
-\subsection{Intro}\label{intro-11}
+\subsection{Intro}\label{intro-9}
 
 used to decrease variance in decision trees
 
@@ -2241,13 +2206,13 @@ get rid of the high variance by averaging. Con is that the trees are
 correlation. train multiple trees using bootstrapped data to reduce
 variance and prevent overfitting
 
-\subsection{Assumptions}\label{assumptions-11}
+\subsection{Assumptions}\label{assumptions-8}
 
-\subsection{Characteristics}\label{characteristics-6}
+\subsection{Characteristics}\label{characteristics-5}
 
-\subsection{Evaluation}\label{evaluation-10}
+\subsection{Evaluation}\label{evaluation-8}
 
-\subsection{Pros/Cons}\label{proscons-11}
+\subsection{Pros/Cons}\label{proscons-9}
 
 \textbf{Pros}
 
@@ -2274,7 +2239,7 @@ variance and prevent overfitting
 
 \section{Random Forest}\label{random-forest}
 
-\subsection{Intro}\label{intro-12}
+\subsection{Intro}\label{intro-10}
 
 Build a number of decision trees using bootstrapped samples
 
@@ -2331,13 +2296,13 @@ is worse), strength of single trees (higher is better). Increasing
 number of features for each split increases correlation and strength of
 single trees.
 
-\subsection{Assumptions}\label{assumptions-12}
+\subsection{Assumptions}\label{assumptions-9}
 
-\subsection{Characteristics}\label{characteristics-7}
+\subsection{Characteristics}\label{characteristics-6}
 
-\subsection{Evaluation}\label{evaluation-11}
+\subsection{Evaluation}\label{evaluation-9}
 
-\subsection{Pros/Cons}\label{proscons-12}
+\subsection{Pros/Cons}\label{proscons-10}
 
 \textbf{Pros}
 
@@ -2358,7 +2323,7 @@ Not as easy to visually interpret
 
 \section{Boosting}\label{boosting}
 
-\subsection{Intro}\label{intro-13}
+\subsection{Intro}\label{intro-11}
 
 Unlike boosting and random forests, can overfit if number of trees is
 too large
@@ -2393,13 +2358,13 @@ variables are relatively important predictors.
 Similar to bagging, but learns sequentially and builds off previous
 trees
 
-\subsection{Assumptions}\label{assumptions-13}
+\subsection{Assumptions}\label{assumptions-10}
 
-\subsection{Characteristics}\label{characteristics-8}
+\subsection{Characteristics}\label{characteristics-7}
 
-\subsection{Evaluation}\label{evaluation-12}
+\subsection{Evaluation}\label{evaluation-10}
 
-\subsection{Pros/Cons}\label{proscons-13}
+\subsection{Pros/Cons}\label{proscons-11}
 
 \textbf{Pros}
 
@@ -2413,7 +2378,7 @@ Can easily handle qualitative (categorical) features
 
 \section{Association Rule Mining}\label{association-rule-mining}
 
-\subsection{Intro}\label{intro-14}
+\subsection{Intro}\label{intro-12}
 
 \begin{itemize}
 \item
@@ -2448,13 +2413,13 @@ Can easily handle qualitative (categorical) features
   the threshold don't make it to the higher iterations.
 \end{itemize}
 
-\subsection{Assumptions}\label{assumptions-14}
+\subsection{Assumptions}\label{assumptions-11}
 
-\subsection{Characteristics}\label{characteristics-9}
+\subsection{Characteristics}\label{characteristics-8}
 
-\subsection{Evaluation}\label{evaluation-13}
+\subsection{Evaluation}\label{evaluation-11}
 
-\subsection{Pros/Cons}\label{proscons-14}
+\subsection{Pros/Cons}\label{proscons-12}
 
 \textbf{Pros}
 
@@ -2485,7 +2450,7 @@ Can easily handle qualitative (categorical) features
 
 \section{Naïve Bayes}\label{naive-bayes}
 
-\subsection{Intro}\label{intro-15}
+\subsection{Intro}\label{intro-13}
 
 Practitioners do use Naive Bayes regularly for ranking, where the actual
 values of the probabilities are not relevant---only the relative values
@@ -2511,13 +2476,13 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a
 batch of samples incrementally while we are using. MultinomialNB and
 Bernoulli NB also support sample weighting.
 
-\subsection{Assumptions}\label{assumptions-15}
+\subsection{Assumptions}\label{assumptions-12}
 
-\subsection{Characteristics}\label{characteristics-10}
+\subsection{Characteristics}\label{characteristics-9}
 
-\subsection{Evaluation}\label{evaluation-14}
+\subsection{Evaluation}\label{evaluation-12}
 
-\subsection{Pros/Cons}\label{proscons-15}
+\subsection{Pros/Cons}\label{proscons-13}
 
 \textbf{Pros}
 
@@ -2548,7 +2513,7 @@ Bernoulli NB also support sample weighting.
 
 \section{LDA}\label{lda}
 
-\subsection{Intro}\label{intro-16}
+\subsection{Intro}\label{intro-14}
 
 Before we take a look into the inner workings of LDA in the following
 subsections, let's summarize the key steps of the LDA approach:
@@ -2575,27 +2540,27 @@ assumes gaussian distributions for each class share the same covariance
 matrix. If they don't share the same covariance matrix, then we use
 Quadratic Discriminant Analysis which assumes each class has its own.
 
-\subsection{Assumptions}\label{assumptions-16}
+\subsection{Assumptions}\label{assumptions-13}
 
-\subsection{Characteristics}\label{characteristics-11}
+\subsection{Characteristics}\label{characteristics-10}
 
-\subsection{Evaluation}\label{evaluation-15}
+\subsection{Evaluation}\label{evaluation-13}
 
-\subsection{Pros/Cons}\label{proscons-16}
+\subsection{Pros/Cons}\label{proscons-14}
 
 \section{QDA}\label{qda}
 
-\subsection{Intro}\label{intro-17}
+\subsection{Intro}\label{intro-15}
 
 TBD
 
-\subsection{Assumptions}\label{assumptions-17}
+\subsection{Assumptions}\label{assumptions-14}
 
-\subsection{Characteristics}\label{characteristics-12}
+\subsection{Characteristics}\label{characteristics-11}
 
-\subsection{Evaluation}\label{evaluation-16}
+\subsection{Evaluation}\label{evaluation-14}
 
-\subsection{Pros/Cons}\label{proscons-17}
+\subsection{Pros/Cons}\label{proscons-15}
 
 \section{DataCamp: Nonlinear Modeling in R with
 GAMs}\label{datacamp-nonlinear-modeling-in-r-with-gams}
@@ -3242,15 +3207,15 @@ for error measurement.
 
 AIC\_c for model selection.
 
-\subsection{Intro}\label{intro-18}
+\subsection{Intro}\label{intro-16}
 
-\subsection{Assumptions}\label{assumptions-18}
+\subsection{Assumptions}\label{assumptions-15}
 
-\subsection{Characteristics}\label{characteristics-13}
+\subsection{Characteristics}\label{characteristics-12}
 
-\subsection{Evaluation}\label{evaluation-17}
+\subsection{Evaluation}\label{evaluation-15}
 
-\subsection{Pros/Cons}\label{proscons-18}
+\subsection{Pros/Cons}\label{proscons-16}
 
 \textbf{Pros}
 
@@ -5810,6 +5775,15 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 
 measurement theory / decision science, semi-supervised, unsupervised,
 online, \& weak learning
+
+set the seed always
+
+Shapiro-Wilk Test for Normality: H\_0 says the data is normally
+distributed while H\_a says it is not. To run this test in R, the syntax
+is quite simple:
+
+import statsmodels.api as sm X = sm.add\_constant(X) rgr\_lr = sm.OLS(Y,
+X).fit(disp=False) print(results.summary())
 
 \section{Other}\label{other-3}
 
