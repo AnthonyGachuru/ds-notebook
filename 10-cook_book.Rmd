@@ -4,6 +4,21 @@
 
 http://chrisalbon.com/
 
+## Rowwise
+
+```{r, eval = F}
+library(dplyr)
+
+mtcars %>% 
+  rowwise() %>% 
+  mutate(mymean=mean(c(cyl,mpg))) %>% 
+  select(cyl, mpg, mymean)
+```
+
+```{python, eval = F}
+import pandas
+```
+
 ## Sampling File
 
 ```{bash, eval = F}

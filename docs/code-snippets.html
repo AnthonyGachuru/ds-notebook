@@ -321,8 +321,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="12" data-path="code-snippets.html"><a href="code-snippets.html"><i class="fa fa-check"></i><b>12</b> Code Snippets</a><ul>
 <li class="chapter" data-level="12.1" data-path="code-snippets.html"><a href="code-snippets.html#albon"><i class="fa fa-check"></i><b>12.1</b> Albon</a></li>
-<li class="chapter" data-level="12.2" data-path="code-snippets.html"><a href="code-snippets.html#sampling-file"><i class="fa fa-check"></i><b>12.2</b> Sampling File</a></li>
-<li class="chapter" data-level="12.3" data-path="code-snippets.html"><a href="code-snippets.html#hold"><i class="fa fa-check"></i><b>12.3</b> Hold</a></li>
+<li class="chapter" data-level="12.2" data-path="code-snippets.html"><a href="code-snippets.html#rowwise"><i class="fa fa-check"></i><b>12.2</b> Rowwise</a></li>
+<li class="chapter" data-level="12.3" data-path="code-snippets.html"><a href="code-snippets.html#sampling-file"><i class="fa fa-check"></i><b>12.3</b> Sampling File</a></li>
+<li class="chapter" data-level="12.4" data-path="code-snippets.html"><a href="code-snippets.html#hold"><i class="fa fa-check"></i><b>12.4</b> Hold</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="frameworks.html"><a href="frameworks.html"><i class="fa fa-check"></i><b>13</b> Frameworks</a><ul>
 <li class="chapter" data-level="13.1" data-path="frameworks.html"><a href="frameworks.html#pyspark"><i class="fa fa-check"></i><b>13.1</b> PySpark</a></li>
@@ -371,13 +372,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">12.1</span> Albon</h2>
 <p><a href="http://chrisalbon.com/" class="uri">http://chrisalbon.com/</a></p>
 </div>
+<div id="rowwise" class="section level2">
+<h2><span class="header-section-number">12.2</span> Rowwise</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mymean=</span><span class="kw">mean</span>(<span class="kw">c</span>(cyl,mpg))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(cyl, mpg, mymean)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas</code></pre></div>
+</div>
 <div id="sampling-file" class="section level2">
-<h2><span class="header-section-number">12.2</span> Sampling File</h2>
+<h2><span class="header-section-number">12.3</span> Sampling File</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pip</span> install subsample
 <span class="ex">gzcat</span> ginormous.csv.gz <span class="kw">|</span> <span class="ex">subsample</span> -n 100000 <span class="op">&gt;</span> sampled.csv.gz</code></pre></div>
 </div>
 <div id="hold" class="section level2">
-<h2><span class="header-section-number">12.3</span> Hold</h2>
+<h2><span class="header-section-number">12.4</span> Hold</h2>
 <p>SELECT ‘Dummy Column Text’ as DUMMYCOL FROM tbl</p>
 <p><a href="https://github.com/jreback/PyDataNYC2015/blob/master/whats-new-in-pandas/v0.16.x.ipynb">Temporary pandas Columns</a></p>
 <ul>

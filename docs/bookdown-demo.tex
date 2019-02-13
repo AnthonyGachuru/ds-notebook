@@ -5989,6 +5989,25 @@ Zero correlation doesn't imply independence
 
 \url{http://chrisalbon.com/}
 
+\section{Rowwise}\label{rowwise}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mymean=}\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(cyl,mpg))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(cyl, mpg, mymean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Sampling File}\label{sampling-file}
 
 \begin{Shaded}
