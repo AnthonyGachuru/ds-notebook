@@ -83,3 +83,5 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 * swarmplot | marimekko charts | radviz | Marey Chart
 
+* https://mobile.twitter.com/andrewheiss/status/1095443941875343360
+

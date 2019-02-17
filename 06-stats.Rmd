@@ -6,6 +6,8 @@ ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) | [2](https://www.rdocum
 
 http://www.stat.umn.edu/geyer/old/5101/rlook.html
 
+https://mobile.twitter.com/PhDemetri/status/1094454658888753152
+
 https://stats.idre.ucla.edu/other/mult-pkg/whatstat/
 
 categorical dissimilairty https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist
