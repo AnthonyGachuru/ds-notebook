@@ -1,5 +1,7 @@
 # Notes
 
+lm() with a single categorical feature is equivalent to a t test or anova test.
+
 measurement theory / decision science, semi-supervised, unsupervised, online, & weak learning
 
 set the seed always

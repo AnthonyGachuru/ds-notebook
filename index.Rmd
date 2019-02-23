@@ -56,6 +56,8 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Remember to use atomic commit messages
 
+* checklists | code books | appendices | post mortems | tests | gacp
+
 ### Import
 
 * Character Encoding Precendence: utf-8, iso-8859-1, utf-16
