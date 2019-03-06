@@ -1,0 +1,712 @@
+# Resources
+
+## General
+<br/>
+
+<div class="col3">
+CoCalc
+
+Conda
+
+[State of the Art Results](https://paperswithcode.com/sota)
+
+[Data Proofer](http://dataproofer.org/)
+
+[DS Project Style Guide](https://www.dataquest.io/blog/data-science-project-style-guide/)
+
+[Stats Forum](https://discourse.datamethods.org/)
+
+[Probability Cheat Sheet](http://www.wzchen.com/probability-cheatsheet)
+
+[AB Testing](http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html)
+
+[Prob Dists In R](http://www.cyclismo.org/tutorial/R/probability.html)
+
+[Power Analysis](https://www.statmethods.net/stats/power.html)
+
+[Effect Size](https://www.leeds.ac.uk/educol/documents/00002182.htm)
+</div>
+<br/>
+
+## Auto Data Science
+<br/>
+
+<div class="col3">
+[Data Cleaning](http://www.dataland.ai/index.php) 
+
+[Visualize](http://holoviews.org)
+
+Feature Engineering: [1](https://www.featuretools.com) | [2](https://towardsdatascience.com/automated-feature-engineering-in-python-99baf11cc219) | [3](https://www.featurelabs.com/) 
+
+Auto ML: [1](https://cloud.google.com/automl/) | [2](http://www.ml4aad.org) | TPOT
+</div>
+
+<br/>
+
+## Data
+<br/>
+
+<div class="col3">
+http://www.fast.ai/2018/10/16/aws-datasets
+
+http://bbcsfx.acropolis.org.uk/
+
+https://hub.packtpub.com/25-datasets-deep-learning-iot/
+
+https://www.backblaze.com/b2/hard-drive-test-data.html
+
+https://toolbox.google.com/datasetsearch
+
+https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research
+
+https://unpaywall.org/products/snapshot
+
+https://blog.webkid.io/datasets-for-machine-learning/
+
+https://www.githubarchive.org
+
+https://www.enigma.com/data
+
+https://www.kaggle.com/about/datasets-awards/overview
+
+http://veekaybee.github.io/2018/07/23/small-datasets/
+
+https://grasswiki.osgeo.org/wiki/Global_datasets
+
+https://www.figure-eight.com/datasets/
+
+https://stanfordmlgroup.github.io/competitions/mura/
+
+[sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp)
+
+[UCI ML Repo](http://archive.ics.uci.edu/ml/)
+
+[Datanauts](https://open.nasa.gov/explore/datanauts/)
+
+Open Census Data: [1](https://www.producthunt.com/posts/open-census-data) | [2](https://www.safegraph.com/open-census-data?ref=producthunt) | [3](https://docs.safegraph.com/docs/open-census-data)
+
+[World Holidays](https://date.nager.at/)
+
+Rosalind: [1](http://rosalind.info/problems/locations/) | [2](https://github.com/mtarbit/Rosalind-Problems)
+
+[Research Data](http://academictorrents.com/)
+ 
+SEC: [1](https://www.sec.gov/structureddata) | [2](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html) | [3](https://www.sec.gov/dera/data/financial-statement-data-sets.html) | [4](https://www.sec.gov/dera/data/financial-statement-data-sets.html)
+
+Neuro Data: [1](http://preprocessed-connectomes-project.org) | [2](http://www.humanconnectomeproject.org) | [3](http://fcon_1000.projects.nitrc.org/indi/abide/) | [4](https://www.ncbi.nlm.nih.gov/pubmed/25840117) | [5](https://coins.mrn.org)
+
+time series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting)
+
+[Microsoft Research](https://msropendata.com)
+
+Disney Animation: [1](https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html) | [2](https://www.disneyanimation.com/technology/datasets)
+
+[Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html)
+
+[SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
+
+[ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv)
+
+[Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/)
+
+[Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
+
+[Data.gov](http://www.data.gov/)
+
+NYC: [1](https://nycopendata.socrata.com/) | [2](https://health.data.ny.gov) | [3](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml)
+
+Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/)
+
+Sentiment: [1](http://ai.stanford.edu/~amaas/data/sentiment/) | [2](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews)
+
+Scripts: [1](https://www.springfieldspringfield.co.uk) | [2](https://github.com/BobAdamsEE/SouthParkData) | [3](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) | [4](http://transcripts.foreverdreaming.org/viewtopic.php?f=809&t=31120)
+
+[Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
+
+[Word Bank](http://wordbank.stanford.edu/)
+
+Q & A: [1](https://rajpurkar.github.io/SQuAD-explorer/) | [2](https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/) | [3](http://jmcauley.ucsd.edu/data/amazon/qa/) | [4](http://ai2-website.s3.amazonaws.com/publications/algebra-TACL2015.pdf) | [5](http://quac.ai/)
+
+Autonomous Driving: [1](http://robotcar-dataset.robots.ox.ac.uk/) | [2](https://medium.com/udacity/open-sourcing-223gb-of-mountain-view-driving-data-f6b5593fbfa5#.ch9a8c762) | [3](https://github.com/commaai/research) | [4](https://www.scaleapi.com/image-annotation/self-driving-cars)
+
+[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/)
+
+CV: [1](https://research.googleblog.com/2016/09/introducing-open-images-dataset.html) | [2](http://aloi.science.uva.nl/?__vid=5c0983704ebd0132821522000b2a88d7) | [3](http://www.vision.caltech.edu/visipedia/CUB-200.html?__vid=5c0983704ebd0132821522000b2a88d7) | [4](http://www.robots.ox.ac.uk/~vgg/data/flowers/17/?__vid=5c0983704ebd0132821522000b2a88d7) | [5](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/) | [6](https://github.com/vc1492a/Hey-Waldo) | [7](https://github.com/gtoderici/sports-1m-dataset)
+
+Networks: [1](https://snap.stanford.edu/data/index.html) | [2](http://networkrepository.com/index.php) | [3](https://aminer.org/data-sna)
+
+[Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/)
+
+Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/)
+
+[Medical Data](https://github.com/beamandrew/medical-data)
+
+[Deep Mind](https://deepmind.com/research/open-source/open-source-datasets/)
+
+[NASA](https://bmtgoncalves.github.io/pyNASA/)
+
+[Visual Reasoning](http://lic.nlp.cornell.edu/nlvr/)
+
+[Allen Institute](http://allenai.org/data.html)
+
+[Miscellaneous Datasets](http://users.stat.ufl.edu/~winner/datasets.html)
+
+[Sound Effects](http://bbcsfx.acropolis.org.uk/)
+
+[NASA](https://open.nasa.gov/blog/)
+
+[Biodiversity](https://www.gbif.org)
+
+[Summarization Data](https://summari.es)
+
+[Kaggle Datasets](https://www.kaggle.com/datasets)
+
+[NLP](https://github.com/niderhoff/nlp-datasets/blob/master/README.md)
+
+[Portals](https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/)
+
+[European Data Portal](http://www.europeandataportal.eu/)
+
+[Journalism Data](http://cjlab.stanford.edu/2015/09/30/lab-launch-and-data-sets/) 
+
+[Enigma](https://public.enigma.com/)
+
+[Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/)
+</div>
+<br/>
+
+
+<br/>
+
+## Import
+<br/>
+
+<div class="col3">
+[R Spreadsheet](https://www.jamovi.org/)
+
+https://www.webscraper.io/documentation#open-web-scraper
+
+Documentation: [1](http://databasenotetaker.com/) | [2](https://dataedo.com/) | [3](https://www.apexsql.com/sql-tools-doc.aspx) | [4](https://techwriter.me/best-practices-guide/documenting-databases.aspx) | [5](http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary) | [6](https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database) | [7](https://drawsql.app/#features)
+  
+CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-peek-at-the-data-set) | [2](https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY) | [3](http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html)
+
+[pdf table extraction](https://tabula.technology)
+
+[DEaaS](https://www.astronomer.io/)
+  
+[data build tool](https://www.getdbt.com/)
+
+https://www.stitchdata.com/
+
+https://www.prefect.io/
+</div>
+<br/>
+
+## Tidy/Transform
+<br/>
+
+<div class="col3">
+[Pandas](http://tomaugspurger.github.io/modern-1.html)
+</div>
+<br/>
+
+## Visualize
+<br/>
+
+<div class="col3">
+http://pyviz.org/
+
+http://dataviz.tools/
+
+https://www.data-to-viz.com
+
+https://dominikkoch.github.io/Bump-Chart/
+
+https://www.r-graph-gallery.com/
+
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top
+
+[Stats Viz](http://emilkirkegaard.dk/understanding_statistics/)
+
+[Seeing Theory](http://students.brown.edu/seeing-theory/)
+
+[Python Plotting Guide](http://pythonplot.com/)
+  
+[Py Graph Gallery](https://python-graph-gallery.com)
+
+ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html) | [2](https://plot.ly/python/table/) | [3](https://plot.ly/python/html-reports/) | [Extensions](http://www.ggplot2-exts.org/gallery/)
+
+[Sankey Diagram Creator](http://sankeymatic.com)
+
+[R Waffle Charts](https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/)
+
+[High Dimensional](https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html)
+
+[Links](http://www.thehackerwithin.org/swinburne/links.html)
+
+[Tufte In R](http://motioninsocial.com/tufte/)
+
+[R Graph Compendium](http://shinyapps.org/apps/RGraphCompendium/index.php)
+
+[Data Viz Catalogue](http://www.datavizcatalogue.com/index.html)
+
+[Text Visualization](http://textvis.lnu.se/)
+</div>
+<br/>
+
+## Model
+
+### General
+
+<br/>
+
+<div class="col3">
+Semi-supervised: active learning | [Auto Labeling](https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html)
+
+[Python Distributed](https://speakerdeck.com/seanoc/a-tour-of-large-scale-data-analysis-tools-in-python)
+
+[SklearnDsitributed ](https://alexperrier.github.io/jekyll/update/2016/03/16/out-of-core-scikit-boston-meetup.html#/)
+
+[Spark Hub](https://sparkhub.databricks.com/)
+
+Interactive ML: [1](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Interactive-Naive-Bayes-using-Shiny-Text-Retrieval-Classification-Quantification) | [2](https://nuit-blanche.blogspot.com/2017/02/saturday-morning-videos-interactive.html)
+  
+[Online Learning](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html)
+
+[ML APIs](http://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html)
+
+[Auto Optimization](https://sigopt.com/)
+
+[Google ML Glossary](https://developers.google.com/machine-learning/glossary/)
+
+[Apache System ML](https://systemml.apache.org)
+
+[Learning Curves](http://www.ritchieng.com/machinelearning-learning-curve/)
+
+[Gaussian Processes](http://scikit-learn.org/stable/modules/gaussian_process.html)
+
+[Debugging ML](http://nlpers.blogspot.com/2016/08/debugging-machine-learning.html)
+
+http://gael-varoquaux.info/interpreting_ml_tuto/index.html
+
+[LM Model Diagnostics](http://mpastell.com/2013/04/19/python_regression/)
+
+[Gain Curve](https://www.rdocumentation.org/packages/WVPlots/versions/0.2.6/topics/GainCurvePlot)
+
+[Metrics](https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/)
+
+[Choosing A Classifier](http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/)
+
+[LOOCV Perils](http://www.russpoldrack.org/2012/12/the-perils-of-leave-one-out.html)
+
+[Model Evaluations](http://www.win-vector.com/blog/2016/12/be-careful-evaluating-model-predictions/)
+
+[Model Evaluation](http://blog.dato.com/how-to-evaluate-machine-learning-models-part-1-orientation)
+
+CV Mistakes: [1](http://betatim.github.io/posts/cross-validation-gone-wrong/) |  [2](http://www.alfredo.motta.name/cross-validation-done-wrong/) |  [3](http://robjhyndman.com/hyndsight/crossvalidation/)
+
+[Partial Dependence Plots](https://cran.r-project.org/web/packages/pdp/pdp.pdf)
+
+https://pair-code.github.io/what-if-tool/
+
+permutation importance (eli5)
+
+https://pbiecek.github.io/breakDown/
+
+[Break Down Plots](https://cran.r-project.org/web/packages/breakDown/index.html)
+</div>
+<br/>
+
+### Supervised
+
+<br/>
+
+<div class="col3">
+http://clus.sourceforge.net/doku.php
+
+https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html
+
+https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html
+
+[sklearn metrics](http://scikit-learn.org/stable/modules/model_evaluation.html#function-for-prediction-error-metrics)
+
+[Algorithm Comparison](https://docs.google.com/spreadsheets/d/16i47Wmjpj8k-mFRk-NnXXU5tmSQz8h37YxluDV8Zy9U/edit#gid=0)
+
+[Regression Effects Lib](https://www.rdocumentation.org/packages/yhat/versions/2.0-0)
+
+anomalies: [skl](http://scikit-learn.org/stable/modules/outlier_detection.html) | [R](https://business-science.github.io/anomalize/)
+
+lightgbm: [tuning](https://medium.com/@pushkarmandot/https-medium-com-pushkarmandot-what-is-lightgbm-how-to-implement-it-how-to-fine-tune-the-parameters-60347819b7fc) | [ex](https://www.kaggle.com/ezietsman/simple-python-lightgbm-example)
+
+[Tree Analysis Viz](http://etetoolkit.org/)
+
+unbalanced classes: [R](https://cran.r-project.org/web/packages/imbalance/index.html) | [Py](http://contrib.scikit-learn.org/imbalanced-learn/stable/)
+
+[Interactive ML](http://www.creativeai.net/posts/eivW6BvrrpyPf282d/interactive-machine-learning-an-overview-in-5-videos)
+
+Ensembles: [General](http://mlwave.com/kaggle-ensembling-guide/) | [caret](http://amunategui.github.io/blending-models/) | [skl](https://www.toptal.com/machine-learning/ensemble-methods-machine-learning) | [1](http://blog.kaggle.com/2016/12/27/a-kagglers-guide-to-model-stacking-in-practice/) | [2](http://blog.kaggle.com/2017/06/15/stacking-made-easy-an-introduction-to-stacknet-by-competitions-grandmaster-marios-michailidis-kazanova/)
+
+HLM / RNNs
+
+Multilevel regression and post stratification
+
+Mixed Models / multilevel / hierarchical / mixed-effects models
+
+Multiple Factor Analysis: FactoMineR
+
+Functional PCA
+
+Hidden Markov Models
+
+LMM: [1](http://edwardlib.org/tutorials/linear-mixed-effects-models) | [2](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)
+
+Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html) | [2](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html) | [3](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html)
+</div>
+<br/>
+
+### Unsupervised
+<br/>
+<div class="col3">
+[Annotation](https://explosion.ai/blog/prodigy-annotation-tool-active-learning)
+
+[Mixed Data Clustering](https://www.r-bloggers.com/clustering-mixed-data-types-in-r/)
+
+[Dimensionality Reduction Techniques](https://colah.github.io/posts/2014-10-Visualizing-MNIST/)
+
+[Unsupervised Learning Sklearn](http://opensource.datacratic.com/mtlpy50/)
+
+[Info Maximization](http://www.inference.vc/unsupervised-learning-by-predicting-noise-an-information-maximization-view-2/)
+
+[K-Means On MNIST](http://johnloeber.com/docs/kmeans.html)
+
+tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.io/tsne/) | [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
+</div>
+<br/>
+
+## Other ML
+<br/>
+
+### Deep Learning
+<br/>
+
+<div class="col3">
+https://chainer.org/
+  
+https://goku.me/blog/EHR
+
+http://www.geometricdeeplearning.com
+
+https://www.crestle.com
+
+fast.ai
+
+[Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
+
+https://cran.r-project.org/web/packages/kerasformula/index.html
+
+[DL Online](https://tenso.rs) 
+
+[DL Everywhere](http://vertex.ai/)
+
+[Debugging](http://theorangeduck.com/page/neural-network-not-working)
+
+[Neural Network Zoo](http://www.asimovinstitute.org/neural-network-zoo/)
+
+[Design Patterns](http://www.deeplearningpatterns.com/doku.php/applications)
+
+[RNNs](http://github.stfi.re/kjw0612/awesome-rnn?sf=dlpbez#aa)
+
+[Resources](https://yanirseroussi.com/deep-learning-resources/)
+
+[Glossary](http://www.wildml.com/deep-learning-glossary/)
+</div>
+<br/>
+
+### Probabilistic Programming
+<br/>
+
+<div class="col3">
+[PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
+
+[Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
+
+https://arviz-devs.github.io/arviz/index.html
+
+SigOpt
+
+https://gitlab.com/vuorre/bayesplan
+
+https://msbnx.azurewebsites.net/
+
+http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
+
+[greta](https://rviews.rstudio.com/2018/04/23/on-first-meeting-greta/)
+
+[Tipping Point Analysis](https://cran.r-project.org/web/packages/tipr/index.html)
+
+http://www.lucymcgowan.com/talks/2018-01-27_data-day-texas.html
+
+[PGM Viz](http://daft-pgm.org)
+
+[SEM](http://sachaepskamp.com/SEM2017)
+
+Approximate Bayesian Computation
+
+[Bayesian Inference Viz](http://rpsychologist.com/d3/bayes/)
+
+[Edward](http://edwardlib.org/) | [Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
+</div>
+<br/>
+
+### Causality
+<br/>
+
+<div class="col3">
+[Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
+
+[Misra Talk](https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245&utm_campaign=US%20Event%20Meetup%20NYU%20NYC%20July%202018&utm_source=hs_email&utm_medium=email&utm_content=64589348&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI&_hsmi=64589348)
+
+https://www.dropbox.com/s/m233izdg1mzbee2/MLSS-18_final.pdf?dl=0
+
+[Causal Impact](https://google.github.io/CausalImpact/)
+
+https://cran.r-project.org/web/packages/causaleffect/causaleffect.pdf
+
+http://causalinference.gitlab.io/icwsm-tutorial/
+</div>
+<br/>
+
+### NLP
+<br/>
+
+<div class="col3">
+https://mobile.twitter.com/lmthang/status/1050543868041555969
+
+https://gking.harvard.edu/readme
+
+https://web.stanford.edu/~jurafsky/slp3/
+
+https://finetune.indico.io
+
+http://textable.io/
+
+https://pypi.python.org/pypi/tmtoolkit
+
+http://www.structuraltopicmodel.com/
+
+https://blog.insightdatascience.com/how-to-solve-90-of-nlp-problems-a-step-by-step-guide-fda605278e4e
+
+[Kaggle Guide](https://t.co/Zcnd7EJKsn)
+
+[Chat Bots](https://rasa.ai/)
+
+[Doc Similarity](http://brandonrose.org/clustering)
+
+[Vector Embeddings](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html)
+
+Topic Modeling: [1](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html) | [2](http://chdoig.github.io/pytexas2015-topic-modeling/#/) | [3](https://www.cs.princeton.edu/~blei/topicmodeling.html)
+
+[qdap](https://trinker.github.io/qdap/vignettes/qdap_vignette.html)
+
+NLP For: [Web Devs](http://blog.algorithmia.com/natural-language-processing-algorithms-web-developers/) | [Bot Makers](https://stanfy.com/blog/advanced-natural-language-processing-tools-for-bot-makers/)
+
+[NLP Intro](http://blog.algorithmia.com/introduction-natural-language-processing-nlp/)
+</div>
+<br/>
+<br/>
+
+### Computer Vision
+<br/>
+
+<div class="col3">
+https://www.pyimagesearch.com
+  
+https://gluon-cv.mxnet.io
+
+[CV Toolkit](https://luminoth.ai)
+</div>
+<br/>
+
+### Geospatial
+<br/>
+
+<div class="col3">
+https://geocompr.robinlovelace.net/adv-map.html#interactive-maps
+
+https://www.jessesadler.com/post/gis-with-r-intro/
+
+https://uber.github.io/kepler.gl/#/
+
+http://gisquick.org/
+
+https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/
+
+[R Spatial](http://www.rspatial.org/analysis/rst/2-scale_distance.html)
+
+[tilegrams](https://pitchinteractiveinc.github.io/tilegrams/)
+
+[Spatial DA R](https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r)
+</div>
+<br/>
+
+### Networks
+<br/>
+
+<div class="col3">
+https://mikedombo.github.io/graphPlayground/#
+
+[SNAP](https://snap.stanford.edu/snappy/index.html)
+
+[graph tool](https://graph-tool.skewed.de/)
+
+[Berkeley Class](http://blogs.ischool.berkeley.edu/i290-abdt-s12/)
+
+netviz: [1](http://curleylab.psych.columbia.edu/netviz/) | [2](http://www.kateto.net/polnet2015)
+
+[CS224 SNA](https://web.stanford.edu/class/cs224w/handouts.html)
+
+[NetworkL](https://networkl.github.io/)
+</div>
+<br/>
+
+### AI
+<br/>
+
+<div class="col3">
+https://www.stateoftheart.ai/
+
+http://www.hbcse.tifr.res.in/jrmcont/notespart1/node27.html
+
+https://ai.google/
+
+https://openai.com/research/
+
+https://selfdrivingcars.mit.edu/deeptraffic/
+
+http://airesources.org/ | https://alleninstitute.org | http://allenai.org/index.html
+
+[AI Music Generation](https://www.jukedeck.com)
+
+[AI Acheivements](https://poo.ai/) | [Create With AI](http://createwith.ai/)
+
+[Hod Lipson](http://www.hodlipson.com/)
+
+[Playing Games](http://www.ggp.org/)
+
+[MIT AI](https://cbmm.mit.edu/)
+
+[DeepMind Lab](https://deepmind.com/blog/open-sourcing-deepmind-lab/)
+
+[AI 4 Py](https://wiki.python.org/moin/PythonForArtificialIntelligence)
+
+[AI Tasks](http://aiimpacts.org/concrete-ai-tasks-for-forecasting/)
+
+[Neuroevolution Viz](https://eng.uber.com/vine/)
+</div>
+<br/>
+
+### RL
+<br/>
+
+<div class="col3">
+https://box2d.org/
+
+https://aihabitat.org/
+
+https://blogs.unity3d.com/2018/10/02/puppo-the-corgi-cuteness-overload-with-the-unity-ml-agents-toolkit/
+
+https://blog.openai.com/openai-baselines-ppo/
+
+https://ai.googleblog.com/2018/08/introducing-new-framework-for-flexible.html
+
+[Unity Agents](https://blogs.unity3d.com/2017/12/08/introducing-ml-agents-v0-2-curriculum-learning-new-environments-and-more/)
+
+[Temporal Diff Learning](https://harderchoices.com/2018/06/07/temporal-difference-learning-in-python/)
+
+[musculoskeletal models rl](http://osim-rl.stanford.edu)
+
+RLlib: [1](https://www.oreilly.com/ideas/introducing-rllib-a-composable-and-scalable-reinforcement-learning-library) | [2](https://ray.readthedocs.io/en/latest/rllib.html)
+
+[Gym](https://blog.openai.com/gym-retro) | [TensorForce](https://reinforce.io/blog/introduction-to-tensorforce/) | keras-rl 
+
+[DeepRL Agent](https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/)
+
+[General Env Creator](https://openai.com/blog/universe/)
+
+[Website RL Benchmarks](http://alpha.openai.com/miniwob/index.html)
+
+[BECCA Agent](https://brohrer.github.io/becca_6_chase_demo.html) | [IOT](https://brohrer.github.io/adaptive_reinforcement_learning_iot.html)
+</div>
+<br/>
+
+### Genetic Algorithms / ES
+<br/>
+
+<div class="col3">
+[Guided Evolutionary Strategies](https://twitter.com/hardmaru/status/1012142197334892545)
+
+[Emergent Mind](http://www.emergentmind.com)
+
+[eureqa](http://www.nutonian.com/products/eureqa/)
+
+[GECCO Conference](http://gecco-2016.sigevo.org/index.html/HomePage#&panel1-1)
+</div>
+<br/>
+
+### Time Series
+<br/>
+
+<div class="col3">
+https://ai.googleblog.com/2018/11/accurate-online-speaker-diarization.html
+
+[librosa](https://librosa.github.io/librosa/tutorial.html#overview)
+</div>
+<br/>
+
+## Communicate
+
+<br/>
+
+<div class="col3">
+https://metabase.com/
+  
+http://koaning.io/make-docs.html
+
+[Mode Studio](https://about.modeanalytics.com/)
+</div>
+<br/>
+
+## Deploy & Maintain
+<br/>
+
+<div class="col3">
+http://pachyderm.io
+
+https://www.mlflow.org
+
+https://www.wandb.com
+
+Databricks
+
+Ansible
+
+[Pipelines](http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines)
+
+[Workflow System](https://snakemake.readthedocs.io/en/stable/)
+
+[Pipeline Automation](http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines)
+
+[Streaming Data](https://www.wallaroolabs.com)
+
+[Spark](https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html)
+
+[batch job execution framework](https://stitchfix.github.io/flotilla-os/)
+
+[Sklearn Serialization](https://cmry.github.io/notes/serialize)
+
+[Auto Deploy](http://content.nexosis.com/twimlai)
+
+TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
+
+[Model Deployment aaS](https://orchestrahq.com)
+</div>

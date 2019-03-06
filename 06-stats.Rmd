@@ -2,6 +2,8 @@
 
 ## General
 
+Mann–Whitney U test
+
 ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) | [2](https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf)
 
 http://www.stat.umn.edu/geyer/old/5101/rlook.html
