@@ -1,5 +1,25 @@
 # Notes
 
+arima: linear vs garch: non-linear
+
+mri: t1 > t2 in terms of focus and intensity
+
+hamming loss: multilabel and multiclass classification
+
+fowles-mallows score for clustering when ground truth is known
+
+outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers
+
+tomek link: points of different classes which are neighbors of each other. Removing them often improves model performance
+
+youden's j
+
+softmax for multiclass classification
+
+Multiple Correspondence Analysis
+
+platt scaling
+
 lm() with a single categorical feature is equivalent to a t test or anova test.
 
 measurement theory / decision science, semi-supervised, unsupervised, online, & weak learning

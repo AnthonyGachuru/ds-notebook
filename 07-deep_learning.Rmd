@@ -2,6 +2,8 @@
 
 ## General
 
+cnn for time series
+
 * restnet, attention > RNN / LSTM
 
 * "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun

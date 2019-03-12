@@ -4,6 +4,10 @@
 
 Mann–Whitney U test
 
+https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf
+
+library(effsize) lm vs t.test vs anova library(EMT): multinomial test
+
 ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) | [2](https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf)
 
 http://www.stat.umn.edu/geyer/old/5101/rlook.html

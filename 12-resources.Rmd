@@ -692,6 +692,8 @@ Databricks
 
 Ansible
 
+https://aws.amazon.com/sagemaker/
+
 [Pipelines](http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines)
 
 [Workflow System](https://snakemake.readthedocs.io/en/stable/)
