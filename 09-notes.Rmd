@@ -2,9 +2,15 @@
 
 arima: linear vs garch: non-linear
 
+hierarchical clustering: ward
+
 mri: t1 > t2 in terms of focus and intensity
 
 hamming loss: multilabel and multiclass classification
+
+cox proportional hazards & multivariate linear regression
+
+sequential data: rnn, lstm, hidden markov models & conditional random fields
 
 fowles-mallows score for clustering when ground truth is known
 

@@ -265,6 +265,8 @@ ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_P
 <div class="col3">
 Semi-supervised: active learning | [Auto Labeling](https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html)
 
+https://machinelearningmastery.com/
+
 [Python Distributed](https://speakerdeck.com/seanoc/a-tour-of-large-scale-data-analysis-tools-in-python)
 
 [SklearnDsitributed ](https://alexperrier.github.io/jekyll/update/2016/03/16/out-of-core-scikit-boston-meetup.html#/)
