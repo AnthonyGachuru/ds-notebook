@@ -1,5 +1,9 @@
 # Notes
 
+time series features: extract data from timestamp (year, month, day), lags, rolling windows, rolling window - summary stats of all previous data points
+
+Cohort analysis
+
 arima: linear vs garch: non-linear
 
 hierarchical clustering: ward

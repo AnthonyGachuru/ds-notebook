@@ -49,6 +49,10 @@ Auto ML: [1](https://cloud.google.com/automl/) | [2](http://www.ml4aad.org) | TP
 <div class="col3">
 http://www.fast.ai/2018/10/16/aws-datasets
 
+https://mimic.physionet.org/
+
+https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750
+
 http://bbcsfx.acropolis.org.uk/
 
 https://hub.packtpub.com/25-datasets-deep-learning-iot/
@@ -688,7 +692,7 @@ http://pachyderm.io
 
 https://www.mlflow.org
 
-https://www.wandb.com
+[Weights & Biases](https://www.wandb.com/blog/towards-reproducibility)
 
 Databricks
 

@@ -2,6 +2,8 @@
 
 ## Notes
 
+Baselines: statsmodels.tsa.holtwinters | forecast::ets  
+
 lubricate ymd, rsample tscv
 
 A stationary time series is one whose properties do not depend on the time at which the series is observed. 
