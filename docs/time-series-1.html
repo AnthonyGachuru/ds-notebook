@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 7 Time Series | Data Science Cribsheet</title>
+  <meta name="description" content="A collection of quick notes on the field.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 7 Time Series | Data Science Cribsheet" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A collection of quick notes on the field." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Time Series | Data Science Cribsheet" />
+  
+  <meta name="twitter:description" content="A collection of quick notes on the field." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="stats.html">
+<link rel="next" href="deep-learning-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DS Cribsheet</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workflow</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preamble"><i class="fa fa-check"></i><b>1.1</b> Preamble</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#preparation"><i class="fa fa-check"></i><b>1.2.1</b> Preparation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#import"><i class="fa fa-check"></i><b>1.2.2</b> Import</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#tidy"><i class="fa fa-check"></i><b>1.2.3</b> Tidy</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#transform"><i class="fa fa-check"></i><b>1.2.4</b> Transform</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#visualize"><i class="fa fa-check"></i><b>1.2.5</b> Visualize</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#model"><i class="fa fa-check"></i><b>1.2.6</b> Model</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
+<li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#auto-data-science"><i class="fa fa-check"></i><b>1.4</b> Auto Data Science</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.5</b> Data</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#import-1"><i class="fa fa-check"></i><b>1.6</b> Import</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#tidytransform"><i class="fa fa-check"></i><b>1.7</b> Tidy/Transform</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#visualize-1"><i class="fa fa-check"></i><b>1.8</b> Visualize</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#model-1"><i class="fa fa-check"></i><b>1.9</b> Model</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.9.1</b> General</a></li>
+<li class="chapter" data-level="1.9.2" data-path="index.html"><a href="index.html#supervised"><i class="fa fa-check"></i><b>1.9.2</b> Supervised</a></li>
+<li class="chapter" data-level="1.9.3" data-path="index.html"><a href="index.html#unsupervised"><i class="fa fa-check"></i><b>1.9.3</b> Unsupervised</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="index.html"><a href="index.html#other-ml"><i class="fa fa-check"></i><b>1.10</b> Other ML</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="index.html"><a href="index.html#deep-learning"><i class="fa fa-check"></i><b>1.10.1</b> Deep Learning</a></li>
+<li class="chapter" data-level="1.10.2" data-path="index.html"><a href="index.html#probabilistic-programming"><i class="fa fa-check"></i><b>1.10.2</b> Probabilistic Programming</a></li>
+<li class="chapter" data-level="1.10.3" data-path="index.html"><a href="index.html#causality"><i class="fa fa-check"></i><b>1.10.3</b> Causality</a></li>
+<li class="chapter" data-level="1.10.4" data-path="index.html"><a href="index.html#nlp"><i class="fa fa-check"></i><b>1.10.4</b> NLP</a></li>
+<li class="chapter" data-level="1.10.5" data-path="index.html"><a href="index.html#computer-vision"><i class="fa fa-check"></i><b>1.10.5</b> Computer Vision</a></li>
+<li class="chapter" data-level="1.10.6" data-path="index.html"><a href="index.html#geospatial"><i class="fa fa-check"></i><b>1.10.6</b> Geospatial</a></li>
+<li class="chapter" data-level="1.10.7" data-path="index.html"><a href="index.html#networks"><i class="fa fa-check"></i><b>1.10.7</b> Networks</a></li>
+<li class="chapter" data-level="1.10.8" data-path="index.html"><a href="index.html#ai"><i class="fa fa-check"></i><b>1.10.8</b> AI</a></li>
+<li class="chapter" data-level="1.10.9" data-path="index.html"><a href="index.html#rl"><i class="fa fa-check"></i><b>1.10.9</b> RL</a></li>
+<li class="chapter" data-level="1.10.10" data-path="index.html"><a href="index.html#genetic-algorithms-es"><i class="fa fa-check"></i><b>1.10.10</b> Genetic Algorithms / ES</a></li>
+<li class="chapter" data-level="1.10.11" data-path="index.html"><a href="index.html#time-series"><i class="fa fa-check"></i><b>1.10.11</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="index.html"><a href="index.html#communicate-1"><i class="fa fa-check"></i><b>1.11</b> Communicate</a></li>
+<li class="chapter" data-level="1.12" data-path="index.html"><a href="index.html#deploy-maintain"><i class="fa fa-check"></i><b>1.12</b> Deploy &amp; Maintain</a></li>
+<li class="chapter" data-level="1.13" data-path="index.html"><a href="index.html#notes"><i class="fa fa-check"></i><b>1.13</b> Notes</a><ul>
+<li class="chapter" data-level="1.13.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.13.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="1.13.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.13.2</b> Sample R Pipeline</a></li>
+<li class="chapter" data-level="1.13.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.13.3</b> Other</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pre-modeling.html"><a href="pre-modeling.html"><i class="fa fa-check"></i><b>2</b> Pre-Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="pre-modeling.html"><a href="pre-modeling.html#import-2"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-1"><i class="fa fa-check"></i><b>2.1.1</b> General</a></li>
+<li class="chapter" data-level="2.1.2" data-path="pre-modeling.html"><a href="pre-modeling.html#sql"><i class="fa fa-check"></i><b>2.1.2</b> SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="pre-modeling.html"><a href="pre-modeling.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-modeling.html"><a href="pre-modeling.html#transform-1"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-2"><i class="fa fa-check"></i><b>2.3.1</b> General</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pre-modeling.html"><a href="pre-modeling.html#missingness-imputation"><i class="fa fa-check"></i><b>2.3.2</b> Missingness &amp; Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="pre-modeling.html"><a href="pre-modeling.html#visualize-2"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
+<li class="chapter" data-level="2.5" data-path="pre-modeling.html"><a href="pre-modeling.html#general-3"><i class="fa fa-check"></i><b>2.5</b> General</a></li>
+<li class="chapter" data-level="2.6" data-path="pre-modeling.html"><a href="pre-modeling.html#pre-processing"><i class="fa fa-check"></i><b>2.6</b> Pre-processing</a></li>
+<li class="chapter" data-level="2.7" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-engineering"><i class="fa fa-check"></i><b>2.7</b> Feature Engineering</a></li>
+<li class="chapter" data-level="2.8" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-selection"><i class="fa fa-check"></i><b>2.8</b> Feature Selection</a></li>
+<li class="chapter" data-level="2.9" data-path="pre-modeling.html"><a href="pre-modeling.html#other-1"><i class="fa fa-check"></i><b>2.9</b> Other</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="pre-modeling.html"><a href="pre-modeling.html#unbalanced-classes"><i class="fa fa-check"></i><b>2.9.1</b> Unbalanced Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="pre-modeling.html"><a href="pre-modeling.html#model-selection"><i class="fa fa-check"></i><b>2.10</b> Model Selection</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-4"><i class="fa fa-check"></i><b>2.10.1</b> General</a></li>
+<li class="chapter" data-level="2.10.2" data-path="pre-modeling.html"><a href="pre-modeling.html#clustering"><i class="fa fa-check"></i><b>2.10.2</b> Clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="model-2.html"><a href="model-2.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-2.html"><a href="model-2.html#notes-1"><i class="fa fa-check"></i><b>3.1</b> Notes</a></li>
+<li class="chapter" data-level="3.2" data-path="model-2.html"><a href="model-2.html#supervised-1"><i class="fa fa-check"></i><b>3.2</b> Supervised</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="model-2.html"><a href="model-2.html#linear-regression"><i class="fa fa-check"></i><b>3.2.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="3.2.2" data-path="model-2.html"><a href="model-2.html#selection"><i class="fa fa-check"></i><b>3.2.2</b> Selection</a></li>
+<li class="chapter" data-level="3.2.3" data-path="model-2.html"><a href="model-2.html#proscons"><i class="fa fa-check"></i><b>3.2.3</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.2.4" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>3.2.4</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="model-2.html"><a href="model-2.html#ridgelasso"><i class="fa fa-check"></i><b>3.3</b> Ridge/Lasso</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="model-2.html"><a href="model-2.html#intro"><i class="fa fa-check"></i><b>3.3.1</b> Intro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="model-2.html"><a href="model-2.html#logistic-regression"><i class="fa fa-check"></i><b>3.4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="model-2.html"><a href="model-2.html#intro-1"><i class="fa fa-check"></i><b>3.4.1</b> Intro</a></li>
+<li class="chapter" data-level="3.4.2" data-path="model-2.html"><a href="model-2.html#assumptions"><i class="fa fa-check"></i><b>3.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="model-2.html"><a href="model-2.html#evaluation"><i class="fa fa-check"></i><b>3.4.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.4.4" data-path="model-2.html"><a href="model-2.html#proscons-1"><i class="fa fa-check"></i><b>3.4.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.4.5" data-path="model-2.html"><a href="model-2.html#code-example"><i class="fa fa-check"></i><b>3.4.5</b> Code Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="model-2.html"><a href="model-2.html#poisson-regression"><i class="fa fa-check"></i><b>3.5</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="model-2.html"><a href="model-2.html#intro-2"><i class="fa fa-check"></i><b>3.5.1</b> Intro</a></li>
+<li class="chapter" data-level="3.5.2" data-path="model-2.html"><a href="model-2.html#assumptions-1"><i class="fa fa-check"></i><b>3.5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.5.3" data-path="model-2.html"><a href="model-2.html#evaluation-1"><i class="fa fa-check"></i><b>3.5.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="model-2.html"><a href="model-2.html#proscons-2"><i class="fa fa-check"></i><b>3.5.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="model-2.html"><a href="model-2.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.6</b> Generalized Additive Models</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="model-2.html"><a href="model-2.html#intro-3"><i class="fa fa-check"></i><b>3.6.1</b> Intro</a></li>
+<li class="chapter" data-level="3.6.2" data-path="model-2.html"><a href="model-2.html#assumptions-2"><i class="fa fa-check"></i><b>3.6.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.6.3" data-path="model-2.html"><a href="model-2.html#evaluation-2"><i class="fa fa-check"></i><b>3.6.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.6.4" data-path="model-2.html"><a href="model-2.html#proscons-3"><i class="fa fa-check"></i><b>3.6.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="model-2.html"><a href="model-2.html#k-means-clustering-us"><i class="fa fa-check"></i><b>3.7</b> K-Means Clustering [US]</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="model-2.html"><a href="model-2.html#intro-4"><i class="fa fa-check"></i><b>3.7.1</b> Intro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="model-2.html"><a href="model-2.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.8</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="model-2.html"><a href="model-2.html#assumptions-3"><i class="fa fa-check"></i><b>3.8.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.8.2" data-path="model-2.html"><a href="model-2.html#characteristics"><i class="fa fa-check"></i><b>3.8.2</b> Characteristics</a></li>
+<li class="chapter" data-level="3.8.3" data-path="model-2.html"><a href="model-2.html#evaluation-3"><i class="fa fa-check"></i><b>3.8.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.8.4" data-path="model-2.html"><a href="model-2.html#proscons-4"><i class="fa fa-check"></i><b>3.8.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="model-2.html"><a href="model-2.html#pca"><i class="fa fa-check"></i><b>3.9</b> PCA</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="model-2.html"><a href="model-2.html#intro-5"><i class="fa fa-check"></i><b>3.9.1</b> Intro</a></li>
+<li class="chapter" data-level="3.9.2" data-path="model-2.html"><a href="model-2.html#assumptions-4"><i class="fa fa-check"></i><b>3.9.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.9.3" data-path="model-2.html"><a href="model-2.html#characteristics-1"><i class="fa fa-check"></i><b>3.9.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.9.4" data-path="model-2.html"><a href="model-2.html#evaluation-4"><i class="fa fa-check"></i><b>3.9.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.9.5" data-path="model-2.html"><a href="model-2.html#proscons-5"><i class="fa fa-check"></i><b>3.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.9.6" data-path="model-2.html"><a href="model-2.html#other-3"><i class="fa fa-check"></i><b>3.9.6</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="model-2.html"><a href="model-2.html#knn"><i class="fa fa-check"></i><b>3.10</b> KNN</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="model-2.html"><a href="model-2.html#intro-6"><i class="fa fa-check"></i><b>3.10.1</b> Intro</a></li>
+<li class="chapter" data-level="3.10.2" data-path="model-2.html"><a href="model-2.html#assumptions-5"><i class="fa fa-check"></i><b>3.10.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.10.3" data-path="model-2.html"><a href="model-2.html#characteristics-2"><i class="fa fa-check"></i><b>3.10.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.10.4" data-path="model-2.html"><a href="model-2.html#evaluation-5"><i class="fa fa-check"></i><b>3.10.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.10.5" data-path="model-2.html"><a href="model-2.html#proscons-6"><i class="fa fa-check"></i><b>3.10.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="model-2.html"><a href="model-2.html#svm"><i class="fa fa-check"></i><b>3.11</b> SVM</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="model-2.html"><a href="model-2.html#intro-7"><i class="fa fa-check"></i><b>3.11.1</b> Intro</a></li>
+<li class="chapter" data-level="3.11.2" data-path="model-2.html"><a href="model-2.html#assumptions-6"><i class="fa fa-check"></i><b>3.11.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.11.3" data-path="model-2.html"><a href="model-2.html#characteristics-3"><i class="fa fa-check"></i><b>3.11.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.11.4" data-path="model-2.html"><a href="model-2.html#evaluation-6"><i class="fa fa-check"></i><b>3.11.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.11.5" data-path="model-2.html"><a href="model-2.html#proscons-7"><i class="fa fa-check"></i><b>3.11.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="model-2.html"><a href="model-2.html#decision-tree"><i class="fa fa-check"></i><b>3.12</b> Decision Tree</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="model-2.html"><a href="model-2.html#intro-8"><i class="fa fa-check"></i><b>3.12.1</b> Intro</a></li>
+<li class="chapter" data-level="3.12.2" data-path="model-2.html"><a href="model-2.html#assumptions-7"><i class="fa fa-check"></i><b>3.12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.12.3" data-path="model-2.html"><a href="model-2.html#characteristics-4"><i class="fa fa-check"></i><b>3.12.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.12.4" data-path="model-2.html"><a href="model-2.html#evaluation-7"><i class="fa fa-check"></i><b>3.12.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.12.5" data-path="model-2.html"><a href="model-2.html#proscons-8"><i class="fa fa-check"></i><b>3.12.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="model-2.html"><a href="model-2.html#bagging"><i class="fa fa-check"></i><b>3.13</b> Bagging</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="model-2.html"><a href="model-2.html#intro-9"><i class="fa fa-check"></i><b>3.13.1</b> Intro</a></li>
+<li class="chapter" data-level="3.13.2" data-path="model-2.html"><a href="model-2.html#assumptions-8"><i class="fa fa-check"></i><b>3.13.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.13.3" data-path="model-2.html"><a href="model-2.html#characteristics-5"><i class="fa fa-check"></i><b>3.13.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.13.4" data-path="model-2.html"><a href="model-2.html#evaluation-8"><i class="fa fa-check"></i><b>3.13.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.13.5" data-path="model-2.html"><a href="model-2.html#proscons-9"><i class="fa fa-check"></i><b>3.13.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="model-2.html"><a href="model-2.html#random-forest"><i class="fa fa-check"></i><b>3.14</b> Random Forest</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="model-2.html"><a href="model-2.html#intro-10"><i class="fa fa-check"></i><b>3.14.1</b> Intro</a></li>
+<li class="chapter" data-level="3.14.2" data-path="model-2.html"><a href="model-2.html#assumptions-9"><i class="fa fa-check"></i><b>3.14.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.14.3" data-path="model-2.html"><a href="model-2.html#characteristics-6"><i class="fa fa-check"></i><b>3.14.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.14.4" data-path="model-2.html"><a href="model-2.html#evaluation-9"><i class="fa fa-check"></i><b>3.14.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.14.5" data-path="model-2.html"><a href="model-2.html#proscons-10"><i class="fa fa-check"></i><b>3.14.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="model-2.html"><a href="model-2.html#boosting"><i class="fa fa-check"></i><b>3.15</b> Boosting</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="model-2.html"><a href="model-2.html#intro-11"><i class="fa fa-check"></i><b>3.15.1</b> Intro</a></li>
+<li class="chapter" data-level="3.15.2" data-path="model-2.html"><a href="model-2.html#assumptions-10"><i class="fa fa-check"></i><b>3.15.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.15.3" data-path="model-2.html"><a href="model-2.html#characteristics-7"><i class="fa fa-check"></i><b>3.15.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.15.4" data-path="model-2.html"><a href="model-2.html#evaluation-10"><i class="fa fa-check"></i><b>3.15.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.15.5" data-path="model-2.html"><a href="model-2.html#proscons-11"><i class="fa fa-check"></i><b>3.15.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.16" data-path="model-2.html"><a href="model-2.html#association-rule-mining"><i class="fa fa-check"></i><b>3.16</b> Association Rule Mining</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="model-2.html"><a href="model-2.html#intro-12"><i class="fa fa-check"></i><b>3.16.1</b> Intro</a></li>
+<li class="chapter" data-level="3.16.2" data-path="model-2.html"><a href="model-2.html#assumptions-11"><i class="fa fa-check"></i><b>3.16.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.16.3" data-path="model-2.html"><a href="model-2.html#characteristics-8"><i class="fa fa-check"></i><b>3.16.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.16.4" data-path="model-2.html"><a href="model-2.html#evaluation-11"><i class="fa fa-check"></i><b>3.16.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.16.5" data-path="model-2.html"><a href="model-2.html#proscons-12"><i class="fa fa-check"></i><b>3.16.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.17" data-path="model-2.html"><a href="model-2.html#naive-bayes"><i class="fa fa-check"></i><b>3.17</b> Naïve Bayes</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="model-2.html"><a href="model-2.html#intro-13"><i class="fa fa-check"></i><b>3.17.1</b> Intro</a></li>
+<li class="chapter" data-level="3.17.2" data-path="model-2.html"><a href="model-2.html#assumptions-12"><i class="fa fa-check"></i><b>3.17.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.17.3" data-path="model-2.html"><a href="model-2.html#characteristics-9"><i class="fa fa-check"></i><b>3.17.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.17.4" data-path="model-2.html"><a href="model-2.html#evaluation-12"><i class="fa fa-check"></i><b>3.17.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.17.5" data-path="model-2.html"><a href="model-2.html#proscons-13"><i class="fa fa-check"></i><b>3.17.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.18" data-path="model-2.html"><a href="model-2.html#lda"><i class="fa fa-check"></i><b>3.18</b> LDA</a><ul>
+<li class="chapter" data-level="3.18.1" data-path="model-2.html"><a href="model-2.html#intro-14"><i class="fa fa-check"></i><b>3.18.1</b> Intro</a></li>
+<li class="chapter" data-level="3.18.2" data-path="model-2.html"><a href="model-2.html#assumptions-13"><i class="fa fa-check"></i><b>3.18.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.18.3" data-path="model-2.html"><a href="model-2.html#characteristics-10"><i class="fa fa-check"></i><b>3.18.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.18.4" data-path="model-2.html"><a href="model-2.html#evaluation-13"><i class="fa fa-check"></i><b>3.18.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.18.5" data-path="model-2.html"><a href="model-2.html#proscons-14"><i class="fa fa-check"></i><b>3.18.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.19" data-path="model-2.html"><a href="model-2.html#qda"><i class="fa fa-check"></i><b>3.19</b> QDA</a><ul>
+<li class="chapter" data-level="3.19.1" data-path="model-2.html"><a href="model-2.html#intro-15"><i class="fa fa-check"></i><b>3.19.1</b> Intro</a></li>
+<li class="chapter" data-level="3.19.2" data-path="model-2.html"><a href="model-2.html#assumptions-14"><i class="fa fa-check"></i><b>3.19.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.19.3" data-path="model-2.html"><a href="model-2.html#characteristics-11"><i class="fa fa-check"></i><b>3.19.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.19.4" data-path="model-2.html"><a href="model-2.html#evaluation-14"><i class="fa fa-check"></i><b>3.19.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.19.5" data-path="model-2.html"><a href="model-2.html#proscons-15"><i class="fa fa-check"></i><b>3.19.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.20" data-path="model-2.html"><a href="model-2.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>3.20</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>4</b> Hierarchical Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-selectionevaluation"><i class="fa fa-check"></i><b>4.1</b> Model Selection/Evaluation</a></li>
+<li class="chapter" data-level="4.2" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-explanability"><i class="fa fa-check"></i><b>4.2</b> Model Explanability</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>5</b> Communicate, Deploy, Maintain</a><ul>
+<li class="chapter" data-level="5.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-2"><i class="fa fa-check"></i><b>5.1</b> Communicate</a></li>
+<li class="chapter" data-level="5.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>5.2</b> Deploy</a></li>
+<li class="chapter" data-level="5.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>5.3</b> Maintain</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>6</b> Stats</a><ul>
+<li class="chapter" data-level="6.1" data-path="stats.html"><a href="stats.html#general-5"><i class="fa fa-check"></i><b>6.1</b> General</a><ul>
+<li class="chapter" data-level="" data-path="stats.html"><a href="stats.html#introduction-to-data"><i class="fa fa-check"></i>Introduction to Data</a></li>
+<li class="chapter" data-level="6.1.1" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>6.1.1</b> Statistical Tests</a></li>
+<li class="chapter" data-level="6.1.2" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>6.1.2</b> Stats For Hackers</a></li>
+<li class="chapter" data-level="6.1.3" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>6.1.3</b> Think Stats</a></li>
+<li class="chapter" data-level="6.1.4" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>6.1.4</b> AB Testing Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>6.2</b> DataCamp: Experimental Design</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="time-series-1.html"><a href="time-series-1.html"><i class="fa fa-check"></i><b>7</b> Time Series</a><ul>
+<li class="chapter" data-level="7.1" data-path="time-series-1.html"><a href="time-series-1.html#notes-2"><i class="fa fa-check"></i><b>7.1</b> Notes</a></li>
+<li class="chapter" data-level="7.2" data-path="time-series-1.html"><a href="time-series-1.html#packages"><i class="fa fa-check"></i><b>7.2</b> Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="time-series-1.html"><a href="time-series-1.html#data-conversion"><i class="fa fa-check"></i><b>7.3</b> Data Conversion</a></li>
+<li class="chapter" data-level="7.4" data-path="time-series-1.html"><a href="time-series-1.html#models"><i class="fa fa-check"></i><b>7.4</b> Models</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="time-series-1.html"><a href="time-series-1.html#intro-16"><i class="fa fa-check"></i><b>7.4.1</b> Intro</a></li>
+<li class="chapter" data-level="7.4.2" data-path="time-series-1.html"><a href="time-series-1.html#assumptions-15"><i class="fa fa-check"></i><b>7.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="7.4.3" data-path="time-series-1.html"><a href="time-series-1.html#characteristics-12"><i class="fa fa-check"></i><b>7.4.3</b> Characteristics</a></li>
+<li class="chapter" data-level="7.4.4" data-path="time-series-1.html"><a href="time-series-1.html#evaluation-15"><i class="fa fa-check"></i><b>7.4.4</b> Evaluation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="time-series-1.html"><a href="time-series-1.html#proscons-16"><i class="fa fa-check"></i><b>7.4.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="time-series-1.html"><a href="time-series-1.html#dsp"><i class="fa fa-check"></i><b>7.5</b> DSP</a></li>
+<li class="chapter" data-level="7.6" data-path="time-series-1.html"><a href="time-series-1.html#forecasting-principles-practice"><i class="fa fa-check"></i><b>7.6</b> Forecasting: Principles &amp; Practice</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="time-series-1.html"><a href="time-series-1.html#c1-3"><i class="fa fa-check"></i><b>7.6.1</b> C1-3</a></li>
+<li class="chapter" data-level="7.6.2" data-path="time-series-1.html"><a href="time-series-1.html#c4"><i class="fa fa-check"></i><b>7.6.2</b> C4</a></li>
+<li class="chapter" data-level="7.6.3" data-path="time-series-1.html"><a href="time-series-1.html#c5"><i class="fa fa-check"></i><b>7.6.3</b> C5</a></li>
+<li class="chapter" data-level="7.6.4" data-path="time-series-1.html"><a href="time-series-1.html#c6"><i class="fa fa-check"></i><b>7.6.4</b> C6</a></li>
+<li class="chapter" data-level="7.6.5" data-path="time-series-1.html"><a href="time-series-1.html#c7"><i class="fa fa-check"></i><b>7.6.5</b> C7</a></li>
+<li class="chapter" data-level="7.6.6" data-path="time-series-1.html"><a href="time-series-1.html#c8-arima"><i class="fa fa-check"></i><b>7.6.6</b> C8: arima</a></li>
+<li class="chapter" data-level="7.6.7" data-path="time-series-1.html"><a href="time-series-1.html#c9"><i class="fa fa-check"></i><b>7.6.7</b> C9</a></li>
+<li class="chapter" data-level="7.6.8" data-path="time-series-1.html"><a href="time-series-1.html#c10"><i class="fa fa-check"></i><b>7.6.8</b> C10</a></li>
+<li class="chapter" data-level="7.6.9" data-path="time-series-1.html"><a href="time-series-1.html#c11"><i class="fa fa-check"></i><b>7.6.9</b> C11</a></li>
+<li class="chapter" data-level="7.6.10" data-path="time-series-1.html"><a href="time-series-1.html#c12"><i class="fa fa-check"></i><b>7.6.10</b> C12</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="time-series-1.html"><a href="time-series-1.html#forecasting-datacamp"><i class="fa fa-check"></i><b>7.7</b> Forecasting Datacamp</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="deep-learning-1.html"><a href="deep-learning-1.html"><i class="fa fa-check"></i><b>8</b> Deep Learning</a><ul>
+<li class="chapter" data-level="8.1" data-path="deep-learning-1.html"><a href="deep-learning-1.html#activation-functions"><i class="fa fa-check"></i><b>8.1</b> Activation Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="deep-learning-1.html"><a href="deep-learning-1.html#preprocessing"><i class="fa fa-check"></i><b>8.2</b> Preprocessing</a></li>
+<li class="chapter" data-level="8.3" data-path="deep-learning-1.html"><a href="deep-learning-1.html#tuning"><i class="fa fa-check"></i><b>8.3</b> Tuning</a></li>
+<li class="chapter" data-level="8.4" data-path="deep-learning-1.html"><a href="deep-learning-1.html#notes-3"><i class="fa fa-check"></i><b>8.4</b> Notes</a></li>
+<li class="chapter" data-level="8.5" data-path="deep-learning-1.html"><a href="deep-learning-1.html#model-3"><i class="fa fa-check"></i><b>8.5</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html"><i class="fa fa-check"></i><b>9</b> Probabilistic Programming</a><ul>
+<li class="chapter" data-level="9.1" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#doing-bayesian-da"><i class="fa fa-check"></i><b>9.1</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="9.2" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#statistical-rethinking"><i class="fa fa-check"></i><b>9.2</b> Statistical Rethinking</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="distributed.html"><a href="distributed.html"><i class="fa fa-check"></i><b>10</b> Distributed</a><ul>
+<li class="chapter" data-level="10.1" data-path="distributed.html"><a href="distributed.html#pyspark"><i class="fa fa-check"></i><b>10.1</b> PySpark</a></li>
+<li class="chapter" data-level="10.2" data-path="distributed.html"><a href="distributed.html#sparklyr"><i class="fa fa-check"></i><b>10.2</b> sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="cook-book.html"><a href="cook-book.html"><i class="fa fa-check"></i><b>11</b> Cook Book</a><ul>
+<li class="chapter" data-level="11.1" data-path="cook-book.html"><a href="cook-book.html#general-6"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
+<li class="chapter" data-level="11.2" data-path="cook-book.html"><a href="cook-book.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>11.2</b> Linear Regression Statsmodels</a></li>
+<li class="chapter" data-level="11.3" data-path="cook-book.html"><a href="cook-book.html#rowwise"><i class="fa fa-check"></i><b>11.3</b> Rowwise</a></li>
+<li class="chapter" data-level="11.4" data-path="cook-book.html"><a href="cook-book.html#sampling-file"><i class="fa fa-check"></i><b>11.4</b> Sampling File</a></li>
+<li class="chapter" data-level="11.5" data-path="cook-book.html"><a href="cook-book.html#sql-dummy-columns"><i class="fa fa-check"></i><b>11.5</b> SQL Dummy Columns</a></li>
+<li class="chapter" data-level="11.6" data-path="cook-book.html"><a href="cook-book.html#model-calibration"><i class="fa fa-check"></i><b>11.6</b> Model Calibration</a></li>
+<li class="chapter" data-level="11.7" data-path="cook-book.html"><a href="cook-book.html#binning-rule-of-thumb"><i class="fa fa-check"></i><b>11.7</b> Binning Rule Of Thumb</a></li>
+<li class="chapter" data-level="11.8" data-path="cook-book.html"><a href="cook-book.html#pyspark-1"><i class="fa fa-check"></i><b>11.8</b> Pyspark</a></li>
+<li class="chapter" data-level="11.9" data-path="cook-book.html"><a href="cook-book.html#sparklyr-1"><i class="fa fa-check"></i><b>11.9</b> Sparklyr</a></li>
+<li class="chapter" data-level="11.10" data-path="cook-book.html"><a href="cook-book.html#parquet"><i class="fa fa-check"></i><b>11.10</b> Parquet</a></li>
+<li class="chapter" data-level="11.11" data-path="cook-book.html"><a href="cook-book.html#data-table"><i class="fa fa-check"></i><b>11.11</b> Data Table</a></li>
+<li class="chapter" data-level="11.12" data-path="cook-book.html"><a href="cook-book.html#keras"><i class="fa fa-check"></i><b>11.12</b> Keras</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Cribsheet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-series-1" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Time Series</h1>
+<div id="notes-2" class="section level2">
+<h2><span class="header-section-number">7.1</span> Notes</h2>
+<p>time series features: extract data from timestamp (year, month, day), lags, rolling windows, rolling window - summary stats of all previous data points</p>
+<p>ts: Vector autoregression, quantile regression forests</p>
+<p>arima: linear vs garch: non-linear</p>
+<p>Baselines: statsmodels.tsa.holtwinters | forecast::ets</p>
+<p>lubricate ymd, rsample tscv</p>
+<p>A stationary time series is one whose properties do not depend on the time at which the series is observed.</p>
+</div>
+<div id="packages" class="section level2">
+<h2><span class="header-section-number">7.2</span> Packages</h2>
+<p><a href="https://robjhyndman.com/seminars/user-fable/" class="uri">https://robjhyndman.com/seminars/user-fable/</a> <a href="https://github.com/robjhyndman/forecast" class="uri">https://github.com/robjhyndman/forecast</a> <a href="https://facebook.github.io/prophet/docs/quick_start.html" class="uri">https://facebook.github.io/prophet/docs/quick_start.html</a> <a href="https://keras.rstudio.com/articles/examples/index.html" class="uri">https://keras.rstudio.com/articles/examples/index.html</a> <a href="http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html" class="uri">http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html</a> <a href="https://www.rdocumentation.org/packages/bsts/versions/0.8.0" class="uri">https://www.rdocumentation.org/packages/bsts/versions/0.8.0</a></p>
+</div>
+<div id="data-conversion" class="section level2">
+<h2><span class="header-section-number">7.3</span> Data Conversion</h2>
+<p><a href="https://robjhyndman.com/hyndsight/seasonal-periods/" class="uri">https://robjhyndman.com/hyndsight/seasonal-periods/</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt =<span class="st"> </span><span class="kw">as.Date</span>(StockData<span class="op">$</span>Date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>) <span class="op">&gt;</span>Stockdataz =<span class="st"> </span><span class="kw">zoo</span>(<span class="dt">x=</span><span class="kw">cbind</span>(StockData<span class="op">$</span>Volume,StockData<span class="op">$</span>Adj.Close), <span class="dt">order.by=</span>dt)
+
+ts<span class="op">:</span><span class="st"> </span>frequency =<span class="st"> </span><span class="dv">5</span> means that data is at daily level business days
+<span class="kw">ts</span>(completed_example_data<span class="op">$</span>Wind,<span class="dt">start =</span> <span class="kw">c</span>(<span class="dv">1973</span>,<span class="dv">5</span>,<span class="dv">1</span>), <span class="dt">frequency =</span> <span class="fl">365.25</span>)
+
+<span class="kw">xts</span>(df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span><span class="kw">as.Date</span>(df[,<span class="dv">1</span>], <span class="st">&quot;%m/%d/%Y&quot;</span>))</code></pre></div>
+</div>
+<div id="models" class="section level2">
+<h2><span class="header-section-number">7.4</span> Models</h2>
+<p>Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.</p>
+<p>Benchmark models: Mean, naive, seasonal naive</p>
+<ol start="0" style="list-style-type: decimal">
+<li><p>Mean</p></li>
+<li><p>Naive: Set all forecasts to be the value of the last observation. This method works remarkably well for many economic and financial time series. Because a naive forecast is optimal when data follow a random walk, these are also called random walk forecasts. naive()</p></li>
+<li><p>Seasonal Naive: Assumes magnitude of the seasonal pattern is constant. snaive()</p></li>
+</ol>
+<p>Linear</p>
+<ol start="10" style="list-style-type: decimal">
+<li><p>regression: tslm(): trend and season are not objects in the R workspace; they are created automatically by tslm() when specified in this way: tslm(beer2 ~ trend + season). It is not recommended that quadratic or higher order trends be used in forecasting. When they are extrapolated, the resulting forecasts are often unrealistic.</p></li>
+<li><p>harmonic regression: An alternative to using seasonal dummy variables, especially for long seasonal periods, is to use Fourier terms. ith Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where m ≈ 52. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables. fourier() - tslm(beer2 ~ trend + fourier(beer2, K=2))</p></li>
+<li><p>Dynamic Regression</p></li>
+</ol>
+<p>The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated.</p>
+<p>Arima(y, xreg=x, order=c(1,1,0)) auto.arima(uschange[,“Consumption”], xreg=uschange[,“Income”])</p>
+<p>There are two different ways of modelling a linear trend: deterministic and stochastic.</p>
+<p>deterministic: fit1 &lt;- auto.arima(austa, d=0, xreg=trend)</p>
+<p>stochastic: fit2 &lt;- auto.arima(austa, d=1)</p>
+<p>There is an implicit assumption with deterministic trends that the slope of the trend is not going to change over time. On the other hand, stochastic trends can change, and the estimated growth is only assumed to be the average growth over the historical period, not necessarily the rate of growth that will be observed into the future. Consequently, it is safer to forecast with stochastic trends, especially for longer forecast horizons, as the prediction intervals allow for greater uncertainty in future growth.</p>
+<p>When there are long seasonal periods, a dynamic regression with Fourier terms is often better than other models we have considered in this book.</p>
+<p>Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.</p>
+<p>So for such time series, we prefer a harmonic regression approach where the seasonal pattern is modelled using Fourier terms with short-term time series dynamics handled by an ARMA error.</p>
+<p>fit &lt;- auto.arima(cafe04, xreg = fourier(cafe04, K = i), seasonal = FALSE, lambda = 0)</p>
+<p>ETS (Error-Trend-Seasonality) Models</p>
+<p>This label can also be thought of as ExponenTial Smoothing. The possibilities for each component are: Error = {a.m}, Trend = {n,a,a_d}, and Seasonal = {n,a,m}. Therefore, for each component in the ETS system, we can assign None, Multiplicative, or Additive (or N, M, A) for each of the three components in our time series.</p>
+<p>Three of the combinations of (Error, Trend, Seasonal) can lead to numerical difficulties. Specifically, the models that can cause such instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to division by values potentially close to zero in the state equations. We normally do not consider these particular combinations when selecting a model.</p>
+<p>Models with multiplicative errors are useful when the data are strictly positive, but are not numerically stable when the data contain zeros or negative values. Therefore, multiplicative error models will not be considered if the time series is not strictly positive. In that case, only the six fully additive models will be applied.</p>
+<p>The ets() function does not produce forecasts. Rather, it estimates the model parameters and returns information about the fitted model. By default it uses the AICc to select an appropriate model</p>
+<p>ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.</p>
+<ol style="list-style-type: decimal">
+<li><p>Simple Exponential Smoothing Method: Time series does not have a trend line and does not have seasonality component. We would use a Simple Exponential Smoothing model.<br />
+ETS(A,N,N): simple exponential smoothing with additive errors | ETS(M,N,N): simple exponential smoothing with multiplicative errors</p></li>
+<li><p>Holt’s Linear Trend Method: Damped Holt’s method is best whether you compare MAE or MSE values. So we will proceed with using the damped Holt’s method and apply it to the whole data set to get forecasts for future years. Forecasts account for trend &amp; continue at the same trend indefinitely into the future: holt(damped = T) . A damped trend makes it level off after time: holt(damped = F) (phi = 1 is Holt’s method).</p></li>
+</ol>
+<p>holt() | ETS(A,A,N): Holt’s linear method with additive errors | ETS(M,A,N): Holt’s linear method with multiplicative errors | (a,a) Additive Holt-Winters’ method | (a,m) Multiplicative Holt-Winters’ method | (a_d,m) Holt-Winters’ damped method | (a,n) Holt’s linear method | (a_d,n) Additive damped trend method</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Holt-Winters Seasonal Method: hw(aust,seasonal=“additive”). Accounts for trend and seasonality. In the additive version the seasonality averages to 0 but this changes to 1 in the multiplicative version</li>
+</ol>
+<p>ARIMA(p,d,q): non-seasonal: White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant Random walk with drift: ARIMA(0,1,0) with a constant Autoregression: ARIMA(p,0,0) Moving average: ARIMA(0,0,q)</p>
+<p>Seasonal ARIMA(p,d,q)(P,D,Q)_m</p>
+<p>auto.arima() does an auto fit.</p>
+<p>When fitting an ARIMA model to a set of (non-seasonal) time series data, the following procedure provides a useful general approach.</p>
+<p>Plot the data and identify any unusual observations.</p>
+<p>If necessary, transform the data (using a Box-Cox transformation) to stabilize the variance.</p>
+<p>If the data are non-stationary, take first differences of the data until the data are stationary.</p>
+<p>Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model appropriate?</p>
+<p>Try your chosen model(s), and use the AICc to search for a better model.</p>
+<p>Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.</p>
+<p>Once the residuals look like white noise, calculate forecasts.</p>
+<p>auto.arima only does steps 3-5.</p>
+<p>arima()</p>
+<p>ggAcf() | ggPacf()</p>
+<p>If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of p/q. If p and q are both positive, then the plots do not help in finding suitable values of p and q.</p>
+<p>The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
+<p>the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag p in the PACF, but none beyond lag p.</p>
+<p>The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
+<p>the PACF is exponentially decaying or sinusoidal; there is a significant spike at lag q in the ACF, but none beyond lag q.</p>
+<p>seaosnal arima: arima(p,d,q) (P,Q,D)_m, m = num of observations per year</p>
+<p>The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12 model will show:</p>
+<p>a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).</p>
+<p>Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))</p>
+<p>auto.arima(euretail, stepwise=FALSE, approximation=FALSE)</p>
+<p>comparing information criteria is only valid for ARIMA models of the same orders of differencing.</p>
+<p>Other</p>
+<ol style="list-style-type: decimal">
+<li><p>ma</p></li>
+<li><p>wma</p></li>
+<li><p>X11 method: seasonal::seas(x11 = ’’). from this output seasonal() will extract the seasonal component, trendcycle() will extract the trend-cycle component, remainder() will extract the remainder component, and seasadj() will compute the seasonally adjusted time series.</p></li>
+<li><p>SEATS: seasonal::seas()</p></li>
+<li><p>STL: best so far but only uses additive decomposition. stl(t.window=13, s.window=“periodic”, robust=TRUE). automate picking of first 2 params with mstl(). A short-cut approach is to use the stlf() function. The following code will decompose the time series using STL, forecast the seasonally adjusted series, and return reseasonalize the forecasts: stlf(elecequip, method=‘naive’)</p></li>
+</ol>
+<p>msts | mstsl | tbats | bld.mbb.bootstrap</p>
+<p>Auto Model:</p>
+<p>forecast(): You can use this directly if you have no idea which model to use, or use it to produce forecasts after fitting a model.</p>
+<p>Hierarchical:</p>
+<p>gts() | hts() | aggts()</p>
+<ul>
+<li>Feature Engineering</li>
+</ul>
+<p><a href="https://github.com/robjhyndman/tsfeatures" class="uri">https://github.com/robjhyndman/tsfeatures</a></p>
+<p>There are several useful predictors that occur frequently when using regression for time series data:</p>
+<ol style="list-style-type: decimal">
+<li><p>A trend variable can be specified in the tslm() function using the trend predictor.</p></li>
+<li><p>dummy variables for time like day of week. The tslm() function will automatically handle this situation if you specify the predictor season.</p></li>
+<li><p>interventions, eg. competitor activity</p></li>
+<li><p>trading days: bizdays()</p></li>
+<li><p>distirbuted lags</p></li>
+<li><p>easter()</p></li>
+</ol>
+<p>Use lagged values of predictors</p>
+<p>A log-log functional form is specified as log(y) = beta_0 + beta_1*log(x) + epsilon</p>
+<p>scaling by monthday() by population or by inflation for money</p>
+<p>Logarithms are useful because they are interpretable: changes in a log value are relative (or percentage) changes on the original scale. So if log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale. Another useful feature of log transformations is that they constrain the forecasts to stay positive on the original scale. A log transformation can address heteroskedasticity.</p>
+<p>boxCox()/boxCox.lambda(), power transforms,</p>
+<p>bias adjustments: mean of forecast distribution instead of median for back-transformed forecast. Bias adjustment is not done by default in the forecast package. If you want your forecasts to be means rather than medians, use the argument biasadj=TRUE when you select your Box-Cox transformation parameter.</p>
+<ul>
+<li>Model Evaluation</li>
+</ul>
+<p>train-test split: window() / subset()</p>
+<p>accuracy()</p>
+<p>tsCV()</p>
+<p>A great advantage of the ETS statistical framework is that information criteria can be used for model selection - AIC, AIC_c, and BIC</p>
+<p>leave-one-out cross-validation statistic : CV(fit.consMR) for model selection</p>
+<p>we recommend that one of the AICc, AIC, or CV statistics be used, each of which has forecasting as their objective.</p>
+<p>When comparing forecast methods applied to a single time series, or to several time series with the same units, the MAE is popular as it is easy to both understand and compute. A forecast method that minimizes the MAE will lead to forecasts of the median, while minimizing the RMSE will lead to forecasts of the mean. Consequently, the RMSE is also widely used, despite being more difficult to interpret. Percentage errors have the advantage of being unit-free, and so are frequently used to compare forecast performances between data sets. The most commonly used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE. forecast errors are different from residuals in two ways. First, residuals are calculated on the training set while forecast errors are calculated on the test set. Second, residuals are based on one-step forecasts while forecast errors can involve multi-step forecasts.</p>
+<p>A good forecasting method will yield residuals with the following properties:</p>
+<ol style="list-style-type: decimal">
+<li><p>The residuals are uncorrelated. If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.</p></li>
+<li><p>The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased. (Adjusting for bias is easy: if the residuals have mean m then add m to all forecasts and the bias problem is solved.)</p></li>
+<li><p>It is useful (but not necessary) for the residuals to also have the following two properties: the residuals have constant variance and are normally distributed.</p></li>
+</ol>
+<p>use the Box-ljung test to test for autocorrelations: h_0: no autocorrelation, h_a: autocorrelation.</p>
+<p>checkresiduals() which will produce a time plot, ACF plot and histogram of the residuals (with an overlayed normal distribution for comparison), and do a Ljung-Box test with the correct degrees of freedom.</p>
+<p>-Notes</p>
+<p>Fourier terms in lm good for intraday data.</p>
+<p>Methods with multiplicative trend produce poor forecasts.</p>
+<p>For stock market prices and indexes, the best forecasting method is often the naïve method. Use also dynamic regression.</p>
+<p>Create time series with ts(mydata[-1], start = c(1981, 1), frequency = 4)</p>
+<p>Time series that show no auto-correlation are called white noise. For white noise series, we expect each auto-correlation to be close to zero. For a white noise series, we expect 95% of the spikes in the ACF to lie within +/- 2 * sqrt(T) where T is the length of the time series.</p>
+<p>The possible time series (TS) scenarios can be recognized by asking the following questions: 1) TS has a trend? If yes, is the trend increasing linearly or exponentially? 2) TS has seasonality? If yes, do the seasonal components increase in magnitude over time?</p>
+<p>Additive model for linear trend and multiplicative model for exponential trend. Additive for trend and Multiplicative and Additive for seasonal components. For trends that are exponential, we would need to use a multiplicative model. For increasing seasonality components, we would need to use a multiplicative model model as well.</p>
+<p>Therefore we can generalize all of these models using a naming system for ETS:</p>
+<p>Error is the error line we saw in the time series decomposition part earlier in the course. If the error is increasing similar to an increasing seasonal components, we would need to consider a multiplicative design for the exponential model.</p>
+<p>A time series model that has a constant error, linear trend, and increasing seasonal components means we would need to use an ETS model of ETS(N,A,M)</p>
+<p>A time series model that has increasing error, exponential trend, and no seasonality means we would need to use an ETS model of:</p>
+<p>non-stationary: This plot shows an upward trend and seasonality.</p>
+<p>stationary: This plot revolves around a constant mean of 0 and shows contained variance.</p>
+<p>-Metrics</p>
+<p>Percentage errors, like MAPE, are useful because they are scale independent, so they can be used to compare forecasts between different data series, unlike scale dependent errors. The disadvantage is that it cannot be used if the series has zero values.</p>
+<p>Mean Absolute Percentage Error (MAPE) is also often useful for purposes of reporting, because it is expressed in generic percentage terms it will make sense even to someone who has no idea what constitutes a “big” error in terms of dollars spent or widgets sold.</p>
+<p>Mean Absolute Scaled Error (MASE) is another relative measure of error that is applicable only to time series data. It is defined as the mean absolute error of the model divided by the the mean absolute value of the first difference of the series. Thus, it measures the relative reduction in error compared to a naive model. Ideally its value will be significantly less than 1 but is relative to comparison across other models for the same series. Since this error measurement is relative and can be applied across models, it is accepted as one of the best metrics for error measurement.</p>
+<p>AIC_c for model selection.</p>
+<div id="intro-16" class="section level3">
+<h3><span class="header-section-number">7.4.1</span> Intro</h3>
+</div>
+<div id="assumptions-15" class="section level3">
+<h3><span class="header-section-number">7.4.2</span> Assumptions</h3>
+</div>
+<div id="characteristics-12" class="section level3">
+<h3><span class="header-section-number">7.4.3</span> Characteristics</h3>
+</div>
+<div id="evaluation-15" class="section level3">
+<h3><span class="header-section-number">7.4.4</span> Evaluation</h3>
+</div>
+<div id="proscons-16" class="section level3">
+<h3><span class="header-section-number">7.4.5</span> Pros/Cons</h3>
+<p><strong>Pros</strong></p>
+<p><strong>Cons</strong></p>
+<ul>
+<li><p>Seasonal Decomposition; Use additive model when the magnitude of the seasonal fluctuations surrounding the general trend doesn’t vary over time. Use the multiplicative model when the magnitude of the seasonal fluctuations surrounding the general trend appear to change in a proportional manner over time. Go from additive to multiplicative with a log transformation.</p></li>
+<li><p>White noise: Describes the assumption that each element in the time series is a random draw from N(0, constant variance). Also called a stationary series. Time series with trends or seasonality are not stationary.</p></li>
+</ul>
+<p><strong>ARIMA(p,d,q) (Auto-Regressive Integrated Moving Average) Models</strong></p>
+<ul>
+<li><p>AR(p): auto-regressive component for lags on the stationary series. The AR models sayd that the value of a variable at a specific time is related to the value of the variable at previous times.</p></li>
+<li><p>I(d): Integrated component for a series that needs to be differenced.</p></li>
+<li><p>MA(q): Moving average component for lag of the forecast errors. In a moving average model of order q, each value in a time series is predicted from the linear combination of the previous q errors. The value of a variable at a specific time is related to the residuals of prediction at previous times.</p></li>
+<li><p>In an auto-regressive model of order p, each valeu in a time series is predicted from a linear combination of the previous p values.</p></li>
+<li><p>Procedure: Make stationary if necessary by differencing. Determine possible values of p and q. Assess model fit and try other values of p and q to overfit. Make forecasts with the final model.</p></li>
+<li><p>Augmented Dicky-Fuller Test: This tests whether or not a time series is stationary. h0: series is not stationary, ha: the series is stationary.</p></li>
+<li><p>Determine p and q: Look at autocorrelation (AC) and partial correlation (PAC) functions. AC measures the way observations relate to each other. PAC measure the way observations relate to each other after accounting for all other intervening observations. Plot of the autocorrelation function (ACF) displays correlation of the series with itself at different lags. A plot of the PAC displays the amount of autocorrelation not explained by lower order correlations. Spikes in the PACF will choose for AR(p). Spikes in the ACF will choose MA(q).</p></li>
+</ul>
+<p><strong>Assess Model Fit</strong></p>
+<ul>
+<li><p>Appropriate model should resemble white noise. Check scatterplot of residuals vs fit to check constant variance and qqplot to check normality. Autocorrelations should be zero to check for violation of independent errors.</p></li>
+<li><p>Box-Ljung Test: Check if all autocorrelations are zero, i.e the series is of white noise. H0: autocorrelations are all 0. ha: At least one is nonzero.</p></li>
+<li><p>Overfit model with extra AR/MA terms and compare using AIC/BIC.</p></li>
+<li><p>Interpretation: AR coefficient closer to 1 means series returns to mean slowly, vice versa for closer to 0.</p></li>
+<li><p>MA(1) coefficient indicates how much the shock of the previous time period is retained in the current time period. MA(2) refers to the previous two time periods.</p></li>
+</ul>
+</div>
+</div>
+<div id="dsp" class="section level2">
+<h2><span class="header-section-number">7.5</span> DSP</h2>
+<p>FFT: time x amplitude to frequency x strength of signal domain</p>
+<p>y(t) = Amplitude * sin(2pi<em>freq</em>time + phase_shift)</p>
+<p>The reduction of a continuous time signal to a discrete time signal is known as sampling</p>
+<p>wavelets: continuous (time frequency analysis) vs discrete (data compression &amp; noise reduction).</p>
+<p>pipeline: signal -&gt; wavelet transform -&gt; pca -&gt; features to classifier</p>
+</div>
+<div id="forecasting-principles-practice" class="section level2">
+<h2><span class="header-section-number">7.6</span> Forecasting: Principles &amp; Practice</h2>
+<div id="c1-3" class="section level3">
+<h3><span class="header-section-number">7.6.1</span> C1-3</h3>
+<p>library(forecast) | ts | autplot / autolayer | ggseasonplot | ggsubseriesplot | gglagplot | window | meanf | s/naive | residuals | gghistogram | ggAcf |</p>
+<p>counterfactual plot</p>
+<p>myts &lt;- ts(mydata[-1], start = c(1981, 1), frequency = 4)</p>
+<p>Time series that show no autocorrelation are called white noise.</p>
+<p>For white noise series, we expect each autocorrelation to be close to zero. Of course, they will not be exactly equal to zero as there is some random variation. For a white noise series, we expect 95% of the spikes in the ACF to lie within<br />
++/- 2 * sqrt(T) where T is the length of the time series.</p>
+<p>For naïve forecasts, we simply set all forecasts to be the value of the last observation. This method works remarkably well for many economic and financial time series. Because a naïve forecast is optimal when data follow a random walk (see Section 8.1), these are also called random walk forecasts.</p>
+<p>mean, naive, and seasonal naive are benchmarks.</p>
+<p>feature engineering: scaling by monthday(), by population, inflation for money, log, boxCox()/boxCox.lambda(), power transforms, bias adjustments: mean of forecast distribution instead of median for back-transformed forecast,</p>
+<p>Bias adjustment is not done by default in the forecast package. If you want your forecasts to be means rather than medians, use the argument biasadj=TRUE when you select your Box-Cox transformation parameter.</p>
+<p>Logarithms are useful because they are interpretable: changes in a log value are relative (or percentage) changes on the original scale. So if log base 10 is used, then an increase of 1 on the log scale corresponds to a multiplication of 10 on the original scale. Another useful feature of log transformations is that they constrain the forecasts to stay positive on the original scale.</p>
+<p>A good forecasting method will yield residuals with the following properties:</p>
+<p>The residuals are uncorrelated. If there are correlations between residuals, then there is information left in the residuals which should be used in computing forecasts.</p>
+<p>The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased.</p>
+<p>Adjusting for bias is easy: if the residuals have mean m then add m to all forecasts and the bias problem is solved.</p>
+<p>It is useful (but not necessary) for the residuals to also have the following two properties: the residuals have constant variance and are normally distributed.</p>
+<p>For stock market prices and indexes, the best forecasting method is often the naïve method.</p>
+<p>Recall that r_k is the autocorrelation for lag k . When we look at the ACF plot to see whether each spike is within the required limits, we are implicitly carrying out multiple hypothesis tests, each one with a small probability of giving a false positive. When enough of these tests are done, it is likely that at least one will give a false positive, and so we may conclude that the residuals have some remaining autocorrelation, when in fact they do not. In order to overcome this problem, we test whether the first h autocorrelations are significantly different from what would be expected from a white noise process. A test for a group of autocorrelations is called a portmanteau test, from a French word describing a suitcase containing a number of items. Use Box-Pierce/Ljung-Box test.</p>
+<p>Large values of suggest that the autocorrelations do not come from a white noise series.</p>
+<p>All of these methods for checking residuals are conveniently packaged into one R function checkresiduals(), which will produce a time plot, ACF plot and histogram of the residuals (with an overlayed normal distribution for comparison), and do a Ljung-Box test with the correct degrees of freedom.</p>
+<p>train-test split: window()/subset()</p>
+<p>forecast errors are different from residuals in two ways. First, residuals are calculated on the training set while forecast errors are calculated on the test set. Second, residuals are based on one-step forecasts while forecast errors can involve multi-step forecasts.</p>
+<p>When comparing forecast methods applied to a single time series, or to several time series with the same units, the MAE is popular as it is easy to both understand and compute. A forecast method that minimizes the MAE will lead to forecasts of the median, while minimizing the RMSE will lead to forecasts of the mean. Consequently, the RMSE is also widely used, despite being more difficult to interpret. Percentage errors have the advantage of being unit-free, and so are frequently used to compare forecast performances between data sets. The most commonly used measure is Mean Absolute Percentage Error (MAPE) or symmetric MAPE.</p>
+<p>accuracy()</p>
+<p>With time series forecasting, one-step forecasts may not be as relevant as multi-step forecasts. In this case, the cross-validation procedure based on a rolling forecasting origin can be modified to allow multi-step errors to be used.</p>
+<p>tsCV()</p>
+<p>a prediction interval gives an interval within which we expect y_t to lie with a specified probability.</p>
+<p>When forecasting one step ahead, the standard deviation of the forecast distribution is almost the same as the standard deviation of the residuals.</p>
+<p>forecast(): You can use this directly if you have no idea which model to use, or use it to produce forecasts after fitting a model.</p>
+<p>checkresiduals()</p>
+</div>
+<div id="c4" class="section level3">
+<h3><span class="header-section-number">7.6.2</span> C4</h3>
+<p>There are three general settings in which judgmental forecasting is used: (i) there are no available data, so that statistical methods are not applicable and judgmental forecasting is the only feasible approach; (ii) data are available, statistical forecasts are generated, and these are then adjusted using judgement; and (iii) data are available and statistical and judgmental forecasts are generated independently and then combined.</p>
+</div>
+<div id="c5" class="section level3">
+<h3><span class="header-section-number">7.6.3</span> C5</h3>
+<p>tslm()</p>
+<p>Another useful test of autocorrelation in the residuals designed to take account for the regression model is the Breusch-Godfrey test, also referred to as the LM (Lagrange Multiplier) test for serial correlation. It is used to test the joint hypothesis that there is no autocorrelation in the residuals up to a certain specified order. A small p-value indicates there is significant autocorrelation remaining in the residuals. The Breusch-Godfrey test is similar to the Ljung-Box test, but it is specifically designed for use with regression models.</p>
+<p>More often than not, time series data are “non-stationary”; that is, the values of the time series do not fluctuate around a constant mean or with a constant variance.</p>
+<p>There are several useful predictors that occur frequently when using regression for time series data:</p>
+<ul>
+<li><p>A trend variable can be specified in the tslm() function using the trend predictor.</p></li>
+<li><p>dummy variables for time like day of week. The tslm() function will automatically handle this situation if you specify the predictor season.</p></li>
+</ul>
+<p>trend and season are not objects in the R workspace; they are created automatically by tslm() when specified in this way: tslm(beer2 ~ trend + season)</p>
+<ul>
+<li><p>interventions, eg. competitor activity</p></li>
+<li><p>trading days: bizdays()</p></li>
+<li><p>distirbuted lags</p></li>
+<li><p>easter()</p></li>
+<li><p>An alternative to using seasonal dummy variables, especially for long seasonal periods, is to use Fourier terms. ith Fourier terms, we often need fewer predictors than with dummy variables, especially when m is large. This makes them useful for weekly data, for example, where m ≈ 52. For short seasonal periods (e.g., quarterly data), there is little advantage in using Fourier terms over seasonal dummy variables. fourier() - tslm(beer2 ~ trend + fourier(beer2, K=2))</p></li>
+</ul>
+<p>A regression model containing Fourier terms is often called a harmonic regression because the successive Fourier terms represent harmonics of the first two Fourier terms.</p>
+<p>leave-one-out cross-validation statistic : CV(fit.consMR) for model selection</p>
+<p>we recommend that one of the AICc, AIC, or CV statistics be used, each of which has forecasting as their objective.</p>
+<p>Ex-ante forecasts are those that are made using only the information that is available in advance. Ex-post forecasts are those that are made using later information on the predictors. These are not genuine forecasts, but are useful for studying the behavior of forecasting models.</p>
+<p>Use lagged values of predictors</p>
+<p>A log-log functional form is specified as log(y) = beta_0 + beta_1*log(x) + epsilon</p>
+<p>In this model, the slope can be interpreted as an elasticity, and is the average percentage change in y resulting from a 1% increase in x. Other useful forms can also be specified. The log-linear form is specified by only transforming the forecast variable and the linear-log form is obtained by transforming the predictor.</p>
+<p>It is not recommended that quadratic or higher order trends be used in forecasting. When they are extrapolated, the resulting forecasts are often unrealistic.</p>
+<p>fit.exp &lt;- tslm(marathon ~ trend, lambda = 0)</p>
+<p>splinef(lambda=0)</p>
+<p>A log transformation can address heteroskedasticity.</p>
+</div>
+<div id="c6" class="section level3">
+<h3><span class="header-section-number">7.6.4</span> C6</h3>
+<p>Thus we think of a time series as comprising three components: a trend-cycle component, a seasonal component, and a remainder component (containing anything else in the time series).</p>
+<p>y = s + t + r or y = str. s is seasonal, t is tend, r is the remainder</p>
+<p>The additive decomposition is the most appropriate if the magnitude of the seasonal fluctuations, or the variation around the trend-cycle, does not vary with the level of the time series. When the variation in the seasonal pattern, or the variation around the trend-cycle, appears to be proportional to the level of the time series, then a multiplicative decomposition is more appropriate. Multiplicative decompositions are common with economic time series.</p>
+<p>An alternative to using a multiplicative decomposition is to first transform the data until the variation in the series appears to be stable over time, then use an additive decomposition. When a log transformation has been used, this is equivalent to using a multiplicative decomposition</p>
+<p>Remove seasonality to make data seasonally adjusted. Remove when not needed.</p>
+<p>simple moving average of order m: ma(elecsales, 5). m is usually odd so the sma is symmetric. It is possible to apply a moving average to a moving average. One reason for doing this is to make an even-order moving average symmetric. The notation “2x4-MA” in the last column means a 4-MA followed by a 2-MA. Called a centered MA of order 4.</p>
+<p>The most common use of centered moving averages is for estimating the trend-cycle from seasonal data.</p>
+<p>In general, a 2xm-MA is equivalent to a weighted moving average of order m+1 where all observations take the weight 1/m except for the first and last terms which take weights 1/2m.</p>
+<p>wma</p>
+<p>additive/multiplicative decomposition (decompose(type=“multiplicative”)) not used now because there are better methods.</p>
+<p>Another popular method for decomposing quarterly and monthly data is the X11 method: seasonal::seas(x11 = ’’). from this output seasonal() will extract the seasonal component, trendcycle() will extract the trend-cycle component, remainder() will extract the remainder component, and seasadj() will compute the seasonally adjusted time series.</p>
+<p>SEATS: seasonal::seas()</p>
+<p>STL: best so far but only uses additive decomposition. stl(t.window=13, s.window=“periodic”, robust=TRUE). automate picking of first 2 params with mstl()</p>
+<p>A time series decomposition can be used to measure the strength of trend and seasonality in a time series. A series with seasonal strength close to 0 exhibits almost no seasonality, while a series with strong seasonality will have close to 1</p>
+<p>While decomposition is primarily useful for studying time series data, and exploring historical changes over time, it can also be used in forecasting.</p>
+<p>To forecast a decomposed time series, we forecast the seasonal component and the seasonally adjusted component separately. It is usually assumed that the seasonal component is unchanging, or changing extremely slowly, so it is forecast by simply taking the last year of the estimated component. In other words, a seasonal naïve method is used for the seasonal component.</p>
+<p>To forecast the seasonally adjusted component, any non-seasonal forecasting method may be used. For example, a random walk with drift model, or Holt’s method (discussed in the next chapter), or a non-seasonal ARIMA model.</p>
+<p>A short-cut approach is to use the stlf() function. The following code will decompose the time series using STL, forecast the seasonally adjusted series, and return reseasonalize the forecasts: stlf(elecequip, method=‘naive’)</p>
+</div>
+<div id="c7" class="section level3">
+<h3><span class="header-section-number">7.6.5</span> C7</h3>
+<p>simple exponential smoothing: For example, it may be sensible to attach larger weights to more recent observations than to observations from the distant past. This is exactly the concept behind simple exponential smoothing. It has the weighted average form, component form,</p>
+<p>exponential smoothing has a “flat” forecast function. That is, all forecasts take the same value, equal to the last level component. Remember that these forecasts will only be suitable if the time series has no trend or seasonal component.</p>
+<p>The application of every exponential smoothing method requires the smoothing parameters and the initial values to be chosen. THis is a nonlinear optimization.</p>
+<p>holt linear trend: holt(). Damped Holt’s method is best whether you compare MAE or MSE values. So we will proceed with using the damped Holt’s method and apply it to the whole data set to get forecasts for future years.</p>
+<p>holt-winters seasonal method: hw(aust,seasonal=“additive”)</p>
+<p>A method that often provides accurate and robust forecasts for seasonal data is the Holt-Winters method with a damped trend and multiplicative seasonality: hw(y, damped=TRUE, seasonal=“multiplicative”)</p>
+<p>Each method is labelled by a pair of letters (T,S) defining the type of ‘Trend’ and ‘Seasonal’ components. For example, (A,M) is the method with an additive trend and multiplicative seasonality; (A_d, N) is the method with damped trend and no seasonality, and so on.</p>
+<table>
+<thead>
+<tr class="header">
+<th>short_hand</th>
+<th>method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(n,n)</td>
+<td>Simple exponential smoothing</td>
+</tr>
+<tr class="even">
+<td>(a,n)</td>
+<td>Holt’s linear method</td>
+</tr>
+<tr class="odd">
+<td>(a_d,n)</td>
+<td>Additive damped trend method</td>
+</tr>
+<tr class="even">
+<td>(a,a)</td>
+<td>Additive Holt-Winters’ method</td>
+</tr>
+<tr class="odd">
+<td>(a,m)</td>
+<td>Multiplicative Holt-Winters’ method</td>
+</tr>
+<tr class="even">
+<td>(a_d,m)</td>
+<td>Holt-Winters’ damped method</td>
+</tr>
+</tbody>
+</table>
+<p>Each model consists of a measurement equation that describes the observed data, and some state equations that describe how the unobserved components or states (level, trend, seasonal) change over time. Hence, these are referred to as state space models. For each method there exist two models: one with additive errors and one with multiplicative errors. The point forecasts produced by the models are identical if they use the same smoothing parameter values. They will, however, generate different prediction intervals.</p>
+<p>To distinguish between a model with additive errors and one with multiplicative errors (and also to distinguish the models from the methods), we add a third letter to the classification of the table above. We label each state space model as ETS (Error, Trend, Seasonal). This label can also be thought of as ExponenTial Smoothing. The possibilities for each component are: Error = {a.m}, Trend = {n,a,a_d}, and Seasonal = {n,a,m}.</p>
+<p>ETS(A,N,N): simple exponential smoothing with additive errors</p>
+<p>ETS(M,N,N): simple exponential smoothing with multiplicative errors</p>
+<p>ETS(A,A,N): Holt’s linear method with additive errors</p>
+<p>ETS(M,A,N): Holt’s linear method with multiplicative errors</p>
+<p>An alternative to estimating the parameters by minimizing the sum of squared errors is to maximize the “likelihood”. The likelihood is the probability of the data arising from the specified model. Thus, a large likelihood is associated with a good model. For an additive error model, maximizing the likelihood gives the same results as minimizing the sum of squared errors. However, different results will be obtained for multiplicative error models.</p>
+<p>Model Selection: A great advantage of the ETS statistical framework is that information criteria can be used for model selection - AIC, AIC_c, and BIC</p>
+<p>Three of the combinations of (Error, Trend, Seasonal) can lead to numerical difficulties. Specifically, the models that can cause such instabilities are ETS(A,N,M), ETS(A,A,M), and ETS(A,A d ,M), due to division by values potentially close to zero in the state equations. We normally do not consider these particular combinations when selecting a model.</p>
+<p>Models with multiplicative errors are useful when the data are strictly positive, but are not numerically stable when the data contain zeros or negative values. Therefore, multiplicative error models will not be considered if the time series is not strictly positive. In that case, only the six fully additive models will be applied.</p>
+<p>The ets() function does not produce forecasts. Rather, it estimates the model parameters and returns information about the fitted model. By default it uses the AICc to select an appropriate model</p>
+<p>ets(y, model=“ZZZ”, damped=NULL, alpha=NULL, beta=NULL, gamma=NULL, phi=NULL, lambda=NULL, biasadj=FALSE, additive.only=FALSE, restrict=TRUE, allow.multiplicative.trend=FALSE)</p>
+<p>Point forecasts are obtained from the models by iterating the equations for t = T+1 -&gt; T + h and setting all e_t = 0 for t &gt; T. These forecasts are identical to the forecasts from Holt’s linear method, and also to those from model ETS(A,A,N). Thus, the point forecasts obtained from the method and from the two models that underlie the method are identical (assuming that the same parameter values are used).</p>
+<p>ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.</p>
+<p>forecast: ets_fit %&gt;% forecast(h=8)</p>
+</div>
+<div id="c8-arima" class="section level3">
+<h3><span class="header-section-number">7.6.6</span> C8: arima</h3>
+<p>Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.</p>
+<p>A stationary time series is one whose properties do not depend on the time at which the series is observed.14 Thus, time series with trends, or with seasonality, are not stationary — the trend and seasonality will affect the value of the time series at different times. On the other hand, a white noise series is stationary — it does not matter when you observe it, it should look much the same at any point in time.</p>
+<p>Some cases can be confusing — a time series with cyclic behaviour (but with no trend or seasonality) is stationary. This is because the cycles are not of a fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be.</p>
+<p>In general, a stationary time series will have no predictable patterns in the long-term. Time plots will show the series to be roughly horizontal (although some cyclic behavior is possible), with constant variance.</p>
+<p>note that the Google stock price was non-stationary in panel (a), but the daily changes were stationary in panel (b). This shows one way to make a non-stationary time series stationary — compute the differences between consecutive observations. This is known as differencing.</p>
+<p>The ACF of the differenced Google stock price looks just like that of a white noise series. There are no autocorrelations lying outside the 95% limits, and the Ljung-Box statistic has a p-value of 0.355 (for h=10 ). This suggests that the daily change in the Google stock price is essentially a random amount which is uncorrelated with that of previous days.</p>
+<p>The differenced series is the change between consecutive observations in the original series, and can be written as: y_t* = y_t - y_{t-1}</p>
+<p>When the differenced series is white noise, the model for the original series can be written as y_t - y_{t-1} = e_t (white noise)</p>
+<p>Random walk models are widely used for non-stationary data, particularly financial and economic data. Random walks typically have: long periods of apparent trends up or down, sudden and unpredictable changes in direction.</p>
+<p>In practice, it is almost never necessary to go beyond second-order differences.</p>
+<p>A seasonal difference is the difference between an observation and the previous observation from the same season.</p>
+<p>If seasonally differenced data appear to be white noise, then an appropriate model for the original data is y_t = y_{t-m} + e_t. Forecasts from this model are equal to the last observation from the relevant season. That is, this model gives seasonal naïve forecasts.</p>
+<p>Sometimes it is necessary to take both a seasonal difference and a first difference to obtain stationary data</p>
+<p>When both seasonal and first differences are applied, it makes no difference which is done first—the result will be the same. However, if the data have a strong seasonal pattern, we recommend that seasonal differencing be done first, because the resulting series will sometimes be stationary and there will be no need for a further first difference. If first differencing is done first, there will still be seasonality present.</p>
+<p>One way to determine more objectively whether differencing is required is to use a unit root test. These are statistical hypothesis tests of stationarity that are designed for determining whether differencing is required.</p>
+<p>A number of unit root tests are available, which are based on different assumptions and may lead to conflicting answers. In our analysis, we use the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the null hypothesis is that the data are stationary, and we look for evidence that the null hypothesis is false. Consequently, small p-values (e.g., less than 0.05) suggest that differencing is required. The test can be computed using the ur.kpss() function from the urca package.</p>
+<p>This process of using a sequence of KPSS tests to determine the appropriate number of first differences is carried out by the function ndiffs()</p>
+<p>A similar function for determining whether seasonal differencing is required is nsdiffs(), which uses the measure of seasonal strength</p>
+<p>The backward shift operator B is a useful notational device when working with time series lags. The backward shift operator is convenient for describing the process of differencing. A first difference can be written as:</p>
+<p>y_t’ = y_t - y_{t-} = y_t -by_t = (1-b) y_t</p>
+<p>In general, a d th-order difference can be written as: (y_t)^d = (1-b)^d y_t</p>
+<p>In a multiple regression model, we forecast the variable of interest using a linear combination of predictors. In an auto-regression model, we forecast the variable of interest using a linear combination of past values of the variable. We refer to this as an AR(p) model, an autoregressive model of order p.</p>
+<p>for ar(1) model, y_t is white noise when beta_1 is 0, a random walk when beta_1 is 1 and beta_0 is 0, a random walk with drift when beta_1 is 1 and beta_0 is not zero, and y_t oscillates if beta_1 is negative.</p>
+<p>We normally restrict autoregressive models to stationary data, in which case some constraints on the values of the parameters are required.</p>
+<p>Rather than using past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model. We refer to this as an MA(q) model, a moving average model of order q.</p>
+<p>If we combine differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average</p>
+<p>The “predictors” include both lagged values of y_t and lagged errors. We call this an ARIMA(p,d,q) model, where p is the order of the autoregressive part; d is the degree of first differencing involved, and q is the orer of the moving average part.</p>
+<p>The same stationarity and invertibility conditions that are used for autoregressive and moving average models also apply to an ARIMA model.</p>
+<p>White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant Random walk with drift: ARIMA(0,1,0) with a constant Autoregression: ARIMA(p,0,0) Moving average: ARIMA(0,0,q)</p>
+<p>auto.arima() does an auto fit.</p>
+<p>The constant c has an important effect on the long-term forecasts obtained from these models.</p>
+<p>If c=0 and d=0, the long-term forecasts will go to zero. If c=0 and d=1, the long-term forecasts will go to a non-zero constant. If c=0 and d=2, the long-term forecasts will follow a straight line. If c≠0 and d=0, the long-term forecasts will go to the mean of the data. If c≠0 and d=1, the long-term forecasts will follow a straight line. If c≠0 and d=2, the long-term forecasts will follow a quadratic trend.</p>
+<p>The value of d also has an effect on the prediction intervals — the higher the value of d, the more rapidly the prediction intervals increase in size. For<br />
+d=0, the long-term forecast standard deviation will go to the standard deviation of the historical data, so the prediction intervals will all be essentially the same.</p>
+<p>partial autocorrelations. These measure the relationship between y_t and y_{t-k} after removing the effects of lags 1,2,3,…</p>
+<p>It is sometimes possible to use the ACF plot, and the closely related PACF plot, to determine appropriate values for p &amp; q.</p>
+<p>ggAcf() | ggPacf()</p>
+<p>If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of p/q. If p and q are both positive, then the plots do not help in finding suitable values of p and q.</p>
+<p>The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
+<p>the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag<br />
+p in the PACF, but none beyond lag p.</p>
+<p>The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:</p>
+<p>the PACF is exponentially decaying or sinusoidal; there is a significant spike at lag<br />
+q in the ACF, but none beyond lag q.</p>
+<p>Arima()</p>
+<p>When fitting an ARIMA model to a set of (non-seasonal) time series data, the following procedure provides a useful general approach.</p>
+<ol style="list-style-type: decimal">
+<li><p>Plot the data and identify any unusual observations.</p></li>
+<li><p>If necessary, transform the data (using a Box-Cox transformation) to stabilize the variance.</p></li>
+<li><p>If the data are non-stationary, take first differences of the data until the data are stationary.</p></li>
+<li><p>Examine the ACF/PACF: Is an ARIMA(p,d,0) or ARIMA(0,d,q) model appropriate?</p></li>
+<li><p>Try your chosen model(s), and use the AICc to search for a better model.</p></li>
+<li><p>Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.</p></li>
+<li><p>Once the residuals look like white noise, calculate forecasts.</p></li>
+</ol>
+<p>auto.arima only does steps 3-5.</p>
+<p>eeadj %&gt;% diff() %&gt;% ggtsdisplay(main=“”)</p>
+<p>The inclusion of a constant in a non-stationary ARIMA model is equivalent to inducing a polynomial trend of order d in the forecast function.</p>
+<p>seaosnal arima: arima(p,d,q) (P,Q,D)_m, m = num of observations per year</p>
+<p>The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12 model will show:</p>
+<p>a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).</p>
+<p>Arima(euretail, order=c(0,1,3), seasonal=c(0,1,1))</p>
+<p>auto.arima(euretail, stepwise=FALSE, approximation=FALSE)</p>
+<p>comparing information criteria is only valid for ARIMA models of the same orders of differencing.</p>
+</div>
+<div id="c9" class="section level3">
+<h3><span class="header-section-number">7.6.7</span> C9</h3>
+<p>The time series models in the previous two chapters allow for the inclusion of information from past observations of a series, but not for the inclusion of other information that may also be relevant. For example, the effects of holidays, competitor activity, changes in the law, the wider economy, or other external variables, may explain some of the historical variation and may lead to more accurate forecasts. On the other hand, the regression models in Chapter 5 allow for the inclusion of a lot of relevant information from predictor variables, but do not allow for the subtle time series dynamics that can be handled with ARIMA models. In this chapter, we consider how to extend ARIMA models in order to allow other information to be included in the models.</p>
+<p>The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated.</p>
+<p>Arima(y, xreg=x, order=c(1,1,0)) auto.arima(uschange[,“Consumption”], xreg=uschange[,“Income”])</p>
+<p>cbind(“Regression Errors” = residuals(fit, type=“regression”), “ARIMA errors” = residuals(fit, type=“innovation”)) %&gt;% autoplot(facets=TRUE)</p>
+<p><strong>9.4</strong></p>
+<p>There are two different ways of modelling a linear trend: deterministic and stochastic.</p>
+<p>deterministic: fit1 &lt;- auto.arima(austa, d=0, xreg=trend)</p>
+<p>stochastic: fit2 &lt;- auto.arima(austa, d=1)</p>
+<p>There is an implicit assumption with deterministic trends that the slope of the trend is not going to change over time. On the other hand, stochastic trends can change, and the estimated growth is only assumed to be the average growth over the historical period, not necessarily the rate of growth that will be observed into the future. Consequently, it is safer to forecast with stochastic trends, especially for longer forecast horizons, as the prediction intervals allow for greater uncertainty in future growth.</p>
+<p><strong>9.5</strong></p>
+<p>When there are long seasonal periods, a dynamic regression with Fourier terms is often better than other models we have considered in this book.</p>
+<p>Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.</p>
+<p>So for such time series, we prefer a harmonic regression approach where the seasonal pattern is modelled using Fourier terms with short-term time series dynamics handled by an ARMA error.</p>
+<p>fit &lt;- auto.arima(cafe04, xreg = fourier(cafe04, K = i), seasonal = FALSE, lambda = 0)</p>
+</div>
+<div id="c10" class="section level3">
+<h3><span class="header-section-number">7.6.8</span> C10</h3>
+<p><strong>10.2</strong></p>
+<p>gts() | hts() | aggts()</p>
+<p><strong>10.3</strong></p>
+<p>hts::</p>
+</div>
+<div id="c11" class="section level3">
+<h3><span class="header-section-number">7.6.9</span> C11</h3>
+<p>So far, we have considered relatively simple seasonal patterns such as quarterly and monthly data. However, higher frequency time series often exhibit more complicated seasonal patterns. For example, daily data may have a weekly pattern as well as an annual pattern. Hourly data usually has three types of seasonality: a daily pattern, a weekly pattern, and an annual pattern</p>
+<p>msts | mstsl | tbats |</p>
+<p>bld.mbb.bootstrap</p>
+</div>
+<div id="c12" class="section level3">
+<h3><span class="header-section-number">7.6.10</span> C12</h3>
+<p>stlf</p>
+<p>The best way to deal with moving holiday effects is to use dummy variables. However, neither STL, ETS nor TBATS models allow for covariates. Amongst the models discussed in this book (and implemented in the forecast package for R), the only choice is a dynamic regression model, where the predictors include any dummy holiday effects (and possibly also the seasonality using Fourier terms).</p>
+<p>To impose a positivity constraint, simply work on the log scale, by specifying the Box-Cox parameter lambda = 0.</p>
+<p>we can transform the data using a scaled logit transform which maps 9a,b) to the whole real line: y = log((x-a)/(b-x))</p>
+<p>Most time series models do not work well for very long time series. The problem is that real data do not come from the models we use. When the number of observations is not large (say up to about 200) the models often work well as an approximation to whatever process generated the data. But eventually we will have enough data that the difference between the true process and the model starts to become more obvious. An additional problem is that the optimization of the parameters becomes more time consuming because of the number of observations involved.</p>
+</div>
+</div>
+<div id="forecasting-datacamp" class="section level2">
+<h2><span class="header-section-number">7.7</span> Forecasting Datacamp</h2>
+<p>annual data can’t be seasonal. seasonal has fixed lengths, cyclical doesn’t.</p>
+<p>When data are either seasonal or cyclic, the ACF will peak around the seasonal lags or at the average cycle length.</p>
+<p>white noise is iid data. 95% of autocorrelations should be within blue lines of acf plot.</p>
+<p>There is a well-known result in economics called the “Efficient Market Hypothesis” that states that asset prices reflect all available information. A consequence of this is that the daily changes in stock prices should behave like white noise (ignoring dividends, interest rates and transaction costs). The consequence for forecasters is that the best forecast of the future price is the current price.</p>
+<p>diff() for daily changes</p>
+<p>Time series forecasting is typically discussed where only a one-step prediction is required.</p>
+<p>What about when you need to predict multiple time steps into the future?</p>
+<p>Predicting multiple time steps into the future is called multi-step time series forecasting. There are four main strategies that you can use for multi-step forecasting.</p>
+<p>Generally, time series forecasting describes predicting the observation at the next time step. This is called a one-step forecast, as only one time step is to be predicted. There are some time series problems where multiple time steps must be predicted. Contrasted to the one-step forecast, these are called multiple-step or multi-step time series forecasting problems.</p>
+<p>A good model forecasts well (so has low RMSE on the test set) and uses all available information in the training data (so has white noise residuals).</p>
+<p>subset.ts() | meanf | mape allows for cross model comparison</p>
+<p>simple exponential smoothing: large alpha puts more weight on recent values and the weights decay quickly. ses(). Has the same value for all forecasts.</p>
+<p>Let’s review the process:</p>
+<p>First, import and load your data. Determine how much of your data you want to allocate to training, and how much to testing; the sets should not overlap.</p>
+<p>Subset the data to create a training set, which you will use as an argument in your forecasting function(s). Optionally, you can also create a test set to use later.</p>
+<p>Compute forecasts of the training set using whichever forecasting function(s) you choose, and set h equal to the number of values you want to forecast, which is also the length of the test set.</p>
+<p>To view the results, use the accuracy() function with the forecast as the first argument and original data (or test set) as the second.</p>
+<p>Pick a measure in the output, such as RMSE or MAE, to evaluate the forecast(s); a smaller error indicates higher accuracy.</p>
+<p>Holt’s Linear Trend: Forecasts account for trend &amp; continue at the same trend indefinitely into the future: holt(damped = T) . A damped trend makes it level off after time: holt(damped = F) (phi = 1 is Holt’s method).</p>
+<p>Holt-Winters Method: Accounds for trend and seasonality. In the additive version the seasonality averages to 0 but this changes to 1 in the multiplicative version: hw(df, seasonal = ‘additive’)</p>
+<p>Methods with multiplicative trend produce poor forecasts.</p>
+<p>Innovation State Space Models</p>
+<p>trends = {n, a, a_d} {none, additive, damped}</p>
+<p>seasons = {n, a, m} {none, additive, multiplicative}</p>
+<p>So there are 9 possible exponential smoothing methods. Add:</p>
+<p>error = {a,m}</p>
+<p>And there are 18 possible state space models. Known as ets models. Estimated using likelihood. Choose model by minimizing AIC_c (biased correct AIC). Roughly the same as time series CV but is much faster: ets()</p>
+<p>transforms: square root, cube root, log, inverse (increasing strength of transformation from left to right). Equal to lambda = 1/2, L = 1/3, L = 0, L = -1 for Box-Cox. (L=0 is no transformation.)</p>
+<p>Not common to use box-cox with ets since ets can handle seasons &amp; trends. Use box-cox with arima models when there is increasing variation.</p>
+<p>BoxCox.lambda()</p>
+<p>Differencing is a way of making a time series stationary; this means that you remove any systematic patterns such as trend and seasonality from the data. A white noise series is considered a special case of a stationary time series. With non-seasonal data, you use lag-1 differences to model changes between observations rather than the observations directly. You have done this before by using the diff() function.</p>
+<p>With seasonal data, differences are often taken between observations in the same season of consecutive years, rather than in consecutive periods. For example, with quarterly data, one would take the difference between Q1 in one year and Q1 in the previous year. This is called seasonal differencing. Sometimes you need to apply both seasonal differences and lag-1 differences to the same series, thus, calculating the differences in the differences.</p>
+<p>auto.arima()</p>
+<p>Don’t compare an arima AIC_c with one from an ets. Comparisons only work within models of the same type.</p>
+<p>The Arima() function can be used to select a specific ARIMA model. Its first argument, order, is set to a vector that specifies the values of p, d and q. The second argument, include.constant, is a boolean that determines if the constant c, or drift, should be included.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up forecast functions for ETS and ARIMA models</span>
+fets &lt;-<span class="st"> </span><span class="cf">function</span>(x, h) {
+  <span class="kw">forecast</span>(<span class="kw">ets</span>(x), <span class="dt">h =</span> h)
+}
+farima &lt;-<span class="st"> </span><span class="cf">function</span>(x, h) {
+  <span class="kw">forecast</span>(___, ___)
+}</code></pre></div>
+<p>The AICc statistic is useful for selecting between models in the same class. For example, you can use it to select an ETS model or to select an ARIMA model. However, you cannot use it to compare ETS and ARIMA models because they are in different model classes. Instead, you can use time series cross-validation to compare an ARIMA model and an ETS model on the austa data. Because tsCV() requires functions that return forecast objects, you will set up some simple functions that fit the models and return the forecasts.</p>
+<p>seasonal arima: arima (p,d,q) (P,D,Q)_m. Coefficients are hard to interpret for original data.</p>
+<p>austa %&gt;% Arima(order = c(2,1,3), include.constant = T) %&gt;% forecast() %&gt;% autoplot()</p>
+<p>To make auto.arima() work harder to find a good model, add the optional argument stepwise = FALSE to look at a much larger collection of models.</p>
+<p>What happens when you want to create training and test sets for data that is more frequent than yearly? If needed, you can use a vector in form c(year, period) for the start and/or end keywords in the window() function. You must also ensure that you’re using the appropriate values of h in forecasting functions. Recall that h should be equal to the length of the data that makes up your test</p>
+<p>In dynamic regression the error term is an arima process.</p>
+<p>autoplot(advert, facets = TRUE) #2nd param scales vars to be comparable coefficients(fit)[3]</p>
+<p>dynamic harmonic regression uses Fourier series: e_t is non-seasonal since Fourier handles that. Assumes seasonality doesn’t change. Only need to select k for compliexty. Start from k=1 and choose model with lowest aic_c. k &lt;= m/2 where m is the seasonal period. Good when the seasonality is very large, weekly, daily, sub-daily, etc. The higher the order (K), the more “wiggly” the seasonal pattern is allowed to be. With K=1, it is a simple sine curve.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up harmonic regressors of order 13</span>
+harmonics &lt;-<span class="st"> </span><span class="kw">fourier</span>(gasoline, <span class="dt">K =</span> <span class="dv">13</span>)
+<span class="co"># Fit regression model with ARIMA errors</span>
+fit &lt;-<span class="st"> </span><span class="kw">auto.arima</span>(gasoline, <span class="dt">xreg =</span> harmonics, <span class="dt">seasonal =</span> <span class="ot">FALSE</span>)
+<span class="co"># Forecasts next 3 years</span>
+fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit, <span class="dt">xreg =</span> <span class="kw">fourier</span>(gasoline, <span class="dt">K =</span> <span class="dv">13</span>, <span class="dt">h =</span> <span class="dv">156</span>))
+<span class="co"># Plot forecasts fc</span>
+<span class="kw">autoplot</span>(fc)</code></pre></div>
+<p>Harmonic regressions are also useful when time series have multiple seasonal patterns.</p>
+<p>tslm()</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a harmonic regression using order 10 for each type of seasonality</span>
+fit &lt;-<span class="st"> </span><span class="kw">tslm</span>(taylor <span class="op">~</span><span class="st"> </span><span class="kw">fourier</span>(taylor, <span class="dt">K =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>)))
+<span class="co"># Forecast 20 working days ahead</span>
+fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="kw">fourier</span>(taylor, <span class="dt">K =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="dt">h =</span> <span class="dv">960</span>)))
+<span class="co"># Plot the forecasts</span>
+<span class="kw">autoplot</span>(fc)
+<span class="co"># Check the residuals of fit</span>
+<span class="kw">checkresiduals</span>(fit)</code></pre></div>
+<p>Another time series with multiple seasonal periods is calls, which contains 20 consecutive days of 5-minute call volume data for a large North American bank. There are 169 5-minute periods in a working day, and so the weekly seasonal frequency is 5 x 169 = 845. The weekly seasonality is relatively weak, so here you will just model daily seasonality.</p>
+<p>The residuals in this case still fail the white noise tests, but their autocorrelations are tiny, even though they are significant. This is because the series is so long. It is often unrealistic to have residuals that pass the tests for such long series. The effect of the remaining correlations on the forecasts will be negligible.</p>
+<p>tbats model: automates everything. tbats(), Good for data with large and multiple seasonal periods.</p>
+<p>Let’s break down elements of a TBATS model in TBATS(1, {0,0}, -, {&lt;51.18,14&gt;}), one of the graph titles from the video (Component: Meaning):</p>
+<p>1: Box-Cox transformation parameter</p>
+<p>{0,0}: ARMA error</p>
+<p>-:Damping parameter</p>
+<p>{&lt;51.18,14&gt;}: Seasonal period, Fourier terms</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="stats.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deep-learning-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-time_series.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

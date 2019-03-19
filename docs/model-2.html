@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 5 Model | Data Science Cribsheet</title>
+  <title>Chapter 3 Model | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 5 Model | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 3 Model | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Model | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 3 Model | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="model-1.html">
-<link rel="next" href="communicate-deploy-maintain.html">
+<link rel="prev" href="pre-modeling.html">
+<link rel="next" href="hierarchical-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -114,237 +114,253 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
 <li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.3</b> Other</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.3.1</b> Vanderplas Jupyter</a></li>
-<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.3.2</b> Sample R Pipeline</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#auto-data-science"><i class="fa fa-check"></i><b>1.4</b> Auto Data Science</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.5</b> Data</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#import-1"><i class="fa fa-check"></i><b>1.6</b> Import</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#tidytransform"><i class="fa fa-check"></i><b>1.7</b> Tidy/Transform</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#visualize-1"><i class="fa fa-check"></i><b>1.8</b> Visualize</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#model-1"><i class="fa fa-check"></i><b>1.9</b> Model</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.9.1</b> General</a></li>
+<li class="chapter" data-level="1.9.2" data-path="index.html"><a href="index.html#supervised"><i class="fa fa-check"></i><b>1.9.2</b> Supervised</a></li>
+<li class="chapter" data-level="1.9.3" data-path="index.html"><a href="index.html#unsupervised"><i class="fa fa-check"></i><b>1.9.3</b> Unsupervised</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="index.html"><a href="index.html#other-ml"><i class="fa fa-check"></i><b>1.10</b> Other ML</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="index.html"><a href="index.html#deep-learning"><i class="fa fa-check"></i><b>1.10.1</b> Deep Learning</a></li>
+<li class="chapter" data-level="1.10.2" data-path="index.html"><a href="index.html#probabilistic-programming"><i class="fa fa-check"></i><b>1.10.2</b> Probabilistic Programming</a></li>
+<li class="chapter" data-level="1.10.3" data-path="index.html"><a href="index.html#causality"><i class="fa fa-check"></i><b>1.10.3</b> Causality</a></li>
+<li class="chapter" data-level="1.10.4" data-path="index.html"><a href="index.html#nlp"><i class="fa fa-check"></i><b>1.10.4</b> NLP</a></li>
+<li class="chapter" data-level="1.10.5" data-path="index.html"><a href="index.html#computer-vision"><i class="fa fa-check"></i><b>1.10.5</b> Computer Vision</a></li>
+<li class="chapter" data-level="1.10.6" data-path="index.html"><a href="index.html#geospatial"><i class="fa fa-check"></i><b>1.10.6</b> Geospatial</a></li>
+<li class="chapter" data-level="1.10.7" data-path="index.html"><a href="index.html#networks"><i class="fa fa-check"></i><b>1.10.7</b> Networks</a></li>
+<li class="chapter" data-level="1.10.8" data-path="index.html"><a href="index.html#ai"><i class="fa fa-check"></i><b>1.10.8</b> AI</a></li>
+<li class="chapter" data-level="1.10.9" data-path="index.html"><a href="index.html#rl"><i class="fa fa-check"></i><b>1.10.9</b> RL</a></li>
+<li class="chapter" data-level="1.10.10" data-path="index.html"><a href="index.html#genetic-algorithms-es"><i class="fa fa-check"></i><b>1.10.10</b> Genetic Algorithms / ES</a></li>
+<li class="chapter" data-level="1.10.11" data-path="index.html"><a href="index.html#time-series"><i class="fa fa-check"></i><b>1.10.11</b> Time Series</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="index.html"><a href="index.html#communicate-1"><i class="fa fa-check"></i><b>1.11</b> Communicate</a></li>
+<li class="chapter" data-level="1.12" data-path="index.html"><a href="index.html#deploy-maintain"><i class="fa fa-check"></i><b>1.12</b> Deploy &amp; Maintain</a></li>
+<li class="chapter" data-level="1.13" data-path="index.html"><a href="index.html#notes"><i class="fa fa-check"></i><b>1.13</b> Notes</a><ul>
+<li class="chapter" data-level="1.13.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.13.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="1.13.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.13.2</b> Sample R Pipeline</a></li>
+<li class="chapter" data-level="1.13.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.13.3</b> Other</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="import-tidy.html"><a href="import-tidy.html"><i class="fa fa-check"></i><b>2</b> Import &amp; Tidy</a><ul>
-<li class="chapter" data-level="2.1" data-path="import-tidy.html"><a href="import-tidy.html#import-1"><i class="fa fa-check"></i><b>2.1</b> Import</a></li>
-<li class="chapter" data-level="2.2" data-path="import-tidy.html"><a href="import-tidy.html#sql"><i class="fa fa-check"></i><b>2.2</b> SQL</a></li>
-<li class="chapter" data-level="2.3" data-path="import-tidy.html"><a href="import-tidy.html#tidy-1"><i class="fa fa-check"></i><b>2.3</b> Tidy</a></li>
+<li class="chapter" data-level="2" data-path="pre-modeling.html"><a href="pre-modeling.html"><i class="fa fa-check"></i><b>2</b> Pre-Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="pre-modeling.html"><a href="pre-modeling.html#import-2"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-1"><i class="fa fa-check"></i><b>2.1.1</b> General</a></li>
+<li class="chapter" data-level="2.1.2" data-path="pre-modeling.html"><a href="pre-modeling.html#sql"><i class="fa fa-check"></i><b>2.1.2</b> SQL</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="transform-visualize.html"><a href="transform-visualize.html"><i class="fa fa-check"></i><b>3</b> Transform &amp; Visualize</a><ul>
-<li class="chapter" data-level="3.1" data-path="transform-visualize.html"><a href="transform-visualize.html#transform-1"><i class="fa fa-check"></i><b>3.1</b> Transform</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="transform-visualize.html"><a href="transform-visualize.html#general"><i class="fa fa-check"></i><b>3.1.1</b> General</a></li>
-<li class="chapter" data-level="3.1.2" data-path="transform-visualize.html"><a href="transform-visualize.html#missingness-imputation"><i class="fa fa-check"></i><b>3.1.2</b> Missingness &amp; Imputation</a></li>
+<li class="chapter" data-level="2.2" data-path="pre-modeling.html"><a href="pre-modeling.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-modeling.html"><a href="pre-modeling.html#transform-1"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-2"><i class="fa fa-check"></i><b>2.3.1</b> General</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pre-modeling.html"><a href="pre-modeling.html#missingness-imputation"><i class="fa fa-check"></i><b>2.3.2</b> Missingness &amp; Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="transform-visualize.html"><a href="transform-visualize.html#visualize-1"><i class="fa fa-check"></i><b>3.2</b> Visualize</a></li>
+<li class="chapter" data-level="2.4" data-path="pre-modeling.html"><a href="pre-modeling.html#visualize-2"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
+<li class="chapter" data-level="2.5" data-path="pre-modeling.html"><a href="pre-modeling.html#general-3"><i class="fa fa-check"></i><b>2.5</b> General</a></li>
+<li class="chapter" data-level="2.6" data-path="pre-modeling.html"><a href="pre-modeling.html#pre-processing"><i class="fa fa-check"></i><b>2.6</b> Pre-processing</a></li>
+<li class="chapter" data-level="2.7" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-engineering"><i class="fa fa-check"></i><b>2.7</b> Feature Engineering</a></li>
+<li class="chapter" data-level="2.8" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-selection"><i class="fa fa-check"></i><b>2.8</b> Feature Selection</a></li>
+<li class="chapter" data-level="2.9" data-path="pre-modeling.html"><a href="pre-modeling.html#other-1"><i class="fa fa-check"></i><b>2.9</b> Other</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="pre-modeling.html"><a href="pre-modeling.html#unbalanced-classes"><i class="fa fa-check"></i><b>2.9.1</b> Unbalanced Classes</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="model-1.html"><a href="model-1.html"><i class="fa fa-check"></i><b>4</b> Model</a><ul>
-<li class="chapter" data-level="4.1" data-path="model-1.html"><a href="model-1.html#general-1"><i class="fa fa-check"></i><b>4.1</b> General</a></li>
-<li class="chapter" data-level="4.2" data-path="model-1.html"><a href="model-1.html#pre-processing"><i class="fa fa-check"></i><b>4.2</b> Pre-processing</a></li>
-<li class="chapter" data-level="4.3" data-path="model-1.html"><a href="model-1.html#feature-engineering"><i class="fa fa-check"></i><b>4.3</b> Feature Engineering</a></li>
-<li class="chapter" data-level="4.4" data-path="model-1.html"><a href="model-1.html#feature-selection"><i class="fa fa-check"></i><b>4.4</b> Feature Selection</a></li>
-<li class="chapter" data-level="4.5" data-path="model-1.html"><a href="model-1.html#other-1"><i class="fa fa-check"></i><b>4.5</b> Other</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="model-1.html"><a href="model-1.html#unbalanced-classes"><i class="fa fa-check"></i><b>4.5.1</b> Unbalanced Classes</a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="model-1.html"><a href="model-1.html#model-selection"><i class="fa fa-check"></i><b>4.6</b> Model Selection</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="model-1.html"><a href="model-1.html#general-2"><i class="fa fa-check"></i><b>4.6.1</b> General</a></li>
-<li class="chapter" data-level="4.6.2" data-path="model-1.html"><a href="model-1.html#clustering"><i class="fa fa-check"></i><b>4.6.2</b> Clustering</a></li>
+<li class="chapter" data-level="2.10" data-path="pre-modeling.html"><a href="pre-modeling.html#model-selection"><i class="fa fa-check"></i><b>2.10</b> Model Selection</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-4"><i class="fa fa-check"></i><b>2.10.1</b> General</a></li>
+<li class="chapter" data-level="2.10.2" data-path="pre-modeling.html"><a href="pre-modeling.html#clustering"><i class="fa fa-check"></i><b>2.10.2</b> Clustering</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="model-2.html"><a href="model-2.html"><i class="fa fa-check"></i><b>5</b> Model</a><ul>
-<li class="chapter" data-level="5.1" data-path="model-2.html"><a href="model-2.html#linear-regression"><i class="fa fa-check"></i><b>5.1</b> Linear Regression</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="model-2.html"><a href="model-2.html#intro"><i class="fa fa-check"></i><b>5.1.1</b> Intro</a></li>
-<li class="chapter" data-level="5.1.2" data-path="model-2.html"><a href="model-2.html#assumptions"><i class="fa fa-check"></i><b>5.1.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.1.3" data-path="model-2.html"><a href="model-2.html#selection"><i class="fa fa-check"></i><b>5.1.3</b> Selection</a></li>
-<li class="chapter" data-level="5.1.4" data-path="model-2.html"><a href="model-2.html#proscons"><i class="fa fa-check"></i><b>5.1.4</b> Pros/Cons</a></li>
-<li class="chapter" data-level="5.1.5" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>5.1.5</b> Other</a></li>
+<li class="chapter" data-level="3" data-path="model-2.html"><a href="model-2.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-2.html"><a href="model-2.html#notes-1"><i class="fa fa-check"></i><b>3.1</b> Notes</a></li>
+<li class="chapter" data-level="3.2" data-path="model-2.html"><a href="model-2.html#supervised-1"><i class="fa fa-check"></i><b>3.2</b> Supervised</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="model-2.html"><a href="model-2.html#linear-regression"><i class="fa fa-check"></i><b>3.2.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="3.2.2" data-path="model-2.html"><a href="model-2.html#selection"><i class="fa fa-check"></i><b>3.2.2</b> Selection</a></li>
+<li class="chapter" data-level="3.2.3" data-path="model-2.html"><a href="model-2.html#proscons"><i class="fa fa-check"></i><b>3.2.3</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.2.4" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>3.2.4</b> Other</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="model-2.html"><a href="model-2.html#ridgelasso"><i class="fa fa-check"></i><b>5.2</b> Ridge/Lasso</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="model-2.html"><a href="model-2.html#intro-1"><i class="fa fa-check"></i><b>5.2.1</b> Intro</a></li>
-<li class="chapter" data-level="5.2.2" data-path="model-2.html"><a href="model-2.html#assumptions-1"><i class="fa fa-check"></i><b>5.2.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.2.3" data-path="model-2.html"><a href="model-2.html#evaluation"><i class="fa fa-check"></i><b>5.2.3</b> Evaluation</a></li>
-<li class="chapter" data-level="5.2.4" data-path="model-2.html"><a href="model-2.html#proscons-1"><i class="fa fa-check"></i><b>5.2.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.3" data-path="model-2.html"><a href="model-2.html#ridgelasso"><i class="fa fa-check"></i><b>3.3</b> Ridge/Lasso</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="model-2.html"><a href="model-2.html#intro"><i class="fa fa-check"></i><b>3.3.1</b> Intro</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="model-2.html"><a href="model-2.html#logistic-regression"><i class="fa fa-check"></i><b>5.3</b> Logistic Regression</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="model-2.html"><a href="model-2.html#intro-2"><i class="fa fa-check"></i><b>5.3.1</b> Intro</a></li>
-<li class="chapter" data-level="5.3.2" data-path="model-2.html"><a href="model-2.html#assumptions-2"><i class="fa fa-check"></i><b>5.3.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.3.3" data-path="model-2.html"><a href="model-2.html#evaluation-1"><i class="fa fa-check"></i><b>5.3.3</b> Evaluation</a></li>
-<li class="chapter" data-level="5.3.4" data-path="model-2.html"><a href="model-2.html#proscons-2"><i class="fa fa-check"></i><b>5.3.4</b> Pros/Cons</a></li>
-<li class="chapter" data-level="5.3.5" data-path="model-2.html"><a href="model-2.html#code-example"><i class="fa fa-check"></i><b>5.3.5</b> Code Example</a></li>
+<li class="chapter" data-level="3.4" data-path="model-2.html"><a href="model-2.html#logistic-regression"><i class="fa fa-check"></i><b>3.4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="model-2.html"><a href="model-2.html#intro-1"><i class="fa fa-check"></i><b>3.4.1</b> Intro</a></li>
+<li class="chapter" data-level="3.4.2" data-path="model-2.html"><a href="model-2.html#assumptions"><i class="fa fa-check"></i><b>3.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="model-2.html"><a href="model-2.html#evaluation"><i class="fa fa-check"></i><b>3.4.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.4.4" data-path="model-2.html"><a href="model-2.html#proscons-1"><i class="fa fa-check"></i><b>3.4.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.4.5" data-path="model-2.html"><a href="model-2.html#code-example"><i class="fa fa-check"></i><b>3.4.5</b> Code Example</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="model-2.html"><a href="model-2.html#poisson-regression"><i class="fa fa-check"></i><b>5.4</b> Poisson Regression</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="model-2.html"><a href="model-2.html#intro-3"><i class="fa fa-check"></i><b>5.4.1</b> Intro</a></li>
-<li class="chapter" data-level="5.4.2" data-path="model-2.html"><a href="model-2.html#assumptions-3"><i class="fa fa-check"></i><b>5.4.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.4.3" data-path="model-2.html"><a href="model-2.html#evaluation-2"><i class="fa fa-check"></i><b>5.4.3</b> Evaluation</a></li>
-<li class="chapter" data-level="5.4.4" data-path="model-2.html"><a href="model-2.html#proscons-3"><i class="fa fa-check"></i><b>5.4.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.5" data-path="model-2.html"><a href="model-2.html#poisson-regression"><i class="fa fa-check"></i><b>3.5</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="model-2.html"><a href="model-2.html#intro-2"><i class="fa fa-check"></i><b>3.5.1</b> Intro</a></li>
+<li class="chapter" data-level="3.5.2" data-path="model-2.html"><a href="model-2.html#assumptions-1"><i class="fa fa-check"></i><b>3.5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.5.3" data-path="model-2.html"><a href="model-2.html#evaluation-1"><i class="fa fa-check"></i><b>3.5.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="model-2.html"><a href="model-2.html#proscons-2"><i class="fa fa-check"></i><b>3.5.4</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="model-2.html"><a href="model-2.html#generalized-additive-models"><i class="fa fa-check"></i><b>5.5</b> Generalized Additive Models</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="model-2.html"><a href="model-2.html#intro-4"><i class="fa fa-check"></i><b>5.5.1</b> Intro</a></li>
-<li class="chapter" data-level="5.5.2" data-path="model-2.html"><a href="model-2.html#assumptions-4"><i class="fa fa-check"></i><b>5.5.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.5.3" data-path="model-2.html"><a href="model-2.html#evaluation-3"><i class="fa fa-check"></i><b>5.5.3</b> Evaluation</a></li>
-<li class="chapter" data-level="5.5.4" data-path="model-2.html"><a href="model-2.html#proscons-4"><i class="fa fa-check"></i><b>5.5.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.6" data-path="model-2.html"><a href="model-2.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.6</b> Generalized Additive Models</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="model-2.html"><a href="model-2.html#intro-3"><i class="fa fa-check"></i><b>3.6.1</b> Intro</a></li>
+<li class="chapter" data-level="3.6.2" data-path="model-2.html"><a href="model-2.html#assumptions-2"><i class="fa fa-check"></i><b>3.6.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.6.3" data-path="model-2.html"><a href="model-2.html#evaluation-2"><i class="fa fa-check"></i><b>3.6.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.6.4" data-path="model-2.html"><a href="model-2.html#proscons-3"><i class="fa fa-check"></i><b>3.6.4</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="model-2.html"><a href="model-2.html#k-means-clustering-us"><i class="fa fa-check"></i><b>5.6</b> K-Means Clustering [US]</a><ul>
-<li class="chapter" data-level="5.6.1" data-path="model-2.html"><a href="model-2.html#intro-5"><i class="fa fa-check"></i><b>5.6.1</b> Intro</a></li>
-<li class="chapter" data-level="5.6.2" data-path="model-2.html"><a href="model-2.html#assumptions-5"><i class="fa fa-check"></i><b>5.6.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.6.3" data-path="model-2.html"><a href="model-2.html#characteristics"><i class="fa fa-check"></i><b>5.6.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.6.4" data-path="model-2.html"><a href="model-2.html#evaluation-4"><i class="fa fa-check"></i><b>5.6.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.6.5" data-path="model-2.html"><a href="model-2.html#proscons-5"><i class="fa fa-check"></i><b>5.6.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.7" data-path="model-2.html"><a href="model-2.html#k-means-clustering-us"><i class="fa fa-check"></i><b>3.7</b> K-Means Clustering [US]</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="model-2.html"><a href="model-2.html#intro-4"><i class="fa fa-check"></i><b>3.7.1</b> Intro</a></li>
 </ul></li>
-<li class="chapter" data-level="5.7" data-path="model-2.html"><a href="model-2.html#hierarchical-clustering"><i class="fa fa-check"></i><b>5.7</b> Hierarchical Clustering</a><ul>
-<li class="chapter" data-level="5.7.1" data-path="model-2.html"><a href="model-2.html#intro-6"><i class="fa fa-check"></i><b>5.7.1</b> Intro</a></li>
-<li class="chapter" data-level="5.7.2" data-path="model-2.html"><a href="model-2.html#assumptions-6"><i class="fa fa-check"></i><b>5.7.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.7.3" data-path="model-2.html"><a href="model-2.html#characteristics-1"><i class="fa fa-check"></i><b>5.7.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.7.4" data-path="model-2.html"><a href="model-2.html#evaluation-5"><i class="fa fa-check"></i><b>5.7.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.7.5" data-path="model-2.html"><a href="model-2.html#proscons-6"><i class="fa fa-check"></i><b>5.7.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.8" data-path="model-2.html"><a href="model-2.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.8</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="model-2.html"><a href="model-2.html#assumptions-3"><i class="fa fa-check"></i><b>3.8.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.8.2" data-path="model-2.html"><a href="model-2.html#characteristics"><i class="fa fa-check"></i><b>3.8.2</b> Characteristics</a></li>
+<li class="chapter" data-level="3.8.3" data-path="model-2.html"><a href="model-2.html#evaluation-3"><i class="fa fa-check"></i><b>3.8.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.8.4" data-path="model-2.html"><a href="model-2.html#proscons-4"><i class="fa fa-check"></i><b>3.8.4</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.8" data-path="model-2.html"><a href="model-2.html#pca"><i class="fa fa-check"></i><b>5.8</b> PCA</a><ul>
-<li class="chapter" data-level="5.8.1" data-path="model-2.html"><a href="model-2.html#intro-7"><i class="fa fa-check"></i><b>5.8.1</b> Intro</a></li>
-<li class="chapter" data-level="5.8.2" data-path="model-2.html"><a href="model-2.html#assumptions-7"><i class="fa fa-check"></i><b>5.8.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.8.3" data-path="model-2.html"><a href="model-2.html#characteristics-2"><i class="fa fa-check"></i><b>5.8.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.8.4" data-path="model-2.html"><a href="model-2.html#evaluation-6"><i class="fa fa-check"></i><b>5.8.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.8.5" data-path="model-2.html"><a href="model-2.html#proscons-7"><i class="fa fa-check"></i><b>5.8.5</b> Pros/Cons</a></li>
-<li class="chapter" data-level="5.8.6" data-path="model-2.html"><a href="model-2.html#other-3"><i class="fa fa-check"></i><b>5.8.6</b> Other</a></li>
+<li class="chapter" data-level="3.9" data-path="model-2.html"><a href="model-2.html#pca"><i class="fa fa-check"></i><b>3.9</b> PCA</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="model-2.html"><a href="model-2.html#intro-5"><i class="fa fa-check"></i><b>3.9.1</b> Intro</a></li>
+<li class="chapter" data-level="3.9.2" data-path="model-2.html"><a href="model-2.html#assumptions-4"><i class="fa fa-check"></i><b>3.9.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.9.3" data-path="model-2.html"><a href="model-2.html#characteristics-1"><i class="fa fa-check"></i><b>3.9.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.9.4" data-path="model-2.html"><a href="model-2.html#evaluation-4"><i class="fa fa-check"></i><b>3.9.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.9.5" data-path="model-2.html"><a href="model-2.html#proscons-5"><i class="fa fa-check"></i><b>3.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.9.6" data-path="model-2.html"><a href="model-2.html#other-3"><i class="fa fa-check"></i><b>3.9.6</b> Other</a></li>
 </ul></li>
-<li class="chapter" data-level="5.9" data-path="model-2.html"><a href="model-2.html#knn"><i class="fa fa-check"></i><b>5.9</b> KNN</a><ul>
-<li class="chapter" data-level="5.9.1" data-path="model-2.html"><a href="model-2.html#intro-8"><i class="fa fa-check"></i><b>5.9.1</b> Intro</a></li>
-<li class="chapter" data-level="5.9.2" data-path="model-2.html"><a href="model-2.html#assumptions-8"><i class="fa fa-check"></i><b>5.9.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.9.3" data-path="model-2.html"><a href="model-2.html#characteristics-3"><i class="fa fa-check"></i><b>5.9.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.9.4" data-path="model-2.html"><a href="model-2.html#evaluation-7"><i class="fa fa-check"></i><b>5.9.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.9.5" data-path="model-2.html"><a href="model-2.html#proscons-8"><i class="fa fa-check"></i><b>5.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.10" data-path="model-2.html"><a href="model-2.html#knn"><i class="fa fa-check"></i><b>3.10</b> KNN</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="model-2.html"><a href="model-2.html#intro-6"><i class="fa fa-check"></i><b>3.10.1</b> Intro</a></li>
+<li class="chapter" data-level="3.10.2" data-path="model-2.html"><a href="model-2.html#assumptions-5"><i class="fa fa-check"></i><b>3.10.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.10.3" data-path="model-2.html"><a href="model-2.html#characteristics-2"><i class="fa fa-check"></i><b>3.10.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.10.4" data-path="model-2.html"><a href="model-2.html#evaluation-5"><i class="fa fa-check"></i><b>3.10.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.10.5" data-path="model-2.html"><a href="model-2.html#proscons-6"><i class="fa fa-check"></i><b>3.10.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.10" data-path="model-2.html"><a href="model-2.html#svm"><i class="fa fa-check"></i><b>5.10</b> SVM</a><ul>
-<li class="chapter" data-level="5.10.1" data-path="model-2.html"><a href="model-2.html#intro-9"><i class="fa fa-check"></i><b>5.10.1</b> Intro</a></li>
-<li class="chapter" data-level="5.10.2" data-path="model-2.html"><a href="model-2.html#assumptions-9"><i class="fa fa-check"></i><b>5.10.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.10.3" data-path="model-2.html"><a href="model-2.html#characteristics-4"><i class="fa fa-check"></i><b>5.10.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.10.4" data-path="model-2.html"><a href="model-2.html#evaluation-8"><i class="fa fa-check"></i><b>5.10.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.10.5" data-path="model-2.html"><a href="model-2.html#proscons-9"><i class="fa fa-check"></i><b>5.10.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.11" data-path="model-2.html"><a href="model-2.html#svm"><i class="fa fa-check"></i><b>3.11</b> SVM</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="model-2.html"><a href="model-2.html#intro-7"><i class="fa fa-check"></i><b>3.11.1</b> Intro</a></li>
+<li class="chapter" data-level="3.11.2" data-path="model-2.html"><a href="model-2.html#assumptions-6"><i class="fa fa-check"></i><b>3.11.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.11.3" data-path="model-2.html"><a href="model-2.html#characteristics-3"><i class="fa fa-check"></i><b>3.11.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.11.4" data-path="model-2.html"><a href="model-2.html#evaluation-6"><i class="fa fa-check"></i><b>3.11.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.11.5" data-path="model-2.html"><a href="model-2.html#proscons-7"><i class="fa fa-check"></i><b>3.11.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.11" data-path="model-2.html"><a href="model-2.html#decision-tree"><i class="fa fa-check"></i><b>5.11</b> Decision Tree</a><ul>
-<li class="chapter" data-level="5.11.1" data-path="model-2.html"><a href="model-2.html#intro-10"><i class="fa fa-check"></i><b>5.11.1</b> Intro</a></li>
-<li class="chapter" data-level="5.11.2" data-path="model-2.html"><a href="model-2.html#assumptions-10"><i class="fa fa-check"></i><b>5.11.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.11.3" data-path="model-2.html"><a href="model-2.html#characteristics-5"><i class="fa fa-check"></i><b>5.11.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.11.4" data-path="model-2.html"><a href="model-2.html#evaluation-9"><i class="fa fa-check"></i><b>5.11.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.11.5" data-path="model-2.html"><a href="model-2.html#proscons-10"><i class="fa fa-check"></i><b>5.11.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.12" data-path="model-2.html"><a href="model-2.html#decision-tree"><i class="fa fa-check"></i><b>3.12</b> Decision Tree</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="model-2.html"><a href="model-2.html#intro-8"><i class="fa fa-check"></i><b>3.12.1</b> Intro</a></li>
+<li class="chapter" data-level="3.12.2" data-path="model-2.html"><a href="model-2.html#assumptions-7"><i class="fa fa-check"></i><b>3.12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.12.3" data-path="model-2.html"><a href="model-2.html#characteristics-4"><i class="fa fa-check"></i><b>3.12.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.12.4" data-path="model-2.html"><a href="model-2.html#evaluation-7"><i class="fa fa-check"></i><b>3.12.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.12.5" data-path="model-2.html"><a href="model-2.html#proscons-8"><i class="fa fa-check"></i><b>3.12.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.12" data-path="model-2.html"><a href="model-2.html#bagging"><i class="fa fa-check"></i><b>5.12</b> Bagging</a><ul>
-<li class="chapter" data-level="5.12.1" data-path="model-2.html"><a href="model-2.html#intro-11"><i class="fa fa-check"></i><b>5.12.1</b> Intro</a></li>
-<li class="chapter" data-level="5.12.2" data-path="model-2.html"><a href="model-2.html#assumptions-11"><i class="fa fa-check"></i><b>5.12.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.12.3" data-path="model-2.html"><a href="model-2.html#characteristics-6"><i class="fa fa-check"></i><b>5.12.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.12.4" data-path="model-2.html"><a href="model-2.html#evaluation-10"><i class="fa fa-check"></i><b>5.12.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.12.5" data-path="model-2.html"><a href="model-2.html#proscons-11"><i class="fa fa-check"></i><b>5.12.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.13" data-path="model-2.html"><a href="model-2.html#bagging"><i class="fa fa-check"></i><b>3.13</b> Bagging</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="model-2.html"><a href="model-2.html#intro-9"><i class="fa fa-check"></i><b>3.13.1</b> Intro</a></li>
+<li class="chapter" data-level="3.13.2" data-path="model-2.html"><a href="model-2.html#assumptions-8"><i class="fa fa-check"></i><b>3.13.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.13.3" data-path="model-2.html"><a href="model-2.html#characteristics-5"><i class="fa fa-check"></i><b>3.13.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.13.4" data-path="model-2.html"><a href="model-2.html#evaluation-8"><i class="fa fa-check"></i><b>3.13.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.13.5" data-path="model-2.html"><a href="model-2.html#proscons-9"><i class="fa fa-check"></i><b>3.13.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.13" data-path="model-2.html"><a href="model-2.html#random-forest"><i class="fa fa-check"></i><b>5.13</b> Random Forest</a><ul>
-<li class="chapter" data-level="5.13.1" data-path="model-2.html"><a href="model-2.html#intro-12"><i class="fa fa-check"></i><b>5.13.1</b> Intro</a></li>
-<li class="chapter" data-level="5.13.2" data-path="model-2.html"><a href="model-2.html#assumptions-12"><i class="fa fa-check"></i><b>5.13.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.13.3" data-path="model-2.html"><a href="model-2.html#characteristics-7"><i class="fa fa-check"></i><b>5.13.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.13.4" data-path="model-2.html"><a href="model-2.html#evaluation-11"><i class="fa fa-check"></i><b>5.13.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.13.5" data-path="model-2.html"><a href="model-2.html#proscons-12"><i class="fa fa-check"></i><b>5.13.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.14" data-path="model-2.html"><a href="model-2.html#random-forest"><i class="fa fa-check"></i><b>3.14</b> Random Forest</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="model-2.html"><a href="model-2.html#intro-10"><i class="fa fa-check"></i><b>3.14.1</b> Intro</a></li>
+<li class="chapter" data-level="3.14.2" data-path="model-2.html"><a href="model-2.html#assumptions-9"><i class="fa fa-check"></i><b>3.14.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.14.3" data-path="model-2.html"><a href="model-2.html#characteristics-6"><i class="fa fa-check"></i><b>3.14.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.14.4" data-path="model-2.html"><a href="model-2.html#evaluation-9"><i class="fa fa-check"></i><b>3.14.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.14.5" data-path="model-2.html"><a href="model-2.html#proscons-10"><i class="fa fa-check"></i><b>3.14.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.14" data-path="model-2.html"><a href="model-2.html#boosting"><i class="fa fa-check"></i><b>5.14</b> Boosting</a><ul>
-<li class="chapter" data-level="5.14.1" data-path="model-2.html"><a href="model-2.html#intro-13"><i class="fa fa-check"></i><b>5.14.1</b> Intro</a></li>
-<li class="chapter" data-level="5.14.2" data-path="model-2.html"><a href="model-2.html#assumptions-13"><i class="fa fa-check"></i><b>5.14.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.14.3" data-path="model-2.html"><a href="model-2.html#characteristics-8"><i class="fa fa-check"></i><b>5.14.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.14.4" data-path="model-2.html"><a href="model-2.html#evaluation-12"><i class="fa fa-check"></i><b>5.14.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.14.5" data-path="model-2.html"><a href="model-2.html#proscons-13"><i class="fa fa-check"></i><b>5.14.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.15" data-path="model-2.html"><a href="model-2.html#boosting"><i class="fa fa-check"></i><b>3.15</b> Boosting</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="model-2.html"><a href="model-2.html#intro-11"><i class="fa fa-check"></i><b>3.15.1</b> Intro</a></li>
+<li class="chapter" data-level="3.15.2" data-path="model-2.html"><a href="model-2.html#assumptions-10"><i class="fa fa-check"></i><b>3.15.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.15.3" data-path="model-2.html"><a href="model-2.html#characteristics-7"><i class="fa fa-check"></i><b>3.15.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.15.4" data-path="model-2.html"><a href="model-2.html#evaluation-10"><i class="fa fa-check"></i><b>3.15.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.15.5" data-path="model-2.html"><a href="model-2.html#proscons-11"><i class="fa fa-check"></i><b>3.15.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.15" data-path="model-2.html"><a href="model-2.html#association-rule-mining"><i class="fa fa-check"></i><b>5.15</b> Association Rule Mining</a><ul>
-<li class="chapter" data-level="5.15.1" data-path="model-2.html"><a href="model-2.html#intro-14"><i class="fa fa-check"></i><b>5.15.1</b> Intro</a></li>
-<li class="chapter" data-level="5.15.2" data-path="model-2.html"><a href="model-2.html#assumptions-14"><i class="fa fa-check"></i><b>5.15.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.15.3" data-path="model-2.html"><a href="model-2.html#characteristics-9"><i class="fa fa-check"></i><b>5.15.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.15.4" data-path="model-2.html"><a href="model-2.html#evaluation-13"><i class="fa fa-check"></i><b>5.15.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.15.5" data-path="model-2.html"><a href="model-2.html#proscons-14"><i class="fa fa-check"></i><b>5.15.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.16" data-path="model-2.html"><a href="model-2.html#association-rule-mining"><i class="fa fa-check"></i><b>3.16</b> Association Rule Mining</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="model-2.html"><a href="model-2.html#intro-12"><i class="fa fa-check"></i><b>3.16.1</b> Intro</a></li>
+<li class="chapter" data-level="3.16.2" data-path="model-2.html"><a href="model-2.html#assumptions-11"><i class="fa fa-check"></i><b>3.16.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.16.3" data-path="model-2.html"><a href="model-2.html#characteristics-8"><i class="fa fa-check"></i><b>3.16.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.16.4" data-path="model-2.html"><a href="model-2.html#evaluation-11"><i class="fa fa-check"></i><b>3.16.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.16.5" data-path="model-2.html"><a href="model-2.html#proscons-12"><i class="fa fa-check"></i><b>3.16.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.16" data-path="model-2.html"><a href="model-2.html#naive-bayes"><i class="fa fa-check"></i><b>5.16</b> Naïve Bayes</a><ul>
-<li class="chapter" data-level="5.16.1" data-path="model-2.html"><a href="model-2.html#intro-15"><i class="fa fa-check"></i><b>5.16.1</b> Intro</a></li>
-<li class="chapter" data-level="5.16.2" data-path="model-2.html"><a href="model-2.html#assumptions-15"><i class="fa fa-check"></i><b>5.16.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.16.3" data-path="model-2.html"><a href="model-2.html#characteristics-10"><i class="fa fa-check"></i><b>5.16.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.16.4" data-path="model-2.html"><a href="model-2.html#evaluation-14"><i class="fa fa-check"></i><b>5.16.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.16.5" data-path="model-2.html"><a href="model-2.html#proscons-15"><i class="fa fa-check"></i><b>5.16.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.17" data-path="model-2.html"><a href="model-2.html#naive-bayes"><i class="fa fa-check"></i><b>3.17</b> Naïve Bayes</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="model-2.html"><a href="model-2.html#intro-13"><i class="fa fa-check"></i><b>3.17.1</b> Intro</a></li>
+<li class="chapter" data-level="3.17.2" data-path="model-2.html"><a href="model-2.html#assumptions-12"><i class="fa fa-check"></i><b>3.17.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.17.3" data-path="model-2.html"><a href="model-2.html#characteristics-9"><i class="fa fa-check"></i><b>3.17.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.17.4" data-path="model-2.html"><a href="model-2.html#evaluation-12"><i class="fa fa-check"></i><b>3.17.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.17.5" data-path="model-2.html"><a href="model-2.html#proscons-13"><i class="fa fa-check"></i><b>3.17.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.17" data-path="model-2.html"><a href="model-2.html#lda"><i class="fa fa-check"></i><b>5.17</b> LDA</a><ul>
-<li class="chapter" data-level="5.17.1" data-path="model-2.html"><a href="model-2.html#intro-16"><i class="fa fa-check"></i><b>5.17.1</b> Intro</a></li>
-<li class="chapter" data-level="5.17.2" data-path="model-2.html"><a href="model-2.html#assumptions-16"><i class="fa fa-check"></i><b>5.17.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.17.3" data-path="model-2.html"><a href="model-2.html#characteristics-11"><i class="fa fa-check"></i><b>5.17.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.17.4" data-path="model-2.html"><a href="model-2.html#evaluation-15"><i class="fa fa-check"></i><b>5.17.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.17.5" data-path="model-2.html"><a href="model-2.html#proscons-16"><i class="fa fa-check"></i><b>5.17.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.18" data-path="model-2.html"><a href="model-2.html#lda"><i class="fa fa-check"></i><b>3.18</b> LDA</a><ul>
+<li class="chapter" data-level="3.18.1" data-path="model-2.html"><a href="model-2.html#intro-14"><i class="fa fa-check"></i><b>3.18.1</b> Intro</a></li>
+<li class="chapter" data-level="3.18.2" data-path="model-2.html"><a href="model-2.html#assumptions-13"><i class="fa fa-check"></i><b>3.18.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.18.3" data-path="model-2.html"><a href="model-2.html#characteristics-10"><i class="fa fa-check"></i><b>3.18.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.18.4" data-path="model-2.html"><a href="model-2.html#evaluation-13"><i class="fa fa-check"></i><b>3.18.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.18.5" data-path="model-2.html"><a href="model-2.html#proscons-14"><i class="fa fa-check"></i><b>3.18.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.18" data-path="model-2.html"><a href="model-2.html#qda"><i class="fa fa-check"></i><b>5.18</b> QDA</a><ul>
-<li class="chapter" data-level="5.18.1" data-path="model-2.html"><a href="model-2.html#intro-17"><i class="fa fa-check"></i><b>5.18.1</b> Intro</a></li>
-<li class="chapter" data-level="5.18.2" data-path="model-2.html"><a href="model-2.html#assumptions-17"><i class="fa fa-check"></i><b>5.18.2</b> Assumptions</a></li>
-<li class="chapter" data-level="5.18.3" data-path="model-2.html"><a href="model-2.html#characteristics-12"><i class="fa fa-check"></i><b>5.18.3</b> Characteristics</a></li>
-<li class="chapter" data-level="5.18.4" data-path="model-2.html"><a href="model-2.html#evaluation-16"><i class="fa fa-check"></i><b>5.18.4</b> Evaluation</a></li>
-<li class="chapter" data-level="5.18.5" data-path="model-2.html"><a href="model-2.html#proscons-17"><i class="fa fa-check"></i><b>5.18.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.19" data-path="model-2.html"><a href="model-2.html#qda"><i class="fa fa-check"></i><b>3.19</b> QDA</a><ul>
+<li class="chapter" data-level="3.19.1" data-path="model-2.html"><a href="model-2.html#intro-15"><i class="fa fa-check"></i><b>3.19.1</b> Intro</a></li>
+<li class="chapter" data-level="3.19.2" data-path="model-2.html"><a href="model-2.html#assumptions-14"><i class="fa fa-check"></i><b>3.19.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.19.3" data-path="model-2.html"><a href="model-2.html#characteristics-11"><i class="fa fa-check"></i><b>3.19.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.19.4" data-path="model-2.html"><a href="model-2.html#evaluation-14"><i class="fa fa-check"></i><b>3.19.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.19.5" data-path="model-2.html"><a href="model-2.html#proscons-15"><i class="fa fa-check"></i><b>3.19.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="5.19" data-path="model-2.html"><a href="model-2.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>5.19</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
+<li class="chapter" data-level="3.20" data-path="model-2.html"><a href="model-2.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>3.20</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>6</b> Communicate, Deploy, Maintain</a><ul>
-<li class="chapter" data-level="6.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>6.1</b> Communicate</a></li>
-<li class="chapter" data-level="6.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>6.2</b> Deploy</a></li>
-<li class="chapter" data-level="6.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>6.3</b> Maintain</a></li>
+<li class="chapter" data-level="4" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>4</b> Hierarchical Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-selectionevaluation"><i class="fa fa-check"></i><b>4.1</b> Model Selection/Evaluation</a></li>
+<li class="chapter" data-level="4.2" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-explanability"><i class="fa fa-check"></i><b>4.2</b> Model Explanability</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="frameworks.html"><a href="frameworks.html"><i class="fa fa-check"></i><b>7</b> Frameworks</a><ul>
-<li class="chapter" data-level="7.1" data-path="frameworks.html"><a href="frameworks.html#pyspark"><i class="fa fa-check"></i><b>7.1</b> PySpark</a></li>
-<li class="chapter" data-level="7.2" data-path="frameworks.html"><a href="frameworks.html#sparklyr"><i class="fa fa-check"></i><b>7.2</b> Sparklyr</a></li>
-<li class="chapter" data-level="7.3" data-path="frameworks.html"><a href="frameworks.html#caret"><i class="fa fa-check"></i><b>7.3</b> Caret</a><ul>
-<li class="chapter" data-level="7.3.1" data-path="frameworks.html"><a href="frameworks.html#preprocessing"><i class="fa fa-check"></i><b>7.3.1</b> Preprocessing</a></li>
-<li class="chapter" data-level="7.3.2" data-path="frameworks.html"><a href="frameworks.html#lm"><i class="fa fa-check"></i><b>7.3.2</b> LM</a></li>
-<li class="chapter" data-level="7.3.3" data-path="frameworks.html"><a href="frameworks.html#lassoridge"><i class="fa fa-check"></i><b>7.3.3</b> Lasso/Ridge</a></li>
-<li class="chapter" data-level="7.3.4" data-path="frameworks.html"><a href="frameworks.html#logistic-regression-1"><i class="fa fa-check"></i><b>7.3.4</b> Logistic Regression</a></li>
-<li class="chapter" data-level="7.3.5" data-path="frameworks.html"><a href="frameworks.html#train-test-split-folds-cv"><i class="fa fa-check"></i><b>7.3.5</b> Train-Test Split, Folds, &amp; CV</a></li>
-<li class="chapter" data-level="7.3.6" data-path="frameworks.html"><a href="frameworks.html#random-forest-1"><i class="fa fa-check"></i><b>7.3.6</b> Random Forest</a></li>
-<li class="chapter" data-level="7.3.7" data-path="frameworks.html"><a href="frameworks.html#svm-1"><i class="fa fa-check"></i><b>7.3.7</b> SVM</a></li>
-<li class="chapter" data-level="7.3.8" data-path="frameworks.html"><a href="frameworks.html#model-selection-1"><i class="fa fa-check"></i><b>7.3.8</b> Model Selection</a></li>
-<li class="chapter" data-level="7.3.9" data-path="frameworks.html"><a href="frameworks.html#stacking"><i class="fa fa-check"></i><b>7.3.9</b> Stacking</a></li>
+<li class="chapter" data-level="5" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>5</b> Communicate, Deploy, Maintain</a><ul>
+<li class="chapter" data-level="5.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-2"><i class="fa fa-check"></i><b>5.1</b> Communicate</a></li>
+<li class="chapter" data-level="5.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>5.2</b> Deploy</a></li>
+<li class="chapter" data-level="5.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>5.3</b> Maintain</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="frameworks.html"><a href="frameworks.html#data-table"><i class="fa fa-check"></i><b>7.4</b> Data Table</a></li>
-<li class="chapter" data-level="7.5" data-path="frameworks.html"><a href="frameworks.html#keras"><i class="fa fa-check"></i><b>7.5</b> Keras</a><ul>
-<li class="chapter" data-level="7.5.1" data-path="frameworks.html"><a href="frameworks.html#regression"><i class="fa fa-check"></i><b>7.5.1</b> Regression</a></li>
-<li class="chapter" data-level="7.5.2" data-path="frameworks.html"><a href="frameworks.html#classification"><i class="fa fa-check"></i><b>7.5.2</b> Classification</a></li>
-<li class="chapter" data-level="7.5.3" data-path="frameworks.html"><a href="frameworks.html#another-example"><i class="fa fa-check"></i><b>7.5.3</b> Another Example</a></li>
-</ul></li>
-<li class="chapter" data-level="7.6" data-path="frameworks.html"><a href="frameworks.html#lme4"><i class="fa fa-check"></i><b>7.6</b> LME4</a></li>
-<li class="chapter" data-level="7.7" data-path="frameworks.html"><a href="frameworks.html#infer-package"><i class="fa fa-check"></i><b>7.7</b> Infer Package</a></li>
-<li class="chapter" data-level="7.8" data-path="frameworks.html"><a href="frameworks.html#networks"><i class="fa fa-check"></i><b>7.8</b> Networks</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time Series</a><ul>
-<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#notes"><i class="fa fa-check"></i><b>8.1</b> Notes</a></li>
-<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#packages"><i class="fa fa-check"></i><b>8.2</b> Packages</a></li>
-<li class="chapter" data-level="8.3" data-path="time-series.html"><a href="time-series.html#data-conversion"><i class="fa fa-check"></i><b>8.3</b> Data Conversion</a></li>
-<li class="chapter" data-level="8.4" data-path="time-series.html"><a href="time-series.html#models"><i class="fa fa-check"></i><b>8.4</b> Models</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="time-series.html"><a href="time-series.html#intro-18"><i class="fa fa-check"></i><b>8.4.1</b> Intro</a></li>
-<li class="chapter" data-level="8.4.2" data-path="time-series.html"><a href="time-series.html#assumptions-18"><i class="fa fa-check"></i><b>8.4.2</b> Assumptions</a></li>
-<li class="chapter" data-level="8.4.3" data-path="time-series.html"><a href="time-series.html#characteristics-13"><i class="fa fa-check"></i><b>8.4.3</b> Characteristics</a></li>
-<li class="chapter" data-level="8.4.4" data-path="time-series.html"><a href="time-series.html#evaluation-17"><i class="fa fa-check"></i><b>8.4.4</b> Evaluation</a></li>
-<li class="chapter" data-level="8.4.5" data-path="time-series.html"><a href="time-series.html#proscons-18"><i class="fa fa-check"></i><b>8.4.5</b> Pros/Cons</a></li>
-</ul></li>
-<li class="chapter" data-level="8.5" data-path="time-series.html"><a href="time-series.html#dsp"><i class="fa fa-check"></i><b>8.5</b> DSP</a></li>
-<li class="chapter" data-level="8.6" data-path="time-series.html"><a href="time-series.html#forecasting-datacamp"><i class="fa fa-check"></i><b>8.6</b> Forecasting Datacamp</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>9</b> Stats</a><ul>
-<li class="chapter" data-level="9.0.1" data-path="stats.html"><a href="stats.html#general-3"><i class="fa fa-check"></i><b>9.0.1</b> General</a></li>
+<li class="chapter" data-level="6" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>6</b> Stats</a><ul>
+<li class="chapter" data-level="6.1" data-path="stats.html"><a href="stats.html#general-5"><i class="fa fa-check"></i><b>6.1</b> General</a><ul>
 <li class="chapter" data-level="" data-path="stats.html"><a href="stats.html#introduction-to-data"><i class="fa fa-check"></i>Introduction to Data</a></li>
-<li class="chapter" data-level="9.0.2" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>9.0.2</b> Statistical Tests</a></li>
-<li class="chapter" data-level="9.0.3" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>9.0.3</b> Stats For Hackers</a></li>
-<li class="chapter" data-level="9.0.4" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>9.0.4</b> Think Stats</a></li>
-<li class="chapter" data-level="9.0.5" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>9.0.5</b> AB Testing Overview</a></li>
-<li class="chapter" data-level="9.1" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>9.1</b> DataCamp: Experimental Design</a></li>
+<li class="chapter" data-level="6.1.1" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>6.1.1</b> Statistical Tests</a></li>
+<li class="chapter" data-level="6.1.2" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>6.1.2</b> Stats For Hackers</a></li>
+<li class="chapter" data-level="6.1.3" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>6.1.3</b> Think Stats</a></li>
+<li class="chapter" data-level="6.1.4" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>6.1.4</b> AB Testing Overview</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>10</b> Deep Learning</a><ul>
-<li class="chapter" data-level="10.1" data-path="deep-learning.html"><a href="deep-learning.html#general-4"><i class="fa fa-check"></i><b>10.1</b> General</a></li>
-<li class="chapter" data-level="10.2" data-path="deep-learning.html"><a href="deep-learning.html#lstms"><i class="fa fa-check"></i><b>10.2</b> LSTMs</a></li>
-<li class="chapter" data-level="10.3" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-intro"><i class="fa fa-check"></i><b>10.3</b> DL.AI: Intro</a></li>
-<li class="chapter" data-level="10.4" data-path="deep-learning.html"><a href="deep-learning.html#dl.ai-improving-deep-neural-network"><i class="fa fa-check"></i><b>10.4</b> DL.AI: Improving Deep Neural Network</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="deep-learning.html"><a href="deep-learning.html#optimization-algorithms"><i class="fa fa-check"></i><b>10.4.1</b> Optimization Algorithms</a></li>
-<li class="chapter" data-level="10.4.2" data-path="deep-learning.html"><a href="deep-learning.html#hyperparameter-tuning"><i class="fa fa-check"></i><b>10.4.2</b> Hyperparameter Tuning</a></li>
+<li class="chapter" data-level="6.2" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>6.2</b> DataCamp: Experimental Design</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="time-series-1.html"><a href="time-series-1.html"><i class="fa fa-check"></i><b>7</b> Time Series</a><ul>
+<li class="chapter" data-level="7.1" data-path="time-series-1.html"><a href="time-series-1.html#notes-2"><i class="fa fa-check"></i><b>7.1</b> Notes</a></li>
+<li class="chapter" data-level="7.2" data-path="time-series-1.html"><a href="time-series-1.html#packages"><i class="fa fa-check"></i><b>7.2</b> Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="time-series-1.html"><a href="time-series-1.html#data-conversion"><i class="fa fa-check"></i><b>7.3</b> Data Conversion</a></li>
+<li class="chapter" data-level="7.4" data-path="time-series-1.html"><a href="time-series-1.html#models"><i class="fa fa-check"></i><b>7.4</b> Models</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="time-series-1.html"><a href="time-series-1.html#intro-16"><i class="fa fa-check"></i><b>7.4.1</b> Intro</a></li>
+<li class="chapter" data-level="7.4.2" data-path="time-series-1.html"><a href="time-series-1.html#assumptions-15"><i class="fa fa-check"></i><b>7.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="7.4.3" data-path="time-series-1.html"><a href="time-series-1.html#characteristics-12"><i class="fa fa-check"></i><b>7.4.3</b> Characteristics</a></li>
+<li class="chapter" data-level="7.4.4" data-path="time-series-1.html"><a href="time-series-1.html#evaluation-15"><i class="fa fa-check"></i><b>7.4.4</b> Evaluation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="time-series-1.html"><a href="time-series-1.html#proscons-16"><i class="fa fa-check"></i><b>7.4.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>11</b> Probabilistic Programming</a><ul>
-<li class="chapter" data-level="11.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>11.1</b> Doing Bayesian DA</a></li>
-<li class="chapter" data-level="11.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>11.2</b> Statistical Rethinking</a></li>
+<li class="chapter" data-level="7.5" data-path="time-series-1.html"><a href="time-series-1.html#dsp"><i class="fa fa-check"></i><b>7.5</b> DSP</a></li>
+<li class="chapter" data-level="7.6" data-path="time-series-1.html"><a href="time-series-1.html#forecasting-principles-practice"><i class="fa fa-check"></i><b>7.6</b> Forecasting: Principles &amp; Practice</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="time-series-1.html"><a href="time-series-1.html#c1-3"><i class="fa fa-check"></i><b>7.6.1</b> C1-3</a></li>
+<li class="chapter" data-level="7.6.2" data-path="time-series-1.html"><a href="time-series-1.html#c4"><i class="fa fa-check"></i><b>7.6.2</b> C4</a></li>
+<li class="chapter" data-level="7.6.3" data-path="time-series-1.html"><a href="time-series-1.html#c5"><i class="fa fa-check"></i><b>7.6.3</b> C5</a></li>
+<li class="chapter" data-level="7.6.4" data-path="time-series-1.html"><a href="time-series-1.html#c6"><i class="fa fa-check"></i><b>7.6.4</b> C6</a></li>
+<li class="chapter" data-level="7.6.5" data-path="time-series-1.html"><a href="time-series-1.html#c7"><i class="fa fa-check"></i><b>7.6.5</b> C7</a></li>
+<li class="chapter" data-level="7.6.6" data-path="time-series-1.html"><a href="time-series-1.html#c8-arima"><i class="fa fa-check"></i><b>7.6.6</b> C8: arima</a></li>
+<li class="chapter" data-level="7.6.7" data-path="time-series-1.html"><a href="time-series-1.html#c9"><i class="fa fa-check"></i><b>7.6.7</b> C9</a></li>
+<li class="chapter" data-level="7.6.8" data-path="time-series-1.html"><a href="time-series-1.html#c10"><i class="fa fa-check"></i><b>7.6.8</b> C10</a></li>
+<li class="chapter" data-level="7.6.9" data-path="time-series-1.html"><a href="time-series-1.html#c11"><i class="fa fa-check"></i><b>7.6.9</b> C11</a></li>
+<li class="chapter" data-level="7.6.10" data-path="time-series-1.html"><a href="time-series-1.html#c12"><i class="fa fa-check"></i><b>7.6.10</b> C12</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="nlp.html"><a href="nlp.html"><i class="fa fa-check"></i><b>12</b> NLP</a><ul>
-<li class="chapter" data-level="12.0.1" data-path="nlp.html"><a href="nlp.html#topic-modeling"><i class="fa fa-check"></i><b>12.0.1</b> Topic Modeling</a></li>
+<li class="chapter" data-level="7.7" data-path="time-series-1.html"><a href="time-series-1.html#forecasting-datacamp"><i class="fa fa-check"></i><b>7.7</b> Forecasting Datacamp</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>13</b> Hierarchical Models</a></li>
-<li class="chapter" data-level="14" data-path="notes-1.html"><a href="notes-1.html"><i class="fa fa-check"></i><b>14</b> Notes</a></li>
-<li class="chapter" data-level="15" data-path="code-snippets.html"><a href="code-snippets.html"><i class="fa fa-check"></i><b>15</b> Code Snippets</a><ul>
-<li class="chapter" data-level="15.1" data-path="code-snippets.html"><a href="code-snippets.html#albon"><i class="fa fa-check"></i><b>15.1</b> Albon</a></li>
-<li class="chapter" data-level="15.2" data-path="code-snippets.html"><a href="code-snippets.html#sampling-file"><i class="fa fa-check"></i><b>15.2</b> Sampling File</a></li>
-<li class="chapter" data-level="15.3" data-path="code-snippets.html"><a href="code-snippets.html#hold"><i class="fa fa-check"></i><b>15.3</b> Hold</a></li>
+<li class="chapter" data-level="8" data-path="deep-learning-1.html"><a href="deep-learning-1.html"><i class="fa fa-check"></i><b>8</b> Deep Learning</a><ul>
+<li class="chapter" data-level="8.1" data-path="deep-learning-1.html"><a href="deep-learning-1.html#activation-functions"><i class="fa fa-check"></i><b>8.1</b> Activation Functions</a></li>
+<li class="chapter" data-level="8.2" data-path="deep-learning-1.html"><a href="deep-learning-1.html#preprocessing"><i class="fa fa-check"></i><b>8.2</b> Preprocessing</a></li>
+<li class="chapter" data-level="8.3" data-path="deep-learning-1.html"><a href="deep-learning-1.html#tuning"><i class="fa fa-check"></i><b>8.3</b> Tuning</a></li>
+<li class="chapter" data-level="8.4" data-path="deep-learning-1.html"><a href="deep-learning-1.html#notes-3"><i class="fa fa-check"></i><b>8.4</b> Notes</a></li>
+<li class="chapter" data-level="8.5" data-path="deep-learning-1.html"><a href="deep-learning-1.html#model-3"><i class="fa fa-check"></i><b>8.5</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html"><i class="fa fa-check"></i><b>9</b> Probabilistic Programming</a><ul>
+<li class="chapter" data-level="9.1" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#doing-bayesian-da"><i class="fa fa-check"></i><b>9.1</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="9.2" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#statistical-rethinking"><i class="fa fa-check"></i><b>9.2</b> Statistical Rethinking</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="distributed.html"><a href="distributed.html"><i class="fa fa-check"></i><b>10</b> Distributed</a><ul>
+<li class="chapter" data-level="10.1" data-path="distributed.html"><a href="distributed.html#pyspark"><i class="fa fa-check"></i><b>10.1</b> PySpark</a></li>
+<li class="chapter" data-level="10.2" data-path="distributed.html"><a href="distributed.html#sparklyr"><i class="fa fa-check"></i><b>10.2</b> sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="cook-book.html"><a href="cook-book.html"><i class="fa fa-check"></i><b>11</b> Cook Book</a><ul>
+<li class="chapter" data-level="11.1" data-path="cook-book.html"><a href="cook-book.html#general-6"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
+<li class="chapter" data-level="11.2" data-path="cook-book.html"><a href="cook-book.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>11.2</b> Linear Regression Statsmodels</a></li>
+<li class="chapter" data-level="11.3" data-path="cook-book.html"><a href="cook-book.html#rowwise"><i class="fa fa-check"></i><b>11.3</b> Rowwise</a></li>
+<li class="chapter" data-level="11.4" data-path="cook-book.html"><a href="cook-book.html#sampling-file"><i class="fa fa-check"></i><b>11.4</b> Sampling File</a></li>
+<li class="chapter" data-level="11.5" data-path="cook-book.html"><a href="cook-book.html#sql-dummy-columns"><i class="fa fa-check"></i><b>11.5</b> SQL Dummy Columns</a></li>
+<li class="chapter" data-level="11.6" data-path="cook-book.html"><a href="cook-book.html#model-calibration"><i class="fa fa-check"></i><b>11.6</b> Model Calibration</a></li>
+<li class="chapter" data-level="11.7" data-path="cook-book.html"><a href="cook-book.html#binning-rule-of-thumb"><i class="fa fa-check"></i><b>11.7</b> Binning Rule Of Thumb</a></li>
+<li class="chapter" data-level="11.8" data-path="cook-book.html"><a href="cook-book.html#pyspark-1"><i class="fa fa-check"></i><b>11.8</b> Pyspark</a></li>
+<li class="chapter" data-level="11.9" data-path="cook-book.html"><a href="cook-book.html#sparklyr-1"><i class="fa fa-check"></i><b>11.9</b> Sparklyr</a></li>
+<li class="chapter" data-level="11.10" data-path="cook-book.html"><a href="cook-book.html#parquet"><i class="fa fa-check"></i><b>11.10</b> Parquet</a></li>
+<li class="chapter" data-level="11.11" data-path="cook-book.html"><a href="cook-book.html#data-table"><i class="fa fa-check"></i><b>11.11</b> Data Table</a></li>
+<li class="chapter" data-level="11.12" data-path="cook-book.html"><a href="cook-book.html#keras"><i class="fa fa-check"></i><b>11.12</b> Keras</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -367,16 +383,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="model-2" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Model</h1>
-<div id="linear-regression" class="section level2">
-<h2><span class="header-section-number">5.1</span> Linear Regression</h2>
-<div id="intro" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> Intro</h3>
+<h1><span class="header-section-number">Chapter 3</span> Model</h1>
+<div id="notes-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Notes</h2>
 <ul>
-<li><p>The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant.</p></li>
-<li><p>Used when you’re predicting a continuous value.</p></li>
-<li><p>In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation.</p></li>
-<li><p>When p &gt; n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.</p></li>
+<li><p>The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn’t change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User’s purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.</p></li>
+<li><p>empirical risk minimization: In supervised learning, a machine learning algorithm builds a model by examining many examples and attempting to find a model that minimizes loss.</p></li>
+<li><p>Loss is the penalty for a bad prediction. That is, loss is a number indicating how bad the model’s prediction was on a single example. If the model’s prediction is perfect, the loss is zero; otherwise, the loss is greater.</p></li>
+<li><p>If a model suffers from overfitting, we also say that the model has a high variance, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. Similarly, our model can also suffer from underfitting (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.</p></li>
+<li><p>“Product classification is an example of multicategory or multinomial classification. Most classification problems and most classification algorithms are specialized for two-category, or binomial, classification. There are tricks to using binary classifiers to solve multicategory problems (for example, building one classifier for each category, called a “one versus rest” classifier). But in most cases it’s worth the effort to find a suitable multiple-category implementation, as they tend to work better than multiple binary classifiers (for example, using the package mlogit instead of the base method glm() for logistic regression).”</p></li>
+</ul>
+<p>With large data we can to the train x dev x test split of 98 x 1 x 1.</p>
+<p>Bayes optimal error: Aim for this. The difference b/w training error and BOE is the avoidable bias.</p>
+<p>new data degrades your model. what should you do? Use the data you have to define a new evaluation metric (using a new dev/test set) taking into account the new species, and use that to drive further progress for your team.</p>
+<p>because even though you have higher overall accuracy, you have more false negatives (failing to raise an alarm when a bird is in the air). What should you do? Rethink the appropriate metric for this task, and ask your team to tune to the new metric.</p>
+<ul>
+<li><p>So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).</p></li>
+<li><p>Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN</p></li>
+</ul>
+</div>
+<div id="supervised-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> Supervised</h2>
+<div id="linear-regression" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Linear Regression</h3>
+<p>General format: INtro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes</p>
+<p>Discuss Ridge, Lasso, and Elastic here.</p>
+<p>Quantile Regression models the median while Linear Regression models the mean</p>
+<p>Linear Regression - BLUE: Best Linear Unbiased (average amount wrong by is error) Estimator</p>
+<p>The standard least squares coefficient estimates are scale equivariant: if we multiply a predictor variable by a constant, the corresponding least squares coefficient estimate will be scaled down by the same constant. Used when you’re predicting a continuous value. In regression, it is often recommended to center the variables so that the predictors have mean 0. This makes it so the intercept term is interpreted as the expected value of Y_i when the predictor values are set to their means. Otherwise, the intercept is interpreted as the expected value of Y_i when the predictors are set to 0, which may not be a realistic or interpretable situation. When p &gt; n, we can no longer calculate a unique least square coefficient estimate, the variances become infinite, so OLS cannot be used at all.</p>
+<ul>
 <li><p>In presence of few variables with medium / large sized effect, use lasso regression. In presence of many variables with small / medium sized effect, use ridge regression.</p></li>
 <li><p>The fitted regression line using a sample of data gives imperfect predictions for future observations due to sampling variability and randomness in Y that is not related to X.</p></li>
 <li><p>Linear Correlation =&gt; Causation if covariates respect: linearity normality indep homoscedasticity + all confounders in model</p></li>
@@ -385,13 +420,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Okay, so many of the features are strongly correlated. We can make use of this in our model by including polynomial features (e.g. PolynomialFeatures(degree=2) from scikit-learn). Adding these brings our validation loss down to 0.69256 (-0.05% from baseline).</p></li>
 <li><p>We prefer natural logs (that is, logarithms base e) because, as described above, coefficients on the natural-log scale are directly interpretable as approximate proportional differences: with a coefficient of 0.06, a difference of 1 in x corresponds to an approximate 6% difference in y, and so forth.</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> statsmodels.api <span class="im">as</span> sm
-X <span class="op">=</span> sm.add_constant(X)
-rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><span class="va">False</span>)
-<span class="bu">print</span>(results.summary())</code></pre></div>
-</div>
-<div id="assumptions" class="section level3">
-<h3><span class="header-section-number">5.1.2</span> Assumptions</h3>
 <p>The regression assumption that is generally least important is that the errors are normally distributed. In fact, for the purpose of estimating the regression line (as compared to predicting individual data points), the assumption of normality is barely important at all. Thus, in contrast to many regression textbooks, we do not recommend diagnostics of the normality of regression residuals. [Gelman]</p>
 <p>Linear regression errors are not autocorrelated. The Durbin-Watson statistic detects this; if it is close to 2, there is no autocorrelation.</p>
 <p>A linear regression model is only as good as the validity of its assumptions, which can be summarized as: <span class="math inline">\(y = b_0+b_1x + \epsilon\)</span>, <span class="math inline">\(\epsilon\)</span> is i.i.d from N(0, <span class="math inline">\(\sigma\)</span>). More verbosely:</p>
@@ -419,8 +447,6 @@ rgr_lr <span class="op">=</span> sm.OLS(Y, X).fit(disp<span class="op">=</span><
 <span class="co"># Test for Autocorrelated Errors</span>
 <span class="kw">durbinWatsonTest</span>(rgr_lr_st1)
 
-<span class="kw">set.seed</span>(<span class="dv">0</span>)
-
 data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="co"># Generating data from a standard normal distribution.</span>
 <span class="kw">shapiro.test</span>(data) <span class="co"># P-value insignificant; retain H0, conclude data is normally distributed.</span>
 
@@ -428,15 +454,13 @@ data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10
 <span class="kw">qqnorm</span>(normal.data) <span class="op">+</span><span class="st"> </span><span class="kw">qqline</span>(normal.data)
 <span class="co">#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model</span></code></pre></div>
 <p>Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook’s distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test &amp; partial f-testr for simple and multiple linear regression.</p>
-<p>Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:</p>
-<p>And a guide for python.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">statsmodels.stats.outliers_influence.variance_inflation_factor</code></pre></div>
 <p>Fixing assumptions:</p>
 <p>Transformations: Can remedy assumption violations and strengthen linear relationships between variables, but can lead to overfitting and less interpretability. square root correction: Take square root of x variable(s). log transformation: Take log of y. General rule of thumb: powers &gt; 1 for skewed left data, powers &lt; 1 for data skewed right.</p>
 <p>Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize the fit of the transformed variable to a normal distribution. Does not guarantee normality since it minimizes standard deviation. Can only be used on positive values. Use on negative values by shifting by a constant value. Use Box-Cox transformations when predictions are skewed.</p>
 </div>
 <div id="selection" class="section level3">
-<h3><span class="header-section-number">5.1.3</span> Selection</h3>
+<h3><span class="header-section-number">3.2.2</span> Selection</h3>
 <ul>
 <li><p>Forward and Backward Stepwise Selection.</p></li>
 <li><p>For simple linear regression, the principal hypothesis test is as follows: H_0 : ? 1 = 0, H_A: ? 1 ≠ 0. If H_0 is true then the population mean of Y would be ? 0 no matter what the value of X. (X has no effect on Y.)</p></li>
@@ -447,7 +471,7 @@ data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10
 </ul>
 </div>
 <div id="proscons" class="section level3">
-<h3><span class="header-section-number">5.1.4</span> Pros/Cons</h3>
+<h3><span class="header-section-number">3.2.3</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>Very fast (runs in constant time)</p></li>
@@ -461,7 +485,9 @@ data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10
 </ul>
 </div>
 <div id="other-2" class="section level3">
-<h3><span class="header-section-number">5.1.5</span> Other</h3>
+<h3><span class="header-section-number">3.2.4</span> Other</h3>
+<p><a href="https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggcoef" class="uri">https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggcoef</a></p>
+<p><a href="https://cran.r-project.org/web/packages/jtools/vignettes/summ.html" class="uri">https://cran.r-project.org/web/packages/jtools/vignettes/summ.html</a></p>
 <ul>
 <li><p><a href="https://twitter.com/alexpghayes/status/1033824995905077250" class="uri">https://twitter.com/alexpghayes/status/1033824995905077250</a></p></li>
 <li><p><a href="https://en.wikipedia.org/wiki/Quantile_regression">Quantile regression</a> is an alternative for quantiles.</p></li>
@@ -481,28 +507,19 @@ pga <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 </div>
 <div id="ridgelasso" class="section level2">
-<h2><span class="header-section-number">5.2</span> Ridge/Lasso</h2>
-<div id="intro-1" class="section level3">
-<h3><span class="header-section-number">5.2.1</span> Intro</h3>
+<h2><span class="header-section-number">3.3</span> Ridge/Lasso</h2>
+<div id="intro" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Intro</h3>
 <p>Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS. By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda.</p>
 <p>Standardize for ridge/lasso alpha makes them not scale invariant</p>
 <p>Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.</p>
 <p>Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.</p>
 </div>
-<div id="assumptions-1" class="section level3">
-<h3><span class="header-section-number">5.2.2</span> Assumptions</h3>
-</div>
-<div id="evaluation" class="section level3">
-<h3><span class="header-section-number">5.2.3</span> Evaluation</h3>
-</div>
-<div id="proscons-1" class="section level3">
-<h3><span class="header-section-number">5.2.4</span> Pros/Cons</h3>
-</div>
 </div>
 <div id="logistic-regression" class="section level2">
-<h2><span class="header-section-number">5.3</span> Logistic Regression</h2>
-<div id="intro-2" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Intro</h3>
+<h2><span class="header-section-number">3.4</span> Logistic Regression</h2>
+<div id="intro-1" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Intro</h3>
 <p>logistic is the same as probit</p>
 <p>wilkinson rogers logistic regression</p>
 <p>weighted logistic regression</p>
@@ -517,8 +534,8 @@ pga <span class="op">%&gt;%</span><span class="st"> </span>
 <p>For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.</p>
 <p>Standardization isn’t required for logistic regression. The main goal of standardizing features is to help convergence of the technique used for optimization. For example, if you use Newton-Raphson to maximize the likelihood, standardizing the features makes the convergence faster. Otherwise, you can run your logistic regression without any standardization treatment on the features.</p>
 </div>
-<div id="assumptions-2" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Assumptions</h3>
+<div id="assumptions" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Assumptions</h3>
 <ul>
 <li><p>The linear regression analysis requires all variables to be multivariate normal. This assumption can best be checked with a histogram or a Q-Q-Plot.</p></li>
 <li><p>Requires the dependent variable to be binary and ordinal logistic regression requires the dependent variable to be ordinal.</p></li>
@@ -575,8 +592,8 @@ pga <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="co">#   theme_bw() + </span>
 <span class="co">#   facet_wrap(~predictors, scales = &quot;free_y&quot;)</span></code></pre></div>
 </div>
-<div id="evaluation-1" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> Evaluation</h3>
+<div id="evaluation" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Evaluation</h3>
 <ul>
 <li><p>Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.</p></li>
 <li><p>Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says the model is appropriate while H_a says the opposite.</p></li>
@@ -585,8 +602,8 @@ pga <span class="op">%&gt;%</span><span class="st"> </span>
 <li><p>Absolute scale odds instead of relative</p></li>
 </ul>
 </div>
-<div id="proscons-2" class="section level3">
-<h3><span class="header-section-number">5.3.4</span> Pros/Cons</h3>
+<div id="proscons-1" class="section level3">
+<h3><span class="header-section-number">3.4.4</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>Highly interpretably</p></li>
@@ -607,7 +624,7 @@ pga <span class="op">%&gt;%</span><span class="st"> </span>
 </ul>
 </div>
 <div id="code-example" class="section level3">
-<h3><span class="header-section-number">5.3.5</span> Code Example</h3>
+<h3><span class="header-section-number">3.4.5</span> Code Example</h3>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> statsmodels.api <span class="im">as</span> sm
 X <span class="op">=</span> sm.add_constant(X)
 clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span><span class="va">False</span>)
@@ -615,52 +632,52 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="poisson-regression" class="section level2">
-<h2><span class="header-section-number">5.4</span> Poisson Regression</h2>
-<div id="intro-3" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Intro</h3>
+<h2><span class="header-section-number">3.5</span> Poisson Regression</h2>
+<div id="intro-2" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Intro</h3>
 <p>Poisson: When you’re predicting a count value. (How many dogs will I see in the park?)</p>
 <p>Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,…).</p>
 <p>Remember that you must specify family = poisson or family = quasipoisson when using glm() to fit a count model.</p>
 </div>
-<div id="assumptions-3" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> Assumptions</h3>
+<div id="assumptions-1" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Assumptions</h3>
 <p>One of the assumptions of Poisson regression to predict counts is that the event you are counting is Poisson distributed: the average count per unit time is the same as the variance of the count. In practice, “the same” means that the mean and the variance should be of a similar order of magnitude.</p>
 <p>When the variance is much larger than the mean, the Poisson assumption doesn’t apply, and one solution is to use quasipoisson regression, which does not assume that variance=meanvariance=mean.</p>
 </div>
-<div id="evaluation-2" class="section level3">
-<h3><span class="header-section-number">5.4.3</span> Evaluation</h3>
+<div id="evaluation-1" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Evaluation</h3>
 </div>
-<div id="proscons-3" class="section level3">
-<h3><span class="header-section-number">5.4.4</span> Pros/Cons</h3>
+<div id="proscons-2" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p><strong>Cons</strong></p>
 </div>
 </div>
 <div id="generalized-additive-models" class="section level2">
-<h2><span class="header-section-number">5.5</span> Generalized Additive Models</h2>
-<div id="intro-4" class="section level3">
-<h3><span class="header-section-number">5.5.1</span> Intro</h3>
+<h2><span class="header-section-number">3.6</span> Generalized Additive Models</h2>
+<div id="intro-3" class="section level3">
+<h3><span class="header-section-number">3.6.1</span> Intro</h3>
 <p>mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don’t use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response.</p>
 <p>Also remember that gam() from the package mgcv has the calling interface</p>
 <p>gam(formula, family, data) For standard regression, use family = gaussian (the default).</p>
 <p>For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.</p>
 </div>
-<div id="assumptions-4" class="section level3">
-<h3><span class="header-section-number">5.5.2</span> Assumptions</h3>
+<div id="assumptions-2" class="section level3">
+<h3><span class="header-section-number">3.6.2</span> Assumptions</h3>
 </div>
-<div id="evaluation-3" class="section level3">
-<h3><span class="header-section-number">5.5.3</span> Evaluation</h3>
+<div id="evaluation-2" class="section level3">
+<h3><span class="header-section-number">3.6.3</span> Evaluation</h3>
 </div>
-<div id="proscons-4" class="section level3">
-<h3><span class="header-section-number">5.5.4</span> Pros/Cons</h3>
+<div id="proscons-3" class="section level3">
+<h3><span class="header-section-number">3.6.4</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p><strong>Cons</strong></p>
 </div>
 </div>
 <div id="k-means-clustering-us" class="section level2">
-<h2><span class="header-section-number">5.6</span> K-Means Clustering [US]</h2>
-<div id="intro-5" class="section level3">
-<h3><span class="header-section-number">5.6.1</span> Intro</h3>
+<h2><span class="header-section-number">3.7</span> K-Means Clustering [US]</h2>
+<div id="intro-4" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Intro</h3>
 <p>K-Means clustering method considers two assumptions regarding the clusters – first that the clusters are spherical and second that the clusters are of similar size.</p>
 <p>k-means assumes the variance of the distribution of each attribute (variable) is spherical; all variables have the same variance;</p>
 <p>the prior probability for all k clusters is the same, i.e., each cluster has roughly equal number of observations;</p>
@@ -670,19 +687,7 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.[3] clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.</p>
 <p>In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)</p>
 <p>We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.</p>
-</div>
-<div id="assumptions-5" class="section level3">
-<h3><span class="header-section-number">5.6.2</span> Assumptions</h3>
-</div>
-<div id="characteristics" class="section level3">
-<h3><span class="header-section-number">5.6.3</span> Characteristics</h3>
-</div>
-<div id="evaluation-4" class="section level3">
-<h3><span class="header-section-number">5.6.4</span> Evaluation</h3>
 <p>Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval.</p>
-</div>
-<div id="proscons-5" class="section level3">
-<h3><span class="header-section-number">5.6.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p>Uses simple principle which can be explained in non-statistical terms. It is efficient.</p>
 <p><strong>Cons</strong></p>
@@ -690,48 +695,45 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="hierarchical-clustering" class="section level2">
-<h2><span class="header-section-number">5.7</span> Hierarchical Clustering</h2>
-<div id="intro-6" class="section level3">
-<h3><span class="header-section-number">5.7.1</span> Intro</h3>
+<h2><span class="header-section-number">3.8</span> Hierarchical Clustering</h2>
 <p>Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.</p>
 <p>K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn’t need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.</p>
+<div id="assumptions-3" class="section level3">
+<h3><span class="header-section-number">3.8.1</span> Assumptions</h3>
 </div>
-<div id="assumptions-6" class="section level3">
-<h3><span class="header-section-number">5.7.2</span> Assumptions</h3>
+<div id="characteristics" class="section level3">
+<h3><span class="header-section-number">3.8.2</span> Characteristics</h3>
 </div>
-<div id="characteristics-1" class="section level3">
-<h3><span class="header-section-number">5.7.3</span> Characteristics</h3>
+<div id="evaluation-3" class="section level3">
+<h3><span class="header-section-number">3.8.3</span> Evaluation</h3>
 </div>
-<div id="evaluation-5" class="section level3">
-<h3><span class="header-section-number">5.7.4</span> Evaluation</h3>
-</div>
-<div id="proscons-6" class="section level3">
-<h3><span class="header-section-number">5.7.5</span> Pros/Cons</h3>
+<div id="proscons-4" class="section level3">
+<h3><span class="header-section-number">3.8.4</span> Pros/Cons</h3>
 </div>
 </div>
 <div id="pca" class="section level2">
-<h2><span class="header-section-number">5.8</span> PCA</h2>
-<div id="intro-7" class="section level3">
-<h3><span class="header-section-number">5.8.1</span> Intro</h3>
+<h2><span class="header-section-number">3.9</span> PCA</h2>
+<div id="intro-5" class="section level3">
+<h3><span class="header-section-number">3.9.1</span> Intro</h3>
 </div>
-<div id="assumptions-7" class="section level3">
-<h3><span class="header-section-number">5.8.2</span> Assumptions</h3>
+<div id="assumptions-4" class="section level3">
+<h3><span class="header-section-number">3.9.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-2" class="section level3">
-<h3><span class="header-section-number">5.8.3</span> Characteristics</h3>
+<div id="characteristics-1" class="section level3">
+<h3><span class="header-section-number">3.9.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-6" class="section level3">
-<h3><span class="header-section-number">5.8.4</span> Evaluation</h3>
+<div id="evaluation-4" class="section level3">
+<h3><span class="header-section-number">3.9.4</span> Evaluation</h3>
 </div>
-<div id="proscons-7" class="section level3">
-<h3><span class="header-section-number">5.8.5</span> Pros/Cons</h3>
+<div id="proscons-5" class="section level3">
+<h3><span class="header-section-number">3.9.5</span> Pros/Cons</h3>
 <ul>
 <li><p>Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit_transforms, use explained_variance_ratio_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse_transform to reconstruct your x. Minimum number of principal components is min(n,p).</p></li>
 <li><p>pca: It accounts for as much of the variability in the data as possible by considering highly correlated features. Each succeeding component in turn has the highest variance using the features that are less correlated with the first principal component and that are orthogonal to the preceding component.</p></li>
 </ul>
 </div>
 <div id="other-3" class="section level3">
-<h3><span class="header-section-number">5.8.6</span> Other</h3>
+<h3><span class="header-section-number">3.9.6</span> Other</h3>
 <ul>
 <li><ol style="list-style-type: decimal">
 <li>look at variance: apply(USArrests , 2, var) | 2) pca &amp; scale: pca = prcomp(USArrests , scale = TRUE) | 3) plot: biplot(pca, scale = 0)</li>
@@ -752,24 +754,24 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="knn" class="section level2">
-<h2><span class="header-section-number">5.9</span> KNN</h2>
-<div id="intro-8" class="section level3">
-<h3><span class="header-section-number">5.9.1</span> Intro</h3>
+<h2><span class="header-section-number">3.10</span> KNN</h2>
+<div id="intro-6" class="section level3">
+<h3><span class="header-section-number">3.10.1</span> Intro</h3>
 <p>Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k’s are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k’s are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can’t adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.</p>
 <p>curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics</p>
 <p>smaller k means smaller training error, ut larger k is more stable.</p>
 </div>
-<div id="assumptions-8" class="section level3">
-<h3><span class="header-section-number">5.9.2</span> Assumptions</h3>
+<div id="assumptions-5" class="section level3">
+<h3><span class="header-section-number">3.10.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-3" class="section level3">
-<h3><span class="header-section-number">5.9.3</span> Characteristics</h3>
+<div id="characteristics-2" class="section level3">
+<h3><span class="header-section-number">3.10.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-7" class="section level3">
-<h3><span class="header-section-number">5.9.4</span> Evaluation</h3>
+<div id="evaluation-5" class="section level3">
+<h3><span class="header-section-number">3.10.4</span> Evaluation</h3>
 </div>
-<div id="proscons-8" class="section level3">
-<h3><span class="header-section-number">5.9.5</span> Pros/Cons</h3>
+<div id="proscons-6" class="section level3">
+<h3><span class="header-section-number">3.10.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p>Only assumption is proximity. Non-parametric.</p>
 <p>The only assumption we are making about our data is related to proximity (i. e., observations that are close by in the feature space are similar to each other in respect to the target value). We do not have to fit a model to the data since this is a non-parametric approach.</p>
@@ -789,9 +791,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="svm" class="section level2">
-<h2><span class="header-section-number">5.10</span> SVM</h2>
-<div id="intro-9" class="section level3">
-<h3><span class="header-section-number">5.10.1</span> Intro</h3>
+<h2><span class="header-section-number">3.11</span> SVM</h2>
+<div id="intro-7" class="section level3">
+<h3><span class="header-section-number">3.11.1</span> Intro</h3>
 <p>Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach? To ensure small prediction error when the underlying distribution is not known</p>
 <p>The LinearSVC class regularizes the bias term, so you should center the training set first by subtracting its mean. This is automatic if you scale the data using the StandardScaler. Moreover, make sure you set the loss hyperparameter to “hinge”, as it is not the default value. Finally, for better performance you should set the dual hyperparameter to False, unless there are more features than training instances (we will discuss duality later in the chapter).</p>
 <p>With so many kernels to choose from, how can you decide which one to use? As a rule of thumb, you should always try the linear kernel first (remember that LinearSVC is much faster than SVC(kernel=“linear”)), especially if the training set is very large or if it has plenty of features. If the training set is not too large, you should try the Gaussian RBF kernel as well; it works well in most cases. Then if you have spare time and computing power, you can also experiment with a few other kernels using cross-validation and grid search, especially if there are kernels specialized for your training set’s data structure.</p>
@@ -805,17 +807,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>1v1: Construct a support vector machine for each pair of categories. For each classifier, record the prediction for each observation. Have the classifiers vote on the prediction for each observation.</p>
 <p>1vAll: Construct a support vector machine for each individual category against all other categories combined. Assign the observation to the classifier with the largest function value.</p>
 </div>
-<div id="assumptions-9" class="section level3">
-<h3><span class="header-section-number">5.10.2</span> Assumptions</h3>
+<div id="assumptions-6" class="section level3">
+<h3><span class="header-section-number">3.11.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-4" class="section level3">
-<h3><span class="header-section-number">5.10.3</span> Characteristics</h3>
+<div id="characteristics-3" class="section level3">
+<h3><span class="header-section-number">3.11.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-8" class="section level3">
-<h3><span class="header-section-number">5.10.4</span> Evaluation</h3>
+<div id="evaluation-6" class="section level3">
+<h3><span class="header-section-number">3.11.4</span> Evaluation</h3>
 </div>
-<div id="proscons-9" class="section level3">
-<h3><span class="header-section-number">5.10.5</span> Pros/Cons</h3>
+<div id="proscons-7" class="section level3">
+<h3><span class="header-section-number">3.11.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>Performs similarly to logistic regression when linear separation</p></li>
@@ -835,9 +837,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="decision-tree" class="section level2">
-<h2><span class="header-section-number">5.11</span> Decision Tree</h2>
-<div id="intro-10" class="section level3">
-<h3><span class="header-section-number">5.11.1</span> Intro</h3>
+<h2><span class="header-section-number">3.12</span> Decision Tree</h2>
+<div id="intro-8" class="section level3">
+<h3><span class="header-section-number">3.12.1</span> Intro</h3>
 <p>So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.</p>
 <p>Decision Trees make very few assumptions about the training data (as opposed to linear models, which obviously assume that the data is linear, for example). Such a model is often called a nonparametric model, not because it does not have any parameters (it often has a lot) but because the number of parameters is not determined prior to training, so the model structure is free to stick closely to the data.</p>
 <p>More generally, the main issue with Decision Trees is that they are very sensitive to small variations in the training data. For example, if you just remove the widest Iris-Versicolor from the iris training set (the one with petals 4.8 cm long and 1.8 cm wide) and train a new Decision Tree, you may get the model represented in Figure 6-8. As you can see, it looks very different from the previous Decision Tree (Figure 6-2). Actually, since the training algorithm used by Scikit-Learn is stochastic6 you may get very different models even on the same training data (unless you set the random_state hyperparameter).</p>
@@ -845,17 +847,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>Regression: Use cost complexity pruning to build set of subtrees as a function of lambda. Classification: Use Gini index, measures total variance among classes.</p>
 <p>Note: Duplicate splits happen when they increase node purity. While pruning reduces the variance of the overall tree model upon repeated builds with different datasets, we induce biasbecause the trees are much simpler.</p>
 </div>
-<div id="assumptions-10" class="section level3">
-<h3><span class="header-section-number">5.11.2</span> Assumptions</h3>
+<div id="assumptions-7" class="section level3">
+<h3><span class="header-section-number">3.12.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-5" class="section level3">
-<h3><span class="header-section-number">5.11.3</span> Characteristics</h3>
+<div id="characteristics-4" class="section level3">
+<h3><span class="header-section-number">3.12.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-9" class="section level3">
-<h3><span class="header-section-number">5.11.4</span> Evaluation</h3>
+<div id="evaluation-7" class="section level3">
+<h3><span class="header-section-number">3.12.4</span> Evaluation</h3>
 </div>
-<div id="proscons-10" class="section level3">
-<h3><span class="header-section-number">5.11.5</span> Pros/Cons</h3>
+<div id="proscons-8" class="section level3">
+<h3><span class="header-section-number">3.12.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>Fast</p></li>
@@ -871,9 +873,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="bagging" class="section level2">
-<h2><span class="header-section-number">5.12</span> Bagging</h2>
-<div id="intro-11" class="section level3">
-<h3><span class="header-section-number">5.12.1</span> Intro</h3>
+<h2><span class="header-section-number">3.13</span> Bagging</h2>
+<div id="intro-9" class="section level3">
+<h3><span class="header-section-number">3.13.1</span> Intro</h3>
 <p>used to decrease variance in decision trees</p>
 <p>How it works: train multiple trees using bootstrapped datasets, regression trees: average the predictions from all the trees, classification: take a majority vote of the predictions, majority vote: the class which occurs most frequently, Out of bag (OOB) error, Only a portion of the data is used to train each tree, The remaining data which wasn’t selected can be used to assess the tree’s performance, (the response for each observation is predicted using only the trees that were not fit using that observation)</p>
 <p>Bagging involves randomly generating Bootstrap samples from the dataset and trains the models individually. Predictions are then made by aggregating or averaging all the response variables:For example, consider a dataset (Xi, Yi), where i=1 …n, contains n data points.Now, randomly select B samples with replacements from the original dataset using Bootstrap technique.Next, train the B samples with regression/classification models independently. Then, predictions are made on the test set by averaging the responses from all the B models generated in the case of regression. Alternatively, the most often occurring class among B samples is generated in the case of classification.</p>
@@ -881,17 +883,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>Bagging reduces generalization error.</p>
 <p>Take repeated samples of the same size from the single overall training dataset. Treat these different sets of data as pseudo-training sets. Fitting separate, independent decision treesto each of the bootstrapped training data sets. We can then average all predictions (or take the majority vote) to obtain the bagged estimate. Instead of pruning back our trees, create very large trees in the first place. These large trees will tend to have low bias, but high variance. Retain the low bias, but get rid of the high variance by averaging. Con is that the trees are correlation. train multiple trees using bootstrapped data to reduce variance and prevent overfitting</p>
 </div>
-<div id="assumptions-11" class="section level3">
-<h3><span class="header-section-number">5.12.2</span> Assumptions</h3>
+<div id="assumptions-8" class="section level3">
+<h3><span class="header-section-number">3.13.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-6" class="section level3">
-<h3><span class="header-section-number">5.12.3</span> Characteristics</h3>
+<div id="characteristics-5" class="section level3">
+<h3><span class="header-section-number">3.13.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-10" class="section level3">
-<h3><span class="header-section-number">5.12.4</span> Evaluation</h3>
+<div id="evaluation-8" class="section level3">
+<h3><span class="header-section-number">3.13.4</span> Evaluation</h3>
 </div>
-<div id="proscons-11" class="section level3">
-<h3><span class="header-section-number">5.12.5</span> Pros/Cons</h3>
+<div id="proscons-9" class="section level3">
+<h3><span class="header-section-number">3.13.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>reduces variance in comparison to regular decision trees</p></li>
@@ -907,9 +909,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="random-forest" class="section level2">
-<h2><span class="header-section-number">5.13</span> Random Forest</h2>
-<div id="intro-12" class="section level3">
-<h3><span class="header-section-number">5.13.1</span> Intro</h3>
+<h2><span class="header-section-number">3.14</span> Random Forest</h2>
+<div id="intro-10" class="section level3">
+<h3><span class="header-section-number">3.14.1</span> Intro</h3>
 <p>Build a number of decision trees using bootstrapped samples</p>
 <p>At each split in the tree only a portion of the features are considered</p>
 <p>a feature is selected from a subset of features not the whole feature space</p>
@@ -920,17 +922,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>Random forests further improve decision tree performance by de-correlating the individual trees in the bagging ensemble.</p>
 <p>Random forests decorrelate tree it generates and thus results in a reduction in variance. Similar to bagging, we first build various decision trees on bootstrapped training samples, but we split internal nodes in a special way. Each time a split is considered within the construction of a decision tree, only a random subset of ᬊthe overall predictors are allowed to be candidates. At every split, a new subset of predictors is randomly selected. The random forest procedure forces the decision tree building process to use different predictors to split at different times. Should a good predictor be left out of consideration for some splits, it still has many chances to be consideredin the construction of other splits. We can’t overfit by adding more trees. The variance just ends up decreasing. Out of bag score is a good estimate of the test score and is the non-bootstrapped data. Need to turn on this scoing method. Error Rate: Depends on correlation between trees (higher is worse), strength of single trees (higher is better). Increasing number of features for each split increases correlation and strength of single trees.</p>
 </div>
-<div id="assumptions-12" class="section level3">
-<h3><span class="header-section-number">5.13.2</span> Assumptions</h3>
+<div id="assumptions-9" class="section level3">
+<h3><span class="header-section-number">3.14.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-7" class="section level3">
-<h3><span class="header-section-number">5.13.3</span> Characteristics</h3>
+<div id="characteristics-6" class="section level3">
+<h3><span class="header-section-number">3.14.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-11" class="section level3">
-<h3><span class="header-section-number">5.13.4</span> Evaluation</h3>
+<div id="evaluation-9" class="section level3">
+<h3><span class="header-section-number">3.14.4</span> Evaluation</h3>
 </div>
-<div id="proscons-12" class="section level3">
-<h3><span class="header-section-number">5.13.5</span> Pros/Cons</h3>
+<div id="proscons-10" class="section level3">
+<h3><span class="header-section-number">3.14.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p>Decorrelates trees (relative to boosted trees)</p>
 <p>important when dealing with mulitple features which may be correlated</p>
@@ -942,9 +944,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="boosting" class="section level2">
-<h2><span class="header-section-number">5.14</span> Boosting</h2>
-<div id="intro-13" class="section level3">
-<h3><span class="header-section-number">5.14.1</span> Intro</h3>
+<h2><span class="header-section-number">3.15</span> Boosting</h2>
+<div id="intro-11" class="section level3">
+<h3><span class="header-section-number">3.15.1</span> Intro</h3>
 <p>Unlike boosting and random forests, can overfit if number of trees is too large</p>
 <p>Similar to bagging, but trees are grown sequentially. Each tree is created using information from previously grown trees</p>
 <p>Each tree is generated using information from previously grown trees; the addition of a new tree improves upon the performance of the previous trees. The trees are now dependentupon one another. Boosting approach tends to slowly learn our data. Given a current decision tree model, we fit a new decision tree to the residualsof the current decision tree. The new decision tree (based on the residuals) is then added to the current decision tree, and the residuals are updated. We limit the number of terminal nodes in order to sequentially fit small trees. By fitting small trees to the residuals, we slowly improve the overall model in areas where it does not perform well.</p>
@@ -952,17 +954,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>Note on Variable Importance: For regression trees, we can use the reduction in the RSS. For classification trees, we can use the reduction in the Gini index. A relatively large value indicates a notable drop in the RSS or Gini index, and thus a better fit to the data; corresponding variables are relatively important predictors.</p>
 <p>Similar to bagging, but learns sequentially and builds off previous trees</p>
 </div>
-<div id="assumptions-13" class="section level3">
-<h3><span class="header-section-number">5.14.2</span> Assumptions</h3>
+<div id="assumptions-10" class="section level3">
+<h3><span class="header-section-number">3.15.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-8" class="section level3">
-<h3><span class="header-section-number">5.14.3</span> Characteristics</h3>
+<div id="characteristics-7" class="section level3">
+<h3><span class="header-section-number">3.15.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-12" class="section level3">
-<h3><span class="header-section-number">5.14.4</span> Evaluation</h3>
+<div id="evaluation-10" class="section level3">
+<h3><span class="header-section-number">3.15.4</span> Evaluation</h3>
 </div>
-<div id="proscons-13" class="section level3">
-<h3><span class="header-section-number">5.14.5</span> Pros/Cons</h3>
+<div id="proscons-11" class="section level3">
+<h3><span class="header-section-number">3.15.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <p>Somewhat more interpretable than boosted trees/random forest as the user can define the size of each tree resulting in a collection of stumps (1 level) which can be viewed as an additive model</p>
 <p>Can easily handle qualitative (categorical) features</p>
@@ -970,9 +972,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="association-rule-mining" class="section level2">
-<h2><span class="header-section-number">5.15</span> Association Rule Mining</h2>
-<div id="intro-14" class="section level3">
-<h3><span class="header-section-number">5.15.1</span> Intro</h3>
+<h2><span class="header-section-number">3.16</span> Association Rule Mining</h2>
+<div id="intro-12" class="section level3">
+<h3><span class="header-section-number">3.16.1</span> Intro</h3>
 <ul>
 <li><p>Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.</p></li>
 <li><p>Tutorial: <a href="http://pbpython.com/market-basket-analysis.html" class="uri">http://pbpython.com/market-basket-analysis.html</a></p></li>
@@ -984,17 +986,17 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <li><p>t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don’t make it to the higher iterations.</p></li>
 </ul>
 </div>
-<div id="assumptions-14" class="section level3">
-<h3><span class="header-section-number">5.15.2</span> Assumptions</h3>
+<div id="assumptions-11" class="section level3">
+<h3><span class="header-section-number">3.16.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-9" class="section level3">
-<h3><span class="header-section-number">5.15.3</span> Characteristics</h3>
+<div id="characteristics-8" class="section level3">
+<h3><span class="header-section-number">3.16.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-13" class="section level3">
-<h3><span class="header-section-number">5.15.4</span> Evaluation</h3>
+<div id="evaluation-11" class="section level3">
+<h3><span class="header-section-number">3.16.4</span> Evaluation</h3>
 </div>
-<div id="proscons-14" class="section level3">
-<h3><span class="header-section-number">5.15.5</span> Pros/Cons</h3>
+<div id="proscons-12" class="section level3">
+<h3><span class="header-section-number">3.16.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>Ideally suited for working with very large amounts of transactional data.</p></li>
@@ -1010,24 +1012,25 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="naive-bayes" class="section level2">
-<h2><span class="header-section-number">5.16</span> Naïve Bayes</h2>
-<div id="intro-15" class="section level3">
-<h3><span class="header-section-number">5.16.1</span> Intro</h3>
+<h2><span class="header-section-number">3.17</span> Naïve Bayes</h2>
+<div id="intro-13" class="section level3">
+<h3><span class="header-section-number">3.17.1</span> Intro</h3>
+<p>Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.</p>
 <p>Practitioners do use Naive Bayes regularly for ranking, where the actual values of the probabilities are not relevant—only the relative values for examples in the different classes. Another advantage of Naive Bayes is that it is naturally an “incremental learner.” An incremental learner is an induction technique that can update its model one training example at a time. It does not need to reprocess all past training examples when new training data become available.</p>
 <p>Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.</p>
 <p>Note: In addition, we can use function “partial_fit” to fit on a batch of samples incrementally while we are using. MultinomialNB and Bernoulli NB also support sample weighting.</p>
 </div>
-<div id="assumptions-15" class="section level3">
-<h3><span class="header-section-number">5.16.2</span> Assumptions</h3>
+<div id="assumptions-12" class="section level3">
+<h3><span class="header-section-number">3.17.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-10" class="section level3">
-<h3><span class="header-section-number">5.16.3</span> Characteristics</h3>
+<div id="characteristics-9" class="section level3">
+<h3><span class="header-section-number">3.17.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-14" class="section level3">
-<h3><span class="header-section-number">5.16.4</span> Evaluation</h3>
+<div id="evaluation-12" class="section level3">
+<h3><span class="header-section-number">3.17.4</span> Evaluation</h3>
 </div>
-<div id="proscons-15" class="section level3">
-<h3><span class="header-section-number">5.16.5</span> Pros/Cons</h3>
+<div id="proscons-13" class="section level3">
+<h3><span class="header-section-number">3.17.5</span> Pros/Cons</h3>
 <p><strong>Pros</strong></p>
 <ul>
 <li><p>It is relatively simple to understand. Training the classifier does not require many observations, and the method also works well with large amounts of data. It is easy to obtain the estimated probabilityfor a classification prediction.</p></li>
@@ -1043,9 +1046,9 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 </div>
 </div>
 <div id="lda" class="section level2">
-<h2><span class="header-section-number">5.17</span> LDA</h2>
-<div id="intro-16" class="section level3">
-<h3><span class="header-section-number">5.17.1</span> Intro</h3>
+<h2><span class="header-section-number">3.18</span> LDA</h2>
+<div id="intro-14" class="section level3">
+<h3><span class="header-section-number">3.18.1</span> Intro</h3>
 <p>Before we take a look into the inner workings of LDA in the following subsections, let’s summarize the key steps of the LDA approach:</p>
 <p>Standardize the -dimensional dataset ( is the number of features).</p>
 <p>For each class, compute the -dimensional mean vector.</p>
@@ -1055,40 +1058,40 @@ clf_lr <span class="op">=</span> sm.Logit(Y, X).fit(disp<span class="op">=</span
 <p>Project the samples onto the new feature subspace using the transformation matrix.</p>
 <p>LDA similar to Naive Bayes but doesn’t assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don’t share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own.</p>
 </div>
-<div id="assumptions-16" class="section level3">
-<h3><span class="header-section-number">5.17.2</span> Assumptions</h3>
+<div id="assumptions-13" class="section level3">
+<h3><span class="header-section-number">3.18.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-11" class="section level3">
-<h3><span class="header-section-number">5.17.3</span> Characteristics</h3>
+<div id="characteristics-10" class="section level3">
+<h3><span class="header-section-number">3.18.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-15" class="section level3">
-<h3><span class="header-section-number">5.17.4</span> Evaluation</h3>
+<div id="evaluation-13" class="section level3">
+<h3><span class="header-section-number">3.18.4</span> Evaluation</h3>
 </div>
-<div id="proscons-16" class="section level3">
-<h3><span class="header-section-number">5.17.5</span> Pros/Cons</h3>
+<div id="proscons-14" class="section level3">
+<h3><span class="header-section-number">3.18.5</span> Pros/Cons</h3>
 </div>
 </div>
 <div id="qda" class="section level2">
-<h2><span class="header-section-number">5.18</span> QDA</h2>
-<div id="intro-17" class="section level3">
-<h3><span class="header-section-number">5.18.1</span> Intro</h3>
+<h2><span class="header-section-number">3.19</span> QDA</h2>
+<div id="intro-15" class="section level3">
+<h3><span class="header-section-number">3.19.1</span> Intro</h3>
 <p>TBD</p>
 </div>
-<div id="assumptions-17" class="section level3">
-<h3><span class="header-section-number">5.18.2</span> Assumptions</h3>
+<div id="assumptions-14" class="section level3">
+<h3><span class="header-section-number">3.19.2</span> Assumptions</h3>
 </div>
-<div id="characteristics-12" class="section level3">
-<h3><span class="header-section-number">5.18.3</span> Characteristics</h3>
+<div id="characteristics-11" class="section level3">
+<h3><span class="header-section-number">3.19.3</span> Characteristics</h3>
 </div>
-<div id="evaluation-16" class="section level3">
-<h3><span class="header-section-number">5.18.4</span> Evaluation</h3>
+<div id="evaluation-14" class="section level3">
+<h3><span class="header-section-number">3.19.4</span> Evaluation</h3>
 </div>
-<div id="proscons-17" class="section level3">
-<h3><span class="header-section-number">5.18.5</span> Pros/Cons</h3>
+<div id="proscons-15" class="section level3">
+<h3><span class="header-section-number">3.19.5</span> Pros/Cons</h3>
 </div>
 </div>
 <div id="datacamp-nonlinear-modeling-in-r-with-gams" class="section level2">
-<h2><span class="header-section-number">5.19</span> DataCamp: Nonlinear Modeling in R with GAMs</h2>
+<h2><span class="header-section-number">3.20</span> DataCamp: Nonlinear Modeling in R with GAMs</h2>
 <p>Wiggleness affected by smoothing factor (sp) and number of basis functions (k)</p>
 <p>gam(y ~ s(x, k = 3), data = df, sp = .1) gam(y ~ s(x, k = 3), data = df, method = “REML”)</p>
 <p>Categorical features must be included as factors.</p>
@@ -1145,7 +1148,6 @@ low_pred &lt;-<span class="st"> </span>predictions<span class="op">$</span>fit <
 high_prob &lt;-<span class="st"> </span><span class="kw">plogis</span>(high_pred)
 low_prob &lt;-<span class="st"> </span><span class="kw">plogis</span>(low_pred)</code></pre></div>
 <p>gams work with broom and caret.</p>
-
 </div>
 </div>
             </section>
@@ -1153,8 +1155,8 @@ low_prob &lt;-<span class="st"> </span><span class="kw">plogis</span>(low_pred)<
           </div>
         </div>
       </div>
-<a href="model-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="communicate-deploy-maintain.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pre-modeling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hierarchical-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1184,7 +1186,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-model-algorithms.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-modeling.Rmd",
 "text": "Edit"
 },
 "history": {

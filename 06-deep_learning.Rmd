@@ -1,34 +1,57 @@
 # Deep Learning
 
-## General
+## Activation Functions
 
-cnn for time series
+* Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
+
+* Softmax: Same end result as sigmoid, but different function. Doesn't like multi-label classification
+
+* tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
+
+* ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. $f(x) = max(0, x)$
+
+## Preprocessing
+
+* Scale features
+
+## Tuning
+
+* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
+
+* Early Stopping: Stop training when validation score stop improving after a certain number of epochs (batches?)
+
+## Notes
+
+* [Debugging](http://theorangeduck.com/page/neural-network-not-working)
+
+* https://tensorflow.rstudio.com/keras/
+
+* cnn for time series
+
+## Model
+
+Regression: loss - mean_squared_error, metric - rmse, activation_function - relu
+
+Classification: * loss - categorical_crossentropy, metric - accuracy, activation_function - softmax
+
+random initialization of weights for logreg
+
+end to end deep learning: an end-to-end approach as it maps directly the input (x) to the output (y). end-to-end learning works better in practice than multi-task learning, but requires a large amount of data. 
+
+Don't use mini-batches larger than 32
 
 * restnet, attention > RNN / LSTM
 
 * "Training with large minibatches is bad for your health. More importantly, it's bad for your test error. Friends dont let friends use minibatches larger than 32." - Yann Le Cun
 
-* [DL Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
+* [Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
 
 * By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.
 
 * Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).
 
-* There are several activation functions you may encounter in practice:
-
-    * Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 ($σ(x) = 1 / (1 + exp(−x))$)
-
-    * Softmax: Same end result as sigmoid, but different function.
-
-    * tanh: Takes a real-valued input and squashes it to the range [-1, 1] ($tanh(x) = 2σ(2x) − 1$)
-
-   * ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. $f(x) = max(0, x)$
-
-* softmax doesn't like multi-label classification
-
 * Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days. 
 
-* Advised to scale features
 
 * [Rule of 30](https://www.youtube.com/watch?v=nqEYVzJLR_c&feature=youtu.be&t=31): A change that affects at least 30 data points in your validation set is usually significant and not just noise.
 
@@ -37,8 +60,6 @@ cnn for time series
 * Momentum and learning rate decay are good for knowing which way to go in gradient descent.
 
 * Always try to lower your learning rate for improvement. 
-
-* ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.
 
 * n inputs and k outputs gives you $(n+1)*k$ parameters. 
 
@@ -67,8 +88,6 @@ term memory). LSTM replaced the rectified linear units by continuous functions. 
 
 * When plotting the mean-squared error loss function against predictions, the slope is $2x(y-xb)$, or $2input_data error$.
 
-* weights_updated = weights - slope*learning_rate
-
 * This is exactly what's happening in the vanishing gradient problem -- the gradients of the network's output with respect to the parameters in the early layers become extremely small. That's a fancy way of saying that even a large change in the value of parameters for the early layers doesn't have a big effect on the output. 
 
 * Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.
@@ -82,8 +101,6 @@ term memory). LSTM replaced the rectified linear units by continuous functions. 
 * Few people use kfold cv in deep learning because of the large datasets in play. 
 
 * Dying neuron + vanishing gradient: Change activation function
-
-## LSTMs
 
 Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. LSTMs are essentially the same thing as the RNN we will develop in this tutorial, they just have a different way of computing the hidden state. 
 
@@ -99,39 +116,17 @@ One major issue with layer_simple_rnn is that although it should theoretically b
 
 A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way.
 
-```{r, eval = F}
-network <- keras_model_sequential() %>%  layer_dense(units = 512, activation = "relu", input_shape = c(28 * 28)) %>%  layer_dense(units = 10, activation = "softmax")
-
-network %>% compile(  optimizer = "rmsprop",  loss = "categorical_crossentropy",  metrics = c("accuracy"))
-
-network %>% fit(train_images, train_labels, epochs = 5, batch_size = 128)
-
-metrics <- network %>% evaluate(test_images, test_labels)
-```
-
-## DL.AI: Intro
-
 ng thinks dl easier of matrix is n x m instead of m x n so target is a row vector instead of a column vector
 
 Loss function applies to a single training example while the cost function applies to many. The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.
 
-A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗∗ c ∗∗ d, a) is to use:
-
-X_flatten = X.reshape(X.shape[0], -1).T 
+A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗∗ c ∗∗ d, a) is to use `X_flatten = X.reshape(X.shape[0], -1).T `
 
 One common preprocessing step in machine learning is to center and standardize your dataset, meaning that you substract the mean of the whole numpy array from each example, and then divide each example by the standard deviation of the whole numpy array. But for picture datasets, it is simpler and more convenient and works almost as well to just divide every row of the dataset by 255 (the maximum value of a pixel channel).
 
 Scale images: train_set_x = train_set_x_flatten/255.
 
-Common steps for pre-processing a new dataset are:
-
-- Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, ...)
-- Reshape the datasets such that each example is now a vector of size (num_px \* num_px \* 3, 1)
-- "Standardize" the data
-
-Preprocessing the dataset is important.
-
-You implemented each function separately: initialize(), propagate(), optimize(). Then you built a model().
+Common steps for pre-processing a new dataset are: 1) Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, ...), 2) Reshape the datasets such that each example is now a vector of size (num_px \* num_px \* 3, 1), 3) "Standardize" the data
 
 Tuning the learning rate (which is an example of a "hyperparameter") can make a big difference to the algorithm. You will see more examples of this later in this course!
 
@@ -141,11 +136,7 @@ Initialize weights randomly but set bias to zero.
 
 You have built a network using the tanh activation for all the hidden units. You initialize the weights to relative large values, using np.random.randn(..,..)*1000. What will happen? This will cause the inputs of the tanh to also be very large, thus causing gradients to be close to zero. The optimization algorithm will thus become slow.
 
-a4[2](12): 4th neuron of the 2nd layer for the 12th training example.
-
 No. Sigmoid outputs a value between 0 and 1 which makes it a very good choice for binary classification. You can classify as 0 if the output is less than 0.5 and classify as 1 if the output is more than 0.5. It can be done with tanh as well but it is less convenient as the output is between -1 and 1.
-
-random initialization of weights for logreg
 
 What is the "cache" used for in our implementation of forward propagation and backward propagation?  We use it to pass variables computed during forward propagation to the corresponding backward propagation step. It contains useful values for backward propagation to compute derivatives.
 
@@ -166,8 +157,6 @@ ng doesn't like dropout bc it couples optimization with regularization
 early stopping
 
 dropout is a regularization technique to prevent over-fitting.
-
-## DL.AI: Improving Deep Neural Network 
 
 If you have 10,000,000 examples, how would you split the train/dev/test set? 98% train . 1% dev . 1% test
 
@@ -195,8 +184,6 @@ Random initialization is used to break symmetry and make sure different hidden u
 Don't intialize to values that are too large
 
 He initialization works well for networks with ReLU activations.
-
-**Fast.AI**
 
 Do a loss vs learning rate plot to pick a good one. It's the key thing to set.
 
@@ -247,8 +234,6 @@ Convulations and pooling layes are invariant to translation of images.
 
 We have reviewed the activation function, weights initializations, and a bunch of new techniques that help to train better networks. What are the takeaways? First, always use ReLU activation because it doesn't saturate and it converges faster. Use He et al initialization which is square root of two divided by square root of number of inputs. Try to add bash normalization or dropout, maybe it will converge better. Try to augment your training data. 
 
-Transfer learning
-
 You should use dropout (randomly eliminate nodes) only in training.
 
 Apply dropout both during forward and backward propagation.
@@ -260,8 +245,6 @@ inverted dropout
 Gradient checking verifies closeness between the gradients from backpropagation and the numerical approximation of the gradient (computed using forward propagation).
 
 Gradient checking is slow, so we don't run it in every iteration of training. You would usually run it only to make sure your code is correct, then turn it off and use backprop for the actual learning process.
-
-### Optimization Algorithms
 
 In batch GD the cost should be monotone decreasing. In mini-batch it doesn't have to be since it's like training on a different training set every time. It should still be trending downwards. 
 
@@ -291,28 +274,12 @@ Momentum takes past gradients into account to smooth out the steps of gradient d
 
 Mini-batch Gradient descent, Mini-batch Gradient descent with momentum, mini-batch with Adam. Adam usually performs best. Some advantages of Adam include: Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum), usually works well even with little tuning of hyperparameters (except alpha).
 
-### Hyperparameter Tuning
-
 Use random values.
 
 batch normalization
-
-softmax regression
 
 During hyperparameter search, whether you try to babysit one model (“Panda” strategy) or train a lot of models in parallel (“Caviar”) is largely determined by computational power
 
 Which of the following statements about γ and β in Batch Norm are true? They can be learned using Adam, Gradient descent with momentum, or RMSprop, not just with gradient descent. They set the mean and variance of the linear variable z[l] of a given layer.
 
 After training a neural network with Batch Norm, at test time, to evaluate the neural network on a new example you should: Perform the needed normalizations, use μ and σ2 estimated using an exponentially weighted average across mini-batches seen during training
-
-tf: To summarize, remember to initialize your variables, create a session and run the operations inside the session.
-
-When you code in tensorflow you have to take the following steps:
-
-* Create a graph containing Tensors (Variables, Placeholders ...) and Operations (tf.matmul, tf.add, ...)
-
-* Create a session
-
-* Initialize the session
-
-* Run the session to execute the graph

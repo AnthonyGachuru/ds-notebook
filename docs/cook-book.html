@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 6 Stats | Data Science Cribsheet</title>
+  <title>Chapter 11 Cook Book | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 6 Stats | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 11 Cook Book | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Stats | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 11 Cook Book | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="communicate-deploy-maintain.html">
-<link rel="next" href="time-series-1.html">
+<link rel="prev" href="distributed.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -382,265 +382,430 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stats" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Stats</h1>
-<div id="general-5" class="section level2">
-<h2><span class="header-section-number">6.1</span> General</h2>
-<p>Cohen’s H | Cohen’s D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate</p>
-<p>Mann–Whitney U test</p>
-<p>Zero correlation doesn’t imply independence</p>
-<p><a href="https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf" class="uri">https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf</a></p>
-<p>Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:</p>
-<p>lm() with a single categorical feature is equivalent to a t test or anova test.</p>
-<p>Power-Of-Test: <a href="https://rpsychologist.com/d3/NHST/" class="uri">https://rpsychologist.com/d3/NHST/</a> <a href="https://juliasilge.shinyapps.io/power-app/" class="uri">https://juliasilge.shinyapps.io/power-app/</a> <a href="https://www.statmethods.net/stats/power.html" class="uri">https://www.statmethods.net/stats/power.html</a> <a href="https://www.graphpad.com/quickcalcs/binomial1.cfm" class="uri">https://www.graphpad.com/quickcalcs/binomial1.cfm</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html</a></p>
-<p>library(effsize) lm vs t.test vs anova library(EMT): multinomial test</p>
-<p>ecdf: <a href="http://www.ericmjl.com/blog/2018/7/14/ecdfs/">1</a> | <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf">2</a></p>
-<p><a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html" class="uri">http://www.stat.umn.edu/geyer/old/5101/rlook.html</a></p>
-<p><a href="https://mobile.twitter.com/PhDemetri/status/1094454658888753152" class="uri">https://mobile.twitter.com/PhDemetri/status/1094454658888753152</a></p>
-<p><a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/whatstat/</a></p>
-<p>categorical dissimilairty <a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist" class="uri">https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist</a></p>
-<p><a href="http://frog.oerc.ox.ac.uk:8080/stato-app/" class="uri">http://frog.oerc.ox.ac.uk:8080/stato-app/</a></p>
-<p>Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Numeric-Categorical Correlation <a href="https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor" class="uri">https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor</a></p>
-<p>Outliers in small samples: <a href="https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617" class="uri">https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617</a></p>
-<p>Since all outcomes are 0 or 1, and drawn with the same (unknown) probability, we know that the number of ones and zeros follows a binomial distribution. This means that the confidence interval of a “k out of n” scenario is a Beta distribution.</p>
-<p>Another common measure of effect size is d, sometimes known as Cohen’s d (as you might have guessed by now, Cohen was quite influential in the field of effect sizes). This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups’ means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups’ means differ by one standard deviation; a d of .5 tells us that the two groups’ means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a ‘small’ effect size, 0.5 represents a ‘medium’ effect size and 0.8 a ‘large’ effect size. This means that if two groups’ means don’t differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant.</p>
-<p>Beta Distribution: The larger the alpha parameter is the closer the resulting distribution is to 1.0 and the larger the beta the closer it is to 0.</p>
-<p>Fisher’s Exact Test: Test for proportions</p>
-<p>cohen’s f^2 | <a href="https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression" class="uri">https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression</a> | <a href="https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis" class="uri">https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis</a></p>
-<p>Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood</p>
-<p><a href="https://www.rdocumentation.org/packages/effsize/versions/0.7.1/topics/cohen.d" class="uri">https://www.rdocumentation.org/packages/effsize/versions/0.7.1/topics/cohen.d</a></p>
-<p>Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)</p>
-<p>Prior P(theta): Probability of parameter value</p>
-<p>Posterior P(theta|D): Credibility of the parameter value with the data taken into account.</p>
-<p>Marginal Likelihood (Evidence): Probability of evidence</p>
-<p>Variance: Spread of the data | Distance from the mean</p>
-<p>Standard Deviation: Square root of the variance | Same units as the data</p>
-<p>Mean: Average/Expected Value</p>
-<p>Covariance: Measure of how two random values change together. Negative - variables show opposite behavior ( As A increases B decreases). Positive - variables show similar behavior (As A increases B increases)</p>
-<p>Pearson Correlation: Normalized version of covariance</p>
-<p>Median: Number at the halfway point of the dataset, found through sorting data into ascending order and selecting middle point</p>
-<p>Mode: Most frequent value in dataset</p>
-<p>Note about Populations and Samples: Populations have parameters. Samples have statistics.</p>
-<p>Distributions:</p>
-<p>Normal/Gaussian: Parameters are mean and standard deviation. Bell shaped. z-score: indicates how many standard deviations an element is from the mean</p>
-<p>Student t: used to estimate the mean of a normally distributed population where the sample size is small and the standard deviation is unknown</p>
-<p>A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.</p>
-<p>Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:</p>
-<p><span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
-<p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
-<ul>
-<li><p>Type I Error: Saying there is an effect when there isn’t one. Type II error: concluding there is no effect when, in fact, there is one.</p></li>
-<li><p>The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.</p></li>
-<li><p>Probably the most useful types of statistics for skewed probability distributions are quantiles.</p></li>
-<li><p>Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!</p></li>
-<li><p>Random sampling &amp; random assignment: generalizable &amp; causal</p></li>
-<li><p>Get 95% ci around p-value</p></li>
-<li><p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p></li>
-<li><p>Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.</p></li>
-<li><p><a href="https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html">Effect size</a></p></li>
-<li><p>jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics</p></li>
-<li><p>box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series</p></li>
-<li><p>shapiro.test: Test for normality</p></li>
-<li><p>Sum of normally distributed random variables: sum of means &amp; sum of variances</p></li>
-<li><p>Zero correlation doesn’t mean independent variables. Covariance only determines linear relationships.</p></li>
-<li><p>test heteroscedaticity: breusch-pagan or ncv test</p></li>
-<li><p>Test Normality: Shapiro–Wilk test is a test of normality</p></li>
-<li><p>Bypass inferential stats if features at least 1/10 of data points.</p></li>
-<li><p>The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.</p></li>
-<li><p>One Sample T-test: To examine the average difference between a sample and the known value of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Two Sample T-test: To examine the average difference between two samples drawn from two different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>Chi-Squared Test of Independence: To test whether two categorical variables are independent. Assumes the sample observations are randomly drawn and independent.</p></li>
-<li><p>F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Barlett Test: F-Test for more than two populations.</p></li>
-<li><p>If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won’t. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.</p></li>
-<li><p>Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.</p></li>
-<li><p>Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.</p></li>
-<li><p>Independent rvs are uncorrelated. That is Cor (X,Y)=0</p></li>
-<li><p>Don’t sum sd’s, sum variances.</p></li>
-<li><p>One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use One-Way ANOVA? To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.</p></li>
-<li><p>To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.</p></li>
-<li><p>The degrees of freedom is the number of data rows minus the number of coefficients fit.</p></li>
-<li><p>Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.</p></li>
-</ul>
-<div id="introduction-to-data" class="section level3 unnumbered">
-<h3>Introduction to Data</h3>
-<p>There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.</p>
-<p>Explanatory variables are conditions you can impose on the experimental units, while blocking variables are characteristics that the experimental units come with that you would like to control for.</p>
-<p>In random sampling, you use stratifying to control for a variable. In random assignment, you use blocking to achieve the same goal.</p>
-<p>Control: compare treatment of interest to a control group</p>
-<p>Randomize: randomly assign subjects to treatments</p>
-<p>Replicate: collect a sufficiently large sample within a study, or replicate the entire study</p>
-<p>Block: account for the potential effect of confounding variables</p>
-<p>Group subjects into blocks based on these variations, and randomize within each block to treatment groups</p>
-<p>Random Sampling + Random Assignment: Causal + generalizable</p>
-<p>No Random Sampling + Random Assignment: Causal + not generalizable</p>
-<p>Random Sampling + No Random Assignment: Not causal + generalizable</p>
-<p>No Random Sampling + No Random Assignment: Not causal + not generalizable</p>
+<div id="cook-book" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Cook Book</h1>
+<div id="general-6" class="section level2">
+<h2><span class="header-section-number">11.1</span> General</h2>
+<p><a href="http://chrisalbon.com/">Chris Albon</a></p>
 </div>
-<div id="statistical-tests" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Statistical Tests</h3>
-<p>The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The “30” rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means.</p>
-<ol style="list-style-type: decimal">
-<li><p>for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]</p></li>
-<li><p>The approximation becomes better with larger n, given other things remaining the same.</p></li>
-</ol>
-<p>However if you are wondering why 30 ? why not 25 or 40 or something else ? Note that actual answer will depend:</p>
-<ol style="list-style-type: decimal">
-<li><p>how much error are you going to tolerate</p></li>
-<li><p>size of the effect</p></li>
-<li><p>exact distribution family (like t vs chi-square vs gamma)</p></li>
-</ol>
-<p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β. In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down. Statistical power is affected chiefly by the size of the effect and the size of the sample used to detect it. Bigger effects are easier to detect than smaller effects, while large samples offer greater test sensitivity than small samples.</p>
-<p>The following four quantities have an intimate relationship:</p>
-<ul>
-<li><p>sample size</p></li>
-<li><p>effect size</p></li>
-<li><p>significance level = P(Type I error) = probability of finding an effect that is not there</p></li>
-<li><p>power = 1 - P(Type II error) = probability of finding an effect that is there</p></li>
-</ul>
-<p>Given any three, we can determine the fourth.</p>
-<p><strong>Other</strong></p>
-<ul>
-<li><p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.</p></li>
-<li><p>For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.</p></li>
-<li><p><a href="http://www.evanmiller.org/ab-testing/sample-size.html">Power Analysis Calculator</a></p></li>
-</ul>
+<div id="linear-regression-statsmodels" class="section level2">
+<h2><span class="header-section-number">11.2</span> Linear Regression Statsmodels</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> statsmodels.api <span class="im">as</span> sm
+X <span class="op">=</span> sm.add_constant(X)
+mdl <span class="op">=</span> sm.OLS(Y, X).fit(disp <span class="op">=</span> <span class="va">False</span>)
+<span class="bu">print</span>(mdl.summary())</code></pre></div>
 </div>
-<div id="stats-for-hackers" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> Stats For Hackers</h3>
-<ul>
-<li><p>Methods: Simluation, Boostrapping (with replacement, not good with ranks), Shuffling (Works when assumption is that the data are the same, representative samples, non-longitudinal data), &amp; Cross Validation.</p></li>
-<li><p>Assumes iid.</p></li>
-</ul>
+<div id="rowwise" class="section level2">
+<h2><span class="header-section-number">11.3</span> Rowwise</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mymean =</span> <span class="kw">mean</span>(<span class="kw">c</span>(cyl,mpg))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(cyl, mpg, mymean)</code></pre></div>
 </div>
-<div id="think-stats" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Think Stats</h3>
-<ul>
-<li><p>Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.</p></li>
-<li><p>The sampling distribution is the distribution of the samples mean.</p></li>
-<li><p>The CDF is the function that maps values to their percentile rank in a distribution.</p></li>
-<li><p>I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.</p></li>
-<li><p>CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).</p></li>
-<li><p>Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.</p></li>
-<li><p>Statistical power is the probability that the test will be positive if the null hypothesis is false. In general, the power of a test depends on the sample size, the magnitude of the effect, and the threshold α.</p></li>
-<li><p>If there are no outliers, the sample mean minimizes the mean squared error</p></li>
-<li><p>An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.</p></li>
-<li><p>A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same units, they come from different distributions. There are two common solutions to these problems:</p></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li><p>Transform all values to standard scores. This leads to the Pearson coefficient of correlation.</p></li>
-<li><p>Transform all values to their percentile ranks. This leads to the Spearman coefficient.</p></li>
-</ol>
+<div id="sampling-file" class="section level2">
+<h2><span class="header-section-number">11.4</span> Sampling File</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pip</span> install subsample
+<span class="ex">gzcat</span> ginormous.csv.gz <span class="kw">|</span> <span class="ex">subsample</span> -n 100000 <span class="op">&gt;</span> sampled.csv.gz</code></pre></div>
 </div>
-<div id="ab-testing-overview" class="section level3">
-<h3><span class="header-section-number">6.1.4</span> AB Testing Overview</h3>
-<p>Guide: Choose metric (CTR), review stats (Hypothesis Testing), design, analyse</p>
-<p>Need to have clear control and thing to test. Also need time. Frequency of customer interaqction is important.</p>
-<p>shopping and searching not independent events.</p>
-<p>Point estimate of CTR (users who clicked)/users. Need margin of error for estimate. Approximate binomial by normal if N*p &amp; N(1-p) &gt; 5.</p>
-<p>marin of error = Z*(stndad error)</p>
-<p>se = sqrt(p(1-p)/n)</p>
-<p>Z for 95% s 1.96 and 2.58 for 99%.</p>
-<p>for Two samples calculate a pooled CTR point estimate and standard error.</p>
-<p>Need to be substantive (a worthy difference) in addition to being statistically significant. Some changes might not be useful due to the resources one might want to allocate.</p>
-<p>Result are repeatable (stat sig) bar should be lower than business interesting (practically sig)</p>
-<p>Stat Power: How many page view necessary to get a stat sig result.</p>
-<p>Size v Power: The smaller the effect or increased confidence you want to detect/have (greater power of experiment), the larger the sample you need to use.</p>
-<p>alpha = P(reject null when true) beta = P(accept null when false)</p>
-<p>small sample: low alpha, high beta larger sample: low alpha, low beta</p>
-<p>1- alpha = confidence level 1 - beta = sensitivity (often 80%)</p>
-<p>practical significance: 2%, alpha = 0.05, beta = 0.2</p>
-<p>sample size dp_to ctr (increase in se), confidence level, sensitivity sample size invp_to practical sig (larger changes easier to detect)</p>
-<p>above is design of experiment. below is analysis:</p>
-<p>estimate diff: experimental prop - control prop margin of error = z*se</p>
-<p>conf int: estimated diff +/- margin of error</p>
-<p><strong>Policy &amp; Ethics</strong></p>
-<p>In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.</p>
-<p>Next, what benefits might result from the study? Even if the risk is minimal, how might the results help?</p>
-<p>Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.</p>
-<p>Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?</p>
-<p>Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:</p>
-<p>Are participants facing more than minimal risk? Do participants understand what data is being gathered? Is that data identifiable? How is the data handled?</p>
-<p>Internal process recommendations Finally, regarding internal process of data handling, we recommend that:</p>
-<p>Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).</p>
-<p>All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.</p>
-<p>rate better for usability test than prob</p>
-<p><strong>Choosing &amp; Characterizing Metrics</strong></p>
-<p><strong>Define</strong></p>
-<p>Make sure to granularize funnel</p>
-<p><strong>Intuition</strong></p>
-<p>NA</p>
-<p><strong>Characterize</strong></p>
-<p>Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data</p>
-<p>temporal effects across hours, days, weeks are important</p>
-<p>different browsers screw with the CTR depending on how they deal with JS</p>
-<p>Can use cookies to track users</p>
-<p>Metric definitions</p>
-<p>Def #1 (Cookie probability): For each <time interval>, number of cookies that click divided by number of cookies</p>
-<p>Def #2 (Pageview probability): Number of pageviews with a click within <time interval> divided by number of pageviews</p>
-<p>Def #3 (Rate): Number of clicks divided by number of pageviews</p>
-<p>CTR vs CTP: The first can be &gt;1.</p>
-<p>Take into consideration mean and median. Median is robust but might not be useful so look at percentiles.</p>
-<p>Measuring sensitiviyt and robustness: 1) Running experiments to see if metrics move as predicted. A vs A experiments: Measure people who saw the same thing to see if there is a difference between them according to the metric or its too sensitive. Look at previous experiments. 2) Retrospective analysis of logs to see how the metrics responded in the past.</p>
-<p>Metric For Loading Vid: Look at distribution of load times for vid. Want a robust metric that doesn’t really change for comparable vids. But wnat a metric that is sensitive to a change that you care about like resolution.</p>
-<p>How to compare experiment vs control: difference or relative change. Relative change allows you to keep same significance boundary.</p>
-<p>Check that praticial sig level is good for metric. Need to have handle on variability for confidence interval.</p>
-<p>sign test: Good for looking to implement a change, but doesn’t give effect size.</p>
-<p>empirical vs analytic: underlying distribution could be weird so do empirical. Analyticcal for simple metrics. If empirical and anlytical don’t agree then run AvA test.</p>
-<p>A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don’t have enough traffic for a big A v A test.</p>
-<p><strong>Designing An Experiment</strong></p>
-<p><strong>Choose Subject</strong></p>
-<p>Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).</p>
-<p>Intra-user vs inter-user experiment.</p>
-<p><strong>Choose Population</strong></p>
-<p>Size</p>
-<p>Duration</p>
-<p>Cohort: People who enter the experiment at the same time.</p>
-<p>Cohort &gt; Population: Learning effects, user retention</p>
-<p>Can reduce sample if just targeting english speaking traffic</p>
-<p>When going to run experiment: holiday or not? How many people to put through experiment and control?</p>
-<p><strong>Analyzing Results</strong></p>
-<p>Sanity Checks:</p>
-<p>Pass all before move on</p>
-<p>Good invariants: # of events, video load time (user has no control over it). Want these to be about the same for experiment and control.</p>
-<p>Single Metric:</p>
-<p>sign test</p>
-<p>Multiple Metrics:</p>
-<p>More metrics increase false positive chance. Use Bonferroni assumption: makes no independence assumption and is conservative.</p>
-<p>margin of error smaller than observed diff so the confidence interval won’t include 0.</p>
-<p>Different strategies: family-wise error rate, false discovery rate,</p>
-<p>Gotchas:</p>
-<p>Simpson’s Paradox</p>
-<p>Usually A/B testing works for testing changes in elements in the web page. A/B testing framework is following sequence:</p>
-<p>Design a research question.</p>
-<p>Choose test statistics method or metrics to evaluate experiment.</p>
-<p>Designing the control group and experiment group.</p>
-<p>Analyzing results, and draw valid conclusions.</p>
+<div id="sql-dummy-columns" class="section level2">
+<h2><span class="header-section-number">11.5</span> SQL Dummy Columns</h2>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> <span class="st">&#39;Dummy Column Text&#39;</span> <span class="kw">as</span> DUMMYCOL <span class="kw">FROM</span> tbl</code></pre></div>
 </div>
+<div id="model-calibration" class="section level2">
+<h2><span class="header-section-number">11.6</span> Model Calibration</h2>
+<p>A quick way of visualizing model calibration without having to manually bin any observations</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(fitted_probability, binary_class_indicator)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>()</code></pre></div>
 </div>
-<div id="datacamp-experimental-design" class="section level2">
-<h2><span class="header-section-number">6.2</span> DataCamp: Experimental Design</h2>
-<p>Randomized Complete Block Design (RCBD) experiment</p>
-<p>Power usually @ 80%. power effect size &amp; sample size all inter-related (with 2 can calculate 3rd).</p>
-<p>power: prob that test correctly rejects null hypo when alt hypo is true</p>
-<p>effect size: standardized measure of the difference you’re trying to detect</p>
-<p>sample size: how many experimental units needed to survey to detect the desired diff at the desired power</p>
-<p>pwr::pwr.anova.test() [exactly one of n, d, power, and sig.level must be NULL]</p>
-<p>aov = lm + anova aov + tukey hsd</p>
-<p>Another assumption of ANOVA and linear modeling is homogeneity of variance. Homogeneity means “same”, and here that would mean that the variance of int_rate is the same for each level of grade. We can test for homogeneity of variances using bartlett.test(), which takes a formula and a dataset as inputs.</p>
-<p>One non-parametric alternative to ANOVA is the Kruskal-Wallis rank sum test. For those with some statistics knowledge, it is an extension of the Mann-Whitney U test for when there are more than two groups, such as with our grade variable.</p>
-<p>Use the correct function from pwr to find the sample size (d is the effect size) pwr::pwr.t.test(n = NULL, d = .2, power = .8, sig.level =.05, alternative = “two.sided”)</p>
-<p>multivariable experiment:</p>
-<p>lendingclub_multi &lt;- lm(loan_amnt ~ Group + grade + verification_status, lendingclub_ab) tidy(lendingclub_multi)</p>
-<p>The sampling package’s cluster() creates cluster samples. It takes in a dataset name, the variable in the set to be used as the cluster variable, passed as a vector with the name as a string, e.g. c(“variable”), a number of clusters to select, and a method</p>
-<p>Randomized Complete Block Designs</p>
-<p>the purpose of blocking an experiment is to make the experimental groups more like one another.</p>
-<p>A rule of thumb in experimental design is often “block what you can, randomize what you cannot”, which means you should aim to block the effects you can control for (e.g. sex) randomize on those you cannot (e.g. smoking status). Variability inside a block is expected to be fairly small, but variability between blocks will be larger.</p>
+<div id="binning-rule-of-thumb" class="section level2">
+<h2><span class="header-section-number">11.7</span> Binning Rule Of Thumb</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862</span>
+<span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(x), <span class="dt">binwidth =</span> <span class="kw">diff</span>(<span class="kw">range</span>(x)) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">IQR</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(x)<span class="op">^</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)))</code></pre></div>
+</div>
+<div id="pyspark-1" class="section level2">
+<h2><span class="header-section-number">11.8</span> Pyspark</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> pyspark
+<span class="im">import</span> random
+<span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+<span class="im">from</span> pyspark.ml.feature <span class="im">import</span> StringIndexer, OneHotEncoder, VectorAssembler
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.getOrCreate() <span class="co"># SparkSession.builder.appName(&#39;chosenName&#39;).getOrCreate()</span>
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">&#39;example&#39;</span>).getOrCreate()
+sc <span class="op">=</span> pyspark.SparkContext(appName<span class="op">=</span><span class="st">&quot;Pi&quot;</span>)
+num_samples <span class="op">=</span> <span class="dv">100000000</span>
+<span class="kw">def</span> inside(p):     
+    x, y <span class="op">=</span> random.random(), random.random()
+    <span class="cf">return</span> x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y <span class="op">&lt;</span> <span class="dv">1</span>
+count <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">0</span>, num_samples)).<span class="bu">filter</span>(inside).count()
+pi <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> count <span class="op">/</span> num_samples
+<span class="bu">print</span>(pi)
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;data.csv&#39;</span>, header <span class="op">=</span> <span class="va">True</span>)
+df.show(<span class="dv">5</span>)
+df.columns
+<span class="co"># Preprocessing</span>
+df <span class="op">=</span> df.withColumn(<span class="st">&quot;label&quot;</span>, df[<span class="st">&quot;target&quot;</span>].cast(<span class="st">&#39;integer&#39;</span>))
+scf_indexer <span class="op">=</span> StringIndexer(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>)
+scf_encoder <span class="op">=</span> OneHotEncoder(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_fact&quot;</span>)
+feature_cols <span class="op">=</span> [<span class="st">&quot;some list of column names&quot;</span>]
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols <span class="op">=</span> feature_cols, 
+                                outputCol <span class="op">=</span> <span class="st">&quot;features&quot;</span>)
+pipe <span class="op">=</span> Pipeline(stages <span class="op">=</span> [scf_indexer, scf_encoder, vec_assembler])
+piped_data <span class="op">=</span> pipe.fit(df).transform(df)
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">8</span>, .<span class="dv">2</span>])
+<span class="co"># Model</span>
+clf_lr <span class="op">=</span> LogisticRegression()
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName <span class="op">=</span> <span class="st">&quot;areaUnderROC&quot;</span>)
+grid <span class="op">=</span> tune.ParamGridBuilder()
+grid <span class="op">=</span> grid.addGrid(clf_lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(clf_lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+grid <span class="op">=</span> grid.build()
+clf_lr_cv <span class="op">=</span> tune.CrossValidator(
+    estimator <span class="op">=</span> clf_lr,
+    estimatorParamMaps <span class="op">=</span> grid,
+    evaluator <span class="op">=</span> evaluator,
+    numFolds <span class="op">=</span> <span class="dv">5</span>
+               )
+best_clf_lr <span class="op">=</span> clf_lr_cv.fit(training).bestModel
+results <span class="op">=</span> best_clf_lr.transform(training)
+<span class="bu">print</span>(evaluator.evaluate(results))
+<span class="co">## List tables</span>
+spark.catalog.listTables()
+<span class="co">## Access and display data</span>
+query <span class="op">=</span> <span class="st">&quot;FROM flights SELECT * LIMIT 10&quot;</span>
+flights10 <span class="op">=</span> spark.sql(query)
+flights10.show()
+<span class="co">## Cast</span>
+df[<span class="st">&#39;g&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;g&#39;</span>].astype(<span class="bu">str</span>)
+<span class="co">## Read from csv</span>
+df<span class="op">=</span> spark.read.csv(file_path, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;fileNameWithPath&#39;</span>, mode<span class="op">=</span><span class="st">&quot;DROPMALFORMED&quot;</span>,inferSchema<span class="op">=</span><span class="va">True</span>, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">&quot;csv&quot;</span>).option(<span class="st">&quot;header&quot;</span>,<span class="st">&quot;true&quot;</span>).option(<span class="st">&quot;inferSchema&quot;</span>,<span class="st">&quot;true&quot;</span>).load(<span class="st">&quot;john_doe.csv&quot;</span>)
+<span class="co">## Spark df to pandas and vice versa</span>
+toPandas()
+spark_temp <span class="op">=</span> spark.createDataFrame(pd_temp)
+<span class="co">## Add to the catalog</span>
+spark_temp.createOrReplaceTempView(<span class="st">&quot;temp&quot;</span>)
+<span class="co">## Mutate</span>
+df <span class="op">=</span> df.withColumn(<span class="st">&quot;newCol&quot;</span>, df.oldCol <span class="op">+</span> <span class="dv">1</span>)
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;arr_delay&quot;</span>, model_data.arr_delay.cast(<span class="st">&#39;integer&#39;</span>))
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;plane_age&quot;</span>, model_data.year <span class="op">-</span> model_data.plane_year)
+<span class="co">## Create the DataFrame flights</span>
+flights <span class="op">=</span> spark.table(<span class="st">&#39;flights&#39;</span>)
+<span class="co">## Get column names</span>
+spark_df.schema.names
+spark_df.printSchema()
+<span class="co">## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string</span>
+long_flights1 <span class="op">=</span> flights.<span class="bu">filter</span>(<span class="st">&#39;distance &gt; 1000&#39;</span>)
+long_flights2 <span class="op">=</span> flights.<span class="bu">filter</span>(flights.distance <span class="op">&gt;</span> <span class="dv">1000</span>)
+model_data <span class="op">=</span> model_data.<span class="bu">filter</span>(<span class="st">&quot;arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL&quot;</span>)
+<span class="co">## Groupby examples</span>
+flights.<span class="bu">filter</span>(flights.origin <span class="op">==</span> <span class="st">&quot;PDX&quot;</span>).groupBy().<span class="bu">min</span>(<span class="st">&quot;distance&quot;</span>).show()
+flights.<span class="bu">filter</span>(flights.carrier<span class="op">==</span><span class="st">&#39;DL&#39;</span>).<span class="bu">filter</span>(flights.origin<span class="op">==</span><span class="st">&#39;SEA&#39;</span>).groupBy().avg(<span class="st">&#39;air_time&#39;</span>).show()
+flights.withColumn(<span class="st">&quot;duration_hrs&quot;</span>, flights.air_time<span class="op">/</span><span class="dv">60</span>).groupBy().<span class="bu">sum</span>(<span class="st">&#39;duration_hrs&#39;</span>).show()
+<span class="co">## Spark functions</span>
+<span class="im">import</span> pyspark.sql.functions <span class="im">as</span> F
+by_month_dest.agg(F.stddev(<span class="st">&#39;dep_delay&#39;</span>)).show()
+<span class="co">## Drop column</span>
+final_test_data.drop(<span class="st">&#39;State&#39;</span>)
+<span class="co">## Dummying</span>
+<span class="co">#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.</span>
+<span class="co">#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer</span>
+<span class="co">## Create a StringIndexer</span>
+carr_indexer <span class="op">=</span> StringIndexer(inputCol<span class="op">=</span><span class="st">&quot;carrier&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>)
+<span class="co">## Create a OneHotEncoder</span>
+carr_encoder <span class="op">=</span> OneHotEncoder(inputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_fact&quot;</span>)
+<span class="co">## Make a VectorAssembler</span>
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols<span class="op">=</span>[<span class="st">&quot;month&quot;</span>, <span class="st">&quot;air_time&quot;</span>, <span class="st">&quot;carrier_fact&quot;</span>, <span class="st">&quot;dest_fact&quot;</span>, <span class="st">&quot;plane_age&quot;</span>], outputCol<span class="op">=</span><span class="st">&quot;features&quot;</span>)
+<span class="co">## Import &amp; Make Pipeline</span>
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+flights_pipe <span class="op">=</span> Pipeline(stages<span class="op">=</span>[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+<span class="co">## Fit and transform the data</span>
+piped_data <span class="op">=</span> flights_pipe.fit(model_data).transform(model_data)
+<span class="co">## Train-test split</span>
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">6</span>, .<span class="dv">4</span>])
+<span class="co">## Tuning &amp; Selection</span>
+<span class="co">## Import LogisticRegression</span>
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="co">## Create a LogisticRegression Estimator</span>
+lr <span class="op">=</span> LogisticRegression()
+<span class="co">## Import the evaluation submodule</span>
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="co">## Create a BinaryClassificationEvaluator</span>
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName<span class="op">=</span><span class="st">&quot;areaUnderROC&quot;</span>)
+<span class="co">## Import the tuning submodule</span>
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="co">## Create the parameter grid</span>
+grid <span class="op">=</span> tune.ParamGridBuilder()
+<span class="co">## Add the hyperparameter</span>
+grid <span class="op">=</span> grid.addGrid(lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+<span class="co">## Build the grid</span>
+grid <span class="op">=</span> grid.build()
+<span class="co">## Create the CrossValidator</span>
+cv <span class="op">=</span> tune.CrossValidator(
+estimator<span class="op">=</span>lr,
+estimatorParamMaps<span class="op">=</span>grid,
+evaluator<span class="op">=</span>evaluator
+               )
+<span class="co">## Fit cross validation models</span>
+models <span class="op">=</span> cv.fit(training)
+<span class="co">## Extract the best model</span>
+best_lr <span class="op">=</span> models.bestModel
+<span class="co">## Use the model to predict the test set</span>
+test_results <span class="op">=</span> best_lr.transform(test)
+<span class="co">## Evaluate the predictions</span>
+<span class="bu">print</span>(evaluator.evaluate(test_results))
+sc.stop()</code></pre></div>
+</div>
+<div id="sparklyr-1" class="section level2">
+<h2><span class="header-section-number">11.9</span> Sparklyr</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
+
+sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master=</span><span class="st">&quot;local&quot;</span>)
+config &lt;-<span class="st"> </span><span class="kw">spark_config</span>()
+config<span class="op">$</span>spark.executor.cores &lt;-<span class="st"> </span><span class="dv">8</span>
+config<span class="op">$</span>spark.executor.memory &lt;-<span class="st"> &quot;25G&quot;</span>
+
+flights &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, flights, <span class="st">&quot;flights&quot;</span>)
+<span class="kw">src_tbls</span>(sc)
+
+iris_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spark_apply</span>(
+    <span class="cf">function</span>(e) <span class="kw">summary</span>(<span class="kw">lm</span>(Petal_Length <span class="op">~</span><span class="st"> </span>Petal_Width, e))<span class="op">$</span>r.squared,
+    <span class="dt">names =</span> <span class="st">&quot;r.squared&quot;</span>,
+    <span class="dt">group_by =</span> <span class="st">&quot;Species&quot;</span>)
+
+
+## Connect to your Spark cluster
+spark_conn &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)
+
+## Print the version of Spark
+<span class="kw">spark_version</span>(<span class="dt">sc =</span> spark_conn)
+
+## Disconnect from Spark
+<span class="kw">spark_disconnect</span>(<span class="dt">sc =</span> spark_conn)
+
+## See tables
+<span class="kw">src_tbls</span>(sc)
+
+## Copy track_metadata to Spark
+track_metadata_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(spark_conn, track_metadata)
+
+## Print 5 rows, all columns
+<span class="kw">print</span>(track_metadata_tbl, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)
+
+## Write and run SQL query
+query &lt;-<span class="st"> &quot;SELECT * FROM track_metadata WHERE year &lt; 1935 AND duration &gt; 300&quot;</span>
+(results &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(spark_conn, query))
+
+## General transformation structure and example
+a_tibble <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ft_some_transformation</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, some_other_args)
+
+hotttnesss &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select artist_hotttnesss</span>
+<span class="st">  </span><span class="kw">select</span>(artist_hotttnesss) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Binarize to is_hottt_or_nottt</span>
+<span class="st">  </span><span class="kw">ft_binarizer</span>(<span class="st">&#39;artist_hotttnesss&#39;</span>, <span class="st">&#39;is_hottt_or_nottt&#39;</span>, <span class="dt">threshold =</span> .<span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the result</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Convert is_hottt_or_nottt to logical</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_hottt_or_nottt =</span> <span class="kw">as.logical</span>(is_hottt_or_nottt))
+  
+## Get and transform the schema
+
+(schema &lt;-<span class="st"> </span><span class="kw">sdf_schema</span>(track_metadata_tbl))
+schema <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lapply</span>(<span class="cf">function</span>(x) <span class="kw">do.call</span>(data_frame, x)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>()
+
+## Train-test split
+partitioned &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sdf_partition</span>(<span class="dt">training =</span> <span class="fl">0.7</span>, <span class="dt">testing =</span> <span class="fl">0.3</span>)
+
+## List ml functions
+<span class="kw">ls</span>(<span class="st">&quot;package:sparklyr&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;^ml&quot;</span>)
+
+## GBT Example
+
+gradient_boosted_trees_model &lt;-<span class="st"> </span>track_data_to_model_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Run the gradient boosted trees model</span>
+<span class="st">   </span><span class="kw">ml_gradient_boosted_trees</span>(<span class="st">&#39;year&#39;</span>, feature_colnames)
+
+responses &lt;-<span class="st"> </span>track_data_to_predict_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select the year column</span>
+<span class="st">  </span><span class="kw">select</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the results</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add in the predictions</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">predicted_year =</span> <span class="kw">predict</span>(
+      gradient_boosted_trees_model,
+      track_data_to_predict_tbl
+    )
+  )
+
+
+<span class="kw">spark_disconnect</span>(sc)</code></pre></div>
+</div>
+<div id="parquet" class="section level2">
+<h2><span class="header-section-number">11.10</span> Parquet</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## The parquet_dir has been pre-defined
+parquet_dir
+
+## List the files in the parquet dir
+filenames &lt;-<span class="st"> </span><span class="kw">dir</span>(parquet_dir, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+
+## Show the filenames and their sizes
+<span class="kw">data_frame</span>(
+  <span class="dt">filename =</span> <span class="kw">basename</span>(filenames),
+  <span class="dt">size_bytes =</span> <span class="kw">file.size</span>(filenames)
+)
+
+<span class="co">#Import the data into Spark</span>
+
+timbre_tbl &lt;-<span class="st"> </span><span class="kw">spark_read_parquet</span>(spark_conn, <span class="st">&#39;timbre&#39;</span>, parquet_dir)</code></pre></div>
+</div>
+<div id="data-table" class="section level2">
+<h2><span class="header-section-number">11.11</span> Data Table</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Operations done by reference</span>
+
+dt[i, j, by] <span class="co"># subset by i calculate by j grouped using by</span>
+
+DT[.N] <span class="co"># prints last row</span>
+
+<span class="kw">names</span>(DT) <span class="co"># colnames</span>
+
+<span class="kw">dim</span>(DT) <span class="co"># dimensions</span>
+
+DT[, .(A, B)] <span class="co"># returns two columns</span>
+
+DT[, <span class="kw">c</span>(A, B)] <span class="co"># returns a concatenated vector</span>
+
+DT[, .(<span class="dt">sum_c =</span> <span class="kw">sum</span>(C)] <span class="co"># mutate</span>
+
+DT[, <span class="kw">plot</span>(A, C)] <span class="co"># plot?</span>
+
+DT[, A <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>] <span class="co"># Remove column A</span>
+
+DT[, .(<span class="dt">sumB =</span> <span class="kw">sum</span>(B)), <span class="dt">by =</span> .(<span class="dt">Grp =</span> A<span class="op">%%</span><span class="dv">2</span>)] <span class="co"># group_by &amp; summarize</span>
+
+DT[, .N, <span class="dt">by =</span> Sepal.Width] <span class="co"># .N is the count of each group</span>
+
+DT[, <span class="kw">lapply</span>(.SD, median)] <span class="co"># .SD is a placeholder for all the columns</span>
+
+dogs[, <span class="kw">lapply</span>(.SD, mean), <span class="dt">.SDcols =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] <span class="co"># Find mean of columns 2 &amp; 3</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="kw">set</span>(DT, i, 3L, i<span class="op">+</span><span class="dv">1</span>) <span class="co"># update first 5 rows of 3rd column</span>
+
+<span class="kw">setnames</span>(DT, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;z&#39;</span>) <span class="co"># changes colname from y to z</span>
+
+<span class="kw">setkey</span>(DT, A, B)
+
+DT[.(<span class="st">&#39;b&#39;</span>)]
+
+DT[.(<span class="kw">c</span>(<span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>))]
+
+DT[.(<span class="kw">c</span>(<span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)), <span class="dt">mult=</span><span class="st">&quot;first&quot;</span>]
+
+DT[<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), .SD[<span class="kw">c</span>(<span class="dv">1</span>, .N)], <span class="dt">by =</span> .EACHI] <span class="co"># First and last row of the &quot;b&quot; and &quot;c&quot; groups</span>
+
+DT[<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), { <span class="kw">print</span>(.SD); .SD[<span class="kw">c</span>(<span class="dv">1</span>, .N)] }, <span class="dt">by =</span> .EACH]
+
+dt1[dt2, <span class="dt">roll=</span><span class="op">-</span><span class="ot">Inf</span>, <span class="dt">rollends=</span><span class="ot">FALSE</span>] <span class="co"># rolling join</span></code></pre></div>
+</div>
+<div id="keras" class="section level2">
+<h2><span class="header-section-number">11.12</span> Keras</h2>
+<p>The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) compile, 4) fit</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">network &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() 
+
+network <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">compile</span>(<span class="dt">optimizer =</span> <span class="st">&quot;rmsprop&quot;</span>,  <span class="dt">loss =</span> <span class="st">&quot;categorical_crossentropy&quot;</span>,  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fit</span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
+
+metrics &lt;-<span class="st"> </span>network <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(test_images, test_labels)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> keras
+<span class="im">from</span> keras.layers <span class="im">import</span> Dense
+<span class="im">from</span> keras.models <span class="im">import</span> Sequential
+<span class="co"># Regression</span>
+<span class="co"># Specify the model: Two hidden layers</span>
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">1</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;adam&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;mean_squared_error&#39;</span>) 
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co"># Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)
+<span class="co"># Classification</span>
+<span class="co"># Specify the model: Two hidden layers</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">2</span>, activation <span class="op">=</span> <span class="st">&#39;softmax&#39;</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;sgd&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>, metrics <span class="op">=</span> [<span class="st">&#39;accuracy&#39;</span>])
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co">#Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)
+<span class="co">#Calculate predicted probability of survival</span>
+predicted_prob_true <span class="op">=</span> predictions[:, <span class="dv">1</span>]
+<span class="co"># Tuning</span>
+<span class="co"># Import the SGD optimizer</span>
+<span class="im">from</span> keras.optimizers <span class="im">import</span> SGD
+<span class="co"># Create list of learning rates: lr_to_test</span>
+lr_to_test <span class="op">=</span> [.<span class="dv">000001</span>, <span class="fl">0.01</span>, <span class="dv">1</span>]
+<span class="co"># Loop over learning rates</span>
+<span class="cf">for</span> lr <span class="kw">in</span> lr_to_test:
+    <span class="bu">print</span>(<span class="st">&#39;Testing model with learning rate: &#39;</span>)
+    
+    <span class="co"># Build new model to test, unaffected by previous models</span>
+    model <span class="op">=</span> get_new_model()
+    
+    <span class="co"># Create SGD optimizer with specified learning rate: my_optimizer</span>
+    my_optimizer <span class="op">=</span> SGD(lr <span class="op">=</span> lr)
+    
+    <span class="co"># Compile the model</span>
+    model.<span class="bu">compile</span>(optimizer <span class="op">=</span> my_optimizer, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>)
+    
+    <span class="co"># Fit the model</span>
+    model.fit(predictors, 
+              target, 
+              validation_split <span class="op">=</span> <span class="fl">0.3</span>, 
+              epochs <span class="op">=</span> <span class="dv">20</span>, 
+              callbacks <span class="op">=</span> [early_stopping_monitor], 
+              verbose <span class="op">=</span> <span class="va">False</span>)</code></pre></div>
 
 </div>
 </div>
@@ -649,8 +814,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="communicate-deploy-maintain.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="time-series-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="distributed.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -680,7 +845,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-stats.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-cook_book.Rmd",
 "text": "Edit"
 },
 "history": {

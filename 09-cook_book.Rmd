@@ -1,25 +1,89 @@
-# Frameworks
+# Cook Book
 
-## PySpark
+## General
 
-A [cheatsheet[(https://www.qubole.com/resources/pyspark-cheatsheet/).
+[Chris Albon](http://chrisalbon.com/)
 
-Setup 
+## Linear Regression Statsmodels
+
+```{python, eval = F}
+import statsmodels.api as sm
+
+X = sm.add_constant(X)
+mdl = sm.OLS(Y, X).fit(disp = False)
+
+print(mdl.summary())
+```
+
+## Rowwise
+
+```{r, eval = F}
+library(dplyr)
+
+mtcars %>% 
+  rowwise() %>% 
+  mutate(mymean = mean(c(cyl,mpg))) %>% 
+  select(cyl, mpg, mymean)
+```
+
+## Sampling File
+
+```{bash, eval = F}
+pip install subsample
+gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
+```
+
+## SQL Dummy Columns
+
+```{sql, eval = F}
+SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
+```
+
+## Model Calibration
+
+A quick way of visualizing model calibration without having to manually bin any observations
+
+```{r, eval = F}
+ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth()
+```
+
+## Binning Rule Of Thumb
+
+```{r, eval = F}
+# https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862
+ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))
+```
+
+## Pyspark
 
 ```{python, eval = FALSE}
 import findspark
 findspark.init()
 
-import pyspark
-from pyspark.sql import SparkSession
-
-sc = pyspark.SparkContext()
-spark = SparkSession.builder.appName('example').getOrCreate()
-
 import findspark
 findspark.init()
 import pyspark
 import random
+
+import pyspark
+from pyspark.sql import SparkSession
+
+from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
+from pyspark.ml import Pipeline
+from pyspark.ml.classification import LogisticRegression
+import pyspark.ml.evaluation as evals
+import pyspark.ml.tuning as tune
+import numpy as np
+
+import pyspark
+from pyspark.sql import SparkSession
+
+sc = pyspark.SparkContext()
+spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
+
+sc = pyspark.SparkContext()
+spark = SparkSession.builder.appName('example').getOrCreate()
+
 
 sc = pyspark.SparkContext(appName="Pi")
 num_samples = 100000000
@@ -30,27 +94,12 @@ count = sc.parallelize(range(0, num_samples)).filter(inside).count()
 pi = 4 * count / num_samples
 print(pi)
 
-sc.stop()
-```
-
-Libs
-
-```{python, eval = FALSE}
-from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
-from pyspark.ml import Pipeline
-from pyspark.ml.classification import LogisticRegression
-import pyspark.ml.evaluation as evals
-import pyspark.ml.tuning as tune
-import numpy as np
-
 df = spark.read.csv('data.csv', header = True)
 df.show(5)
 df.columns
-```
 
-Preprocessing
+# Preprocessing
 
-```{python, eval = FALSE}
 df = df.withColumn("label", df["target"].cast('integer'))
 
 scf_indexer = StringIndexer(inputCol = "some_cat_feature", outputCol = "some_cat_feature_index")
@@ -65,11 +114,9 @@ pipe = Pipeline(stages = [scf_indexer, scf_encoder, vec_assembler])
 
 piped_data = pipe.fit(df).transform(df)
 training, test = piped_data.randomSplit([.8, .2])
-```
 
-Model
+# Model
 
-```{python, eval = FALSE}
 clf_lr = LogisticRegression()
 evaluator = evals.BinaryClassificationEvaluator(metricName = "areaUnderROC")
 
@@ -89,43 +136,6 @@ best_clf_lr = clf_lr_cv.fit(training).bestModel
 results = best_clf_lr.transform(training)
 print(evaluator.evaluate(results))
 
-#stop
-
-sc.stop()
-```
-
-Quick Test:
-
-```{python, eval = FALSE}
-import findspark
-findspark.init()
-import pyspark
-import random
-
-sc = pyspark.SparkContext(appName="Pi")
-num_samples = 100000000
-def inside(p):     
-    x, y = random.random(), random.random()
-    return x*x + y*y < 1
-count = sc.parallelize(range(0, num_samples)).filter(inside).count()
-pi = 4 * count / num_samples
-print(pi)
-
-sc.stop()
-```
-
-First have to create a SparkSession object from your SparkContext. The SparkContext is ther connection to the cluster and the SparkSession as your interface with that connection.
-
-```{python, eval = FALSE}
-import pyspark
-from pyspark.sql import SparkSession
-sc = pyspark.SparkContext()
-spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
-```
-
-The rest of my notes:
-
-```{python, eval = FALSE}
 ## List tables
 spark.catalog.listTables()
 
@@ -174,9 +184,7 @@ flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum('duration_
 ## Spark functions
 import pyspark.sql.functions as F
 by_month_dest.agg(F.stddev('dep_delay')).show()
-```
 
-```{python, eval = FALSE}
 ## Drop column
 final_test_data.drop('State')
 
@@ -250,31 +258,9 @@ test_results = best_lr.transform(test)
 
 ## Evaluate the predictions
 print(evaluator.evaluate(test_results))
+
+sc.stop()
 ```
-
-* Spark's assumes the target is called 'label' in ML. Everything else is a feature.
-
-* alias() method to rename a column you're selecting.
-
-* cast() method: nominative determinism on columns
-
-* withColumn(): create new column
-
-* pyspark.ml.feature
-
-* At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
-
-* You can create what are called 'one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
-
-* Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
-
-* selectExpr() takes SQL expressions as a string
-
-* show() vs collect()
-
-* Spark only handles numeric data
-
-* In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
 
 ## Sparklyr
 
@@ -295,13 +281,6 @@ iris_tbl %>%
     names = "r.squared",
     group_by = "Species")
 
-
-spark_disconnect(sc)
-```
-
-
-```{r, eval = FALSE}
-library(sparklyr)
 
 ## Connect to your Spark cluster
 spark_conn <- spark_connect(master = "local")
@@ -371,11 +350,12 @@ responses <- track_data_to_predict_tbl %>%
       track_data_to_predict_tbl
     )
   )
+
+
+spark_disconnect(sc)
 ```
 
-**Parquet Aside**
-
-Parquet files are quicker to read and write.  parquet files can be used with other tools in the Hadoop ecosystem, like Shark, Impala, Hive, and Pig.
+## Parquet 
 
 ```{r, eval = FALSE}
 ## The parquet_dir has been pre-defined
@@ -395,305 +375,81 @@ data_frame(
 timbre_tbl <- spark_read_parquet(spark_conn, 'timbre', parquet_dir)
 ```
 
-* To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.
-
-* Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
-
-* If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
-
-* feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
-
-* ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort
-
-## Caret
-
-attributes(clf_lr): results, finalModel
-
-### Preprocessing
-
-```{r, eval = FALSE}
-# Apply median imputation: model
-model <- train(
-  x = breast_cancer_x, 
-  y = breast_cancer_y,
-  method = 'glm',
-  trControl = myControl,
-  preProcess = c('medianImpute', "knnImpute", 'center', 'scale', 'pca')
-)
-
-dotplot(resamples, metric = "ROC")
-
-min(model$results$RSME)
-
-# Identify near zero variance predictors: remove_cols
-remove_cols <- nearZeroVar(bloodbrain_x, names = TRUE, 
-                           freqCut = 2, uniqueCut = 20)
-
-# Get all column names from bloodbrain_x: all_cols
-all_cols = colnames(bloodbrain_x)
-
-# Remove from data: bloodbrain_x_small
-bloodbrain_x_small <- bloodbrain_x[ , setdiff(all_cols, remove_cols)]
-```
-
-### LM
-
-```{r basic_lm, eval = FALSE}
-# Set seed
-set.seed(42)
-
-# Fit lm model: model
-model <- lm(price ~ ., data = diamonds)
-
-# Predict on full data: p
-p <- predict(model, diamonds)
-
-# Compute errors: error
-error <- p - diamonds$price
-
-# Calculate RMSE
-sqrt(mean(error^2))
-
-# Fit lm model using 5 x 5-fold CV: model
-model <- train(
-  medv ~ ., 
-  Boston,
-  method = "lm",
-  trControl = trainControl(
-    method = "cv", number = 5,
-    repeats = 5, verboseIter = TRUE
-  )
-)
-```
-
-### Lasso/Ridge
-
-Alpha controls balance between lasso and ridge. Lambda controls penalty.
-
-```{r, eval = FALSE}
-# Fit glmnet model: model
-model <- train(
-  y~., data = overfit,
-  method = "glmnet",
-  trControl = myControl
-)
-
-# Train glmnet with custom trainControl and tuning: model
-model <- train(
-  y~., overfit,
-  tuneGrid = expand.grid(alpha = 0:1, lambda = seq(0.0001, 1, length = 20)),
-  method = 'glmnet',
-  trControl = myControl
-)
-
-# Print model to console
-model
-
-# Print maximum ROC statistic
-max(model[["results"]][["ROC"]])
-```
-
-### Logistic Regression
-
-```{r, eval = FALSE}
-# Fit glm model
-model = glm(Class ~ ., family = "binomial", train)
-
-# Predict on test: p
-p = predict(model, test, type = "response")
-
-# Calculate class probabilities: p_class
-p_class <- ifelse(p > 0.50, "M", "R")
-
-# Create confusion matrix
-confusionMatrix(p_class, test$Class)
-```
-
-### Train-Test Split, Folds, & CV
-
-```{r, eval = FALSE}
-# Shuffle row indices: rows
-rows = sample(nrow(Sonar))
-
-# Randomly order data: Sonar
-Sonar = Sonar[rows,]
-
-# Identify row to split on: split
-split <- round(nrow(Sonar) * .6)
-
-# Create train: 60%
-train = Sonar[1:split,]
-
-# Create test: 40%
-test = Sonar[(split+1):nrow(Sonar),]
-
-# Create custom indices: myFolds
-myFolds <- createFolds(churn_y, k = 5)
-
-# Create reusable trainControl object: myControl
-myControl <- trainControl(
-  summaryFunction = twoClassSummary, #default option is default summary
-  classProbs = TRUE, # IMPORTANT!
-  verboseIter = TRUE,
-  savePredictions = TRUE,
-  index = myFolds
-)
-```
-
-### Random Forest
-
-```{r, eval = FALSE}
-# Fit random forest: model
-model <- train(
-  quality~.,
-  tuneLength = 3,
-  #tuneGrid = data.frame(mtry = c(2, 3, 7)),
-  data = wine, 
-  method = 'ranger',
-  trControl = trainControl(method = "cv", number = 5, verboseIter = TRUE)
-)
-
-# Print model to console
-model
-
-# Plot model
-plot(model)
-```
-
-### SVM
-
-```{r, eval = FALSE}
-clf_svm <- train(
-  pass ~., 
-  data = df3, 
-  method = "svmLinear",
-  preProcess = c("center", "scale")
-                 )
-```
-
-### Model Selection
-
-Now that you have fit two models to the churn dataset, it's time to compare their out-of-sample predictions and choose which one is the best model for your dataset.
-
-You can compare models in caret using the resamples() function, provided they have the same training data and use the same trainControl object with preset cross-validation folds. resamples() takes as input a list of models and can be used to compare dozens of models at once (though in this case you are only comparing two models).
-
-```{r, eval = FALSE}
-# Create model_list
-model_list <- list(item1 = model_glmnet, item2 = model_rf)
-
-# Pass model_list to resamples(): resamples
-resamples = resamples(model_list)
-
-# Summarize the results
-summary(resamples)
-
-# Create bwplot
-bwplot(resamples, metric = 'ROC')
-
-# Create xyplot
-xyplot(resamples)
-
-# Predict on test: p
-p = predict(model, test, type = 'response')
-
-# Make ROC curve
-colAUC(p, test$Class, plotROC = TRUE)
-```
-
-* caret: finalModel of model object
-
-### Stacking
-
-caretEnsemble provides the caretList() function for creating multiple caret models at once on the same dataset, using the same resampling folds. You can also create your own lists of caret models. Use the caretStack() function to make a stack of caret models, with the two sub-models (glmnet and ranger) feeding into another (hopefully more accurate!) caret model.
-
-```{r, eval = FALSE}
-# Create ensemble model: stack
-stack <- caretStack(model_list, method = 'glm')
-
-# Look at summary
-summary(stack)
-```
-
-& caretEnnsemble
-
 ## Data Table
 
-* Operations done by reference
+```{r, eval = FALSE}
+# Operations done by reference
 
-* dt[i, j, by] : subset by i calculate by j grouped using by
+dt[i, j, by] # subset by i calculate by j grouped using by
 
-* 1: numeric | 1L: integer
+DT[.N] # prints last row
 
-* NA_integer_: integer
+names(DT) # colnames
 
-* DT[.N] : prints last row
+dim(DT) # dimensions
 
-* names(DT): colnames
+DT[, .(A, B)] # returns two columns
 
-* dim(DT): dimensions
+DT[, c(A, B)] # returns a concatenated vector
 
-* DT[, .(A, B)]: returns two columns
+DT[, .(sum_c = sum(C)] # mutate
 
-* DT[, c(A, B)]: returns a concatenated vector
+DT[, plot(A, C)] # plot?
 
-* DT[, .(sum_c = sum(C)]
+DT[, A := NULL] # Remove column A
 
-* DT[, plot(A, C)]
+DT[, .(sumB = sum(B)), by = .(Grp = A%%2)] # group_by & summarize
 
-* DT[, A:=NULL]: Remove column A
+DT[, .N, by = Sepal.Width] # .N is the count of each group
 
-* DT[, .(sumB = sum(B)), by = .(Grp = A%%2)]
+DT[, lapply(.SD, median)] # .SD is a placeholder for all the columns
 
-* DT[, .N, by = Sepal.Width]: .N is the count of each group
+dogs[, lapply(.SD, mean), .SDcols = 2:3] # Find mean of columns 2 & 3
 
-* DT[, lapply(.SD, median)]: .SD is a placeholder for all the columns
+for (i in 1:5) set(DT, i, 3L, i+1) # update first 5 rows of 3rd column
 
-* dogs[, lapply(.SD, mean), .SDcols = 2:3]: Find mean of columns 2 & 3
+setnames(DT, 'y', 'z') # changes colname from y to z
 
-* for (i in 1:5) set(DT, i, 3L, i+1): update first 5 rows of 3rd column
+setkey(DT, A, B)
 
-* setnames(DT, 'y', 'z'): changes colname from y to z
+DT[.('b')]
 
-* setkey(DT, A, B)
+DT[.(c('b', 'c'))]
 
-* DT[.('b')]
+DT[.(c('b', 'c')), mult="first"]
 
-* DT[.(c('b', 'c'))]
+DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI] # First and last row of the "b" and "c" groups
 
-* DT[.(c('b', 'c')), mult="first"]
+DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACH]
 
-* DT[c("b", "c"), .SD[c(1, .N)], by = .EACHI]: First and last row of the "b" and "c" groups
-
-* DT[c("b", "c"), { print(.SD); .SD[c(1, .N)] }, by = .EACHI]
-
-* roll=TRUE, 'nearest', -Inf, Inf | rollends=FALSE
+dt1[dt2, roll=-Inf, rollends=FALSE] # rolling join
+```
 
 ## Keras 
 
-Here's a [Hello World](https://github.com/fastforwardlabs/keras-hello-world/blob/master/kerashelloworld.ipynb) and the general framework:
+The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) compile, 4) fit
 
-* declare: sequential
+```{r, eval = F}
 
-* add layers input-hidden-output
+network <- keras_model_sequential() 
 
-* compile
+network %>%  
+  layer_dense(units = 512, activation = "relu", input_shape = c(28 * 28)) %>%  
+  layer_dense(units = 10, activation = "softmax") %>% 
+  compile(optimizer = "rmsprop",  loss = "categorical_crossentropy",  metrics = c("accuracy")) %>% 
+  fit(train_images, train_labels, epochs = 5, batch_size = 128)
 
-* fit
+metrics <- network %>% evaluate(test_images, test_labels)
 
-Keras only uses numpy arrays. 
+```
 
-### Regression
-
-* loss = mean_squared_error
-
-* metric: rmse
-
-* activation_function = relu
 
 ```{python, eval = FALSE}
 import keras
 from keras.layers import Dense
 from keras.models import Sequential
+
+# Regression
 
 # Specify the model: Two hidden layers
 model = Sequential()
@@ -719,23 +475,8 @@ model.summary()
 
 # Calculate predictions: predictions
 predictions = model.predict(pred_data)
-```
 
-
-### Classification
-
-* loss = categorical_crossentropy
-
-* metric = accuracy
-
-* activation_function = softmax
-
-* output layer with stuff equal to number of categorical groups
-
-```{python, eval = FALSE}
-import keras
-from keras.layers import Dense
-from keras.models import Sequential
+# Classification
 
 # Specify the model: Two hidden layers
 n_cols = predictors.shape[1]
@@ -764,15 +505,9 @@ predictions = model.predict(pred_data)
 
 #Calculate predicted probability of survival
 predicted_prob_true = predictions[:, 1]
-```
 
-### More
+# Tuning
 
-keras: declare model | compile with loss, optimizer, and scoring metric | fit | keras::to_categorical
-
-keras.callbacks.EarlyStopping: Stop training when validation score stop improving after a certain number of epochs (baches?)
-
-```{python, eval = FALSE}
 # Import the SGD optimizer
 from keras.optimizers import SGD
 
@@ -800,4 +535,3 @@ for lr in lr_to_test:
               callbacks = [early_stopping_monitor], 
               verbose = False)
 ```
-

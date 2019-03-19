@@ -2,6 +2,12 @@
 
 ## Notes
 
+time series features: extract data from timestamp (year, month, day), lags, rolling windows, rolling window - summary stats of all previous data points
+
+ts: Vector autoregression, quantile regression forests
+
+arima: linear vs garch: non-linear
+
 Baselines: statsmodels.tsa.holtwinters | forecast::ets  
 
 lubricate ymd, rsample tscv

@@ -2,9 +2,19 @@
 
 ## General
 
+Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate
+
 Mann–Whitney U test
 
+Zero correlation doesn't imply independence
+
 https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf
+
+Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
+
+lm() with a single categorical feature is equivalent to a t test or anova test.
+
+Power-Of-Test: https://rpsychologist.com/d3/NHST/ https://juliasilge.shinyapps.io/power-app/ https://www.statmethods.net/stats/power.html https://www.graphpad.com/quickcalcs/binomial1.cfm https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html
 
 library(effsize) lm vs t.test vs anova library(EMT): multinomial test
 

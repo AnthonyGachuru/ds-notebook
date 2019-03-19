@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 6 Stats | Data Science Cribsheet</title>
+  <title>Chapter 8 Deep Learning | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 6 Stats | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 8 Deep Learning | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Stats | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 8 Deep Learning | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="communicate-deploy-maintain.html">
-<link rel="next" href="time-series-1.html">
+<link rel="prev" href="time-series-1.html">
+<link rel="next" href="probabilistic-programming-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -382,265 +382,172 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="stats" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Stats</h1>
-<div id="general-5" class="section level2">
-<h2><span class="header-section-number">6.1</span> General</h2>
-<p>Cohen’s H | Cohen’s D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate</p>
-<p>Mann–Whitney U test</p>
-<p>Zero correlation doesn’t imply independence</p>
-<p><a href="https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf" class="uri">https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf</a></p>
-<p>Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:</p>
-<p>lm() with a single categorical feature is equivalent to a t test or anova test.</p>
-<p>Power-Of-Test: <a href="https://rpsychologist.com/d3/NHST/" class="uri">https://rpsychologist.com/d3/NHST/</a> <a href="https://juliasilge.shinyapps.io/power-app/" class="uri">https://juliasilge.shinyapps.io/power-app/</a> <a href="https://www.statmethods.net/stats/power.html" class="uri">https://www.statmethods.net/stats/power.html</a> <a href="https://www.graphpad.com/quickcalcs/binomial1.cfm" class="uri">https://www.graphpad.com/quickcalcs/binomial1.cfm</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html</a></p>
-<p>library(effsize) lm vs t.test vs anova library(EMT): multinomial test</p>
-<p>ecdf: <a href="http://www.ericmjl.com/blog/2018/7/14/ecdfs/">1</a> | <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf">2</a></p>
-<p><a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html" class="uri">http://www.stat.umn.edu/geyer/old/5101/rlook.html</a></p>
-<p><a href="https://mobile.twitter.com/PhDemetri/status/1094454658888753152" class="uri">https://mobile.twitter.com/PhDemetri/status/1094454658888753152</a></p>
-<p><a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/whatstat/</a></p>
-<p>categorical dissimilairty <a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist" class="uri">https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist</a></p>
-<p><a href="http://frog.oerc.ox.ac.uk:8080/stato-app/" class="uri">http://frog.oerc.ox.ac.uk:8080/stato-app/</a></p>
-<p>Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Numeric-Categorical Correlation <a href="https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor" class="uri">https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor</a></p>
-<p>Outliers in small samples: <a href="https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617" class="uri">https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617</a></p>
-<p>Since all outcomes are 0 or 1, and drawn with the same (unknown) probability, we know that the number of ones and zeros follows a binomial distribution. This means that the confidence interval of a “k out of n” scenario is a Beta distribution.</p>
-<p>Another common measure of effect size is d, sometimes known as Cohen’s d (as you might have guessed by now, Cohen was quite influential in the field of effect sizes). This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups’ means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups’ means differ by one standard deviation; a d of .5 tells us that the two groups’ means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a ‘small’ effect size, 0.5 represents a ‘medium’ effect size and 0.8 a ‘large’ effect size. This means that if two groups’ means don’t differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant.</p>
-<p>Beta Distribution: The larger the alpha parameter is the closer the resulting distribution is to 1.0 and the larger the beta the closer it is to 0.</p>
-<p>Fisher’s Exact Test: Test for proportions</p>
-<p>cohen’s f^2 | <a href="https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression" class="uri">https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression</a> | <a href="https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis" class="uri">https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis</a></p>
-<p>Bayes Rule: Posterior = Likelihood * Prior / Marginal Likelihood</p>
-<p><a href="https://www.rdocumentation.org/packages/effsize/versions/0.7.1/topics/cohen.d" class="uri">https://www.rdocumentation.org/packages/effsize/versions/0.7.1/topics/cohen.d</a></p>
-<p>Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)</p>
-<p>Prior P(theta): Probability of parameter value</p>
-<p>Posterior P(theta|D): Credibility of the parameter value with the data taken into account.</p>
-<p>Marginal Likelihood (Evidence): Probability of evidence</p>
-<p>Variance: Spread of the data | Distance from the mean</p>
-<p>Standard Deviation: Square root of the variance | Same units as the data</p>
-<p>Mean: Average/Expected Value</p>
-<p>Covariance: Measure of how two random values change together. Negative - variables show opposite behavior ( As A increases B decreases). Positive - variables show similar behavior (As A increases B increases)</p>
-<p>Pearson Correlation: Normalized version of covariance</p>
-<p>Median: Number at the halfway point of the dataset, found through sorting data into ascending order and selecting middle point</p>
-<p>Mode: Most frequent value in dataset</p>
-<p>Note about Populations and Samples: Populations have parameters. Samples have statistics.</p>
-<p>Distributions:</p>
-<p>Normal/Gaussian: Parameters are mean and standard deviation. Bell shaped. z-score: indicates how many standard deviations an element is from the mean</p>
-<p>Student t: used to estimate the mean of a normally distributed population where the sample size is small and the standard deviation is unknown</p>
-<p>A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.</p>
-<p>Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:</p>
-<p><span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
-<p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
+<div id="deep-learning-1" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Deep Learning</h1>
+<div id="activation-functions" class="section level2">
+<h2><span class="header-section-number">8.1</span> Activation Functions</h2>
 <ul>
-<li><p>Type I Error: Saying there is an effect when there isn’t one. Type II error: concluding there is no effect when, in fact, there is one.</p></li>
-<li><p>The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.</p></li>
-<li><p>Probably the most useful types of statistics for skewed probability distributions are quantiles.</p></li>
-<li><p>Hypothesis testing requires an inferential-statistical approach. Crucial are meaningful distributions of test statistics, on which p-values for hypothesis tests can be based. It is not trivial to construct such “meaningful distributions” for complete network data!</p></li>
-<li><p>Random sampling &amp; random assignment: generalizable &amp; causal</p></li>
-<li><p>Get 95% ci around p-value</p></li>
-<li><p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p></li>
-<li><p>Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.</p></li>
-<li><p><a href="https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html">Effect size</a></p></li>
-<li><p>jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics</p></li>
-<li><p>box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series</p></li>
-<li><p>shapiro.test: Test for normality</p></li>
-<li><p>Sum of normally distributed random variables: sum of means &amp; sum of variances</p></li>
-<li><p>Zero correlation doesn’t mean independent variables. Covariance only determines linear relationships.</p></li>
-<li><p>test heteroscedaticity: breusch-pagan or ncv test</p></li>
-<li><p>Test Normality: Shapiro–Wilk test is a test of normality</p></li>
-<li><p>Bypass inferential stats if features at least 1/10 of data points.</p></li>
-<li><p>The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.</p></li>
-<li><p>One Sample T-test: To examine the average difference between a sample and the known value of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Two Sample T-test: To examine the average difference between two samples drawn from two different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>Chi-Squared Test of Independence: To test whether two categorical variables are independent. Assumes the sample observations are randomly drawn and independent.</p></li>
-<li><p>F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Barlett Test: F-Test for more than two populations.</p></li>
-<li><p>If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won’t. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.</p></li>
-<li><p>Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.</p></li>
-<li><p>Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.</p></li>
-<li><p>Independent rvs are uncorrelated. That is Cor (X,Y)=0</p></li>
-<li><p>Don’t sum sd’s, sum variances.</p></li>
-<li><p>One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use One-Way ANOVA? To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.</p></li>
-<li><p>To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.</p></li>
-<li><p>The degrees of freedom is the number of data rows minus the number of coefficients fit.</p></li>
-<li><p>Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.</p></li>
+<li><p>Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 (<span class="math inline">\(σ(x) = 1 / (1 + exp(−x))\)</span>)</p></li>
+<li><p>Softmax: Same end result as sigmoid, but different function. Doesn’t like multi-label classification</p></li>
+<li><p>tanh: Takes a real-valued input and squashes it to the range [-1, 1] (<span class="math inline">\(tanh(x) = 2σ(2x) − 1\)</span>)</p></li>
+<li><p>ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. <span class="math inline">\(f(x) = max(0, x)\)</span></p></li>
 </ul>
-<div id="introduction-to-data" class="section level3 unnumbered">
-<h3>Introduction to Data</h3>
-<p>There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.</p>
-<p>Explanatory variables are conditions you can impose on the experimental units, while blocking variables are characteristics that the experimental units come with that you would like to control for.</p>
-<p>In random sampling, you use stratifying to control for a variable. In random assignment, you use blocking to achieve the same goal.</p>
-<p>Control: compare treatment of interest to a control group</p>
-<p>Randomize: randomly assign subjects to treatments</p>
-<p>Replicate: collect a sufficiently large sample within a study, or replicate the entire study</p>
-<p>Block: account for the potential effect of confounding variables</p>
-<p>Group subjects into blocks based on these variations, and randomize within each block to treatment groups</p>
-<p>Random Sampling + Random Assignment: Causal + generalizable</p>
-<p>No Random Sampling + Random Assignment: Causal + not generalizable</p>
-<p>Random Sampling + No Random Assignment: Not causal + generalizable</p>
-<p>No Random Sampling + No Random Assignment: Not causal + not generalizable</p>
 </div>
-<div id="statistical-tests" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Statistical Tests</h3>
-<p>The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The “30” rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means.</p>
-<ol style="list-style-type: decimal">
-<li><p>for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]</p></li>
-<li><p>The approximation becomes better with larger n, given other things remaining the same.</p></li>
+<div id="preprocessing" class="section level2">
+<h2><span class="header-section-number">8.2</span> Preprocessing</h2>
+<ul>
+<li>Scale features</li>
+</ul>
+</div>
+<div id="tuning" class="section level2">
+<h2><span class="header-section-number">8.3</span> Tuning</h2>
+<ul>
+<li><p>ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.</p></li>
+<li><p>Early Stopping: Stop training when validation score stop improving after a certain number of epochs (batches?)</p></li>
+</ul>
+</div>
+<div id="notes-3" class="section level2">
+<h2><span class="header-section-number">8.4</span> Notes</h2>
+<ul>
+<li><p><a href="http://theorangeduck.com/page/neural-network-not-working">Debugging</a></p></li>
+<li><p><a href="https://tensorflow.rstudio.com/keras/" class="uri">https://tensorflow.rstudio.com/keras/</a></p></li>
+<li><p>cnn for time series</p></li>
+</ul>
+</div>
+<div id="model-3" class="section level2">
+<h2><span class="header-section-number">8.5</span> Model</h2>
+<p>Regression: loss - mean_squared_error, metric - rmse, activation_function - relu</p>
+<p>Classification: * loss - categorical_crossentropy, metric - accuracy, activation_function - softmax</p>
+<p>random initialization of weights for logreg</p>
+<p>end to end deep learning: an end-to-end approach as it maps directly the input (x) to the output (y). end-to-end learning works better in practice than multi-task learning, but requires a large amount of data.</p>
+<p>Don’t use mini-batches larger than 32</p>
+<ul>
+<li><p>restnet, attention &gt; RNN / LSTM</p></li>
+<li><p>“Training with large minibatches is bad for your health. More importantly, it’s bad for your test error. Friends dont let friends use minibatches larger than 32.” - Yann Le Cun</p></li>
+<li><p><a href="https://hackernoon.com/deep-learning-cheat-sheet-25421411e460">Cheatsheet</a></p></li>
+<li><p>By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.</p></li>
+<li><p>Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).</p></li>
+<li><p>Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days.</p></li>
+<li><p><a href="https://www.youtube.com/watch?v=nqEYVzJLR_c&amp;feature=youtu.be&amp;t=31">Rule of 30</a>: A change that affects at least 30 data points in your validation set is usually significant and not just noise.</p></li>
+<li><p>Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.</p></li>
+<li><p>Momentum and learning rate decay are good for knowing which way to go in gradient descent.</p></li>
+<li><p>Always try to lower your learning rate for improvement.</p></li>
+<li><p>n inputs and k outputs gives you <span class="math inline">\((n+1)*k\)</span> parameters.</p></li>
+<li><p>Back propogation takes about twice the memory as forward propogation.</p></li>
+<li><p>Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn’t work, go deeper.</p></li>
+<li><p>Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn’t matter then use translation invariance. Use weight sharing if this occurs in text.</p></li>
+<li><p>Things that don’t chnage across time, space, etc are called statistical invariants.</p></li>
+<li><p>RNN’s use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier.</p></li>
+<li><p>Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn’t remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.</p></li>
+<li><p>Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.</p></li>
+<li><p>Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.</p></li>
+<li><p>The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.</p></li>
+<li><p>BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.</p></li>
+<li><p>The last layer of a neural network captures the most complex interactions.</p></li>
+<li><p>When plotting the mean-squared error loss function against predictions, the slope is <span class="math inline">\(2x(y-xb)\)</span>, or <span class="math inline">\(2input_data error\)</span>.</p></li>
+<li><p>This is exactly what’s happening in the vanishing gradient problem – the gradients of the network’s output with respect to the parameters in the early layers become extremely small. That’s a fancy way of saying that even a large change in the value of parameters for the early layers doesn’t have a big effect on the output.</p></li>
+<li><p>Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.</p></li>
+<li><p>Epoch: One full pass through all the batches in the training data.</p></li>
+<li><p>Stochastic gradient descent calculates slopes one batch at a time.</p></li>
+<li><p>This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.</p></li>
+<li><p>Few people use kfold cv in deep learning because of the large datasets in play.</p></li>
+<li><p>Dying neuron + vanishing gradient: Change activation function</p></li>
+</ul>
+<p>Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. LSTMs are essentially the same thing as the RNN we will develop in this tutorial, they just have a different way of computing the hidden state.</p>
+<p>The default activation function for LSTMs is the hyperbolic tangent (tanh), which outputs values between -1 and 1. This is the preferred range for the time series data: MinMaxScaler(feature_range=(-1, 1)).</p>
+<p>Keras LSTM expects the input as well as the target data to be in a specific shape. The input has to be a 3-d array of size num_samples, num_timesteps, num_features.</p>
+<p>The way we can do this, with Keras, is by wiring the LSTM hidden states to sets of consecutive outputs of the same length. Thus, if we want to produce predictions for 12 months, our LSTM should have a hidden state length of 12.</p>
+<p>Keras - stateful vs stateless LSTMs</p>
+<p>One major issue with layer_simple_rnn is that although it should theoretically be able to retain at time t information about inputs seen many time steps before, in practice, such long-term dependencies are impossible to learn. This is due to the vanishing gradient problem, an effect that is similar to what is observed with non-recurrent networks (feed forward networks) that are many layers deep: as you keep adding layers to a network, the network eventually becomes un-trainable.</p>
+<p>A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way.</p>
+<p>ng thinks dl easier of matrix is n x m instead of m x n so target is a row vector instead of a column vector</p>
+<p>Loss function applies to a single training example while the cost function applies to many. The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.</p>
+<p>A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗∗ c ∗∗ d, a) is to use <code>X_flatten = X.reshape(X.shape[0], -1).T</code></p>
+<p>One common preprocessing step in machine learning is to center and standardize your dataset, meaning that you substract the mean of the whole numpy array from each example, and then divide each example by the standard deviation of the whole numpy array. But for picture datasets, it is simpler and more convenient and works almost as well to just divide every row of the dataset by 255 (the maximum value of a pixel channel).</p>
+<p>Scale images: train_set_x = train_set_x_flatten/255.</p>
+<p>Common steps for pre-processing a new dataset are: 1) Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, …), 2) Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1), 3) “Standardize” the data</p>
+<p>Tuning the learning rate (which is an example of a “hyperparameter”) can make a big difference to the algorithm. You will see more examples of this later in this course!</p>
+<p>The tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.</p>
+<p>Initialize weights randomly but set bias to zero.</p>
+<p>You have built a network using the tanh activation for all the hidden units. You initialize the weights to relative large values, using np.random.randn(..,..)*1000. What will happen? This will cause the inputs of the tanh to also be very large, thus causing gradients to be close to zero. The optimization algorithm will thus become slow.</p>
+<p>No. Sigmoid outputs a value between 0 and 1 which makes it a very good choice for binary classification. You can classify as 0 if the output is less than 0.5 and classify as 1 if the output is more than 0.5. It can be done with tanh as well but it is less convenient as the output is between -1 and 1.</p>
+<p>What is the “cache” used for in our implementation of forward propagation and backward propagation? We use it to pass variables computed during forward propagation to the corresponding backward propagation step. It contains useful values for backward propagation to compute derivatives.</p>
+<p>The deeper layers of a neural network are typically computing more complex features of the input than the earlier layers.</p>
+<p>During backpropagation, the corresponding backward function also needs to know what is the activation function for layer l, since the gradient depends on it.</p>
+<ol style="list-style-type: lower-roman">
+<li>To compute the function using a shallow network circuit, you will need a large network (where we measure size by the number of logic gates in the network), but (ii) To compute it using a deep network circuit, you need only an exponentially smaller network.</li>
 </ol>
-<p>However if you are wondering why 30 ? why not 25 or 40 or something else ? Note that actual answer will depend:</p>
-<ol style="list-style-type: decimal">
-<li><p>how much error are you going to tolerate</p></li>
-<li><p>size of the effect</p></li>
-<li><p>exact distribution family (like t vs chi-square vs gamma)</p></li>
-</ol>
-<p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – β. In plain English, statistical power is the likelihood that a study will detect an effect when there is an effect there to be detected. If statistical power is high, the probability of making a Type II error, or concluding there is no effect when, in fact, there is one, goes down. Statistical power is affected chiefly by the size of the effect and the size of the sample used to detect it. Bigger effects are easier to detect than smaller effects, while large samples offer greater test sensitivity than small samples.</p>
-<p>The following four quantities have an intimate relationship:</p>
+<p>gradient checking</p>
+<p>vanishing/exploding gradients</p>
+<p>data augmentation for images: rotate and crop</p>
+<p>ng doesn’t like dropout bc it couples optimization with regularization</p>
+<p>early stopping</p>
+<p>dropout is a regularization technique to prevent over-fitting.</p>
+<p>If you have 10,000,000 examples, how would you split the train/dev/test set? 98% train . 1% dev . 1% test</p>
+<p>The dev and test set should: Come from the same distribution</p>
+<p>If your Neural Network model seems to have high variance, what of the following would be promising things to try? Add regularization &amp; Get more training data. For high bias, make a bigger and deeper network.</p>
+<p>What is weight decay? A regularization technique (such as L2 regularization) that results in gradient descent shrinking the weights on every iteration. As a rule of thumb, the more training examples you have, the weaker this term should be. The more parameters you have the higher this term should be.</p>
+<p>With the inverted dropout technique, at test time: You do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training.</p>
+<p>With the inverted dropout technique, at test time: You do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training</p>
+<p>Increasing the parameter keep_prob from (say) 0.5 to 0.6 will likely cause the following: Reducing the regularization effect &amp; Causing the neural network to end up with a lower training set error</p>
+<p>Normalization makes the cost function faster to optimize</p>
+<p>Which of these techniques are useful for reducing variance (reducing overfitting)? Dropout, L2 regularization Data augmentation</p>
+<p>Different initializations lead to different results</p>
+<p>Random initialization is used to break symmetry and make sure different hidden units can learn different things</p>
+<p>Don’t intialize to values that are too large</p>
+<p>He initialization works well for networks with ReLU activations.</p>
+<p>Do a loss vs learning rate plot to pick a good one. It’s the key thing to set.</p>
+<p>learning rate annealing: decrease learning rate as you reach the minimum.</p>
+<p>If you try training for more epochs, you’ll notice that we start to overfit, which means that our model is learning to recognize the specific images in the training set, rather than generalizing such that we also get good results on the validation set. One way to fix this is to effectively create more data, through data augmentation. This refers to randomly changing the images in ways that shouldn’t impact their interpretation, such as horizontal flipping, zooming, and rotating.</p>
+<p>mse: loss function for regression</p>
+<p>Cross-entropy: loss function for classification</p>
+<p>Gradient descent: a generic method that can optimize any differentiable loss function</p>
+<p>Analtycial soltion for linear modela nd MSE effectivr when: Small number of features</p>
+<p>There is an analytical solution for linear regression parameters and MSE loss, but we usually prefer gradient descent optimization over it. What are the reasons?</p>
 <ul>
-<li><p>sample size</p></li>
-<li><p>effect size</p></li>
-<li><p>significance level = P(Type I error) = probability of finding an effect that is not there</p></li>
-<li><p>power = 1 - P(Type II error) = probability of finding an effect that is there</p></li>
+<li>Gradient descent doesn’t require to invert a matrix</li>
+<li>Gradient descent is more scalable and can be applied for problems with high number of features</li>
 </ul>
-<p>Given any three, we can determine the fourth.</p>
-<p><strong>Other</strong></p>
-<ul>
-<li><p>The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.</p></li>
-<li><p>For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.</p></li>
-<li><p><a href="http://www.evanmiller.org/ab-testing/sample-size.html">Power Analysis Calculator</a></p></li>
-</ul>
-</div>
-<div id="stats-for-hackers" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> Stats For Hackers</h3>
-<ul>
-<li><p>Methods: Simluation, Boostrapping (with replacement, not good with ranks), Shuffling (Works when assumption is that the data are the same, representative samples, non-longitudinal data), &amp; Cross Validation.</p></li>
-<li><p>Assumes iid.</p></li>
-</ul>
-</div>
-<div id="think-stats" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Think Stats</h3>
-<ul>
-<li><p>Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.</p></li>
-<li><p>The sampling distribution is the distribution of the samples mean.</p></li>
-<li><p>The CDF is the function that maps values to their percentile rank in a distribution.</p></li>
-<li><p>I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.</p></li>
-<li><p>CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).</p></li>
-<li><p>Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.</p></li>
-<li><p>Statistical power is the probability that the test will be positive if the null hypothesis is false. In general, the power of a test depends on the sample size, the magnitude of the effect, and the threshold α.</p></li>
-<li><p>If there are no outliers, the sample mean minimizes the mean squared error</p></li>
-<li><p>An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.</p></li>
-<li><p>A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same units, they come from different distributions. There are two common solutions to these problems:</p></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li><p>Transform all values to standard scores. This leads to the Pearson coefficient of correlation.</p></li>
-<li><p>Transform all values to their percentile ranks. This leads to the Spearman coefficient.</p></li>
-</ol>
-</div>
-<div id="ab-testing-overview" class="section level3">
-<h3><span class="header-section-number">6.1.4</span> AB Testing Overview</h3>
-<p>Guide: Choose metric (CTR), review stats (Hypothesis Testing), design, analyse</p>
-<p>Need to have clear control and thing to test. Also need time. Frequency of customer interaqction is important.</p>
-<p>shopping and searching not independent events.</p>
-<p>Point estimate of CTR (users who clicked)/users. Need margin of error for estimate. Approximate binomial by normal if N*p &amp; N(1-p) &gt; 5.</p>
-<p>marin of error = Z*(stndad error)</p>
-<p>se = sqrt(p(1-p)/n)</p>
-<p>Z for 95% s 1.96 and 2.58 for 99%.</p>
-<p>for Two samples calculate a pooled CTR point estimate and standard error.</p>
-<p>Need to be substantive (a worthy difference) in addition to being statistically significant. Some changes might not be useful due to the resources one might want to allocate.</p>
-<p>Result are repeatable (stat sig) bar should be lower than business interesting (practically sig)</p>
-<p>Stat Power: How many page view necessary to get a stat sig result.</p>
-<p>Size v Power: The smaller the effect or increased confidence you want to detect/have (greater power of experiment), the larger the sample you need to use.</p>
-<p>alpha = P(reject null when true) beta = P(accept null when false)</p>
-<p>small sample: low alpha, high beta larger sample: low alpha, low beta</p>
-<p>1- alpha = confidence level 1 - beta = sensitivity (often 80%)</p>
-<p>practical significance: 2%, alpha = 0.05, beta = 0.2</p>
-<p>sample size dp_to ctr (increase in se), confidence level, sensitivity sample size invp_to practical sig (larger changes easier to detect)</p>
-<p>above is design of experiment. below is analysis:</p>
-<p>estimate diff: experimental prop - control prop margin of error = z*se</p>
-<p>conf int: estimated diff +/- margin of error</p>
-<p><strong>Policy &amp; Ethics</strong></p>
-<p>In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.</p>
-<p>Next, what benefits might result from the study? Even if the risk is minimal, how might the results help?</p>
-<p>Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.</p>
-<p>Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?</p>
-<p>Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:</p>
-<p>Are participants facing more than minimal risk? Do participants understand what data is being gathered? Is that data identifiable? How is the data handled?</p>
-<p>Internal process recommendations Finally, regarding internal process of data handling, we recommend that:</p>
-<p>Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).</p>
-<p>All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.</p>
-<p>rate better for usability test than prob</p>
-<p><strong>Choosing &amp; Characterizing Metrics</strong></p>
-<p><strong>Define</strong></p>
-<p>Make sure to granularize funnel</p>
-<p><strong>Intuition</strong></p>
-<p>NA</p>
-<p><strong>Characterize</strong></p>
-<p>Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data</p>
-<p>temporal effects across hours, days, weeks are important</p>
-<p>different browsers screw with the CTR depending on how they deal with JS</p>
-<p>Can use cookies to track users</p>
-<p>Metric definitions</p>
-<p>Def #1 (Cookie probability): For each <time interval>, number of cookies that click divided by number of cookies</p>
-<p>Def #2 (Pageview probability): Number of pageviews with a click within <time interval> divided by number of pageviews</p>
-<p>Def #3 (Rate): Number of clicks divided by number of pageviews</p>
-<p>CTR vs CTP: The first can be &gt;1.</p>
-<p>Take into consideration mean and median. Median is robust but might not be useful so look at percentiles.</p>
-<p>Measuring sensitiviyt and robustness: 1) Running experiments to see if metrics move as predicted. A vs A experiments: Measure people who saw the same thing to see if there is a difference between them according to the metric or its too sensitive. Look at previous experiments. 2) Retrospective analysis of logs to see how the metrics responded in the past.</p>
-<p>Metric For Loading Vid: Look at distribution of load times for vid. Want a robust metric that doesn’t really change for comparable vids. But wnat a metric that is sensitive to a change that you care about like resolution.</p>
-<p>How to compare experiment vs control: difference or relative change. Relative change allows you to keep same significance boundary.</p>
-<p>Check that praticial sig level is good for metric. Need to have handle on variability for confidence interval.</p>
-<p>sign test: Good for looking to implement a change, but doesn’t give effect size.</p>
-<p>empirical vs analytic: underlying distribution could be weird so do empirical. Analyticcal for simple metrics. If empirical and anlytical don’t agree then run AvA test.</p>
-<p>A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don’t have enough traffic for a big A v A test.</p>
-<p><strong>Designing An Experiment</strong></p>
-<p><strong>Choose Subject</strong></p>
-<p>Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).</p>
-<p>Intra-user vs inter-user experiment.</p>
-<p><strong>Choose Population</strong></p>
-<p>Size</p>
-<p>Duration</p>
-<p>Cohort: People who enter the experiment at the same time.</p>
-<p>Cohort &gt; Population: Learning effects, user retention</p>
-<p>Can reduce sample if just targeting english speaking traffic</p>
-<p>When going to run experiment: holiday or not? How many people to put through experiment and control?</p>
-<p><strong>Analyzing Results</strong></p>
-<p>Sanity Checks:</p>
-<p>Pass all before move on</p>
-<p>Good invariants: # of events, video load time (user has no control over it). Want these to be about the same for experiment and control.</p>
-<p>Single Metric:</p>
-<p>sign test</p>
-<p>Multiple Metrics:</p>
-<p>More metrics increase false positive chance. Use Bonferroni assumption: makes no independence assumption and is conservative.</p>
-<p>margin of error smaller than observed diff so the confidence interval won’t include 0.</p>
-<p>Different strategies: family-wise error rate, false discovery rate,</p>
-<p>Gotchas:</p>
-<p>Simpson’s Paradox</p>
-<p>Usually A/B testing works for testing changes in elements in the web page. A/B testing framework is following sequence:</p>
-<p>Design a research question.</p>
-<p>Choose test statistics method or metrics to evaluate experiment.</p>
-<p>Designing the control group and experiment group.</p>
-<p>Analyzing results, and draw valid conclusions.</p>
-</div>
-</div>
-<div id="datacamp-experimental-design" class="section level2">
-<h2><span class="header-section-number">6.2</span> DataCamp: Experimental Design</h2>
-<p>Randomized Complete Block Design (RCBD) experiment</p>
-<p>Power usually @ 80%. power effect size &amp; sample size all inter-related (with 2 can calculate 3rd).</p>
-<p>power: prob that test correctly rejects null hypo when alt hypo is true</p>
-<p>effect size: standardized measure of the difference you’re trying to detect</p>
-<p>sample size: how many experimental units needed to survey to detect the desired diff at the desired power</p>
-<p>pwr::pwr.anova.test() [exactly one of n, d, power, and sig.level must be NULL]</p>
-<p>aov = lm + anova aov + tukey hsd</p>
-<p>Another assumption of ANOVA and linear modeling is homogeneity of variance. Homogeneity means “same”, and here that would mean that the variance of int_rate is the same for each level of grade. We can test for homogeneity of variances using bartlett.test(), which takes a formula and a dataset as inputs.</p>
-<p>One non-parametric alternative to ANOVA is the Kruskal-Wallis rank sum test. For those with some statistics knowledge, it is an extension of the Mann-Whitney U test for when there are more than two groups, such as with our grade variable.</p>
-<p>Use the correct function from pwr to find the sample size (d is the effect size) pwr::pwr.t.test(n = NULL, d = .2, power = .8, sig.level =.05, alternative = “two.sided”)</p>
-<p>multivariable experiment:</p>
-<p>lendingclub_multi &lt;- lm(loan_amnt ~ Group + grade + verification_status, lendingclub_ab) tidy(lendingclub_multi)</p>
-<p>The sampling package’s cluster() creates cluster samples. It takes in a dataset name, the variable in the set to be used as the cluster variable, passed as a vector with the name as a string, e.g. c(“variable”), a number of clusters to select, and a method</p>
-<p>Randomized Complete Block Designs</p>
-<p>the purpose of blocking an experiment is to make the experimental groups more like one another.</p>
-<p>A rule of thumb in experimental design is often “block what you can, randomize what you cannot”, which means you should aim to block the effects you can control for (e.g. sex) randomize on those you cannot (e.g. smoking status). Variability inside a block is expected to be fairly small, but variability between blocks will be larger.</p>
+<p>Number of params in logistic regression: k*d where k is the number of classes and d is the size of the dimensional space.</p>
+<p>Large model weights can indicate that model is overfitted</p>
+<p>Weight penalty drives model parameters closer to zero and prevents the model from being too sensitive to small changes in features</p>
+<p>disadvantages do model validation on holdout sample can give biased quality estimates for small samples</p>
+<p>Stochastic gradient descent: Noisy but evntually converge to minimum. Needs only one example at each step. Can be used online. Choose the learning rate carefully.</p>
+<p>mini-batch gradient descent</p>
+<p>Gradient descent extensions: adagrad, rms prop,adam</p>
+<p>The best nonlinearity functions to use in a Multilayer perceptron are step functions as they allow to reconstruct the decision boundary with better precision? No. Step function gradient with the respect to its input is zero almost everywhere - thus the resulting network can’t be trained via backpropagation.</p>
+<p>A dense layer applies a linear transformation to its input</p>
+<p>For an MLP to work, the nonlinearity function must have a finite upper bound? No, widely used ReLu has no upper bound.</p>
+<p>How many dimensions will a derivative of a 1-D vector by a 2-D matrix have? 3. The rule of thumb is that the final derivative will consist of derivatives of each component of the output by each component of input. So, for each element of the output vector there will be a 2-D matrix of derivatives, 3 dimensions in total.</p>
+<p>Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU better. Leaky ReLU best to avoid non-activation.</p>
+<p>Dropout is a regularization technique.</p>
+<p>Convulations and pooling layes are invariant to translation of images.</p>
+<p>We have reviewed the activation function, weights initializations, and a bunch of new techniques that help to train better networks. What are the takeaways? First, always use ReLU activation because it doesn’t saturate and it converges faster. Use He et al initialization which is square root of two divided by square root of number of inputs. Try to add bash normalization or dropout, maybe it will converge better. Try to augment your training data.</p>
+<p>You should use dropout (randomly eliminate nodes) only in training.</p>
+<p>Apply dropout both during forward and backward propagation.</p>
+<p>During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5.</p>
+<p>inverted dropout</p>
+<p>Gradient checking verifies closeness between the gradients from backpropagation and the numerical approximation of the gradient (computed using forward propagation).</p>
+<p>Gradient checking is slow, so we don’t run it in every iteration of training. You would usually run it only to make sure your code is correct, then turn it off and use backprop for the actual learning process.</p>
+<p>In batch GD the cost should be monotone decreasing. In mini-batch it doesn’t have to be since it’s like training on a different training set every time. It should still be trending downwards.</p>
+<p>For small training set use ( &lt; 2000) use batch GD. Use batches of 64, 128, 256, 512 otherwise which should speed up training. Make sure it fits in meemory. MIni-batch size is another hyperparameter.</p>
+<p>RMS PRop</p>
+<p>ADAM: Adam combines the advantages of RMSProp and momentum, We usually use “default” values for the hyperparameters, The learning rate hyperparameter α in Adam usually needs to be tuned.</p>
+<p>Learning rate decay</p>
+<p>epoch: one pass through the training set</p>
+<p>If batch gradient descent in a deep network is taking excessively long to find a value of the parameters that achieves a small value for the cost function: Try mini-batch gradient descent, Try better random initialization for the weights, Try Adam, Try tuning the learning rate.</p>
+<p>A variant of this is Stochastic Gradient Descent (SGD), which is equivalent to mini-batch gradient descent where each mini-batch has just 1 example. When the training set is large, SGD can be faster. But the parameters will “oscillate” toward the minimum rather than converge smoothly.</p>
+<p>In practice, you’ll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples.</p>
+<p>The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step. You have to tune a learning rate hyperparameter alpha. With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).</p>
+<p>Shuffling and Partitioning are the two steps required to build mini-batches. Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.</p>
+<p>Momentum takes into account the past gradients to smooth out the update</p>
+<p>Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent. You have to tune a momentum hyperparameter beta and a learning rate alpha.</p>
+<p>Mini-batch Gradient descent, Mini-batch Gradient descent with momentum, mini-batch with Adam. Adam usually performs best. Some advantages of Adam include: Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum), usually works well even with little tuning of hyperparameters (except alpha).</p>
+<p>Use random values.</p>
+<p>batch normalization</p>
+<p>During hyperparameter search, whether you try to babysit one model (“Panda” strategy) or train a lot of models in parallel (“Caviar”) is largely determined by computational power</p>
+<p>Which of the following statements about γ and β in Batch Norm are true? They can be learned using Adam, Gradient descent with momentum, or RMSprop, not just with gradient descent. They set the mean and variance of the linear variable z[l] of a given layer.</p>
+<p>After training a neural network with Batch Norm, at test time, to evaluate the neural network on a new example you should: Perform the needed normalizations, use μ and σ2 estimated using an exponentially weighted average across mini-batches seen during training</p>
 
 </div>
 </div>
@@ -649,8 +556,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="communicate-deploy-maintain.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="time-series-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="time-series-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probabilistic-programming-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -680,7 +587,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-stats.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-deep_learning.Rmd",
 "text": "Edit"
 },
 "history": {
