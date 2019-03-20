@@ -589,33 +589,21 @@ https://cran.r-project.org/web/packages/kerasformula/index.html
 <div class="col3">
 [PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
 
+https://www.pymc-learn.org/
+
 [Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
 
 https://arviz-devs.github.io/arviz/index.html
 
 SigOpt
 
-https://gitlab.com/vuorre/bayesplan
-
-https://msbnx.azurewebsites.net/
-
-http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
-
-[greta](https://rviews.rstudio.com/2018/04/23/on-first-meeting-greta/)
-
-[Tipping Point Analysis](https://cran.r-project.org/web/packages/tipr/index.html)
-
-http://www.lucymcgowan.com/talks/2018-01-27_data-day-texas.html
-
 [PGM Viz](http://daft-pgm.org)
 
 [SEM](http://sachaepskamp.com/SEM2017)
 
-Approximate Bayesian Computation
+[Edward](http://edwardlib.org/)
 
-[Bayesian Inference Viz](http://rpsychologist.com/d3/bayes/)
-
-[Edward](http://edwardlib.org/) | [Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
+[Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
 </div>
 <br/>
 
@@ -624,6 +612,8 @@ Approximate Bayesian Computation
 
 <div class="col3">
 [Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
+
+http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
 
 [Misra Talk](https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245&utm_campaign=US%20Event%20Meetup%20NYU%20NYC%20July%202018&utm_source=hs_email&utm_medium=email&utm_content=64589348&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI&_hsmi=64589348)
 

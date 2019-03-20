@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 10 Distributed | Data Science Cribsheet</title>
+  <title>Chapter 12 Causality | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 10 Distributed | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 12 Causality | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Distributed | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 12 Causality | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="probabilistic-programming-1.html">
-<link rel="next" href="cook-book.html">
+<link rel="prev" href="cook-book.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -378,51 +378,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="distributed" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Distributed</h1>
-<div id="general-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> General</h2>
-<p>ff | bigmemory | biganalytics | bigtabulate | purrrlyr: dplyr purrr | furrr: parallelized purrr</p>
-<p>foreach + doMC | parallel | doParallel</p>
-<p>Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression</p>
-</div>
-<div id="pyspark" class="section level2">
-<h2><span class="header-section-number">10.2</span> PySpark</h2>
-<ul>
-<li><p>A [cheatsheet[(<a href="https://www.qubole.com/resources/pyspark-cheatsheet/" class="uri">https://www.qubole.com/resources/pyspark-cheatsheet/</a>).</p></li>
-<li><p>Spark’s assumes the target is called ‘label’ in ML. Everything else is a feature.</p></li>
-<li><p>alias() method to rename a column you’re selecting.</p></li>
-<li><p>cast() method: nominative determinism on columns</p></li>
-<li><p>withColumn(): create new column</p></li>
-<li><p>pyspark.ml.feature</p></li>
-<li><p>At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA</p></li>
-<li><p>You can create what are called ‘one-hot vectors’ to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).</p></li>
-<li><p>Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models</p></li>
-<li><p>selectExpr() takes SQL expressions as a string</p></li>
-<li><p>show() vs collect()</p></li>
-<li><p>Spark only handles numeric data</p></li>
-<li><p>In Spark it’s important to make sure you split the data after all the transformations. This is because operations like StringIndexer don’t always produce the same index even when given the same list of strings.</p></li>
-</ul>
-</div>
-<div id="sparklyr" class="section level2">
-<h2><span class="header-section-number">10.3</span> sparklyr</h2>
-<ul>
-<li><p>To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.</p></li>
-<li><p>Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.</p></li>
-<li><p>If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.</p></li>
-<li><p>feature transforms: ft_, ml functions: ml_, spark df functions: sdf_</p></li>
-<li><p>ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort</p></li>
-</ul>
+<div id="causality-1" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Causality</h1>
+<p>Causality</p>
+<p>L1</p>
+<p>Draw a complete DAG if your expert knowledge is insufficient to exclude any possible effect. Knowledge is expressed in the form of missing arrows.</p>
+<p>Causal Markov Condition: If two vars share a cause this cause is also on the graph.</p>
+<p>An association exists b/w A &amp; Y if having info on A on average better allows us to predict Y.</p>
+<p>An association for a -&gt; y exists if the proportion of individuals with y is different given having or not having a.</p>
+<p>A -&gt; B -&gt; Y: B is a mediator which blocks the association b/w A &amp; Y when conditioning on it even though A is causal for Y.</p>
+<p>Systematic bias: Any assoication between A &amp; Y not causes by an effect of A on Y.</p>
+<p>Bias due to a common cause is called confounding. We expect an association b/w two items with a commong cause.</p>
+<p>a &lt;- t -&gt; y: t is a commong cause which blocks the association from a to y when conditioned upon.</p>
+<p>Common effects ( a -&gt; y &lt;- b) don’t cause an association but common causes ( a &lt;- y -&gt; b) do.</p>
+<p>For a -&gt; y &lt;- b, y is called a collider. It blocks association between a and b.</p>
+<p>Selection bias: Conditioning on a collider introduces an association between its causes.</p>
+<p>Bias stems from The existence of a shared cause of treatment and outcome and Conditioning on a common effect of treatment and outcome.</p>
+<p>Associations: 1) Cause &amp; effect, 2) Common causes, 3) Conditioning on a common effect</p>
+<p>Bias introduced by association by chance can be removed by increasing the sample size.</p>
+<p>A (parent) -&gt; B (descendant)</p>
+<p>D(irectionally)-separation rules: Determine whether paths (which don’t need to follow arrows) are blocked or open.</p>
+<p>D-separation rules:</p>
+<ol style="list-style-type: decimal">
+<li><p>If there are no variables being conditioned on, a path is blocked iff two arrows on the path collide at some variable on the path.</p></li>
+<li><p>Any path with a non-collider that has been conditioned on is blocked.</p></li>
+<li><p>A collider that has been conditioned on doesn’t block the path.</p></li>
+<li><p>A collider with a descendant that has been conditioned on doesn’t block the path.</p></li>
+</ol>
+<p>The summary of these D-separation rules is that a path is blocked if, and only if, it contains a non-collider that has been conditioned on, or a collider that has not been conditioned on and has no descendant that had been conditioned on.</p>
+<p>Two variables are d-separated if all paths between then are blocked</p>
+<p>And two variables are marginally or unconditionally independent if they are D-separated without conditioning on all the variables. On the other hand, we say that two variables are conditionally independent, even a set variables L, if they are D-separated after conditioning on the variables L.</p>
+<p>Faithfulness: Causal effects in opposite directions that cancel out, i.e a certain medication causes diseases in some people and prevents it in others. Rare.</p>
+<p>All paths are blocked variables are not associated.</p>
+<p>L2</p>
+<p>back door path: a path connecting A and Y without using arrows that leave from A. eg. Given L → A → Y ← L, the path A - L - Y is a back door path.</p>
+<p>back door path criterion: We can identify the causal effect of A on Y if we have enough data to block all back door paths between them</p>
+<p>confounder: A variable that, possibly with other variables, can block back door paths between treatment and outcome.</p>
+<p>Change in estimate definition of confounder: A var is a confounder of the effect of a on y if adjusting for it alters the association between a and y</p>
+<p>Conventional definition of confounder: L is a confounder of the effect of a on y if L meets 3 conditions: L is associated with a, L is associated with y conditional on a, L is not on a causal pathway from a to y.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="probabilistic-programming-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cook-book.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cook-book.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -452,7 +454,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-distributed.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-causality.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -1,5 +1,7 @@
 # Distributed
 
+## General
+
 ff | bigmemory | biganalytics | bigtabulate | purrrlyr: dplyr purrr | furrr: parallelized purrr
 
 foreach + doMC | parallel | doParallel

@@ -333,23 +333,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="7.7" data-path="time-series-1.html"><a href="time-series-1.html#forecasting-datacamp"><i class="fa fa-check"></i><b>7.7</b> Forecasting Datacamp</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="deep-learning-1.html"><a href="deep-learning-1.html"><i class="fa fa-check"></i><b>8</b> Deep Learning</a><ul>
-<li class="chapter" data-level="8.1" data-path="deep-learning-1.html"><a href="deep-learning-1.html#activation-functions"><i class="fa fa-check"></i><b>8.1</b> Activation Functions</a></li>
-<li class="chapter" data-level="8.2" data-path="deep-learning-1.html"><a href="deep-learning-1.html#preprocessing"><i class="fa fa-check"></i><b>8.2</b> Preprocessing</a></li>
-<li class="chapter" data-level="8.3" data-path="deep-learning-1.html"><a href="deep-learning-1.html#tuning"><i class="fa fa-check"></i><b>8.3</b> Tuning</a></li>
-<li class="chapter" data-level="8.4" data-path="deep-learning-1.html"><a href="deep-learning-1.html#notes-3"><i class="fa fa-check"></i><b>8.4</b> Notes</a></li>
-<li class="chapter" data-level="8.5" data-path="deep-learning-1.html"><a href="deep-learning-1.html#model-3"><i class="fa fa-check"></i><b>8.5</b> Model</a></li>
-</ul></li>
+<li class="chapter" data-level="8" data-path="deep-learning-1.html"><a href="deep-learning-1.html"><i class="fa fa-check"></i><b>8</b> Deep Learning</a></li>
 <li class="chapter" data-level="9" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html"><i class="fa fa-check"></i><b>9</b> Probabilistic Programming</a><ul>
 <li class="chapter" data-level="9.1" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#doing-bayesian-da"><i class="fa fa-check"></i><b>9.1</b> Doing Bayesian DA</a></li>
 <li class="chapter" data-level="9.2" data-path="probabilistic-programming-1.html"><a href="probabilistic-programming-1.html#statistical-rethinking"><i class="fa fa-check"></i><b>9.2</b> Statistical Rethinking</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="distributed.html"><a href="distributed.html"><i class="fa fa-check"></i><b>10</b> Distributed</a><ul>
-<li class="chapter" data-level="10.1" data-path="distributed.html"><a href="distributed.html#pyspark"><i class="fa fa-check"></i><b>10.1</b> PySpark</a></li>
-<li class="chapter" data-level="10.2" data-path="distributed.html"><a href="distributed.html#sparklyr"><i class="fa fa-check"></i><b>10.2</b> sparklyr</a></li>
+<li class="chapter" data-level="10.1" data-path="distributed.html"><a href="distributed.html#general-6"><i class="fa fa-check"></i><b>10.1</b> General</a></li>
+<li class="chapter" data-level="10.2" data-path="distributed.html"><a href="distributed.html#pyspark"><i class="fa fa-check"></i><b>10.2</b> PySpark</a></li>
+<li class="chapter" data-level="10.3" data-path="distributed.html"><a href="distributed.html#sparklyr"><i class="fa fa-check"></i><b>10.3</b> sparklyr</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="cook-book.html"><a href="cook-book.html"><i class="fa fa-check"></i><b>11</b> Cook Book</a><ul>
-<li class="chapter" data-level="11.1" data-path="cook-book.html"><a href="cook-book.html#general-6"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
+<li class="chapter" data-level="11.1" data-path="cook-book.html"><a href="cook-book.html#general-7"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
 <li class="chapter" data-level="11.2" data-path="cook-book.html"><a href="cook-book.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>11.2</b> Linear Regression Statsmodels</a></li>
 <li class="chapter" data-level="11.3" data-path="cook-book.html"><a href="cook-book.html#rowwise"><i class="fa fa-check"></i><b>11.3</b> Rowwise</a></li>
 <li class="chapter" data-level="11.4" data-path="cook-book.html"><a href="cook-book.html#sampling-file"><i class="fa fa-check"></i><b>11.4</b> Sampling File</a></li>
@@ -362,6 +357,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.11" data-path="cook-book.html"><a href="cook-book.html#data-table"><i class="fa fa-check"></i><b>11.11</b> Data Table</a></li>
 <li class="chapter" data-level="11.12" data-path="cook-book.html"><a href="cook-book.html#keras"><i class="fa fa-check"></i><b>11.12</b> Keras</a></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="causality-1.html"><a href="causality-1.html"><i class="fa fa-check"></i><b>12</b> Causality</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -384,172 +380,82 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="deep-learning-1" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Deep Learning</h1>
-<div id="activation-functions" class="section level2">
-<h2><span class="header-section-number">8.1</span> Activation Functions</h2>
-<ul>
-<li><p>Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 (<span class="math inline">\(σ(x) = 1 / (1 + exp(−x))\)</span>)</p></li>
-<li><p>Softmax: Same end result as sigmoid, but different function. Doesn’t like multi-label classification</p></li>
-<li><p>tanh: Takes a real-valued input and squashes it to the range [-1, 1] (<span class="math inline">\(tanh(x) = 2σ(2x) − 1\)</span>)</p></li>
-<li><p>ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. <span class="math inline">\(f(x) = max(0, x)\)</span></p></li>
-</ul>
-</div>
-<div id="preprocessing" class="section level2">
-<h2><span class="header-section-number">8.2</span> Preprocessing</h2>
-<ul>
-<li>Scale features</li>
-</ul>
-</div>
-<div id="tuning" class="section level2">
-<h2><span class="header-section-number">8.3</span> Tuning</h2>
-<ul>
-<li><p>ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.</p></li>
-<li><p>Early Stopping: Stop training when validation score stop improving after a certain number of epochs (batches?)</p></li>
-</ul>
-</div>
-<div id="notes-3" class="section level2">
-<h2><span class="header-section-number">8.4</span> Notes</h2>
-<ul>
-<li><p><a href="http://theorangeduck.com/page/neural-network-not-working">Debugging</a></p></li>
-<li><p><a href="https://tensorflow.rstudio.com/keras/" class="uri">https://tensorflow.rstudio.com/keras/</a></p></li>
-<li><p>cnn for time series</p></li>
-</ul>
-</div>
-<div id="model-3" class="section level2">
-<h2><span class="header-section-number">8.5</span> Model</h2>
-<p>Regression: loss - mean_squared_error, metric - rmse, activation_function - relu</p>
-<p>Classification: * loss - categorical_crossentropy, metric - accuracy, activation_function - softmax</p>
-<p>random initialization of weights for logreg</p>
-<p>end to end deep learning: an end-to-end approach as it maps directly the input (x) to the output (y). end-to-end learning works better in practice than multi-task learning, but requires a large amount of data.</p>
-<p>Don’t use mini-batches larger than 32</p>
-<ul>
-<li><p>restnet, attention &gt; RNN / LSTM</p></li>
-<li><p>“Training with large minibatches is bad for your health. More importantly, it’s bad for your test error. Friends dont let friends use minibatches larger than 32.” - Yann Le Cun</p></li>
-<li><p><a href="https://hackernoon.com/deep-learning-cheat-sheet-25421411e460">Cheatsheet</a></p></li>
-<li><p>By reducing learning rate (for example, to 0.001), Test loss drops to a value much closer to Training loss. In most runs, increasing Batch size does not influence Training loss or Test loss significantly. However, in a small percentage of runs, increasing Batch size to 20 or greater causes Test loss to drop slightly below Training loss.</p></li>
-<li><p>Reducing the ratio of training to test data from 50% to 10% dramatically lowers the number of data points in the training set. With so little data, high batch size and high learning rate cause the training model to jump around chaotically (jumping repeatedly over the minimum point).</p></li>
-<li><p>Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days.</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=nqEYVzJLR_c&amp;feature=youtu.be&amp;t=31">Rule of 30</a>: A change that affects at least 30 data points in your validation set is usually significant and not just noise.</p></li>
-<li><p>Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent.</p></li>
-<li><p>Momentum and learning rate decay are good for knowing which way to go in gradient descent.</p></li>
-<li><p>Always try to lower your learning rate for improvement.</p></li>
-<li><p>n inputs and k outputs gives you <span class="math inline">\((n+1)*k\)</span> parameters.</p></li>
-<li><p>Back propogation takes about twice the memory as forward propogation.</p></li>
-<li><p>Stop model from overoptimizing on training set: early termination (stop as soon as performance on validation set drops) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Uses l2 regularization or dropout. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. Scale the non-zero activates by 2 to get the right average. If it doesn’t work, go deeper.</p></li>
-<li><p>Two ways are to average the yellow, blue, and green channels or to use YUV representation. If position on the screen doesn’t matter then use translation invariance. Use weight sharing if this occurs in text.</p></li>
-<li><p>Things that don’t chnage across time, space, etc are called statistical invariants.</p></li>
-<li><p>RNN’s use shared parameters over time to extract patterns. Uses a recurrent connection to provide a summary of the past and pass this info to the classifier.</p></li>
-<li><p>Backpropagation occurs throw time to the beginning. All derivative applied to same parameters, so very correlated. Bad for stochastic gradient descent and makes math very unstable. Gradients are either zero (doesn’t remember the past well) or infinity. The latter is fixed by gradient clipping and the former by LSTM (long-short term memory). LSTM replaced the rectified linear units by continuous functions. You can use dropout or L2 regularization with an LSTM.</p></li>
-<li><p>Generally dealing with images, Convolutional Neural Network is used mostly because of its better accuracy results.</p></li>
-<li><p>Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.</p></li>
-<li><p>The perceptron is the simplest neural network. The perceptron is an iterative classification method.The perceptron starts with a random hyperplane then adjust its weights to separate the data.</p></li>
-<li><p>BackProp Algorithm: Initially all the edge weights are randomly assigned. For every input in the training dataset, the ANN is activated and its output is observed. This output is compared with the desired output that we already know, and the error is “propagated” back to the previous layer. This error is noted and the weights are “adjusted” accordingly. This process is repeated until the output error is below a predetermined threshold.</p></li>
-<li><p>The last layer of a neural network captures the most complex interactions.</p></li>
-<li><p>When plotting the mean-squared error loss function against predictions, the slope is <span class="math inline">\(2x(y-xb)\)</span>, or <span class="math inline">\(2input_data error\)</span>.</p></li>
-<li><p>This is exactly what’s happening in the vanishing gradient problem – the gradients of the network’s output with respect to the parameters in the early layers become extremely small. That’s a fancy way of saying that even a large change in the value of parameters for the early layers doesn’t have a big effect on the output.</p></li>
-<li><p>Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.</p></li>
-<li><p>Epoch: One full pass through all the batches in the training data.</p></li>
-<li><p>Stochastic gradient descent calculates slopes one batch at a time.</p></li>
-<li><p>This network again uses the ReLU activation function, so the slope of the activation function is 1 for any node receiving a positive value as input.</p></li>
-<li><p>Few people use kfold cv in deep learning because of the large datasets in play.</p></li>
-<li><p>Dying neuron + vanishing gradient: Change activation function</p></li>
-</ul>
-<p>Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. LSTMs are essentially the same thing as the RNN we will develop in this tutorial, they just have a different way of computing the hidden state.</p>
-<p>The default activation function for LSTMs is the hyperbolic tangent (tanh), which outputs values between -1 and 1. This is the preferred range for the time series data: MinMaxScaler(feature_range=(-1, 1)).</p>
-<p>Keras LSTM expects the input as well as the target data to be in a specific shape. The input has to be a 3-d array of size num_samples, num_timesteps, num_features.</p>
-<p>The way we can do this, with Keras, is by wiring the LSTM hidden states to sets of consecutive outputs of the same length. Thus, if we want to produce predictions for 12 months, our LSTM should have a hidden state length of 12.</p>
+<p>airflow</p>
+<p><a href="http://theorangeduck.com/page/neural-network-not-working">Debugging</a></p>
+<p><a href="https://tensorflow.rstudio.com/keras/" class="uri">https://tensorflow.rstudio.com/keras/</a></p>
+<p><a href="https://hackernoon.com/deep-learning-cheat-sheet-25421411e460">Cheatsheet</a></p>
+<p>In a single-label, multiclass classification problem, your network should end with a softmax activation so that it will output a probability distribution over the N output classes.</p>
+<p>In general, the less training data you have, the worse overfitting will be, and using a small network is one way to mitigate overfitting.</p>
+<p>If you’re predicting N categories, don’t have layers with less than N nodes.</p>
+<p>Softmax regression (or multinomial logistic regression) is a generalization of logistic regression to the case where we want to handle multiple classes.</p>
+<p>fast.ai: Use different learning rates for each layer</p>
+<p>Vanishing gradient problem: the gradients of the network’s output with respect to the parameters in the early layers become extremely small. That’s a fancy way of saying that even a large change in the value of parameters for the early layers doesn’t have a big effect on the output. Change the activation function to solve.</p>
+<p>Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.</p>
+<p>Epoch: One full pass through all the batches in the training data.</p>
+<p>Few people use kfold cv in deep learning because of the large datasets in play.</p>
+<p>Dying neuron:</p>
+<p>n inputs and k outputs gives you <span class="math inline">\((n+1)*k\)</span> parameters.</p>
+<p>Back propogation takes about twice the memory as forward propogation.</p>
+<p>Model capacity: Same as underfitting and overfitting in bias-variance. Less nodes and hidden layers corresponds to simpler model and vice versa.</p>
+<p>The last layer of a neural network captures the most complex interactions.</p>
+<p>Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1 (<span class="math inline">\(σ(x) = 1 / (1 + exp(−x))\)</span>)</p>
+<p>Softmax: Same end result as sigmoid, but different function. Doesn’t like multi-label classification</p>
+<p>tanh: Takes a real-valued input and squashes it to the range [-1, 1] (<span class="math inline">\(tanh(x) = 2σ(2x) − 1\)</span>)</p>
+<p>ReLU: The rectified linear activation function (called ReLU) has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive. <span class="math inline">\(f(x) = max(0, x)\)</span></p>
+<p>Scale features</p>
+<p>Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days.</p>
+<p>ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.</p>
+<p>Stop model from overoptimizing on training set: early stopping/termination (stop as soon as performance on validation set drops after a certain number of epochs) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Use L2 regularization or dropout.</p>
+<p>Dropout: Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. You should use dropout (randomly eliminate nodes) only in training. Apply dropout both during forward and backward propagation. During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5. Also consider inverted dropout.</p>
+<p>Reducing the learning rate can improve results</p>
+<p><a href="https://www.youtube.com/watch?v=nqEYVzJLR_c&amp;feature=youtu.be&amp;t=31">Rule of 30</a>: A change that affects at least 30 data points in your validation set is usually significant and not just noise.</p>
+<p>dying relu</p>
 <p>Keras - stateful vs stateless LSTMs</p>
+<p>Regression: loss - mean_squared_error, metric - rmse, activation_function - relu</p>
+<p>Classification: loss - categorical_crossentropy, metric - accuracy, activation_function - softmax</p>
+<p>Do random initialization of weights but set bias to zero. Don’t intialize to values that are too large. He initialization works well for networks with ReLU activations.</p>
+<p>end to end deep learning: an end-to-end approach as it maps directly the input (x) to the output (y). end-to-end learning works better in practice than multi-task learning, but requires a large amount of data.</p>
+<p>Don’t use mini-batches larger than 32. Training with large minibatches is bad for your test error.</p>
+<p>restnet/attention &gt; RNN / LSTM</p>
+<p>With a reduced the training set a high batch size and high learning rate cause the model to jump around chaotically.</p>
+<p>Gradient descent takes about 3 times longer than the loss function. Stochastic gradient descent works off an estimate of the loss function from a sample of the training set. Scales better than normal gradient descent. Momentum and learning rate decay are good for knowing which way to go in gradient descent.</p>
+<p>In backpropagation all derivative applied to same parameters, so they’re very correlated. This is bad for stochastic gradient descent. Gradients are either zero (don’t remember the past well) or infinity. The latter is fixed by gradient clipping and the former by using LSTMs.</p>
+<p>The default activation function for LSTMs is the hyperbolic tangent (tanh), which outputs values between -1 and 1. This is the preferred range for the time series data: MinMaxScaler(feature_range = (-1, 1)).</p>
+<p>Keras’ LSTM expects the input as well as the target data to be in a specific shape. The input has to be a 3-d array of size num_samples, num_timesteps, num_features.</p>
+<p>Wiring the LSTM hidden states to sets of consecutive outputs of the same length. For example, if we want to produce predictions for 12 months, our LSTM should have a hidden state length of 12.</p>
 <p>One major issue with layer_simple_rnn is that although it should theoretically be able to retain at time t information about inputs seen many time steps before, in practice, such long-term dependencies are impossible to learn. This is due to the vanishing gradient problem, an effect that is similar to what is observed with non-recurrent networks (feed forward networks) that are many layers deep: as you keep adding layers to a network, the network eventually becomes un-trainable.</p>
-<p>A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way.</p>
-<p>ng thinks dl easier of matrix is n x m instead of m x n so target is a row vector instead of a column vector</p>
-<p>Loss function applies to a single training example while the cost function applies to many. The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.</p>
-<p>A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗∗ c ∗∗ d, a) is to use <code>X_flatten = X.reshape(X.shape[0], -1).T</code></p>
+<p>A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way. Loss function applies to a single training example while the cost function applies to many. The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.</p>
+<p>A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗ c ∗ d, a) is to use <code>X_flatten = X.reshape(X.shape[0], -1).T</code></p>
 <p>One common preprocessing step in machine learning is to center and standardize your dataset, meaning that you substract the mean of the whole numpy array from each example, and then divide each example by the standard deviation of the whole numpy array. But for picture datasets, it is simpler and more convenient and works almost as well to just divide every row of the dataset by 255 (the maximum value of a pixel channel).</p>
 <p>Scale images: train_set_x = train_set_x_flatten/255.</p>
-<p>Common steps for pre-processing a new dataset are: 1) Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, …), 2) Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1), 3) “Standardize” the data</p>
-<p>Tuning the learning rate (which is an example of a “hyperparameter”) can make a big difference to the algorithm. You will see more examples of this later in this course!</p>
+<p>Common steps for pre-processing a new dataset are: 1) Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, …), 2) Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1), 3) Standardize the data</p>
 <p>The tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.</p>
-<p>Initialize weights randomly but set bias to zero.</p>
-<p>You have built a network using the tanh activation for all the hidden units. You initialize the weights to relative large values, using np.random.randn(..,..)*1000. What will happen? This will cause the inputs of the tanh to also be very large, thus causing gradients to be close to zero. The optimization algorithm will thus become slow.</p>
-<p>No. Sigmoid outputs a value between 0 and 1 which makes it a very good choice for binary classification. You can classify as 0 if the output is less than 0.5 and classify as 1 if the output is more than 0.5. It can be done with tanh as well but it is less convenient as the output is between -1 and 1.</p>
-<p>What is the “cache” used for in our implementation of forward propagation and backward propagation? We use it to pass variables computed during forward propagation to the corresponding backward propagation step. It contains useful values for backward propagation to compute derivatives.</p>
+<p>Sigmoid outputs a value between 0 and 1 which makes it a very good choice for binary classification. You can classify as 0 if the output is less than 0.5 and classify as 1 if the output is more than 0.5. It can be done with tanh as well but it is less convenient as the output is between -1 and 1.</p>
 <p>The deeper layers of a neural network are typically computing more complex features of the input than the earlier layers.</p>
-<p>During backpropagation, the corresponding backward function also needs to know what is the activation function for layer l, since the gradient depends on it.</p>
-<ol style="list-style-type: lower-roman">
-<li>To compute the function using a shallow network circuit, you will need a large network (where we measure size by the number of logic gates in the network), but (ii) To compute it using a deep network circuit, you need only an exponentially smaller network.</li>
-</ol>
 <p>gradient checking</p>
-<p>vanishing/exploding gradients</p>
 <p>data augmentation for images: rotate and crop</p>
-<p>ng doesn’t like dropout bc it couples optimization with regularization</p>
-<p>early stopping</p>
-<p>dropout is a regularization technique to prevent over-fitting.</p>
-<p>If you have 10,000,000 examples, how would you split the train/dev/test set? 98% train . 1% dev . 1% test</p>
-<p>The dev and test set should: Come from the same distribution</p>
-<p>If your Neural Network model seems to have high variance, what of the following would be promising things to try? Add regularization &amp; Get more training data. For high bias, make a bigger and deeper network.</p>
+<p>Andre Ng doesn’t like dropout bc it couples optimization with regularization</p>
+<p>If you have 10,000,000 examples, how would you split the train/dev/test set? 98% train . 1% dev . 1% test. The dev and test set should come from the same distribution</p>
+<p>If your Neural Network model seems to have high variance try to add regularization &amp; get more training data. For high bias, make a bigger and deeper network.</p>
 <p>What is weight decay? A regularization technique (such as L2 regularization) that results in gradient descent shrinking the weights on every iteration. As a rule of thumb, the more training examples you have, the weaker this term should be. The more parameters you have the higher this term should be.</p>
-<p>With the inverted dropout technique, at test time: You do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training.</p>
-<p>With the inverted dropout technique, at test time: You do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training</p>
-<p>Increasing the parameter keep_prob from (say) 0.5 to 0.6 will likely cause the following: Reducing the regularization effect &amp; Causing the neural network to end up with a lower training set error</p>
+<p>Tthe inverted dropout technique: At test time you do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training.</p>
 <p>Normalization makes the cost function faster to optimize</p>
-<p>Which of these techniques are useful for reducing variance (reducing overfitting)? Dropout, L2 regularization Data augmentation</p>
-<p>Different initializations lead to different results</p>
-<p>Random initialization is used to break symmetry and make sure different hidden units can learn different things</p>
-<p>Don’t intialize to values that are too large</p>
-<p>He initialization works well for networks with ReLU activations.</p>
+<p>Techniques for reducing variance (reducing overfitting)? Dropout, L2 regularization, Data augmentation</p>
 <p>Do a loss vs learning rate plot to pick a good one. It’s the key thing to set.</p>
-<p>learning rate annealing: decrease learning rate as you reach the minimum.</p>
-<p>If you try training for more epochs, you’ll notice that we start to overfit, which means that our model is learning to recognize the specific images in the training set, rather than generalizing such that we also get good results on the validation set. One way to fix this is to effectively create more data, through data augmentation. This refers to randomly changing the images in ways that shouldn’t impact their interpretation, such as horizontal flipping, zooming, and rotating.</p>
-<p>mse: loss function for regression</p>
-<p>Cross-entropy: loss function for classification</p>
-<p>Gradient descent: a generic method that can optimize any differentiable loss function</p>
-<p>Analtycial soltion for linear modela nd MSE effectivr when: Small number of features</p>
-<p>There is an analytical solution for linear regression parameters and MSE loss, but we usually prefer gradient descent optimization over it. What are the reasons?</p>
-<ul>
-<li>Gradient descent doesn’t require to invert a matrix</li>
-<li>Gradient descent is more scalable and can be applied for problems with high number of features</li>
-</ul>
-<p>Number of params in logistic regression: k*d where k is the number of classes and d is the size of the dimensional space.</p>
+<p>Learning rate annealing: decrease learning rate as you reach the minimum.</p>
+<p>Training for more epochs will lead to overfitting.</p>
+<p>There is an analytical solution for linear regression parameters and MSE loss, but we usually prefer gradient descent optimization over it. This is because gradient descent doesn’t require matrix inversion and it is more scalable and can be applied for problems with high number of features</p>
+<p>Number of params in logistic regression: k multiplied by d where k is the number of classes and d is the size of the dimensional space.</p>
 <p>Large model weights can indicate that model is overfitted</p>
 <p>Weight penalty drives model parameters closer to zero and prevents the model from being too sensitive to small changes in features</p>
-<p>disadvantages do model validation on holdout sample can give biased quality estimates for small samples</p>
-<p>Stochastic gradient descent: Noisy but evntually converge to minimum. Needs only one example at each step. Can be used online. Choose the learning rate carefully.</p>
-<p>mini-batch gradient descent</p>
-<p>Gradient descent extensions: adagrad, rms prop,adam</p>
-<p>The best nonlinearity functions to use in a Multilayer perceptron are step functions as they allow to reconstruct the decision boundary with better precision? No. Step function gradient with the respect to its input is zero almost everywhere - thus the resulting network can’t be trained via backpropagation.</p>
+<p>Gradient descent extensions: adagrad, rms prop, adam, mini-batch gradient descent</p>
 <p>A dense layer applies a linear transformation to its input</p>
-<p>For an MLP to work, the nonlinearity function must have a finite upper bound? No, widely used ReLu has no upper bound.</p>
-<p>How many dimensions will a derivative of a 1-D vector by a 2-D matrix have? 3. The rule of thumb is that the final derivative will consist of derivatives of each component of the output by each component of input. So, for each element of the output vector there will be a 2-D matrix of derivatives, 3 dimensions in total.</p>
-<p>Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU better. Leaky ReLU best to avoid non-activation.</p>
-<p>Dropout is a regularization technique.</p>
-<p>Convulations and pooling layes are invariant to translation of images.</p>
+<p>Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU is better and Leaky ReLU is the best to avoid non-activation.</p>
 <p>We have reviewed the activation function, weights initializations, and a bunch of new techniques that help to train better networks. What are the takeaways? First, always use ReLU activation because it doesn’t saturate and it converges faster. Use He et al initialization which is square root of two divided by square root of number of inputs. Try to add bash normalization or dropout, maybe it will converge better. Try to augment your training data.</p>
-<p>You should use dropout (randomly eliminate nodes) only in training.</p>
-<p>Apply dropout both during forward and backward propagation.</p>
-<p>During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5.</p>
-<p>inverted dropout</p>
-<p>Gradient checking verifies closeness between the gradients from backpropagation and the numerical approximation of the gradient (computed using forward propagation).</p>
-<p>Gradient checking is slow, so we don’t run it in every iteration of training. You would usually run it only to make sure your code is correct, then turn it off and use backprop for the actual learning process.</p>
-<p>In batch GD the cost should be monotone decreasing. In mini-batch it doesn’t have to be since it’s like training on a different training set every time. It should still be trending downwards.</p>
-<p>For small training set use ( &lt; 2000) use batch GD. Use batches of 64, 128, 256, 512 otherwise which should speed up training. Make sure it fits in meemory. MIni-batch size is another hyperparameter.</p>
-<p>RMS PRop</p>
-<p>ADAM: Adam combines the advantages of RMSProp and momentum, We usually use “default” values for the hyperparameters, The learning rate hyperparameter α in Adam usually needs to be tuned.</p>
-<p>Learning rate decay</p>
-<p>epoch: one pass through the training set</p>
-<p>If batch gradient descent in a deep network is taking excessively long to find a value of the parameters that achieves a small value for the cost function: Try mini-batch gradient descent, Try better random initialization for the weights, Try Adam, Try tuning the learning rate.</p>
-<p>A variant of this is Stochastic Gradient Descent (SGD), which is equivalent to mini-batch gradient descent where each mini-batch has just 1 example. When the training set is large, SGD can be faster. But the parameters will “oscillate” toward the minimum rather than converge smoothly.</p>
-<p>In practice, you’ll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples.</p>
-<p>The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step. You have to tune a learning rate hyperparameter alpha. With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large).</p>
-<p>Shuffling and Partitioning are the two steps required to build mini-batches. Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.</p>
-<p>Momentum takes into account the past gradients to smooth out the update</p>
-<p>Momentum takes past gradients into account to smooth out the steps of gradient descent. It can be applied with batch gradient descent, mini-batch gradient descent or stochastic gradient descent. You have to tune a momentum hyperparameter beta and a learning rate alpha.</p>
-<p>Mini-batch Gradient descent, Mini-batch Gradient descent with momentum, mini-batch with Adam. Adam usually performs best. Some advantages of Adam include: Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum), usually works well even with little tuning of hyperparameters (except alpha).</p>
-<p>Use random values.</p>
+<p>Gradient checking verifies closeness between the gradients from backpropagation and the numerical approximation of the gradient (computed using forward propagation). Gradient checking is slow, so we don’t run it in every iteration of training. You would usually run it only to make sure your code is correct, then turn it off and use backprop for the actual learning process. In batch GD the cost should be monotone decreasing. In mini-batch it doesn’t have to be since it’s like training on a different training set every time. It should still be trending downwards. For small training set use ( &lt; 2000) use batch GD. Use batches of 64, 128, 256, 512 otherwise which should speed up training. Make sure it fits in meemory. MIni-batch size is another hyperparameter.</p>
+<p>If batch gradient descent in a deep network is taking excessively long to find a value of the parameters that achieves a small value for the cost function: Try mini-batch gradient descent, Try better random initialization for the weights, Try Adam, Try tuning the learning rate. A variant of this is Stochastic Gradient Descent (SGD), which is equivalent to mini-batch gradient descent where each mini-batch has just 1 example. When the training set is large, SGD can be faster. But the parameters will “oscillate” toward the minimum rather than converge smoothly. In practice, you’ll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples. The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step. You have to tune a learning rate hyperparameter alpha. With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large). Shuffling and Partitioning are the two steps required to build mini-batches. Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128. Mini-batch Gradient descent, Mini-batch Gradient descent with momentum, mini-batch with Adam. Adam usually performs best. Some advantages of Adam include: Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum), usually works well even with little tuning of hyperparameters (except alpha).</p>
 <p>batch normalization</p>
-<p>During hyperparameter search, whether you try to babysit one model (“Panda” strategy) or train a lot of models in parallel (“Caviar”) is largely determined by computational power</p>
-<p>Which of the following statements about γ and β in Batch Norm are true? They can be learned using Adam, Gradient descent with momentum, or RMSprop, not just with gradient descent. They set the mean and variance of the linear variable z[l] of a given layer.</p>
-<p>After training a neural network with Batch Norm, at test time, to evaluate the neural network on a new example you should: Perform the needed normalizations, use μ and σ2 estimated using an exponentially weighted average across mini-batches seen during training</p>
 
-</div>
 </div>
             </section>
 
