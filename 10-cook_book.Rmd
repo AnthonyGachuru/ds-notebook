@@ -54,6 +54,248 @@ ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth()
 ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))
 ```
 
+## Featuretools Example
+
+```{python, eval = F}
+#https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table
+
+import numpy as np
+import pandas as pd
+import featuretools as ft
+
+df = pd.read_csv('iris.csv')
+df = df.reset_index()
+
+es = ft.EntitySet(id = "test") #.drop(columns = ['species'], axis = 1)
+es = es.entity_from_dataframe(entity_id = 'd', dataframe = df, make_index=True, index='ind')
+
+# produces 626 features
+fm, features = ft.dfs(
+    entityset = es, 
+    target_entity = 'd',
+    agg_primitives = ['mean', 'max', 'percent_true', 'last'],
+    trans_primitives = ['subtract', 'divide']
+)
+
+# produces no new features
+_, features2 = ft.dfs(
+    entityset = es, 
+    target_entity = 'd',
+    max_depth = 2
+)
+```
+
+## Skimage Example
+
+```{python, eval = F}
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import io
+from skimage.transform import resize
+
+image = io.imread(r'test.jpg')
+image2 = resize(image,(200, 200),mode='edge')
+
+plt.imshow(image)
+plt.show()
+```
+
+## SHAP Example
+
+```{python, eval = F}
+import shap
+
+mdl.fit(X_train, y_train)
+explainer = shap.TreeExplainer(clf)
+shap_values = explainer.shap_values(X_train)
+
+#all records explained (both lines of code)
+shap.summary_plot(shap_values, X_train)
+shap.summary_plot(shap_values, X_train, plot_type = "bar")
+
+df_shap = pd.DataFrame(list(zip(np.mean(shap_values, axis = 0), X_train.columns)),
+                       columns = ['shap_mean', 'feature'])
+df_shap = df_shap[['feature', 'shap_mean']]
+
+df_shap['shap_mean_abs'] = np.absolute(df_shap['shap_mean'])
+df_shap.sort_values(['shap_mean_abs'], ascending = False, inplace = True)
+```
+
+## Hyperband CV Example
+
+```{python, eval = F}
+#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
+
+from civismlext.hyperband import HyperbandSearchCV
+```
+
+## CSV To DB
+
+```{python, eval = F}
+#source: http://bit.ly/294gmmP
+
+import pandas as pd
+import sqlite3
+
+# pass in column names for each CSV
+r_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
+ratings = pd.read_csv(fdata, sep=';', names=r_cols, compression='gzip')
+
+m_cols = ['movie_id', 'title', 'genres']
+movies = pd.read_csv(fitem, sep=';', names=m_cols, dtype={'title': object, 'genres': object})
+
+sqlite_norm = "movielens-norm.sqlite"
+
+if os.path.exists(sqlite_norm):
+    os.unlink(sqlite_norm)
+
+conn = sqlite3.connect(sqlite_norm)
+conn.text_factory = str   # Shut up problems with Unicode
+ratings.to_sql("ratings", conn)
+movies.to_sql("movies", conn)
+conn.close()
+```
+
+```{bash, eval = F}
+sqlite3 db_name.db
+.mode csv db_name
+.import data.csv db_name
+```
+
+# Xgboost & Light GBM Example
+
+```{python, eval = F}
+import numpy as np
+import pandas as pd
+import time
+import xgboost as xgb
+import lightgbm as lgb
+from scipy.stats import randint as sp_randint
+from mlxtend.classifier import StackingClassifier
+from skopt import BayesSearchCV
+from skopt.space import Real, Integer, Categorical
+
+
+param_grid_lgb = {
+    'learning_rate': [0.005, 0.05, 0.1], 'n_estimators': [10, 100, 250, 500],
+    'num_leaves': [6, 50, 100, 250, 500], 'boosting_type': ['gbdt', 'rf'],
+    'colsample_bytree' : [0.65, 1], 'subsample': [0.7, 0.9],
+    'reg_alpha': [0, 1.2], 'reg_lambda': [0, 2],
+    }
+
+param_grid_xgb = {'bootstrap': [True, False],
+ 'max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
+ 'max_features': ['auto', 'sqrt'],
+ 'min_samples_leaf': [1, 2, 4],
+ 'min_samples_split': [2, 5, 10],
+ 'n_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]}
+
+clf_tuned = sk_ms.RandomizedSearchCV(clf, param_grid, cv = 5, scoring = 'f1', n_jobs = -1)
+```
+
+## Bayesian CV
+
+```{python, eval = F}
+import numpy as np
+import pandas as pd
+import lightgbm as lgb
+from scipy.stats import randint as sp_randint
+from skopt import BayesSearchCV
+from skopt.space import Real, Integer, Categorical
+
+#v1: Light GBM
+
+bayes_cv_tuner = BayesSearchCV(
+    estimator = lgb.LGBMClassifier(
+        objective='binary',
+        metric='auc',
+        n_jobs=1,
+        verbose=0
+    ),
+    search_spaces = {
+        'learning_rate': (0.01, 1.0, 'log-uniform'),
+        'num_leaves': (1, 100),      
+        'max_depth': (0, 50),
+        'min_child_samples': (0, 50),
+        'max_bin': (100, 1000),
+        'subsample': (0.01, 1.0, 'uniform'),
+        'subsample_freq': (0, 10),
+        'colsample_bytree': (0.01, 1.0, 'uniform'),
+        'min_child_weight': (0, 10),
+        'subsample_for_bin': (100000, 500000),
+        'reg_lambda': (1e-9, 1000, 'log-uniform'),
+        'reg_alpha': (1e-9, 1.0, 'log-uniform'),
+        'scale_pos_weight': (1e-6, 500, 'log-uniform'),
+        'n_estimators': (50, 100),
+    },    
+    scoring = 'roc_auc',
+    cv = sk_ms.StratifiedKFold(
+        n_splits=3,
+        shuffle=True,
+        random_state = 42
+    ),
+    n_jobs = 3,
+    n_iter = 10,   
+    verbose = 0,
+    refit = True,
+    random_state = 42
+)
+
+result = bayes_cv_tuner.fit(X_train.values, y_train.values)
+print(result.best_score_)
+print(result.best_estimator_)
+
+#v2: XGBoost
+
+bayes_cv_tuner = BayesSearchCV(
+    estimator = xgb.XGBClassifier(
+        n_jobs = 1,
+        objective = 'binary:logistic',
+        eval_metric = 'auc',
+        silent=1,
+        tree_method='approx'
+    ),
+    search_spaces = {
+        'learning_rate': (0.01, 1.0, 'log-uniform'),
+        'min_child_weight': (0, 10),
+        'max_depth': (0, 50),
+        'max_delta_step': (0, 20),
+        'subsample': (0.01, 1.0, 'uniform'),
+        'colsample_bytree': (0.01, 1.0, 'uniform'),
+        'colsample_bylevel': (0.01, 1.0, 'uniform'),
+        'reg_lambda': (1e-9, 1000, 'log-uniform'),
+        'reg_alpha': (1e-9, 1.0, 'log-uniform'),
+        'gamma': (1e-9, 0.5, 'log-uniform'),
+        'min_child_weight': (0, 5),
+        'n_estimators': (50, 100),
+        'scale_pos_weight': (1e-6, 500, 'log-uniform')
+    },    
+    scoring = 'roc_auc',
+    cv = sk_ms.StratifiedKFold(
+        n_splits=3,
+        shuffle=True,
+        random_state=42
+    ),
+    n_jobs = 3,
+    n_iter = 10,   
+    verbose = 0,
+    refit = True,
+    random_state = 42
+)
+
+#v3
+
+param_grid = {
+    'learning_rate': Real(0.005, 0.1), 'n_estimators': Integer(10, 500),
+    'num_leaves': Integer(6, 50), 'boosting_type' : Categorical(['gbdt', 'rf']),
+    'colsample_bytree' : Real(0.65, 1), 'subsample' : Real(0.7, 0.9),
+    'reg_alpha' : Real(0, 1.2), 'reg_lambda' : Real(0, 2),
+    }
+
+clf_tuned = BayesSearchCV(clf, param_grid, cv = 5, random_state = 8, scoring = 'f1', n_jobs = -1)
+
+```
+
 ## Pyspark
 
 ```{python, eval = FALSE}

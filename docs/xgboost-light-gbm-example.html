@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 13 Xgboost &amp; Light GBM Example | Data Science Cribsheet</title>
+  <meta name="description" content="A collection of quick notes on the field.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 13 Xgboost &amp; Light GBM Example | Data Science Cribsheet" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A collection of quick notes on the field." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Xgboost &amp; Light GBM Example | Data Science Cribsheet" />
+  
+  <meta name="twitter:description" content="A collection of quick notes on the field." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="cook-book.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DS Cribsheet</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workflow</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preamble"><i class="fa fa-check"></i><b>1.1</b> Preamble</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#preparation"><i class="fa fa-check"></i><b>1.2.1</b> Preparation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#import"><i class="fa fa-check"></i><b>1.2.2</b> Import</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#tidy"><i class="fa fa-check"></i><b>1.2.3</b> Tidy</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#transform"><i class="fa fa-check"></i><b>1.2.4</b> Transform</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#visualize"><i class="fa fa-check"></i><b>1.2.5</b> Visualize</a></li>
+<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#model"><i class="fa fa-check"></i><b>1.2.6</b> Model</a></li>
+<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
+<li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#general"><i class="fa fa-check"></i><b>1.3.1</b> General</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.3.2</b> Data</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#other-ml"><i class="fa fa-check"></i><b>1.3.3</b> Other ML</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#communicate-1"><i class="fa fa-check"></i><b>1.3.4</b> Communicate</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#deploy-maintain"><i class="fa fa-check"></i><b>1.3.5</b> Deploy &amp; Maintain</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#notes"><i class="fa fa-check"></i><b>1.4</b> Notes</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#vanderplas-jupyter"><i class="fa fa-check"></i><b>1.4.1</b> Vanderplas Jupyter</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.4.2</b> Sample R Pipeline</a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#other"><i class="fa fa-check"></i><b>1.4.3</b> Other</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="pre-modeling.html"><a href="pre-modeling.html"><i class="fa fa-check"></i><b>2</b> Pre-Modeling</a><ul>
+<li class="chapter" data-level="2.1" data-path="pre-modeling.html"><a href="pre-modeling.html#import-2"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-2"><i class="fa fa-check"></i><b>2.1.1</b> General</a></li>
+<li class="chapter" data-level="2.1.2" data-path="pre-modeling.html"><a href="pre-modeling.html#sql"><i class="fa fa-check"></i><b>2.1.2</b> SQL</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="pre-modeling.html"><a href="pre-modeling.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-modeling.html"><a href="pre-modeling.html#transform-1"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-3"><i class="fa fa-check"></i><b>2.3.1</b> General</a></li>
+<li class="chapter" data-level="2.3.2" data-path="pre-modeling.html"><a href="pre-modeling.html#missingness-imputation"><i class="fa fa-check"></i><b>2.3.2</b> Missingness &amp; Imputation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="pre-modeling.html"><a href="pre-modeling.html#visualize-1"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
+<li class="chapter" data-level="2.5" data-path="pre-modeling.html"><a href="pre-modeling.html#general-4"><i class="fa fa-check"></i><b>2.5</b> General</a></li>
+<li class="chapter" data-level="2.6" data-path="pre-modeling.html"><a href="pre-modeling.html#pre-processing"><i class="fa fa-check"></i><b>2.6</b> Pre-processing</a></li>
+<li class="chapter" data-level="2.7" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-engineering"><i class="fa fa-check"></i><b>2.7</b> Feature Engineering</a></li>
+<li class="chapter" data-level="2.8" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-selection"><i class="fa fa-check"></i><b>2.8</b> Feature Selection</a></li>
+<li class="chapter" data-level="2.9" data-path="pre-modeling.html"><a href="pre-modeling.html#other-1"><i class="fa fa-check"></i><b>2.9</b> Other</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="pre-modeling.html"><a href="pre-modeling.html#unbalanced-classes"><i class="fa fa-check"></i><b>2.9.1</b> Unbalanced Classes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="pre-modeling.html"><a href="pre-modeling.html#model-selection"><i class="fa fa-check"></i><b>2.10</b> Model Selection</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-5"><i class="fa fa-check"></i><b>2.10.1</b> General</a></li>
+<li class="chapter" data-level="2.10.2" data-path="pre-modeling.html"><a href="pre-modeling.html#clustering"><i class="fa fa-check"></i><b>2.10.2</b> Clustering</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="model-2.html"><a href="model-2.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-2.html"><a href="model-2.html#notes-1"><i class="fa fa-check"></i><b>3.1</b> Notes</a></li>
+<li class="chapter" data-level="3.2" data-path="model-2.html"><a href="model-2.html#supervised-1"><i class="fa fa-check"></i><b>3.2</b> Supervised</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="model-2.html"><a href="model-2.html#linear-regression"><i class="fa fa-check"></i><b>3.2.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="3.2.2" data-path="model-2.html"><a href="model-2.html#selection"><i class="fa fa-check"></i><b>3.2.2</b> Selection</a></li>
+<li class="chapter" data-level="3.2.3" data-path="model-2.html"><a href="model-2.html#proscons"><i class="fa fa-check"></i><b>3.2.3</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.2.4" data-path="model-2.html"><a href="model-2.html#other-2"><i class="fa fa-check"></i><b>3.2.4</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="model-2.html"><a href="model-2.html#ridgelasso"><i class="fa fa-check"></i><b>3.3</b> Ridge/Lasso</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="model-2.html"><a href="model-2.html#intro"><i class="fa fa-check"></i><b>3.3.1</b> Intro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="model-2.html"><a href="model-2.html#logistic-regression"><i class="fa fa-check"></i><b>3.4</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="model-2.html"><a href="model-2.html#intro-1"><i class="fa fa-check"></i><b>3.4.1</b> Intro</a></li>
+<li class="chapter" data-level="3.4.2" data-path="model-2.html"><a href="model-2.html#assumptions"><i class="fa fa-check"></i><b>3.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.4.3" data-path="model-2.html"><a href="model-2.html#evaluation"><i class="fa fa-check"></i><b>3.4.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.4.4" data-path="model-2.html"><a href="model-2.html#proscons-1"><i class="fa fa-check"></i><b>3.4.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.4.5" data-path="model-2.html"><a href="model-2.html#code-example"><i class="fa fa-check"></i><b>3.4.5</b> Code Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="model-2.html"><a href="model-2.html#poisson-regression"><i class="fa fa-check"></i><b>3.5</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="model-2.html"><a href="model-2.html#intro-2"><i class="fa fa-check"></i><b>3.5.1</b> Intro</a></li>
+<li class="chapter" data-level="3.5.2" data-path="model-2.html"><a href="model-2.html#assumptions-1"><i class="fa fa-check"></i><b>3.5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.5.3" data-path="model-2.html"><a href="model-2.html#evaluation-1"><i class="fa fa-check"></i><b>3.5.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="model-2.html"><a href="model-2.html#proscons-2"><i class="fa fa-check"></i><b>3.5.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="model-2.html"><a href="model-2.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.6</b> Generalized Additive Models</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="model-2.html"><a href="model-2.html#intro-3"><i class="fa fa-check"></i><b>3.6.1</b> Intro</a></li>
+<li class="chapter" data-level="3.6.2" data-path="model-2.html"><a href="model-2.html#assumptions-2"><i class="fa fa-check"></i><b>3.6.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.6.3" data-path="model-2.html"><a href="model-2.html#evaluation-2"><i class="fa fa-check"></i><b>3.6.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.6.4" data-path="model-2.html"><a href="model-2.html#proscons-3"><i class="fa fa-check"></i><b>3.6.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="model-2.html"><a href="model-2.html#k-means-clustering-us"><i class="fa fa-check"></i><b>3.7</b> K-Means Clustering [US]</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="model-2.html"><a href="model-2.html#intro-4"><i class="fa fa-check"></i><b>3.7.1</b> Intro</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="model-2.html"><a href="model-2.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.8</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="model-2.html"><a href="model-2.html#assumptions-3"><i class="fa fa-check"></i><b>3.8.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.8.2" data-path="model-2.html"><a href="model-2.html#characteristics"><i class="fa fa-check"></i><b>3.8.2</b> Characteristics</a></li>
+<li class="chapter" data-level="3.8.3" data-path="model-2.html"><a href="model-2.html#evaluation-3"><i class="fa fa-check"></i><b>3.8.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.8.4" data-path="model-2.html"><a href="model-2.html#proscons-4"><i class="fa fa-check"></i><b>3.8.4</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="model-2.html"><a href="model-2.html#pca"><i class="fa fa-check"></i><b>3.9</b> PCA</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="model-2.html"><a href="model-2.html#intro-5"><i class="fa fa-check"></i><b>3.9.1</b> Intro</a></li>
+<li class="chapter" data-level="3.9.2" data-path="model-2.html"><a href="model-2.html#assumptions-4"><i class="fa fa-check"></i><b>3.9.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.9.3" data-path="model-2.html"><a href="model-2.html#characteristics-1"><i class="fa fa-check"></i><b>3.9.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.9.4" data-path="model-2.html"><a href="model-2.html#evaluation-4"><i class="fa fa-check"></i><b>3.9.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.9.5" data-path="model-2.html"><a href="model-2.html#proscons-5"><i class="fa fa-check"></i><b>3.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.9.6" data-path="model-2.html"><a href="model-2.html#other-3"><i class="fa fa-check"></i><b>3.9.6</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="model-2.html"><a href="model-2.html#knn"><i class="fa fa-check"></i><b>3.10</b> KNN</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="model-2.html"><a href="model-2.html#intro-6"><i class="fa fa-check"></i><b>3.10.1</b> Intro</a></li>
+<li class="chapter" data-level="3.10.2" data-path="model-2.html"><a href="model-2.html#assumptions-5"><i class="fa fa-check"></i><b>3.10.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.10.3" data-path="model-2.html"><a href="model-2.html#characteristics-2"><i class="fa fa-check"></i><b>3.10.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.10.4" data-path="model-2.html"><a href="model-2.html#evaluation-5"><i class="fa fa-check"></i><b>3.10.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.10.5" data-path="model-2.html"><a href="model-2.html#proscons-6"><i class="fa fa-check"></i><b>3.10.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="model-2.html"><a href="model-2.html#svm"><i class="fa fa-check"></i><b>3.11</b> SVM</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="model-2.html"><a href="model-2.html#intro-7"><i class="fa fa-check"></i><b>3.11.1</b> Intro</a></li>
+<li class="chapter" data-level="3.11.2" data-path="model-2.html"><a href="model-2.html#assumptions-6"><i class="fa fa-check"></i><b>3.11.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.11.3" data-path="model-2.html"><a href="model-2.html#characteristics-3"><i class="fa fa-check"></i><b>3.11.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.11.4" data-path="model-2.html"><a href="model-2.html#evaluation-6"><i class="fa fa-check"></i><b>3.11.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.11.5" data-path="model-2.html"><a href="model-2.html#proscons-7"><i class="fa fa-check"></i><b>3.11.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.12" data-path="model-2.html"><a href="model-2.html#decision-tree"><i class="fa fa-check"></i><b>3.12</b> Decision Tree</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="model-2.html"><a href="model-2.html#intro-8"><i class="fa fa-check"></i><b>3.12.1</b> Intro</a></li>
+<li class="chapter" data-level="3.12.2" data-path="model-2.html"><a href="model-2.html#assumptions-7"><i class="fa fa-check"></i><b>3.12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.12.3" data-path="model-2.html"><a href="model-2.html#characteristics-4"><i class="fa fa-check"></i><b>3.12.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.12.4" data-path="model-2.html"><a href="model-2.html#evaluation-7"><i class="fa fa-check"></i><b>3.12.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.12.5" data-path="model-2.html"><a href="model-2.html#proscons-8"><i class="fa fa-check"></i><b>3.12.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.13" data-path="model-2.html"><a href="model-2.html#bagging"><i class="fa fa-check"></i><b>3.13</b> Bagging</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="model-2.html"><a href="model-2.html#intro-9"><i class="fa fa-check"></i><b>3.13.1</b> Intro</a></li>
+<li class="chapter" data-level="3.13.2" data-path="model-2.html"><a href="model-2.html#assumptions-8"><i class="fa fa-check"></i><b>3.13.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.13.3" data-path="model-2.html"><a href="model-2.html#characteristics-5"><i class="fa fa-check"></i><b>3.13.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.13.4" data-path="model-2.html"><a href="model-2.html#evaluation-8"><i class="fa fa-check"></i><b>3.13.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.13.5" data-path="model-2.html"><a href="model-2.html#proscons-9"><i class="fa fa-check"></i><b>3.13.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.14" data-path="model-2.html"><a href="model-2.html#random-forest"><i class="fa fa-check"></i><b>3.14</b> Random Forest</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="model-2.html"><a href="model-2.html#intro-10"><i class="fa fa-check"></i><b>3.14.1</b> Intro</a></li>
+<li class="chapter" data-level="3.14.2" data-path="model-2.html"><a href="model-2.html#assumptions-9"><i class="fa fa-check"></i><b>3.14.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.14.3" data-path="model-2.html"><a href="model-2.html#characteristics-6"><i class="fa fa-check"></i><b>3.14.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.14.4" data-path="model-2.html"><a href="model-2.html#evaluation-9"><i class="fa fa-check"></i><b>3.14.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.14.5" data-path="model-2.html"><a href="model-2.html#proscons-10"><i class="fa fa-check"></i><b>3.14.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="model-2.html"><a href="model-2.html#boosting"><i class="fa fa-check"></i><b>3.15</b> Boosting</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="model-2.html"><a href="model-2.html#intro-11"><i class="fa fa-check"></i><b>3.15.1</b> Intro</a></li>
+<li class="chapter" data-level="3.15.2" data-path="model-2.html"><a href="model-2.html#assumptions-10"><i class="fa fa-check"></i><b>3.15.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.15.3" data-path="model-2.html"><a href="model-2.html#characteristics-7"><i class="fa fa-check"></i><b>3.15.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.15.4" data-path="model-2.html"><a href="model-2.html#evaluation-10"><i class="fa fa-check"></i><b>3.15.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.15.5" data-path="model-2.html"><a href="model-2.html#proscons-11"><i class="fa fa-check"></i><b>3.15.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.16" data-path="model-2.html"><a href="model-2.html#association-rule-mining"><i class="fa fa-check"></i><b>3.16</b> Association Rule Mining</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="model-2.html"><a href="model-2.html#intro-12"><i class="fa fa-check"></i><b>3.16.1</b> Intro</a></li>
+<li class="chapter" data-level="3.16.2" data-path="model-2.html"><a href="model-2.html#assumptions-11"><i class="fa fa-check"></i><b>3.16.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.16.3" data-path="model-2.html"><a href="model-2.html#characteristics-8"><i class="fa fa-check"></i><b>3.16.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.16.4" data-path="model-2.html"><a href="model-2.html#evaluation-11"><i class="fa fa-check"></i><b>3.16.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.16.5" data-path="model-2.html"><a href="model-2.html#proscons-12"><i class="fa fa-check"></i><b>3.16.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.17" data-path="model-2.html"><a href="model-2.html#naive-bayes"><i class="fa fa-check"></i><b>3.17</b> Naïve Bayes</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="model-2.html"><a href="model-2.html#intro-13"><i class="fa fa-check"></i><b>3.17.1</b> Intro</a></li>
+<li class="chapter" data-level="3.17.2" data-path="model-2.html"><a href="model-2.html#assumptions-12"><i class="fa fa-check"></i><b>3.17.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.17.3" data-path="model-2.html"><a href="model-2.html#characteristics-9"><i class="fa fa-check"></i><b>3.17.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.17.4" data-path="model-2.html"><a href="model-2.html#evaluation-12"><i class="fa fa-check"></i><b>3.17.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.17.5" data-path="model-2.html"><a href="model-2.html#proscons-13"><i class="fa fa-check"></i><b>3.17.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.18" data-path="model-2.html"><a href="model-2.html#lda"><i class="fa fa-check"></i><b>3.18</b> LDA</a><ul>
+<li class="chapter" data-level="3.18.1" data-path="model-2.html"><a href="model-2.html#intro-14"><i class="fa fa-check"></i><b>3.18.1</b> Intro</a></li>
+<li class="chapter" data-level="3.18.2" data-path="model-2.html"><a href="model-2.html#assumptions-13"><i class="fa fa-check"></i><b>3.18.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.18.3" data-path="model-2.html"><a href="model-2.html#characteristics-10"><i class="fa fa-check"></i><b>3.18.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.18.4" data-path="model-2.html"><a href="model-2.html#evaluation-13"><i class="fa fa-check"></i><b>3.18.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.18.5" data-path="model-2.html"><a href="model-2.html#proscons-14"><i class="fa fa-check"></i><b>3.18.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.19" data-path="model-2.html"><a href="model-2.html#qda"><i class="fa fa-check"></i><b>3.19</b> QDA</a><ul>
+<li class="chapter" data-level="3.19.1" data-path="model-2.html"><a href="model-2.html#intro-15"><i class="fa fa-check"></i><b>3.19.1</b> Intro</a></li>
+<li class="chapter" data-level="3.19.2" data-path="model-2.html"><a href="model-2.html#assumptions-14"><i class="fa fa-check"></i><b>3.19.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.19.3" data-path="model-2.html"><a href="model-2.html#characteristics-11"><i class="fa fa-check"></i><b>3.19.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.19.4" data-path="model-2.html"><a href="model-2.html#evaluation-14"><i class="fa fa-check"></i><b>3.19.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.19.5" data-path="model-2.html"><a href="model-2.html#proscons-15"><i class="fa fa-check"></i><b>3.19.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="3.20" data-path="model-2.html"><a href="model-2.html#datacamp-nonlinear-modeling-in-r-with-gams"><i class="fa fa-check"></i><b>3.20</b> DataCamp: Nonlinear Modeling in R with GAMs</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="hierarchical-models.html"><a href="hierarchical-models.html"><i class="fa fa-check"></i><b>4</b> Hierarchical Models</a><ul>
+<li class="chapter" data-level="4.1" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-selectionevaluation"><i class="fa fa-check"></i><b>4.1</b> Model Selection/Evaluation</a></li>
+<li class="chapter" data-level="4.2" data-path="hierarchical-models.html"><a href="hierarchical-models.html#model-explanability"><i class="fa fa-check"></i><b>4.2</b> Model Explanability</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>5</b> Communicate, Deploy, Maintain</a><ul>
+<li class="chapter" data-level="5.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-2"><i class="fa fa-check"></i><b>5.1</b> Communicate</a></li>
+<li class="chapter" data-level="5.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>5.2</b> Deploy</a></li>
+<li class="chapter" data-level="5.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>5.3</b> Maintain</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>6</b> Stats</a><ul>
+<li class="chapter" data-level="6.1" data-path="stats.html"><a href="stats.html#general-6"><i class="fa fa-check"></i><b>6.1</b> General</a><ul>
+<li class="chapter" data-level="" data-path="stats.html"><a href="stats.html#introduction-to-data"><i class="fa fa-check"></i>Introduction to Data</a></li>
+<li class="chapter" data-level="6.1.1" data-path="stats.html"><a href="stats.html#statistical-tests"><i class="fa fa-check"></i><b>6.1.1</b> Statistical Tests</a></li>
+<li class="chapter" data-level="6.1.2" data-path="stats.html"><a href="stats.html#stats-for-hackers"><i class="fa fa-check"></i><b>6.1.2</b> Stats For Hackers</a></li>
+<li class="chapter" data-level="6.1.3" data-path="stats.html"><a href="stats.html#think-stats"><i class="fa fa-check"></i><b>6.1.3</b> Think Stats</a></li>
+<li class="chapter" data-level="6.1.4" data-path="stats.html"><a href="stats.html#ab-testing-overview"><i class="fa fa-check"></i><b>6.1.4</b> AB Testing Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="stats.html"><a href="stats.html#datacamp-experimental-design"><i class="fa fa-check"></i><b>6.2</b> DataCamp: Experimental Design</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>7</b> Time Series</a><ul>
+<li class="chapter" data-level="7.1" data-path="time-series.html"><a href="time-series.html#notes-2"><i class="fa fa-check"></i><b>7.1</b> Notes</a></li>
+<li class="chapter" data-level="7.2" data-path="time-series.html"><a href="time-series.html#packages"><i class="fa fa-check"></i><b>7.2</b> Packages</a></li>
+<li class="chapter" data-level="7.3" data-path="time-series.html"><a href="time-series.html#data-conversion"><i class="fa fa-check"></i><b>7.3</b> Data Conversion</a></li>
+<li class="chapter" data-level="7.4" data-path="time-series.html"><a href="time-series.html#models"><i class="fa fa-check"></i><b>7.4</b> Models</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="time-series.html"><a href="time-series.html#intro-16"><i class="fa fa-check"></i><b>7.4.1</b> Intro</a></li>
+<li class="chapter" data-level="7.4.2" data-path="time-series.html"><a href="time-series.html#assumptions-15"><i class="fa fa-check"></i><b>7.4.2</b> Assumptions</a></li>
+<li class="chapter" data-level="7.4.3" data-path="time-series.html"><a href="time-series.html#characteristics-12"><i class="fa fa-check"></i><b>7.4.3</b> Characteristics</a></li>
+<li class="chapter" data-level="7.4.4" data-path="time-series.html"><a href="time-series.html#evaluation-15"><i class="fa fa-check"></i><b>7.4.4</b> Evaluation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="time-series.html"><a href="time-series.html#proscons-16"><i class="fa fa-check"></i><b>7.4.5</b> Pros/Cons</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="time-series.html"><a href="time-series.html#dsp"><i class="fa fa-check"></i><b>7.5</b> DSP</a></li>
+<li class="chapter" data-level="7.6" data-path="time-series.html"><a href="time-series.html#forecasting-principles-practice"><i class="fa fa-check"></i><b>7.6</b> Forecasting: Principles &amp; Practice</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="time-series.html"><a href="time-series.html#c1-3"><i class="fa fa-check"></i><b>7.6.1</b> C1-3</a></li>
+<li class="chapter" data-level="7.6.2" data-path="time-series.html"><a href="time-series.html#c4"><i class="fa fa-check"></i><b>7.6.2</b> C4</a></li>
+<li class="chapter" data-level="7.6.3" data-path="time-series.html"><a href="time-series.html#c5"><i class="fa fa-check"></i><b>7.6.3</b> C5</a></li>
+<li class="chapter" data-level="7.6.4" data-path="time-series.html"><a href="time-series.html#c6"><i class="fa fa-check"></i><b>7.6.4</b> C6</a></li>
+<li class="chapter" data-level="7.6.5" data-path="time-series.html"><a href="time-series.html#c7"><i class="fa fa-check"></i><b>7.6.5</b> C7</a></li>
+<li class="chapter" data-level="7.6.6" data-path="time-series.html"><a href="time-series.html#c8-arima"><i class="fa fa-check"></i><b>7.6.6</b> C8: arima</a></li>
+<li class="chapter" data-level="7.6.7" data-path="time-series.html"><a href="time-series.html#c9"><i class="fa fa-check"></i><b>7.6.7</b> C9</a></li>
+<li class="chapter" data-level="7.6.8" data-path="time-series.html"><a href="time-series.html#c10"><i class="fa fa-check"></i><b>7.6.8</b> C10</a></li>
+<li class="chapter" data-level="7.6.9" data-path="time-series.html"><a href="time-series.html#c11"><i class="fa fa-check"></i><b>7.6.9</b> C11</a></li>
+<li class="chapter" data-level="7.6.10" data-path="time-series.html"><a href="time-series.html#c12"><i class="fa fa-check"></i><b>7.6.10</b> C12</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="time-series.html"><a href="time-series.html#forecasting-datacamp"><i class="fa fa-check"></i><b>7.7</b> Forecasting Datacamp</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="deep-learning.html"><a href="deep-learning.html"><i class="fa fa-check"></i><b>8</b> Deep Learning</a></li>
+<li class="chapter" data-level="9" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>9</b> Probabilistic Programming</a><ul>
+<li class="chapter" data-level="9.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>9.1</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="9.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>9.2</b> Statistical Rethinking</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>10</b> Causality</a></li>
+<li class="chapter" data-level="11" data-path="distributed.html"><a href="distributed.html"><i class="fa fa-check"></i><b>11</b> Distributed</a><ul>
+<li class="chapter" data-level="11.1" data-path="distributed.html"><a href="distributed.html#general-7"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
+<li class="chapter" data-level="11.2" data-path="distributed.html"><a href="distributed.html#pyspark"><i class="fa fa-check"></i><b>11.2</b> PySpark</a></li>
+<li class="chapter" data-level="11.3" data-path="distributed.html"><a href="distributed.html#sparklyr"><i class="fa fa-check"></i><b>11.3</b> sparklyr</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="cook-book.html"><a href="cook-book.html"><i class="fa fa-check"></i><b>12</b> Cook Book</a><ul>
+<li class="chapter" data-level="12.1" data-path="cook-book.html"><a href="cook-book.html#general-8"><i class="fa fa-check"></i><b>12.1</b> General</a></li>
+<li class="chapter" data-level="12.2" data-path="cook-book.html"><a href="cook-book.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>12.2</b> Linear Regression Statsmodels</a></li>
+<li class="chapter" data-level="12.3" data-path="cook-book.html"><a href="cook-book.html#rowwise"><i class="fa fa-check"></i><b>12.3</b> Rowwise</a></li>
+<li class="chapter" data-level="12.4" data-path="cook-book.html"><a href="cook-book.html#sampling-file"><i class="fa fa-check"></i><b>12.4</b> Sampling File</a></li>
+<li class="chapter" data-level="12.5" data-path="cook-book.html"><a href="cook-book.html#sql-dummy-columns"><i class="fa fa-check"></i><b>12.5</b> SQL Dummy Columns</a></li>
+<li class="chapter" data-level="12.6" data-path="cook-book.html"><a href="cook-book.html#model-calibration"><i class="fa fa-check"></i><b>12.6</b> Model Calibration</a></li>
+<li class="chapter" data-level="12.7" data-path="cook-book.html"><a href="cook-book.html#binning-rule-of-thumb"><i class="fa fa-check"></i><b>12.7</b> Binning Rule Of Thumb</a></li>
+<li class="chapter" data-level="12.8" data-path="cook-book.html"><a href="cook-book.html#featuretools-example"><i class="fa fa-check"></i><b>12.8</b> Featuretools Example</a></li>
+<li class="chapter" data-level="12.9" data-path="cook-book.html"><a href="cook-book.html#skimage-example"><i class="fa fa-check"></i><b>12.9</b> Skimage Example</a></li>
+<li class="chapter" data-level="12.10" data-path="cook-book.html"><a href="cook-book.html#shap-example"><i class="fa fa-check"></i><b>12.10</b> SHAP Example</a></li>
+<li class="chapter" data-level="12.11" data-path="cook-book.html"><a href="cook-book.html#hyperband-cv-example"><i class="fa fa-check"></i><b>12.11</b> Hyperband CV Example</a></li>
+<li class="chapter" data-level="12.12" data-path="cook-book.html"><a href="cook-book.html#csv-to-db"><i class="fa fa-check"></i><b>12.12</b> CSV To DB</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html"><i class="fa fa-check"></i><b>13</b> Xgboost &amp; Light GBM Example</a><ul>
+<li class="chapter" data-level="13.1" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#bayesian-cv"><i class="fa fa-check"></i><b>13.1</b> Bayesian CV</a></li>
+<li class="chapter" data-level="13.2" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#pyspark-1"><i class="fa fa-check"></i><b>13.2</b> Pyspark</a></li>
+<li class="chapter" data-level="13.3" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#sparklyr-1"><i class="fa fa-check"></i><b>13.3</b> Sparklyr</a></li>
+<li class="chapter" data-level="13.4" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#parquet"><i class="fa fa-check"></i><b>13.4</b> Parquet</a></li>
+<li class="chapter" data-level="13.5" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#data-table"><i class="fa fa-check"></i><b>13.5</b> Data Table</a></li>
+<li class="chapter" data-level="13.6" data-path="xgboost-light-gbm-example.html"><a href="xgboost-light-gbm-example.html#keras"><i class="fa fa-check"></i><b>13.6</b> Keras</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science Cribsheet</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="xgboost-light-gbm-example" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Xgboost &amp; Light GBM Example</h1>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> pandas <span class="im">as</span> pd
+<span class="im">import</span> time
+<span class="im">import</span> xgboost <span class="im">as</span> xgb
+<span class="im">import</span> lightgbm <span class="im">as</span> lgb
+<span class="im">from</span> scipy.stats <span class="im">import</span> randint <span class="im">as</span> sp_randint
+<span class="im">from</span> mlxtend.classifier <span class="im">import</span> StackingClassifier
+<span class="im">from</span> skopt <span class="im">import</span> BayesSearchCV
+<span class="im">from</span> skopt.space <span class="im">import</span> Real, Integer, Categorical
+param_grid_lgb <span class="op">=</span> {
+    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.005</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>], <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>],
+    <span class="st">&#39;num_leaves&#39;</span>: [<span class="dv">6</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">250</span>, <span class="dv">500</span>], <span class="st">&#39;boosting_type&#39;</span>: [<span class="st">&#39;gbdt&#39;</span>, <span class="st">&#39;rf&#39;</span>],
+    <span class="st">&#39;colsample_bytree&#39;</span> : [<span class="fl">0.65</span>, <span class="dv">1</span>], <span class="st">&#39;subsample&#39;</span>: [<span class="fl">0.7</span>, <span class="fl">0.9</span>],
+    <span class="st">&#39;reg_alpha&#39;</span>: [<span class="dv">0</span>, <span class="fl">1.2</span>], <span class="st">&#39;reg_lambda&#39;</span>: [<span class="dv">0</span>, <span class="dv">2</span>],
+    }
+param_grid_xgb <span class="op">=</span> {<span class="st">&#39;bootstrap&#39;</span>: [<span class="va">True</span>, <span class="va">False</span>],
+ <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="va">None</span>],
+ <span class="st">&#39;max_features&#39;</span>: [<span class="st">&#39;auto&#39;</span>, <span class="st">&#39;sqrt&#39;</span>],
+ <span class="st">&#39;min_samples_leaf&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>],
+ <span class="st">&#39;min_samples_split&#39;</span>: [<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>],
+ <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">200</span>, <span class="dv">400</span>, <span class="dv">600</span>, <span class="dv">800</span>, <span class="dv">1000</span>, <span class="dv">1200</span>, <span class="dv">1400</span>, <span class="dv">1600</span>, <span class="dv">1800</span>, <span class="dv">2000</span>]}
+clf_tuned <span class="op">=</span> sk_ms.RandomizedSearchCV(clf, param_grid, cv <span class="op">=</span> <span class="dv">5</span>, scoring <span class="op">=</span> <span class="st">&#39;f1&#39;</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<div id="bayesian-cv" class="section level2">
+<h2><span class="header-section-number">13.1</span> Bayesian CV</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> pandas <span class="im">as</span> pd
+<span class="im">import</span> lightgbm <span class="im">as</span> lgb
+<span class="im">from</span> scipy.stats <span class="im">import</span> randint <span class="im">as</span> sp_randint
+<span class="im">from</span> skopt <span class="im">import</span> BayesSearchCV
+<span class="im">from</span> skopt.space <span class="im">import</span> Real, Integer, Categorical
+<span class="co">#v1: Light GBM</span>
+bayes_cv_tuner <span class="op">=</span> BayesSearchCV(
+    estimator <span class="op">=</span> lgb.LGBMClassifier(
+        objective<span class="op">=</span><span class="st">&#39;binary&#39;</span>,
+        metric<span class="op">=</span><span class="st">&#39;auc&#39;</span>,
+        n_jobs<span class="op">=</span><span class="dv">1</span>,
+        verbose<span class="op">=</span><span class="dv">0</span>
+    ),
+    search_spaces <span class="op">=</span> {
+        <span class="st">&#39;learning_rate&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;num_leaves&#39;</span>: (<span class="dv">1</span>, <span class="dv">100</span>),      
+        <span class="st">&#39;max_depth&#39;</span>: (<span class="dv">0</span>, <span class="dv">50</span>),
+        <span class="st">&#39;min_child_samples&#39;</span>: (<span class="dv">0</span>, <span class="dv">50</span>),
+        <span class="st">&#39;max_bin&#39;</span>: (<span class="dv">100</span>, <span class="dv">1000</span>),
+        <span class="st">&#39;subsample&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;uniform&#39;</span>),
+        <span class="st">&#39;subsample_freq&#39;</span>: (<span class="dv">0</span>, <span class="dv">10</span>),
+        <span class="st">&#39;colsample_bytree&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;uniform&#39;</span>),
+        <span class="st">&#39;min_child_weight&#39;</span>: (<span class="dv">0</span>, <span class="dv">10</span>),
+        <span class="st">&#39;subsample_for_bin&#39;</span>: (<span class="dv">100000</span>, <span class="dv">500000</span>),
+        <span class="st">&#39;reg_lambda&#39;</span>: (<span class="fl">1e-9</span>, <span class="dv">1000</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;reg_alpha&#39;</span>: (<span class="fl">1e-9</span>, <span class="fl">1.0</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;scale_pos_weight&#39;</span>: (<span class="fl">1e-6</span>, <span class="dv">500</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;n_estimators&#39;</span>: (<span class="dv">50</span>, <span class="dv">100</span>),
+    },    
+    scoring <span class="op">=</span> <span class="st">&#39;roc_auc&#39;</span>,
+    cv <span class="op">=</span> sk_ms.StratifiedKFold(
+        n_splits<span class="op">=</span><span class="dv">3</span>,
+        shuffle<span class="op">=</span><span class="va">True</span>,
+        random_state <span class="op">=</span> <span class="dv">42</span>
+    ),
+    n_jobs <span class="op">=</span> <span class="dv">3</span>,
+    n_iter <span class="op">=</span> <span class="dv">10</span>,   
+    verbose <span class="op">=</span> <span class="dv">0</span>,
+    refit <span class="op">=</span> <span class="va">True</span>,
+    random_state <span class="op">=</span> <span class="dv">42</span>
+)
+result <span class="op">=</span> bayes_cv_tuner.fit(X_train.values, y_train.values)
+<span class="bu">print</span>(result.best_score_)
+<span class="bu">print</span>(result.best_estimator_)
+<span class="co">#v2: XGBoost</span>
+bayes_cv_tuner <span class="op">=</span> BayesSearchCV(
+    estimator <span class="op">=</span> xgb.XGBClassifier(
+        n_jobs <span class="op">=</span> <span class="dv">1</span>,
+        objective <span class="op">=</span> <span class="st">&#39;binary:logistic&#39;</span>,
+        eval_metric <span class="op">=</span> <span class="st">&#39;auc&#39;</span>,
+        silent<span class="op">=</span><span class="dv">1</span>,
+        tree_method<span class="op">=</span><span class="st">&#39;approx&#39;</span>
+    ),
+    search_spaces <span class="op">=</span> {
+        <span class="st">&#39;learning_rate&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;min_child_weight&#39;</span>: (<span class="dv">0</span>, <span class="dv">10</span>),
+        <span class="st">&#39;max_depth&#39;</span>: (<span class="dv">0</span>, <span class="dv">50</span>),
+        <span class="st">&#39;max_delta_step&#39;</span>: (<span class="dv">0</span>, <span class="dv">20</span>),
+        <span class="st">&#39;subsample&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;uniform&#39;</span>),
+        <span class="st">&#39;colsample_bytree&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;uniform&#39;</span>),
+        <span class="st">&#39;colsample_bylevel&#39;</span>: (<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="st">&#39;uniform&#39;</span>),
+        <span class="st">&#39;reg_lambda&#39;</span>: (<span class="fl">1e-9</span>, <span class="dv">1000</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;reg_alpha&#39;</span>: (<span class="fl">1e-9</span>, <span class="fl">1.0</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;gamma&#39;</span>: (<span class="fl">1e-9</span>, <span class="fl">0.5</span>, <span class="st">&#39;log-uniform&#39;</span>),
+        <span class="st">&#39;min_child_weight&#39;</span>: (<span class="dv">0</span>, <span class="dv">5</span>),
+        <span class="st">&#39;n_estimators&#39;</span>: (<span class="dv">50</span>, <span class="dv">100</span>),
+        <span class="st">&#39;scale_pos_weight&#39;</span>: (<span class="fl">1e-6</span>, <span class="dv">500</span>, <span class="st">&#39;log-uniform&#39;</span>)
+    },    
+    scoring <span class="op">=</span> <span class="st">&#39;roc_auc&#39;</span>,
+    cv <span class="op">=</span> sk_ms.StratifiedKFold(
+        n_splits<span class="op">=</span><span class="dv">3</span>,
+        shuffle<span class="op">=</span><span class="va">True</span>,
+        random_state<span class="op">=</span><span class="dv">42</span>
+    ),
+    n_jobs <span class="op">=</span> <span class="dv">3</span>,
+    n_iter <span class="op">=</span> <span class="dv">10</span>,   
+    verbose <span class="op">=</span> <span class="dv">0</span>,
+    refit <span class="op">=</span> <span class="va">True</span>,
+    random_state <span class="op">=</span> <span class="dv">42</span>
+)
+<span class="co">#v3</span>
+param_grid <span class="op">=</span> {
+    <span class="st">&#39;learning_rate&#39;</span>: Real(<span class="fl">0.005</span>, <span class="fl">0.1</span>), <span class="st">&#39;n_estimators&#39;</span>: Integer(<span class="dv">10</span>, <span class="dv">500</span>),
+    <span class="st">&#39;num_leaves&#39;</span>: Integer(<span class="dv">6</span>, <span class="dv">50</span>), <span class="st">&#39;boosting_type&#39;</span> : Categorical([<span class="st">&#39;gbdt&#39;</span>, <span class="st">&#39;rf&#39;</span>]),
+    <span class="st">&#39;colsample_bytree&#39;</span> : Real(<span class="fl">0.65</span>, <span class="dv">1</span>), <span class="st">&#39;subsample&#39;</span> : Real(<span class="fl">0.7</span>, <span class="fl">0.9</span>),
+    <span class="st">&#39;reg_alpha&#39;</span> : Real(<span class="dv">0</span>, <span class="fl">1.2</span>), <span class="st">&#39;reg_lambda&#39;</span> : Real(<span class="dv">0</span>, <span class="dv">2</span>),
+    }
+clf_tuned <span class="op">=</span> BayesSearchCV(clf, param_grid, cv <span class="op">=</span> <span class="dv">5</span>, random_state <span class="op">=</span> <span class="dv">8</span>, scoring <span class="op">=</span> <span class="st">&#39;f1&#39;</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+</div>
+<div id="pyspark-1" class="section level2">
+<h2><span class="header-section-number">13.2</span> Pyspark</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> findspark
+findspark.init()
+<span class="im">import</span> pyspark
+<span class="im">import</span> random
+<span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+<span class="im">from</span> pyspark.ml.feature <span class="im">import</span> StringIndexer, OneHotEncoder, VectorAssembler
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="im">import</span> numpy <span class="im">as</span> np
+<span class="im">import</span> pyspark
+<span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.getOrCreate() <span class="co"># SparkSession.builder.appName(&#39;chosenName&#39;).getOrCreate()</span>
+sc <span class="op">=</span> pyspark.SparkContext()
+spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">&#39;example&#39;</span>).getOrCreate()
+sc <span class="op">=</span> pyspark.SparkContext(appName<span class="op">=</span><span class="st">&quot;Pi&quot;</span>)
+num_samples <span class="op">=</span> <span class="dv">100000000</span>
+<span class="kw">def</span> inside(p):     
+    x, y <span class="op">=</span> random.random(), random.random()
+    <span class="cf">return</span> x<span class="op">*</span>x <span class="op">+</span> y<span class="op">*</span>y <span class="op">&lt;</span> <span class="dv">1</span>
+count <span class="op">=</span> sc.parallelize(<span class="bu">range</span>(<span class="dv">0</span>, num_samples)).<span class="bu">filter</span>(inside).count()
+pi <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> count <span class="op">/</span> num_samples
+<span class="bu">print</span>(pi)
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;data.csv&#39;</span>, header <span class="op">=</span> <span class="va">True</span>)
+df.show(<span class="dv">5</span>)
+df.columns
+<span class="co"># Preprocessing</span>
+df <span class="op">=</span> df.withColumn(<span class="st">&quot;label&quot;</span>, df[<span class="st">&quot;target&quot;</span>].cast(<span class="st">&#39;integer&#39;</span>))
+scf_indexer <span class="op">=</span> StringIndexer(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>)
+scf_encoder <span class="op">=</span> OneHotEncoder(inputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_index&quot;</span>, outputCol <span class="op">=</span> <span class="st">&quot;some_cat_feature_fact&quot;</span>)
+feature_cols <span class="op">=</span> [<span class="st">&quot;some list of column names&quot;</span>]
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols <span class="op">=</span> feature_cols, 
+                                outputCol <span class="op">=</span> <span class="st">&quot;features&quot;</span>)
+pipe <span class="op">=</span> Pipeline(stages <span class="op">=</span> [scf_indexer, scf_encoder, vec_assembler])
+piped_data <span class="op">=</span> pipe.fit(df).transform(df)
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">8</span>, .<span class="dv">2</span>])
+<span class="co"># Model</span>
+clf_lr <span class="op">=</span> LogisticRegression()
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName <span class="op">=</span> <span class="st">&quot;areaUnderROC&quot;</span>)
+grid <span class="op">=</span> tune.ParamGridBuilder()
+grid <span class="op">=</span> grid.addGrid(clf_lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(clf_lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+grid <span class="op">=</span> grid.build()
+clf_lr_cv <span class="op">=</span> tune.CrossValidator(
+    estimator <span class="op">=</span> clf_lr,
+    estimatorParamMaps <span class="op">=</span> grid,
+    evaluator <span class="op">=</span> evaluator,
+    numFolds <span class="op">=</span> <span class="dv">5</span>
+               )
+best_clf_lr <span class="op">=</span> clf_lr_cv.fit(training).bestModel
+results <span class="op">=</span> best_clf_lr.transform(training)
+<span class="bu">print</span>(evaluator.evaluate(results))
+<span class="co">## List tables</span>
+spark.catalog.listTables()
+<span class="co">## Access and display data</span>
+query <span class="op">=</span> <span class="st">&quot;FROM flights SELECT * LIMIT 10&quot;</span>
+flights10 <span class="op">=</span> spark.sql(query)
+flights10.show()
+<span class="co">## Cast</span>
+df[<span class="st">&#39;g&#39;</span>] <span class="op">=</span> df[<span class="st">&#39;g&#39;</span>].astype(<span class="bu">str</span>)
+<span class="co">## Read from csv</span>
+df<span class="op">=</span> spark.read.csv(file_path, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.csv(<span class="st">&#39;fileNameWithPath&#39;</span>, mode<span class="op">=</span><span class="st">&quot;DROPMALFORMED&quot;</span>,inferSchema<span class="op">=</span><span class="va">True</span>, header <span class="op">=</span> <span class="va">True</span>)
+df <span class="op">=</span> spark.read.<span class="bu">format</span>(<span class="st">&quot;csv&quot;</span>).option(<span class="st">&quot;header&quot;</span>,<span class="st">&quot;true&quot;</span>).option(<span class="st">&quot;inferSchema&quot;</span>,<span class="st">&quot;true&quot;</span>).load(<span class="st">&quot;john_doe.csv&quot;</span>)
+<span class="co">## Spark df to pandas and vice versa</span>
+toPandas()
+spark_temp <span class="op">=</span> spark.createDataFrame(pd_temp)
+<span class="co">## Add to the catalog</span>
+spark_temp.createOrReplaceTempView(<span class="st">&quot;temp&quot;</span>)
+<span class="co">## Mutate</span>
+df <span class="op">=</span> df.withColumn(<span class="st">&quot;newCol&quot;</span>, df.oldCol <span class="op">+</span> <span class="dv">1</span>)
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;arr_delay&quot;</span>, model_data.arr_delay.cast(<span class="st">&#39;integer&#39;</span>))
+model_data <span class="op">=</span> model_data.withColumn(<span class="st">&quot;plane_age&quot;</span>, model_data.year <span class="op">-</span> model_data.plane_year)
+<span class="co">## Create the DataFrame flights</span>
+flights <span class="op">=</span> spark.table(<span class="st">&#39;flights&#39;</span>)
+<span class="co">## Get column names</span>
+spark_df.schema.names
+spark_df.printSchema()
+<span class="co">## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string</span>
+long_flights1 <span class="op">=</span> flights.<span class="bu">filter</span>(<span class="st">&#39;distance &gt; 1000&#39;</span>)
+long_flights2 <span class="op">=</span> flights.<span class="bu">filter</span>(flights.distance <span class="op">&gt;</span> <span class="dv">1000</span>)
+model_data <span class="op">=</span> model_data.<span class="bu">filter</span>(<span class="st">&quot;arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL&quot;</span>)
+<span class="co">## Groupby examples</span>
+flights.<span class="bu">filter</span>(flights.origin <span class="op">==</span> <span class="st">&quot;PDX&quot;</span>).groupBy().<span class="bu">min</span>(<span class="st">&quot;distance&quot;</span>).show()
+flights.<span class="bu">filter</span>(flights.carrier<span class="op">==</span><span class="st">&#39;DL&#39;</span>).<span class="bu">filter</span>(flights.origin<span class="op">==</span><span class="st">&#39;SEA&#39;</span>).groupBy().avg(<span class="st">&#39;air_time&#39;</span>).show()
+flights.withColumn(<span class="st">&quot;duration_hrs&quot;</span>, flights.air_time<span class="op">/</span><span class="dv">60</span>).groupBy().<span class="bu">sum</span>(<span class="st">&#39;duration_hrs&#39;</span>).show()
+<span class="co">## Spark functions</span>
+<span class="im">import</span> pyspark.sql.functions <span class="im">as</span> F
+by_month_dest.agg(F.stddev(<span class="st">&#39;dep_delay&#39;</span>)).show()
+<span class="co">## Drop column</span>
+final_test_data.drop(<span class="st">&#39;State&#39;</span>)
+<span class="co">## Dummying</span>
+<span class="co">#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.</span>
+<span class="co">#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer</span>
+<span class="co">## Create a StringIndexer</span>
+carr_indexer <span class="op">=</span> StringIndexer(inputCol<span class="op">=</span><span class="st">&quot;carrier&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>)
+<span class="co">## Create a OneHotEncoder</span>
+carr_encoder <span class="op">=</span> OneHotEncoder(inputCol<span class="op">=</span><span class="st">&quot;carrier_index&quot;</span>, outputCol<span class="op">=</span><span class="st">&quot;carrier_fact&quot;</span>)
+<span class="co">## Make a VectorAssembler</span>
+vec_assembler <span class="op">=</span> VectorAssembler(inputCols<span class="op">=</span>[<span class="st">&quot;month&quot;</span>, <span class="st">&quot;air_time&quot;</span>, <span class="st">&quot;carrier_fact&quot;</span>, <span class="st">&quot;dest_fact&quot;</span>, <span class="st">&quot;plane_age&quot;</span>], outputCol<span class="op">=</span><span class="st">&quot;features&quot;</span>)
+<span class="co">## Import &amp; Make Pipeline</span>
+<span class="im">from</span> pyspark.ml <span class="im">import</span> Pipeline
+flights_pipe <span class="op">=</span> Pipeline(stages<span class="op">=</span>[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+<span class="co">## Fit and transform the data</span>
+piped_data <span class="op">=</span> flights_pipe.fit(model_data).transform(model_data)
+<span class="co">## Train-test split</span>
+training, test <span class="op">=</span> piped_data.randomSplit([.<span class="dv">6</span>, .<span class="dv">4</span>])
+<span class="co">## Tuning &amp; Selection</span>
+<span class="co">## Import LogisticRegression</span>
+<span class="im">from</span> pyspark.ml.classification <span class="im">import</span> LogisticRegression
+<span class="co">## Create a LogisticRegression Estimator</span>
+lr <span class="op">=</span> LogisticRegression()
+<span class="co">## Import the evaluation submodule</span>
+<span class="im">import</span> pyspark.ml.evaluation <span class="im">as</span> evals
+<span class="co">## Create a BinaryClassificationEvaluator</span>
+evaluator <span class="op">=</span> evals.BinaryClassificationEvaluator(metricName<span class="op">=</span><span class="st">&quot;areaUnderROC&quot;</span>)
+<span class="co">## Import the tuning submodule</span>
+<span class="im">import</span> pyspark.ml.tuning <span class="im">as</span> tune
+<span class="co">## Create the parameter grid</span>
+grid <span class="op">=</span> tune.ParamGridBuilder()
+<span class="co">## Add the hyperparameter</span>
+grid <span class="op">=</span> grid.addGrid(lr.regParam, np.arange(<span class="dv">0</span>, .<span class="dv">1</span>, .<span class="dv">01</span>))
+grid <span class="op">=</span> grid.addGrid(lr.elasticNetParam, [<span class="dv">0</span>, <span class="dv">1</span>])
+<span class="co">## Build the grid</span>
+grid <span class="op">=</span> grid.build()
+<span class="co">## Create the CrossValidator</span>
+cv <span class="op">=</span> tune.CrossValidator(
+estimator<span class="op">=</span>lr,
+estimatorParamMaps<span class="op">=</span>grid,
+evaluator<span class="op">=</span>evaluator
+               )
+<span class="co">## Fit cross validation models</span>
+models <span class="op">=</span> cv.fit(training)
+<span class="co">## Extract the best model</span>
+best_lr <span class="op">=</span> models.bestModel
+<span class="co">## Use the model to predict the test set</span>
+test_results <span class="op">=</span> best_lr.transform(test)
+<span class="co">## Evaluate the predictions</span>
+<span class="bu">print</span>(evaluator.evaluate(test_results))
+sc.stop()</code></pre></div>
+</div>
+<div id="sparklyr-1" class="section level2">
+<h2><span class="header-section-number">13.3</span> Sparklyr</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
+
+sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master=</span><span class="st">&quot;local&quot;</span>)
+config &lt;-<span class="st"> </span><span class="kw">spark_config</span>()
+config<span class="op">$</span>spark.executor.cores &lt;-<span class="st"> </span><span class="dv">8</span>
+config<span class="op">$</span>spark.executor.memory &lt;-<span class="st"> &quot;25G&quot;</span>
+
+flights &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, flights, <span class="st">&quot;flights&quot;</span>)
+<span class="kw">src_tbls</span>(sc)
+
+iris_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">spark_apply</span>(
+    <span class="cf">function</span>(e) <span class="kw">summary</span>(<span class="kw">lm</span>(Petal_Length <span class="op">~</span><span class="st"> </span>Petal_Width, e))<span class="op">$</span>r.squared,
+    <span class="dt">names =</span> <span class="st">&quot;r.squared&quot;</span>,
+    <span class="dt">group_by =</span> <span class="st">&quot;Species&quot;</span>)
+
+
+## Connect to your Spark cluster
+spark_conn &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)
+
+## Print the version of Spark
+<span class="kw">spark_version</span>(<span class="dt">sc =</span> spark_conn)
+
+## Disconnect from Spark
+<span class="kw">spark_disconnect</span>(<span class="dt">sc =</span> spark_conn)
+
+## See tables
+<span class="kw">src_tbls</span>(sc)
+
+## Copy track_metadata to Spark
+track_metadata_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(spark_conn, track_metadata)
+
+## Print 5 rows, all columns
+<span class="kw">print</span>(track_metadata_tbl, <span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)
+
+## Write and run SQL query
+query &lt;-<span class="st"> &quot;SELECT * FROM track_metadata WHERE year &lt; 1935 AND duration &gt; 300&quot;</span>
+(results &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(spark_conn, query))
+
+## General transformation structure and example
+a_tibble <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ft_some_transformation</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, some_other_args)
+
+hotttnesss &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select artist_hotttnesss</span>
+<span class="st">  </span><span class="kw">select</span>(artist_hotttnesss) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Binarize to is_hottt_or_nottt</span>
+<span class="st">  </span><span class="kw">ft_binarizer</span>(<span class="st">&#39;artist_hotttnesss&#39;</span>, <span class="st">&#39;is_hottt_or_nottt&#39;</span>, <span class="dt">threshold =</span> .<span class="dv">5</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the result</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Convert is_hottt_or_nottt to logical</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_hottt_or_nottt =</span> <span class="kw">as.logical</span>(is_hottt_or_nottt))
+  
+## Get and transform the schema
+
+(schema &lt;-<span class="st"> </span><span class="kw">sdf_schema</span>(track_metadata_tbl))
+schema <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lapply</span>(<span class="cf">function</span>(x) <span class="kw">do.call</span>(data_frame, x)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">bind_rows</span>()
+
+## Train-test split
+partitioned &lt;-<span class="st"> </span>track_metadata_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sdf_partition</span>(<span class="dt">training =</span> <span class="fl">0.7</span>, <span class="dt">testing =</span> <span class="fl">0.3</span>)
+
+## List ml functions
+<span class="kw">ls</span>(<span class="st">&quot;package:sparklyr&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;^ml&quot;</span>)
+
+## GBT Example
+
+gradient_boosted_trees_model &lt;-<span class="st"> </span>track_data_to_model_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Run the gradient boosted trees model</span>
+<span class="st">   </span><span class="kw">ml_gradient_boosted_trees</span>(<span class="st">&#39;year&#39;</span>, feature_colnames)
+
+responses &lt;-<span class="st"> </span>track_data_to_predict_tbl <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Select the year column</span>
+<span class="st">  </span><span class="kw">select</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Collect the results</span>
+<span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Add in the predictions</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">predicted_year =</span> <span class="kw">predict</span>(
+      gradient_boosted_trees_model,
+      track_data_to_predict_tbl
+    )
+  )
+
+
+<span class="kw">spark_disconnect</span>(sc)</code></pre></div>
+</div>
+<div id="parquet" class="section level2">
+<h2><span class="header-section-number">13.4</span> Parquet</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## The parquet_dir has been pre-defined
+parquet_dir
+
+## List the files in the parquet dir
+filenames &lt;-<span class="st"> </span><span class="kw">dir</span>(parquet_dir, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+
+## Show the filenames and their sizes
+<span class="kw">data_frame</span>(
+  <span class="dt">filename =</span> <span class="kw">basename</span>(filenames),
+  <span class="dt">size_bytes =</span> <span class="kw">file.size</span>(filenames)
+)
+
+<span class="co">#Import the data into Spark</span>
+
+timbre_tbl &lt;-<span class="st"> </span><span class="kw">spark_read_parquet</span>(spark_conn, <span class="st">&#39;timbre&#39;</span>, parquet_dir)</code></pre></div>
+</div>
+<div id="data-table" class="section level2">
+<h2><span class="header-section-number">13.5</span> Data Table</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Operations done by reference</span>
+
+dt[i, j, by] <span class="co"># subset by i calculate by j grouped using by</span>
+
+DT[.N] <span class="co"># prints last row</span>
+
+<span class="kw">names</span>(DT) <span class="co"># colnames</span>
+
+<span class="kw">dim</span>(DT) <span class="co"># dimensions</span>
+
+DT[, .(A, B)] <span class="co"># returns two columns</span>
+
+DT[, <span class="kw">c</span>(A, B)] <span class="co"># returns a concatenated vector</span>
+
+DT[, .(<span class="dt">sum_c =</span> <span class="kw">sum</span>(C)] <span class="co"># mutate</span>
+
+DT[, <span class="kw">plot</span>(A, C)] <span class="co"># plot?</span>
+
+DT[, A <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>] <span class="co"># Remove column A</span>
+
+DT[, .(<span class="dt">sumB =</span> <span class="kw">sum</span>(B)), <span class="dt">by =</span> .(<span class="dt">Grp =</span> A<span class="op">%%</span><span class="dv">2</span>)] <span class="co"># group_by &amp; summarize</span>
+
+DT[, .N, <span class="dt">by =</span> Sepal.Width] <span class="co"># .N is the count of each group</span>
+
+DT[, <span class="kw">lapply</span>(.SD, median)] <span class="co"># .SD is a placeholder for all the columns</span>
+
+dogs[, <span class="kw">lapply</span>(.SD, mean), <span class="dt">.SDcols =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>] <span class="co"># Find mean of columns 2 &amp; 3</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="kw">set</span>(DT, i, 3L, i<span class="op">+</span><span class="dv">1</span>) <span class="co"># update first 5 rows of 3rd column</span>
+
+<span class="kw">setnames</span>(DT, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;z&#39;</span>) <span class="co"># changes colname from y to z</span>
+
+<span class="kw">setkey</span>(DT, A, B)
+
+DT[.(<span class="st">&#39;b&#39;</span>)]
+
+DT[.(<span class="kw">c</span>(<span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>))]
+
+DT[.(<span class="kw">c</span>(<span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>)), <span class="dt">mult=</span><span class="st">&quot;first&quot;</span>]
+
+DT[<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), .SD[<span class="kw">c</span>(<span class="dv">1</span>, .N)], <span class="dt">by =</span> .EACHI] <span class="co"># First and last row of the &quot;b&quot; and &quot;c&quot; groups</span>
+
+DT[<span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), { <span class="kw">print</span>(.SD); .SD[<span class="kw">c</span>(<span class="dv">1</span>, .N)] }, <span class="dt">by =</span> .EACH]
+
+dt1[dt2, <span class="dt">roll=</span><span class="op">-</span><span class="ot">Inf</span>, <span class="dt">rollends=</span><span class="ot">FALSE</span>] <span class="co"># rolling join</span></code></pre></div>
+</div>
+<div id="keras" class="section level2">
+<h2><span class="header-section-number">13.6</span> Keras</h2>
+<p>The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) compile, 4) fit</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">network &lt;-<span class="st"> </span><span class="kw">keras_model_sequential</span>() 
+
+network <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">512</span>, <span class="dt">activation =</span> <span class="st">&quot;relu&quot;</span>, <span class="dt">input_shape =</span> <span class="kw">c</span>(<span class="dv">28</span> <span class="op">*</span><span class="st"> </span><span class="dv">28</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">layer_dense</span>(<span class="dt">units =</span> <span class="dv">10</span>, <span class="dt">activation =</span> <span class="st">&quot;softmax&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">compile</span>(<span class="dt">optimizer =</span> <span class="st">&quot;rmsprop&quot;</span>,  <span class="dt">loss =</span> <span class="st">&quot;categorical_crossentropy&quot;</span>,  <span class="dt">metrics =</span> <span class="kw">c</span>(<span class="st">&quot;accuracy&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">fit</span>(train_images, train_labels, <span class="dt">epochs =</span> <span class="dv">5</span>, <span class="dt">batch_size =</span> <span class="dv">128</span>)
+
+metrics &lt;-<span class="st"> </span>network <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">evaluate</span>(test_images, test_labels)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> keras
+<span class="im">from</span> keras.layers <span class="im">import</span> Dense
+<span class="im">from</span> keras.models <span class="im">import</span> Sequential
+<span class="co"># Regression</span>
+<span class="co"># Specify the model: Two hidden layers</span>
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">1</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;adam&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;mean_squared_error&#39;</span>) 
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co"># Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)
+<span class="co"># Classification</span>
+<span class="co"># Specify the model: Two hidden layers</span>
+n_cols <span class="op">=</span> predictors.shape[<span class="dv">1</span>]
+model <span class="op">=</span> Sequential()
+<span class="co">## Input</span>
+model.add(Dense(<span class="dv">50</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>, input_shape <span class="op">=</span> (n_cols,)))
+<span class="co"># Hidden</span>
+model.add(Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">&#39;relu&#39;</span>))
+<span class="co"># Output</span>
+model.add(Dense(<span class="dv">2</span>, activation <span class="op">=</span> <span class="st">&#39;softmax&#39;</span>))
+<span class="co"># Compile the model</span>
+model.<span class="bu">compile</span>(optimizer <span class="op">=</span> <span class="st">&#39;sgd&#39;</span>, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>, metrics <span class="op">=</span> [<span class="st">&#39;accuracy&#39;</span>])
+<span class="co"># Fit the model</span>
+model.fit(predictors, target)
+<span class="co">#Look at summary</span>
+model.summary()
+<span class="co">#Calculate predictions: predictions</span>
+predictions <span class="op">=</span> model.predict(pred_data)
+<span class="co">#Calculate predicted probability of survival</span>
+predicted_prob_true <span class="op">=</span> predictions[:, <span class="dv">1</span>]
+<span class="co"># Tuning</span>
+<span class="co"># Import the SGD optimizer</span>
+<span class="im">from</span> keras.optimizers <span class="im">import</span> SGD
+<span class="co"># Create list of learning rates: lr_to_test</span>
+lr_to_test <span class="op">=</span> [.<span class="dv">000001</span>, <span class="fl">0.01</span>, <span class="dv">1</span>]
+<span class="co"># Loop over learning rates</span>
+<span class="cf">for</span> lr <span class="kw">in</span> lr_to_test:
+    <span class="bu">print</span>(<span class="st">&#39;Testing model with learning rate: &#39;</span>)
+    
+    <span class="co"># Build new model to test, unaffected by previous models</span>
+    model <span class="op">=</span> get_new_model()
+    
+    <span class="co"># Create SGD optimizer with specified learning rate: my_optimizer</span>
+    my_optimizer <span class="op">=</span> SGD(lr <span class="op">=</span> lr)
+    
+    <span class="co"># Compile the model</span>
+    model.<span class="bu">compile</span>(optimizer <span class="op">=</span> my_optimizer, loss <span class="op">=</span> <span class="st">&#39;categorical_crossentropy&#39;</span>)
+    
+    <span class="co"># Fit the model</span>
+    model.fit(predictors, 
+              target, 
+              validation_split <span class="op">=</span> <span class="fl">0.3</span>, 
+              epochs <span class="op">=</span> <span class="dv">20</span>, 
+              callbacks <span class="op">=</span> [early_stopping_monitor], 
+              verbose <span class="op">=</span> <span class="va">False</span>)</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cook-book.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-cook_book.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

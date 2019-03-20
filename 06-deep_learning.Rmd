@@ -1,6 +1,30 @@
 # Deep Learning
 
-airflow
+https://goku.me/blog/EHR
+
+http://www.geometricdeeplearning.com
+
+https://www.crestle.com
+
+[Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
+
+https://cran.r-project.org/web/packages/kerasformula/index.html
+
+[DL Online](https://tenso.rs) 
+
+[DL Everywhere](http://vertex.ai/)
+
+[Debugging](http://theorangeduck.com/page/neural-network-not-working)
+
+[Neural Network Zoo](http://www.asimovinstitute.org/neural-network-zoo/)
+
+[Design Patterns](http://www.deeplearningpatterns.com/doku.php/applications)
+
+[RNNs](http://github.stfi.re/kjw0612/awesome-rnn?sf=dlpbez#aa)
+
+[Resources](https://yanirseroussi.com/deep-learning-resources/)
+
+[Glossary](http://www.wildml.com/deep-learning-glossary/)
 
 [Debugging](http://theorangeduck.com/page/neural-network-not-working)
 

@@ -1,5 +1,23 @@
 # Probabilistic Programming
 
+[PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
+
+https://www.pymc-learn.org/
+
+[Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
+
+https://arviz-devs.github.io/arviz/index.html
+
+SigOpt
+
+[PGM Viz](http://daft-pgm.org)
+
+[SEM](http://sachaepskamp.com/SEM2017)
+
+[Edward](http://edwardlib.org/)
+
+[Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
+
 https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7
 
 Bayes Rule:

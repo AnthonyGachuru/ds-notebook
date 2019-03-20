@@ -6,6 +6,18 @@ Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bay
 
 Mann–Whitney U test
 
+[Stats Forum](https://discourse.datamethods.org/)
+
+[Probability Cheat Sheet](http://www.wzchen.com/probability-cheatsheet)
+
+[AB Testing](http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html)
+
+[Prob Dists In R](http://www.cyclismo.org/tutorial/R/probability.html)
+
+[Power Analysis](https://www.statmethods.net/stats/power.html)
+
+[Effect Size](https://www.leeds.ac.uk/educol/documents/00002182.htm)
+
 Zero correlation doesn't imply independence
 
 https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf

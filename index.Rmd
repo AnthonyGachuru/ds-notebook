@@ -152,49 +152,20 @@ The first part conda env export writes out all the packages in the environment, 
 This will create a new environment with the same name listed in environment.yaml.
 
 ## Resources
-<br/>
 
-<div class="col3">
+### General
+
 CoCalc
 
 Conda
 
-[State of the Art Results](https://paperswithcode.com/sota)
-
-[Data Proofer](http://dataproofer.org/)
+[SOTA Results](https://paperswithcode.com/sota)
 
 [DS Project Style Guide](https://www.dataquest.io/blog/data-science-project-style-guide/)
-
-[Stats Forum](https://discourse.datamethods.org/)
-
-[Probability Cheat Sheet](http://www.wzchen.com/probability-cheatsheet)
-
-[AB Testing](http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html)
-
-[Prob Dists In R](http://www.cyclismo.org/tutorial/R/probability.html)
-
-[Power Analysis](https://www.statmethods.net/stats/power.html)
-
-[Effect Size](https://www.leeds.ac.uk/educol/documents/00002182.htm)
 </div>
 <br/>
 
-## Auto Data Science
-<br/>
-
-<div class="col3">
-[Data Cleaning](http://www.dataland.ai/index.php) 
-
-[Visualize](http://holoviews.org)
-
-Feature Engineering: [1](https://www.featuretools.com) | [2](https://towardsdatascience.com/automated-feature-engineering-in-python-99baf11cc219) | [3](https://www.featurelabs.com/) 
-
-Auto ML: [1](https://cloud.google.com/automl/) | [2](http://www.ml4aad.org) | TPOT
-</div>
-
-<br/>
-
-## Data
+### Data
 <br/>
 
 <div class="col3">
@@ -327,16 +298,19 @@ Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com
 [Enigma](https://public.enigma.com/)
 
 [Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/)
-</div>
-<br/>
 
+### Auto Data Science
 
-<br/>
+[Data Cleaning](http://www.dataland.ai/index.php) 
 
-## Import
-<br/>
+[Visualize](http://holoviews.org)
 
-<div class="col3">
+Feature Engineering: [1](https://www.featuretools.com) | [2](https://www.featurelabs.com/) 
+
+Auto ML: TPOT
+
+### Import
+
 [R Spreadsheet](https://www.jamovi.org/)
 
 https://www.webscraper.io/documentation#open-web-scraper
@@ -354,21 +328,9 @@ CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-pe
 https://www.stitchdata.com/
 
 https://www.prefect.io/
-</div>
-<br/>
 
-## Tidy/Transform
-<br/>
+### Tidy-Transform-Visualize
 
-<div class="col3">
-[Pandas](http://tomaugspurger.github.io/modern-1.html)
-</div>
-<br/>
-
-## Visualize
-<br/>
-
-<div class="col3">
 http://pyviz.org/
 
 http://dataviz.tools/
@@ -408,16 +370,11 @@ ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_P
 [Data Viz Catalogue](http://www.datavizcatalogue.com/index.html)
 
 [Text Visualization](http://textvis.lnu.se/)
-</div>
-<br/>
 
-## Model
+### Model
 
-### General
+#### General
 
-<br/>
-
-<div class="col3">
 Semi-supervised: active learning | [Auto Labeling](https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html)
 
 https://machinelearningmastery.com/
@@ -478,11 +435,8 @@ https://pbiecek.github.io/breakDown/
 </div>
 <br/>
 
-### Supervised
+#### Supervised
 
-<br/>
-
-<div class="col3">
 http://clus.sourceforge.net/doku.php
 
 https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html
@@ -507,8 +461,6 @@ unbalanced classes: [R](https://cran.r-project.org/web/packages/imbalance/index.
 
 Ensembles: [General](http://mlwave.com/kaggle-ensembling-guide/) | [caret](http://amunategui.github.io/blending-models/) | [skl](https://www.toptal.com/machine-learning/ensemble-methods-machine-learning) | [1](http://blog.kaggle.com/2016/12/27/a-kagglers-guide-to-model-stacking-in-practice/) | [2](http://blog.kaggle.com/2017/06/15/stacking-made-easy-an-introduction-to-stacknet-by-competitions-grandmaster-marios-michailidis-kazanova/)
 
-HLM / RNNs
-
 Multilevel regression and post stratification
 
 Mixed Models / multilevel / hierarchical / mixed-effects models
@@ -517,17 +469,12 @@ Multiple Factor Analysis: FactoMineR
 
 Functional PCA
 
-Hidden Markov Models
-
 LMM: [1](http://edwardlib.org/tutorials/linear-mixed-effects-models) | [2](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)
 
 Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html) | [2](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html) | [3](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html)
-</div>
-<br/>
 
-### Unsupervised
-<br/>
-<div class="col3">
+#### Unsupervised
+
 [Annotation](https://explosion.ai/blog/prodigy-annotation-tool-active-learning)
 
 [Mixed Data Clustering](https://www.r-bloggers.com/clustering-mixed-data-types-in-r/)
@@ -541,96 +488,11 @@ Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sk
 [K-Means On MNIST](http://johnloeber.com/docs/kmeans.html)
 
 tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.io/tsne/) | [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
-</div>
-<br/>
 
-## Other ML
-<br/>
+### Other ML
 
-### Deep Learning
-<br/>
+#### NLP
 
-<div class="col3">
-https://chainer.org/
-  
-https://goku.me/blog/EHR
-
-http://www.geometricdeeplearning.com
-
-https://www.crestle.com
-
-fast.ai
-
-[Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
-
-https://cran.r-project.org/web/packages/kerasformula/index.html
-
-[DL Online](https://tenso.rs) 
-
-[DL Everywhere](http://vertex.ai/)
-
-[Debugging](http://theorangeduck.com/page/neural-network-not-working)
-
-[Neural Network Zoo](http://www.asimovinstitute.org/neural-network-zoo/)
-
-[Design Patterns](http://www.deeplearningpatterns.com/doku.php/applications)
-
-[RNNs](http://github.stfi.re/kjw0612/awesome-rnn?sf=dlpbez#aa)
-
-[Resources](https://yanirseroussi.com/deep-learning-resources/)
-
-[Glossary](http://www.wildml.com/deep-learning-glossary/)
-</div>
-<br/>
-
-### Probabilistic Programming
-<br/>
-
-<div class="col3">
-[PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
-
-https://www.pymc-learn.org/
-
-[Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
-
-https://arviz-devs.github.io/arviz/index.html
-
-SigOpt
-
-[PGM Viz](http://daft-pgm.org)
-
-[SEM](http://sachaepskamp.com/SEM2017)
-
-[Edward](http://edwardlib.org/)
-
-[Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
-</div>
-<br/>
-
-### Causality
-<br/>
-
-<div class="col3">
-[Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
-
-http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
-
-[Misra Talk](https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245&utm_campaign=US%20Event%20Meetup%20NYU%20NYC%20July%202018&utm_source=hs_email&utm_medium=email&utm_content=64589348&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI&_hsmi=64589348)
-
-https://www.dropbox.com/s/m233izdg1mzbee2/MLSS-18_final.pdf?dl=0
-
-[Causal Impact](https://google.github.io/CausalImpact/)
-
-https://cran.r-project.org/web/packages/causaleffect/causaleffect.pdf
-
-http://causalinference.gitlab.io/icwsm-tutorial/
-</div>
-<br/>
-
-### NLP
-<br/>
-
-<div class="col3">
 https://mobile.twitter.com/lmthang/status/1050543868041555969
 
 https://gking.harvard.edu/readme
@@ -662,26 +524,9 @@ Topic Modeling: [1](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-
 NLP For: [Web Devs](http://blog.algorithmia.com/natural-language-processing-algorithms-web-developers/) | [Bot Makers](https://stanfy.com/blog/advanced-natural-language-processing-tools-for-bot-makers/)
 
 [NLP Intro](http://blog.algorithmia.com/introduction-natural-language-processing-nlp/)
-</div>
-<br/>
-<br/>
 
-### Computer Vision
-<br/>
+#### Geospatial
 
-<div class="col3">
-https://www.pyimagesearch.com
-  
-https://gluon-cv.mxnet.io
-
-[CV Toolkit](https://luminoth.ai)
-</div>
-<br/>
-
-### Geospatial
-<br/>
-
-<div class="col3">
 https://geocompr.robinlovelace.net/adv-map.html#interactive-maps
 
 https://www.jessesadler.com/post/gis-with-r-intro/
@@ -697,13 +542,9 @@ https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/
 [tilegrams](https://pitchinteractiveinc.github.io/tilegrams/)
 
 [Spatial DA R](https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r)
-</div>
-<br/>
 
-### Networks
-<br/>
+#### Networks
 
-<div class="col3">
 https://mikedombo.github.io/graphPlayground/#
 
 [SNAP](https://snap.stanford.edu/snappy/index.html)
@@ -717,13 +558,9 @@ netviz: [1](http://curleylab.psych.columbia.edu/netviz/) | [2](http://www.kateto
 [CS224 SNA](https://web.stanford.edu/class/cs224w/handouts.html)
 
 [NetworkL](https://networkl.github.io/)
-</div>
-<br/>
 
-### AI
-<br/>
+#### AI
 
-<div class="col3">
 https://www.stateoftheart.ai/
 
 http://www.hbcse.tifr.res.in/jrmcont/notespart1/node27.html
@@ -753,13 +590,9 @@ http://airesources.org/ | https://alleninstitute.org | http://allenai.org/index.
 [AI Tasks](http://aiimpacts.org/concrete-ai-tasks-for-forecasting/)
 
 [Neuroevolution Viz](https://eng.uber.com/vine/)
-</div>
-<br/>
 
-### RL
-<br/>
+#### RL
 
-<div class="col3">
 https://box2d.org/
 
 https://aihabitat.org/
@@ -787,51 +620,20 @@ RLlib: [1](https://www.oreilly.com/ideas/introducing-rllib-a-composable-and-scal
 [Website RL Benchmarks](http://alpha.openai.com/miniwob/index.html)
 
 [BECCA Agent](https://brohrer.github.io/becca_6_chase_demo.html) | [IOT](https://brohrer.github.io/adaptive_reinforcement_learning_iot.html)
-</div>
-<br/>
 
-### Genetic Algorithms / ES
-<br/>
+### Communicate
 
-<div class="col3">
-[Guided Evolutionary Strategies](https://twitter.com/hardmaru/status/1012142197334892545)
-
-[Emergent Mind](http://www.emergentmind.com)
-
-[eureqa](http://www.nutonian.com/products/eureqa/)
-
-[GECCO Conference](http://gecco-2016.sigevo.org/index.html/HomePage#&panel1-1)
-</div>
-<br/>
-
-### Time Series
-<br/>
-
-<div class="col3">
-https://ai.googleblog.com/2018/11/accurate-online-speaker-diarization.html
-
-[librosa](https://librosa.github.io/librosa/tutorial.html#overview)
-</div>
-<br/>
-
-## Communicate
-
-<br/>
-
-<div class="col3">
 https://metabase.com/
   
 http://koaning.io/make-docs.html
 
 [Mode Studio](https://about.modeanalytics.com/)
-</div>
-<br/>
 
-## Deploy & Maintain
-<br/>
+### Deploy & Maintain
 
-<div class="col3">
 http://pachyderm.io
+
+Apache Airflow
 
 https://ropensci.org/technotes/2019/03/18/drake-700/
 
@@ -864,8 +666,6 @@ https://aws.amazon.com/sagemaker/
 TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
 
 [Model Deployment aaS](https://orchestrahq.com)
-</div>
-
 
 ## Notes
 
@@ -909,13 +709,13 @@ Docs: rmarkdown
 
 ### Other
 
-* Simulated Annealing: Gradient descent extension
+Simulated Annealing: Gradient descent extension
 
-* "No Free Lunch" theorem: no single classifier works best across all possible scenarios
+"No Free Lunch" theorem: no single classifier works best across all possible scenarios
 
-* Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
+Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
 
-* Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
 
 Cohort analysis
 
