@@ -90,6 +90,30 @@ Change in estimate definition of confounder: A var is a confounder of the effect
 
 Conventional definition of confounder: L is a confounder of the effect of a on y if L meets 3 conditions: L is associated with a, L is associated with y conditional on a, L is not on a causal pathway from a to y.
 
+l3
 
+surrogate confounder: a descendant of a cofounder.
+
+turn on recruiter linkedin
+
+cofounding if absolute but cofounder is relative to other variables.
+
+If you can't randomize then you have to rely on observational data.  Methods: 1) Measure enough variables to block all backdoor paths between A & Y, 2) Alternatives to blocking back door paths (instrumental variable estimation) Here's are a few options for 1):
+
+Stratification (adjust for confounding): A way to adjust for a variable by only looking at a subset of it, for example only looking at people who smoke instead of all people. An alternative is to use regression to look at the effects in each subset and then pool the estimates.
+
+Matching (adjust for confounding): Randomly match someone with a & b to ~a & b and a & ~b to ~a & ~b. Then see if there is an associating in the match subset.
+
+G-methods: The following three methods should be used when time-varying confounders are affected by prior treatment.
+
+Inverse Probability Weighting (adjust for confounding): Compute 1/p(a = 1 | b) and 1/p(a = 0 | b), and use these as weights in the association computation. Eliminates backdoor. 
+
+Standardization (G-formula)
+
+G-estimation
+
+All these confounding adjustment methods require knowledge of the true causal DAG since you need to know which paths to block.
+
+Randomization, when possible, is the preferred approach to eliminating confounding.
 
 

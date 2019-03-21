@@ -412,6 +412,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>confounder: A variable that, possibly with other variables, can block back door paths between treatment and outcome.</p>
 <p>Change in estimate definition of confounder: A var is a confounder of the effect of a on y if adjusting for it alters the association between a and y</p>
 <p>Conventional definition of confounder: L is a confounder of the effect of a on y if L meets 3 conditions: L is associated with a, L is associated with y conditional on a, L is not on a causal pathway from a to y.</p>
+<p>l3</p>
+<p>surrogate confounder: a descendant of a cofounder.</p>
+<p>turn on recruiter linkedin</p>
+<p>cofounding if absolute but cofounder is relative to other variables.</p>
+<p>If you can’t randomize then you have to rely on observational data. Methods: 1) Measure enough variables to block all backdoor paths between A &amp; Y, 2) Alternatives to blocking back door paths (instrumental variable estimation) Here’s are a few options for 1):</p>
+<p>Stratification (adjust for confounding): A way to adjust for a variable by only looking at a subset of it, for example only looking at people who smoke instead of all people. An alternative is to use regression to look at the effects in each subset and then pool the estimates.</p>
+<p>Matching (adjust for confounding): Randomly match someone with a &amp; b to ~a &amp; b and a &amp; ~b to ~a &amp; ~b. Then see if there is an associating in the match subset.</p>
+<p>G-methods: The following three methods should be used when time-varying confounders are affected by prior treatment.</p>
+<p>Inverse Probability Weighting (adjust for confounding): Compute 1/p(a = 1 | b) and 1/p(a = 0 | b), and use these as weights in the association computation. Eliminates backdoor.</p>
+<p>Standardization (G-formula)</p>
+<p>G-estimation</p>
+<p>All these confounding adjustment methods require knowledge of the true causal DAG since you need to know which paths to block.</p>
+<p>Randomization, when possible, is the preferred approach to eliminating confounding.</p>
 
 </div>
             </section>

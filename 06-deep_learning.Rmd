@@ -14,7 +14,7 @@ https://cran.r-project.org/web/packages/kerasformula/index.html
 
 [DL Everywhere](http://vertex.ai/)
 
-[Debugging](http://theorangeduck.com/page/neural-network-not-working)
+Debugging: [1](http://theorangeduck.com/page/neural-network-not-working) [2](https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21)
 
 [Neural Network Zoo](http://www.asimovinstitute.org/neural-network-zoo/)
 

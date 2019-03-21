@@ -2,6 +2,10 @@
 
 ## Notes
 
+ts features engineering:  Various lags inside the FDW, Rolling mean, min, max, etc. statistics, Bollinger bands and statistics, Rolling entropy, or rolling majority, for categorical features, Rolling text statistics for text features, Log-transformation (for exponential trends and multiplicative models), Periodic differencing (to make an integrated model with stationary targets), Simple naive difference (using the most recent FDW row)
+
+ts distance measures: Dynamic Time Warping & Frechet Distance
+
 time series features: extract data from timestamp (year, month, day), lags, rolling windows, rolling window - summary stats of all previous data points
 
 ts: Vector autoregression, quantile regression forests

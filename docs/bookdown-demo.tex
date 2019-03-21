@@ -370,6 +370,9 @@ Project Style Guide}
 
 \url{http://www.fast.ai/2018/10/16/aws-datasets}
 
+Causality: \href{https://www.kaggle.com/c/cause-effect-pairs}{1}
+\href{http://webdav.tuebingen.mpg.de/cause-effect/}{2}
+
 \url{https://mimic.physionet.org/}
 
 \url{https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750}
@@ -4403,6 +4406,16 @@ fairly small, but variability between blocks will be larger.
 
 \section{Notes}\label{notes-2}
 
+ts features engineering: Various lags inside the FDW, Rolling mean, min,
+max, etc. statistics, Bollinger bands and statistics, Rolling entropy,
+or rolling majority, for categorical features, Rolling text statistics
+for text features, Log-transformation (for exponential trends and
+multiplicative models), Periodic differencing (to make an integrated
+model with stationary targets), Simple naive difference (using the most
+recent FDW row)
+
+ts distance measures: Dynamic Time Warping \& Frechet Distance
+
 time series features: extract data from timestamp (year, month, day),
 lags, rolling windows, rolling window - summary stats of all previous
 data points
@@ -6031,7 +6044,9 @@ video (Component: Meaning):
 
 \href{http://vertex.ai/}{DL Everywhere}
 
-\href{http://theorangeduck.com/page/neural-network-not-working}{Debugging}
+Debugging:
+\href{http://theorangeduck.com/page/neural-network-not-working}{1}
+\href{https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21}{2}
 
 \href{http://www.asimovinstitute.org/neural-network-zoo/}{Neural Network
 Zoo}
@@ -6649,6 +6664,46 @@ Conventional definition of confounder: L is a confounder of the effect
 of a on y if L meets 3 conditions: L is associated with a, L is
 associated with y conditional on a, L is not on a causal pathway from a
 to y.
+
+l3
+
+surrogate confounder: a descendant of a cofounder.
+
+turn on recruiter linkedin
+
+cofounding if absolute but cofounder is relative to other variables.
+
+If you can't randomize then you have to rely on observational data.
+Methods: 1) Measure enough variables to block all backdoor paths between
+A \& Y, 2) Alternatives to blocking back door paths (instrumental
+variable estimation) Here's are a few options for 1):
+
+Stratification (adjust for confounding): A way to adjust for a variable
+by only looking at a subset of it, for example only looking at people
+who smoke instead of all people. An alternative is to use regression to
+look at the effects in each subset and then pool the estimates.
+
+Matching (adjust for confounding): Randomly match someone with a \& b to
+\textasciitilde{}a \& b and a \& \textasciitilde{}b to
+\textasciitilde{}a \& \textasciitilde{}b. Then see if there is an
+associating in the match subset.
+
+G-methods: The following three methods should be used when time-varying
+confounders are affected by prior treatment.
+
+Inverse Probability Weighting (adjust for confounding): Compute 1/p(a =
+1 \textbar{} b) and 1/p(a = 0 \textbar{} b), and use these as weights in
+the association computation. Eliminates backdoor.
+
+Standardization (G-formula)
+
+G-estimation
+
+All these confounding adjustment methods require knowledge of the true
+causal DAG since you need to know which paths to block.
+
+Randomization, when possible, is the preferred approach to eliminating
+confounding.
 
 \chapter{Distributed}\label{distributed}
 
