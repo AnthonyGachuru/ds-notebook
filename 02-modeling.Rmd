@@ -24,6 +24,13 @@ because even though you have higher overall accuracy, you have more false negati
 
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN
 
+## Model Selection/Evaluation
+
+* **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
+
+## Model Explanability
+
+Use SHAP.
 
 ## Supervised
 
@@ -876,7 +883,7 @@ TBD
 
 ### Pros/Cons
 
-## DataCamp: Nonlinear Modeling in R with GAMs
+## GAMs
 
 Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
 
@@ -977,7 +984,7 @@ low_prob <- plogis(low_pred)
 
 gams work with broom and caret.
 
-# Hierarchical Models
+## Hierarchical Models
 
 "Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
 
@@ -988,14 +995,3 @@ Analysis of Variance, or ANOVA, can be used to compare two different lmer models
 * One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
 
 * Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
-
-
-## Model Selection/Evaluation
-
-* **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
-
-## Model Explanability
-
-ss
-
-

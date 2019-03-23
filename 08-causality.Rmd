@@ -14,9 +14,9 @@ https://cran.r-project.org/web/packages/causaleffect/causaleffect.pdf
 
 http://causalinference.gitlab.io/icwsm-tutorial/
 
-Causality Edx
+## Causality Edx
 
-L1
+### L1
 
 Draw a complete DAG if your expert knowledge is insufficient to exclude any possible effect.
 Knowledge is expressed in the form of missing arrows.
@@ -78,7 +78,7 @@ people and prevents it in others. Rare.
 
 All paths are blocked variables are not associated.
 
-L2
+### L2
 
 back door path: a path connecting A and Y without using arrows that leave from A. eg. Given L → A → Y ← L, the path A - L - Y is a back door path.
 
@@ -90,7 +90,7 @@ Change in estimate definition of confounder: A var is a confounder of the effect
 
 Conventional definition of confounder: L is a confounder of the effect of a on y if L meets 3 conditions: L is associated with a, L is associated with y conditional on a, L is not on a causal pathway from a to y.
 
-l3
+### l3
 
 surrogate confounder: a descendant of a cofounder.
 
@@ -116,4 +116,49 @@ All these confounding adjustment methods require knowledge of the true causal DA
 
 Randomization, when possible, is the preferred approach to eliminating confounding.
 
+Selection bias under the null is called collider stratification bias. One way it occurs is by conditioning on a collider or the child of  a collider.
 
+Case-control study: Outcome based selection design
+
+Selection bias can occur due to eligibility criteria and loss to follow-up. The latter can occur from causes that have significance in the causal graph.
+
+Internal validity: We say that a study has internal validity when the estimated association has a causal interpretation in the study population. That is, there is no selection bias, there is no confounding, et cetera.
+
+External validity:  We say that a study has external validity when the estimated association has a causal interpretation in another population. That is, we can transport or generalize the estimated effect to other populations.
+
+In randomized trials, self-selection bias does not affect internal validity, but may affect external validity.
+
+Bias under the null due to self-selection at baseline can happen in a follow up study.
+
+Smart selection, adjustment for selection bias
+
+Use inverse probability weighting to control for the four selection bias dags discussed: {insert dags here}
+
+Competing events
+
+### L4
+
+Measurement error: True value isn't equal to measured value. 
+
+Measurement bias: When the measure of association between a* and y* (measured treatment & outcome values) differs from that of a and y.
+
+Types of measurement error:
+
+Type 1, independent non-differential.
+Type 2, dependent non-differential.
+Type 3, independent differential.
+Type 4, dependent differential.
+
+Independent non-differential error is the only type of measurement error that does not create bias under the null.
+
+information bias
+
+Statistical models and validation samples can be used to correct measurement error.
+
+We can't correctly choose methods of measurement error correction without considering the structure of the measurement error.
+
+A causal DAG can't eliminate bias due to confounding. A causal DAG can improve precision. A causal DAG can't improve external validity. A causal DAG can represent sources of bias.
+
+### L5
+
+Time-varying treatments

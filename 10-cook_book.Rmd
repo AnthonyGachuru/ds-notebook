@@ -4,6 +4,113 @@
 
 [Chris Albon](http://chrisalbon.com/)
 
+## EBB
+
+```
+df_ebb <- df %>%
+  summarise(successes = sum(success), sample_size = n()) %>%
+  add_ebb_estimate(num_passed, sample_size)
+```
+
+## Plot Grid 
+
+```
+gridExtra::grid.arrange(plots[[1]],plots[[2]],plots[[3]], plots[[4]],plots[[5]],plots[[6]], nrow=3)
+```
+
+## Pairwise Scatterplot
+
+```
+
+GGally::ggpairs(data, mapping = aes(colour = category))
+```
+
+## Anti-join
+
+```
+# https://stackoverflow.com/questions/38516664/anti-join-pandas
+
+# Identify what values are in TableB and not in TableA
+key_diff = set(TableB.Key).difference(TableA.Key)
+where_diff = TableB.Key.isin(key_diff)
+
+# Slice TableB accordingly and append to TableA
+TableA.append(TableB[where_diff], ignore_index=True)
+```
+
+## DF Diff
+
+```
+# https://stackoverflow.com/a/36893675/6627726
+
+merged = df1.merge(df2, indicator=True, how='outer')
+merged[merged['_merge'] == 'right_only']
+```
+
+## CSV Encoding Check
+
+```
+import chardet
+
+with open("../input/kickstarter-projects/ks-projects-201801.csv", 'rb') as rawdata:
+    result = chardet.detect(rawdata.read(10000))
+```
+
+## Pandas Profiling
+
+```
+import pandas_profiling
+pandas_profiling.ProfileReport(data)
+```
+
+## Read SQL File
+
+```
+df <- dbGetQuery(con, statement = read_file('query.sql'))
+```
+
+## Extract Date
+
+```
+StartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
+YearMonth = Day %>% strftime(format="%Y-%m")
+date = date %>% as.POSIXct() %>% strptime('%Y-%m-%d') %>% strftime(format="%Y-%m-%d")
+```
+
+## GGPLOT To Plotly
+
+```
+ggplotly(ggplot(filter(df_master2, group == x), aes(x,y, label = z, color = w)) +
+        geom_jitter(width = .2), tooltip = c('y', 'label'))
+```
+
+## Custom Theme For Plot
+
+```
+theme_ilo <- function() {
+    theme_minimal() +
+        theme(
+            text = element_text(family = "Bookman", color = "gray25"),
+            plot.subtitle = element_text(size = 12),
+            plot.caption = element_text(color = "gray30"),
+            plot.background = element_rect(fill = "gray95"),
+            plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+        )
+}
+```
+
+## Heatmap
+
+```
+library(corrplot)
+
+df_fltrd %>% 
+select_if(is.numeric) %>%
+    cor() %>% 
+corrplot(method = "circle", is.corr = FALSE)
+```
+
+
 ## Linear Regression Statsmodels
 
 ```{python, eval = F}
@@ -15,7 +122,40 @@ mdl = sm.OLS(Y, X).fit(disp = False)
 print(mdl.summary())
 ```
 
+## Linear Regression By Groups
+
+```{r, eval = F}
+librarytidyverse)
+
+mtcars %>% group_by(cyl) %>% split(.$cyl) %>% purrr::map(~ lm(mpg ~ ., data = .))
+mtcars %>% group_by(cyl) %>% nest() %>% 
+mutate(model = map(data, function(x) lm(mpg ~ ., data = x) ))
+```
+
+
+## RML Pipeline
+
+```{r, eval = F}
+# categorical comparison to target
+chisq.test(table(cut(iris$Sepal.Length, 3), iris$Species))
+
+# Variable Importance
+varImp
+```
+
 ## Rowwise
+
+```{python, eval = F}
+rectangles = [
+    { 'height': 40, 'width': 10 },
+    { 'height': 20, 'width': 9 },
+    { 'height': 3.4, 'width': 4 }
+]
+rectangles_df = pd.DataFrame(rectangles)
+def calculate_area(row):
+    return row['height'] * row['width']
+rectangles_df.apply(calculate_area, axis=1)
+```
 
 ```{r, eval = F}
 library(dplyr)
@@ -30,7 +170,7 @@ mtcars %>%
 
 ```{bash, eval = F}
 pip install subsample
-gzcat ginormous.csv.gz | subsample -n 100000 > sampled.csv.gz
+subsample -s 8 -n 100000 test.csv -r > test_sample.csv
 ```
 
 ## SQL Dummy Columns
@@ -54,7 +194,7 @@ ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth()
 ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))
 ```
 
-## Featuretools Example
+## Featuretools
 
 ```{python, eval = F}
 #https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table
@@ -85,7 +225,7 @@ _, features2 = ft.dfs(
 )
 ```
 
-## Skimage Example
+## Skimage
 
 ```{python, eval = F}
 import numpy as np
@@ -100,7 +240,7 @@ plt.imshow(image)
 plt.show()
 ```
 
-## SHAP Example
+## SHAP
 
 ```{python, eval = F}
 import shap
@@ -121,7 +261,7 @@ df_shap['shap_mean_abs'] = np.absolute(df_shap['shap_mean'])
 df_shap.sort_values(['shap_mean_abs'], ascending = False, inplace = True)
 ```
 
-## Hyperband CV Example
+## Hyperband CV
 
 ```{python, eval = F}
 #https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
@@ -162,7 +302,7 @@ sqlite3 db_name.db
 .import data.csv db_name
 ```
 
-# Xgboost & Light GBM Example
+## Xgboost & Light GBM
 
 ```{python, eval = F}
 import numpy as np

@@ -193,6 +193,8 @@ https://blog.webkid.io/datasets-for-machine-learning/
 
 https://www.githubarchive.org
 
+https://www.datasetlist.com/
+
 https://www.enigma.com/data
 
 https://www.kaggle.com/about/datasets-awards/overview

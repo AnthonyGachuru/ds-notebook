@@ -393,6 +393,8 @@ Causality: \href{https://www.kaggle.com/c/cause-effect-pairs}{1}
 
 \url{https://www.githubarchive.org}
 
+\url{https://www.datasetlist.com/}
+
 \url{https://www.enigma.com/data}
 
 \url{https://www.kaggle.com/about/datasets-awards/overview}
@@ -1948,6 +1950,20 @@ ask your team to tune to the new metric.
   form is made, Example: KNN
 \end{itemize}
 
+\section{Model Selection/Evaluation}\label{model-selectionevaluation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
+  as how often observations differ from one another. It varies from 0 to
+  1. The higher the value, the more unalike the data are.
+\end{itemize}
+
+\section{Model Explanability}\label{model-explanability}
+
+Use SHAP.
+
 \section{Supervised}\label{supervised-1}
 
 \subsection{Linear Regression}\label{linear-regression}
@@ -3460,8 +3476,7 @@ TBD
 
 \subsection{Pros/Cons}\label{proscons-15}
 
-\section{DataCamp: Nonlinear Modeling in R with
-GAMs}\label{datacamp-nonlinear-modeling-in-r-with-gams}
+\section{GAMs}\label{gams}
 
 Wiggleness affected by smoothing factor (sp) and number of basis
 functions (k)
@@ -3575,7 +3590,7 @@ outputs on the log odds scale
 
 gams work with broom and caret.
 
-\chapter{Hierarchical Models}\label{hierarchical-models}
+\section{Hierarchical Models}\label{hierarchical-models}
 
 ``Across counties, as the average mother's age increases the birth rate
 decreases while correcting for state-level impacts'' BirthRate
@@ -3599,20 +3614,6 @@ model that includes Year.
   student, partition cross validation by dates, pca finds major trends
   hidden within the data
 \end{itemize}
-
-\section{Model Selection/Evaluation}\label{model-selectionevaluation}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{The Coefficient of Unalikeability}: Unalikeability is defined
-  as how often observations differ from one another. It varies from 0 to
-  1. The higher the value, the more unalike the data are.
-\end{itemize}
-
-\section{Model Explanability}\label{model-explanability}
-
-ss
 
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
@@ -3939,8 +3940,7 @@ estimated sample size to 300.
   threshold.
 \end{itemize}
 
-\subsection*{Introduction to Data}\label{introduction-to-data}
-\addcontentsline{toc}{subsection}{Introduction to Data}
+\section{Introduction to Data}\label{introduction-to-data}
 
 There is no random sampling since the subjects of the study were
 volunteers, so the results cannot be generalized to all people. However,
@@ -3976,7 +3976,7 @@ Random Sampling + No Random Assignment: Not causal + generalizable
 No Random Sampling + No Random Assignment: Not causal + not
 generalizable
 
-\subsection{Statistical Tests}\label{statistical-tests}
+\section{Statistical Tests}\label{statistical-tests}
 
 The appropriate sample size depends on many things, chiefly the
 complexity of the analysis and the expected effect size. The ``30'' rule
@@ -4052,19 +4052,76 @@ Given any three, we can determine the fourth.
   Analysis Calculator}
 \end{itemize}
 
-\subsection{Stats For Hackers}\label{stats-for-hackers}
+\section{Stats For Hackers}\label{stats-for-hackers}
 
-\begin{itemize}
-\item
-  Methods: Simluation, Boostrapping (with replacement, not good with
-  ranks), Shuffling (Works when assumption is that the data are the
-  same, representative samples, non-longitudinal data), \& Cross
-  Validation.
-\item
-  Assumes iid.
-\end{itemize}
+Notes on the talk by Jake Vanderplas. I left out bootstrap and cross
+validation below. For all methods look out for selection bias and make
+sure you have representative samples. More on the bootstrap: These are
+simulated confidence intervals that work well for n \textgreater{} 20 as
+a rule of thumb.
 
-\subsection{Think Stats}\label{think-stats}
+\subsection{Direct Simulation}\label{direct-simulation}
+
+Works well with an apriori (generative) model of the world, like the
+probability distribution of a coin toss. Example: Flip a fair coin 30
+times. How likely it is to see 22 heads?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{h_a <-}\StringTok{ }\DecValTok{22}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }
+           \OperatorTok{~}\StringTok{ }\KeywordTok{sum}\NormalTok{(base}\OperatorTok{::}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{30}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)) }\OperatorTok{>=}\StringTok{ }\NormalTok{h_a) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Shuffling}\label{shuffling}
+
+Comparing groups
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_}\DecValTok{100}\NormalTok{ <-}\StringTok{ }\NormalTok{iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\NormalTok{(}\KeywordTok{t.test}\NormalTok{(iris_}\DecValTok{100}\NormalTok{[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{1}\NormalTok{], iris_}\DecValTok{100}\NormalTok{[}\DecValTok{51}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{], }
+       \DataTypeTok{alternative =} \StringTok{'greater'}\NormalTok{))}\OperatorTok{$}\NormalTok{p.value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ha_shuffle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
+  
+\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Species =} \KeywordTok{sample}\NormalTok{(Species, }\KeywordTok{n}\NormalTok{())) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+  
+  \KeywordTok{return}\NormalTok{(result }\OperatorTok{>=}\StringTok{ }\NormalTok{observed_diff)}
+  
+\NormalTok{\}}
+
+\NormalTok{observed_diff <-}\StringTok{ }\NormalTok{iris_}\DecValTok{100} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }\OperatorTok{~}\StringTok{ }\KeywordTok{ha_shuffle}\NormalTok{(iris_}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Think Stats}\label{think-stats}
 
 \begin{itemize}
 \item
@@ -4120,7 +4177,7 @@ Given any three, we can determine the fourth.
   Spearman coefficient.
 \end{enumerate}
 
-\subsection{AB Testing Overview}\label{ab-testing-overview}
+\section{AB Testing Overview}\label{ab-testing-overview}
 
 Guide: Choose metric (CTR), review stats (Hypothesis Testing), design,
 analyse
@@ -4345,8 +4402,9 @@ Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
 
-\section{DataCamp: Experimental
-Design}\label{datacamp-experimental-design}
+\section{Experimental Design}\label{experimental-design}
+
+Note from the DataCamp course.
 
 Randomized Complete Block Design (RCBD) experiment
 
@@ -6556,9 +6614,9 @@ Talk}
 
 \url{http://causalinference.gitlab.io/icwsm-tutorial/}
 
-Causality Edx
+\section{Causality Edx}\label{causality-edx}
 
-L1
+\subsection{L1}\label{l1}
 
 Draw a complete DAG if your expert knowledge is insufficient to exclude
 any possible effect. Knowledge is expressed in the form of missing
@@ -6644,7 +6702,7 @@ others. Rare.
 
 All paths are blocked variables are not associated.
 
-L2
+\subsection{L2}\label{l2}
 
 back door path: a path connecting A and Y without using arrows that
 leave from A. eg. Given L → A → Y ← L, the path A - L - Y is a back door
@@ -6665,7 +6723,7 @@ of a on y if L meets 3 conditions: L is associated with a, L is
 associated with y conditional on a, L is not on a causal pathway from a
 to y.
 
-l3
+\subsection{l3}\label{l3}
 
 surrogate confounder: a descendant of a cofounder.
 
@@ -6704,6 +6762,71 @@ causal DAG since you need to know which paths to block.
 
 Randomization, when possible, is the preferred approach to eliminating
 confounding.
+
+Selection bias under the null is called collider stratification bias.
+One way it occurs is by conditioning on a collider or the child of a
+collider.
+
+Case-control study: Outcome based selection design
+
+Selection bias can occur due to eligibility criteria and loss to
+follow-up. The latter can occur from causes that have significance in
+the causal graph.
+
+Internal validity: We say that a study has internal validity when the
+estimated association has a causal interpretation in the study
+population. That is, there is no selection bias, there is no
+confounding, et cetera.
+
+External validity: We say that a study has external validity when the
+estimated association has a causal interpretation in another population.
+That is, we can transport or generalize the estimated effect to other
+populations.
+
+In randomized trials, self-selection bias does not affect internal
+validity, but may affect external validity.
+
+Bias under the null due to self-selection at baseline can happen in a
+follow up study.
+
+Smart selection, adjustment for selection bias
+
+Use inverse probability weighting to control for the four selection bias
+dags discussed: \{insert dags here\}
+
+Competing events
+
+\subsection{L4}\label{l4}
+
+Measurement error: True value isn't equal to measured value.
+
+Measurement bias: When the measure of association between a* and y*
+(measured treatment \& outcome values) differs from that of a and y.
+
+Types of measurement error:
+
+Type 1, independent non-differential. Type 2, dependent
+non-differential. Type 3, independent differential. Type 4, dependent
+differential.
+
+Independent non-differential error is the only type of measurement error
+that does not create bias under the null.
+
+information bias
+
+Statistical models and validation samples can be used to correct
+measurement error.
+
+We can't correctly choose methods of measurement error correction
+without considering the structure of the measurement error.
+
+A causal DAG can't eliminate bias due to confounding. A causal DAG can
+improve precision. A causal DAG can't improve external validity. A
+causal DAG can represent sources of bias.
+
+\subsection{L5}\label{l5}
+
+Time-varying treatments
 
 \chapter{Distributed}\label{distributed}
 
@@ -6787,6 +6910,112 @@ regression
 
 \href{http://chrisalbon.com/}{Chris Albon}
 
+\section{EBB}\label{ebb}
+
+\begin{verbatim}
+df_ebb <- df %>%
+  summarise(successes = sum(success), sample_size = n()) %>%
+  add_ebb_estimate(num_passed, sample_size)
+\end{verbatim}
+
+\section{Plot Grid}\label{plot-grid}
+
+\begin{verbatim}
+gridExtra::grid.arrange(plots[[1]],plots[[2]],plots[[3]], plots[[4]],plots[[5]],plots[[6]], nrow=3)
+\end{verbatim}
+
+\section{Pairwise Scatterplot}\label{pairwise-scatterplot}
+
+\begin{verbatim}
+
+GGally::ggpairs(data, mapping = aes(colour = category))
+\end{verbatim}
+
+\section{Anti-join}\label{anti-join}
+
+\begin{verbatim}
+# https://stackoverflow.com/questions/38516664/anti-join-pandas
+
+# Identify what values are in TableB and not in TableA
+key_diff = set(TableB.Key).difference(TableA.Key)
+where_diff = TableB.Key.isin(key_diff)
+
+# Slice TableB accordingly and append to TableA
+TableA.append(TableB[where_diff], ignore_index=True)
+\end{verbatim}
+
+\section{DF Diff}\label{df-diff}
+
+\begin{verbatim}
+# https://stackoverflow.com/a/36893675/6627726
+
+merged = df1.merge(df2, indicator=True, how='outer')
+merged[merged['_merge'] == 'right_only']
+\end{verbatim}
+
+\section{CSV Encoding Check}\label{csv-encoding-check}
+
+\begin{verbatim}
+import chardet
+
+with open("../input/kickstarter-projects/ks-projects-201801.csv", 'rb') as rawdata:
+    result = chardet.detect(rawdata.read(10000))
+\end{verbatim}
+
+\section{Pandas Profiling}\label{pandas-profiling}
+
+\begin{verbatim}
+import pandas_profiling
+pandas_profiling.ProfileReport(data)
+\end{verbatim}
+
+\section{Read SQL File}\label{read-sql-file}
+
+\begin{verbatim}
+df <- dbGetQuery(con, statement = read_file('query.sql'))
+\end{verbatim}
+
+\section{Extract Date}\label{extract-date}
+
+\begin{verbatim}
+StartTime %>% as.POSIXct() %>% strftime(format="%Y-%m-%d")
+YearMonth = Day %>% strftime(format="%Y-%m")
+date = date %>% as.POSIXct() %>% strptime('%Y-%m-%d') %>% strftime(format="%Y-%m-%d")
+\end{verbatim}
+
+\section{GGPLOT To Plotly}\label{ggplot-to-plotly}
+
+\begin{verbatim}
+ggplotly(ggplot(filter(df_master2, group == x), aes(x,y, label = z, color = w)) +
+        geom_jitter(width = .2), tooltip = c('y', 'label'))
+\end{verbatim}
+
+\section{Custom Theme For Plot}\label{custom-theme-for-plot}
+
+\begin{verbatim}
+theme_ilo <- function() {
+    theme_minimal() +
+        theme(
+            text = element_text(family = "Bookman", color = "gray25"),
+            plot.subtitle = element_text(size = 12),
+            plot.caption = element_text(color = "gray30"),
+            plot.background = element_rect(fill = "gray95"),
+            plot.margin = unit(c(5, 10, 5, 10), units = "mm")
+        )
+}
+\end{verbatim}
+
+\section{Heatmap}\label{heatmap}
+
+\begin{verbatim}
+library(corrplot)
+
+df_fltrd %>% 
+select_if(is.numeric) %>%
+    cor() %>% 
+corrplot(method = "circle", is.corr = FALSE)
+\end{verbatim}
+
 \section{Linear Regression
 Statsmodels}\label{linear-regression-statsmodels}
 
@@ -6799,7 +7028,45 @@ Statsmodels}\label{linear-regression-statsmodels}
 \end{Highlighting}
 \end{Shaded}
 
+\section{Linear Regression By Groups}\label{linear-regression-by-groups}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{librarytidyverse}\ErrorTok{)}
+
+\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ .))}
+\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{map}\NormalTok{(data, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ x) ))}
+\end{Highlighting}
+\end{Shaded}
+
+\section{RML Pipeline}\label{rml-pipeline}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# categorical comparison to target}
+\KeywordTok{chisq.test}\NormalTok{(}\KeywordTok{table}\NormalTok{(}\KeywordTok{cut}\NormalTok{(iris}\OperatorTok{$}\NormalTok{Sepal.Length, }\DecValTok{3}\NormalTok{), iris}\OperatorTok{$}\NormalTok{Species))}
+
+\CommentTok{# Variable Importance}
+\NormalTok{varImp}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Rowwise}\label{rowwise}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rectangles }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\DecValTok{40}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{10}\NormalTok{ \},}
+\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\DecValTok{20}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{9}\NormalTok{ \},}
+\NormalTok{    \{ }\StringTok{'height'}\NormalTok{: }\FloatTok{3.4}\NormalTok{, }\StringTok{'width'}\NormalTok{: }\DecValTok{4}\NormalTok{ \}}
+\NormalTok{]}
+\NormalTok{rectangles_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(rectangles)}
+\KeywordTok{def}\NormalTok{ calculate_area(row):}
+    \ControlFlowTok{return}\NormalTok{ row[}\StringTok{'height'}\NormalTok{] }\OperatorTok{*}\NormalTok{ row[}\StringTok{'width'}\NormalTok{]}
+\NormalTok{rectangles_df.}\BuiltInTok{apply}\NormalTok{(calculate_area, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6817,7 +7084,7 @@ Statsmodels}\label{linear-regression-statsmodels}
 \begin{Shaded}
 \begin{Highlighting}[]
 \ExtensionTok{pip}\NormalTok{ install subsample}
-\ExtensionTok{gzcat}\NormalTok{ ginormous.csv.gz }\KeywordTok{|} \ExtensionTok{subsample}\NormalTok{ -n 100000 }\OperatorTok{>}\NormalTok{ sampled.csv.gz}
+\ExtensionTok{subsample}\NormalTok{ -s 8 -n 100000 test.csv -r }\OperatorTok{>}\NormalTok{ test_sample.csv}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6849,7 +7116,7 @@ bin any observations
 \end{Highlighting}
 \end{Shaded}
 
-\section{Featuretools Example}\label{featuretools-example}
+\section{Featuretools}\label{featuretools}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6877,7 +7144,7 @@ bin any observations
 \end{Highlighting}
 \end{Shaded}
 
-\section{Skimage Example}\label{skimage-example}
+\section{Skimage}\label{skimage}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6892,7 +7159,7 @@ bin any observations
 \end{Highlighting}
 \end{Shaded}
 
-\section{SHAP Example}\label{shap-example}
+\section{SHAP}\label{shap}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6911,7 +7178,7 @@ bin any observations
 \end{Highlighting}
 \end{Shaded}
 
-\section{Hyperband CV Example}\label{hyperband-cv-example}
+\section{Hyperband CV}\label{hyperband-cv}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6951,7 +7218,7 @@ bin any observations
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{Xgboost \& Light GBM Example}\label{xgboost-light-gbm-example}
+\section{Xgboost \& Light GBM}\label{xgboost-light-gbm}
 
 \begin{Shaded}
 \begin{Highlighting}[]

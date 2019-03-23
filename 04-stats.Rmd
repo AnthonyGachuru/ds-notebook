@@ -175,7 +175,7 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
 
-### Introduction to Data {-}
+## Introduction to Data
 
 There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.
 
@@ -201,7 +201,7 @@ Random Sampling + No Random Assignment: Not causal + generalizable
 
 No Random Sampling + No Random Assignment: Not causal + not generalizable
 
-### Statistical Tests
+## Statistical Tests
 
 The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 
 
@@ -239,13 +239,64 @@ Given any three, we can determine the fourth.
 
 * [Power Analysis Calculator](http://www.evanmiller.org/ab-testing/sample-size.html)
 
-### Stats For Hackers
- 
-* Methods: Simluation, Boostrapping (with replacement, not good with ranks), Shuffling (Works when assumption is that the data are the same, representative samples, non-longitudinal data), & Cross Validation.
+## Stats For Hackers
 
-* Assumes iid.
+Notes on the talk by Jake Vanderplas. I left out bootstrap and cross validation below. For all methods look out for selection bias and make sure you have representative samples. More on the bootstrap: These are simulated confidence intervals that work well for n > 20 as a rule of thumb.
 
-### Think Stats
+### Direct Simulation
+
+Works well with an apriori (generative) model of the world, like the probability distribution of a coin toss. Example: Flip a fair coin 30 times. How likely it is to see 22 heads?
+
+```{r, eval = F}
+n <- 10^6
+h_a <- 22
+result <- purrr::map(seq(1, n, 1), 
+           ~ sum(base::sample(c(0,1), 30, replace = T)) >= h_a) %>%
+  unlist() %>% sum()
+
+result/n
+```
+
+### Shuffling
+
+Comparing groups
+
+```{r, eval = F}
+iris_100 <- iris[1:100, c(2,5)]
+(t.test(iris_100[1:50, 1], iris_100[51:100, 1], 
+       alternative = 'greater'))$p.value
+```
+
+```{r, eval = F}
+ha_shuffle <- function(df){
+  
+  result <- df %>% 
+  mutate(Species = sample(Species, n())) %>% 
+  group_by(Species) %>% 
+  summarise_at(1, mean) %>% 
+  mutate(mu_diff = Sepal.Width - lag(Sepal.Width)) %>% 
+  filter(!is.na(mu_diff)) %>% 
+  pull(mu_diff)
+  
+  return(result >= observed_diff)
+  
+}
+
+observed_diff <- iris_100 %>% 
+  group_by(Species) %>% 
+  summarise_at(1, mean) %>% 
+  mutate(mu_diff = Sepal.Width - lag(Sepal.Width)) %>% 
+  filter(!is.na(mu_diff)) %>% 
+  pull(mu_diff)
+
+n <- 10^6
+result <- purrr::map(seq(1, n, 1), ~ ha_shuffle(iris_100)) %>%
+  unlist() %>% sum()
+
+result/n
+```
+
+## Think Stats
 
 * Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.
 
@@ -274,7 +325,7 @@ units, they come from different distributions. There are two common solutions to
 
 2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
 
-### AB Testing Overview
+## AB Testing Overview
 
 Guide: Choose metric (CTR), review stats (Hypothesis Testing), design, analyse
 
@@ -449,7 +500,9 @@ Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
 
-## DataCamp: Experimental Design
+## Experimental Design
+
+Note from the DataCamp course.
 
 Randomized Complete Block Design (RCBD) experiment
 
