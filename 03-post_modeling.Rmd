@@ -2,6 +2,12 @@
 
 ## Communicate
 
+https://metabase.com/
+  
+http://koaning.io/make-docs.html
+
+[Mode Studio](https://about.modeanalytics.com/)
+
 Summarize the motivation and goals of the project. It should either be an executive summary or a technical abstract.
 
 State results with details as needed. For an end user presentation show how the model fits into and improves the user's workflow, and how to use it.
@@ -12,4 +18,42 @@ Introduction | Motivation | Summary | Results | Conclusion
 
 ## Deploy
 
+http://pachyderm.io
+
+Apache Airflow
+
+https://ropensci.org/technotes/2019/03/18/drake-700/
+
+https://www.mlflow.org
+
+[Weights & Biases](https://www.wandb.com/blog/towards-reproducibility)
+
+Databricks
+
+Ansible
+
+https://aws.amazon.com/sagemaker/
+
+[Pipelines](http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines)
+
+[Workflow System](https://snakemake.readthedocs.io/en/stable/)
+
+[Pipeline Automation](http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines)
+
+[Streaming Data](https://www.wallaroolabs.com)
+
+[Spark](https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html)
+
+[batch job execution framework](https://stitchfix.github.io/flotilla-os/)
+
+[Sklearn Serialization](https://cmry.github.io/notes/serialize)
+
+[Auto Deploy](http://content.nexosis.com/twimlai)
+
+TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/)
+
+[Model Deployment aaS](https://orchestrahq.com)
+
 ## Maintain
+
+https://dvc.org/

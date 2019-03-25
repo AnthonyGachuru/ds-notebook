@@ -12,6 +12,24 @@ tomek link: points of different classes which are neighbors of each other. Remov
     
 * Make codebooks
 
+[R Spreadsheet](https://www.jamovi.org/)
+
+https://www.webscraper.io/documentation#open-web-scraper
+
+Documentation: [1](http://databasenotetaker.com/) | [2](https://dataedo.com/) | [3](https://www.apexsql.com/sql-tools-doc.aspx) | [4](https://techwriter.me/best-practices-guide/documenting-databases.aspx) | [5](http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary) | [6](https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database) | [7](https://drawsql.app/#features)
+  
+CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-peek-at-the-data-set) | [2](https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY) | [3](http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html)
+
+[pdf table extraction](https://tabula.technology)
+
+[DEaaS](https://www.astronomer.io/)
+  
+[data build tool](https://www.getdbt.com/)
+
+https://www.stitchdata.com/
+
+https://www.prefect.io/
+
 ### SQL
 
 * Maintain a query library
@@ -35,6 +53,46 @@ tomek link: points of different classes which are neighbors of each other. Remov
   * Each variable must have its own column.
   * Each observation must have its own row.
   * Each value must have its own cell.
+  
+http://pyviz.org/
+
+http://dataviz.tools/
+
+https://www.datawrapper.de/
+
+https://www.data-to-viz.com
+
+https://dominikkoch.github.io/Bump-Chart/
+
+https://www.r-graph-gallery.com/
+
+http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top
+
+[Stats Viz](http://emilkirkegaard.dk/understanding_statistics/)
+
+[Seeing Theory](http://students.brown.edu/seeing-theory/)
+
+[Python Plotting Guide](http://pythonplot.com/)
+  
+[Py Graph Gallery](https://python-graph-gallery.com)
+
+ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html) | [2](https://plot.ly/python/table/) | [3](https://plot.ly/python/html-reports/) | [Extensions](http://www.ggplot2-exts.org/gallery/)
+
+[Sankey Diagram Creator](http://sankeymatic.com)
+
+[R Waffle Charts](https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/)
+
+[High Dimensional](https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html)
+
+[Links](http://www.thehackerwithin.org/swinburne/links.html)
+
+[Tufte In R](http://motioninsocial.com/tufte/)
+
+[R Graph Compendium](http://shinyapps.org/apps/RGraphCompendium/index.php)
+
+[Data Viz Catalogue](http://www.datavizcatalogue.com/index.html)
+
+[Text Visualization](http://textvis.lnu.se/)
   
 ## Transform
 

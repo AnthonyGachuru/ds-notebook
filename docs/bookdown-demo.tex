@@ -363,8 +363,60 @@ Conda
 
 \href{https://paperswithcode.com/sota}{SOTA Results}
 
-\href{https://www.dataquest.io/blog/data-science-project-style-guide/}{DS
-Project Style Guide}
+{[}DS Project Style
+Guide{]}(\url{https://www.dataquest.io/blog/data-science-project-style-guide/}
+
+Simulated Annealing: Gradient descent extension
+
+``No Free Lunch'' theorem: no single classifier works best across all
+possible scenarios
+
+Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
+
+Network models: graphical lasso, ising model, granger causality test,
+network hypothesis testing, bayesian networks
+
+Cohort analysis
+
+Transfer learning
+
+hierarchical clustering: ward
+
+hamming loss: multilabel and multiclass classification
+
+cox proportional hazards \& multivariate linear regression
+
+sequential data: rnn, lstm, hidden markov models \& conditional random
+fields
+
+fowles-mallows score for clustering when ground truth is known
+
+youden's j
+
+Multiple Correspondence Analysis
+
+platt scaling
+
+set the seed always
+
+natural log goes from unit change to percentage change
+
+generalized low rank models
+
+conditional random field
+
+linear probability model
+
+\url{http://r-pkgs.had.co.nz/tests.html}
+
+\url{https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/}
+
+\url{http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/}
+
+\url{https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html}
+
+confint conjoint analysis Incremental PCA fe: Permutation Measure meta
+learning \textbar{} Rasch Model \textbar{} Learning\_to\_rank
 
 \subsection{Data}\label{data}
 
@@ -588,7 +640,66 @@ Feature Engineering: \href{https://www.featuretools.com}{1} \textbar{}
 
 Auto ML: TPOT
 
-\subsection{Import}\label{import-1}
+\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
+
+\begin{itemize}
+\item
+  create helper functions and units tests as R/py for Rmd/ipynb
+\item
+  pytest/hypothesis for testing
+\item
+  use makefile to run cmd commands
+\item
+  Make package for workflow with data (\textbf{init}.py) and use this
+  formation for function docs:
+\item
+  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
+\end{itemize}
+
+\subsection{Sample R Pipeline}\label{sample-r-pipeline}
+
+\href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
+
+IO: odbc readxl httr
+
+EDA: DataExplorer
+
+Prep: tidyverse
+
+Sampling: rsample modelr
+
+Feature Engineering: recipes
+
+Modeling: glmnet h2o FFTrees
+
+Evaluation: broom yardstick
+
+Deployment: sqlrutils AzureML opencpu
+
+Monitoring: flexdashboard
+
+Docs: rmarkdown
+
+\chapter{Pre-Modeling}\label{pre-modeling}
+
+outliers: 1) dropping is an option but a bad one, 2) create a new
+columns to mark outliers, 3) rescale with the log to reduce the effect
+of outliers
+
+tomek link: points of different classes which are neighbors of each
+other. Removing them often improves model performance
+
+\section{Import}\label{import-1}
+
+\subsection{General}\label{general-1}
+
+\begin{itemize}
+\item
+  A schema is a blueprint for storing data. For a table every row has
+  same number of columns, and each column is of the same type.
+\item
+  Make codebooks
+\end{itemize}
 
 \href{https://www.jamovi.org/}{R Spreadsheet}
 
@@ -621,7 +732,48 @@ CLI:
 
 \url{https://www.prefect.io/}
 
-\subsection{Tidy-Transform-Visualize}\label{tidy-transform-visualize}
+\subsection{SQL}\label{sql}
+
+\begin{itemize}
+\item
+  Maintain a query library
+\item
+  Common Table Expressions
+\item
+  cross apply = inner join \textbar{} outer apply = full join
+\item
+  SQL UNION stacks one dataset on top of the other. It only appends
+  distinct values. More specifically, when you use UNION, the dataset is
+  appended, and any rows in the appended table that are exactly
+  identical to rows in the first table are dropped. If you'd like to
+  append all the values from the second table, use UNION ALL.
+\item
+  COUNT(DISTINCT month): returns count of non-null values like table in
+  R
+\item
+  The CASE statement is followed by at least one pair of WHEN and THEN
+  statements: CASE WHEN year = `SR' THEN `yes' ELSE NULL END. You can
+  also define a number of outcomes in a CASE statement by including as
+  many WHEN/THEN statements as you'd like
+\item
+  If you include two (or more) columns in a SELECT DISTINCT clause, your
+  results will contain all of the unique pairs of those two columns
+\end{itemize}
+
+\section{Tidy}\label{tidy-1}
+
+\begin{itemize}
+\item
+  In tidy data: Each variable forms a column. Each observation forms a
+  row. Each type of observational unit forms a table. There are three
+  interrelated rules which make a dataset tidy.
+\item
+  Each variable must have its own column.
+\item
+  Each observation must have its own row.
+\item
+  Each value must have its own cell.
+\end{itemize}
 
 \url{http://pyviz.org/}
 
@@ -670,557 +822,9 @@ Compendium}
 
 \href{http://textvis.lnu.se/}{Text Visualization}
 
-\subsection{Model}\label{model-1}
-
-\subsubsection{General}\label{general-1}
-
-Semi-supervised: active learning \textbar{}
-\href{https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html}{Auto
-Labeling}
-
-\url{https://machinelearningmastery.com/}
-
-Active Learning: Finding the optimal data to manually label
-
-\href{https://speakerdeck.com/seanoc/a-tour-of-large-scale-data-analysis-tools-in-python}{Python
-Distributed}
-
-\href{https://alexperrier.github.io/jekyll/update/2016/03/16/out-of-core-scikit-boston-meetup.html\#/}{SklearnDsitributed}
-
-\href{https://sparkhub.databricks.com/}{Spark Hub}
-
-Interactive ML:
-\href{https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Interactive-Naive-Bayes-using-Shiny-Text-Retrieval-Classification-Quantification}{1}
-\textbar{}
-\href{https://nuit-blanche.blogspot.com/2017/02/saturday-morning-videos-interactive.html}{2}
-
-\href{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html}{Online
-Learning}
-
-\href{http://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html}{ML
-APIs}
-
-\href{https://sigopt.com/}{Auto Optimization}
-
-\href{https://developers.google.com/machine-learning/glossary/}{Google
-ML Glossary}
-
-\href{https://systemml.apache.org}{Apache System ML}
-
-\href{http://www.ritchieng.com/machinelearning-learning-curve/}{Learning
-Curves}
-
-\href{http://scikit-learn.org/stable/modules/gaussian_process.html}{Gaussian
-Processes}
-
-\href{http://nlpers.blogspot.com/2016/08/debugging-machine-learning.html}{Debugging
-ML}
-
-\url{http://gael-varoquaux.info/interpreting_ml_tuto/index.html}
-
-\href{http://mpastell.com/2013/04/19/python_regression/}{LM Model
-Diagnostics}
-
-\href{https://www.rdocumentation.org/packages/WVPlots/versions/0.2.6/topics/GainCurvePlot}{Gain
-Curve}
-
-\href{https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/}{Metrics}
-
-\href{http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/}{Choosing
-A Classifier}
-
-\href{http://www.russpoldrack.org/2012/12/the-perils-of-leave-one-out.html}{LOOCV
-Perils}
-
-\href{http://www.win-vector.com/blog/2016/12/be-careful-evaluating-model-predictions/}{Model
-Evaluations}
-
-\href{http://blog.dato.com/how-to-evaluate-machine-learning-models-part-1-orientation}{Model
-Evaluation}
-
-CV Mistakes:
-\href{http://betatim.github.io/posts/cross-validation-gone-wrong/}{1}
-\textbar{}
-\href{http://www.alfredo.motta.name/cross-validation-done-wrong/}{2}
-\textbar{} \href{http://robjhyndman.com/hyndsight/crossvalidation/}{3}
-
-\href{https://cran.r-project.org/web/packages/pdp/pdp.pdf}{Partial
-Dependence Plots}
-
-\url{https://pair-code.github.io/what-if-tool/}
-
-permutation importance (eli5)
-
-\url{https://pbiecek.github.io/breakDown/}
-
-\href{https://cran.r-project.org/web/packages/breakDown/index.html}{Break
-Down Plots}
-
-\subsubsection{Supervised}\label{supervised}
-
-\url{http://clus.sourceforge.net/doku.php}
-
-\url{https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html}
-
-\url{https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html}
-
-\href{http://scikit-learn.org/stable/modules/model_evaluation.html\#function-for-prediction-error-metrics}{sklearn
-metrics}
-
-\href{https://docs.google.com/spreadsheets/d/16i47Wmjpj8k-mFRk-NnXXU5tmSQz8h37YxluDV8Zy9U/edit\#gid=0}{Algorithm
-Comparison}
-
-\href{https://www.rdocumentation.org/packages/yhat/versions/2.0-0}{Regression
-Effects Lib}
-
-anomalies:
-\href{http://scikit-learn.org/stable/modules/outlier_detection.html}{skl}
-\textbar{} \href{https://business-science.github.io/anomalize/}{R}
-
-lightgbm:
-\href{https://medium.com/@pushkarmandot/https-medium-com-pushkarmandot-what-is-lightgbm-how-to-implement-it-how-to-fine-tune-the-parameters-60347819b7fc}{tuning}
-\textbar{}
-\href{https://www.kaggle.com/ezietsman/simple-python-lightgbm-example}{ex}
-
-\href{http://etetoolkit.org/}{Tree Analysis Viz}
-
-unbalanced classes:
-\href{https://cran.r-project.org/web/packages/imbalance/index.html}{R}
-\textbar{}
-\href{http://contrib.scikit-learn.org/imbalanced-learn/stable/}{Py}
-
-\href{http://www.creativeai.net/posts/eivW6BvrrpyPf282d/interactive-machine-learning-an-overview-in-5-videos}{Interactive
-ML}
-
-Ensembles: \href{http://mlwave.com/kaggle-ensembling-guide/}{General}
-\textbar{} \href{http://amunategui.github.io/blending-models/}{caret}
-\textbar{}
-\href{https://www.toptal.com/machine-learning/ensemble-methods-machine-learning}{skl}
-\textbar{}
-\href{http://blog.kaggle.com/2016/12/27/a-kagglers-guide-to-model-stacking-in-practice/}{1}
-\textbar{}
-\href{http://blog.kaggle.com/2017/06/15/stacking-made-easy-an-introduction-to-stacknet-by-competitions-grandmaster-marios-michailidis-kazanova/}{2}
-
-Multilevel regression and post stratification
-
-Mixed Models / multilevel / hierarchical / mixed-effects models
-
-Multiple Factor Analysis: FactoMineR
-
-Functional PCA
-
-LMM:
-\href{http://edwardlib.org/tutorials/linear-mixed-effects-models}{1}
-\textbar{}
-\href{https://ourcodingclub.github.io/2017/03/15/mixed-models.html}{2}
-
-Sklearn Model Selection:
-\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html}{1}
-\textbar{}
-\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html}{2}
-\textbar{}
-\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html}{3}
-
-\subsubsection{Unsupervised}\label{unsupervised}
-
-\href{https://explosion.ai/blog/prodigy-annotation-tool-active-learning}{Annotation}
-
-\href{https://www.r-bloggers.com/clustering-mixed-data-types-in-r/}{Mixed
-Data Clustering}
-
-\href{https://colah.github.io/posts/2014-10-Visualizing-MNIST/}{Dimensionality
-Reduction Techniques}
-
-\href{http://opensource.datacratic.com/mtlpy50/}{Unsupervised Learning
-Sklearn}
-
-\href{http://www.inference.vc/unsupervised-learning-by-predicting-noise-an-information-maximization-view-2/}{Info
-Maximization}
-
-\href{http://johnloeber.com/docs/kmeans.html}{K-Means On MNIST}
-
-tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{}
-\href{https://lvdmaaten.github.io/tsne/}{2} \textbar{}
-\href{https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html}{3}
-
-\subsection{Other ML}\label{other-ml}
-
-\subsubsection{NLP}\label{nlp}
-
-\url{https://mobile.twitter.com/lmthang/status/1050543868041555969}
-
-\url{https://gking.harvard.edu/readme}
-
-\url{https://web.stanford.edu/~jurafsky/slp3/}
-
-\url{https://finetune.indico.io}
-
-\url{http://textable.io/}
-
-\url{https://pypi.python.org/pypi/tmtoolkit}
-
-\url{http://www.structuraltopicmodel.com/}
-
-\url{https://blog.insightdatascience.com/how-to-solve-90-of-nlp-problems-a-step-by-step-guide-fda605278e4e}
-
-\href{https://t.co/Zcnd7EJKsn}{Kaggle Guide}
-
-\href{https://rasa.ai/}{Chat Bots}
-
-\href{http://brandonrose.org/clustering}{Doc Similarity}
-
-\href{http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html}{Vector
-Embeddings}
-
-Topic Modeling:
-\href{http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html}{1}
-\textbar{}
-\href{http://chdoig.github.io/pytexas2015-topic-modeling/\#/}{2}
-\textbar{}
-\href{https://www.cs.princeton.edu/~blei/topicmodeling.html}{3}
-
-\href{https://trinker.github.io/qdap/vignettes/qdap_vignette.html}{qdap}
-
-NLP For:
-\href{http://blog.algorithmia.com/natural-language-processing-algorithms-web-developers/}{Web
-Devs} \textbar{}
-\href{https://stanfy.com/blog/advanced-natural-language-processing-tools-for-bot-makers/}{Bot
-Makers}
-
-\href{http://blog.algorithmia.com/introduction-natural-language-processing-nlp/}{NLP
-Intro}
-
-\subsubsection{Geospatial}\label{geospatial}
-
-\url{https://geocompr.robinlovelace.net/adv-map.html\#interactive-maps}
-
-\url{https://www.jessesadler.com/post/gis-with-r-intro/}
-
-\url{https://uber.github.io/kepler.gl/\#/}
-
-\url{http://gisquick.org/}
-
-\url{https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/}
-
-\href{http://www.rspatial.org/analysis/rst/2-scale_distance.html}{R
-Spatial}
-
-\href{https://pitchinteractiveinc.github.io/tilegrams/}{tilegrams}
-
-\href{https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r}{Spatial
-DA R}
-
-\subsubsection{Networks}\label{networks}
-
-\url{https://mikedombo.github.io/graphPlayground/\#}
-
-\href{https://snap.stanford.edu/snappy/index.html}{SNAP}
-
-\href{https://graph-tool.skewed.de/}{graph tool}
-
-\href{http://blogs.ischool.berkeley.edu/i290-abdt-s12/}{Berkeley Class}
-
-netviz: \href{http://curleylab.psych.columbia.edu/netviz/}{1} \textbar{}
-\href{http://www.kateto.net/polnet2015}{2}
-
-\href{https://web.stanford.edu/class/cs224w/handouts.html}{CS224 SNA}
-
-\href{https://networkl.github.io/}{NetworkL}
-
-\subsubsection{AI}\label{ai}
-
-\url{https://www.stateoftheart.ai/}
-
-\url{http://www.hbcse.tifr.res.in/jrmcont/notespart1/node27.html}
-
-\url{https://ai.google/}
-
-\url{https://openai.com/research/}
-
-\url{https://selfdrivingcars.mit.edu/deeptraffic/}
-
-\url{http://airesources.org/} \textbar{}
-\url{https://alleninstitute.org} \textbar{}
-\url{http://allenai.org/index.html}
-
-\href{https://www.jukedeck.com}{AI Music Generation}
-
-\href{https://poo.ai/}{AI Acheivements} \textbar{}
-\href{http://createwith.ai/}{Create With AI}
-
-\href{http://www.hodlipson.com/}{Hod Lipson}
-
-\href{http://www.ggp.org/}{Playing Games}
-
-\href{https://cbmm.mit.edu/}{MIT AI}
-
-\href{https://deepmind.com/blog/open-sourcing-deepmind-lab/}{DeepMind
-Lab}
-
-\href{https://wiki.python.org/moin/PythonForArtificialIntelligence}{AI 4
-Py}
-
-\href{http://aiimpacts.org/concrete-ai-tasks-for-forecasting/}{AI Tasks}
-
-\href{https://eng.uber.com/vine/}{Neuroevolution Viz}
-
-\subsubsection{RL}\label{rl}
-
-\url{https://box2d.org/}
-
-\url{https://aihabitat.org/}
-
-\url{https://blogs.unity3d.com/2018/10/02/puppo-the-corgi-cuteness-overload-with-the-unity-ml-agents-toolkit/}
-
-\url{https://blog.openai.com/openai-baselines-ppo/}
-
-\url{https://ai.googleblog.com/2018/08/introducing-new-framework-for-flexible.html}
-
-\href{https://blogs.unity3d.com/2017/12/08/introducing-ml-agents-v0-2-curriculum-learning-new-environments-and-more/}{Unity
-Agents}
-
-\href{https://harderchoices.com/2018/06/07/temporal-difference-learning-in-python/}{Temporal
-Diff Learning}
-
-\href{http://osim-rl.stanford.edu}{musculoskeletal models rl}
-
-RLlib:
-\href{https://www.oreilly.com/ideas/introducing-rllib-a-composable-and-scalable-reinforcement-learning-library}{1}
-\textbar{} \href{https://ray.readthedocs.io/en/latest/rllib.html}{2}
-
-\href{https://blog.openai.com/gym-retro}{Gym} \textbar{}
-\href{https://reinforce.io/blog/introduction-to-tensorforce/}{TensorForce}
-\textbar{} keras-rl
-
-\href{https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/}{DeepRL
-Agent}
-
-\href{https://openai.com/blog/universe/}{General Env Creator}
-
-\href{http://alpha.openai.com/miniwob/index.html}{Website RL Benchmarks}
-
-\href{https://brohrer.github.io/becca_6_chase_demo.html}{BECCA Agent}
-\textbar{}
-\href{https://brohrer.github.io/adaptive_reinforcement_learning_iot.html}{IOT}
-
-\subsection{Communicate}\label{communicate-1}
-
-\url{https://metabase.com/}
-
-\url{http://koaning.io/make-docs.html}
-
-\href{https://about.modeanalytics.com/}{Mode Studio}
-
-\subsection{Deploy \& Maintain}\label{deploy-maintain}
-
-\url{http://pachyderm.io}
-
-Apache Airflow
-
-\url{https://ropensci.org/technotes/2019/03/18/drake-700/}
-
-\url{https://www.mlflow.org}
-
-\href{https://www.wandb.com/blog/towards-reproducibility}{Weights \&
-Biases}
-
-Databricks
-
-Ansible
-
-\url{https://aws.amazon.com/sagemaker/}
-
-\href{http://stat545.com/automation01_slides/\#/automating-data-analysis-pipelines}{Pipelines}
-
-\href{https://snakemake.readthedocs.io/en/stable/}{Workflow System}
-
-\href{http://stat545.com/automation01_slides/\#/automating-data-analysis-pipelines}{Pipeline
-Automation}
-
-\href{https://www.wallaroolabs.com}{Streaming Data}
-
-\href{https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html}{Spark}
-
-\href{https://stitchfix.github.io/flotilla-os/}{batch job execution
-framework}
-
-\href{https://cmry.github.io/notes/serialize}{Sklearn Serialization}
-
-\href{http://content.nexosis.com/twimlai}{Auto Deploy}
-
-TDD:
-\href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
-\textbar{} \href{http://www.tdda.info/}{2} \textbar{}
-\href{http://stochasticsolutions.com/}{3}
-
-\href{https://orchestrahq.com}{Model Deployment aaS}
-
-\section{Notes}\label{notes}
-
-\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Write file with date:
-  df.to\_csv('\{\}\_model.csv'.format(str(datetime.datetime.now()).split(`'){[}0{]}))
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\item
-  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
-\end{itemize}
-
-\subsection{Sample R Pipeline}\label{sample-r-pipeline}
-
-\href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
-
-IO: odbc readxl httr
-
-EDA: DataExplorer
-
-Prep: tidyverse
-
-Sampling: rsample modelr
-
-Feature Engineering: recipes
-
-Modeling: glmnet h2o FFTrees
-
-Evaluation: broom yardstick
-
-Deployment: sqlrutils AzureML opencpu
-
-Monitoring: flexdashboard
-
-Docs: rmarkdown
-
-\subsection{Other}\label{other}
-
-Simulated Annealing: Gradient descent extension
-
-``No Free Lunch'' theorem: no single classifier works best across all
-possible scenarios
-
-Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
-
-Network models: graphical lasso, ising model, granger causality test,
-network hypothesis testing, bayesian networks
-
-Cohort analysis
-
-Transfer learning
-
-hierarchical clustering: ward
-
-hamming loss: multilabel and multiclass classification
-
-cox proportional hazards \& multivariate linear regression
-
-sequential data: rnn, lstm, hidden markov models \& conditional random
-fields
-
-fowles-mallows score for clustering when ground truth is known
-
-youden's j
-
-Multiple Correspondence Analysis
-
-platt scaling
-
-set the seed always
-
-natural log goes from unit change to percentage change
-
-generalized low rank models
-
-conditional random field
-
-linear probability model
-
-\url{http://r-pkgs.had.co.nz/tests.html}
-
-\url{https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/}
-
-\url{http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/}
-
-\url{https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html}
-
-confint conjoint analysis Incremental PCA fe: Permutation Measure meta
-learning \textbar{} Rasch Model \textbar{} Learning\_to\_rank
-
-\chapter{Pre-Modeling}\label{pre-modeling}
-
-outliers: 1) dropping is an option but a bad one, 2) create a new
-columns to mark outliers, 3) rescale with the log to reduce the effect
-of outliers
-
-tomek link: points of different classes which are neighbors of each
-other. Removing them often improves model performance
-
-\section{Import}\label{import-2}
-
-\subsection{General}\label{general-2}
-
-\begin{itemize}
-\item
-  A schema is a blueprint for storing data. For a table every row has
-  same number of columns, and each column is of the same type.
-\item
-  Make codebooks
-\end{itemize}
-
-\subsection{SQL}\label{sql}
-
-\begin{itemize}
-\item
-  Maintain a query library
-\item
-  Common Table Expressions
-\item
-  cross apply = inner join \textbar{} outer apply = full join
-\item
-  SQL UNION stacks one dataset on top of the other. It only appends
-  distinct values. More specifically, when you use UNION, the dataset is
-  appended, and any rows in the appended table that are exactly
-  identical to rows in the first table are dropped. If you'd like to
-  append all the values from the second table, use UNION ALL.
-\item
-  COUNT(DISTINCT month): returns count of non-null values like table in
-  R
-\item
-  The CASE statement is followed by at least one pair of WHEN and THEN
-  statements: CASE WHEN year = `SR' THEN `yes' ELSE NULL END. You can
-  also define a number of outcomes in a CASE statement by including as
-  many WHEN/THEN statements as you'd like
-\item
-  If you include two (or more) columns in a SELECT DISTINCT clause, your
-  results will contain all of the unique pairs of those two columns
-\end{itemize}
-
-\section{Tidy}\label{tidy-1}
-
-\begin{itemize}
-\item
-  In tidy data: Each variable forms a column. Each observation forms a
-  row. Each type of observational unit forms a table. There are three
-  interrelated rules which make a dataset tidy.
-\item
-  Each variable must have its own column.
-\item
-  Each observation must have its own row.
-\item
-  Each value must have its own cell.
-\end{itemize}
-
 \section{Transform}\label{transform-1}
 
-\subsection{General}\label{general-3}
+\subsection{General}\label{general-2}
 
 \begin{itemize}
 \tightlist
@@ -1337,7 +941,7 @@ estimated sample size to 300.
   \url{https://mobile.twitter.com/andrewheiss/status/1095443941875343360}
 \end{itemize}
 
-\section{General}\label{general-4}
+\section{General}\label{general-3}
 
 \begin{itemize}
 \item
@@ -1554,7 +1158,7 @@ estimated sample size to 300.
   dashboards).
 \end{itemize}
 
-\section{Other}\label{other-1}
+\section{Other}\label{other}
 
 \subsection{Unbalanced Classes}\label{unbalanced-classes}
 
@@ -1602,7 +1206,7 @@ framework.
 
 \section{Model Selection}\label{model-selection}
 
-\subsection{General}\label{general-5}
+\subsection{General}\label{general-4}
 
 \begin{itemize}
 \item
@@ -1871,9 +1475,14 @@ framework.
   \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
 \end{itemize}
 
-\chapter{Model}\label{model-2}
+\chapter{Model}\label{model-1}
 
-\section{Notes}\label{notes-1}
+\section{General}\label{general-5}
+
+\href{https://mikedombo.github.io/graphPlayground/\#}{Network
+Playground}
+
+\href{https://snap.stanford.edu/snappy/index.html}{SNAP Network Library}
 
 \begin{itemize}
 \item
@@ -1949,6 +1558,179 @@ ask your team to tune to the new metric.
   Examples: linear regression. Non-Parametric: No assumption about model
   form is made, Example: KNN
 \end{itemize}
+
+\subsection{Model}\label{model-2}
+
+\subsubsection{General}\label{general-6}
+
+Semi-supervised: active learning \textbar{}
+\href{https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html}{Auto
+Labeling}
+
+\url{https://machinelearningmastery.com/}
+
+Active Learning: Finding the optimal data to manually label
+
+\href{https://speakerdeck.com/seanoc/a-tour-of-large-scale-data-analysis-tools-in-python}{Python
+Distributed}
+
+\href{https://alexperrier.github.io/jekyll/update/2016/03/16/out-of-core-scikit-boston-meetup.html\#/}{SklearnDsitributed}
+
+\href{https://sparkhub.databricks.com/}{Spark Hub}
+
+Interactive ML:
+\href{https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Interactive-Naive-Bayes-using-Shiny-Text-Retrieval-Classification-Quantification}{1}
+\textbar{}
+\href{https://nuit-blanche.blogspot.com/2017/02/saturday-morning-videos-interactive.html}{2}
+
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html}{Online
+Learning}
+
+\href{http://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html}{ML
+APIs}
+
+\href{https://sigopt.com/}{Auto Optimization}
+
+\href{https://developers.google.com/machine-learning/glossary/}{Google
+ML Glossary}
+
+\href{https://systemml.apache.org}{Apache System ML}
+
+\href{http://www.ritchieng.com/machinelearning-learning-curve/}{Learning
+Curves}
+
+\href{http://scikit-learn.org/stable/modules/gaussian_process.html}{Gaussian
+Processes}
+
+\href{http://nlpers.blogspot.com/2016/08/debugging-machine-learning.html}{Debugging
+ML}
+
+\url{http://gael-varoquaux.info/interpreting_ml_tuto/index.html}
+
+\href{http://mpastell.com/2013/04/19/python_regression/}{LM Model
+Diagnostics}
+
+\href{https://www.rdocumentation.org/packages/WVPlots/versions/0.2.6/topics/GainCurvePlot}{Gain
+Curve}
+
+\href{https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/}{Metrics}
+
+\href{http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/}{Choosing
+A Classifier}
+
+\href{http://www.russpoldrack.org/2012/12/the-perils-of-leave-one-out.html}{LOOCV
+Perils}
+
+\href{http://www.win-vector.com/blog/2016/12/be-careful-evaluating-model-predictions/}{Model
+Evaluations}
+
+\href{http://blog.dato.com/how-to-evaluate-machine-learning-models-part-1-orientation}{Model
+Evaluation}
+
+CV Mistakes:
+\href{http://betatim.github.io/posts/cross-validation-gone-wrong/}{1}
+\textbar{}
+\href{http://www.alfredo.motta.name/cross-validation-done-wrong/}{2}
+\textbar{} \href{http://robjhyndman.com/hyndsight/crossvalidation/}{3}
+
+\href{https://cran.r-project.org/web/packages/pdp/pdp.pdf}{Partial
+Dependence Plots}
+
+\url{https://pair-code.github.io/what-if-tool/}
+
+permutation importance (eli5)
+
+\url{https://pbiecek.github.io/breakDown/}
+
+\href{https://cran.r-project.org/web/packages/breakDown/index.html}{Break
+Down Plots}
+
+\subsubsection{Supervised}\label{supervised}
+
+\url{http://clus.sourceforge.net/doku.php}
+
+\url{https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html}
+
+\url{https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html}
+
+\href{http://scikit-learn.org/stable/modules/model_evaluation.html\#function-for-prediction-error-metrics}{sklearn
+metrics}
+
+\href{https://docs.google.com/spreadsheets/d/16i47Wmjpj8k-mFRk-NnXXU5tmSQz8h37YxluDV8Zy9U/edit\#gid=0}{Algorithm
+Comparison}
+
+\href{https://www.rdocumentation.org/packages/yhat/versions/2.0-0}{Regression
+Effects Lib}
+
+anomalies:
+\href{http://scikit-learn.org/stable/modules/outlier_detection.html}{skl}
+\textbar{} \href{https://business-science.github.io/anomalize/}{R}
+
+lightgbm:
+\href{https://medium.com/@pushkarmandot/https-medium-com-pushkarmandot-what-is-lightgbm-how-to-implement-it-how-to-fine-tune-the-parameters-60347819b7fc}{tuning}
+\textbar{}
+\href{https://www.kaggle.com/ezietsman/simple-python-lightgbm-example}{ex}
+
+\href{http://etetoolkit.org/}{Tree Analysis Viz}
+
+unbalanced classes:
+\href{https://cran.r-project.org/web/packages/imbalance/index.html}{R}
+\textbar{}
+\href{http://contrib.scikit-learn.org/imbalanced-learn/stable/}{Py}
+
+\href{http://www.creativeai.net/posts/eivW6BvrrpyPf282d/interactive-machine-learning-an-overview-in-5-videos}{Interactive
+ML}
+
+Ensembles: \href{http://mlwave.com/kaggle-ensembling-guide/}{General}
+\textbar{} \href{http://amunategui.github.io/blending-models/}{caret}
+\textbar{}
+\href{https://www.toptal.com/machine-learning/ensemble-methods-machine-learning}{skl}
+\textbar{}
+\href{http://blog.kaggle.com/2016/12/27/a-kagglers-guide-to-model-stacking-in-practice/}{1}
+\textbar{}
+\href{http://blog.kaggle.com/2017/06/15/stacking-made-easy-an-introduction-to-stacknet-by-competitions-grandmaster-marios-michailidis-kazanova/}{2}
+
+Multilevel regression and post stratification
+
+Mixed Models / multilevel / hierarchical / mixed-effects models
+
+Multiple Factor Analysis: FactoMineR
+
+Functional PCA
+
+LMM:
+\href{http://edwardlib.org/tutorials/linear-mixed-effects-models}{1}
+\textbar{}
+\href{https://ourcodingclub.github.io/2017/03/15/mixed-models.html}{2}
+
+Sklearn Model Selection:
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html}{1}
+\textbar{}
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html}{2}
+\textbar{}
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html}{3}
+
+\subsubsection{Unsupervised}\label{unsupervised}
+
+\href{https://explosion.ai/blog/prodigy-annotation-tool-active-learning}{Annotation}
+
+\href{https://www.r-bloggers.com/clustering-mixed-data-types-in-r/}{Mixed
+Data Clustering}
+
+\href{https://colah.github.io/posts/2014-10-Visualizing-MNIST/}{Dimensionality
+Reduction Techniques}
+
+\href{http://opensource.datacratic.com/mtlpy50/}{Unsupervised Learning
+Sklearn}
+
+\href{http://www.inference.vc/unsupervised-learning-by-predicting-noise-an-information-maximization-view-2/}{Info
+Maximization}
+
+\href{http://johnloeber.com/docs/kmeans.html}{K-Means On MNIST}
+
+tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{}
+\href{https://lvdmaaten.github.io/tsne/}{2} \textbar{}
+\href{https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html}{3}
 
 \section{Model Selection/Evaluation}\label{model-selectionevaluation}
 
@@ -2210,7 +1992,7 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   the inputs
 \end{itemize}
 
-\subsection{Other}\label{other-2}
+\subsection{Other}\label{other-1}
 
 \url{https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggcoef}
 
@@ -2714,7 +2496,7 @@ effcient run-time wise.
   orthogonal to the preceding component.
 \end{itemize}
 
-\subsection{Other}\label{other-3}
+\subsection{Other}\label{other-2}
 
 \begin{itemize}
 \item
@@ -3615,10 +3397,108 @@ model that includes Year.
   hidden within the data
 \end{itemize}
 
+\section{Other ML}\label{other-ml}
+
+\subsubsection{NLP}\label{nlp}
+
+\url{https://mobile.twitter.com/lmthang/status/1050543868041555969}
+
+\url{https://gking.harvard.edu/readme}
+
+\url{https://web.stanford.edu/~jurafsky/slp3/}
+
+\url{https://finetune.indico.io}
+
+\url{http://textable.io/}
+
+\url{https://pypi.python.org/pypi/tmtoolkit}
+
+\url{http://www.structuraltopicmodel.com/}
+
+\url{https://blog.insightdatascience.com/how-to-solve-90-of-nlp-problems-a-step-by-step-guide-fda605278e4e}
+
+\href{https://t.co/Zcnd7EJKsn}{Kaggle Guide}
+
+\href{https://rasa.ai/}{Chat Bots}
+
+\href{http://brandonrose.org/clustering}{Doc Similarity}
+
+\href{http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html}{Vector
+Embeddings}
+
+Topic Modeling:
+\href{http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html}{1}
+\textbar{}
+\href{http://chdoig.github.io/pytexas2015-topic-modeling/\#/}{2}
+\textbar{}
+\href{https://www.cs.princeton.edu/~blei/topicmodeling.html}{3}
+
+\href{https://trinker.github.io/qdap/vignettes/qdap_vignette.html}{qdap}
+
+NLP For:
+\href{http://blog.algorithmia.com/natural-language-processing-algorithms-web-developers/}{Web
+Devs} \textbar{}
+\href{https://stanfy.com/blog/advanced-natural-language-processing-tools-for-bot-makers/}{Bot
+Makers}
+
+\href{http://blog.algorithmia.com/introduction-natural-language-processing-nlp/}{NLP
+Intro}
+
+\subsubsection{Geospatial}\label{geospatial}
+
+\url{https://geocompr.robinlovelace.net/adv-map.html\#interactive-maps}
+
+\url{https://www.jessesadler.com/post/gis-with-r-intro/}
+
+\url{https://uber.github.io/kepler.gl/\#/}
+
+\url{http://gisquick.org/}
+
+\url{https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/}
+
+\href{http://www.rspatial.org/analysis/rst/2-scale_distance.html}{R
+Spatial}
+
+\href{https://pitchinteractiveinc.github.io/tilegrams/}{tilegrams}
+
+\href{https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r}{Spatial
+DA R}
+
+\subsubsection{AI}\label{ai}
+
+\url{https://www.stateoftheart.ai/}
+
+\url{http://airesources.org/}
+
+\url{https://alleninstitute.org} \textbar{}
+\url{http://allenai.org/index.html} \textbar{}
+\url{http://geometry.allenai.org/} \textbar{}
+\url{https://competitions.codalab.org/competitions/20013} \textbar{}
+\url{http://www.hbcse.tifr.res.in/jrmcont/notespart1/node27.html}
+
+\href{https://www.jukedeck.com}{AI Music Generation}
+
+\href{https://poo.ai/}{AI Acheivements}
+
+\href{http://createwith.ai/}{Create With AI}
+
+\href{http://www.hodlipson.com/}{Hod Lipson}
+
+\href{http://www.ggp.org/}{Playing Games}
+
+\href{https://wiki.python.org/moin/PythonForArtificialIntelligence}{AI 4
+Py}
+
 \chapter{Communicate, Deploy,
 Maintain}\label{communicate-deploy-maintain}
 
-\section{Communicate}\label{communicate-2}
+\section{Communicate}\label{communicate-1}
+
+\url{https://metabase.com/}
+
+\url{http://koaning.io/make-docs.html}
+
+\href{https://about.modeanalytics.com/}{Mode Studio}
 
 Summarize the motivation and goals of the project. It should either be
 an executive summary or a technical abstract.
@@ -3634,11 +3514,55 @@ Introduction \textbar{} Motivation \textbar{} Summary \textbar{} Results
 
 \section{Deploy}\label{deploy}
 
+\url{http://pachyderm.io}
+
+Apache Airflow
+
+\url{https://ropensci.org/technotes/2019/03/18/drake-700/}
+
+\url{https://www.mlflow.org}
+
+\href{https://www.wandb.com/blog/towards-reproducibility}{Weights \&
+Biases}
+
+Databricks
+
+Ansible
+
+\url{https://aws.amazon.com/sagemaker/}
+
+\href{http://stat545.com/automation01_slides/\#/automating-data-analysis-pipelines}{Pipelines}
+
+\href{https://snakemake.readthedocs.io/en/stable/}{Workflow System}
+
+\href{http://stat545.com/automation01_slides/\#/automating-data-analysis-pipelines}{Pipeline
+Automation}
+
+\href{https://www.wallaroolabs.com}{Streaming Data}
+
+\href{https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html}{Spark}
+
+\href{https://stitchfix.github.io/flotilla-os/}{batch job execution
+framework}
+
+\href{https://cmry.github.io/notes/serialize}{Sklearn Serialization}
+
+\href{http://content.nexosis.com/twimlai}{Auto Deploy}
+
+TDD:
+\href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
+\textbar{} \href{http://www.tdda.info/}{2} \textbar{}
+\href{http://stochasticsolutions.com/}{3}
+
+\href{https://orchestrahq.com}{Model Deployment aaS}
+
 \section{Maintain}\label{maintain}
+
+\url{https://dvc.org/}
 
 \chapter{Stats}\label{stats}
 
-\section{General}\label{general-6}
+\section{General}\label{general-7}
 
 Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem
 \textbar{} Importance sampling \textbar{} Bayes Error Rate
@@ -4462,7 +4386,7 @@ fairly small, but variability between blocks will be larger.
 
 \chapter{Time Series}\label{time-series}
 
-\section{Notes}\label{notes-2}
+\section{Notes}\label{notes}
 
 ts features engineering: Various lags inside the FDW, Rolling mean, min,
 max, etc. statistics, Bollinger bands and statistics, Rolling entropy,
@@ -6654,7 +6578,8 @@ Selection bias: Conditioning on a collider introduces an association
 between its causes.
 
 Bias stems from The existence of a shared cause of treatment and outcome
-and Conditioning on a common effect of treatment and outcome.
+and conditioning on a common effect of treatment and outcome. (Also
+conditioning on a mediator.)
 
 Associations: 1) Cause \& effect, 2) Common causes, 3) Conditioning on a
 common effect
@@ -6828,9 +6753,12 @@ causal DAG can represent sources of bias.
 
 Time-varying treatments
 
+treatment-confounder feedback: In its presence most methods are biased.
+Use G Methods.
+
 \chapter{Distributed}\label{distributed}
 
-\section{General}\label{general-7}
+\section{General}\label{general-8}
 
 ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate
 \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
@@ -6906,9 +6834,15 @@ regression
 
 \chapter{Cook Book}\label{cook-book}
 
-\section{General}\label{general-8}
+\section{General}\label{general-9}
 
 \href{http://chrisalbon.com/}{Chris Albon}
+
+\section{Attach Date CSV}\label{attach-date-csv}
+
+\begin{verbatim}
+df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+\end{verbatim}
 
 \section{EBB}\label{ebb}
 

@@ -42,8 +42,7 @@ For a -> y <- b, y is called a collider. It blocks association between a and b.
 
 Selection bias: Conditioning on a collider introduces an association between its causes.
 
-Bias stems from The existence of a shared cause of treatment and outcome and 
-Conditioning on a common effect of treatment and outcome.
+Bias stems from The existence of a shared cause of treatment and outcome and conditioning on a common effect of treatment and outcome. (Also conditioning on a mediator.)
 
 Associations: 1) Cause & effect, 2) Common causes, 3) Conditioning on a common effect
 
@@ -162,3 +161,7 @@ A causal DAG can't eliminate bias due to confounding. A causal DAG can improve p
 ### L5
 
 Time-varying treatments
+
+treatment-confounder feedback: In its presence most methods are biased. Use G Methods.
+
+

@@ -4,6 +4,12 @@
 
 [Chris Albon](http://chrisalbon.com/)
 
+## Attach Date CSV
+
+```
+df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
+```
+
 ## EBB
 
 ```

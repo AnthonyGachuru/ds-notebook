@@ -1,6 +1,10 @@
 # Model
 
-## Notes
+## General
+
+[Network Playground](https://mikedombo.github.io/graphPlayground/#)
+
+[SNAP Network Library](https://snap.stanford.edu/snappy/index.html)
 
 * The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn't change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User's purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.
 
@@ -23,6 +27,125 @@ because even though you have higher overall accuracy, you have more false negati
 * So, if your problem involves kind of searching a needle in the haystack when for ex: the positive class samples are very rare compared to the negative classes, use a precision recall curve. Otherwise use a ROC curve because a ROC curve remains the same regardless of the baseline prior probability of your positive class (the important rare class).
 
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN
+
+### Model
+
+#### General
+
+Semi-supervised: active learning | [Auto Labeling](https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html)
+
+https://machinelearningmastery.com/
+
+Active Learning: Finding the optimal data to manually label
+
+[Python Distributed](https://speakerdeck.com/seanoc/a-tour-of-large-scale-data-analysis-tools-in-python)
+
+[SklearnDsitributed ](https://alexperrier.github.io/jekyll/update/2016/03/16/out-of-core-scikit-boston-meetup.html#/)
+
+[Spark Hub](https://sparkhub.databricks.com/)
+
+Interactive ML: [1](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Interactive-Naive-Bayes-using-Shiny-Text-Retrieval-Classification-Quantification) | [2](https://nuit-blanche.blogspot.com/2017/02/saturday-morning-videos-interactive.html)
+  
+[Online Learning](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.PassiveAggressiveRegressor.html)
+
+[ML APIs](http://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html)
+
+[Auto Optimization](https://sigopt.com/)
+
+[Google ML Glossary](https://developers.google.com/machine-learning/glossary/)
+
+[Apache System ML](https://systemml.apache.org)
+
+[Learning Curves](http://www.ritchieng.com/machinelearning-learning-curve/)
+
+[Gaussian Processes](http://scikit-learn.org/stable/modules/gaussian_process.html)
+
+[Debugging ML](http://nlpers.blogspot.com/2016/08/debugging-machine-learning.html)
+
+http://gael-varoquaux.info/interpreting_ml_tuto/index.html
+
+[LM Model Diagnostics](http://mpastell.com/2013/04/19/python_regression/)
+
+[Gain Curve](https://www.rdocumentation.org/packages/WVPlots/versions/0.2.6/topics/GainCurvePlot)
+
+[Metrics](https://www.analyticsvidhya.com/blog/2016/02/7-important-model-evaluation-error-metrics/)
+
+[Choosing A Classifier](http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/)
+
+[LOOCV Perils](http://www.russpoldrack.org/2012/12/the-perils-of-leave-one-out.html)
+
+[Model Evaluations](http://www.win-vector.com/blog/2016/12/be-careful-evaluating-model-predictions/)
+
+[Model Evaluation](http://blog.dato.com/how-to-evaluate-machine-learning-models-part-1-orientation)
+
+CV Mistakes: [1](http://betatim.github.io/posts/cross-validation-gone-wrong/) |  [2](http://www.alfredo.motta.name/cross-validation-done-wrong/) |  [3](http://robjhyndman.com/hyndsight/crossvalidation/)
+
+[Partial Dependence Plots](https://cran.r-project.org/web/packages/pdp/pdp.pdf)
+
+https://pair-code.github.io/what-if-tool/
+
+permutation importance (eli5)
+
+https://pbiecek.github.io/breakDown/
+
+[Break Down Plots](https://cran.r-project.org/web/packages/breakDown/index.html)
+</div>
+<br/>
+
+#### Supervised
+
+http://clus.sourceforge.net/doku.php
+
+https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html
+
+https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html
+
+[sklearn metrics](http://scikit-learn.org/stable/modules/model_evaluation.html#function-for-prediction-error-metrics)
+
+[Algorithm Comparison](https://docs.google.com/spreadsheets/d/16i47Wmjpj8k-mFRk-NnXXU5tmSQz8h37YxluDV8Zy9U/edit#gid=0)
+
+[Regression Effects Lib](https://www.rdocumentation.org/packages/yhat/versions/2.0-0)
+
+anomalies: [skl](http://scikit-learn.org/stable/modules/outlier_detection.html) | [R](https://business-science.github.io/anomalize/)
+
+lightgbm: [tuning](https://medium.com/@pushkarmandot/https-medium-com-pushkarmandot-what-is-lightgbm-how-to-implement-it-how-to-fine-tune-the-parameters-60347819b7fc) | [ex](https://www.kaggle.com/ezietsman/simple-python-lightgbm-example)
+
+[Tree Analysis Viz](http://etetoolkit.org/)
+
+unbalanced classes: [R](https://cran.r-project.org/web/packages/imbalance/index.html) | [Py](http://contrib.scikit-learn.org/imbalanced-learn/stable/)
+
+[Interactive ML](http://www.creativeai.net/posts/eivW6BvrrpyPf282d/interactive-machine-learning-an-overview-in-5-videos)
+
+Ensembles: [General](http://mlwave.com/kaggle-ensembling-guide/) | [caret](http://amunategui.github.io/blending-models/) | [skl](https://www.toptal.com/machine-learning/ensemble-methods-machine-learning) | [1](http://blog.kaggle.com/2016/12/27/a-kagglers-guide-to-model-stacking-in-practice/) | [2](http://blog.kaggle.com/2017/06/15/stacking-made-easy-an-introduction-to-stacknet-by-competitions-grandmaster-marios-michailidis-kazanova/)
+
+Multilevel regression and post stratification
+
+Mixed Models / multilevel / hierarchical / mixed-effects models
+
+Multiple Factor Analysis: FactoMineR
+
+Functional PCA
+
+LMM: [1](http://edwardlib.org/tutorials/linear-mixed-effects-models) | [2](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)
+
+Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html) | [2](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html) | [3](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html)
+
+#### Unsupervised
+
+[Annotation](https://explosion.ai/blog/prodigy-annotation-tool-active-learning)
+
+[Mixed Data Clustering](https://www.r-bloggers.com/clustering-mixed-data-types-in-r/)
+
+[Dimensionality Reduction Techniques](https://colah.github.io/posts/2014-10-Visualizing-MNIST/)
+
+[Unsupervised Learning Sklearn](http://opensource.datacratic.com/mtlpy50/)
+
+[Info Maximization](http://www.inference.vc/unsupervised-learning-by-predicting-noise-an-information-maximization-view-2/)
+
+[K-Means On MNIST](http://johnloeber.com/docs/kmeans.html)
+
+tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.io/tsne/) | [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
+
 
 ## Model Selection/Evaluation
 
@@ -995,3 +1118,77 @@ Analysis of Variance, or ANOVA, can be used to compare two different lmer models
 * One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
 
 * Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
+
+## Other ML
+
+#### NLP
+
+https://mobile.twitter.com/lmthang/status/1050543868041555969
+
+https://gking.harvard.edu/readme
+
+https://web.stanford.edu/~jurafsky/slp3/
+
+https://finetune.indico.io
+
+http://textable.io/
+
+https://pypi.python.org/pypi/tmtoolkit
+
+http://www.structuraltopicmodel.com/
+
+https://blog.insightdatascience.com/how-to-solve-90-of-nlp-problems-a-step-by-step-guide-fda605278e4e
+
+[Kaggle Guide](https://t.co/Zcnd7EJKsn)
+
+[Chat Bots](https://rasa.ai/)
+
+[Doc Similarity](http://brandonrose.org/clustering)
+
+[Vector Embeddings](http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html)
+
+Topic Modeling: [1](http://alexperrier.github.io/jekyll/update/2015/09/04/topic-modeling-of-twitter-followers.html) | [2](http://chdoig.github.io/pytexas2015-topic-modeling/#/) | [3](https://www.cs.princeton.edu/~blei/topicmodeling.html)
+
+[qdap](https://trinker.github.io/qdap/vignettes/qdap_vignette.html)
+
+NLP For: [Web Devs](http://blog.algorithmia.com/natural-language-processing-algorithms-web-developers/) | [Bot Makers](https://stanfy.com/blog/advanced-natural-language-processing-tools-for-bot-makers/)
+
+[NLP Intro](http://blog.algorithmia.com/introduction-natural-language-processing-nlp/)
+
+#### Geospatial
+
+https://geocompr.robinlovelace.net/adv-map.html#interactive-maps
+
+https://www.jessesadler.com/post/gis-with-r-intro/
+
+https://uber.github.io/kepler.gl/#/
+
+http://gisquick.org/
+
+https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/
+
+[R Spatial](http://www.rspatial.org/analysis/rst/2-scale_distance.html)
+
+[tilegrams](https://pitchinteractiveinc.github.io/tilegrams/)
+
+[Spatial DA R](https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r)
+
+#### AI
+
+https://www.stateoftheart.ai/
+
+http://airesources.org/
+
+https://alleninstitute.org | http://allenai.org/index.html | http://geometry.allenai.org/ | https://competitions.codalab.org/competitions/20013 | http://www.hbcse.tifr.res.in/jrmcont/notespart1/node27.html
+
+[AI Music Generation](https://www.jukedeck.com)
+
+[AI Acheivements](https://poo.ai/)
+
+[Create With AI](http://createwith.ai/)
+
+[Hod Lipson](http://www.hodlipson.com/)
+
+[Playing Games](http://www.ggp.org/)
+
+[AI 4 Py](https://wiki.python.org/moin/PythonForArtificialIntelligence)
