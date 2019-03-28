@@ -1,36 +1,18 @@
 # Deep Learning
 
-https://goku.me/blog/EHR
-
-http://www.geometricdeeplearning.com
-
 https://www.crestle.com
 
 [Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
 
 https://cran.r-project.org/web/packages/kerasformula/index.html
 
-[DL Online](https://tenso.rs) 
-
 [DL Everywhere](http://vertex.ai/)
 
 Debugging: [1](http://theorangeduck.com/page/neural-network-not-working) [2](https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21)
 
-[Neural Network Zoo](http://www.asimovinstitute.org/neural-network-zoo/)
-
-[Design Patterns](http://www.deeplearningpatterns.com/doku.php/applications)
-
-[RNNs](http://github.stfi.re/kjw0612/awesome-rnn?sf=dlpbez#aa)
-
-[Resources](https://yanirseroussi.com/deep-learning-resources/)
-
 [Glossary](http://www.wildml.com/deep-learning-glossary/)
 
-[Debugging](http://theorangeduck.com/page/neural-network-not-working)
-
 https://tensorflow.rstudio.com/keras/
-
-[Cheatsheet](https://hackernoon.com/deep-learning-cheat-sheet-25421411e460)
 
 In a single-label, multiclass classification problem, your network should end with a softmax activation so that it will output a probability distribution over the N output classes.
 

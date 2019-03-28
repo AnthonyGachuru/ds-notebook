@@ -1,16 +1,14 @@
 # Causality
 
+## General
+
 [Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
 
 http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
 
 [Misra Talk](https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245&utm_campaign=US%20Event%20Meetup%20NYU%20NYC%20July%202018&utm_source=hs_email&utm_medium=email&utm_content=64589348&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI&_hsmi=64589348)
 
-https://www.dropbox.com/s/m233izdg1mzbee2/MLSS-18_final.pdf?dl=0
-
-[Causal Impact](https://google.github.io/CausalImpact/)
-
-https://cran.r-project.org/web/packages/causaleffect/causaleffect.pdf
+Instrumental variables
 
 http://causalinference.gitlab.io/icwsm-tutorial/
 
@@ -89,7 +87,7 @@ Change in estimate definition of confounder: A var is a confounder of the effect
 
 Conventional definition of confounder: L is a confounder of the effect of a on y if L meets 3 conditions: L is associated with a, L is associated with y conditional on a, L is not on a causal pathway from a to y.
 
-### l3
+### L3
 
 surrogate confounder: a descendant of a cofounder.
 
@@ -163,5 +161,9 @@ A causal DAG can't eliminate bias due to confounding. A causal DAG can improve p
 Time-varying treatments
 
 treatment-confounder feedback: In its presence most methods are biased. Use G Methods.
+
+### Cases
+
+The difference method: Run regression with E[M|A,C] which has the term beta_1 times a and E[Y|A,M,C] with the terms theta_1 times a & theta_2 times m. The direct effect is theta_1 and the indirect effect is beta_1 times theta_1.
 
 

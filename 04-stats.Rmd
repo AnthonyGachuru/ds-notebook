@@ -20,6 +20,8 @@ Mann–Whitney U test
 
 Zero correlation doesn't imply independence
 
+https://lindeloev.github.io/tests-as-linear/
+
 https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf
 
 Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
@@ -175,7 +177,32 @@ different populations. Assumes the populations from which the samples are drawn 
 
 * Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
 
-## Introduction to Data
+* Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.
+
+* The sampling distribution is the distribution of the samples mean.
+
+* The CDF is the function that maps values to their percentile rank in a distribution.
+
+* I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
+
+* CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).
+
+* Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.
+
+* Statistical power is the probability that the test will be positive if the null
+hypothesis is false. In general, the power of a test depends on the sample
+size, the magnitude of the effect, and the threshold α.
+
+* If there are no outliers, the sample mean minimizes the mean squared error
+
+* An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
+
+* A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
+units, they come from different distributions. There are two common solutions to these problems:
+
+1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation.
+
+2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
 
 There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.
 
@@ -204,7 +231,6 @@ No Random Sampling + No Random Assignment: Not causal + not generalizable
 ## Statistical Tests
 
 The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 
-
 1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]
 
 2) The approximation becomes better with larger n, given other things remaining the same.
@@ -231,8 +257,6 @@ The following four quantities have an intimate relationship:
 
 Given any three, we can determine the fourth.
 
-**Other**
-
 * The power of any test of statistical significance is defined as the probability that it will reject a false null hypothesis. Statistical power is inversely related to beta or the probability of making a Type II error. In short, power = 1 – beta.
 
 * For quantitative explanatory variables, effect sizes always have the unit of the response variable divided by the unit of the explanatory variable.
@@ -243,7 +267,7 @@ Given any three, we can determine the fourth.
 
 Notes on the talk by Jake Vanderplas. I left out bootstrap and cross validation below. For all methods look out for selection bias and make sure you have representative samples. More on the bootstrap: These are simulated confidence intervals that work well for n > 20 as a rule of thumb.
 
-### Direct Simulation
+**Direct Simulation**
 
 Works well with an apriori (generative) model of the world, like the probability distribution of a coin toss. Example: Flip a fair coin 30 times. How likely it is to see 22 heads?
 
@@ -257,7 +281,7 @@ result <- purrr::map(seq(1, n, 1),
 result/n
 ```
 
-### Shuffling
+**Shuffling**
 
 Comparing groups
 
@@ -295,35 +319,6 @@ result <- purrr::map(seq(1, n, 1), ~ ha_shuffle(iris_100)) %>%
 
 result/n
 ```
-
-## Think Stats
-
-* Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.
-
-* The sampling distribution is the distribution of the samples mean.
-
-* The CDF is the function that maps values to their percentile rank in a distribution.
-
-* I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
-
-* CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).
-
-* Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.
-
-* Statistical power is the probability that the test will be positive if the null
-hypothesis is false. In general, the power of a test depends on the sample
-size, the magnitude of the effect, and the threshold α.
-
-* If there are no outliers, the sample mean minimizes the mean squared error
-
-* An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
-
-* A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
-units, they come from different distributions. There are two common solutions to these problems:
-
-1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation.
-
-2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
 
 ## AB Testing Overview
 
@@ -502,7 +497,7 @@ Analyzing results, and draw valid conclusions.
 
 ## Experimental Design
 
-Note from the DataCamp course.
+Notes from the DataCamp course.
 
 Randomized Complete Block Design (RCBD) experiment
 

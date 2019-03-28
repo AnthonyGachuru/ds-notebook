@@ -215,6 +215,8 @@ confint conjoint analysis Incremental PCA fe: Permutation Measure meta learning 
 
 http://www.fast.ai/2018/10/16/aws-datasets
 
+https://www.spe.org/en/jpt/jpt-article-detail/?art=5282
+
 Causality: [1](https://www.kaggle.com/c/cause-effect-pairs) [2](http://webdav.tuebingen.mpg.de/cause-effect/)
 
 https://mimic.physionet.org/

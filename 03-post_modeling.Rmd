@@ -14,11 +14,15 @@ State results with details as needed. For an end user presentation show how the 
 
 Discuss recommendations, outstanding issues, and possible future work.
 
-Introduction | Motivation | Summary | Results | Conclusion
+Structure: Introduction | Motivation | Summary | Results | Conclusion
+
+Interactive Reports Without Shiny: plotly, dt, crosstalk
 
 ## Deploy
 
 http://pachyderm.io
+
+Algorithmia
 
 Apache Airflow
 
@@ -31,6 +35,8 @@ https://www.mlflow.org
 Databricks
 
 Ansible
+
+https://www.prefect.io/
 
 https://aws.amazon.com/sagemaker/
 

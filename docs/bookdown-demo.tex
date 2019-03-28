@@ -422,6 +422,8 @@ learning \textbar{} Rasch Model \textbar{} Learning\_to\_rank
 
 \url{http://www.fast.ai/2018/10/16/aws-datasets}
 
+\url{https://www.spe.org/en/jpt/jpt-article-detail/?art=5282}
+
 Causality: \href{https://www.kaggle.com/c/cause-effect-pairs}{1}
 \href{http://webdav.tuebingen.mpg.de/cause-effect/}{2}
 
@@ -1645,8 +1647,6 @@ permutation importance (eli5)
 \href{https://cran.r-project.org/web/packages/breakDown/index.html}{Break
 Down Plots}
 
-\subsubsection{Supervised}\label{supervised}
-
 \url{http://clus.sourceforge.net/doku.php}
 
 \url{https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html}
@@ -1710,8 +1710,6 @@ Sklearn Model Selection:
 \textbar{}
 \href{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html}{3}
 
-\subsubsection{Unsupervised}\label{unsupervised}
-
 \href{https://explosion.ai/blog/prodigy-annotation-tool-active-learning}{Annotation}
 
 \href{https://www.r-bloggers.com/clustering-mixed-data-types-in-r/}{Mixed
@@ -1746,14 +1744,63 @@ tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{}
 
 Use SHAP.
 
-\section{Supervised}\label{supervised-1}
+\section{Supervised}\label{supervised}
 
-\subsection{Linear Regression}\label{linear-regression}
-
-General format: INtro, Assumptions, Evaluation, Interpretation,
+General format: Intro, Assumptions, Evaluation, Interpretation,
 Pros/Cons, Notes
 
-Discuss Ridge, Lasso, and Elastic here.
+\subsection{GLM}\label{glm}
+
+\subsubsection{`Linear Regression}\label{linear-regression}
+
+Discuss Ridge, Lasso, and Elastic Net here.
+
+Poisson: When you're predicting a count value. (How many dogs will I see
+in the park?)
+
+Poisson Regression: The Poisson distribution is used to model variation
+in count data (that is, data that can equal 0,1,2,\ldots{}).
+
+Remember that you must specify family = poisson or family = quasipoisson
+when using glm() to fit a count model.
+
+One of the assumptions of Poisson regression to predict counts is that
+the event you are counting is Poisson distributed: the average count per
+unit time is the same as the variance of the count. In practice, ``the
+same'' means that the mean and the variance should be of a similar order
+of magnitude.
+
+When the variance is much larger than the mean, the Poisson assumption
+doesn't apply, and one solution is to use quasipoisson regression, which
+does not assume that variance=meanvariance=mean.
+
+Ridge/Lasso:
+
+Minimizes RSS but also has shrinkage penalty (L2 penalty). A small
+lambda penalizes the RSS more than the shrinkage penalty. A large lambda
+penalizes the shrinkage penalty more than the RSS. By shrinking the
+coefficient estimates towards 0 by increasing lambda, the bias increases
+slightly but remains relatively small, the variance reduces
+substantially, and the mean squared error of the predictions drops. Not
+scale invariant due to the shrinkage penalty. To avoid the issue of
+overvaluing or undervaluing certain predictor variables simply based on
+their magnitudes, we must standardize the variables prior to performing
+ridge regression. The main disadvantage of ridge regression is that,
+while parameter estimates are shrunken, they only asymptotically
+approach 0 as we increase the value of lambda.
+
+Standardize for ridge/lasso alpha makes them not scale invariant
+
+Minimizes RSS but also has L1 penalty (norm). This necessarily
+forcessome coefficient estimates to be exactly 0 (when lambda is
+sufficiently large). It has the added advantage of essentially
+performing variable selection, yielding models that are both accurate
+and parsimonious. Restricting ourselves to simpler models by including a
+Lasso penalty will generally decrease the variance of the fits at the
+cost of higher bias.
+
+Note: In both ridge and lasso regression, is important to select an
+appropriate value of lambda by means of cross-validation.
 
 Quantile Regression models the median while Linear Regression models the
 mean
@@ -1936,8 +1983,6 @@ Does not guarantee normality since it minimizes standard deviation. Can
 only be used on positive values. Use on negative values by shifting by a
 constant value. Use Box-Cox transformations when predictions are skewed.
 
-\subsection{Selection}\label{selection}
-
 \begin{itemize}
 \item
   Forward and Backward Stepwise Selection.
@@ -1969,8 +2014,6 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   \textless{} sd then good.)
 \end{itemize}
 
-\subsection{Pros/Cons}\label{proscons}
-
 \textbf{Pros}
 
 \begin{itemize}
@@ -1991,8 +2034,6 @@ constant value. Use Box-Cox transformations when predictions are skewed.
   Unable to capture nonlinear relationships without first transforming
   the inputs
 \end{itemize}
-
-\subsection{Other}\label{other-1}
 
 \url{https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggcoef}
 
@@ -2038,39 +2079,14 @@ constant value. Use Box-Cox transformations when predictions are skewed.
 \end{Highlighting}
 \end{Shaded}
 
-\section{Ridge/Lasso}\label{ridgelasso}
+The importance of a feature in a linear regression model can be measured
+by the absolute value of its t-statistic. The t-statistic is the
+estimated weight scaled with its standard error.
 
-\subsection{Intro}\label{intro}
-
-Minimizes RSS but also has shrinkage penalty (L2 penalty). A small
-lambda penalizes the RSS more than the shrinkage penalty. A large lambda
-penalizes the shrinkage penalty more than the RSS. By shrinking the
-coefficient estimates towards 0 by increasing lambda, the bias increases
-slightly but remains relatively small, the variance reduces
-substantially, and the mean squared error of the predictions drops. Not
-scale invariant due to the shrinkage penalty. To avoid the issue of
-overvaluing or undervaluing certain predictor variables simply based on
-their magnitudes, we must standardize the variables prior to performing
-ridge regression. The main disadvantage of ridge regression is that,
-while parameter estimates are shrunken, they only asymptotically
-approach 0 as we increase the value of lambda.
-
-Standardize for ridge/lasso alpha makes them not scale invariant
-
-Minimizes RSS but also has L1 penalty (norm). This necessarily
-forcessome coefficient estimates to be exactly 0 (when lambda is
-sufficiently large). It has the added advantage of essentially
-performing variable selection, yielding models that are both accurate
-and parsimonious. Restricting ourselves to simpler models by including a
-Lasso penalty will generally decrease the variance of the fits at the
-cost of higher bias.
-
-Note: In both ridge and lasso regression, is important to select an
-appropriate value of lambda by means of cross-validation.
+effect of linear regression is w\_ix\_i. A feature effect plot shows the
+distribution of effects throughout the data.
 
 \section{Logistic Regression}\label{logistic-regression}
-
-\subsection{Intro}\label{intro-1}
 
 logistic is the same as probit
 
@@ -2124,8 +2140,6 @@ optimization. For example, if you use Newton-Raphson to maximize the
 likelihood, standardizing the features makes the convergence faster.
 Otherwise, you can run your logistic regression without any
 standardization treatment on the features.
-
-\subsection{Assumptions}\label{assumptions}
 
 \begin{itemize}
 \item
@@ -2222,8 +2236,6 @@ multicolinearity.)
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Evaluation}\label{evaluation}
-
 \begin{itemize}
 \item
   Wald Test: h\_0: b = 0 and h\_a: b =/= 0. h\_0 means the log odds are
@@ -2241,8 +2253,6 @@ multicolinearity.)
 \item
   Absolute scale odds instead of relative
 \end{itemize}
-
-\subsection{Pros/Cons}\label{proscons-1}
 
 \textbf{Pros}
 
@@ -2280,53 +2290,12 @@ multicolinearity.)
   High bias
 \end{itemize}
 
-\subsection{Code Example}\label{code-example}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
-\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ sm.Logit(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
-\BuiltInTok{print}\NormalTok{(results.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Poisson Regression}\label{poisson-regression}
-
-\subsection{Intro}\label{intro-2}
-
-Poisson: When you're predicting a count value. (How many dogs will I see
-in the park?)
-
-Poisson Regression: The Poisson distribution is used to model variation
-in count data (that is, data that can equal 0,1,2,\ldots{}).
-
-Remember that you must specify family = poisson or family = quasipoisson
-when using glm() to fit a count model.
-
-\subsection{Assumptions}\label{assumptions-1}
-
-One of the assumptions of Poisson regression to predict counts is that
-the event you are counting is Poisson distributed: the average count per
-unit time is the same as the variance of the count. In practice, ``the
-same'' means that the mean and the variance should be of a similar order
-of magnitude.
-
-When the variance is much larger than the mean, the Poisson assumption
-doesn't apply, and one solution is to use quasipoisson regression, which
-does not assume that variance=meanvariance=mean.
-
-\subsection{Evaluation}\label{evaluation-1}
-
-\subsection{Pros/Cons}\label{proscons-2}
-
-\textbf{Pros}
-
-\textbf{Cons}
+with bayesian log reg you can have a probability distribution of the
+probability estimate so you can attach a ci to the prediction
 
 \section{Generalized Additive Models}\label{generalized-additive-models}
 
-\subsection{Intro}\label{intro-3}
+\subsection{Intro}\label{intro}
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on
 larger data sets. use s(var) to denote non-linear relationship. Don't
@@ -2341,11 +2310,11 @@ gaussian (the default).
 For GAM models, the predict() method returns a matrix, so use
 as.numeric() to convert the matrix to a vector.
 
-\subsection{Assumptions}\label{assumptions-2}
+\subsection{Assumptions}\label{assumptions}
 
-\subsection{Evaluation}\label{evaluation-2}
+\subsection{Evaluation}\label{evaluation}
 
-\subsection{Pros/Cons}\label{proscons-3}
+\subsection{Pros/Cons}\label{proscons}
 
 \textbf{Pros}
 
@@ -2353,7 +2322,7 @@ as.numeric() to convert the matrix to a vector.
 
 \section{K-Means Clustering {[}US{]}}\label{k-means-clustering-us}
 
-\subsection{Intro}\label{intro-4}
+\subsection{Intro}\label{intro-1}
 
 K-Means clustering method considers two assumptions regarding the
 clusters -- first that the clusters are spherical and second that the
@@ -2445,25 +2414,25 @@ of clusters to be speciﬁed. Hierarchical clustering doesn't need the
 number of clusters to be speciﬁed. K-means clustering is usually more
 effcient run-time wise.
 
-\subsection{Assumptions}\label{assumptions-3}
+\subsection{Assumptions}\label{assumptions-1}
 
 \subsection{Characteristics}\label{characteristics}
 
-\subsection{Evaluation}\label{evaluation-3}
+\subsection{Evaluation}\label{evaluation-1}
 
-\subsection{Pros/Cons}\label{proscons-4}
+\subsection{Pros/Cons}\label{proscons-1}
 
 \section{PCA}\label{pca}
 
-\subsection{Intro}\label{intro-5}
+\subsection{Intro}\label{intro-2}
 
-\subsection{Assumptions}\label{assumptions-4}
+\subsection{Assumptions}\label{assumptions-2}
 
 \subsection{Characteristics}\label{characteristics-1}
 
-\subsection{Evaluation}\label{evaluation-4}
+\subsection{Evaluation}\label{evaluation-2}
 
-\subsection{Pros/Cons}\label{proscons-5}
+\subsection{Pros/Cons}\label{proscons-2}
 
 \begin{itemize}
 \item
@@ -2496,7 +2465,7 @@ effcient run-time wise.
   orthogonal to the preceding component.
 \end{itemize}
 
-\subsection{Other}\label{other-2}
+\subsection{Other}\label{other-1}
 
 \begin{itemize}
 \item
@@ -2566,7 +2535,7 @@ of the original data.
 
 \section{KNN}\label{knn}
 
-\subsection{Intro}\label{intro-6}
+\subsection{Intro}\label{intro-3}
 
 Calculate distance between each observation and all the others.
 Determine the k nearest observations to the observation. Classify the
@@ -2586,13 +2555,13 @@ update, sensitivity of distance metrics
 
 smaller k means smaller training error, ut larger k is more stable.
 
-\subsection{Assumptions}\label{assumptions-5}
+\subsection{Assumptions}\label{assumptions-3}
 
 \subsection{Characteristics}\label{characteristics-2}
 
-\subsection{Evaluation}\label{evaluation-5}
+\subsection{Evaluation}\label{evaluation-3}
 
-\subsection{Pros/Cons}\label{proscons-6}
+\subsection{Pros/Cons}\label{proscons-3}
 
 \textbf{Pros}
 
@@ -2637,7 +2606,7 @@ space it takes to store the computations increases dramatically.
 
 \section{SVM}\label{svm}
 
-\subsection{Intro}\label{intro-7}
+\subsection{Intro}\label{intro-4}
 
 Selection of margin in SVM is a convex optimization problem. What is the
 objective of the maximum margin approach? To ensure small prediction
@@ -2724,13 +2693,13 @@ classifiers vote on the prediction for each observation.
 against all other categories combined. Assign the observation to the
 classifier with the largest function value.
 
-\subsection{Assumptions}\label{assumptions-6}
+\subsection{Assumptions}\label{assumptions-4}
 
 \subsection{Characteristics}\label{characteristics-3}
 
-\subsection{Evaluation}\label{evaluation-6}
+\subsection{Evaluation}\label{evaluation-4}
 
-\subsection{Pros/Cons}\label{proscons-7}
+\subsection{Pros/Cons}\label{proscons-4}
 
 \textbf{Pros}
 
@@ -2764,7 +2733,7 @@ classifier with the largest function value.
 
 \section{Decision Tree}\label{decision-tree}
 
-\subsection{Intro}\label{intro-8}
+\subsection{Intro}\label{intro-5}
 
 So should you use Gini impurity or entropy? The truth is, most of the
 time it does not make a big difference: they lead to similar trees. Gini
@@ -2824,13 +2793,13 @@ pruning reduces the variance of the overall tree model upon repeated
 builds with different datasets, we induce biasbecause the trees are much
 simpler.
 
-\subsection{Assumptions}\label{assumptions-7}
+\subsection{Assumptions}\label{assumptions-5}
 
 \subsection{Characteristics}\label{characteristics-4}
 
-\subsection{Evaluation}\label{evaluation-7}
+\subsection{Evaluation}\label{evaluation-5}
 
-\subsection{Pros/Cons}\label{proscons-8}
+\subsection{Pros/Cons}\label{proscons-5}
 
 \textbf{Pros}
 
@@ -2856,7 +2825,7 @@ simpler.
 
 \section{Bagging}\label{bagging}
 
-\subsection{Intro}\label{intro-9}
+\subsection{Intro}\label{intro-6}
 
 used to decrease variance in decision trees
 
@@ -2897,13 +2866,13 @@ get rid of the high variance by averaging. Con is that the trees are
 correlation. train multiple trees using bootstrapped data to reduce
 variance and prevent overfitting
 
-\subsection{Assumptions}\label{assumptions-8}
+\subsection{Assumptions}\label{assumptions-6}
 
 \subsection{Characteristics}\label{characteristics-5}
 
-\subsection{Evaluation}\label{evaluation-8}
+\subsection{Evaluation}\label{evaluation-6}
 
-\subsection{Pros/Cons}\label{proscons-9}
+\subsection{Pros/Cons}\label{proscons-6}
 
 \textbf{Pros}
 
@@ -2930,7 +2899,7 @@ variance and prevent overfitting
 
 \section{Random Forest}\label{random-forest}
 
-\subsection{Intro}\label{intro-10}
+\subsection{Intro}\label{intro-7}
 
 Build a number of decision trees using bootstrapped samples
 
@@ -2987,13 +2956,13 @@ is worse), strength of single trees (higher is better). Increasing
 number of features for each split increases correlation and strength of
 single trees.
 
-\subsection{Assumptions}\label{assumptions-9}
+\subsection{Assumptions}\label{assumptions-7}
 
 \subsection{Characteristics}\label{characteristics-6}
 
-\subsection{Evaluation}\label{evaluation-9}
+\subsection{Evaluation}\label{evaluation-7}
 
-\subsection{Pros/Cons}\label{proscons-10}
+\subsection{Pros/Cons}\label{proscons-7}
 
 \textbf{Pros}
 
@@ -3014,7 +2983,7 @@ Not as easy to visually interpret
 
 \section{Boosting}\label{boosting}
 
-\subsection{Intro}\label{intro-11}
+\subsection{Intro}\label{intro-8}
 
 Unlike boosting and random forests, can overfit if number of trees is
 too large
@@ -3049,13 +3018,13 @@ variables are relatively important predictors.
 Similar to bagging, but learns sequentially and builds off previous
 trees
 
-\subsection{Assumptions}\label{assumptions-10}
+\subsection{Assumptions}\label{assumptions-8}
 
 \subsection{Characteristics}\label{characteristics-7}
 
-\subsection{Evaluation}\label{evaluation-10}
+\subsection{Evaluation}\label{evaluation-8}
 
-\subsection{Pros/Cons}\label{proscons-11}
+\subsection{Pros/Cons}\label{proscons-8}
 
 \textbf{Pros}
 
@@ -3069,7 +3038,7 @@ Can easily handle qualitative (categorical) features
 
 \section{Association Rule Mining}\label{association-rule-mining}
 
-\subsection{Intro}\label{intro-12}
+\subsection{Intro}\label{intro-9}
 
 \begin{itemize}
 \item
@@ -3104,13 +3073,13 @@ Can easily handle qualitative (categorical) features
   the threshold don't make it to the higher iterations.
 \end{itemize}
 
-\subsection{Assumptions}\label{assumptions-11}
+\subsection{Assumptions}\label{assumptions-9}
 
 \subsection{Characteristics}\label{characteristics-8}
 
-\subsection{Evaluation}\label{evaluation-11}
+\subsection{Evaluation}\label{evaluation-9}
 
-\subsection{Pros/Cons}\label{proscons-12}
+\subsection{Pros/Cons}\label{proscons-9}
 
 \textbf{Pros}
 
@@ -3141,7 +3110,7 @@ Can easily handle qualitative (categorical) features
 
 \section{Naïve Bayes}\label{naive-bayes}
 
-\subsection{Intro}\label{intro-13}
+\subsection{Intro}\label{intro-10}
 
 Laplace smoothing/estimator in Naive Bayes: To see why consider the
 worst case where none of the words in the training sample appear in the
@@ -3172,13 +3141,13 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a
 batch of samples incrementally while we are using. MultinomialNB and
 Bernoulli NB also support sample weighting.
 
-\subsection{Assumptions}\label{assumptions-12}
+\subsection{Assumptions}\label{assumptions-10}
 
 \subsection{Characteristics}\label{characteristics-9}
 
-\subsection{Evaluation}\label{evaluation-12}
+\subsection{Evaluation}\label{evaluation-10}
 
-\subsection{Pros/Cons}\label{proscons-13}
+\subsection{Pros/Cons}\label{proscons-10}
 
 \textbf{Pros}
 
@@ -3209,7 +3178,7 @@ Bernoulli NB also support sample weighting.
 
 \section{LDA}\label{lda}
 
-\subsection{Intro}\label{intro-14}
+\subsection{Intro}\label{intro-11}
 
 Before we take a look into the inner workings of LDA in the following
 subsections, let's summarize the key steps of the LDA approach:
@@ -3236,27 +3205,27 @@ assumes gaussian distributions for each class share the same covariance
 matrix. If they don't share the same covariance matrix, then we use
 Quadratic Discriminant Analysis which assumes each class has its own.
 
-\subsection{Assumptions}\label{assumptions-13}
+\subsection{Assumptions}\label{assumptions-11}
 
 \subsection{Characteristics}\label{characteristics-10}
 
-\subsection{Evaluation}\label{evaluation-13}
+\subsection{Evaluation}\label{evaluation-11}
 
-\subsection{Pros/Cons}\label{proscons-14}
+\subsection{Pros/Cons}\label{proscons-11}
 
 \section{QDA}\label{qda}
 
-\subsection{Intro}\label{intro-15}
+\subsection{Intro}\label{intro-12}
 
 TBD
 
-\subsection{Assumptions}\label{assumptions-14}
+\subsection{Assumptions}\label{assumptions-12}
 
 \subsection{Characteristics}\label{characteristics-11}
 
-\subsection{Evaluation}\label{evaluation-14}
+\subsection{Evaluation}\label{evaluation-12}
 
-\subsection{Pros/Cons}\label{proscons-15}
+\subsection{Pros/Cons}\label{proscons-12}
 
 \section{GAMs}\label{gams}
 
@@ -3509,12 +3478,16 @@ it.
 
 Discuss recommendations, outstanding issues, and possible future work.
 
-Introduction \textbar{} Motivation \textbar{} Summary \textbar{} Results
-\textbar{} Conclusion
+Structure: Introduction \textbar{} Motivation \textbar{} Summary
+\textbar{} Results \textbar{} Conclusion
+
+Interactive Reports Without Shiny: plotly, dt, crosstalk
 
 \section{Deploy}\label{deploy}
 
 \url{http://pachyderm.io}
+
+Algorithmia
 
 Apache Airflow
 
@@ -3528,6 +3501,8 @@ Biases}
 Databricks
 
 Ansible
+
+\url{https://www.prefect.io/}
 
 \url{https://aws.amazon.com/sagemaker/}
 
@@ -3586,6 +3561,8 @@ R}
 Size}
 
 Zero correlation doesn't imply independence
+
+\url{https://lindeloev.github.io/tests-as-linear/}
 
 \url{https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf}
 
@@ -3862,192 +3839,6 @@ estimated sample size to 300.
   the value of the parameter specified by H0 is not contained within the
   95\% confidence interval, then H0 can be rejectedat the 0.05 p-value
   threshold.
-\end{itemize}
-
-\section{Introduction to Data}\label{introduction-to-data}
-
-There is no random sampling since the subjects of the study were
-volunteers, so the results cannot be generalized to all people. However,
-due to random assignment, we are able to infer a causal link between the
-belief information is stored and the ability to recall that same
-information.
-
-Explanatory variables are conditions you can impose on the experimental
-units, while blocking variables are characteristics that the
-experimental units come with that you would like to control for.
-
-In random sampling, you use stratifying to control for a variable. In
-random assignment, you use blocking to achieve the same goal.
-
-Control: compare treatment of interest to a control group
-
-Randomize: randomly assign subjects to treatments
-
-Replicate: collect a sufficiently large sample within a study, or
-replicate the entire study
-
-Block: account for the potential effect of confounding variables
-
-Group subjects into blocks based on these variations, and randomize
-within each block to treatment groups
-
-Random Sampling + Random Assignment: Causal + generalizable
-
-No Random Sampling + Random Assignment: Causal + not generalizable
-
-Random Sampling + No Random Assignment: Not causal + generalizable
-
-No Random Sampling + No Random Assignment: Not causal + not
-generalizable
-
-\section{Statistical Tests}\label{statistical-tests}
-
-The appropriate sample size depends on many things, chiefly the
-complexity of the analysis and the expected effect size. The ``30'' rule
-comes from one of the simplest cases: Whether to use a z-test or t-test
-for comparing two means.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\item
-  for large n (sample size), many distributions can be approximated to
-  normal. {[} courtesy : Central Limit Theorems {]}
-\item
-  The approximation becomes better with larger n, given other things
-  remaining the same.
-\end{enumerate}
-
-However if you are wondering why 30 ? why not 25 or 40 or something else
-? Note that actual answer will depend:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\item
-  how much error are you going to tolerate
-\item
-  size of the effect
-\item
-  exact distribution family (like t vs chi-square vs gamma)
-\end{enumerate}
-
-The power of any test of statistical significance is defined as the
-probability that it will reject a false null hypothesis. Statistical
-power is inversely related to beta or the probability of making a Type
-II error. In short, power = 1 -- β. In plain English, statistical power
-is the likelihood that a study will detect an effect when there is an
-effect there to be detected. If statistical power is high, the
-probability of making a Type II error, or concluding there is no effect
-when, in fact, there is one, goes down. Statistical power is affected
-chiefly by the size of the effect and the size of the sample used to
-detect it. Bigger effects are easier to detect than smaller effects,
-while large samples offer greater test sensitivity than small samples.
-
-The following four quantities have an intimate relationship:
-
-\begin{itemize}
-\item
-  sample size
-\item
-  effect size
-\item
-  significance level = P(Type I error) = probability of finding an
-  effect that is not there
-\item
-  power = 1 - P(Type II error) = probability of finding an effect that
-  is there
-\end{itemize}
-
-Given any three, we can determine the fourth.
-
-\textbf{Other}
-
-\begin{itemize}
-\item
-  The power of any test of statistical significance is defined as the
-  probability that it will reject a false null hypothesis. Statistical
-  power is inversely related to beta or the probability of making a Type
-  II error. In short, power = 1 -- beta.
-\item
-  For quantitative explanatory variables, effect sizes always have the
-  unit of the response variable divided by the unit of the explanatory
-  variable.
-\item
-  \href{http://www.evanmiller.org/ab-testing/sample-size.html}{Power
-  Analysis Calculator}
-\end{itemize}
-
-\section{Stats For Hackers}\label{stats-for-hackers}
-
-Notes on the talk by Jake Vanderplas. I left out bootstrap and cross
-validation below. For all methods look out for selection bias and make
-sure you have representative samples. More on the bootstrap: These are
-simulated confidence intervals that work well for n \textgreater{} 20 as
-a rule of thumb.
-
-\subsection{Direct Simulation}\label{direct-simulation}
-
-Works well with an apriori (generative) model of the world, like the
-probability distribution of a coin toss. Example: Flip a fair coin 30
-times. How likely it is to see 22 heads?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
-\NormalTok{h_a <-}\StringTok{ }\DecValTok{22}
-\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }
-           \OperatorTok{~}\StringTok{ }\KeywordTok{sum}\NormalTok{(base}\OperatorTok{::}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{30}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)) }\OperatorTok{>=}\StringTok{ }\NormalTok{h_a) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
-
-\NormalTok{result}\OperatorTok{/}\NormalTok{n}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Shuffling}\label{shuffling}
-
-Comparing groups
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{iris_}\DecValTok{100}\NormalTok{ <-}\StringTok{ }\NormalTok{iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
-\NormalTok{(}\KeywordTok{t.test}\NormalTok{(iris_}\DecValTok{100}\NormalTok{[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{1}\NormalTok{], iris_}\DecValTok{100}\NormalTok{[}\DecValTok{51}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{], }
-       \DataTypeTok{alternative =} \StringTok{'greater'}\NormalTok{))}\OperatorTok{$}\NormalTok{p.value}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ha_shuffle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
-  
-\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Species =} \KeywordTok{sample}\NormalTok{(Species, }\KeywordTok{n}\NormalTok{())) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
-  
-  \KeywordTok{return}\NormalTok{(result }\OperatorTok{>=}\StringTok{ }\NormalTok{observed_diff)}
-  
-\NormalTok{\}}
-
-\NormalTok{observed_diff <-}\StringTok{ }\NormalTok{iris_}\DecValTok{100} \OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
-
-\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
-\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }\OperatorTok{~}\StringTok{ }\KeywordTok{ha_shuffle}\NormalTok{(iris_}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
-
-\NormalTok{result}\OperatorTok{/}\NormalTok{n}
-\end{Highlighting}
-\end{Shaded}
-
-\section{Think Stats}\label{think-stats}
-
-\begin{itemize}
 \item
   Is it possible that the apparent effect is due to selection bias or
   some other error in the experimental setup? If so, then we might
@@ -4100,6 +3891,184 @@ Comparing groups
   Transform all values to their percentile ranks. This leads to the
   Spearman coefficient.
 \end{enumerate}
+
+There is no random sampling since the subjects of the study were
+volunteers, so the results cannot be generalized to all people. However,
+due to random assignment, we are able to infer a causal link between the
+belief information is stored and the ability to recall that same
+information.
+
+Explanatory variables are conditions you can impose on the experimental
+units, while blocking variables are characteristics that the
+experimental units come with that you would like to control for.
+
+In random sampling, you use stratifying to control for a variable. In
+random assignment, you use blocking to achieve the same goal.
+
+Control: compare treatment of interest to a control group
+
+Randomize: randomly assign subjects to treatments
+
+Replicate: collect a sufficiently large sample within a study, or
+replicate the entire study
+
+Block: account for the potential effect of confounding variables
+
+Group subjects into blocks based on these variations, and randomize
+within each block to treatment groups
+
+Random Sampling + Random Assignment: Causal + generalizable
+
+No Random Sampling + Random Assignment: Causal + not generalizable
+
+Random Sampling + No Random Assignment: Not causal + generalizable
+
+No Random Sampling + No Random Assignment: Not causal + not
+generalizable
+
+\section{Statistical Tests}\label{statistical-tests}
+
+The appropriate sample size depends on many things, chiefly the
+complexity of the analysis and the expected effect size. The ``30'' rule
+comes from one of the simplest cases: Whether to use a z-test or t-test
+for comparing two means. 1) for large n (sample size), many
+distributions can be approximated to normal. {[} courtesy : Central
+Limit Theorems {]}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  The approximation becomes better with larger n, given other things
+  remaining the same.
+\end{enumerate}
+
+However if you are wondering why 30 ? why not 25 or 40 or something else
+? Note that actual answer will depend:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  how much error are you going to tolerate
+\item
+  size of the effect
+\item
+  exact distribution family (like t vs chi-square vs gamma)
+\end{enumerate}
+
+The power of any test of statistical significance is defined as the
+probability that it will reject a false null hypothesis. Statistical
+power is inversely related to beta or the probability of making a Type
+II error. In short, power = 1 -- β. In plain English, statistical power
+is the likelihood that a study will detect an effect when there is an
+effect there to be detected. If statistical power is high, the
+probability of making a Type II error, or concluding there is no effect
+when, in fact, there is one, goes down. Statistical power is affected
+chiefly by the size of the effect and the size of the sample used to
+detect it. Bigger effects are easier to detect than smaller effects,
+while large samples offer greater test sensitivity than small samples.
+
+The following four quantities have an intimate relationship:
+
+\begin{itemize}
+\item
+  sample size
+\item
+  effect size
+\item
+  significance level = P(Type I error) = probability of finding an
+  effect that is not there
+\item
+  power = 1 - P(Type II error) = probability of finding an effect that
+  is there
+\end{itemize}
+
+Given any three, we can determine the fourth.
+
+\begin{itemize}
+\item
+  The power of any test of statistical significance is defined as the
+  probability that it will reject a false null hypothesis. Statistical
+  power is inversely related to beta or the probability of making a Type
+  II error. In short, power = 1 -- beta.
+\item
+  For quantitative explanatory variables, effect sizes always have the
+  unit of the response variable divided by the unit of the explanatory
+  variable.
+\item
+  \href{http://www.evanmiller.org/ab-testing/sample-size.html}{Power
+  Analysis Calculator}
+\end{itemize}
+
+\section{Stats For Hackers}\label{stats-for-hackers}
+
+Notes on the talk by Jake Vanderplas. I left out bootstrap and cross
+validation below. For all methods look out for selection bias and make
+sure you have representative samples. More on the bootstrap: These are
+simulated confidence intervals that work well for n \textgreater{} 20 as
+a rule of thumb.
+
+\textbf{Direct Simulation}
+
+Works well with an apriori (generative) model of the world, like the
+probability distribution of a coin toss. Example: Flip a fair coin 30
+times. How likely it is to see 22 heads?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{h_a <-}\StringTok{ }\DecValTok{22}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }
+           \OperatorTok{~}\StringTok{ }\KeywordTok{sum}\NormalTok{(base}\OperatorTok{::}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{30}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)) }\OperatorTok{>=}\StringTok{ }\NormalTok{h_a) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Shuffling}
+
+Comparing groups
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_}\DecValTok{100}\NormalTok{ <-}\StringTok{ }\NormalTok{iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\NormalTok{(}\KeywordTok{t.test}\NormalTok{(iris_}\DecValTok{100}\NormalTok{[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{1}\NormalTok{], iris_}\DecValTok{100}\NormalTok{[}\DecValTok{51}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{], }
+       \DataTypeTok{alternative =} \StringTok{'greater'}\NormalTok{))}\OperatorTok{$}\NormalTok{p.value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ha_shuffle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
+  
+\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Species =} \KeywordTok{sample}\NormalTok{(Species, }\KeywordTok{n}\NormalTok{())) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+  
+  \KeywordTok{return}\NormalTok{(result }\OperatorTok{>=}\StringTok{ }\NormalTok{observed_diff)}
+  
+\NormalTok{\}}
+
+\NormalTok{observed_diff <-}\StringTok{ }\NormalTok{iris_}\DecValTok{100} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }\OperatorTok{~}\StringTok{ }\KeywordTok{ha_shuffle}\NormalTok{(iris_}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
 
 \section{AB Testing Overview}\label{ab-testing-overview}
 
@@ -4328,7 +4297,7 @@ Analyzing results, and draw valid conclusions.
 
 \section{Experimental Design}\label{experimental-design}
 
-Note from the DataCamp course.
+Notes from the DataCamp course.
 
 Randomized Complete Block Design (RCBD) experiment
 
@@ -4890,15 +4859,15 @@ for error measurement.
 
 AIC\_c for model selection.
 
-\subsection{Intro}\label{intro-16}
+\subsection{Intro}\label{intro-13}
 
-\subsection{Assumptions}\label{assumptions-15}
+\subsection{Assumptions}\label{assumptions-13}
 
 \subsection{Characteristics}\label{characteristics-12}
 
-\subsection{Evaluation}\label{evaluation-15}
+\subsection{Evaluation}\label{evaluation-13}
 
-\subsection{Pros/Cons}\label{proscons-16}
+\subsection{Pros/Cons}\label{proscons-13}
 
 \textbf{Pros}
 
@@ -6012,17 +5981,11 @@ video (Component: Meaning):
 
 \chapter{Deep Learning}\label{deep-learning}
 
-\url{https://goku.me/blog/EHR}
-
-\url{http://www.geometricdeeplearning.com}
-
 \url{https://www.crestle.com}
 
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
 
 \url{https://cran.r-project.org/web/packages/kerasformula/index.html}
-
-\href{https://tenso.rs}{DL Online}
 
 \href{http://vertex.ai/}{DL Everywhere}
 
@@ -6030,23 +5993,9 @@ Debugging:
 \href{http://theorangeduck.com/page/neural-network-not-working}{1}
 \href{https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21}{2}
 
-\href{http://www.asimovinstitute.org/neural-network-zoo/}{Neural Network
-Zoo}
-
-\href{http://www.deeplearningpatterns.com/doku.php/applications}{Design
-Patterns}
-
-\href{http://github.stfi.re/kjw0612/awesome-rnn?sf=dlpbez\#aa}{RNNs}
-
-\href{https://yanirseroussi.com/deep-learning-resources/}{Resources}
-
 \href{http://www.wildml.com/deep-learning-glossary/}{Glossary}
 
-\href{http://theorangeduck.com/page/neural-network-not-working}{Debugging}
-
 \url{https://tensorflow.rstudio.com/keras/}
-
-\href{https://hackernoon.com/deep-learning-cheat-sheet-25421411e460}{Cheatsheet}
 
 In a single-label, multiclass classification problem, your network
 should end with a softmax activation so that it will output a
@@ -6522,6 +6471,8 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 
 \chapter{Causality}\label{causality}
 
+\section{General}\label{general-8}
+
 \href{https://twitter.com/tdietterich/status/1034631407904018437}{Causality
 \& DL}
 
@@ -6530,11 +6481,7 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 \href{https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245\&utm_campaign=US\%20Event\%20Meetup\%20NYU\%20NYC\%20July\%202018\&utm_source=hs_email\&utm_medium=email\&utm_content=64589348\&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI\&_hsmi=64589348}{Misra
 Talk}
 
-\url{https://www.dropbox.com/s/m233izdg1mzbee2/MLSS-18_final.pdf?dl=0}
-
-\href{https://google.github.io/CausalImpact/}{Causal Impact}
-
-\url{https://cran.r-project.org/web/packages/causaleffect/causaleffect.pdf}
+Instrumental variables
 
 \url{http://causalinference.gitlab.io/icwsm-tutorial/}
 
@@ -6648,7 +6595,7 @@ of a on y if L meets 3 conditions: L is associated with a, L is
 associated with y conditional on a, L is not on a causal pathway from a
 to y.
 
-\subsection{l3}\label{l3}
+\subsection{L3}\label{l3}
 
 surrogate confounder: a descendant of a cofounder.
 
@@ -6756,9 +6703,16 @@ Time-varying treatments
 treatment-confounder feedback: In its presence most methods are biased.
 Use G Methods.
 
+\subsection{Cases}\label{cases}
+
+The difference method: Run regression with E{[}M\textbar{}A,C{]} which
+has the term beta\_1 times a and E{[}Y\textbar{}A,M,C{]} with the terms
+theta\_1 times a \& theta\_2 times m. The direct effect is theta\_1 and
+the indirect effect is beta\_1 times theta\_1.
+
 \chapter{Distributed}\label{distributed}
 
-\section{General}\label{general-8}
+\section{General}\label{general-9}
 
 ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate
 \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
@@ -6834,9 +6788,28 @@ regression
 
 \chapter{Cook Book}\label{cook-book}
 
-\section{General}\label{general-9}
+\section{General}\label{general-10}
 
 \href{http://chrisalbon.com/}{Chris Albon}
+
+\section{Logistic Regression Stats
+Models}\label{logistic-regression-stats-models}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
+\NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ sm.Logit(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(results.summary())}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Function Negation}\label{function-negation}
+
+\begin{verbatim}
+not_in <- purrr::negate(%in%)
+not_between <- purrr::negate(between)
+\end{verbatim}
 
 \section{Attach Date CSV}\label{attach-date-csv}
 
@@ -7010,6 +6983,22 @@ Statsmodels}\label{linear-regression-statsmodels}
 \StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mymean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(cyl,mpg))) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(cyl, mpg, mymean)}
+
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu =} \KeywordTok{select}\NormalTok{(., R1}\OperatorTok{:}\NormalTok{R16) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pmap_dbl}\NormalTok{(}\OperatorTok{~}\KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(...))))}
+
+\NormalTok{calc_row_mean <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(li)\{}
+  
+\NormalTok{  df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(li)}
+  
+\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"Round"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu =} \KeywordTok{rowMeans}\NormalTok{(.)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{pull}\NormalTok{(mu)}
+  
+  \KeywordTok{return}\NormalTok{(result)}
+  
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -7109,6 +7098,10 @@ bin any observations
 \NormalTok{df_shap }\OperatorTok{=}\NormalTok{ df_shap[[}\StringTok{'feature'}\NormalTok{, }\StringTok{'shap_mean'}\NormalTok{]]}
 \NormalTok{df_shap[}\StringTok{'shap_mean_abs'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.absolute(df_shap[}\StringTok{'shap_mean'}\NormalTok{])}
 \NormalTok{df_shap.sort_values([}\StringTok{'shap_mean_abs'}\NormalTok{], ascending }\OperatorTok{=} \VariableTok{False}\NormalTok{, inplace }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+\ImportTok{import}\NormalTok{ shap}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\NormalTok{attribution_data }\OperatorTok{=}\NormalTok{ np.array(train_data[:}\DecValTok{50}\NormalTok{])}
+\NormalTok{explainer }\OperatorTok{=}\NormalTok{ shap.DeepExplainer(model, attribution_data)}
 \end{Highlighting}
 \end{Shaded}
 

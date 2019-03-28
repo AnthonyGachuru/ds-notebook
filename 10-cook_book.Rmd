@@ -4,6 +4,24 @@
 
 [Chris Albon](http://chrisalbon.com/)
 
+## Logistic Regression Stats Models
+
+```{python, eval = FALSE}
+import statsmodels.api as sm
+
+X = sm.add_constant(X)
+clf_lr = sm.Logit(Y, X).fit(disp=False)
+print(results.summary())
+```
+
+
+## Function Negation
+
+```
+not_in <- purrr::negate(%in%)
+not_between <- purrr::negate(between)
+```
+
 ## Attach Date CSV
 
 ```
@@ -170,6 +188,22 @@ mtcars %>%
   rowwise() %>% 
   mutate(mymean = mean(c(cyl,mpg))) %>% 
   select(cyl, mpg, mymean)
+
+df %>% 
+  mutate(mu = select(., R1:R16) %>% pmap_dbl(~mean(c(...))))
+
+calc_row_mean <- function(li){
+  
+  df <- as.data.frame(li)
+  
+  result <- df %>% 
+    select(contains("Round")) %>%
+    mutate(mu = rowMeans(.)) %>% 
+    pull(mu)
+  
+  return(result)
+  
+}
 ```
 
 ## Sampling File
@@ -265,6 +299,12 @@ df_shap = df_shap[['feature', 'shap_mean']]
 
 df_shap['shap_mean_abs'] = np.absolute(df_shap['shap_mean'])
 df_shap.sort_values(['shap_mean_abs'], ascending = False, inplace = True)
+
+import shap
+import matplotlib.pyplot as plt
+
+attribution_data = np.array(train_data[:50])
+explainer = shap.DeepExplainer(model, attribution_data)
 ```
 
 ## Hyperband CV

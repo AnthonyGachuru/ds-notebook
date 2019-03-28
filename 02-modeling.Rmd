@@ -92,8 +92,6 @@ https://pbiecek.github.io/breakDown/
 </div>
 <br/>
 
-#### Supervised
-
 http://clus.sourceforge.net/doku.php
 
 https://scikit-optimize.github.io/notebooks/sklearn-gridsearchcv-replacement.html
@@ -130,8 +128,6 @@ LMM: [1](http://edwardlib.org/tutorials/linear-mixed-effects-models) | [2](https
 
 Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html) | [2](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeaveOneGroupOut.html) | [3](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.LeavePGroupsOut.html)
 
-#### Unsupervised
-
 [Annotation](https://explosion.ai/blog/prodigy-annotation-tool-active-learning)
 
 [Mixed Data Clustering](https://www.r-bloggers.com/clustering-mixed-data-types-in-r/)
@@ -146,7 +142,6 @@ Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sk
 
 tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.io/tsne/) | [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
 
-
 ## Model Selection/Evaluation
 
 * **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
@@ -157,12 +152,33 @@ Use SHAP.
 
 ## Supervised
 
-### Linear Regression
+General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
-General format: INtro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+### GLM
 
-Discuss Ridge, Lasso, and Elastic here.
+####`Linear Regression
 
+Discuss Ridge, Lasso, and Elastic Net here.
+
+Poisson: When you’re predicting a count value. (How many dogs will I see in the park?)
+
+Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
+
+Remember that you must specify family = poisson or family = quasipoisson when using glm() to fit a count model.
+
+One of the assumptions of Poisson regression to predict counts is that the event you are counting is Poisson distributed: the average count per unit time is the same as the variance of the count. In practice, "the same" means that the mean and the variance should be of a similar order of magnitude.
+
+When the variance is much larger than the mean, the Poisson assumption doesn't apply, and one solution is to use quasipoisson regression, which does not assume that variance=meanvariance=mean.
+
+Ridge/Lasso:
+
+Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS. By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
+
+Standardize for ridge/lasso alpha makes them not scale invariant
+
+Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
+
+Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
 
 Quantile Regression models the median while Linear Regression models the mean
 
@@ -240,8 +256,6 @@ Transformations: Can remedy assumption violations and strengthen linear relation
 
 Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize the fit of the transformed variable to a normal distribution. Does not guarantee normality since it minimizes standard deviation. Can only be used on positive values. Use on negative values by shifting by a constant value. Use Box-Cox transformations when predictions are skewed.
 
-### Selection
-
 * Forward and Backward Stepwise Selection.
 
 * For simple linear regression, the principal hypothesis test is as follows: H_0 : ? 1 = 0, H_A: ? 1 ≠ 0.
@@ -254,8 +268,6 @@ If H_0 is true then the population mean of Y would be ? 0 no matter what the val
 * R-squared increases whenever a predictor is added, and it doesn't take model complexity into consideration which makes it prone to overfitting. Use adjusted R-squared instead. Additional predictors only make this increase is they are statistically significant. It’s easy to show that given no other data for a set of numbers, the predictor that minimises the MAE is the median, while the predictor that minimises the MSE is the mean. 
 
 * Compare RSME to sd of data for sense of how good it is. (If RSME < sd then good.)
-
-### Pros/Cons
 
 **Pros**
 
@@ -270,8 +282,6 @@ If H_0 is true then the population mean of Y would be ? 0 no matter what the val
 * Unable to model complex relationships
 
 * Unable to capture nonlinear relationships without first transforming the inputs
-
-### Other
 
 https://www.rdocumentation.org/packages/GGally/versions/1.4.0/topics/ggcoef
 
@@ -302,21 +312,12 @@ pga %>%
   map(summary)
 ```
 
-## Ridge/Lasso
+The importance of a feature in a linear regression model can be measured by the absolute value of
+its t-statistic. The t-statistic is the estimated weight scaled with its standard error.
 
-### Intro
-
-Minimizes RSS but also has shrinkage penalty (L2 penalty). A small lambda penalizes the RSS more than the shrinkage penalty. A large lambda penalizes the shrinkage penalty more than the RSS. By shrinking the coefficient estimates towards 0 by increasing lambda, the bias increases slightly but remains relatively small, the variance reduces substantially, and the mean squared error of the predictions drops. Not scale invariant due to the shrinkage penalty. To avoid the issue of overvaluing or undervaluing certain predictor variables simply based on their magnitudes, we must standardize the variables prior to performing ridge regression. The main disadvantage of ridge regression is that, while parameter estimates are shrunken, they only asymptotically approach 0 as we increase the value of lambda. 
-
-Standardize for ridge/lasso alpha makes them not scale invariant
-
-Minimizes RSS but also has L1 penalty (norm). This necessarily forcessome coefficient estimates to be exactly 0 (when lambda is sufficiently large). It has the added advantage of essentially performing variable selection, yielding models that are both accurate and parsimonious. Restricting ourselves to simpler models by including a Lasso penalty will generally decrease the variance of the fits at the cost of higher bias.
-
-Note: In both ridge and lasso regression, is important to select an appropriate value of lambda by means of cross-validation.
+effect of linear regression is w_ix_i. A feature effect plot shows the distribution of effects throughout the data.
 
 ## Logistic Regression
-
-### Intro
 
 logistic is the same as probit
 
@@ -343,8 +344,6 @@ Makes a linear boundary between classes.
 For multiclass classification it will build multiple models. Given 3 classes 0,1, and 2, there will be models 0 and not 0, 1 and not 1, and 2 and not 2.
 
 Standardization isn't required for logistic regression. The main goal of standardizing features is to help convergence of the technique used for optimization. For example, if you use Newton-Raphson to maximize the likelihood, standardizing the features makes the convergence faster. Otherwise, you can run your logistic regression without any standardization treatment on the features.
-
-### Assumptions
 
 * The linear regression analysis requires all variables to be multivariate normal.  This assumption can best be checked with a histogram or a Q-Q-Plot. 
 
@@ -417,8 +416,6 @@ https://data.library.virginia.edu/diagnostic-plots/
 #   facet_wrap(~predictors, scales = "free_y")
 ```
 
-### Evaluation
-
 * Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.
 
 * Deviance G^2 and Goodness of Fit: The deviance associated with a given logistic regression model M is based on comparing the maximum log-likelihood of model M against the saturated model S. The smaller the deviance the better. For goodness of fit h0 says the model is appropriate while H_a says the opposite.
@@ -428,8 +425,6 @@ https://data.library.virginia.edu/diagnostic-plots/
 * A.I.C / B.I.C
 
 * Absolute scale odds instead of relative
-
-### Pros/Cons
 
 **Pros**
 
@@ -459,39 +454,7 @@ https://data.library.virginia.edu/diagnostic-plots/
 
 * High bias
 
-### Code Example
-
-```{python, eval = FALSE}
-import statsmodels.api as sm
-
-X = sm.add_constant(X)
-clf_lr = sm.Logit(Y, X).fit(disp=False)
-print(results.summary())
-```
-
-## Poisson Regression
-
-### Intro
-
-Poisson: When you’re predicting a count value. (How many dogs will I see in the park?)
-
-Poisson Regression: The Poisson distribution is used to model variation in count data (that is, data that can equal 0,1,2,...).
-
-Remember that you must specify family = poisson or family = quasipoisson when using glm() to fit a count model.
-
-### Assumptions
-
-One of the assumptions of Poisson regression to predict counts is that the event you are counting is Poisson distributed: the average count per unit time is the same as the variance of the count. In practice, "the same" means that the mean and the variance should be of a similar order of magnitude.
-
-When the variance is much larger than the mean, the Poisson assumption doesn't apply, and one solution is to use quasipoisson regression, which does not assume that variance=meanvariance=mean.
-
-### Evaluation
-
-### Pros/Cons
-
-**Pros**
-
-**Cons**
+with bayesian log reg you can have a probability distribution of the probability estimate so you can attach a ci to the prediction
 
 ## Generalized Additive Models
 
