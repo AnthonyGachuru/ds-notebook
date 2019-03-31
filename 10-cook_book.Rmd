@@ -1,8 +1,25 @@
-# Cook Book
+# Codebook 
 
 ## General
 
 [Chris Albon](http://chrisalbon.com/)
+
+## Save And Load Models
+
+```
+from sklearn.externals import joblib
+
+joblib.dump(grid_search, 'model.pkl')
+
+grid_search = joblib.load('model.pkl')
+model = grid_search.best_estimator_
+```
+
+
+```
+save(m1, file = "my_model1.rda")
+m1 = load("my_model1.rda")
+```
 
 ## Logistic Regression Stats Models
 

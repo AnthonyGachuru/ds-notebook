@@ -18,7 +18,7 @@ Structure: Introduction | Motivation | Summary | Results | Conclusion
 
 Interactive Reports Without Shiny: plotly, dt, crosstalk
 
-## Deploy
+## Deploy/Maintain
 
 http://pachyderm.io
 
@@ -60,6 +60,6 @@ TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-sci
 
 [Model Deployment aaS](https://orchestrahq.com)
 
-## Maintain
-
 https://dvc.org/
+
+docker

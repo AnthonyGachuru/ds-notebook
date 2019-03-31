@@ -3483,7 +3483,7 @@ Structure: Introduction \textbar{} Motivation \textbar{} Summary
 
 Interactive Reports Without Shiny: plotly, dt, crosstalk
 
-\section{Deploy}\label{deploy}
+\section{Deploy/Maintain}\label{deploymaintain}
 
 \url{http://pachyderm.io}
 
@@ -3531,9 +3531,9 @@ TDD:
 
 \href{https://orchestrahq.com}{Model Deployment aaS}
 
-\section{Maintain}\label{maintain}
-
 \url{https://dvc.org/}
+
+docker
 
 \chapter{Stats}\label{stats}
 
@@ -5981,6 +5981,8 @@ video (Component: Meaning):
 
 \chapter{Deep Learning}\label{deep-learning}
 
+\section{General}\label{general-8}
+
 \url{https://www.crestle.com}
 
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
@@ -6295,6 +6297,10 @@ even with little tuning of hyperparameters (except alpha).
 
 batch normalization
 
+\section{Tuning}\label{tuning}
+
+\section{Debugging}\label{debugging}
+
 \chapter{Probabilistic Programming}\label{probabilistic-programming}
 
 \href{https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit\#slide=id.g4254d546f6_0_0}{PyMc3
@@ -6471,7 +6477,7 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 
 \chapter{Causality}\label{causality}
 
-\section{General}\label{general-8}
+\section{General}\label{general-9}
 
 \href{https://twitter.com/tdietterich/status/1034631407904018437}{Causality
 \& DL}
@@ -6712,7 +6718,7 @@ the indirect effect is beta\_1 times theta\_1.
 
 \chapter{Distributed}\label{distributed}
 
-\section{General}\label{general-9}
+\section{General}\label{general-10}
 
 ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate
 \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
@@ -6786,11 +6792,27 @@ regression
   ft\_regex\_tokenizer, sdf\_sort
 \end{itemize}
 
-\chapter{Cook Book}\label{cook-book}
+\chapter{Codebook}\label{codebook}
 
-\section{General}\label{general-10}
+\section{General}\label{general-11}
 
 \href{http://chrisalbon.com/}{Chris Albon}
+
+\section{Save And Load Models}\label{save-and-load-models}
+
+\begin{verbatim}
+from sklearn.externals import joblib
+
+joblib.dump(grid_search, 'model.pkl')
+
+grid_search = joblib.load('model.pkl')
+model = grid_search.best_estimator_
+\end{verbatim}
+
+\begin{verbatim}
+save(m1, file = "my_model1.rda")
+m1 = load("my_model1.rda")
+\end{verbatim}
 
 \section{Logistic Regression Stats
 Models}\label{logistic-regression-stats-models}
