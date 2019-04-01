@@ -166,4 +166,8 @@ treatment-confounder feedback: In its presence most methods are biased. Use G Me
 
 The difference method: Run regression with E[M|A,C] which has the term beta_1 times a and E[Y|A,M,C] with the terms theta_1 times a & theta_2 times m. The direct effect is theta_1 and the indirect effect is beta_1 times theta_1.
 
+### Causality Coursera
 
+The fundamental problem of causal inference: We can only observe one potential outcome for each person.
+
+Causal effect: E(y^1) - E(y^0)
