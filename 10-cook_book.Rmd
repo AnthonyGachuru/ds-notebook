@@ -2,6 +2,8 @@
 
 ## General
 
+## Collection
+
 [Chris Albon](http://chrisalbon.com/)
 
 ## Save And Load Models
@@ -15,10 +17,19 @@ grid_search = joblib.load('model.pkl')
 model = grid_search.best_estimator_
 ```
 
-
 ```
 save(m1, file = "my_model1.rda")
 m1 = load("my_model1.rda")
+```
+
+## LSTM Data Shape
+
+```
+data_x = np.array([
+    # Datapoint 1: 3 features for timesteps 1 & 2
+    [[1, 2, 3], [4, 5, 6]],
+    # Datapoint 2
+    [[7, 8, 9], [10, 11, 12]]])
 ```
 
 ## Logistic Regression Stats Models
@@ -951,32 +962,8 @@ predictions = model.predict(pred_data)
 #Calculate predicted probability of survival
 predicted_prob_true = predictions[:, 1]
 
-# Tuning
+keras.utils.to_categorical(y, num_classes = 2)
+mdl.add(layer_dense(units = 1, activation = "softmax"))
+mdl.compile(loss = "categorical_crossentropy", optimizer = "adam", metrics = ["accuracy"])
 
-# Import the SGD optimizer
-from keras.optimizers import SGD
-
-# Create list of learning rates: lr_to_test
-lr_to_test = [.000001, 0.01, 1]
-
-# Loop over learning rates
-for lr in lr_to_test:
-    print('Testing model with learning rate: ')
-    
-    # Build new model to test, unaffected by previous models
-    model = get_new_model()
-    
-    # Create SGD optimizer with specified learning rate: my_optimizer
-    my_optimizer = SGD(lr = lr)
-    
-    # Compile the model
-    model.compile(optimizer = my_optimizer, loss = 'categorical_crossentropy')
-    
-    # Fit the model
-    model.fit(predictors, 
-              target, 
-              validation_split = 0.3, 
-              epochs = 20, 
-              callbacks = [early_stopping_monitor], 
-              verbose = False)
 ```

@@ -6,6 +6,8 @@ ts features engineering:  Various lags inside the FDW, Rolling mean, min, max, e
 
 ts distance measures: Dynamic Time Warping & Frechet Distance
 
+statsmodels: times series python
+
 time series features: extract data from timestamp (year, month, day), lags, rolling windows, rolling window - summary stats of all previous data points
 
 ts: Vector autoregression, quantile regression forests
@@ -17,15 +19,6 @@ Baselines: statsmodels.tsa.holtwinters | forecast::ets
 lubricate ymd, rsample tscv
 
 A stationary time series is one whose properties do not depend on the time at which the series is observed. 
-
-## Packages
-
-https://robjhyndman.com/seminars/user-fable/
-https://github.com/robjhyndman/forecast
-https://facebook.github.io/prophet/docs/quick_start.html
-https://keras.rstudio.com/articles/examples/index.html
-http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html
-https://www.rdocumentation.org/packages/bsts/versions/0.8.0
 
 ## Data Conversion
 

@@ -4,6 +4,16 @@
 
 [Network Playground](https://mikedombo.github.io/graphPlayground/#)
 
+Opposite the other algorithms, increasing n in KNN means less overfitting.
+
+KNN doesn't easily extrapolate as linear regression.
+
+Linear Regression better than KNN: space to store model, time to query
+
+KNN better than LinReg: compute time to train, ease to add new data
+
+As m increases, AdaBoost tries to assign more and more specific data points to subsequent learners, trying to model all the difficult examples. Thus, compared to simple bagging, it may result in more over-fitting.
+
 [SNAP Network Library](https://snap.stanford.edu/snappy/index.html)
 
 * The ML Fine Print: Three basic assumptions: 1) We draw examples independently and identically (i.i.d.) at random from the distribution, 2) The distribution is stationary: It doesn't change over time, 3) We always pull from the same distribution: Including training, validation, and test sets. In practice, we sometimes violate these assumptions. For example: 1) Consider a model that chooses ads to display. The i.i.d. assumption would be violated if the model bases its choice of ads, in part, on what ads the user has previously seen. 2) Consider a data set that contains retail sales information for a year. User's purchases change seasonally, which would violate stationarity. When we know that any of the preceding three basic assumptions are violated, we must pay careful attention to metrics.

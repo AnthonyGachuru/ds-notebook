@@ -361,6 +361,8 @@ CoCalc
 
 Conda
 
+\url{https://www.crestle.com}
+
 \href{https://paperswithcode.com/sota}{SOTA Results}
 
 {[}DS Project Style
@@ -1483,6 +1485,20 @@ framework.
 
 \href{https://mikedombo.github.io/graphPlayground/\#}{Network
 Playground}
+
+Opposite the other algorithms, increasing n in KNN means less
+overfitting.
+
+KNN doesn't easily extrapolate as linear regression.
+
+Linear Regression better than KNN: space to store model, time to query
+
+KNN better than LinReg: compute time to train, ease to add new data
+
+As m increases, AdaBoost tries to assign more and more specific data
+points to subsequent learners, trying to model all the difficult
+examples. Thus, compared to simple bagging, it may result in more
+over-fitting.
 
 \href{https://snap.stanford.edu/snappy/index.html}{SNAP Network Library}
 
@@ -3487,6 +3503,8 @@ Interactive Reports Without Shiny: plotly, dt, crosstalk
 
 \url{http://pachyderm.io}
 
+\url{https://datacoral.com/}
+
 Algorithmia
 
 Apache Airflow
@@ -4367,6 +4385,8 @@ recent FDW row)
 
 ts distance measures: Dynamic Time Warping \& Frechet Distance
 
+statsmodels: times series python
+
 time series features: extract data from timestamp (year, month, day),
 lags, rolling windows, rolling window - summary stats of all previous
 data points
@@ -4381,15 +4401,6 @@ lubricate ymd, rsample tscv
 
 A stationary time series is one whose properties do not depend on the
 time at which the series is observed.
-
-\section{Packages}\label{packages}
-
-\url{https://robjhyndman.com/seminars/user-fable/}
-\url{https://github.com/robjhyndman/forecast}
-\url{https://facebook.github.io/prophet/docs/quick_start.html}
-\url{https://keras.rstudio.com/articles/examples/index.html}
-\url{http://www.business-science.io/code-tools/2017/05/02/timekit-0-2-0.html}
-\url{https://www.rdocumentation.org/packages/bsts/versions/0.8.0}
 
 \section{Data Conversion}\label{data-conversion}
 
@@ -5983,28 +5994,33 @@ video (Component: Meaning):
 
 \section{General}\label{general-8}
 
-\url{https://www.crestle.com}
-
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
-
-\url{https://cran.r-project.org/web/packages/kerasformula/index.html}
-
-\href{http://vertex.ai/}{DL Everywhere}
-
-Debugging:
-\href{http://theorangeduck.com/page/neural-network-not-working}{1}
-\href{https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21}{2}
 
 \href{http://www.wildml.com/deep-learning-glossary/}{Glossary}
 
-\url{https://tensorflow.rstudio.com/keras/}
+Batch: Subset of the data used to calculate slopes during back
+propagation. Different batches are used to calculate different updates.
+
+Epoch: One full pass through all the batches in the training data.
+
+Activation Functions: Sigmoid: Takes a real-valued input and squashes it
+to range between 0 and 1. Softmax: Same end result as sigmoid, but
+different function. tanh: Takes a real-valued input and squashes it to
+the range {[}-1, 1{]}. ReLU:Has been shown to lead to very
+high-performance networks. This function takes a single number as an
+input, returning 0 if the input is negative, and the input if the input
+is positive.
+
+Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot
+Encodings because it allows for relationships to be shown between days.
+
+\href{https://www.youtube.com/watch?v=nqEYVzJLR_c\&feature=youtu.be\&t=31}{Rule
+of 30}: A change that affects at least 30 data points in your validation
+set is usually significant and not just noise.
 
 In a single-label, multiclass classification problem, your network
 should end with a softmax activation so that it will output a
 probability distribution over the N output classes.
-
-In general, the less training data you have, the worse overfitting will
-be, and using a small network is one way to mitigate overfitting.
 
 If you're predicting N categories, don't have layers with less than N
 nodes.
@@ -6013,92 +6029,10 @@ Softmax regression (or multinomial logistic regression) is a
 generalization of logistic regression to the case where we want to
 handle multiple classes.
 
-fast.ai: Use different learning rates for each layer
-
-Vanishing gradient problem: the gradients of the network's output with
-respect to the parameters in the early layers become extremely small.
-That's a fancy way of saying that even a large change in the value of
-parameters for the early layers doesn't have a big effect on the output.
-Change the activation function to solve.
-
-Batch: Subset of the data used to calculate slopes during back
-propagation. Different batches are used to calculate different updates.
-
-Epoch: One full pass through all the batches in the training data.
-
 Few people use kfold cv in deep learning because of the large datasets
 in play.
 
-Dying neuron:
-
 n inputs and k outputs gives you \((n+1)*k\) parameters.
-
-Back propogation takes about twice the memory as forward propogation.
-
-Model capacity: Same as underfitting and overfitting in bias-variance.
-Less nodes and hidden layers corresponds to simpler model and vice
-versa.
-
-The last layer of a neural network captures the most complex
-interactions.
-
-Sigmoid: Takes a real-valued input and squashes it to range between 0
-and 1 (\(σ(x) = 1 / (1 + exp(−x))\))
-
-Softmax: Same end result as sigmoid, but different function. Doesn't
-like multi-label classification
-
-tanh: Takes a real-valued input and squashes it to the range {[}-1, 1{]}
-(\(tanh(x) = 2σ(2x) − 1\))
-
-ReLU: The rectified linear activation function (called ReLU) has been
-shown to lead to very high-performance networks. This function takes a
-single number as an input, returning 0 if the input is negative, and the
-input if the input is positive. \(f(x) = max(0, x)\)
-
-Scale features
-
-Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot
-Encodings because it allows for relationships to be shown between days.
-
-ADAGRAD is another optimization option that takes care of some of the
-hyperparameters for you.
-
-Stop model from overoptimizing on training set: early
-stopping/termination (stop as soon as performance on validation set
-drops after a certain number of epochs) and regularization which applies
-artifical constraints to reduce the number of free parameters while
-making it difficult to optimize. Use L2 regularization or dropout.
-
-Dropout: Dropout works by randomly setting activations from one layer to
-the next to 0 repeatly. Forces the network to learn redundant
-representations, and takes average consensus for final prediction. Makes
-things more robust and prevents overfitting. You should use dropout
-(randomly eliminate nodes) only in training. Apply dropout both during
-forward and backward propagation. During training time, divide each
-dropout layer by keep\_prob to keep the same expected value for the
-activations. For example, if keep\_prob is 0.5, then we will on average
-shut down half the nodes, so the output will be scaled by 0.5 since only
-the remaining half are contributing to the solution. Dividing by 0.5 is
-equivalent to multiplying by 2. Hence, the output now has the same
-expected value. You can check that this works even when keep\_prob is
-other values than 0.5. Also consider inverted dropout.
-
-Reducing the learning rate can improve results
-
-\href{https://www.youtube.com/watch?v=nqEYVzJLR_c\&feature=youtu.be\&t=31}{Rule
-of 30}: A change that affects at least 30 data points in your validation
-set is usually significant and not just noise.
-
-dying relu
-
-Keras - stateful vs stateless LSTMs
-
-Regression: loss - mean\_squared\_error, metric - rmse,
-activation\_function - relu
-
-Classification: loss - categorical\_crossentropy, metric - accuracy,
-activation\_function - softmax
 
 Do random initialization of weights but set bias to zero. Don't
 intialize to values that are too large. He initialization works well for
@@ -6108,56 +6042,19 @@ end to end deep learning: an end-to-end approach as it maps directly the
 input (x) to the output (y). end-to-end learning works better in
 practice than multi-task learning, but requires a large amount of data.
 
-Don't use mini-batches larger than 32. Training with large minibatches
-is bad for your test error.
-
 restnet/attention \textgreater{} RNN / LSTM
 
 With a reduced the training set a high batch size and high learning rate
 cause the model to jump around chaotically.
 
-Gradient descent takes about 3 times longer than the loss function.
-Stochastic gradient descent works off an estimate of the loss function
-from a sample of the training set. Scales better than normal gradient
-descent. Momentum and learning rate decay are good for knowing which way
-to go in gradient descent.
+In backpropagation all derivatives applied to same parameters, so
+they're very correlated. This is bad for stochastic gradient descent.
+Gradients are either zero (don't remember the past well) or infinity.
+The latter is fixed by gradient clipping and the former by using LSTMs.
 
-In backpropagation all derivative applied to same parameters, so they're
-very correlated. This is bad for stochastic gradient descent. Gradients
-are either zero (don't remember the past well) or infinity. The latter
-is fixed by gradient clipping and the former by using LSTMs.
+\section{Pre-processing}\label{pre-processing-1}
 
-The default activation function for LSTMs is the hyperbolic tangent
-(tanh), which outputs values between -1 and 1. This is the preferred
-range for the time series data: MinMaxScaler(feature\_range = (-1, 1)).
-
-Keras' LSTM expects the input as well as the target data to be in a
-specific shape. The input has to be a 3-d array of size num\_samples,
-num\_timesteps, num\_features.
-
-Wiring the LSTM hidden states to sets of consecutive outputs of the same
-length. For example, if we want to produce predictions for 12 months,
-our LSTM should have a hidden state length of 12.
-
-One major issue with layer\_simple\_rnn is that although it should
-theoretically be able to retain at time t information about inputs seen
-many time steps before, in practice, such long-term dependencies are
-impossible to learn. This is due to the vanishing gradient problem, an
-effect that is similar to what is observed with non-recurrent networks
-(feed forward networks) that are many layers deep: as you keep adding
-layers to a network, the network eventually becomes un-trainable.
-
-A loss function is used to optimize a machine learning algorithm. An
-accuracy metric is used to measure the algorithm's performance
-(accuracy) in an interpretable way. Loss function applies to a single
-training example while the cost function applies to many. The loss
-function computes the error for a single training example; the cost
-function is the average of the loss functions of the entire training
-set.
-
-A trick when you want to flatten a matrix X of shape (a,b,c,d) to a
-matrix X\_flatten of shape (b ∗ c ∗ d, a) is to use
-\texttt{X\_flatten\ =\ X.reshape(X.shape{[}0{]},\ -1).T}
+Normalization makes the cost function faster to optimize
 
 One common preprocessing step in machine learning is to center and
 standardize your dataset, meaning that you substract the mean of the
@@ -6174,6 +6071,50 @@ dimensions and shapes of the problem (m\_train, m\_test, num\_px,
 \ldots{}), 2) Reshape the datasets such that each example is now a
 vector of size (num\_px * num\_px * 3, 1), 3) Standardize the data
 
+\section{Defaults}\label{defaults}
+
+Regression: loss - mean\_squared\_error, metric - rmse,
+activation\_function - relu
+
+Classification: loss - categorical\_crossentropy, metric - accuracy,
+activation\_function - softmax
+
+\section{RNN/LSTM}\label{rnnlstm}
+
+stateful vs stateless LSTMs
+
+One major issue with layer\_simple\_rnn is that although it should
+theoretically be able to retain at time t information about inputs seen
+many time steps before, in practice, such long-term dependencies are
+impossible to learn. This is due to the vanishing gradient problem, an
+effect that is similar to what is observed with non-recurrent networks
+(feed forward networks) that are many layers deep: as you keep adding
+layers to a network, the network eventually becomes un-trainable.
+
+The default activation function for LSTMs is the hyperbolic tangent
+(tanh), which outputs values between -1 and 1. This is the preferred
+range for the time series data: MinMaxScaler(feature\_range = (-1, 1)).
+
+Keras' LSTM expects the input as well as the target data to be in a
+specific shape. The input has to be a 3-d array of size num\_samples,
+num\_timesteps, num\_features.
+
+Wiring the LSTM hidden states to sets of consecutive outputs of the same
+length. For example, if we want to produce predictions for 12 months,
+our LSTM should have a hidden state length of 12.
+
+A loss function is used to optimize a machine learning algorithm. An
+accuracy metric is used to measure the algorithm's performance
+(accuracy) in an interpretable way. Loss function applies to a single
+training example while the cost function applies to many. The loss
+function computes the error for a single training example; the cost
+function is the average of the loss functions of the entire training
+set.
+
+A trick when you want to flatten a matrix X of shape (a,b,c,d) to a
+matrix X\_flatten of shape (b ∗ c ∗ d, a) is to use
+\texttt{X\_flatten\ =\ X.reshape(X.shape{[}0{]},\ -1).T}
+
 The tanh activation usually works better than sigmoid activation
 function for hidden units because the mean of its output is closer to
 zero, and so it centers the data better for the next layer.
@@ -6187,20 +6128,11 @@ between -1 and 1.
 The deeper layers of a neural network are typically computing more
 complex features of the input than the earlier layers.
 
-gradient checking
-
 data augmentation for images: rotate and crop
-
-Andre Ng doesn't like dropout bc it couples optimization with
-regularization
 
 If you have 10,000,000 examples, how would you split the train/dev/test
 set? 98\% train . 1\% dev . 1\% test. The dev and test set should come
 from the same distribution
-
-If your Neural Network model seems to have high variance try to add
-regularization \& get more training data. For high bias, make a bigger
-and deeper network.
 
 What is weight decay? A regularization technique (such as L2
 regularization) that results in gradient descent shrinking the weights
@@ -6208,52 +6140,142 @@ on every iteration. As a rule of thumb, the more training examples you
 have, the weaker this term should be. The more parameters you have the
 higher this term should be.
 
-Tthe inverted dropout technique: At test time you do not apply dropout
-(do not randomly eliminate units) and do not keep the 1/keep\_prob
-factor in the calculations used in training.
-
-Normalization makes the cost function faster to optimize
-
 Techniques for reducing variance (reducing overfitting)? Dropout, L2
 regularization, Data augmentation
 
 Do a loss vs learning rate plot to pick a good one. It's the key thing
-to set.
-
-Learning rate annealing: decrease learning rate as you reach the
+to set. Learning rate annealing: decrease learning rate as you reach the
 minimum.
 
 Training for more epochs will lead to overfitting.
-
-There is an analytical solution for linear regression parameters and MSE
-loss, but we usually prefer gradient descent optimization over it. This
-is because gradient descent doesn't require matrix inversion and it is
-more scalable and can be applied for problems with high number of
-features
 
 Number of params in logistic regression: k multiplied by d where k is
 the number of classes and d is the size of the dimensional space.
 
 Large model weights can indicate that model is overfitted
 
-Weight penalty drives model parameters closer to zero and prevents the
-model from being too sensitive to small changes in features
-
 Gradient descent extensions: adagrad, rms prop, adam, mini-batch
 gradient descent
 
 A dense layer applies a linear transformation to its input
 
+Always use ReLU activation because it doesn't saturate and it converges
+faster. Use He et al initialization which is square root of two divided
+by square root of number of inputs.
+
+batch normalization
+
+\section{Tuning}\label{tuning}
+
+\textbf{Optimizers}: If batch gradient descent in a deep network is
+taking excessively long to find a value of the parameters that achieves
+a small value for the cost function: Try mini-batch gradient descent,
+Try better random initialization for the weights, Try Adam, Try tuning
+the learning rate. A variant of this is Stochastic Gradient Descent
+(SGD), which is equivalent to mini-batch gradient descent where each
+mini-batch has just 1 example. When the training set is large, SGD can
+be faster. But the parameters will ``oscillate'' toward the minimum
+rather than converge smoothly. In practice, you'll often get faster
+results if you do not use neither the whole training set, nor only one
+training example, to perform each update. Mini-batch gradient descent
+uses an intermediate number of examples for each step. With mini-batch
+gradient descent, you loop over the mini-batches instead of looping over
+individual training examples. The difference between gradient descent,
+mini-batch gradient descent and stochastic gradient descent is the
+number of examples you use to perform one update step. You have to tune
+a learning rate hyperparameter alpha. With a well-turned mini-batch
+size, usually it outperforms either gradient descent or stochastic
+gradient descent (particularly when the training set is large).
+Shuffling and Partitioning are the two steps required to build
+mini-batches. Powers of two are often chosen to be the mini-batch size,
+e.g., 16, 32, 64, 128. Mini-batch Gradient descent, Mini-batch Gradient
+descent with momentum, mini-batch with Adam. Adam usually performs best.
+Some advantages of Adam include: Relatively low memory requirements
+(though higher than gradient descent and gradient descent with
+momentum), usually works well even with little tuning of hyperparameters
+(except alpha).
+
+\textbf{early stopping/termination}: (stop as soon as performance on
+validation set drops after a certain number of epochs) and
+regularization which applies artifical constraints to reduce the number
+of free parameters while making it difficult to optimize. Use L2
+regularization or dropout.
+
+\textbf{Dropout}. Slow down learning with regularization methods like
+dropout on the recurrent LSTM connections. Dropout works by randomly
+setting activations from one layer to the next to 0 repeatly. Forces the
+network to learn redundant representations, and takes average consensus
+for final prediction. Makes things more robust and prevents overfitting.
+You should use dropout (randomly eliminate nodes) only in training.
+Apply dropout both during forward and backward propagation. During
+training time, divide each dropout layer by keep\_prob to keep the same
+expected value for the activations. For example, if keep\_prob is 0.5,
+then we will on average shut down half the nodes, so the output will be
+scaled by 0.5 since only the remaining half are contributing to the
+solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the
+output now has the same expected value. You can check that this works
+even when keep\_prob is other values than 0.5. Also consider inverted
+dropout. Andrew Ng doesn't like dropout bc it couples optimization with
+regularization
+
+\textbf{Inverted dropout}: At test time you do not apply dropout (do not
+randomly eliminate units) and do not keep the 1/keep\_prob factor in the
+calculations used in training.
+
+\textbf{Layers}. Explore additional hierarchical learning capacity by
+adding more layers and varied numbers of neurons in each layer.
+
+\textbf{Regularization}. Explore how weight regularization, such as L1
+and L2, can be used to slow down learning and overfitting of the network
+on some configurations.
+
+\textbf{Optimization Algorithm}. Explore the use of
+\href{https://keras.io/optimizers/}{alternate optimization algorithms},
+such as classical gradient descent, to see if specific configurations to
+speed up or slow down learning can lead to benefits.
+
+\textbf{Loss Function}. Explore the use of
+\href{https://keras.io/objectives/}{alternative loss functions} to see
+if these can be used to lift performance.
+
+\textbf{Features and Timesteps}. Explore the use of lag observations as
+input features and input time steps of the feature to see if their
+presence as input can improve learning and/or predictive capability of
+the model.
+
+\textbf{Larger Batch Size}. Explore larger batch sizes than 4, perhaps
+requiring further manipulation of the size of the training and test
+datasets. Don't use mini-batches larger than 32. Training with large
+mini-batches is bad for your test error.
+
+\textbf{Change Learning Rate}: Reducing the learning rate can improve
+results. Use different learning rates for each layer
+
+\textbf{Model Capacity (Bias-Variance)}: If your Neural Network model
+seems to have high variance try to add regularization \& get more
+training data. For high bias, make a bigger and deeper network. In
+general, the less training data you have, the worse overfitting will be,
+and using a small network is one way to mitigate overfitting. Less nodes
+and hidden layers corresponds to simpler model and vice versa.
+
+Try to add batch normalization or dropout, maybe it will converge
+better. Try to augment your training data.
+
+ADAGRAD is another optimization option that takes care of some of the
+hyperparameters for you.
+
+\section{Debugging}\label{debugging}
+
+\href{http://theorangeduck.com/page/neural-network-not-working}{1}
+
+\href{https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21}{2}
+
+gradient checking
+
 Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU is
 better and Leaky ReLU is the best to avoid non-activation.
 
-We have reviewed the activation function, weights initializations, and a
-bunch of new techniques that help to train better networks. What are the
-takeaways? First, always use ReLU activation because it doesn't saturate
-and it converges faster. Use He et al initialization which is square
-root of two divided by square root of number of inputs. Try to add bash
-normalization or dropout, maybe it will converge better. Try to augment
-your training data.
+dying relu
 
 Gradient checking verifies closeness between the gradients from
 backpropagation and the numerical approximation of the gradient
@@ -6268,38 +6290,11 @@ batch GD. Use batches of 64, 128, 256, 512 otherwise which should speed
 up training. Make sure it fits in meemory. MIni-batch size is another
 hyperparameter.
 
-If batch gradient descent in a deep network is taking excessively long
-to find a value of the parameters that achieves a small value for the
-cost function: Try mini-batch gradient descent, Try better random
-initialization for the weights, Try Adam, Try tuning the learning rate.
-A variant of this is Stochastic Gradient Descent (SGD), which is
-equivalent to mini-batch gradient descent where each mini-batch has just
-1 example. When the training set is large, SGD can be faster. But the
-parameters will ``oscillate'' toward the minimum rather than converge
-smoothly. In practice, you'll often get faster results if you do not use
-neither the whole training set, nor only one training example, to
-perform each update. Mini-batch gradient descent uses an intermediate
-number of examples for each step. With mini-batch gradient descent, you
-loop over the mini-batches instead of looping over individual training
-examples. The difference between gradient descent, mini-batch gradient
-descent and stochastic gradient descent is the number of examples you
-use to perform one update step. You have to tune a learning rate
-hyperparameter alpha. With a well-turned mini-batch size, usually it
-outperforms either gradient descent or stochastic gradient descent
-(particularly when the training set is large). Shuffling and
-Partitioning are the two steps required to build mini-batches. Powers of
-two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
-Mini-batch Gradient descent, Mini-batch Gradient descent with momentum,
-mini-batch with Adam. Adam usually performs best. Some advantages of
-Adam include: Relatively low memory requirements (though higher than
-gradient descent and gradient descent with momentum), usually works well
-even with little tuning of hyperparameters (except alpha).
-
-batch normalization
-
-\section{Tuning}\label{tuning}
-
-\section{Debugging}\label{debugging}
+Vanishing gradient problem: the gradients of the network's output with
+respect to the parameters in the early layers become extremely small.
+That's a fancy way of saying that even a large change in the value of
+parameters for the early layers doesn't have a big effect on the output.
+Change the activation function to solve.
 
 \chapter{Probabilistic Programming}\label{probabilistic-programming}
 
@@ -6803,6 +6798,8 @@ regression
 
 \section{General}\label{general-11}
 
+\section{Collection}\label{collection}
+
 \href{http://chrisalbon.com/}{Chris Albon}
 
 \section{Save And Load Models}\label{save-and-load-models}
@@ -6819,6 +6816,16 @@ model = grid_search.best_estimator_
 \begin{verbatim}
 save(m1, file = "my_model1.rda")
 m1 = load("my_model1.rda")
+\end{verbatim}
+
+\section{LSTM Data Shape}\label{lstm-data-shape}
+
+\begin{verbatim}
+data_x = np.array([
+    # Datapoint 1: 3 features for timesteps 1 & 2
+    [[1, 2, 3], [4, 5, 6]],
+    # Datapoint 2
+    [[7, 8, 9], [10, 11, 12]]])
 \end{verbatim}
 
 \section{Logistic Regression Stats
@@ -7682,31 +7689,9 @@ input-hidden-output, 3) compile, 4) fit
 \NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(pred_data)}
 \CommentTok{#Calculate predicted probability of survival}
 \NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
-\CommentTok{# Tuning}
-\CommentTok{# Import the SGD optimizer}
-\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ SGD}
-\CommentTok{# Create list of learning rates: lr_to_test}
-\NormalTok{lr_to_test }\OperatorTok{=}\NormalTok{ [.}\DecValTok{000001}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\DecValTok{1}\NormalTok{]}
-\CommentTok{# Loop over learning rates}
-\ControlFlowTok{for}\NormalTok{ lr }\KeywordTok{in}\NormalTok{ lr_to_test:}
-    \BuiltInTok{print}\NormalTok{(}\StringTok{'Testing model with learning rate: '}\NormalTok{)}
-    
-    \CommentTok{# Build new model to test, unaffected by previous models}
-\NormalTok{    model }\OperatorTok{=}\NormalTok{ get_new_model()}
-    
-    \CommentTok{# Create SGD optimizer with specified learning rate: my_optimizer}
-\NormalTok{    my_optimizer }\OperatorTok{=}\NormalTok{ SGD(lr }\OperatorTok{=}\NormalTok{ lr)}
-    
-    \CommentTok{# Compile the model}
-\NormalTok{    model.}\BuiltInTok{compile}\NormalTok{(optimizer }\OperatorTok{=}\NormalTok{ my_optimizer, loss }\OperatorTok{=} \StringTok{'categorical_crossentropy'}\NormalTok{)}
-    
-    \CommentTok{# Fit the model}
-\NormalTok{    model.fit(predictors, }
-\NormalTok{              target, }
-\NormalTok{              validation_split }\OperatorTok{=} \FloatTok{0.3}\NormalTok{, }
-\NormalTok{              epochs }\OperatorTok{=} \DecValTok{20}\NormalTok{, }
-\NormalTok{              callbacks }\OperatorTok{=}\NormalTok{ [early_stopping_monitor], }
-\NormalTok{              verbose }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
+\NormalTok{keras.utils.to_categorical(y, num_classes }\OperatorTok{=} \DecValTok{2}\NormalTok{)}
+\NormalTok{mdl.add(layer_dense(units }\OperatorTok{=} \DecValTok{1}\NormalTok{, activation }\OperatorTok{=} \StringTok{"softmax"}\NormalTok{))}
+\NormalTok{mdl.}\BuiltInTok{compile}\NormalTok{(loss }\OperatorTok{=} \StringTok{"categorical_crossentropy"}\NormalTok{, optimizer }\OperatorTok{=} \StringTok{"adam"}\NormalTok{, metrics }\OperatorTok{=}\NormalTok{ [}\StringTok{"accuracy"}\NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
