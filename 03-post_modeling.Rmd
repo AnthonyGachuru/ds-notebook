@@ -2,6 +2,8 @@
 
 ## Communicate
 
+https://jupyter.org/jupyter-book/intro.html#installation
+
 https://metabase.com/
   
 http://koaning.io/make-docs.html

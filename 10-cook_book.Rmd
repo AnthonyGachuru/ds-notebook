@@ -2,8 +2,6 @@
 
 ## General
 
-## Collection
-
 [Chris Albon](http://chrisalbon.com/)
 
 ## Save And Load Models
@@ -22,7 +20,9 @@ save(m1, file = "my_model1.rda")
 m1 = load("my_model1.rda")
 ```
 
-## LSTM Data Shape
+## LSTM 
+
+Data Shape
 
 ```
 data_x = np.array([
@@ -30,6 +30,12 @@ data_x = np.array([
     [[1, 2, 3], [4, 5, 6]],
     # Datapoint 2
     [[7, 8, 9], [10, 11, 12]]])
+```
+
+Prediction Example
+
+```
+mdl.predict([[np.array([.5, .6, .6] + [0 for i in range(14)]).reshape((17, 1))]])[0]
 ```
 
 ## Logistic Regression Stats Models

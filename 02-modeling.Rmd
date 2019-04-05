@@ -4,6 +4,8 @@
 
 [Network Playground](https://mikedombo.github.io/graphPlayground/#)
 
+train & dev set error: low-high = high variance, high-high = high bias, high-high = high bias and variance, low-low = low bias and variance
+
 Opposite the other algorithms, increasing n in KNN means less overfitting.
 
 KNN doesn't easily extrapolate as linear regression.

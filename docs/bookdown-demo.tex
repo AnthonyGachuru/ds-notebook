@@ -1486,6 +1486,9 @@ framework.
 \href{https://mikedombo.github.io/graphPlayground/\#}{Network
 Playground}
 
+train \& dev set error: low-high = high variance, high-high = high bias,
+high-high = high bias and variance, low-low = low bias and variance
+
 Opposite the other algorithms, increasing n in KNN means less
 overfitting.
 
@@ -3478,6 +3481,8 @@ Py}
 Maintain}\label{communicate-deploy-maintain}
 
 \section{Communicate}\label{communicate-1}
+
+\url{https://jupyter.org/jupyter-book/intro.html\#installation}
 
 \url{https://metabase.com/}
 
@@ -6798,8 +6803,6 @@ regression
 
 \section{General}\label{general-11}
 
-\section{Collection}\label{collection}
-
 \href{http://chrisalbon.com/}{Chris Albon}
 
 \section{Save And Load Models}\label{save-and-load-models}
@@ -6818,7 +6821,9 @@ save(m1, file = "my_model1.rda")
 m1 = load("my_model1.rda")
 \end{verbatim}
 
-\section{LSTM Data Shape}\label{lstm-data-shape}
+\section{LSTM}\label{lstm}
+
+Data Shape
 
 \begin{verbatim}
 data_x = np.array([
@@ -6826,6 +6831,12 @@ data_x = np.array([
     [[1, 2, 3], [4, 5, 6]],
     # Datapoint 2
     [[7, 8, 9], [10, 11, 12]]])
+\end{verbatim}
+
+Prediction Example
+
+\begin{verbatim}
+mdl.predict([[np.array([.5, .6, .6] + [0 for i in range(14)]).reshape((17, 1))]])[0]
 \end{verbatim}
 
 \section{Logistic Regression Stats
