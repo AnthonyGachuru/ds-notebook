@@ -30,11 +30,9 @@ A typical data science workflow can be framed as following these steps:
 
 * Maintain: adapt the models and features to the evolution of the environment
 
-More succinctly, as per Hadley Wickham: 
+Another instantiation via Hadley Wickham is :  import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
 
-import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
-
-My combination of the two:
+And the two combined:
 
 preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
 
@@ -134,26 +132,19 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
 
-Write Tests.
-
-Write helper functions, do testing: 
-
-[1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
+Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
  | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) 
  
-And validation:
+Validation: [1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
 
-[1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
-
-A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`
-
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`
-
-This will create a new environment with the same name listed in environment.yaml.
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`. 
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`. This will create a new environment with the same name listed in environment.yaml.
 
 ## Resources
 
 ### General
+
+https://matrixds.com/
 
 CoCalc
 
@@ -211,15 +202,11 @@ linear probability model
 
 [https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html)
 
-confint conjoint analysis Incremental PCA fe: Permutation Measure meta learning | Rasch Model | Learning_to_rank
-
 ### Data
 
 http://www.fast.ai/2018/10/16/aws-datasets
 
 https://www.spe.org/en/jpt/jpt-article-detail/?art=5282
-
-Causality: [1](https://www.kaggle.com/c/cause-effect-pairs) [2](http://webdav.tuebingen.mpg.de/cause-effect/)
 
 https://mimic.physionet.org/
 
@@ -255,68 +242,6 @@ https://www.figure-eight.com/datasets/
 
 https://stanfordmlgroup.github.io/competitions/mura/
 
-[sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp)
-
-[UCI ML Repo](http://archive.ics.uci.edu/ml/)
-
-[Datanauts](https://open.nasa.gov/explore/datanauts/)
-
-Open Census Data: [1](https://www.producthunt.com/posts/open-census-data) | [2](https://www.safegraph.com/open-census-data?ref=producthunt) | [3](https://docs.safegraph.com/docs/open-census-data)
-
-[World Holidays](https://date.nager.at/)
-
-Rosalind: [1](http://rosalind.info/problems/locations/) | [2](https://github.com/mtarbit/Rosalind-Problems)
-
-[Research Data](http://academictorrents.com/)
- 
-SEC: [1](https://www.sec.gov/structureddata) | [2](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html) | [3](https://www.sec.gov/dera/data/financial-statement-data-sets.html) | [4](https://www.sec.gov/dera/data/financial-statement-data-sets.html)
-
-Neuro Data: [1](http://preprocessed-connectomes-project.org) | [2](http://www.humanconnectomeproject.org) | [3](http://fcon_1000.projects.nitrc.org/indi/abide/) | [4](https://www.ncbi.nlm.nih.gov/pubmed/25840117) | [5](https://coins.mrn.org)
-
-time series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting)
-
-[Microsoft Research](https://msropendata.com)
-
-Disney Animation: [1](https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html) | [2](https://www.disneyanimation.com/technology/datasets)
-
-[Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html)
-
-[SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
-
-[ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv)
-
-[Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/)
-
-[Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
-
-[Data.gov](http://www.data.gov/)
-
-NYC: [1](https://nycopendata.socrata.com/) | [2](https://health.data.ny.gov) | [3](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml)
-
-Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/)
-
-Sentiment: [1](http://ai.stanford.edu/~amaas/data/sentiment/) | [2](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews)
-
-Scripts: [1](https://www.springfieldspringfield.co.uk) | [2](https://github.com/BobAdamsEE/SouthParkData) | [3](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) | [4](http://transcripts.foreverdreaming.org/viewtopic.php?f=809&t=31120)
-
-[Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
-
-[Word Bank](http://wordbank.stanford.edu/)
-
-Q & A: [1](https://rajpurkar.github.io/SQuAD-explorer/) | [2](https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/) | [3](http://jmcauley.ucsd.edu/data/amazon/qa/) | [4](http://ai2-website.s3.amazonaws.com/publications/algebra-TACL2015.pdf) | [5](http://quac.ai/)
-
-Autonomous Driving: [1](http://robotcar-dataset.robots.ox.ac.uk/) | [2](https://medium.com/udacity/open-sourcing-223gb-of-mountain-view-driving-data-f6b5593fbfa5#.ch9a8c762) | [3](https://github.com/commaai/research) | [4](https://www.scaleapi.com/image-annotation/self-driving-cars)
-
-[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/)
-
-CV: [1](https://research.googleblog.com/2016/09/introducing-open-images-dataset.html) | [2](http://aloi.science.uva.nl/?__vid=5c0983704ebd0132821522000b2a88d7) | [3](http://www.vision.caltech.edu/visipedia/CUB-200.html?__vid=5c0983704ebd0132821522000b2a88d7) | [4](http://www.robots.ox.ac.uk/~vgg/data/flowers/17/?__vid=5c0983704ebd0132821522000b2a88d7) | [5](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/) | [6](https://github.com/vc1492a/Hey-Waldo) | [7](https://github.com/gtoderici/sports-1m-dataset)
-
-Networks: [1](https://snap.stanford.edu/data/index.html) | [2](http://networkrepository.com/index.php) | [3](https://aminer.org/data-sna)
-
-[Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/)
-
-Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/)
-
 [Medical Data](https://github.com/beamandrew/medical-data)
 
 [Deep Mind](https://deepmind.com/research/open-source/open-source-datasets/)
@@ -350,6 +275,68 @@ Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com
 [Enigma](https://public.enigma.com/)
 
 [Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/)
+
+[UCI ML Repo](http://archive.ics.uci.edu/ml/)
+
+[Datanauts](https://open.nasa.gov/explore/datanauts/)
+
+[World Holidays](https://date.nager.at/)
+
+[Research Data](http://academictorrents.com/)
+
+[Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html)
+
+[SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
+
+[ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv)
+
+[Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/)
+
+[Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
+
+[Data.gov](http://www.data.gov/)
+
+[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/)
+
+[Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
+
+[Word Bank](http://wordbank.stanford.edu/)
+
+[Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/)
+
+[Microsoft Research](https://msropendata.com)
+
+Open Census Data: [1](https://www.producthunt.com/posts/open-census-data) | [2](https://www.safegraph.com/open-census-data?ref=producthunt) | [3](https://docs.safegraph.com/docs/open-census-data)
+
+Causality: [1](https://www.kaggle.com/c/cause-effect-pairs) [2](http://webdav.tuebingen.mpg.de/cause-effect/)
+
+Rosalind: [1](http://rosalind.info/problems/locations/) | [2](https://github.com/mtarbit/Rosalind-Problems)
+ 
+SEC: [1](https://www.sec.gov/structureddata) | [2](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html) | [3](https://www.sec.gov/dera/data/financial-statement-data-sets.html) | [4](https://www.sec.gov/dera/data/financial-statement-data-sets.html)
+
+Neuro Data: [1](http://preprocessed-connectomes-project.org) | [2](http://www.humanconnectomeproject.org) | [3](http://fcon_1000.projects.nitrc.org/indi/abide/) | [4](https://www.ncbi.nlm.nih.gov/pubmed/25840117) | [5](https://coins.mrn.org)
+
+time series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting) | [sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp)
+
+Disney Animation: [1](https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html) | [2](https://www.disneyanimation.com/technology/datasets)
+
+NYC: [1](https://nycopendata.socrata.com/) | [2](https://health.data.ny.gov) | [3](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml)
+
+Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/)
+
+Sentiment: [1](http://ai.stanford.edu/~amaas/data/sentiment/) | [2](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews)
+
+Scripts: [1](https://www.springfieldspringfield.co.uk) | [2](https://github.com/BobAdamsEE/SouthParkData) | [3](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) | [4](http://transcripts.foreverdreaming.org/viewtopic.php?f=809&t=31120)
+
+Q & A: [1](https://rajpurkar.github.io/SQuAD-explorer/) | [2](https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/) | [3](http://jmcauley.ucsd.edu/data/amazon/qa/) | [4](http://ai2-website.s3.amazonaws.com/publications/algebra-TACL2015.pdf) | [5](http://quac.ai/)
+
+Autonomous Driving: [1](http://robotcar-dataset.robots.ox.ac.uk/) | [2](https://medium.com/udacity/open-sourcing-223gb-of-mountain-view-driving-data-f6b5593fbfa5#.ch9a8c762) | [3](https://github.com/commaai/research) | [4](https://www.scaleapi.com/image-annotation/self-driving-cars)
+
+CV: [1](https://research.googleblog.com/2016/09/introducing-open-images-dataset.html) | [2](http://aloi.science.uva.nl/?__vid=5c0983704ebd0132821522000b2a88d7) | [3](http://www.vision.caltech.edu/visipedia/CUB-200.html?__vid=5c0983704ebd0132821522000b2a88d7) | [4](http://www.robots.ox.ac.uk/~vgg/data/flowers/17/?__vid=5c0983704ebd0132821522000b2a88d7) | [5](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/) | [6](https://github.com/vc1492a/Hey-Waldo) | [7](https://github.com/gtoderici/sports-1m-dataset)
+
+Networks: [1](https://snap.stanford.edu/data/index.html) | [2](http://networkrepository.com/index.php) | [3](https://aminer.org/data-sna)
+
+Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/)
 
 ### Auto Data Science
 
