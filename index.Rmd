@@ -132,75 +132,32 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
 
-Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/)
- | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial)) 
+Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial) | [R](http://r-pkgs.had.co.nz/tests.html) | pytest/hypothesis
  
 Validation: [1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
 
 A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`. 
 The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`. This will create a new environment with the same name listed in environment.yaml.
 
+package for helper functions and units tests
+
+use makefile to run cmd commands
+
 ## Resources
 
 ### General
 
-https://matrixds.com/
+https://matrixds.com/ | https://www.crestle.com
 
 CoCalc
 
 Conda
 
-https://www.crestle.com
-
 [SOTA Results](https://paperswithcode.com/sota)
 
-[DS Project Style Guide](https://www.dataquest.io/blog/data-science-project-style-guide/
+[DS Project Style Guide](https://www.dataquest.io/blog/data-science-project-style-guide/)
 
-Simulated Annealing: Gradient descent extension
-
-"No Free Lunch" theorem: no single classifier works best across all possible scenarios
-
-Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
-
-Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
-
-Cohort analysis
-
-Transfer learning
-
-hierarchical clustering: ward
-
-hamming loss: multilabel and multiclass classification
-
-cox proportional hazards & multivariate linear regression
-
-sequential data: rnn, lstm, hidden markov models & conditional random fields
-
-fowles-mallows score for clustering when ground truth is known
-
-youden's j
-
-Multiple Correspondence Analysis
-
-platt scaling
-
-set the seed always
-
-natural log goes from unit change to percentage change
-
-generalized low rank models
-
-conditional random field
-
-linear probability model
-
-[http://r-pkgs.had.co.nz/tests.html](http://r-pkgs.had.co.nz/tests.html)
-
-[https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/](https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/)
-
-[http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/](http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/)
-
-[https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html)
+ohort analysis, Transfer learning, cox proportional hazards, youden's j, Multiple Correspondence Analysis. platt scaling, generalized low rank models, conditional random field, linear probability model
 
 ### Data
 
@@ -347,18 +304,6 @@ Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com
 Feature Engineering: [1](https://www.featuretools.com) | [2](https://www.featurelabs.com/) 
 
 Auto ML: TPOT
-
-### Vanderplas Jupyter
-
-* create helper functions and units tests as R/py for Rmd/ipynb
-
-* pytest/hypothesis for testing
-
-* use makefile to run cmd commands
-
-* Make package for workflow with data (__init__.py) and use this formation for function docs:
-
-* `def fun(a): return(a) #Role Parameters Returns`
 
 ### Sample R Pipeline
 

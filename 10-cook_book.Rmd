@@ -4,7 +4,85 @@
 
 [Chris Albon](http://chrisalbon.com/)
 
-## Harmonic Regression
+## Stats By Simulation
+
+Notes on the talk by Jake Vanderplas. I left out bootstrap and cross validation below. For all methods look out for selection bias and make sure you have representative samples. More on the bootstrap: These are simulated confidence intervals that work well for n > 20 as a rule of thumb.
+
+**Direct Simulation**
+
+Works well with an apriori (generative) model of the world, like the probability distribution of a coin toss. Example: Flip a fair coin 30 times. How likely it is to see 22 heads?
+
+```{r, eval = F}
+n <- 10^6
+h_a <- 22
+result <- purrr::map(seq(1, n, 1), 
+           ~ sum(base::sample(c(0,1), 30, replace = T)) >= h_a) %>%
+  unlist() %>% sum()
+
+result/n
+```
+
+**Shuffling**
+
+Comparing groups
+
+```{r, eval = F}
+iris_100 <- iris[1:100, c(2,5)]
+(t.test(iris_100[1:50, 1], iris_100[51:100, 1], 
+       alternative = 'greater'))$p.value
+```
+
+```{r, eval = F}
+ha_shuffle <- function(df){
+  
+  result <- df %>% 
+  mutate(Species = sample(Species, n())) %>% 
+  group_by(Species) %>% 
+  summarise_at(1, mean) %>% 
+  mutate(mu_diff = Sepal.Width - lag(Sepal.Width)) %>% 
+  filter(!is.na(mu_diff)) %>% 
+  pull(mu_diff)
+  
+  return(result >= observed_diff)
+  
+}
+
+observed_diff <- iris_100 %>% 
+  group_by(Species) %>% 
+  summarise_at(1, mean) %>% 
+  mutate(mu_diff = Sepal.Width - lag(Sepal.Width)) %>% 
+  filter(!is.na(mu_diff)) %>% 
+  pull(mu_diff)
+
+n <- 10^6
+result <- purrr::map(seq(1, n, 1), ~ ha_shuffle(iris_100)) %>%
+  unlist() %>% sum()
+
+result/n
+```
+
+## Simple Bayes
+
+```{python, eval = FALSE}
+
+#Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
+
+from numpy.random import beta as beta_dist
+import numpy as np
+
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
+## TS Harmonic Regression
 
 ```{r, eval = F}
 # Set up harmonic regressors of order 13

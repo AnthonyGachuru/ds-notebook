@@ -4,6 +4,26 @@
 
 toolbox: classic ml, bayesian ml, abm, rl, ga & gp, es
 
+"No Free Lunch" theorem: no single classifier works best across all possible scenarios
+
+Always set the seed
+
+natural log goes from unit change to percentage change
+
+Simulated Annealing: Gradient descent extension
+
+hierarchical clustering: ward
+
+hamming loss: multilabel and multiclass classification
+
+Sequence mining Algorithms: spade, gsp, freespan; hmmlearn 
+
+Network models: graphical lasso, ising model, granger causality test, network hypothesis testing, bayesian networks
+
+sequential data: rnn, lstm, hidden markov models & conditional random fields
+
+fowles-mallows score for clustering when ground truth is known
+
 Clustering: [Comparison](http://scikit-learn.org/stable/modules/clustering.html#clustering) | [Rules](https://twitter.com/thomaswdinsmore/status/965223193043718145)
 
 [Network Playground](https://mikedombo.github.io/graphPlayground/#)

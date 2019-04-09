@@ -87,6 +87,12 @@ The ets() function does not produce forecasts. Rather, it estimates the model pa
 
 ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.
 
+Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.
+
+A stationary time series is one whose properties do not depend on the time at which the series is observed.14 Thus, time series with trends, or with seasonality, are not stationary — the trend and seasonality will affect the value of the time series at different times. On the other hand, a white noise series is stationary — it does not matter when you observe it, it should look much the same at any point in time. Some cases can be confusing — a time series with cyclic behaviour (but with no trend or seasonality) is stationary. This is because the cycles are not of a fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be. In general, a stationary time series will have no predictable patterns in the long-term. Time plots will show the series to be roughly horizontal (although some cyclic behavior is possible), with constant variance.
+
+Most time series models do not work well for very long time series. The problem is that real data do not come from the models we use. When the number of observations is not large (say up to about 200) the models often work well as an approximation to whatever process generated the data. But eventually we will have enough data that the difference between the true process and the model starts to become more obvious. An additional problem is that the optimization of the parameters becomes more time consuming because of the number of observations involved.
+
 ### Workflow
 
 Let's review the process:
@@ -105,7 +111,39 @@ Ex-ante forecasts are those that are made using only the information that is ava
 
 ### Preprocessing
 
-To fill Out
+#### General
+
+So far, we have considered relatively simple seasonal patterns such as quarterly and monthly data. However, higher frequency time series often exhibit more complicated seasonal patterns. For example, daily data may have a weekly pattern as well as an annual pattern. Hourly data usually has three types of seasonality: a daily pattern, a weekly pattern, and an annual pattern
+
+The best way to deal with moving holiday effects is to use dummy variables. However, neither STL, ETS nor TBATS models allow for covariates. Amongst the models discussed in this book (and implemented in the forecast package for R), the only choice is a dynamic regression model, where the predictors include any dummy holiday effects (and possibly also the seasonality using Fourier terms).
+
+To impose a positivity constraint, simply work on the log scale, by specifying the Box-Cox parameter lambda = 0.
+
+we can transform the data using a scaled logit transform which maps  9a,b) to the whole real line: y = log((x-a)/(b-x))
+
+One way to make a non-stationary time series stationary — compute the differences between consecutive observations. This is known as differencing. The ACF of the differenced Google stock price looks just like that of a white noise series. There are no autocorrelations lying outside the 95% limits, and the Ljung-Box statistic has a p-value of 0.355 (for h=10 ). This suggests that the daily change in the Google stock price is essentially a random amount which is uncorrelated with that of previous days. When the differenced series is white noise, the model for the original series can be written as y_t - y_{t-1} = e_t (white noise)
+
+#### Differencing
+
+This process of using a sequence of KPSS tests to determine the appropriate number of first differences is carried out by the function ndiffs()
+
+A similar function for determining whether seasonal differencing is required is nsdiffs(), which uses the measure of seasonal strength
+
+In practice, it is almost never necessary to go beyond second-order differences.
+
+A seasonal difference is the difference between an observation and the previous observation from the same season.
+
+If  seasonally differenced data appear to be white noise, then an appropriate model for the original data is y_t = y_{t-m} + e_t. Forecasts from this model are equal to the last observation from the relevant season. That is, this model gives seasonal naïve forecasts.
+
+Sometimes it is necessary to take both a seasonal difference and a first difference to obtain stationary data
+
+When both seasonal and first differences are applied, it makes no difference which is done first—the result will be the same. However, if the data have a strong seasonal pattern, we recommend that seasonal differencing be done first, because the resulting series will sometimes be stationary and there will be no need for a further first difference. If first differencing is done first, there will still be seasonality present.
+
+One way to determine more objectively whether differencing is required is to use a unit root test. These are statistical hypothesis tests of stationarity that are designed for determining whether differencing is required.
+
+A number of unit root tests are available, which are based on different assumptions and may lead to conflicting answers. In our analysis, we use the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the null hypothesis is that the data are stationary, and we look for evidence that the null hypothesis is false. Consequently, small p-values (e.g., less than 0.05) suggest that differencing is required. The test can be computed using the ur.kpss() function from the urca package.
+
+Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.
 
 ### Feature Engineering
 
@@ -227,6 +265,14 @@ ETS(M,N,N): simple exponential smoothing with multiplicative errors
 ETS(A,A,N): Holt’s linear method with additive errors
 
 ETS(M,A,N): Holt’s linear method with multiplicative errors
+
+Random walk models are widely used for non-stationary data, particularly financial and economic data. Random walks typically have: long periods of apparent trends up or down, sudden and unpredictable changes in direction.
+
+In a multiple regression model, we forecast the variable of interest using a linear combination of predictors. In an auto-regression model, we forecast the variable of interest using a linear combination of past values of the variable. We refer to this as an AR(p) model, an autoregressive model of order p.
+
+Rather than using past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model. We refer to this as an MA(q) model, a moving average model of order q.
+
+If we combine differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average 
 
 #### Benchmark/Baseline Models
 
@@ -353,6 +399,33 @@ When fitting an ARIMA model to a set of (non-seasonal) time series data, the fol
 7. Once the residuals look like white noise, calculate forecasts.
 
 auto.arima only does steps 3-5.
+
+The same stationarity and invertibility conditions that are used for autoregressive and moving average models also apply to an ARIMA model.
+
+White noise: ARIMA(0,0,0)
+Random walk: ARIMA(0,1,0) with no constant
+Random walk with drift: ARIMA(0,1,0) with a constant
+Autoregression:	ARIMA(p,0,0)
+Moving average: ARIMA(0,0,q)
+
+It is sometimes possible to use the ACF plot, and the closely related PACF plot, to determine appropriate values for p & q.
+
+If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of  p/q. If p and q are both positive, then the plots do not help in finding suitable values of  p and q.
+
+The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:
+
+the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag p in the PACF, but none beyond lag p.
+
+The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:
+
+The PACF is exponentially decaying or sinusoidal; there is a significant spike at lag  
+q in the ACF, but none beyond lag q.
+
+The inclusion of a constant in a non-stationary ARIMA model is equivalent to inducing a polynomial trend of order  d in the forecast function.
+
+The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12  model will show: a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).
+
+The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated. 
 
 #### Dynamic Harmonic Regression
 
@@ -537,120 +610,7 @@ We recommend that one of the AICc, AIC, or CV statistics be used, each of which 
 
 Model Selection: A great advantage of the ETS statistical framework is that information criteria can be used for model selection - AIC, AIC_c, and BIC
 
-## Forecasting: Principles & Practice
-
-Exponential smoothing and ARIMA models are the two most widely used approaches to time series forecasting, and provide complementary approaches to the problem. While exponential smoothing models are based on a description of the trend and seasonality in the data, ARIMA models aim to describe the autocorrelations in the data.
-
-A stationary time series is one whose properties do not depend on the time at which the series is observed.14 Thus, time series with trends, or with seasonality, are not stationary — the trend and seasonality will affect the value of the time series at different times. On the other hand, a white noise series is stationary — it does not matter when you observe it, it should look much the same at any point in time.
-
-Some cases can be confusing — a time series with cyclic behaviour (but with no trend or seasonality) is stationary. This is because the cycles are not of a fixed length, so before we observe the series we cannot be sure where the peaks and troughs of the cycles will be.
-
-In general, a stationary time series will have no predictable patterns in the long-term. Time plots will show the series to be roughly horizontal (although some cyclic behavior is possible), with constant variance.
-
-note that the Google stock price was non-stationary in panel (a), but the daily changes were stationary in panel (b). This shows one way to make a non-stationary time series stationary — compute the differences between consecutive observations. This is known as differencing.
-
-The ACF of the differenced Google stock price looks just like that of a white noise series. There are no autocorrelations lying outside the 95% limits, and the Ljung-Box statistic has a p-value of 0.355 (for h=10 ). This suggests that the daily change in the Google stock price is essentially a random amount which is uncorrelated with that of previous days.
-
-When the differenced series is white noise, the model for the original series can be written as y_t - y_{t-1} = e_t (white noise)
-
-Random walk models are widely used for non-stationary data, particularly financial and economic data. Random walks typically have: long periods of apparent trends up or down, sudden and unpredictable changes in direction.
-
-In practice, it is almost never necessary to go beyond second-order differences.
-
-A seasonal difference is the difference between an observation and the previous observation from the same season.
-
-If  seasonally differenced data appear to be white noise, then an appropriate model for the original data is y_t = y_{t-m} + e_t. Forecasts from this model are equal to the last observation from the relevant season. That is, this model gives seasonal naïve forecasts.
-
-Sometimes it is necessary to take both a seasonal difference and a first difference to obtain stationary data
-
-When both seasonal and first differences are applied, it makes no difference which is done first—the result will be the same. However, if the data have a strong seasonal pattern, we recommend that seasonal differencing be done first, because the resulting series will sometimes be stationary and there will be no need for a further first difference. If first differencing is done first, there will still be seasonality present.
-
-One way to determine more objectively whether differencing is required is to use a unit root test. These are statistical hypothesis tests of stationarity that are designed for determining whether differencing is required.
-
-A number of unit root tests are available, which are based on different assumptions and may lead to conflicting answers. In our analysis, we use the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the null hypothesis is that the data are stationary, and we look for evidence that the null hypothesis is false. Consequently, small p-values (e.g., less than 0.05) suggest that differencing is required. The test can be computed using the ur.kpss() function from the urca package.
-
-This process of using a sequence of KPSS tests to determine the appropriate number of first differences is carried out by the function ndiffs()
-
-A similar function for determining whether seasonal differencing is required is nsdiffs(), which uses the measure of seasonal strength
-
-The backward shift operator B  is a useful notational device when working with time series lags. The backward shift operator is convenient for describing the process of differencing. A first difference can be written as:
-
-y_t' = y_t - y_{t-} = y_t -by_t = (1-b) y_t
-
-In  general, a d th-order difference can be written as: (y_t)^d  = (1-b)^d y_t
-
-In a multiple regression model, we forecast the variable of interest using a linear combination of predictors. In an auto-regression model, we forecast the variable of interest using a linear combination of past values of the variable. We refer to this as an AR(p) model, an autoregressive model of order p.
-
-for ar(1) model, y_t is white noise when beta_1 is 0, a random walk when beta_1 is 1 and beta_0 is 0, a random walk with drift when beta_1 is 1 and beta_0 is not zero, and y_t oscillates if beta_1 is negative.
-
-We normally restrict autoregressive models to stationary data, in which case some constraints on the values of the parameters are required.
-
-Rather than using past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model. We refer to this as an MA(q) model, a moving average model of order q.
-
-If we combine differencing with autoregression and a moving average model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for AutoRegressive Integrated Moving Average 
-
-The “predictors”  include both lagged values of  y_t and lagged errors. We call this an ARIMA(p,d,q) model, where p is the order of the autoregressive part; d is the 	degree of first differencing involved, and q is the orer of the moving average part.
- 
-The same stationarity and invertibility conditions that are used for autoregressive and moving average models also apply to an ARIMA model.
-
-White noise: ARIMA(0,0,0)
-Random walk: ARIMA(0,1,0) with no constant
-Random walk with drift: ARIMA(0,1,0) with a constant
-Autoregression:	ARIMA(p,0,0)
-Moving average: ARIMA(0,0,q)
-
-The constant c has an important effect on the long-term forecasts obtained from these models.
-
-If c=0 and d=0, the long-term forecasts will go to zero.
-If c=0 and d=1, the long-term forecasts will go to a non-zero constant.
-If c=0 and d=2, the long-term forecasts will follow a straight line.
-If c≠0 and d=0, the long-term forecasts will go to the mean of the data.
-If c≠0 and d=1, the long-term forecasts will follow a straight line.
-If c≠0 and d=2, the long-term forecasts will follow a quadratic trend.
-
-The value of d also has an effect on the prediction intervals — the higher the value of  d, the more rapidly the prediction intervals increase in size. For  
-d=0, the long-term forecast standard deviation will go to the standard deviation of the historical data, so the prediction intervals will all be essentially the same.
-
-It is sometimes possible to use the ACF plot, and the closely related PACF plot, to determine appropriate values for  p & q.
-
-If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF and PACF plots can be helpful in determining the value of  p/q. If p and q are both positive, then the plots do not help in finding suitable values of  p and q.
-
-The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of the differenced data show the following patterns:
-
-the ACF is exponentially decaying or sinusoidal; there is a significant spike at lag p in the PACF, but none beyond lag p.
-
-The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of the differenced data show the following patterns:
-
-The PACF is exponentially decaying or sinusoidal; there is a significant spike at lag  
-q in the ACF, but none beyond lag q.
-
-The inclusion of a constant in a non-stationary ARIMA model is equivalent to inducing a polynomial trend of order  d in the forecast function.
-
-The seasonal part of an AR or MA model will be seen in the seasonal lags of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)_12  model will show: a spike at lag 12 in the ACF but no other significant spikes; exponential decay in the seasonal lags of the PACF (i.e., at lags 12, 24, 36, …).
-
-comparing information criteria is only valid for ARIMA models of the same orders of differencing.
-
-The time series models in the previous two chapters allow for the inclusion of information from past observations of a series, but not for the inclusion of other information that may also be relevant. For example, the effects of holidays, competitor activity, changes in the law, the wider economy, or other external variables, may explain some of the historical variation and may lead to more accurate forecasts. On the other hand, the regression models in Chapter 5 allow for the inclusion of a lot of relevant information from predictor variables, but do not allow for the subtle time series dynamics that can be handled with ARIMA models. In this chapter, we consider how to extend ARIMA models in order to allow other information to be included in the models.
-
-The R function Arima() will fit a regression model with ARIMA errors if the argument xreg is used. The order argument specifies the order of the ARIMA error model. If differencing is specified, then the differencing is applied to all variables in the regression model before the model is estimated. 
-
-There is an implicit assumption with deterministic trends that the slope of the trend is not going to change over time. On the other hand, stochastic trends can change, and the estimated growth is only assumed to be the average growth over the historical period, not necessarily the rate of growth that will be observed into the future. Consequently, it is safer to forecast with stochastic trends, especially for longer forecast horizons, as the prediction intervals allow for greater uncertainty in future growth.
-
-When there are long seasonal periods, a dynamic regression with Fourier terms is often better than other models we have considered in this book.
-
-Seasonal differencing of high order does not make a lot of sense — for daily data it involves comparing what happened today with what happened exactly a year ago and there is no constraint that the seasonal pattern is smooth.
-
-So for such time series, we prefer a harmonic regression approach where the seasonal pattern is modelled using Fourier terms with short-term time series dynamics handled by an ARMA error.
-
-So far, we have considered relatively simple seasonal patterns such as quarterly and monthly data. However, higher frequency time series often exhibit more complicated seasonal patterns. For example, daily data may have a weekly pattern as well as an annual pattern. Hourly data usually has three types of seasonality: a daily pattern, a weekly pattern, and an annual pattern
-
-The best way to deal with moving holiday effects is to use dummy variables. However, neither STL, ETS nor TBATS models allow for covariates. Amongst the models discussed in this book (and implemented in the forecast package for R), the only choice is a dynamic regression model, where the predictors include any dummy holiday effects (and possibly also the seasonality using Fourier terms).
-
-To impose a positivity constraint, simply work on the log scale, by specifying the Box-Cox parameter lambda = 0.
-
-we can transform the data using a scaled logit transform which maps  9a,b) to the whole real line: y = log((x-a)/(b-x))
-
-Most time series models do not work well for very long time series. The problem is that real data do not come from the models we use. When the number of observations is not large (say up to about 200) the models often work well as an approximation to whatever process generated the data. But eventually we will have enough data that the difference between the true process and the model starts to become more obvious. An additional problem is that the optimization of the parameters becomes more time consuming because of the number of observations involved.
+Comparing information criteria is only valid for ARIMA models of the same orders of differencing.
 
 ## DSP
 

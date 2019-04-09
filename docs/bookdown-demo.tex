@@ -323,7 +323,9 @@ Tests:
 \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1}
 \textbar{} \href{http://www.tdda.info/}{2} \textbar{}
 \href{http://stochasticsolutions.com/}{3} \textbar{}
-\href{https://github.com/ericmjl/data-testing-tutorial}{4})
+\href{https://github.com/ericmjl/data-testing-tutorial}{4} \textbar{}
+\href{http://r-pkgs.had.co.nz/tests.html}{R} \textbar{}
+pytest/hypothesis
 
 Validation: \href{https://github.com/data-cleaning/validate}{1}
 \textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{}
@@ -343,71 +345,28 @@ used for the project. To create an environment from an environment file
 use: \texttt{conda\ env\ create\ -f\ environment.yaml}. This will create
 a new environment with the same name listed in environment.yaml.
 
+package for helper functions and units tests
+
+use makefile to run cmd commands
+
 \section{Resources}\label{resources}
 
 \subsection{General}\label{general}
 
-\url{https://matrixds.com/}
+\url{https://matrixds.com/} \textbar{} \url{https://www.crestle.com}
 
 CoCalc
 
 Conda
 
-\url{https://www.crestle.com}
-
 \href{https://paperswithcode.com/sota}{SOTA Results}
 
-{[}DS Project Style
-Guide{]}(\url{https://www.dataquest.io/blog/data-science-project-style-guide/}
+\href{https://www.dataquest.io/blog/data-science-project-style-guide/}{DS
+Project Style Guide}
 
-Simulated Annealing: Gradient descent extension
-
-``No Free Lunch'' theorem: no single classifier works best across all
-possible scenarios
-
-Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
-
-Network models: graphical lasso, ising model, granger causality test,
-network hypothesis testing, bayesian networks
-
-Cohort analysis
-
-Transfer learning
-
-hierarchical clustering: ward
-
-hamming loss: multilabel and multiclass classification
-
-cox proportional hazards \& multivariate linear regression
-
-sequential data: rnn, lstm, hidden markov models \& conditional random
-fields
-
-fowles-mallows score for clustering when ground truth is known
-
-youden's j
-
-Multiple Correspondence Analysis
-
-platt scaling
-
-set the seed always
-
-natural log goes from unit change to percentage change
-
-generalized low rank models
-
-conditional random field
-
-linear probability model
-
-\url{http://r-pkgs.had.co.nz/tests.html}
-
-\url{https://cartesianfaith.com/2013/03/10/better-logging-in-r-aka-futile-logger-1-3-0-released/}
-
-\url{http://www.markvanderloo.eu/yaRb/2016/03/25/easy-data-validation-with-the-validate-package/}
-
-\url{https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html}
+ohort analysis, Transfer learning, cox proportional hazards, youden's j,
+Multiple Correspondence Analysis. platt scaling, generalized low rank
+models, conditional random field, linear probability model
 
 \subsection{Data}\label{data}
 
@@ -632,22 +591,6 @@ Feature Engineering: \href{https://www.featuretools.com}{1} \textbar{}
 \href{https://www.featurelabs.com/}{2}
 
 Auto ML: TPOT
-
-\subsection{Vanderplas Jupyter}\label{vanderplas-jupyter}
-
-\begin{itemize}
-\item
-  create helper functions and units tests as R/py for Rmd/ipynb
-\item
-  pytest/hypothesis for testing
-\item
-  use makefile to run cmd commands
-\item
-  Make package for workflow with data (\textbf{init}.py) and use this
-  formation for function docs:
-\item
-  \texttt{def\ fun(a):\ return(a)\ \#Role\ Parameters\ Returns}
-\end{itemize}
 
 \subsection{Sample R Pipeline}\label{sample-r-pipeline}
 
@@ -1202,6 +1145,29 @@ framework.
 \section{General}\label{general-4}
 
 toolbox: classic ml, bayesian ml, abm, rl, ga \& gp, es
+
+``No Free Lunch'' theorem: no single classifier works best across all
+possible scenarios
+
+Always set the seed
+
+natural log goes from unit change to percentage change
+
+Simulated Annealing: Gradient descent extension
+
+hierarchical clustering: ward
+
+hamming loss: multilabel and multiclass classification
+
+Sequence mining Algorithms: spade, gsp, freespan; hmmlearn
+
+Network models: graphical lasso, ising model, granger causality test,
+network hypothesis testing, bayesian networks
+
+sequential data: rnn, lstm, hidden markov models \& conditional random
+fields
+
+fowles-mallows score for clustering when ground truth is known
 
 Clustering:
 \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison}
@@ -3542,8 +3508,9 @@ docker
 \section{General}\label{general-6}
 
 Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem
-\textbar{} Importance sampling \textbar{} Bayes Error Rate
-
+\textbar{} Importance sampling \textbar{} Bayes Error Rate \textbar{}
+Pearson's Coefficient of Skewness \textbar{} Bayes factor \textbar{}
+Correction methods for non representative samples \textbar{}
 Mann--Whitney U test
 
 \href{https://discourse.datamethods.org/}{Stats Forum}
@@ -3564,16 +3531,13 @@ Size}
 
 Zero correlation doesn't imply independence
 
-\url{https://lindeloev.github.io/tests-as-linear/}
-
-\url{https://static1.squarespace.com/static/54bf3241e4b0f0d81bf7ff36/t/55e9494fe4b011aed10e48e5/1441352015658/probability_cheatsheet.pdf}
-
 Shapiro-Wilk Test for Normality: H\_0 says the data is normally
 distributed while H\_a says it is not. To run this test in R, the syntax
 is quite simple:
 
-lm() with a single categorical feature is equivalent to a t test or
-anova test.
+\href{https://lindeloev.github.io/tests-as-linear/}{Most Tests Are
+Linear Regression}: lm() with a single categorical feature is equivalent
+to a t test or anova test.
 
 Power-Of-Test: \url{https://rpsychologist.com/d3/NHST/}
 \url{https://juliasilge.shinyapps.io/power-app/}
@@ -3589,19 +3553,11 @@ ecdf: \href{http://www.ericmjl.com/blog/2018/7/14/ecdfs/}{1} \textbar{}
 
 \url{http://www.stat.umn.edu/geyer/old/5101/rlook.html}
 
-\url{https://mobile.twitter.com/PhDemetri/status/1094454658888753152}
-
 \url{https://stats.idre.ucla.edu/other/mult-pkg/whatstat/}
 
-categorical dissimilairty
-\url{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}
-
-\url{http://frog.oerc.ox.ac.uk:8080/stato-app/}
-
-Pearson's Coefficient of Skewness \textbar{} Bayes factor \textbar{}
-Correction methods for non representative samples \textbar{}
-Numeric-Categorical Correlation
-\url{https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor}
+\href{https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist}{Mixed
+Categorical \& Numeric Distance} \textbar{}
+\href{https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor}{2}
 
 Outliers in small samples:
 \url{https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617\#78617}
@@ -3649,53 +3605,17 @@ the data taken into account.
 
 Marginal Likelihood (Evidence): Probability of evidence
 
-Variance: Spread of the data \textbar{} Distance from the mean
-
-Standard Deviation: Square root of the variance \textbar{} Same units as
-the data
-
-Mean: Average/Expected Value
-
 Covariance: Measure of how two random values change together. Negative -
 variables show opposite behavior ( As A increases B decreases). Positive
 - variables show similar behavior (As A increases B increases)
 
 Pearson Correlation: Normalized version of covariance
 
-Median: Number at the halfway point of the dataset, found through
-sorting data into ascending order and selecting middle point
-
-Mode: Most frequent value in dataset
-
 Note about Populations and Samples: Populations have parameters. Samples
 have statistics.
 
-Distributions:
-
-Normal/Gaussian: Parameters are mean and standard deviation. Bell
-shaped. z-score: indicates how many standard deviations an element is
-from the mean
-
-Student t: used to estimate the mean of a normally distributed
-population where the sample size is small and the standard deviation is
-unknown
-
 A t test (t.test in R) is a special case of an ANOVA and a paired t test
 (parameter paired = T) is a special case of a repeated measures ANOVA.
-
-Sample size: A good formula is: if your sample is picked uniformly at
-random and is of size at least:
-
-\(\frac{-log(\frac{d}{2})}{2e^2}\)
-
-then with probability at least 1-d your sample measured proportion q is
-no further away than e from the unknown true population proportion p
-(what you are trying to estimate). Need to estimate with 99\% certainty
-the unknown true population rate to +- 10\% precision? That is d=0.01,
-e=0.1 and a sample of size 265 should be enough. A stricter precision of
-+-0.05 causes the estimated sample size to increase to 1060, but
-increasing the certainty requirement to 99.5\% only increases the
-estimated sample size to 300.
 
 \begin{itemize}
 \item
@@ -3928,7 +3848,21 @@ Random Sampling + No Random Assignment: Not causal + generalizable
 No Random Sampling + No Random Assignment: Not causal + not
 generalizable
 
-\section{Statistical Tests}\label{statistical-tests}
+\section{Sample Size}\label{sample-size}
+
+Sample size: A good formula is: if your sample is picked uniformly at
+random and is of size at least: \(\frac{-log(\frac{d}{2})}{2e^2}\)
+
+then with probability at least 1-d your sample measured proportion q is
+no further away than e from the unknown true population proportion p
+(what you are trying to estimate). Need to estimate with 99\% certainty
+the unknown true population rate to +- 10\% precision? That is d=0.01,
+e=0.1 and a sample of size 265 should be enough. A stricter precision of
++-0.05 causes the estimated sample size to increase to 1060, but
+increasing the certainty requirement to 99.5\% only increases the
+estimated sample size to 300.
+
+\section{AB Testing}\label{ab-testing}
 
 The appropriate sample size depends on many things, chiefly the
 complexity of the analysis and the expected effect size. The ``30'' rule
@@ -4002,77 +3936,6 @@ Given any three, we can determine the fourth.
   \href{http://www.evanmiller.org/ab-testing/sample-size.html}{Power
   Analysis Calculator}
 \end{itemize}
-
-\section{Stats For Hackers}\label{stats-for-hackers}
-
-Notes on the talk by Jake Vanderplas. I left out bootstrap and cross
-validation below. For all methods look out for selection bias and make
-sure you have representative samples. More on the bootstrap: These are
-simulated confidence intervals that work well for n \textgreater{} 20 as
-a rule of thumb.
-
-\textbf{Direct Simulation}
-
-Works well with an apriori (generative) model of the world, like the
-probability distribution of a coin toss. Example: Flip a fair coin 30
-times. How likely it is to see 22 heads?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
-\NormalTok{h_a <-}\StringTok{ }\DecValTok{22}
-\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }
-           \OperatorTok{~}\StringTok{ }\KeywordTok{sum}\NormalTok{(base}\OperatorTok{::}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{30}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)) }\OperatorTok{>=}\StringTok{ }\NormalTok{h_a) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
-
-\NormalTok{result}\OperatorTok{/}\NormalTok{n}
-\end{Highlighting}
-\end{Shaded}
-
-\textbf{Shuffling}
-
-Comparing groups
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{iris_}\DecValTok{100}\NormalTok{ <-}\StringTok{ }\NormalTok{iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
-\NormalTok{(}\KeywordTok{t.test}\NormalTok{(iris_}\DecValTok{100}\NormalTok{[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{1}\NormalTok{], iris_}\DecValTok{100}\NormalTok{[}\DecValTok{51}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{], }
-       \DataTypeTok{alternative =} \StringTok{'greater'}\NormalTok{))}\OperatorTok{$}\NormalTok{p.value}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ha_shuffle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
-  
-\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Species =} \KeywordTok{sample}\NormalTok{(Species, }\KeywordTok{n}\NormalTok{())) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
-  
-  \KeywordTok{return}\NormalTok{(result }\OperatorTok{>=}\StringTok{ }\NormalTok{observed_diff)}
-  
-\NormalTok{\}}
-
-\NormalTok{observed_diff <-}\StringTok{ }\NormalTok{iris_}\DecValTok{100} \OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
-
-\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
-\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }\OperatorTok{~}\StringTok{ }\KeywordTok{ha_shuffle}\NormalTok{(iris_}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
-
-\NormalTok{result}\OperatorTok{/}\NormalTok{n}
-\end{Highlighting}
-\end{Shaded}
-
-\section{AB Testing Overview}\label{ab-testing-overview}
 
 Guide: Choose metric (CTR), review stats (Hypothesis Testing), design,
 analyse
@@ -4297,9 +4160,8 @@ Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
 
-\section{Experimental Design}\label{experimental-design}
-
-Notes from the DataCamp course.
+\section{Experimental Design
+DataCamp}\label{experimental-design-datacamp}
 
 Randomized Complete Block Design (RCBD) experiment
 
@@ -4317,7 +4179,7 @@ desired diff at the desired power
 pwr::pwr.anova.test() {[}exactly one of n, d, power, and sig.level must
 be NULL{]}
 
-aov = lm + anova aov + tukey hsd
+aov = lm + anova \textbar{} aov + tukey hsd
 
 Another assumption of ANOVA and linear modeling is homogeneity of
 variance. Homogeneity means ``same'', and here that would mean that the
@@ -4558,6 +4420,35 @@ models with multiplicative errors, or with multiplicative seasonality,
 the point forecasts will not be equal to the means of the forecast
 distributions.
 
+Exponential smoothing and ARIMA models are the two most widely used
+approaches to time series forecasting, and provide complementary
+approaches to the problem. While exponential smoothing models are based
+on a description of the trend and seasonality in the data, ARIMA models
+aim to describe the autocorrelations in the data.
+
+A stationary time series is one whose properties do not depend on the
+time at which the series is observed.14 Thus, time series with trends,
+or with seasonality, are not stationary --- the trend and seasonality
+will affect the value of the time series at different times. On the
+other hand, a white noise series is stationary --- it does not matter
+when you observe it, it should look much the same at any point in time.
+Some cases can be confusing --- a time series with cyclic behaviour (but
+with no trend or seasonality) is stationary. This is because the cycles
+are not of a fixed length, so before we observe the series we cannot be
+sure where the peaks and troughs of the cycles will be. In general, a
+stationary time series will have no predictable patterns in the
+long-term. Time plots will show the series to be roughly horizontal
+(although some cyclic behavior is possible), with constant variance.
+
+Most time series models do not work well for very long time series. The
+problem is that real data do not come from the models we use. When the
+number of observations is not large (say up to about 200) the models
+often work well as an approximation to whatever process generated the
+data. But eventually we will have enough data that the difference
+between the true process and the model starts to become more obvious. An
+additional problem is that the optimization of the parameters becomes
+more time consuming because of the number of observations involved.
+
 \subsection{Workflow}\label{workflow-1}
 
 Let's review the process:
@@ -4588,7 +4479,87 @@ models.
 
 \subsection{Preprocessing}\label{preprocessing}
 
-To fill Out
+\subsubsection{General}\label{general-7}
+
+So far, we have considered relatively simple seasonal patterns such as
+quarterly and monthly data. However, higher frequency time series often
+exhibit more complicated seasonal patterns. For example, daily data may
+have a weekly pattern as well as an annual pattern. Hourly data usually
+has three types of seasonality: a daily pattern, a weekly pattern, and
+an annual pattern
+
+The best way to deal with moving holiday effects is to use dummy
+variables. However, neither STL, ETS nor TBATS models allow for
+covariates. Amongst the models discussed in this book (and implemented
+in the forecast package for R), the only choice is a dynamic regression
+model, where the predictors include any dummy holiday effects (and
+possibly also the seasonality using Fourier terms).
+
+To impose a positivity constraint, simply work on the log scale, by
+specifying the Box-Cox parameter lambda = 0.
+
+we can transform the data using a scaled logit transform which maps
+9a,b) to the whole real line: y = log((x-a)/(b-x))
+
+One way to make a non-stationary time series stationary --- compute the
+differences between consecutive observations. This is known as
+differencing. The ACF of the differenced Google stock price looks just
+like that of a white noise series. There are no autocorrelations lying
+outside the 95\% limits, and the Ljung-Box statistic has a p-value of
+0.355 (for h=10 ). This suggests that the daily change in the Google
+stock price is essentially a random amount which is uncorrelated with
+that of previous days. When the differenced series is white noise, the
+model for the original series can be written as y\_t - y\_\{t-1\} = e\_t
+(white noise)
+
+\subsubsection{Differencing}\label{differencing}
+
+This process of using a sequence of KPSS tests to determine the
+appropriate number of first differences is carried out by the function
+ndiffs()
+
+A similar function for determining whether seasonal differencing is
+required is nsdiffs(), which uses the measure of seasonal strength
+
+In practice, it is almost never necessary to go beyond second-order
+differences.
+
+A seasonal difference is the difference between an observation and the
+previous observation from the same season.
+
+If seasonally differenced data appear to be white noise, then an
+appropriate model for the original data is y\_t = y\_\{t-m\} + e\_t.
+Forecasts from this model are equal to the last observation from the
+relevant season. That is, this model gives seasonal naïve forecasts.
+
+Sometimes it is necessary to take both a seasonal difference and a first
+difference to obtain stationary data
+
+When both seasonal and first differences are applied, it makes no
+difference which is done first---the result will be the same. However,
+if the data have a strong seasonal pattern, we recommend that seasonal
+differencing be done first, because the resulting series will sometimes
+be stationary and there will be no need for a further first difference.
+If first differencing is done first, there will still be seasonality
+present.
+
+One way to determine more objectively whether differencing is required
+is to use a unit root test. These are statistical hypothesis tests of
+stationarity that are designed for determining whether differencing is
+required.
+
+A number of unit root tests are available, which are based on different
+assumptions and may lead to conflicting answers. In our analysis, we use
+the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the
+null hypothesis is that the data are stationary, and we look for
+evidence that the null hypothesis is false. Consequently, small p-values
+(e.g., less than 0.05) suggest that differencing is required. The test
+can be computed using the ur.kpss() function from the urca package.
+
+Seasonal differencing of high order does not make a lot of sense --- for
+daily data it involves comparing what happened today with what happened
+exactly a year ago and there is no constraint that the seasonal pattern
+is smooth.
 
 \subsection{Feature Engineering}\label{feature-engineering-1}
 
@@ -4718,7 +4689,7 @@ ggAcf() \textbar{} ggPacf()
 
 \subsection{Models}\label{models}
 
-\subsubsection{General}\label{general-7}
+\subsubsection{General}\label{general-8}
 
 In this model, the slope can be interpreted as an elasticity, and is the
 average percentage change in y resulting from a 1\% increase in x. Other
@@ -4779,6 +4750,26 @@ ETS(M,N,N): simple exponential smoothing with multiplicative errors
 ETS(A,A,N): Holt's linear method with additive errors
 
 ETS(M,A,N): Holt's linear method with multiplicative errors
+
+Random walk models are widely used for non-stationary data, particularly
+financial and economic data. Random walks typically have: long periods
+of apparent trends up or down, sudden and unpredictable changes in
+direction.
+
+In a multiple regression model, we forecast the variable of interest
+using a linear combination of predictors. In an auto-regression model,
+we forecast the variable of interest using a linear combination of past
+values of the variable. We refer to this as an AR(p) model, an
+autoregressive model of order p.
+
+Rather than using past values of the forecast variable in a regression,
+a moving average model uses past forecast errors in a regression-like
+model. We refer to this as an MA(q) model, a moving average model of
+order q.
+
+If we combine differencing with autoregression and a moving average
+model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for
+AutoRegressive Integrated Moving Average
 
 \subsubsection{Benchmark/Baseline
 Models}\label{benchmarkbaseline-models}
@@ -4994,6 +4985,50 @@ the following procedure provides a useful general approach.
 \end{enumerate}
 
 auto.arima only does steps 3-5.
+
+The same stationarity and invertibility conditions that are used for
+autoregressive and moving average models also apply to an ARIMA model.
+
+White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant
+Random walk with drift: ARIMA(0,1,0) with a constant Autoregression:
+ARIMA(p,0,0) Moving average: ARIMA(0,0,q)
+
+It is sometimes possible to use the ACF plot, and the closely related
+PACF plot, to determine appropriate values for p \& q.
+
+If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF
+and PACF plots can be helpful in determining the value of p/q. If p and
+q are both positive, then the plots do not help in finding suitable
+values of p and q.
+
+The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+the ACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag p in the PACF, but none beyond lag p.
+
+The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of
+the differenced data show the following patterns:
+
+The PACF is exponentially decaying or sinusoidal; there is a significant
+spike at lag\\
+q in the ACF, but none beyond lag q.
+
+The inclusion of a constant in a non-stationary ARIMA model is
+equivalent to inducing a polynomial trend of order d in the forecast
+function.
+
+The seasonal part of an AR or MA model will be seen in the seasonal lags
+of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)\_12 model will
+show: a spike at lag 12 in the ACF but no other significant spikes;
+exponential decay in the seasonal lags of the PACF (i.e., at lags 12,
+24, 36, \ldots{}).
+
+The R function Arima() will fit a regression model with ARIMA errors if
+the argument xreg is used. The order argument specifies the order of the
+ARIMA error model. If differencing is specified, then the differencing
+is applied to all variables in the regression model before the model is
+estimated.
 
 \subsubsection{Dynamic Harmonic
 Regression}\label{dynamic-harmonic-regression}
@@ -5432,257 +5467,8 @@ Model Selection: A great advantage of the ETS statistical framework is
 that information criteria can be used for model selection - AIC, AIC\_c,
 and BIC
 
-\section{Forecasting: Principles \&
-Practice}\label{forecasting-principles-practice}
-
-Exponential smoothing and ARIMA models are the two most widely used
-approaches to time series forecasting, and provide complementary
-approaches to the problem. While exponential smoothing models are based
-on a description of the trend and seasonality in the data, ARIMA models
-aim to describe the autocorrelations in the data.
-
-A stationary time series is one whose properties do not depend on the
-time at which the series is observed.14 Thus, time series with trends,
-or with seasonality, are not stationary --- the trend and seasonality
-will affect the value of the time series at different times. On the
-other hand, a white noise series is stationary --- it does not matter
-when you observe it, it should look much the same at any point in time.
-
-Some cases can be confusing --- a time series with cyclic behaviour (but
-with no trend or seasonality) is stationary. This is because the cycles
-are not of a fixed length, so before we observe the series we cannot be
-sure where the peaks and troughs of the cycles will be.
-
-In general, a stationary time series will have no predictable patterns
-in the long-term. Time plots will show the series to be roughly
-horizontal (although some cyclic behavior is possible), with constant
-variance.
-
-note that the Google stock price was non-stationary in panel (a), but
-the daily changes were stationary in panel (b). This shows one way to
-make a non-stationary time series stationary --- compute the differences
-between consecutive observations. This is known as differencing.
-
-The ACF of the differenced Google stock price looks just like that of a
-white noise series. There are no autocorrelations lying outside the 95\%
-limits, and the Ljung-Box statistic has a p-value of 0.355 (for h=10 ).
-This suggests that the daily change in the Google stock price is
-essentially a random amount which is uncorrelated with that of previous
-days.
-
-When the differenced series is white noise, the model for the original
-series can be written as y\_t - y\_\{t-1\} = e\_t (white noise)
-
-Random walk models are widely used for non-stationary data, particularly
-financial and economic data. Random walks typically have: long periods
-of apparent trends up or down, sudden and unpredictable changes in
-direction.
-
-In practice, it is almost never necessary to go beyond second-order
-differences.
-
-A seasonal difference is the difference between an observation and the
-previous observation from the same season.
-
-If seasonally differenced data appear to be white noise, then an
-appropriate model for the original data is y\_t = y\_\{t-m\} + e\_t.
-Forecasts from this model are equal to the last observation from the
-relevant season. That is, this model gives seasonal naïve forecasts.
-
-Sometimes it is necessary to take both a seasonal difference and a first
-difference to obtain stationary data
-
-When both seasonal and first differences are applied, it makes no
-difference which is done first---the result will be the same. However,
-if the data have a strong seasonal pattern, we recommend that seasonal
-differencing be done first, because the resulting series will sometimes
-be stationary and there will be no need for a further first difference.
-If first differencing is done first, there will still be seasonality
-present.
-
-One way to determine more objectively whether differencing is required
-is to use a unit root test. These are statistical hypothesis tests of
-stationarity that are designed for determining whether differencing is
-required.
-
-A number of unit root tests are available, which are based on different
-assumptions and may lead to conflicting answers. In our analysis, we use
-the Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test. In this test, the
-null hypothesis is that the data are stationary, and we look for
-evidence that the null hypothesis is false. Consequently, small p-values
-(e.g., less than 0.05) suggest that differencing is required. The test
-can be computed using the ur.kpss() function from the urca package.
-
-This process of using a sequence of KPSS tests to determine the
-appropriate number of first differences is carried out by the function
-ndiffs()
-
-A similar function for determining whether seasonal differencing is
-required is nsdiffs(), which uses the measure of seasonal strength
-
-The backward shift operator B is a useful notational device when working
-with time series lags. The backward shift operator is convenient for
-describing the process of differencing. A first difference can be
-written as:
-
-y\_t' = y\_t - y\_\{t-\} = y\_t -by\_t = (1-b) y\_t
-
-In general, a d th-order difference can be written as: (y\_t)\^{}d =
-(1-b)\^{}d y\_t
-
-In a multiple regression model, we forecast the variable of interest
-using a linear combination of predictors. In an auto-regression model,
-we forecast the variable of interest using a linear combination of past
-values of the variable. We refer to this as an AR(p) model, an
-autoregressive model of order p.
-
-for ar(1) model, y\_t is white noise when beta\_1 is 0, a random walk
-when beta\_1 is 1 and beta\_0 is 0, a random walk with drift when
-beta\_1 is 1 and beta\_0 is not zero, and y\_t oscillates if beta\_1 is
-negative.
-
-We normally restrict autoregressive models to stationary data, in which
-case some constraints on the values of the parameters are required.
-
-Rather than using past values of the forecast variable in a regression,
-a moving average model uses past forecast errors in a regression-like
-model. We refer to this as an MA(q) model, a moving average model of
-order q.
-
-If we combine differencing with autoregression and a moving average
-model, we obtain a non-seasonal ARIMA model. ARIMA is an acronym for
-AutoRegressive Integrated Moving Average
-
-The ``predictors'' include both lagged values of y\_t and lagged errors.
-We call this an ARIMA(p,d,q) model, where p is the order of the
-autoregressive part; d is the degree of first differencing involved, and
-q is the orer of the moving average part.
-
-The same stationarity and invertibility conditions that are used for
-autoregressive and moving average models also apply to an ARIMA model.
-
-White noise: ARIMA(0,0,0) Random walk: ARIMA(0,1,0) with no constant
-Random walk with drift: ARIMA(0,1,0) with a constant Autoregression:
-ARIMA(p,0,0) Moving average: ARIMA(0,0,q)
-
-The constant c has an important effect on the long-term forecasts
-obtained from these models.
-
-If c=0 and d=0, the long-term forecasts will go to zero. If c=0 and d=1,
-the long-term forecasts will go to a non-zero constant. If c=0 and d=2,
-the long-term forecasts will follow a straight line. If c≠0 and d=0, the
-long-term forecasts will go to the mean of the data. If c≠0 and d=1, the
-long-term forecasts will follow a straight line. If c≠0 and d=2, the
-long-term forecasts will follow a quadratic trend.
-
-The value of d also has an effect on the prediction intervals --- the
-higher the value of d, the more rapidly the prediction intervals
-increase in size. For\\
-d=0, the long-term forecast standard deviation will go to the standard
-deviation of the historical data, so the prediction intervals will all
-be essentially the same.
-
-It is sometimes possible to use the ACF plot, and the closely related
-PACF plot, to determine appropriate values for p \& q.
-
-If the data are from an ARIMA(p,d,0) or ARIMA(0,d,q) model, then the ACF
-and PACF plots can be helpful in determining the value of p/q. If p and
-q are both positive, then the plots do not help in finding suitable
-values of p and q.
-
-The data may follow an ARIMA(p,d,0) model if the ACF and PACF plots of
-the differenced data show the following patterns:
-
-the ACF is exponentially decaying or sinusoidal; there is a significant
-spike at lag p in the PACF, but none beyond lag p.
-
-The data may follow an ARIMA(0,d,q) model if the ACF and PACF plots of
-the differenced data show the following patterns:
-
-The PACF is exponentially decaying or sinusoidal; there is a significant
-spike at lag\\
-q in the ACF, but none beyond lag q.
-
-The inclusion of a constant in a non-stationary ARIMA model is
-equivalent to inducing a polynomial trend of order d in the forecast
-function.
-
-The seasonal part of an AR or MA model will be seen in the seasonal lags
-of the PACF and ACF. For example, an ARIMA(0,0,0)(0,0,1)\_12 model will
-show: a spike at lag 12 in the ACF but no other significant spikes;
-exponential decay in the seasonal lags of the PACF (i.e., at lags 12,
-24, 36, \ldots{}).
-
-comparing information criteria is only valid for ARIMA models of the
+Comparing information criteria is only valid for ARIMA models of the
 same orders of differencing.
-
-The time series models in the previous two chapters allow for the
-inclusion of information from past observations of a series, but not for
-the inclusion of other information that may also be relevant. For
-example, the effects of holidays, competitor activity, changes in the
-law, the wider economy, or other external variables, may explain some of
-the historical variation and may lead to more accurate forecasts. On the
-other hand, the regression models in Chapter 5 allow for the inclusion
-of a lot of relevant information from predictor variables, but do not
-allow for the subtle time series dynamics that can be handled with ARIMA
-models. In this chapter, we consider how to extend ARIMA models in order
-to allow other information to be included in the models.
-
-The R function Arima() will fit a regression model with ARIMA errors if
-the argument xreg is used. The order argument specifies the order of the
-ARIMA error model. If differencing is specified, then the differencing
-is applied to all variables in the regression model before the model is
-estimated.
-
-There is an implicit assumption with deterministic trends that the slope
-of the trend is not going to change over time. On the other hand,
-stochastic trends can change, and the estimated growth is only assumed
-to be the average growth over the historical period, not necessarily the
-rate of growth that will be observed into the future. Consequently, it
-is safer to forecast with stochastic trends, especially for longer
-forecast horizons, as the prediction intervals allow for greater
-uncertainty in future growth.
-
-When there are long seasonal periods, a dynamic regression with Fourier
-terms is often better than other models we have considered in this book.
-
-Seasonal differencing of high order does not make a lot of sense --- for
-daily data it involves comparing what happened today with what happened
-exactly a year ago and there is no constraint that the seasonal pattern
-is smooth.
-
-So for such time series, we prefer a harmonic regression approach where
-the seasonal pattern is modelled using Fourier terms with short-term
-time series dynamics handled by an ARMA error.
-
-So far, we have considered relatively simple seasonal patterns such as
-quarterly and monthly data. However, higher frequency time series often
-exhibit more complicated seasonal patterns. For example, daily data may
-have a weekly pattern as well as an annual pattern. Hourly data usually
-has three types of seasonality: a daily pattern, a weekly pattern, and
-an annual pattern
-
-The best way to deal with moving holiday effects is to use dummy
-variables. However, neither STL, ETS nor TBATS models allow for
-covariates. Amongst the models discussed in this book (and implemented
-in the forecast package for R), the only choice is a dynamic regression
-model, where the predictors include any dummy holiday effects (and
-possibly also the seasonality using Fourier terms).
-
-To impose a positivity constraint, simply work on the log scale, by
-specifying the Box-Cox parameter lambda = 0.
-
-we can transform the data using a scaled logit transform which maps
-9a,b) to the whole real line: y = log((x-a)/(b-x))
-
-Most time series models do not work well for very long time series. The
-problem is that real data do not come from the models we use. When the
-number of observations is not large (say up to about 200) the models
-often work well as an approximation to whatever process generated the
-data. But eventually we will have enough data that the difference
-between the true process and the model starts to become more obvious. An
-additional problem is that the optimization of the parameters becomes
-more time consuming because of the number of observations involved.
 
 \section{DSP}\label{dsp}
 
@@ -5701,7 +5487,7 @@ pipeline: signal -\textgreater{} wavelet transform -\textgreater{} pca
 
 \chapter{Deep Learning}\label{deep-learning}
 
-\section{General}\label{general-8}
+\section{General}\label{general-9}
 
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
 
@@ -6010,28 +5796,15 @@ Change the activation function to solve.
 \href{https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit\#slide=id.g4254d546f6_0_0}{PyMc3
 Quick Intro}
 
-\url{https://www.pymc-learn.org/}
-
 \href{https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations}{Prior
 Guide}
-
-\url{https://arviz-devs.github.io/arviz/index.html}
 
 SigOpt
 
 \href{http://daft-pgm.org}{PGM Viz}
 
-\href{http://sachaepskamp.com/SEM2017}{SEM}
-
-\href{http://edwardlib.org/}{Edward}
-
-\href{http://pomegranate.readthedocs.io/en/latest/}{Pomegranate}
-
-\url{https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7}
-
-Bayes Rule:
-
-old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
+Bayes Rule: old\_prob {[}P(h)/p(\textasciitilde{}h){]} *
+strength\_of\_evidence
 {[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob
 {[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
 
@@ -6079,27 +5852,6 @@ old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence
   Empirical Bayes is an approximation to more exact Bayesian methods.
   With a lot of data it is a very good approximation.
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
-\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
-\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
-\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
-\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
-\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
-\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
-\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
-\end{Highlighting}
-\end{Shaded}
-
-Posterior prob that CTR\_A \textgreater{} CTR\_B given data is
-np.mean(A\_samples \textgreater{} B\_samples). Prob that lift of A
-relative to B is \textgreater{}=3\%:
-np.mean(100*(A\_samples-B\_samples)/B\_samples \textgreater{} 3)
 
 \section{Doing Bayesian DA}\label{doing-bayesian-da}
 
@@ -6181,12 +5933,10 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 
 \chapter{Causality}\label{causality}
 
-\section{General}\label{general-9}
+\section{General}\label{general-10}
 
 \href{https://twitter.com/tdietterich/status/1034631407904018437}{Causality
 \& DL}
-
-\url{http://causalinference.gitlab.io/dowhy/do_why_simple_example.html}
 
 \href{https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245\&utm_campaign=US\%20Event\%20Meetup\%20NYU\%20NYC\%20July\%202018\&utm_source=hs_email\&utm_medium=email\&utm_content=64589348\&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI\&_hsmi=64589348}{Misra
 Talk}
@@ -6195,9 +5945,9 @@ Instrumental variables
 
 \url{http://causalinference.gitlab.io/icwsm-tutorial/}
 
-\section{Causality Edx}\label{causality-edx}
+\url{http://causalinference.gitlab.io/dowhy/do_why_simple_example.html}
 
-\subsection{L1}\label{l1}
+\section{Causality edX}\label{causality-edx}
 
 Draw a complete DAG if your expert knowledge is insufficient to exclude
 any possible effect. Knowledge is expressed in the form of missing
@@ -6284,8 +6034,6 @@ others. Rare.
 
 All paths are blocked variables are not associated.
 
-\subsection{L2}\label{l2}
-
 back door path: a path connecting A and Y without using arrows that
 leave from A. eg. Given L → A → Y ← L, the path A - L - Y is a back door
 path.
@@ -6304,8 +6052,6 @@ Conventional definition of confounder: L is a confounder of the effect
 of a on y if L meets 3 conditions: L is associated with a, L is
 associated with y conditional on a, L is not on a causal pathway from a
 to y.
-
-\subsection{L3}\label{l3}
 
 surrogate confounder: a descendant of a cofounder.
 
@@ -6378,11 +6124,9 @@ dags discussed: \{insert dags here\}
 
 Competing events
 
-\subsection{L4}\label{l4}
-
 Measurement error: True value isn't equal to measured value.
 
-Measurement bias: When the measure of association between a* and y*
+Measurement bias: When the measure of association between a and y
 (measured treatment \& outcome values) differs from that of a and y.
 
 Types of measurement error:
@@ -6406,14 +6150,10 @@ A causal DAG can't eliminate bias due to confounding. A causal DAG can
 improve precision. A causal DAG can't improve external validity. A
 causal DAG can represent sources of bias.
 
-\subsection{L5}\label{l5}
-
 Time-varying treatments
 
 treatment-confounder feedback: In its presence most methods are biased.
 Use G Methods.
-
-\subsection{Cases}\label{cases}
 
 The difference method: Run regression with E{[}M\textbar{}A,C{]} which
 has the term beta\_1 times a and E{[}Y\textbar{}A,M,C{]} with the terms
@@ -6429,7 +6169,7 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 
 \chapter{Distributed}\label{distributed}
 
-\section{General}\label{general-10}
+\section{General}\label{general-11}
 
 ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate
 \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
@@ -6505,11 +6245,99 @@ regression
 
 \chapter{Codebook}\label{codebook}
 
-\section{General}\label{general-11}
+\section{General}\label{general-12}
 
 \href{http://chrisalbon.com/}{Chris Albon}
 
-\section{Harmonic Regression}\label{harmonic-regression}
+\section{Stats By Simulation}\label{stats-by-simulation}
+
+Notes on the talk by Jake Vanderplas. I left out bootstrap and cross
+validation below. For all methods look out for selection bias and make
+sure you have representative samples. More on the bootstrap: These are
+simulated confidence intervals that work well for n \textgreater{} 20 as
+a rule of thumb.
+
+\textbf{Direct Simulation}
+
+Works well with an apriori (generative) model of the world, like the
+probability distribution of a coin toss. Example: Flip a fair coin 30
+times. How likely it is to see 22 heads?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{h_a <-}\StringTok{ }\DecValTok{22}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }
+           \OperatorTok{~}\StringTok{ }\KeywordTok{sum}\NormalTok{(base}\OperatorTok{::}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{), }\DecValTok{30}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)) }\OperatorTok{>=}\StringTok{ }\NormalTok{h_a) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Shuffling}
+
+Comparing groups
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_}\DecValTok{100}\NormalTok{ <-}\StringTok{ }\NormalTok{iris[}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\NormalTok{(}\KeywordTok{t.test}\NormalTok{(iris_}\DecValTok{100}\NormalTok{[}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{1}\NormalTok{], iris_}\DecValTok{100}\NormalTok{[}\DecValTok{51}\OperatorTok{:}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{], }
+       \DataTypeTok{alternative =} \StringTok{'greater'}\NormalTok{))}\OperatorTok{$}\NormalTok{p.value}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ha_shuffle <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df)\{}
+  
+\NormalTok{  result <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Species =} \KeywordTok{sample}\NormalTok{(Species, }\KeywordTok{n}\NormalTok{())) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+  
+  \KeywordTok{return}\NormalTok{(result }\OperatorTok{>=}\StringTok{ }\NormalTok{observed_diff)}
+  
+\NormalTok{\}}
+
+\NormalTok{observed_diff <-}\StringTok{ }\NormalTok{iris_}\DecValTok{100} \OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Species) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\DecValTok{1}\NormalTok{, mean) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{mu_diff =}\NormalTok{ Sepal.Width }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(Sepal.Width)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(mu_diff)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pull}\NormalTok{(mu_diff)}
+
+\NormalTok{n <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{6}
+\NormalTok{result <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, n, }\DecValTok{1}\NormalTok{), }\OperatorTok{~}\StringTok{ }\KeywordTok{ha_shuffle}\NormalTok{(iris_}\DecValTok{100}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unlist}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{sum}\NormalTok{()}
+
+\NormalTok{result}\OperatorTok{/}\NormalTok{n}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Simple Bayes}\label{simple-bayes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)}
+\ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
+\NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
+\NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
+\NormalTok{clicks_B }\OperatorTok{=} \DecValTok{345}
+\NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
+\NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
+\NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
+\NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{TS Harmonic Regression}\label{ts-harmonic-regression}
 
 \begin{Shaded}
 \begin{Highlighting}[]

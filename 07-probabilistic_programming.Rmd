@@ -2,27 +2,13 @@
 
 [PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
 
-https://www.pymc-learn.org/
-
 [Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
-
-https://arviz-devs.github.io/arviz/index.html
 
 SigOpt
 
 [PGM Viz](http://daft-pgm.org)
 
-[SEM](http://sachaepskamp.com/SEM2017)
-
-[Edward](http://edwardlib.org/)
-
-[Pomegranate](http://pomegranate.readthedocs.io/en/latest/)
-
-https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7
-
-Bayes Rule:
-
-old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
+Bayes Rule: old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
 
 * Models have a lot of parameters classical methods that use simple point estimates of the parameters don't adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata. 
 
@@ -43,25 +29,6 @@ old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)
 * Small alpha and beta means the prior is less informative 
 
 * Empirical Bayes is an approximation to more exact Bayesian methods. With a lot of data it is a very good approximation.
-
-```{python, eval = FALSE}
-
-from numpy.random import beta as beta_dist
-import numpy as np
-
-N_samp = 10000 #number of samples to draw
-clicks_A = 450
-views_A = 56000
-clicks_B = 345
-views_B = 49000
-alpha = 1.1
-beta = 14.2
-
-A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
-B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
-```
-
-Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
 
 ## Doing Bayesian DA
 
