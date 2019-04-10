@@ -30,7 +30,7 @@ A typical data science workflow can be framed as following these steps:
 
 * Maintain: adapt the models and features to the evolution of the environment
 
-Another instantiation via Hadley Wickham is :  import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
+Another instantiation via Hadley Wickham is:  import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
 
 And the two combined:
 
@@ -130,6 +130,8 @@ Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-g
 
 ### Deployment /  Maintenance
 
+https://matrixds.com/ | https://www.crestle.com | CoCalc
+
 [Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
 
 Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial) | [R](http://r-pkgs.had.co.nz/tests.html) | pytest/hypothesis
@@ -145,123 +147,19 @@ use makefile to run cmd commands
 
 ## Resources
 
-### General
-
-https://matrixds.com/ | https://www.crestle.com
-
-CoCalc
-
-Conda
-
-[SOTA Results](https://paperswithcode.com/sota)
-
-[DS Project Style Guide](https://www.dataquest.io/blog/data-science-project-style-guide/)
-
-ohort analysis, Transfer learning, cox proportional hazards, youden's j, Multiple Correspondence Analysis. platt scaling, generalized low rank models, conditional random field, linear probability model
-
 ### Data
 
-http://www.fast.ai/2018/10/16/aws-datasets
-
-https://www.spe.org/en/jpt/jpt-article-detail/?art=5282
-
-https://mimic.physionet.org/
-
-https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750
-
-http://bbcsfx.acropolis.org.uk/
-
-https://hub.packtpub.com/25-datasets-deep-learning-iot/
-
-https://www.backblaze.com/b2/hard-drive-test-data.html
-
-https://toolbox.google.com/datasetsearch
-
-https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research
-
-https://unpaywall.org/products/snapshot
-
-https://blog.webkid.io/datasets-for-machine-learning/
-
-https://www.githubarchive.org
-
-https://www.datasetlist.com/
-
-https://www.enigma.com/data
-
-https://www.kaggle.com/about/datasets-awards/overview
-
-http://veekaybee.github.io/2018/07/23/small-datasets/
-
-https://grasswiki.osgeo.org/wiki/Global_datasets
-
-https://www.figure-eight.com/datasets/
-
-https://stanfordmlgroup.github.io/competitions/mura/
-
-[Medical Data](https://github.com/beamandrew/medical-data)
-
-[Deep Mind](https://deepmind.com/research/open-source/open-source-datasets/)
-
-[NASA](https://bmtgoncalves.github.io/pyNASA/)
-
-[Visual Reasoning](http://lic.nlp.cornell.edu/nlvr/)
-
-[Allen Institute](http://allenai.org/data.html)
-
-[Miscellaneous Datasets](http://users.stat.ufl.edu/~winner/datasets.html)
-
-[Sound Effects](http://bbcsfx.acropolis.org.uk/)
-
-[NASA](https://open.nasa.gov/blog/)
+[Search](https://toolbox.google.com/datasetsearch)
 
 [Biodiversity](https://www.gbif.org)
 
-[Summarization Data](https://summari.es)
+[Drives](https://www.backblaze.com/b2/hard-drive-test-data.html)
 
-[Kaggle Datasets](https://www.kaggle.com/datasets)
+Medical: [X-rays](https://stanfordmlgroup.github.io/competitions/mura/) | [Medical Data](https://github.com/beamandrew/medical-data) | https://mimic.physionet.org/ | https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750
 
-[NLP](https://github.com/niderhoff/nlp-datasets/blob/master/README.md)
+[Enigma](https://public.enigma.com/) | [Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/) | [UCI ML Repo](http://archive.ics.uci.edu/ml/) | [Datanauts](https://open.nasa.gov/explore/datanauts/) | [Research Data](http://academictorrents.com/) | [Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0) | [Data.gov](http://www.data.gov/) |[Microsoft Research](https://msropendata.com) | [Portals](https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/) | [Kaggle Datasets](https://www.kaggle.com/datasets) | [NASA](https://open.nasa.gov/blog/) | [ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv) | https://www.enigma.com/data | http://veekaybee.github.io/2018/07/23/small-datasets/ | https://grasswiki.osgeo.org/wiki/Global_datasets | https://www.figure-eight.com/datasets/ | https://blog.webkid.io/datasets-for-machine-learning/ | https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research | https://www.githubarchive.org | https://www.datasetlist.com/ | [NASA](https://bmtgoncalves.github.io/pyNASA/) | [Deep Mind](https://deepmind.com/research/open-source/open-source-datasets/) | [Allen Institute](http://allenai.org/data.html) | [Miscellaneous Datasets](http://users.stat.ufl.edu/~winner/datasets.html) | https://hub.packtpub.com/25-datasets-deep-learning-iot/ | [Open Access Papers](https://unpaywall.org/products/snapshot) | https://www.spe.org/en/jpt/jpt-article-detail/?art=5282 | http://www.fast.ai/2018/10/16/aws-datasets
 
-[Portals](https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/)
-
-[European Data Portal](http://www.europeandataportal.eu/)
-
-[Journalism Data](http://cjlab.stanford.edu/2015/09/30/lab-launch-and-data-sets/) 
-
-[Enigma](https://public.enigma.com/)
-
-[Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/)
-
-[UCI ML Repo](http://archive.ics.uci.edu/ml/)
-
-[Datanauts](https://open.nasa.gov/explore/datanauts/)
-
-[World Holidays](https://date.nager.at/)
-
-[Research Data](http://academictorrents.com/)
-
-[Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html)
-
-[SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/)
-
-[ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv)
-
-[Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/)
-
-[Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)
-
-[Data.gov](http://www.data.gov/)
-
-[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/)
-
-[Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
-
-[Word Bank](http://wordbank.stanford.edu/)
-
-[Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/)
-
-[Microsoft Research](https://msropendata.com)
+[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/) | [Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) | [Word Bank](http://wordbank.stanford.edu/) | [Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/) | [SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/) | [Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/) | [NLP](https://github.com/niderhoff/nlp-datasets/blob/master/README.md) | [Summarization Data](https://summari.es) | [Visual Reasoning](http://lic.nlp.cornell.edu/nlvr/) | [Journalism Data](http://cjlab.stanford.edu/2015/09/30/lab-launch-and-data-sets/) 
 
 Open Census Data: [1](https://www.producthunt.com/posts/open-census-data) | [2](https://www.safegraph.com/open-census-data?ref=producthunt) | [3](https://docs.safegraph.com/docs/open-census-data)
 
@@ -273,13 +171,13 @@ SEC: [1](https://www.sec.gov/structureddata) | [2](https://www.sec.gov/dera/data
 
 Neuro Data: [1](http://preprocessed-connectomes-project.org) | [2](http://www.humanconnectomeproject.org) | [3](http://fcon_1000.projects.nitrc.org/indi/abide/) | [4](https://www.ncbi.nlm.nih.gov/pubmed/25840117) | [5](https://coins.mrn.org)
 
-time series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting) | [sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp)
+Time Series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting) | [sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp) | [World Holidays](https://date.nager.at/)
 
 Disney Animation: [1](https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html) | [2](https://www.disneyanimation.com/technology/datasets)
 
 NYC: [1](https://nycopendata.socrata.com/) | [2](https://health.data.ny.gov) | [3](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml)
 
-Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/)
+Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/) | [European Data Portal](http://www.europeandataportal.eu/)
 
 Sentiment: [1](http://ai.stanford.edu/~amaas/data/sentiment/) | [2](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews)
 
@@ -293,17 +191,15 @@ CV: [1](https://research.googleblog.com/2016/09/introducing-open-images-dataset.
 
 Networks: [1](https://snap.stanford.edu/data/index.html) | [2](http://networkrepository.com/index.php) | [3](https://aminer.org/data-sna)
 
-Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/)
+Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/) | [Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html) | [Sound Effects](http://bbcsfx.acropolis.org.uk/)
 
 ### Auto Data Science
-
-[Data Cleaning](http://www.dataland.ai/index.php) 
 
 [Visualize](http://holoviews.org)
 
 Feature Engineering: [1](https://www.featuretools.com) | [2](https://www.featurelabs.com/) 
 
-Auto ML: TPOT
+TPOT
 
 ### Sample R Pipeline
 
