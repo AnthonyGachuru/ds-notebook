@@ -64,6 +64,8 @@ because even though you have higher overall accuracy, you have more false negati
 
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN
 
+https://scikit-learn.org/stable/modules/classes.html#module-sklearn.semi_supervised
+
 ## Model
 
 ### General
@@ -275,6 +277,10 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 ### GLM
 
 ####`Linear Regression
+
+add interaction terms
+
+https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor
 
 Discuss Ridge, Lasso, and Elastic Net here.
 
