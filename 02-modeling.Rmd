@@ -6,7 +6,7 @@
 
 cohort analysis, Transfer learning, cox proportional hazards, youden's j, Multiple Correspondence Analysis. platt scaling, generalized low rank models, conditional random field, linear probability model
 
-toolbox: classic ml, bayesian ml, abm, rl, ga & gp, es
+toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es
 
 "No Free Lunch" theorem: no single classifier works best across all possible scenarios
 
@@ -282,7 +282,7 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 ####`Linear Regression
 
-add interaction terms
+add interaction terms and polynomial features
 
 https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor
 

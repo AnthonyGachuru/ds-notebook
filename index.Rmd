@@ -197,9 +197,11 @@ Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com
 
 [Visualize](http://holoviews.org)
 
-Feature Engineering: [1](https://www.featuretools.com) | [2](https://www.featurelabs.com/) 
+[Feature Engineering](https://www.featuretools.com) 
 
 TPOT
+
+[Google AutoML](https://cloud.google.com/automl/)
 
 ### Sample R Pipeline
 
