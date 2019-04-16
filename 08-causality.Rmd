@@ -4,9 +4,9 @@
 
 [Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
 
-[Misra Talk](https://pages.dataiku.com/hubfs/PDF/Meetup-Presentation/06-18_Stress-Testing_Mishra.pdf?t=1532033314245&utm_campaign=US%20Event%20Meetup%20NYU%20NYC%20July%202018&utm_source=hs_email&utm_medium=email&utm_content=64589348&_hsenc=p2ANqtz-9_41UxxLKzauP5Gf5bbRh63DzcsGFL8hMuW8HH8a_a1AeS9zaESqO-PoTbCkzXirAvWBJnHgvb-PEi_l7ds9IWg_y25H7xE2uVhBib3XwWmO68PBI&_hsmi=64589348)
-
 Instrumental variables
+
+propensity score matching
 
 http://causalinference.gitlab.io/icwsm-tutorial/
 

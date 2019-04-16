@@ -117,7 +117,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.3.1</b> Data</a></li>
 <li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#auto-data-science"><i class="fa fa-check"></i><b>1.3.2</b> Auto Data Science</a></li>
-<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#sample-r-pipeline"><i class="fa fa-check"></i><b>1.3.3</b> Sample R Pipeline</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#pipelines"><i class="fa fa-check"></i><b>1.3.3</b> Pipelines</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="pre-modeling.html"><a href="pre-modeling.html"><i class="fa fa-check"></i><b>2</b> Pre-Modeling</a><ul>
@@ -253,9 +253,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Stats</a><ul>
 <li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#general-5"><i class="fa fa-check"></i><b>5.1</b> General</a></li>
-<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#sample-size"><i class="fa fa-check"></i><b>5.2</b> Sample Size</a></li>
-<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#ab-testing"><i class="fa fa-check"></i><b>5.3</b> AB Testing</a></li>
-<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#experimental-design-datacamp"><i class="fa fa-check"></i><b>5.4</b> Experimental Design DataCamp</a></li>
+<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#bayes-rule"><i class="fa fa-check"></i><b>5.2</b> Bayes Rule</a></li>
+<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#sample-size"><i class="fa fa-check"></i><b>5.3</b> Sample Size</a></li>
+<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#hypothesis-testing"><i class="fa fa-check"></i><b>5.4</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="5.5" data-path="stats.html"><a href="stats.html#ab-testing"><i class="fa fa-check"></i><b>5.5</b> AB Testing</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="stats.html"><a href="stats.html#power-analysis"><i class="fa fa-check"></i><b>5.5.1</b> Power Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="stats.html"><a href="stats.html#experimental-design"><i class="fa fa-check"></i><b>5.6</b> Experimental Design</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="sequences.html"><a href="sequences.html"><i class="fa fa-check"></i><b>6</b> Sequences</a><ul>
 <li class="chapter" data-level="6.1" data-path="sequences.html"><a href="sequences.html#time-series"><i class="fa fa-check"></i><b>6.1</b> Time Series</a><ul>
@@ -373,7 +377,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
 <li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
 </ul>
-<p>Another instantiation via Hadley Wickham is: import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
+<p>Another instantiation via Hadley Wickham is:</p>
+<p>import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate</p>
+<p>As an abbreviation: ittvmcmd</p>
 <p>And the two combined:</p>
 <p>preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
 <p>Another note is that one way to structure projects is to write user stories a la software engineering.</p>
@@ -495,8 +501,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>TPOT</p>
 <p><a href="https://cloud.google.com/automl/">Google AutoML</a></p>
 </div>
-<div id="sample-r-pipeline" class="section level3">
-<h3><span class="header-section-number">1.3.3</span> Sample R Pipeline</h3>
+<div id="pipelines" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Pipelines</h3>
+<div id="sample" class="section level4">
+<h4><span class="header-section-number">1.3.3.1</span> Sample</h4>
 <p><a href="https://mobile.twitter.com/TheStephLocke/status/990251709531344896">Source</a>:</p>
 <p>IO: odbc readxl httr</p>
 <p>EDA: DataExplorer</p>
@@ -508,7 +516,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Deployment: sqlrutils AzureML opencpu</p>
 <p>Monitoring: flexdashboard</p>
 <p>Docs: rmarkdown</p>
+</div>
+<div id="my-pipeline" class="section level4">
+<h4><span class="header-section-number">1.3.3.2</span> My Pipeline</h4>
+<p>Import: odbc dbi readr data.table</p>
+<p>Tidy: skimr dplyr tidyr visdat data.table</p>
+<p>Transform: dplyr data.table</p>
+<p>Visualization: ggplot2</p>
+<p>Modeling: sklearn mlxtend shap yellowbrick pyspark</p>
+<p>Communicate: rmarkdown</p>
+<p>Monitor:</p>
+<p>Deploy: shiny</p>
+</div>
+<div id="r-pipeline" class="section level4">
+<h4><span class="header-section-number">1.3.3.3</span> R Pipeline</h4>
+<p>Import: odbc dbi readr data.table</p>
+<p>Tidy: skimr dplyr tidyr visdat data.table</p>
+<p>Transform: dplyr data.table</p>
+<p>Visualization: ggplot2</p>
+<p>Modeling: rsample modelr broom yardstick caret sparklyr</p>
+<p>Communicate: rmarkdown</p>
+<p>Monitor:</p>
+<p>Deploy: shiny</p>
+</div>
+<div id="python-pipeline" class="section level4">
+<h4><span class="header-section-number">1.3.3.4</span> Python Pipeline</h4>
+<p>Import: pyodbc pandas-modin</p>
+<p>Tidy: pandas-modin</p>
+<p>Transform: pandas-modin</p>
+<p>Visualization: altair plotnine</p>
+<p>Modeling: sklearn mlxtend shap yellowbrick pyspark chainlearn</p>
+<p>Communicate: jupyter</p>
+<p>Monitor:</p>
+<p>Deploy: flask</p>
 
+</div>
 </div>
 </div>
 </div>

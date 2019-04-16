@@ -30,7 +30,11 @@ A typical data science workflow can be framed as following these steps:
 
 * Maintain: adapt the models and features to the evolution of the environment
 
-Another instantiation via Hadley Wickham is:  import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
+Another instantiation via Hadley Wickham is:  
+
+import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
+
+As an abbreviation: ittvmcmd
 
 And the two combined:
 
@@ -203,7 +207,9 @@ TPOT
 
 [Google AutoML](https://cloud.google.com/automl/)
 
-### Sample R Pipeline
+### Pipelines
+
+#### Sample
 
 [Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
 
@@ -226,3 +232,64 @@ Deployment: sqlrutils AzureML opencpu
 Monitoring: flexdashboard
 
 Docs: rmarkdown
+
+#### My Pipeline
+
+Import: odbc dbi readr data.table
+
+Tidy: skimr dplyr tidyr visdat data.table
+
+Transform: dplyr data.table
+
+Visualization: ggplot2
+
+Modeling: sklearn mlxtend shap yellowbrick pyspark
+
+Communicate: rmarkdown 
+
+Monitor:
+
+Deploy: shiny
+
+#### R Pipeline
+
+Import: odbc dbi readr data.table
+
+Tidy: skimr dplyr tidyr visdat data.table
+
+Transform: dplyr data.table
+
+Visualization: ggplot2
+
+Modeling: rsample modelr broom yardstick caret sparklyr
+
+Communicate: rmarkdown
+
+Monitor:
+
+Deploy: shiny
+
+#### Python Pipeline
+
+Import: pyodbc pandas-modin
+
+Tidy: pandas-modin
+
+Transform: pandas-modin
+
+Visualization: altair plotnine
+
+Modeling: sklearn mlxtend shap yellowbrick pyspark chainlearn
+
+Communicate: jupyter
+
+Monitor:
+
+Deploy: flask
+
+
+
+
+
+
+

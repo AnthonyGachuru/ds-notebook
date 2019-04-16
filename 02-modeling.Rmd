@@ -1202,6 +1202,8 @@ gams work with broom and caret.
 
 "Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
 
+https://www.jstatsoft.org/article/view/v067i01/0
+
 lmerTest 
 
 Analysis of Variance, or ANOVA, can be used to compare two different lmer models and test if one model explains more variability than the other model. We can use this to compare two lmer models. For example, if we wanted to see if Year is important for predicting Crime in Maryland, we can build a null model with only County as a random-effect and a year model that includes Year. 
