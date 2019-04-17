@@ -20,7 +20,11 @@ Structure: Introduction | Motivation | Summary | Results | Conclusion
 
 Interactive Reports Without Shiny: plotly, dt, crosstalk
 
+Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
+
 ## Deploy/Maintain
+
+https://www.meltano.com/
 
 http://pachyderm.io
 
@@ -67,3 +71,26 @@ TDD: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-sci
 https://dvc.org/
 
 docker
+
+design by contract: contracts
+
+property based testing: hypothesis
+
+unit tests: pytest, static typing: mypy
+
+packrat & conda
+
+https://matrixds.com/ | https://www.crestle.com | CoCalc
+
+[Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
+
+Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial) | [R](http://r-pkgs.had.co.nz/tests.html) | pytest/hypothesis
+ 
+Validation: [1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
+
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`. 
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`. This will create a new environment with the same name listed in environment.yaml.
+
+package for helper functions and units tests
+
+use makefile to run cmd commands

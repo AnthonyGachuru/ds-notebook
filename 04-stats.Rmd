@@ -2,7 +2,7 @@
 
 ## General
 
-Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test
+Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test | cohen's f^2 | https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression | https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis
 
 [Probability Cheat Sheet](http://www.wzchen.com/probability-cheatsheet)
 
@@ -12,124 +12,62 @@ Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bay
 
 Zero correlation doesn't imply independence
 
-library(effsize) lm vs t.test vs anova library(EMT): multinomial test
+lm vs t.test vs anova
+
+library(EMT): multinomial test
 
 ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) | [2](https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf)
-
-http://www.stat.umn.edu/geyer/old/5101/rlook.html
-
-https://stats.idre.ucla.edu/other/mult-pkg/whatstat/
 
 [Mixed Categorical & Numeric Distance](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist) | [2](https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor)
 
 [Outliers in small samples](https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617)
 
-Another common measure of effect size is d, sometimes known as Cohen's d (as you might have guessed by now, Cohen was quite influential in the field of effect sizes). This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups' means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups' means differ by one standard deviation; a d of .5 tells us that the two groups' means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a 'small' effect size, 0.5 represents a 'medium' effect size and 0.8 a 'large' effect size. This means that if two groups' means don't differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant. 
+Another common measure of effect size is d, sometimes known as Cohen's d. This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups' means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups' means differ by one standard deviation; a d of .5 tells us that the two groups' means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a 'small' effect size, 0.5 represents a 'medium' effect size and 0.8 a 'large' effect size. This means that if two groups' means don't differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant. 
 
 Beta Distribution: The larger the alpha parameter is the closer the resulting distribution is to 1.0 and the larger the beta the closer it is to 0.
 
-cohen's f^2 | https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression | https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis
+The Pearson Correlation is normalized version of covariance 
 
-Covariance: Measure of how two random values change together. Negative - variables show opposite behavior ( As A increases B decreases). Positive - variables show similar behavior (As A increases B increases). The Pearson Correlation is normalized version of covariance 
-
-Note about Populations and Samples: Populations have parameters. Samples have statistics.
-
-A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.
-
-* Type I Error: Saying there is an effect when there isn't one. Type II error: concluding there is no effect when, in fact, there is one.
+Populations have parameters. Samples have statistics.
 
 Probably the most useful types of statistics for skewed probability distributions are quantiles. 
 
-* Random sampling & random assignment: generalizable & causal
+Random sampling & random assignment: generalizable & causal
 
-* Get 95% ci around p-value
+There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
 
-* There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
+Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
 
-* Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
+[Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
 
-* [Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
+Sum of normally distributed random variables: sum of means & sum of variances
 
-* box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series			
+Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
 
-* Sum of normally distributed random variables: sum of means & sum of variances
+Bypass inferential stats if features at least 1/10 of data points. 
 
-* Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
+If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won't. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.
 
-* Bypass inferential stats if features at least 1/10 of data points. 
+Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random. Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.
 
-* The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+Independent rvs are uncorrelated. That is Cor (X,Y)=0
 
-* One Sample T-test: To examine the average difference between a sample and the known value 
-of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
+Don’t sum sd’s, sum variances
 
-* Two Sample T-test: To examine the average difference between two samples drawn from two 
-different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
+The sampling distribution is the distribution of the samples mean.
 
-* One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+The CDF is the function that maps values to their percentile rank in a distribution.
 
-* Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
 
-* F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+If the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (n mu, n sigma_sqrd).
 
-* Barlett Test: F-Test for more than two populations. 
+If there are no outliers, the sample mean minimizes the mean squared error
 
-* If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won't. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.
+An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
 
-* Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.
-
-* Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.
-
-* Independent rvs are uncorrelated. That is Cor (X,Y)=0
-
-* Don’t sum sd’s, sum variances.
-
-* One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.
-
-* When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.
-
-* When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.
-
-* When do we use One-Way ANOVA?  To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist.  The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.
-
-* When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.
-
-* To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.
-
-* The degrees of freedom is the number of data rows minus the number of coefficients fit.
-
-* Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
-
-* Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.
-
-* The sampling distribution is the distribution of the samples mean.
-
-* The CDF is the function that maps values to their percentile rank in a distribution.
-
-* I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
-
-* CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).
-
-* Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.
-
-* Statistical power is the probability that the test will be positive if the null
-hypothesis is false. In general, the power of a test depends on the sample
-size, the magnitude of the effect, and the threshold α.
-
-* If there are no outliers, the sample mean minimizes the mean squared error
-
-* An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
-
-* A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
-units, they come from different distributions. There are two common solutions to these problems:
-
-1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation.
-
-2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
-
-There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.
-
-Explanatory variables are conditions you can impose on the experimental units, while blocking variables are characteristics that the experimental units come with that you would like to control for.
+A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
+units, they come from different distributions. There are two common solutions to these problems: 1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation. 2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.
 
 In random sampling, you use stratifying to control for a variable. In random assignment, you use blocking to achieve the same goal.
 
@@ -141,27 +79,7 @@ Replicate: collect a sufficiently large sample within a study, or replicate the 
 
 Block: account for the potential effect of confounding variables 
 
-Group subjects into blocks based on these variations, and randomize within each block to treatment groups 
-
 Random Sampling + Random Assignment: Causal + generalizable
-
-No Random Sampling + Random Assignment: Causal + not generalizable
-
-Random Sampling + No Random Assignment: Not causal + generalizable
-
-No Random Sampling + No Random Assignment: Not causal + not generalizable
-
-## Bayes Rule 
-
-Posterior = Likelihood * Prior / Marginal Likelihood
-
-Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)
-
-Prior P(theta): Probability of parameter value
-
-Posterior P(theta|D):  Credibility of the parameter value with the data taken into account.
-
-Marginal Likelihood (Evidence): Probability of evidence
 
 ## Sample Size
 
@@ -175,11 +93,40 @@ then with probability at least 1-d your sample measured proportion q is no furth
 
 There is only one test.
 
+Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.
+
+A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.
+
+Type I Error: Saying there is an effect when there isn't one. Type II error: concluding there is no effect when, in fact, there is one.
+
 jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics	
 
 test heteroscedaticity: breusch-pagan or ncv test
 
-Shapiro–Wilk test is a test of normality
+box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series			
+The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.
+
+One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.
+
+When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.
+
+When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.
+
+When do we use One-Way ANOVA?  To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist.  The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.
+
+One Sample T-test: To examine the average difference between a sample and the known value 
+of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent. 
+
+Two Sample T-test: To examine the average difference between two samples drawn from two 
+different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.
+
+One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent. 
+
+Chi-Squared Test of Independence: To test whether two categorical variables are independent.  Assumes the sample observations are randomly drawn and independent.
+
+F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.
+
+Barlett Test: F-Test for more than two populations. 
 
 Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:
 
@@ -275,43 +222,7 @@ margin of error = z*se
 
 conf int: estimated diff +/- margin of error
 
-**Policy & Ethics**
-
-In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.
-
-Next, what benefits might result from the study? Even if the risk is minimal, how might the results help? 
-
-Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.
-
-Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?
-
-Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:
-
-Are participants facing more than minimal risk?
-Do participants understand what data is being gathered?
-Is that data identifiable?
-How is the data handled?
-
-Internal process recommendations
-Finally, regarding internal process of data handling, we recommend that:
-
-Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).
-
-All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.
-
 rate better for usability test than prob
-
-**Choosing & Characterizing Metrics**
-
-**Define**
-
-Make sure to granularize funnel
-
-**Intuition**
-
-NA
-
-**Characterize**
 
 Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data
 
@@ -347,15 +258,11 @@ empirical vs analytic: underlying distribution could be weird so do empirical. A
 
 A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don't have enough traffic for a big A v A test.
 
-**Designing An Experiment**
-
-**Choose Subject**
-
 Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).
 
 Intra-user vs inter-user experiment.
 
-**Choose Population**
+Choose Population:
 
 Size
 
@@ -369,7 +276,7 @@ Can reduce sample if just targeting english speaking traffic
 
 When going to run experiment: holiday or not? How many people to put through experiment and control?
 
-**Analyzing Results**
+Analyzing Results:
 
 Sanity Checks:
 

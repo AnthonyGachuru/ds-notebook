@@ -46,8 +46,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ## Checklist
 
-### Preparation
-
 * Understand the business question, goals, and measures of success
 
 * See if the data to answer the question exists, and if it is useful.
@@ -60,13 +58,9 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * checklists | code books | appendices | post mortems | tests | gacp
 
-### Import
-
 * Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
 * Sampling from data if its too large
-
-### Tidy
 
 * [Follow tidy data principles](http://vita.had.co.nz/papers/tidy-data.pdf). 
 
@@ -75,8 +69,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 * See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
 
 * Outlier Detection: interquartile range, kernel density estimation, bonferroni test
-
-### Transform
 
 * Look at missingness.
 
@@ -88,8 +80,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * [Binned Stats](https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html)
 
-### Visualize
-
 * Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
 
 * Trendlines & Histograms
@@ -100,11 +90,9 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
 
-* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure. 
+* Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
 
-### Model
-
-* Stick to rergression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
+* Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
 * Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.
 
@@ -113,8 +101,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 * Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.
     
 * Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
-
-* Model Selection
 
 * Model Explanability: SHAP
 
@@ -127,27 +113,6 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 * Ensembling: mlxtend in Python, and caretEnsemble in R.
 
 * Look at learning curves: [1](https://www.dataquest.io/blog/learning-curves-machine-learning/) | [2](http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html)
-
-### Communicate
-
-Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
-
-### Deployment /  Maintenance
-
-https://matrixds.com/ | https://www.crestle.com | CoCalc
-
-[Git Workflow](https://blog.osteele.com/2008/05/my-git-workflow/)
-
-Tests: [1](http://engineering.pivotal.io/post/test-driven-development-for-data-science/) | [2](http://www.tdda.info/) | [3](http://stochasticsolutions.com/) | [4](https://github.com/ericmjl/data-testing-tutorial) | [R](http://r-pkgs.had.co.nz/tests.html) | pytest/hypothesis
- 
-Validation: [1](https://github.com/data-cleaning/validate) | [2](https://rdrr.io/cran/checkmate/) | [3](https://github.com/shawnbrown/datatest)
-
-A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: `conda env export > environment.yaml`. 
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, > environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: `conda env create -f environment.yaml`. This will create a new environment with the same name listed in environment.yaml.
-
-package for helper functions and units tests
-
-use makefile to run cmd commands
 
 ## Resources
 
@@ -209,7 +174,7 @@ TPOT
 
 ### Pipelines
 
-#### Sample
+**Sample**
 
 [Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
 
@@ -233,7 +198,7 @@ Monitoring: flexdashboard
 
 Docs: rmarkdown
 
-#### My Pipeline
+**My Pipeline**
 
 Import: odbc dbi readr data.table
 
@@ -251,7 +216,7 @@ Monitor:
 
 Deploy: shiny
 
-#### R Pipeline
+**R Pipeline**
 
 Import: odbc dbi readr data.table
 
@@ -269,7 +234,7 @@ Monitor:
 
 Deploy: shiny
 
-#### Python Pipeline
+**Python Pipeline**
 
 Import: pyodbc pandas-modin
 
@@ -286,10 +251,3 @@ Communicate: jupyter
 Monitor:
 
 Deploy: flask
-
-
-
-
-
-
-

@@ -49,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -104,16 +130,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workflow</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preamble"><i class="fa fa-check"></i><b>1.1</b> Preamble</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#preparation"><i class="fa fa-check"></i><b>1.2.1</b> Preparation</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#import"><i class="fa fa-check"></i><b>1.2.2</b> Import</a></li>
-<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#tidy"><i class="fa fa-check"></i><b>1.2.3</b> Tidy</a></li>
-<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#transform"><i class="fa fa-check"></i><b>1.2.4</b> Transform</a></li>
-<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#visualize"><i class="fa fa-check"></i><b>1.2.5</b> Visualize</a></li>
-<li class="chapter" data-level="1.2.6" data-path="index.html"><a href="index.html#model"><i class="fa fa-check"></i><b>1.2.6</b> Model</a></li>
-<li class="chapter" data-level="1.2.7" data-path="index.html"><a href="index.html#communicate"><i class="fa fa-check"></i><b>1.2.7</b> Communicate</a></li>
-<li class="chapter" data-level="1.2.8" data-path="index.html"><a href="index.html#deployment-maintenance"><i class="fa fa-check"></i><b>1.2.8</b> Deployment / Maintenance</a></li>
-</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#checklist"><i class="fa fa-check"></i><b>1.2</b> Checklist</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.3.1</b> Data</a></li>
 <li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#auto-data-science"><i class="fa fa-check"></i><b>1.3.2</b> Auto Data Science</a></li>
@@ -121,16 +138,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="pre-modeling.html"><a href="pre-modeling.html"><i class="fa fa-check"></i><b>2</b> Pre-Modeling</a><ul>
-<li class="chapter" data-level="2.1" data-path="pre-modeling.html"><a href="pre-modeling.html#import-1"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
+<li class="chapter" data-level="2.1" data-path="pre-modeling.html"><a href="pre-modeling.html#import"><i class="fa fa-check"></i><b>2.1</b> Import</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general"><i class="fa fa-check"></i><b>2.1.1</b> General</a></li>
 <li class="chapter" data-level="2.1.2" data-path="pre-modeling.html"><a href="pre-modeling.html#sql"><i class="fa fa-check"></i><b>2.1.2</b> SQL</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="pre-modeling.html"><a href="pre-modeling.html#tidy-1"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
-<li class="chapter" data-level="2.3" data-path="pre-modeling.html"><a href="pre-modeling.html#transform-1"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
+<li class="chapter" data-level="2.2" data-path="pre-modeling.html"><a href="pre-modeling.html#tidy"><i class="fa fa-check"></i><b>2.2</b> Tidy</a></li>
+<li class="chapter" data-level="2.3" data-path="pre-modeling.html"><a href="pre-modeling.html#transform"><i class="fa fa-check"></i><b>2.3</b> Transform</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="pre-modeling.html"><a href="pre-modeling.html#general-1"><i class="fa fa-check"></i><b>2.3.1</b> General</a></li>
 <li class="chapter" data-level="2.3.2" data-path="pre-modeling.html"><a href="pre-modeling.html#missingness-imputation"><i class="fa fa-check"></i><b>2.3.2</b> Missingness &amp; Imputation</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="pre-modeling.html"><a href="pre-modeling.html#visualize-1"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
+<li class="chapter" data-level="2.4" data-path="pre-modeling.html"><a href="pre-modeling.html#visualize"><i class="fa fa-check"></i><b>2.4</b> Visualize</a></li>
 <li class="chapter" data-level="2.5" data-path="pre-modeling.html"><a href="pre-modeling.html#general-2"><i class="fa fa-check"></i><b>2.5</b> General</a></li>
 <li class="chapter" data-level="2.6" data-path="pre-modeling.html"><a href="pre-modeling.html#pre-processing"><i class="fa fa-check"></i><b>2.6</b> Pre-processing</a></li>
 <li class="chapter" data-level="2.7" data-path="pre-modeling.html"><a href="pre-modeling.html#feature-engineering"><i class="fa fa-check"></i><b>2.7</b> Feature Engineering</a></li>
@@ -139,127 +156,124 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.9.1" data-path="pre-modeling.html"><a href="pre-modeling.html#unbalanced-classes"><i class="fa fa-check"></i><b>2.9.1</b> Unbalanced Classes</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="model-1.html"><a href="model-1.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
-<li class="chapter" data-level="3.1" data-path="model-1.html"><a href="model-1.html#general-3"><i class="fa fa-check"></i><b>3.1</b> General</a></li>
-<li class="chapter" data-level="3.2" data-path="model-1.html"><a href="model-1.html#model-2"><i class="fa fa-check"></i><b>3.2</b> Model</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="model-1.html"><a href="model-1.html#general-4"><i class="fa fa-check"></i><b>3.2.1</b> General</a></li>
-<li class="chapter" data-level="3.2.2" data-path="model-1.html"><a href="model-1.html#model-selectionevaluation"><i class="fa fa-check"></i><b>3.2.2</b> Model Selection/Evaluation</a></li>
-<li class="chapter" data-level="3.2.3" data-path="model-1.html"><a href="model-1.html#model-explanability"><i class="fa fa-check"></i><b>3.2.3</b> Model Explanability</a></li>
+<li class="chapter" data-level="3" data-path="model.html"><a href="model.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
+<li class="chapter" data-level="3.1" data-path="model.html"><a href="model.html#general-3"><i class="fa fa-check"></i><b>3.1</b> General</a></li>
+<li class="chapter" data-level="3.2" data-path="model.html"><a href="model.html#model-1"><i class="fa fa-check"></i><b>3.2</b> Model</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="model.html"><a href="model.html#general-4"><i class="fa fa-check"></i><b>3.2.1</b> General</a></li>
+<li class="chapter" data-level="3.2.2" data-path="model.html"><a href="model.html#model-selectionevaluation"><i class="fa fa-check"></i><b>3.2.2</b> Model Selection/Evaluation</a></li>
+<li class="chapter" data-level="3.2.3" data-path="model.html"><a href="model.html#model-explanability"><i class="fa fa-check"></i><b>3.2.3</b> Model Explanability</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="model-1.html"><a href="model-1.html#supervised"><i class="fa fa-check"></i><b>3.3</b> Supervised</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="model-1.html"><a href="model-1.html#glm"><i class="fa fa-check"></i><b>3.3.1</b> GLM</a></li>
+<li class="chapter" data-level="3.3" data-path="model.html"><a href="model.html#supervised"><i class="fa fa-check"></i><b>3.3</b> Supervised</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="model.html"><a href="model.html#glm"><i class="fa fa-check"></i><b>3.3.1</b> GLM</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="model-1.html"><a href="model-1.html#logistic-regression"><i class="fa fa-check"></i><b>3.4</b> Logistic Regression</a></li>
-<li class="chapter" data-level="3.5" data-path="model-1.html"><a href="model-1.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.5</b> Generalized Additive Models</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="model-1.html"><a href="model-1.html#intro"><i class="fa fa-check"></i><b>3.5.1</b> Intro</a></li>
-<li class="chapter" data-level="3.5.2" data-path="model-1.html"><a href="model-1.html#assumptions"><i class="fa fa-check"></i><b>3.5.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.5.3" data-path="model-1.html"><a href="model-1.html#evaluation"><i class="fa fa-check"></i><b>3.5.3</b> Evaluation</a></li>
-<li class="chapter" data-level="3.5.4" data-path="model-1.html"><a href="model-1.html#proscons"><i class="fa fa-check"></i><b>3.5.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.4" data-path="model.html"><a href="model.html#logistic-regression"><i class="fa fa-check"></i><b>3.4</b> Logistic Regression</a></li>
+<li class="chapter" data-level="3.5" data-path="model.html"><a href="model.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.5</b> Generalized Additive Models</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="model.html"><a href="model.html#intro"><i class="fa fa-check"></i><b>3.5.1</b> Intro</a></li>
+<li class="chapter" data-level="3.5.2" data-path="model.html"><a href="model.html#assumptions"><i class="fa fa-check"></i><b>3.5.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.5.3" data-path="model.html"><a href="model.html#evaluation"><i class="fa fa-check"></i><b>3.5.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.5.4" data-path="model.html"><a href="model.html#proscons"><i class="fa fa-check"></i><b>3.5.4</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="model-1.html"><a href="model-1.html#k-means-clustering-us"><i class="fa fa-check"></i><b>3.6</b> K-Means Clustering [US]</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="model-1.html"><a href="model-1.html#intro-1"><i class="fa fa-check"></i><b>3.6.1</b> Intro</a></li>
+<li class="chapter" data-level="3.6" data-path="model.html"><a href="model.html#k-means-clustering-us"><i class="fa fa-check"></i><b>3.6</b> K-Means Clustering [US]</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="model.html"><a href="model.html#intro-1"><i class="fa fa-check"></i><b>3.6.1</b> Intro</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="model-1.html"><a href="model-1.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.7</b> Hierarchical Clustering</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="model-1.html"><a href="model-1.html#assumptions-1"><i class="fa fa-check"></i><b>3.7.1</b> Assumptions</a></li>
-<li class="chapter" data-level="3.7.2" data-path="model-1.html"><a href="model-1.html#characteristics"><i class="fa fa-check"></i><b>3.7.2</b> Characteristics</a></li>
-<li class="chapter" data-level="3.7.3" data-path="model-1.html"><a href="model-1.html#evaluation-1"><i class="fa fa-check"></i><b>3.7.3</b> Evaluation</a></li>
-<li class="chapter" data-level="3.7.4" data-path="model-1.html"><a href="model-1.html#proscons-1"><i class="fa fa-check"></i><b>3.7.4</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.7" data-path="model.html"><a href="model.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.7</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="model.html"><a href="model.html#assumptions-1"><i class="fa fa-check"></i><b>3.7.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.7.2" data-path="model.html"><a href="model.html#characteristics"><i class="fa fa-check"></i><b>3.7.2</b> Characteristics</a></li>
+<li class="chapter" data-level="3.7.3" data-path="model.html"><a href="model.html#evaluation-1"><i class="fa fa-check"></i><b>3.7.3</b> Evaluation</a></li>
+<li class="chapter" data-level="3.7.4" data-path="model.html"><a href="model.html#proscons-1"><i class="fa fa-check"></i><b>3.7.4</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.8" data-path="model-1.html"><a href="model-1.html#pca"><i class="fa fa-check"></i><b>3.8</b> PCA</a><ul>
-<li class="chapter" data-level="3.8.1" data-path="model-1.html"><a href="model-1.html#intro-2"><i class="fa fa-check"></i><b>3.8.1</b> Intro</a></li>
-<li class="chapter" data-level="3.8.2" data-path="model-1.html"><a href="model-1.html#assumptions-2"><i class="fa fa-check"></i><b>3.8.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.8.3" data-path="model-1.html"><a href="model-1.html#characteristics-1"><i class="fa fa-check"></i><b>3.8.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.8.4" data-path="model-1.html"><a href="model-1.html#evaluation-2"><i class="fa fa-check"></i><b>3.8.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.8.5" data-path="model-1.html"><a href="model-1.html#proscons-2"><i class="fa fa-check"></i><b>3.8.5</b> Pros/Cons</a></li>
-<li class="chapter" data-level="3.8.6" data-path="model-1.html"><a href="model-1.html#other-1"><i class="fa fa-check"></i><b>3.8.6</b> Other</a></li>
+<li class="chapter" data-level="3.8" data-path="model.html"><a href="model.html#pca"><i class="fa fa-check"></i><b>3.8</b> PCA</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="model.html"><a href="model.html#intro-2"><i class="fa fa-check"></i><b>3.8.1</b> Intro</a></li>
+<li class="chapter" data-level="3.8.2" data-path="model.html"><a href="model.html#assumptions-2"><i class="fa fa-check"></i><b>3.8.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.8.3" data-path="model.html"><a href="model.html#characteristics-1"><i class="fa fa-check"></i><b>3.8.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.8.4" data-path="model.html"><a href="model.html#evaluation-2"><i class="fa fa-check"></i><b>3.8.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.8.5" data-path="model.html"><a href="model.html#proscons-2"><i class="fa fa-check"></i><b>3.8.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.8.6" data-path="model.html"><a href="model.html#other-1"><i class="fa fa-check"></i><b>3.8.6</b> Other</a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="model-1.html"><a href="model-1.html#knn"><i class="fa fa-check"></i><b>3.9</b> KNN</a><ul>
-<li class="chapter" data-level="3.9.1" data-path="model-1.html"><a href="model-1.html#intro-3"><i class="fa fa-check"></i><b>3.9.1</b> Intro</a></li>
-<li class="chapter" data-level="3.9.2" data-path="model-1.html"><a href="model-1.html#assumptions-3"><i class="fa fa-check"></i><b>3.9.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.9.3" data-path="model-1.html"><a href="model-1.html#characteristics-2"><i class="fa fa-check"></i><b>3.9.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.9.4" data-path="model-1.html"><a href="model-1.html#evaluation-3"><i class="fa fa-check"></i><b>3.9.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.9.5" data-path="model-1.html"><a href="model-1.html#proscons-3"><i class="fa fa-check"></i><b>3.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.9" data-path="model.html"><a href="model.html#knn"><i class="fa fa-check"></i><b>3.9</b> KNN</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="model.html"><a href="model.html#intro-3"><i class="fa fa-check"></i><b>3.9.1</b> Intro</a></li>
+<li class="chapter" data-level="3.9.2" data-path="model.html"><a href="model.html#assumptions-3"><i class="fa fa-check"></i><b>3.9.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.9.3" data-path="model.html"><a href="model.html#characteristics-2"><i class="fa fa-check"></i><b>3.9.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.9.4" data-path="model.html"><a href="model.html#evaluation-3"><i class="fa fa-check"></i><b>3.9.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.9.5" data-path="model.html"><a href="model.html#proscons-3"><i class="fa fa-check"></i><b>3.9.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.9.6" data-path="model.html"><a href="model.html#intro-4"><i class="fa fa-check"></i><b>3.9.6</b> Intro</a></li>
+<li class="chapter" data-level="3.9.7" data-path="model.html"><a href="model.html#assumptions-4"><i class="fa fa-check"></i><b>3.9.7</b> Assumptions</a></li>
+<li class="chapter" data-level="3.9.8" data-path="model.html"><a href="model.html#characteristics-3"><i class="fa fa-check"></i><b>3.9.8</b> Characteristics</a></li>
+<li class="chapter" data-level="3.9.9" data-path="model.html"><a href="model.html#evaluation-4"><i class="fa fa-check"></i><b>3.9.9</b> Evaluation</a></li>
+<li class="chapter" data-level="3.9.10" data-path="model.html"><a href="model.html#proscons-4"><i class="fa fa-check"></i><b>3.9.10</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.10" data-path="model-1.html"><a href="model-1.html#svm"><i class="fa fa-check"></i><b>3.10</b> SVM</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="model-1.html"><a href="model-1.html#intro-4"><i class="fa fa-check"></i><b>3.10.1</b> Intro</a></li>
-<li class="chapter" data-level="3.10.2" data-path="model-1.html"><a href="model-1.html#assumptions-4"><i class="fa fa-check"></i><b>3.10.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.10.3" data-path="model-1.html"><a href="model-1.html#characteristics-3"><i class="fa fa-check"></i><b>3.10.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.10.4" data-path="model-1.html"><a href="model-1.html#evaluation-4"><i class="fa fa-check"></i><b>3.10.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.10.5" data-path="model-1.html"><a href="model-1.html#proscons-4"><i class="fa fa-check"></i><b>3.10.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.10" data-path="model.html"><a href="model.html#decision-tree"><i class="fa fa-check"></i><b>3.10</b> Decision Tree</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="model.html"><a href="model.html#intro-5"><i class="fa fa-check"></i><b>3.10.1</b> Intro</a></li>
+<li class="chapter" data-level="3.10.2" data-path="model.html"><a href="model.html#assumptions-5"><i class="fa fa-check"></i><b>3.10.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.10.3" data-path="model.html"><a href="model.html#characteristics-4"><i class="fa fa-check"></i><b>3.10.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.10.4" data-path="model.html"><a href="model.html#evaluation-5"><i class="fa fa-check"></i><b>3.10.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.10.5" data-path="model.html"><a href="model.html#proscons-5"><i class="fa fa-check"></i><b>3.10.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.11" data-path="model-1.html"><a href="model-1.html#decision-tree"><i class="fa fa-check"></i><b>3.11</b> Decision Tree</a><ul>
-<li class="chapter" data-level="3.11.1" data-path="model-1.html"><a href="model-1.html#intro-5"><i class="fa fa-check"></i><b>3.11.1</b> Intro</a></li>
-<li class="chapter" data-level="3.11.2" data-path="model-1.html"><a href="model-1.html#assumptions-5"><i class="fa fa-check"></i><b>3.11.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.11.3" data-path="model-1.html"><a href="model-1.html#characteristics-4"><i class="fa fa-check"></i><b>3.11.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.11.4" data-path="model-1.html"><a href="model-1.html#evaluation-5"><i class="fa fa-check"></i><b>3.11.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.11.5" data-path="model-1.html"><a href="model-1.html#proscons-5"><i class="fa fa-check"></i><b>3.11.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.11" data-path="model.html"><a href="model.html#bagging"><i class="fa fa-check"></i><b>3.11</b> Bagging</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="model.html"><a href="model.html#intro-6"><i class="fa fa-check"></i><b>3.11.1</b> Intro</a></li>
+<li class="chapter" data-level="3.11.2" data-path="model.html"><a href="model.html#assumptions-6"><i class="fa fa-check"></i><b>3.11.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.11.3" data-path="model.html"><a href="model.html#characteristics-5"><i class="fa fa-check"></i><b>3.11.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.11.4" data-path="model.html"><a href="model.html#evaluation-6"><i class="fa fa-check"></i><b>3.11.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.11.5" data-path="model.html"><a href="model.html#proscons-6"><i class="fa fa-check"></i><b>3.11.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.12" data-path="model-1.html"><a href="model-1.html#bagging"><i class="fa fa-check"></i><b>3.12</b> Bagging</a><ul>
-<li class="chapter" data-level="3.12.1" data-path="model-1.html"><a href="model-1.html#intro-6"><i class="fa fa-check"></i><b>3.12.1</b> Intro</a></li>
-<li class="chapter" data-level="3.12.2" data-path="model-1.html"><a href="model-1.html#assumptions-6"><i class="fa fa-check"></i><b>3.12.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.12.3" data-path="model-1.html"><a href="model-1.html#characteristics-5"><i class="fa fa-check"></i><b>3.12.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.12.4" data-path="model-1.html"><a href="model-1.html#evaluation-6"><i class="fa fa-check"></i><b>3.12.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.12.5" data-path="model-1.html"><a href="model-1.html#proscons-6"><i class="fa fa-check"></i><b>3.12.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.12" data-path="model.html"><a href="model.html#random-forest"><i class="fa fa-check"></i><b>3.12</b> Random Forest</a><ul>
+<li class="chapter" data-level="3.12.1" data-path="model.html"><a href="model.html#intro-7"><i class="fa fa-check"></i><b>3.12.1</b> Intro</a></li>
+<li class="chapter" data-level="3.12.2" data-path="model.html"><a href="model.html#assumptions-7"><i class="fa fa-check"></i><b>3.12.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.12.3" data-path="model.html"><a href="model.html#characteristics-6"><i class="fa fa-check"></i><b>3.12.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.12.4" data-path="model.html"><a href="model.html#evaluation-7"><i class="fa fa-check"></i><b>3.12.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.12.5" data-path="model.html"><a href="model.html#proscons-7"><i class="fa fa-check"></i><b>3.12.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.13" data-path="model-1.html"><a href="model-1.html#random-forest"><i class="fa fa-check"></i><b>3.13</b> Random Forest</a><ul>
-<li class="chapter" data-level="3.13.1" data-path="model-1.html"><a href="model-1.html#intro-7"><i class="fa fa-check"></i><b>3.13.1</b> Intro</a></li>
-<li class="chapter" data-level="3.13.2" data-path="model-1.html"><a href="model-1.html#assumptions-7"><i class="fa fa-check"></i><b>3.13.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.13.3" data-path="model-1.html"><a href="model-1.html#characteristics-6"><i class="fa fa-check"></i><b>3.13.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.13.4" data-path="model-1.html"><a href="model-1.html#evaluation-7"><i class="fa fa-check"></i><b>3.13.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.13.5" data-path="model-1.html"><a href="model-1.html#proscons-7"><i class="fa fa-check"></i><b>3.13.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.13" data-path="model.html"><a href="model.html#boosting"><i class="fa fa-check"></i><b>3.13</b> Boosting</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="model.html"><a href="model.html#intro-8"><i class="fa fa-check"></i><b>3.13.1</b> Intro</a></li>
+<li class="chapter" data-level="3.13.2" data-path="model.html"><a href="model.html#assumptions-8"><i class="fa fa-check"></i><b>3.13.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.13.3" data-path="model.html"><a href="model.html#characteristics-7"><i class="fa fa-check"></i><b>3.13.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.13.4" data-path="model.html"><a href="model.html#evaluation-8"><i class="fa fa-check"></i><b>3.13.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.13.5" data-path="model.html"><a href="model.html#proscons-8"><i class="fa fa-check"></i><b>3.13.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.14" data-path="model-1.html"><a href="model-1.html#boosting"><i class="fa fa-check"></i><b>3.14</b> Boosting</a><ul>
-<li class="chapter" data-level="3.14.1" data-path="model-1.html"><a href="model-1.html#intro-8"><i class="fa fa-check"></i><b>3.14.1</b> Intro</a></li>
-<li class="chapter" data-level="3.14.2" data-path="model-1.html"><a href="model-1.html#assumptions-8"><i class="fa fa-check"></i><b>3.14.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.14.3" data-path="model-1.html"><a href="model-1.html#characteristics-7"><i class="fa fa-check"></i><b>3.14.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.14.4" data-path="model-1.html"><a href="model-1.html#evaluation-8"><i class="fa fa-check"></i><b>3.14.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.14.5" data-path="model-1.html"><a href="model-1.html#proscons-8"><i class="fa fa-check"></i><b>3.14.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.14" data-path="model.html"><a href="model.html#association-rule-mining"><i class="fa fa-check"></i><b>3.14</b> Association Rule Mining</a><ul>
+<li class="chapter" data-level="3.14.1" data-path="model.html"><a href="model.html#intro-9"><i class="fa fa-check"></i><b>3.14.1</b> Intro</a></li>
+<li class="chapter" data-level="3.14.2" data-path="model.html"><a href="model.html#assumptions-9"><i class="fa fa-check"></i><b>3.14.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.14.3" data-path="model.html"><a href="model.html#characteristics-8"><i class="fa fa-check"></i><b>3.14.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.14.4" data-path="model.html"><a href="model.html#evaluation-9"><i class="fa fa-check"></i><b>3.14.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.14.5" data-path="model.html"><a href="model.html#proscons-9"><i class="fa fa-check"></i><b>3.14.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.15" data-path="model-1.html"><a href="model-1.html#association-rule-mining"><i class="fa fa-check"></i><b>3.15</b> Association Rule Mining</a><ul>
-<li class="chapter" data-level="3.15.1" data-path="model-1.html"><a href="model-1.html#intro-9"><i class="fa fa-check"></i><b>3.15.1</b> Intro</a></li>
-<li class="chapter" data-level="3.15.2" data-path="model-1.html"><a href="model-1.html#assumptions-9"><i class="fa fa-check"></i><b>3.15.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.15.3" data-path="model-1.html"><a href="model-1.html#characteristics-8"><i class="fa fa-check"></i><b>3.15.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.15.4" data-path="model-1.html"><a href="model-1.html#evaluation-9"><i class="fa fa-check"></i><b>3.15.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.15.5" data-path="model-1.html"><a href="model-1.html#proscons-9"><i class="fa fa-check"></i><b>3.15.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.15" data-path="model.html"><a href="model.html#naive-bayes"><i class="fa fa-check"></i><b>3.15</b> Naïve Bayes</a><ul>
+<li class="chapter" data-level="3.15.1" data-path="model.html"><a href="model.html#intro-10"><i class="fa fa-check"></i><b>3.15.1</b> Intro</a></li>
+<li class="chapter" data-level="3.15.2" data-path="model.html"><a href="model.html#assumptions-10"><i class="fa fa-check"></i><b>3.15.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.15.3" data-path="model.html"><a href="model.html#characteristics-9"><i class="fa fa-check"></i><b>3.15.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.15.4" data-path="model.html"><a href="model.html#evaluation-10"><i class="fa fa-check"></i><b>3.15.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.15.5" data-path="model.html"><a href="model.html#proscons-10"><i class="fa fa-check"></i><b>3.15.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.16" data-path="model-1.html"><a href="model-1.html#naive-bayes"><i class="fa fa-check"></i><b>3.16</b> Naïve Bayes</a><ul>
-<li class="chapter" data-level="3.16.1" data-path="model-1.html"><a href="model-1.html#intro-10"><i class="fa fa-check"></i><b>3.16.1</b> Intro</a></li>
-<li class="chapter" data-level="3.16.2" data-path="model-1.html"><a href="model-1.html#assumptions-10"><i class="fa fa-check"></i><b>3.16.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.16.3" data-path="model-1.html"><a href="model-1.html#characteristics-9"><i class="fa fa-check"></i><b>3.16.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.16.4" data-path="model-1.html"><a href="model-1.html#evaluation-10"><i class="fa fa-check"></i><b>3.16.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.16.5" data-path="model-1.html"><a href="model-1.html#proscons-10"><i class="fa fa-check"></i><b>3.16.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.16" data-path="model.html"><a href="model.html#lda"><i class="fa fa-check"></i><b>3.16</b> LDA</a><ul>
+<li class="chapter" data-level="3.16.1" data-path="model.html"><a href="model.html#intro-11"><i class="fa fa-check"></i><b>3.16.1</b> Intro</a></li>
+<li class="chapter" data-level="3.16.2" data-path="model.html"><a href="model.html#assumptions-11"><i class="fa fa-check"></i><b>3.16.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.16.3" data-path="model.html"><a href="model.html#characteristics-10"><i class="fa fa-check"></i><b>3.16.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.16.4" data-path="model.html"><a href="model.html#evaluation-11"><i class="fa fa-check"></i><b>3.16.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.16.5" data-path="model.html"><a href="model.html#proscons-11"><i class="fa fa-check"></i><b>3.16.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.17" data-path="model-1.html"><a href="model-1.html#lda"><i class="fa fa-check"></i><b>3.17</b> LDA</a><ul>
-<li class="chapter" data-level="3.17.1" data-path="model-1.html"><a href="model-1.html#intro-11"><i class="fa fa-check"></i><b>3.17.1</b> Intro</a></li>
-<li class="chapter" data-level="3.17.2" data-path="model-1.html"><a href="model-1.html#assumptions-11"><i class="fa fa-check"></i><b>3.17.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.17.3" data-path="model-1.html"><a href="model-1.html#characteristics-10"><i class="fa fa-check"></i><b>3.17.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.17.4" data-path="model-1.html"><a href="model-1.html#evaluation-11"><i class="fa fa-check"></i><b>3.17.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.17.5" data-path="model-1.html"><a href="model-1.html#proscons-11"><i class="fa fa-check"></i><b>3.17.5</b> Pros/Cons</a></li>
+<li class="chapter" data-level="3.17" data-path="model.html"><a href="model.html#qda"><i class="fa fa-check"></i><b>3.17</b> QDA</a><ul>
+<li class="chapter" data-level="3.17.1" data-path="model.html"><a href="model.html#intro-12"><i class="fa fa-check"></i><b>3.17.1</b> Intro</a></li>
+<li class="chapter" data-level="3.17.2" data-path="model.html"><a href="model.html#assumptions-12"><i class="fa fa-check"></i><b>3.17.2</b> Assumptions</a></li>
+<li class="chapter" data-level="3.17.3" data-path="model.html"><a href="model.html#characteristics-11"><i class="fa fa-check"></i><b>3.17.3</b> Characteristics</a></li>
+<li class="chapter" data-level="3.17.4" data-path="model.html"><a href="model.html#evaluation-12"><i class="fa fa-check"></i><b>3.17.4</b> Evaluation</a></li>
+<li class="chapter" data-level="3.17.5" data-path="model.html"><a href="model.html#proscons-12"><i class="fa fa-check"></i><b>3.17.5</b> Pros/Cons</a></li>
 </ul></li>
-<li class="chapter" data-level="3.18" data-path="model-1.html"><a href="model-1.html#qda"><i class="fa fa-check"></i><b>3.18</b> QDA</a><ul>
-<li class="chapter" data-level="3.18.1" data-path="model-1.html"><a href="model-1.html#intro-12"><i class="fa fa-check"></i><b>3.18.1</b> Intro</a></li>
-<li class="chapter" data-level="3.18.2" data-path="model-1.html"><a href="model-1.html#assumptions-12"><i class="fa fa-check"></i><b>3.18.2</b> Assumptions</a></li>
-<li class="chapter" data-level="3.18.3" data-path="model-1.html"><a href="model-1.html#characteristics-11"><i class="fa fa-check"></i><b>3.18.3</b> Characteristics</a></li>
-<li class="chapter" data-level="3.18.4" data-path="model-1.html"><a href="model-1.html#evaluation-12"><i class="fa fa-check"></i><b>3.18.4</b> Evaluation</a></li>
-<li class="chapter" data-level="3.18.5" data-path="model-1.html"><a href="model-1.html#proscons-12"><i class="fa fa-check"></i><b>3.18.5</b> Pros/Cons</a></li>
-</ul></li>
-<li class="chapter" data-level="3.19" data-path="model-1.html"><a href="model-1.html#gams"><i class="fa fa-check"></i><b>3.19</b> GAMs</a></li>
-<li class="chapter" data-level="3.20" data-path="model-1.html"><a href="model-1.html#hierarchical-models"><i class="fa fa-check"></i><b>3.20</b> Hierarchical Models</a></li>
-<li class="chapter" data-level="3.21" data-path="model-1.html"><a href="model-1.html#other-ml"><i class="fa fa-check"></i><b>3.21</b> Other ML</a></li>
+<li class="chapter" data-level="3.18" data-path="model.html"><a href="model.html#gams"><i class="fa fa-check"></i><b>3.18</b> GAMs</a></li>
+<li class="chapter" data-level="3.19" data-path="model.html"><a href="model.html#hierarchical-models"><i class="fa fa-check"></i><b>3.19</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="3.20" data-path="model.html"><a href="model.html#other-ml"><i class="fa fa-check"></i><b>3.20</b> Other ML</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>4</b> Communicate, Deploy, Maintain</a><ul>
-<li class="chapter" data-level="4.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>4.1</b> Communicate</a></li>
+<li class="chapter" data-level="4.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate"><i class="fa fa-check"></i><b>4.1</b> Communicate</a></li>
 <li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploymaintain"><i class="fa fa-check"></i><b>4.2</b> Deploy/Maintain</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Stats</a><ul>
 <li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#general-5"><i class="fa fa-check"></i><b>5.1</b> General</a></li>
-<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#bayes-rule"><i class="fa fa-check"></i><b>5.2</b> Bayes Rule</a></li>
-<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#sample-size"><i class="fa fa-check"></i><b>5.3</b> Sample Size</a></li>
-<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#hypothesis-testing"><i class="fa fa-check"></i><b>5.4</b> Hypothesis Testing</a></li>
-<li class="chapter" data-level="5.5" data-path="stats.html"><a href="stats.html#ab-testing"><i class="fa fa-check"></i><b>5.5</b> AB Testing</a><ul>
-<li class="chapter" data-level="5.5.1" data-path="stats.html"><a href="stats.html#power-analysis"><i class="fa fa-check"></i><b>5.5.1</b> Power Analysis</a></li>
+<li class="chapter" data-level="5.2" data-path="stats.html"><a href="stats.html#sample-size"><i class="fa fa-check"></i><b>5.2</b> Sample Size</a></li>
+<li class="chapter" data-level="5.3" data-path="stats.html"><a href="stats.html#hypothesis-testing"><i class="fa fa-check"></i><b>5.3</b> Hypothesis Testing</a></li>
+<li class="chapter" data-level="5.4" data-path="stats.html"><a href="stats.html#ab-testing"><i class="fa fa-check"></i><b>5.4</b> AB Testing</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="stats.html"><a href="stats.html#power-analysis"><i class="fa fa-check"></i><b>5.4.1</b> Power Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="stats.html"><a href="stats.html#experimental-design"><i class="fa fa-check"></i><b>5.6</b> Experimental Design</a></li>
+<li class="chapter" data-level="5.5" data-path="stats.html"><a href="stats.html#experimental-design"><i class="fa fa-check"></i><b>5.5</b> Experimental Design</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="sequences.html"><a href="sequences.html"><i class="fa fa-check"></i><b>6</b> Sequences</a><ul>
 <li class="chapter" data-level="6.1" data-path="sequences.html"><a href="sequences.html#time-series"><i class="fa fa-check"></i><b>6.1</b> Time Series</a><ul>
@@ -282,8 +296,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.6" data-path="deep-learning.html"><a href="deep-learning.html#debugging"><i class="fa fa-check"></i><b>7.6</b> Debugging</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html"><i class="fa fa-check"></i><b>8</b> Probabilistic Programming</a><ul>
-<li class="chapter" data-level="8.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>8.1</b> Doing Bayesian DA</a></li>
-<li class="chapter" data-level="8.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>8.2</b> Statistical Rethinking</a></li>
+<li class="chapter" data-level="8.1" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#bayes-rule"><i class="fa fa-check"></i><b>8.1</b> Bayes Rule</a></li>
+<li class="chapter" data-level="8.2" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#other-3"><i class="fa fa-check"></i><b>8.2</b> Other</a></li>
+<li class="chapter" data-level="8.3" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#doing-bayesian-da"><i class="fa fa-check"></i><b>8.3</b> Doing Bayesian DA</a></li>
+<li class="chapter" data-level="8.4" data-path="probabilistic-programming.html"><a href="probabilistic-programming.html#statistical-rethinking"><i class="fa fa-check"></i><b>8.4</b> Statistical Rethinking</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>9</b> Causality</a><ul>
 <li class="chapter" data-level="9.1" data-path="causality.html"><a href="causality.html#general-9"><i class="fa fa-check"></i><b>9.1</b> General</a></li>
@@ -298,47 +314,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="11" data-path="codebook.html"><a href="codebook.html"><i class="fa fa-check"></i><b>11</b> Codebook</a><ul>
 <li class="chapter" data-level="11.1" data-path="codebook.html"><a href="codebook.html#general-11"><i class="fa fa-check"></i><b>11.1</b> General</a></li>
-<li class="chapter" data-level="11.2" data-path="codebook.html"><a href="codebook.html#stats-by-simulation"><i class="fa fa-check"></i><b>11.2</b> Stats By Simulation</a></li>
-<li class="chapter" data-level="11.3" data-path="codebook.html"><a href="codebook.html#simple-bayes"><i class="fa fa-check"></i><b>11.3</b> Simple Bayes</a></li>
-<li class="chapter" data-level="11.4" data-path="codebook.html"><a href="codebook.html#ts-harmonic-regression"><i class="fa fa-check"></i><b>11.4</b> TS Harmonic Regression</a></li>
-<li class="chapter" data-level="11.5" data-path="codebook.html"><a href="codebook.html#all-sklearn-metrics"><i class="fa fa-check"></i><b>11.5</b> All Sklearn Metrics</a></li>
-<li class="chapter" data-level="11.6" data-path="codebook.html"><a href="codebook.html#save-and-load-models"><i class="fa fa-check"></i><b>11.6</b> Save And Load Models</a></li>
-<li class="chapter" data-level="11.7" data-path="codebook.html"><a href="codebook.html#lstm"><i class="fa fa-check"></i><b>11.7</b> LSTM</a></li>
-<li class="chapter" data-level="11.8" data-path="codebook.html"><a href="codebook.html#logistic-regression-stats-models"><i class="fa fa-check"></i><b>11.8</b> Logistic Regression Stats Models</a></li>
-<li class="chapter" data-level="11.9" data-path="codebook.html"><a href="codebook.html#function-negation"><i class="fa fa-check"></i><b>11.9</b> Function Negation</a></li>
-<li class="chapter" data-level="11.10" data-path="codebook.html"><a href="codebook.html#attach-date-csv"><i class="fa fa-check"></i><b>11.10</b> Attach Date CSV</a></li>
-<li class="chapter" data-level="11.11" data-path="codebook.html"><a href="codebook.html#ebb"><i class="fa fa-check"></i><b>11.11</b> EBB</a></li>
-<li class="chapter" data-level="11.12" data-path="codebook.html"><a href="codebook.html#plot-grid"><i class="fa fa-check"></i><b>11.12</b> Plot Grid</a></li>
-<li class="chapter" data-level="11.13" data-path="codebook.html"><a href="codebook.html#pairwise-scatterplot"><i class="fa fa-check"></i><b>11.13</b> Pairwise Scatterplot</a></li>
-<li class="chapter" data-level="11.14" data-path="codebook.html"><a href="codebook.html#anti-join"><i class="fa fa-check"></i><b>11.14</b> Anti-join</a></li>
-<li class="chapter" data-level="11.15" data-path="codebook.html"><a href="codebook.html#df-diff"><i class="fa fa-check"></i><b>11.15</b> DF Diff</a></li>
-<li class="chapter" data-level="11.16" data-path="codebook.html"><a href="codebook.html#csv-encoding-check"><i class="fa fa-check"></i><b>11.16</b> CSV Encoding Check</a></li>
-<li class="chapter" data-level="11.17" data-path="codebook.html"><a href="codebook.html#pandas-profiling"><i class="fa fa-check"></i><b>11.17</b> Pandas Profiling</a></li>
-<li class="chapter" data-level="11.18" data-path="codebook.html"><a href="codebook.html#read-sql"><i class="fa fa-check"></i><b>11.18</b> Read SQL</a></li>
-<li class="chapter" data-level="11.19" data-path="codebook.html"><a href="codebook.html#extract-date"><i class="fa fa-check"></i><b>11.19</b> Extract Date</a></li>
-<li class="chapter" data-level="11.20" data-path="codebook.html"><a href="codebook.html#ggplot-to-plotly"><i class="fa fa-check"></i><b>11.20</b> GGPLOT To Plotly</a></li>
-<li class="chapter" data-level="11.21" data-path="codebook.html"><a href="codebook.html#custom-theme-for-plot"><i class="fa fa-check"></i><b>11.21</b> Custom Theme For Plot</a></li>
-<li class="chapter" data-level="11.22" data-path="codebook.html"><a href="codebook.html#heatmap"><i class="fa fa-check"></i><b>11.22</b> Heatmap</a></li>
-<li class="chapter" data-level="11.23" data-path="codebook.html"><a href="codebook.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>11.23</b> Linear Regression Statsmodels</a></li>
-<li class="chapter" data-level="11.24" data-path="codebook.html"><a href="codebook.html#linear-regression-by-groups"><i class="fa fa-check"></i><b>11.24</b> Linear Regression By Groups</a></li>
-<li class="chapter" data-level="11.25" data-path="codebook.html"><a href="codebook.html#rml-pipeline"><i class="fa fa-check"></i><b>11.25</b> RML Pipeline</a></li>
-<li class="chapter" data-level="11.26" data-path="codebook.html"><a href="codebook.html#rowwise"><i class="fa fa-check"></i><b>11.26</b> Rowwise</a></li>
-<li class="chapter" data-level="11.27" data-path="codebook.html"><a href="codebook.html#sampling-file"><i class="fa fa-check"></i><b>11.27</b> Sampling File</a></li>
-<li class="chapter" data-level="11.28" data-path="codebook.html"><a href="codebook.html#sql-dummy-columns"><i class="fa fa-check"></i><b>11.28</b> SQL Dummy Columns</a></li>
-<li class="chapter" data-level="11.29" data-path="codebook.html"><a href="codebook.html#model-calibration"><i class="fa fa-check"></i><b>11.29</b> Model Calibration</a></li>
-<li class="chapter" data-level="11.30" data-path="codebook.html"><a href="codebook.html#binning-rule-of-thumb"><i class="fa fa-check"></i><b>11.30</b> Binning Rule Of Thumb</a></li>
-<li class="chapter" data-level="11.31" data-path="codebook.html"><a href="codebook.html#featuretools"><i class="fa fa-check"></i><b>11.31</b> Featuretools</a></li>
-<li class="chapter" data-level="11.32" data-path="codebook.html"><a href="codebook.html#skimage"><i class="fa fa-check"></i><b>11.32</b> Skimage</a></li>
-<li class="chapter" data-level="11.33" data-path="codebook.html"><a href="codebook.html#shap"><i class="fa fa-check"></i><b>11.33</b> SHAP</a></li>
-<li class="chapter" data-level="11.34" data-path="codebook.html"><a href="codebook.html#hyperband-cv"><i class="fa fa-check"></i><b>11.34</b> Hyperband CV</a></li>
-<li class="chapter" data-level="11.35" data-path="codebook.html"><a href="codebook.html#csv-to-db"><i class="fa fa-check"></i><b>11.35</b> CSV To DB</a></li>
-<li class="chapter" data-level="11.36" data-path="codebook.html"><a href="codebook.html#xgboost-light-gbm"><i class="fa fa-check"></i><b>11.36</b> Xgboost &amp; Light GBM</a></li>
-<li class="chapter" data-level="11.37" data-path="codebook.html"><a href="codebook.html#bayesian-cv"><i class="fa fa-check"></i><b>11.37</b> Bayesian CV</a></li>
-<li class="chapter" data-level="11.38" data-path="codebook.html"><a href="codebook.html#pyspark-1"><i class="fa fa-check"></i><b>11.38</b> Pyspark</a></li>
-<li class="chapter" data-level="11.39" data-path="codebook.html"><a href="codebook.html#sparklyr-1"><i class="fa fa-check"></i><b>11.39</b> Sparklyr</a></li>
-<li class="chapter" data-level="11.40" data-path="codebook.html"><a href="codebook.html#data-table"><i class="fa fa-check"></i><b>11.40</b> Data Table</a></li>
-<li class="chapter" data-level="11.41" data-path="codebook.html"><a href="codebook.html#keras"><i class="fa fa-check"></i><b>11.41</b> Keras</a></li>
-<li class="chapter" data-level="11.42" data-path="codebook.html"><a href="codebook.html#mnist-example"><i class="fa fa-check"></i><b>11.42</b> MNIST Example</a></li>
+<li class="chapter" data-level="11.2" data-path="codebook.html"><a href="codebook.html#symbolic-regression"><i class="fa fa-check"></i><b>11.2</b> Symbolic Regression</a></li>
+<li class="chapter" data-level="11.3" data-path="codebook.html"><a href="codebook.html#stats-by-simulation"><i class="fa fa-check"></i><b>11.3</b> Stats By Simulation</a></li>
+<li class="chapter" data-level="11.4" data-path="codebook.html"><a href="codebook.html#simple-bayes"><i class="fa fa-check"></i><b>11.4</b> Simple Bayes</a></li>
+<li class="chapter" data-level="11.5" data-path="codebook.html"><a href="codebook.html#ts-harmonic-regression"><i class="fa fa-check"></i><b>11.5</b> TS Harmonic Regression</a></li>
+<li class="chapter" data-level="11.6" data-path="codebook.html"><a href="codebook.html#all-sklearn-metrics"><i class="fa fa-check"></i><b>11.6</b> All Sklearn Metrics</a></li>
+<li class="chapter" data-level="11.7" data-path="codebook.html"><a href="codebook.html#save-and-load-models"><i class="fa fa-check"></i><b>11.7</b> Save And Load Models</a></li>
+<li class="chapter" data-level="11.8" data-path="codebook.html"><a href="codebook.html#lstm"><i class="fa fa-check"></i><b>11.8</b> LSTM</a></li>
+<li class="chapter" data-level="11.9" data-path="codebook.html"><a href="codebook.html#logistic-regression-stats-models"><i class="fa fa-check"></i><b>11.9</b> Logistic Regression Stats Models</a></li>
+<li class="chapter" data-level="11.10" data-path="codebook.html"><a href="codebook.html#function-negation"><i class="fa fa-check"></i><b>11.10</b> Function Negation</a></li>
+<li class="chapter" data-level="11.11" data-path="codebook.html"><a href="codebook.html#attach-date-csv"><i class="fa fa-check"></i><b>11.11</b> Attach Date CSV</a></li>
+<li class="chapter" data-level="11.12" data-path="codebook.html"><a href="codebook.html#ebb"><i class="fa fa-check"></i><b>11.12</b> EBB</a></li>
+<li class="chapter" data-level="11.13" data-path="codebook.html"><a href="codebook.html#plot-grid"><i class="fa fa-check"></i><b>11.13</b> Plot Grid</a></li>
+<li class="chapter" data-level="11.14" data-path="codebook.html"><a href="codebook.html#pairwise-scatterplot"><i class="fa fa-check"></i><b>11.14</b> Pairwise Scatterplot</a></li>
+<li class="chapter" data-level="11.15" data-path="codebook.html"><a href="codebook.html#anti-join"><i class="fa fa-check"></i><b>11.15</b> Anti-join</a></li>
+<li class="chapter" data-level="11.16" data-path="codebook.html"><a href="codebook.html#df-diff"><i class="fa fa-check"></i><b>11.16</b> DF Diff</a></li>
+<li class="chapter" data-level="11.17" data-path="codebook.html"><a href="codebook.html#csv-encoding-check"><i class="fa fa-check"></i><b>11.17</b> CSV Encoding Check</a></li>
+<li class="chapter" data-level="11.18" data-path="codebook.html"><a href="codebook.html#pandas-profiling"><i class="fa fa-check"></i><b>11.18</b> Pandas Profiling</a></li>
+<li class="chapter" data-level="11.19" data-path="codebook.html"><a href="codebook.html#read-sql"><i class="fa fa-check"></i><b>11.19</b> Read SQL</a></li>
+<li class="chapter" data-level="11.20" data-path="codebook.html"><a href="codebook.html#extract-date"><i class="fa fa-check"></i><b>11.20</b> Extract Date</a></li>
+<li class="chapter" data-level="11.21" data-path="codebook.html"><a href="codebook.html#ggplot-to-plotly"><i class="fa fa-check"></i><b>11.21</b> GGPLOT To Plotly</a></li>
+<li class="chapter" data-level="11.22" data-path="codebook.html"><a href="codebook.html#custom-theme-for-plot"><i class="fa fa-check"></i><b>11.22</b> Custom Theme For Plot</a></li>
+<li class="chapter" data-level="11.23" data-path="codebook.html"><a href="codebook.html#heatmap"><i class="fa fa-check"></i><b>11.23</b> Heatmap</a></li>
+<li class="chapter" data-level="11.24" data-path="codebook.html"><a href="codebook.html#linear-regression-statsmodels"><i class="fa fa-check"></i><b>11.24</b> Linear Regression Statsmodels</a></li>
+<li class="chapter" data-level="11.25" data-path="codebook.html"><a href="codebook.html#linear-regression-by-groups"><i class="fa fa-check"></i><b>11.25</b> Linear Regression By Groups</a></li>
+<li class="chapter" data-level="11.26" data-path="codebook.html"><a href="codebook.html#rml-pipeline"><i class="fa fa-check"></i><b>11.26</b> RML Pipeline</a></li>
+<li class="chapter" data-level="11.27" data-path="codebook.html"><a href="codebook.html#rowwise"><i class="fa fa-check"></i><b>11.27</b> Rowwise</a></li>
+<li class="chapter" data-level="11.28" data-path="codebook.html"><a href="codebook.html#sampling-file"><i class="fa fa-check"></i><b>11.28</b> Sampling File</a></li>
+<li class="chapter" data-level="11.29" data-path="codebook.html"><a href="codebook.html#sql-dummy-columns"><i class="fa fa-check"></i><b>11.29</b> SQL Dummy Columns</a></li>
+<li class="chapter" data-level="11.30" data-path="codebook.html"><a href="codebook.html#model-calibration"><i class="fa fa-check"></i><b>11.30</b> Model Calibration</a></li>
+<li class="chapter" data-level="11.31" data-path="codebook.html"><a href="codebook.html#binning-rule-of-thumb"><i class="fa fa-check"></i><b>11.31</b> Binning Rule Of Thumb</a></li>
+<li class="chapter" data-level="11.32" data-path="codebook.html"><a href="codebook.html#featuretools"><i class="fa fa-check"></i><b>11.32</b> Featuretools</a></li>
+<li class="chapter" data-level="11.33" data-path="codebook.html"><a href="codebook.html#skimage"><i class="fa fa-check"></i><b>11.33</b> Skimage</a></li>
+<li class="chapter" data-level="11.34" data-path="codebook.html"><a href="codebook.html#shap"><i class="fa fa-check"></i><b>11.34</b> SHAP</a></li>
+<li class="chapter" data-level="11.35" data-path="codebook.html"><a href="codebook.html#hyperband-cv"><i class="fa fa-check"></i><b>11.35</b> Hyperband CV</a></li>
+<li class="chapter" data-level="11.36" data-path="codebook.html"><a href="codebook.html#csv-to-db"><i class="fa fa-check"></i><b>11.36</b> CSV To DB</a></li>
+<li class="chapter" data-level="11.37" data-path="codebook.html"><a href="codebook.html#xgboost-light-gbm"><i class="fa fa-check"></i><b>11.37</b> Xgboost &amp; Light GBM</a></li>
+<li class="chapter" data-level="11.38" data-path="codebook.html"><a href="codebook.html#bayesian-cv"><i class="fa fa-check"></i><b>11.38</b> Bayesian CV</a></li>
+<li class="chapter" data-level="11.39" data-path="codebook.html"><a href="codebook.html#pyspark-1"><i class="fa fa-check"></i><b>11.39</b> Pyspark</a></li>
+<li class="chapter" data-level="11.40" data-path="codebook.html"><a href="codebook.html#sparklyr-1"><i class="fa fa-check"></i><b>11.40</b> Sparklyr</a></li>
+<li class="chapter" data-level="11.41" data-path="codebook.html"><a href="codebook.html#data-table"><i class="fa fa-check"></i><b>11.41</b> Data Table</a></li>
+<li class="chapter" data-level="11.42" data-path="codebook.html"><a href="codebook.html#keras"><i class="fa fa-check"></i><b>11.42</b> Keras</a></li>
+<li class="chapter" data-level="11.43" data-path="codebook.html"><a href="codebook.html#mnist-example"><i class="fa fa-check"></i><b>11.43</b> MNIST Example</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -364,105 +381,75 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 5</span> Stats</h1>
 <div id="general-5" class="section level2">
 <h2><span class="header-section-number">5.1</span> General</h2>
-<p>Cohen’s H | Cohen’s D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test</p>
+<p>Cohen’s H | Cohen’s D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test | cohen’s f^2 | <a href="https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression" class="uri">https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression</a> | <a href="https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis" class="uri">https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis</a></p>
 <p><a href="http://www.wzchen.com/probability-cheatsheet">Probability Cheat Sheet</a></p>
 <p><a href="http://www.cyclismo.org/tutorial/R/probability.html">Prob Dists In R</a></p>
 <p><a href="https://www.leeds.ac.uk/educol/documents/00002182.htm">Effect Size</a></p>
 <p>Zero correlation doesn’t imply independence</p>
-<p>library(effsize) lm vs t.test vs anova library(EMT): multinomial test</p>
+<p>lm vs t.test vs anova</p>
+<p>library(EMT): multinomial test</p>
 <p>ecdf: <a href="http://www.ericmjl.com/blog/2018/7/14/ecdfs/">1</a> | <a href="https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf">2</a></p>
-<p><a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html" class="uri">http://www.stat.umn.edu/geyer/old/5101/rlook.html</a></p>
-<p><a href="https://stats.idre.ucla.edu/other/mult-pkg/whatstat/" class="uri">https://stats.idre.ucla.edu/other/mult-pkg/whatstat/</a></p>
 <p><a href="https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist">Mixed Categorical &amp; Numeric Distance</a> | <a href="https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor">2</a></p>
 <p><a href="https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617">Outliers in small samples</a></p>
-<p>Another common measure of effect size is d, sometimes known as Cohen’s d (as you might have guessed by now, Cohen was quite influential in the field of effect sizes). This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups’ means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups’ means differ by one standard deviation; a d of .5 tells us that the two groups’ means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a ‘small’ effect size, 0.5 represents a ‘medium’ effect size and 0.8 a ‘large’ effect size. This means that if two groups’ means don’t differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant.</p>
+<p>Another common measure of effect size is d, sometimes known as Cohen’s d. This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups’ means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups’ means differ by one standard deviation; a d of .5 tells us that the two groups’ means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a ‘small’ effect size, 0.5 represents a ‘medium’ effect size and 0.8 a ‘large’ effect size. This means that if two groups’ means don’t differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant.</p>
 <p>Beta Distribution: The larger the alpha parameter is the closer the resulting distribution is to 1.0 and the larger the beta the closer it is to 0.</p>
-<p>cohen’s f^2 | <a href="https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression" class="uri">https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression</a> | <a href="https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis" class="uri">https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis</a></p>
-<p>Covariance: Measure of how two random values change together. Negative - variables show opposite behavior ( As A increases B decreases). Positive - variables show similar behavior (As A increases B increases). The Pearson Correlation is normalized version of covariance</p>
-<p>Note about Populations and Samples: Populations have parameters. Samples have statistics.</p>
-<p>A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.</p>
-<ul>
-<li>Type I Error: Saying there is an effect when there isn’t one. Type II error: concluding there is no effect when, in fact, there is one.</li>
-</ul>
+<p>The Pearson Correlation is normalized version of covariance</p>
+<p>Populations have parameters. Samples have statistics.</p>
 <p>Probably the most useful types of statistics for skewed probability distributions are quantiles.</p>
-<ul>
-<li><p>Random sampling &amp; random assignment: generalizable &amp; causal</p></li>
-<li><p>Get 95% ci around p-value</p></li>
-<li><p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p></li>
-<li><p>Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.</p></li>
-<li><p><a href="https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html">Effect size</a></p></li>
-<li><p>box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series</p></li>
-<li><p>Sum of normally distributed random variables: sum of means &amp; sum of variances</p></li>
-<li><p>Zero correlation doesn’t mean independent variables. Covariance only determines linear relationships.</p></li>
-<li><p>Bypass inferential stats if features at least 1/10 of data points.</p></li>
-<li><p>The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.</p></li>
-<li><p>One Sample T-test: To examine the average difference between a sample and the known value of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Two Sample T-test: To examine the average difference between two samples drawn from two different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent.</p></li>
-<li><p>Chi-Squared Test of Independence: To test whether two categorical variables are independent. Assumes the sample observations are randomly drawn and independent.</p></li>
-<li><p>F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p></li>
-<li><p>Barlett Test: F-Test for more than two populations.</p></li>
-<li><p>If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won’t. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.</p></li>
-<li><p>Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random.</p></li>
-<li><p>Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.</p></li>
-<li><p>Independent rvs are uncorrelated. That is Cor (X,Y)=0</p></li>
-<li><p>Don’t sum sd’s, sum variances.</p></li>
-<li><p>One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use One-Way ANOVA? To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.</p></li>
-<li><p>When do we use the chisq2 Test of Independence? To test whether two categorical variables are independent. Assumptions: Sample observations are randomly drawn and independent.</p></li>
-<li><p>To perform the one-way ANOVA, we can use the f_oneway() function of the SciPy package.</p></li>
-<li><p>The degrees of freedom is the number of data rows minus the number of coefficients fit.</p></li>
-<li><p>Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.</p></li>
-<li><p>Is it possible that the apparent effect is due to selection bias or some other error in the experimental setup? If so, then we might conclude that the effect is an artifact; that is, something we created (by accident) rather than found.</p></li>
-<li><p>The sampling distribution is the distribution of the samples mean.</p></li>
-<li><p>The CDF is the function that maps values to their percentile rank in a distribution.</p></li>
-<li><p>I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.</p></li>
-<li><p>CLT: More specifically, if the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (nμ, nσ^2).</p></li>
-<li><p>Another option is to report just the Bayes Factor or likelihood ratio, P(E | H A ) / P(E|H 0 ), rather than the posterior probability.</p></li>
-<li><p>Statistical power is the probability that the test will be positive if the null hypothesis is false. In general, the power of a test depends on the sample size, the magnitude of the effect, and the threshold α.</p></li>
-<li><p>If there are no outliers, the sample mean minimizes the mean squared error</p></li>
-<li><p>An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.</p></li>
-<li><p>A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same units, they come from different distributions. There are two common solutions to these problems:</p></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li><p>Transform all values to standard scores. This leads to the Pearson coefficient of correlation.</p></li>
-<li><p>Transform all values to their percentile ranks. This leads to the Spearman coefficient.</p></li>
-</ol>
-<p>There is no random sampling since the subjects of the study were volunteers, so the results cannot be generalized to all people. However, due to random assignment, we are able to infer a causal link between the belief information is stored and the ability to recall that same information.</p>
-<p>Explanatory variables are conditions you can impose on the experimental units, while blocking variables are characteristics that the experimental units come with that you would like to control for.</p>
+<p>Random sampling &amp; random assignment: generalizable &amp; causal</p>
+<p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p>
+<p>Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.</p>
+<p><a href="https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html">Effect size</a></p>
+<p>Sum of normally distributed random variables: sum of means &amp; sum of variances</p>
+<p>Zero correlation doesn’t mean independent variables. Covariance only determines linear relationships.</p>
+<p>Bypass inferential stats if features at least 1/10 of data points.</p>
+<p>If we take a larger and larger sample from a population, its distribution will tend to become normal no matter what it is initially. It won’t. The Central Limit Theorem, the misreading of which is the cause of this mistake, refers to the distribution of standardized sums of random variables as their number grow, not to the distribution of a collection of random variables.</p>
+<p>Frequentists: Probability is a measure of the the frequency of repeated events. The parameters are fixed (but unknown) and data are random. Bayesians: Probability is a measure of the degree of certainty about values, so the interpretation is that rameters are random and data are fixed.</p>
+<p>Independent rvs are uncorrelated. That is Cor (X,Y)=0</p>
+<p>Don’t sum sd’s, sum variances</p>
+<p>The sampling distribution is the distribution of the samples mean.</p>
+<p>The CDF is the function that maps values to their percentile rank in a distribution.</p>
+<p>I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.</p>
+<p>If the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (n mu, n sigma_sqrd).</p>
+<p>If there are no outliers, the sample mean minimizes the mean squared error</p>
+<p>An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.</p>
+<p>A challenge in measuring correlation is that the variables we want to compare might not be expressed in the same units. For example, height might be in centimeters and weight in kilograms. And even if they are in the same
+units, they come from different distributions. There are two common solutions to these problems: 1. Transform all values to standard scores. This leads to the Pearson coefficient of correlation. 2. Transform all values to their percentile ranks. This leads to the Spearman coefficient.</p>
 <p>In random sampling, you use stratifying to control for a variable. In random assignment, you use blocking to achieve the same goal.</p>
 <p>Control: compare treatment of interest to a control group</p>
 <p>Randomize: randomly assign subjects to treatments</p>
 <p>Replicate: collect a sufficiently large sample within a study, or replicate the entire study</p>
 <p>Block: account for the potential effect of confounding variables</p>
-<p>Group subjects into blocks based on these variations, and randomize within each block to treatment groups</p>
 <p>Random Sampling + Random Assignment: Causal + generalizable</p>
-<p>No Random Sampling + Random Assignment: Causal + not generalizable</p>
-<p>Random Sampling + No Random Assignment: Not causal + generalizable</p>
-<p>No Random Sampling + No Random Assignment: Not causal + not generalizable</p>
-</div>
-<div id="bayes-rule" class="section level2">
-<h2><span class="header-section-number">5.2</span> Bayes Rule</h2>
-<p>Posterior = Likelihood * Prior / Marginal Likelihood</p>
-<p>Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)</p>
-<p>Prior P(theta): Probability of parameter value</p>
-<p>Posterior P(theta|D): Credibility of the parameter value with the data taken into account.</p>
-<p>Marginal Likelihood (Evidence): Probability of evidence</p>
 </div>
 <div id="sample-size" class="section level2">
-<h2><span class="header-section-number">5.3</span> Sample Size</h2>
+<h2><span class="header-section-number">5.2</span> Sample Size</h2>
 <p>Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:</p>
 <p><span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
 <p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
 </div>
 <div id="hypothesis-testing" class="section level2">
-<h2><span class="header-section-number">5.4</span> Hypothesis Testing</h2>
+<h2><span class="header-section-number">5.3</span> Hypothesis Testing</h2>
 <p>There is only one test.</p>
+<p>Hypothesis tests aim to describe the plausibility of a parameter taking on a specific value. Confidence intervals aim to describe a range of plausible values a parameter can take on. If the value of the parameter specified by H0 is contained within the 95% confidence interval, then H0 cannot be rejectedat the 0.05 p-value threshold. If the value of the parameter specified by H0 is not contained within the 95% confidence interval, then H0 can be rejectedat the 0.05 p-value threshold.</p>
+<p>A t test (t.test in R) is a special case of an ANOVA and a paired t test (parameter paired = T) is a special case of a repeated measures ANOVA.</p>
+<p>Type I Error: Saying there is an effect when there isn’t one. Type II error: concluding there is no effect when, in fact, there is one.</p>
 <p>jarque.bera.test: Tests the null of normaility for the series using the Jarque-Bera test statistics</p>
 <p>test heteroscedaticity: breusch-pagan or ncv test</p>
-<p>Shapiro–Wilk test is a test of normality</p>
+<p>box.test: Compute the Box-Pierce or Ljung-Box test statistics for examining the null of independence in a given series<br />
+The probability (p-value) of observing results at least as extreme as what is present in your data sample. P-value less than .05 retain h_0 else reject h_0.</p>
+<p>One Sample T-Test? To examine the average difference between a sample and the known value of the population mean. Assumptions: The population from which the sample is drawn is normally distributed. Sample observations are randomly drawn and independent.</p>
+<p>When do we use the Two Sample T-Test? To examine the average difference between two samples drawn from two different populations. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the two populations are equal. Sample observations are randomly drawn and independent.</p>
+<p>When do we use the F-Test? To assess whether the variances of two different populations are equal. Assumptions: The populations from which the samples are drawn are normally dist. Sample observations are randomly drawn and independent.</p>
+<p>When do we use One-Way ANOVA? To assess the equality of means of two or more groups. NB: When there are exactly two groups, this is equivalent to a Two Sample T-Test. Assumptions: The populations from which the samples are drawn are normally dist. The standard deviations of the populations are equal. Sample observations are randomly drawn and independent.</p>
+<p>One Sample T-test: To examine the average difference between a sample and the known value
+of the population mean. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p>
+<p>Two Sample T-test: To examine the average difference between two samples drawn from two
+different populations. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the two populations are equal, and sample observations are randomly drawn and independent.</p>
+<p>One-Way ANOVA: To assess the equality of means of two or more groups. Assumes the populations from which the samples are drawn are normally dist, the standard deviations of the populations are equal, and sample observations are randomly drawn and independent.</p>
+<p>Chi-Squared Test of Independence: To test whether two categorical variables are independent. Assumes the sample observations are randomly drawn and independent.</p>
+<p>F-Test: To assess whether the variances of two different populations are equal. Assumes the population from which the sample is drawn is normally distributed and the sample observations are randomly drawn and independent.</p>
+<p>Barlett Test: F-Test for more than two populations.</p>
 <p>Shapiro-Wilk Test for Normality: H_0 says the data is normally distributed while H_a says it is not. To run this test in R, the syntax is quite simple:</p>
 <p><a href="https://lindeloev.github.io/tests-as-linear/">Most Tests Are Linear Regression</a>: lm() with a single categorical feature is equivalent to a t test or anova test.</p>
 <p>Fisher’s Exact Test: Test for proportions</p>
@@ -470,10 +457,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The MWW RankSum test is a useful test to determine if two distributions are significantly different or not. Unlike the t-test, the RankSum test does not assume that the data are normally distributed, potentially providing a more accurate assessment of the data sets.</p>
 </div>
 <div id="ab-testing" class="section level2">
-<h2><span class="header-section-number">5.5</span> AB Testing</h2>
+<h2><span class="header-section-number">5.4</span> AB Testing</h2>
 <p>Mostly notes from the Udacity class.</p>
 <p><a href="http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html">AB Testing</a></p>
-<p>The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The “30” rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]</p>
+<p>The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The “30” rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means.
+1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]</p>
 <ol start="2" style="list-style-type: decimal">
 <li>The approximation becomes better with larger n, given other things remaining the same.</li>
 </ol>
@@ -509,31 +497,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Result are repeatable (stat sig) bar should be lower than business interesting (practically sig)</p>
 <p>Stat Power: How many page view necessary to get a stat sig result.</p>
 <p>Size v Power: The smaller the effect or increased confidence you want to detect/have (greater power of experiment), the larger the sample you need to use.</p>
-<p>alpha = P(reject null when true) beta = P(accept null when false)</p>
-<p>small sample: low alpha, high beta larger sample: low alpha, low beta</p>
-<p>1- alpha = confidence level 1 - beta = sensitivity (often 80%)</p>
+<p>alpha = P(reject null when true)
+beta = P(accept null when false)</p>
+<p>small sample: low alpha, high beta
+larger sample: low alpha, low beta</p>
+<p>1- alpha = confidence level
+1 - beta = sensitivity (often 80%)</p>
 <p>practical significance: 2%, alpha = 0.05, beta = 0.2</p>
-<p>sample size dp_to ctr (increase in se), confidence level, sensitivity sample size invp_to practical sig (larger changes easier to detect)</p>
+<p>sample size dp_to ctr (increase in se), confidence level, sensitivity
+sample size invp_to practical sig (larger changes easier to detect)</p>
 <p>above is design of experiment. below is analysis:</p>
-<p>estimate diff: experimental prop - control prop margin of error = z*se</p>
+<p>estimate diff: experimental prop - control prop
+margin of error = z*se</p>
 <p>conf int: estimated diff +/- margin of error</p>
-<p><strong>Policy &amp; Ethics</strong></p>
-<p>In the study, what risk is the participant undertaking? The main threshold is whether the risk exceeds that of “minimal risk”.</p>
-<p>Next, what benefits might result from the study? Even if the risk is minimal, how might the results help?</p>
-<p>Third, what other choices do participants have? For example, if you are testing out changes to a search engine, participants always have the choice to use another search engine.</p>
-<p>Finally, what data is being collected, and what is the expectation of privacy and confidentiality? This last question is quite nuanced, encompassing numerous questions: Do participants understand what data is being collected about them? What harm would befall them should that data be made public? Would they expect that data to be considered private and confidential?</p>
-<p>Our recommendation is that there should be internal reviews of all proposed studies by experts regarding the questions:</p>
-<p>Are participants facing more than minimal risk? Do participants understand what data is being gathered? Is that data identifiable? How is the data handled?</p>
-<p>Internal process recommendations Finally, regarding internal process of data handling, we recommend that:</p>
-<p>Every employee who might be involved in A/B test be educated about the ethics and the protection of the participants. Clearly there are other areas of ethics beyond what we’ve covered that discuss integrity, competence, and responsibility, but those generally are broader than protecting participants of A/B tests (cite ACM code of ethics).</p>
-<p>All data, identified or not, be stored securely, with access limited to those who need it to complete their job. Access should be time limited. There should be clear policies of what data usages are acceptable and not acceptable. Moreover, all usage of the data should be logged and audited regularly for violations. You create a clear escalation path for how to handle cases where there is even possibly more than minimal risk or data sensitivity issues.</p>
 <p>rate better for usability test than prob</p>
-<p><strong>Choosing &amp; Characterizing Metrics</strong></p>
-<p><strong>Define</strong></p>
-<p>Make sure to granularize funnel</p>
-<p><strong>Intuition</strong></p>
-<p>NA</p>
-<p><strong>Characterize</strong></p>
 <p>Focus groups, UER (user experience study), survey, experiments, retrospective analysis, external data</p>
 <p>temporal effects across hours, days, weeks are important</p>
 <p>different browsers screw with the CTR depending on how they deal with JS</p>
@@ -551,18 +528,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>sign test: Good for looking to implement a change, but doesn’t give effect size.</p>
 <p>empirical vs analytic: underlying distribution could be weird so do empirical. Analyticcal for simple metrics. If empirical and anlytical don’t agree then run AvA test.</p>
 <p>A vs A test: Std proportional to square root of number of samples. Diminishing returns for many tests. Can use bootstrap if don’t have enough traffic for a big A v A test.</p>
-<p><strong>Designing An Experiment</strong></p>
-<p><strong>Choose Subject</strong></p>
 <p>Unit of Diversion: How to indentify a person. Cookie (could clear so change), userid, deviceid, and address (changes all the time).</p>
 <p>Intra-user vs inter-user experiment.</p>
-<p><strong>Choose Population</strong></p>
+<p>Choose Population:</p>
 <p>Size</p>
 <p>Duration</p>
 <p>Cohort: People who enter the experiment at the same time.</p>
 <p>Cohort &gt; Population: Learning effects, user retention</p>
 <p>Can reduce sample if just targeting english speaking traffic</p>
 <p>When going to run experiment: holiday or not? How many people to put through experiment and control?</p>
-<p><strong>Analyzing Results</strong></p>
+<p>Analyzing Results:</p>
 <p>Sanity Checks:</p>
 <p>Pass all before move on</p>
 <p>Good invariants: # of events, video load time (user has no control over it). Want these to be about the same for experiment and control.</p>
@@ -580,13 +555,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Designing the control group and experiment group.</p>
 <p>Analyzing results, and draw valid conclusions.</p>
 <div id="power-analysis" class="section level3">
-<h3><span class="header-section-number">5.5.1</span> Power Analysis</h3>
+<h3><span class="header-section-number">5.4.1</span> Power Analysis</h3>
 <p><a href="https://www.statmethods.net/stats/power.html">Power Analysis</a></p>
 <p>Power-Of-Test: <a href="https://rpsychologist.com/d3/NHST/" class="uri">https://rpsychologist.com/d3/NHST/</a> <a href="https://juliasilge.shinyapps.io/power-app/" class="uri">https://juliasilge.shinyapps.io/power-app/</a> <a href="https://www.statmethods.net/stats/power.html" class="uri">https://www.statmethods.net/stats/power.html</a> <a href="https://www.graphpad.com/quickcalcs/binomial1.cfm" class="uri">https://www.graphpad.com/quickcalcs/binomial1.cfm</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html</a> <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html</a></p>
 </div>
 </div>
 <div id="experimental-design" class="section level2">
-<h2><span class="header-section-number">5.6</span> Experimental Design</h2>
+<h2><span class="header-section-number">5.5</span> Experimental Design</h2>
 <p>Notes from DataCamp</p>
 <p>Randomized Complete Block Design (RCBD) experiment</p>
 <p>Power usually @ 80%. power effect size &amp; sample size all inter-related (with 2 can calculate 3rd).</p>
@@ -597,9 +572,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>aov = lm + anova | aov + tukey hsd</p>
 <p>Another assumption of ANOVA and linear modeling is homogeneity of variance. Homogeneity means “same”, and here that would mean that the variance of int_rate is the same for each level of grade. We can test for homogeneity of variances using bartlett.test(), which takes a formula and a dataset as inputs.</p>
 <p>One non-parametric alternative to ANOVA is the Kruskal-Wallis rank sum test. For those with some statistics knowledge, it is an extension of the Mann-Whitney U test for when there are more than two groups, such as with our grade variable.</p>
-<p>Use the correct function from pwr to find the sample size (d is the effect size) pwr::pwr.t.test(n = NULL, d = .2, power = .8, sig.level =.05, alternative = “two.sided”)</p>
+<p>Use the correct function from pwr to find the sample size (d is the effect size)
+pwr::pwr.t.test(n = NULL, d = .2, power = .8, sig.level =.05, alternative = “two.sided”)</p>
 <p>multivariable experiment:</p>
-<p>lendingclub_multi &lt;- lm(loan_amnt ~ Group + grade + verification_status, lendingclub_ab) tidy(lendingclub_multi)</p>
+<p>lendingclub_multi &lt;- lm(loan_amnt ~ Group + grade + verification_status, lendingclub_ab)
+tidy(lendingclub_multi)</p>
 <p>The sampling package’s cluster() creates cluster samples. It takes in a dataset name, the variable in the set to be used as the cluster variable, passed as a vector with the name as a string, e.g. c(“variable”), a number of clusters to select, and a method</p>
 <p>Randomized Complete Block Designs</p>
 <p>the purpose of blocking an experiment is to make the experimental groups more like one another.</p>
@@ -663,7 +640,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
