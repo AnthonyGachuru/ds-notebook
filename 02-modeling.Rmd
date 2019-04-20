@@ -280,6 +280,8 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 ####`Linear Regression
 
+radial basis to attach time awareness linear regression
+
 add interaction terms and polynomial features
 
 https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html#sklearn.gaussian_process.GaussianProcessRegressor

@@ -1042,6 +1042,8 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 \#\#\#\#`Linear Regression
 
+radial basis to attach time awareness linear regression
+
 add interaction terms and polynomial features
 
 \url{https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.GaussianProcessRegressor.html\#sklearn.gaussian_process.GaussianProcessRegressor}
@@ -3884,25 +3886,66 @@ Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression
 
 \href{http://chrisalbon.com/}{Chris Albon}
 
+\hypertarget{rpy2-ipynb}{%
+\section{Rpy2 Ipynb}\label{rpy2-ipynb}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ rpy2.robjects}
+\ImportTok{from}\NormalTok{ rpy2.robjects }\ImportTok{import}\NormalTok{ r, pandas2ri}
+\ImportTok{from}\NormalTok{ rpy2.robjects.packages }\ImportTok{import}\NormalTok{ importr}
+\CommentTok{# base = importr('base') # not working for some weird issue}
+\CommentTok{# %load_ext rpy2.ipython}
+\NormalTok{stats }\OperatorTok{=}\NormalTok{ importr(}\StringTok{'stats'}\NormalTok{)}
+\NormalTok{pandas2ri.activate()}
+\NormalTok{r[}\StringTok{'mtcars'}\NormalTok{].head()}
+\NormalTok{iris }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{"https://bit.ly/2ow0oJO"}\NormalTok{)}
+\NormalTok{test }\OperatorTok{=}\NormalTok{ iris.copy()}
+\NormalTok{test.columns  }\OperatorTok{=}\NormalTok{ [}\StringTok{"Sepal.Length"}\NormalTok{, }\StringTok{"Sepal.Width"}\NormalTok{,  }\StringTok{"Petal.Length"}\NormalTok{, }\StringTok{"Petal.Width"}\NormalTok{, }\StringTok{"Species"}\NormalTok{]}
+\NormalTok{rdf }\OperatorTok{=}\NormalTok{ pandas2ri.py2rpy_pandasdataframe(test)}
+\NormalTok{rpy2.robjects.r(}\StringTok{'''}
+\StringTok{f <- function() \{}
+\StringTok{    model = load("rgr_iris.rda")}
+\StringTok{    #predict(get(model), X)}
+\StringTok{    return(get(model))}
+\StringTok{    \}}
+\StringTok{'''}\NormalTok{)}
+\NormalTok{r_f }\OperatorTok{=}\NormalTok{ rpy2.robjects.r[}\StringTok{'f'}\NormalTok{]}
+\NormalTok{mdl1 }\OperatorTok{=}\NormalTok{ r_f() }
+\NormalTok{stats.predict(mdl1, test)}
+\CommentTok{#----------------------------------------------------------}
+\CommentTok{# %%R -i df -o model -w 5 -h 5 --units in -r 200}
+\CommentTok{# import df from global environment}
+\CommentTok{# make default figure size 5 by 5 inches with 200 dpi resolution}
+\CommentTok{#library(ggplot2)}
+\CommentTok{#library(stats)}
+\CommentTok{#ggplot(df, aes(x=cups_of_coffee, y=productivity)) + geom_line()}
+\CommentTok{#model =  lm("Petal.Length ~ . - Species", iris)}
+\CommentTok{#----------------------------------------------------------}
+\NormalTok{preds2 }\OperatorTok{=}\NormalTok{ stats.predict(model, test)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{symbolic-regression}{%
 \section{Symbolic Regression}\label{symbolic-regression}}
 
-``
-from gplearn import SymbolicRegressor
-
-est\_gp = SymbolicRegressor(population\_size = 100, generations = 100, stopping\_criteria = 0.01, p\_crossover = 0.7, p\_subtree\_mutation = 0.1, metric = `rmse', p\_hoist\_mutation = 0.05, p\_point\_mutation = 0.1, max\_samples = 0.9, verbose = 0, parsimony\_coefficient = 0.01, random\_state = seed)
-
-est\_gp.fit(X\_train, y\_train)
-preds = est\_gp.predict(X\_train)
-np.sqrt(mean\_squared\_error(y\_train, preds))
-
-graph = pydotplus.graphviz.graph\_from\_dot\_data(est\_gp.\_program.export\_graphviz())
-Image(graph.create\_png())
-eqn = str(est\_gp.\_program)
-mapping\_dict = \{`X\{\}'.format(i): X\_train.columns{[}i{]} for i in range(X\_train.shape{[}1{]})\}
-for old\_value, new\_value in mapping\_dict.items():
-eqn = eqn.replace(old\_value, new\_value)
-```
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ gplearn }\ImportTok{import}\NormalTok{ SymbolicRegressor}
+\NormalTok{est_gp }\OperatorTok{=}\NormalTok{ SymbolicRegressor(population_size }\OperatorTok{=} \DecValTok{100}\NormalTok{, generations }\OperatorTok{=} \DecValTok{100}\NormalTok{, stopping_criteria }\OperatorTok{=} \FloatTok{0.01}\NormalTok{, p_crossover }\OperatorTok{=} \FloatTok{0.7}\NormalTok{, p_subtree_mutation }\OperatorTok{=} \FloatTok{0.1}\NormalTok{, metric }\OperatorTok{=} \StringTok{'rmse'}\NormalTok{, p_hoist_mutation }\OperatorTok{=} \FloatTok{0.05}\NormalTok{, p_point_mutation }\OperatorTok{=} \FloatTok{0.1}\NormalTok{, max_samples }\OperatorTok{=} \FloatTok{0.9}\NormalTok{, verbose }\OperatorTok{=} \DecValTok{0}\NormalTok{, parsimony_coefficient }\OperatorTok{=} \FloatTok{0.01}\NormalTok{, random_state }\OperatorTok{=}\NormalTok{ seed)}
+\NormalTok{est_gp.fit(X_train, y_train)}
+\NormalTok{preds }\OperatorTok{=}\NormalTok{ est_gp.predict(X_train)}
+\NormalTok{np.sqrt(mean_squared_error(y_train, preds))}
+\NormalTok{graph }\OperatorTok{=}\NormalTok{ pydotplus.graphviz.graph_from_dot_data(est_gp._program.export_graphviz())}
+\NormalTok{Image(graph.create_png())}
+\NormalTok{eqn }\OperatorTok{=} \BuiltInTok{str}\NormalTok{(est_gp._program)}
+\NormalTok{mapping_dict }\OperatorTok{=}\NormalTok{ \{}\StringTok{'X}\SpecialCharTok{\{\}}\StringTok{'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i): X_train.columns[i] }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(X_train.shape[}\DecValTok{1}\NormalTok{])\}}
+\ControlFlowTok{for}\NormalTok{ old_value, new_value }\KeywordTok{in}\NormalTok{ mapping_dict.items():}
+\NormalTok{  eqn }\OperatorTok{=}\NormalTok{ eqn.replace(old_value, new_value)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{stats-by-simulation}{%
 \section{Stats By Simulation}\label{stats-by-simulation}}
@@ -4004,16 +4047,6 @@ Comparing groups
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{all-sklearn-metrics}{%
-\section{All Sklearn Metrics}\label{all-sklearn-metrics}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ SCORERS}
-\BuiltInTok{sorted}\NormalTok{(SCORERS.keys())}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{save-and-load-models}{%
 \section{Save And Load Models}\label{save-and-load-models}}
 
@@ -4036,10 +4069,9 @@ Comparing groups
 \hypertarget{lstm}{%
 \section{LSTM}\label{lstm}}
 
-Data Shape
-
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Data Shape}
 \NormalTok{data_x }\OperatorTok{=}\NormalTok{ np.array([}
     \CommentTok{# Datapoint 1: 3 features for timesteps 1 & 2}
 \NormalTok{    [[}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{], [}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{]],}
@@ -4048,10 +4080,9 @@ Data Shape
 \end{Highlighting}
 \end{Shaded}
 
-Prediction Example
-
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Prediction Example}
 \NormalTok{mdl.predict([[np.array([.}\DecValTok{5}\NormalTok{, }\FloatTok{.6}\NormalTok{, }\FloatTok{.6}\NormalTok{] }\OperatorTok{+}\NormalTok{ [}\DecValTok{0} \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{14}\NormalTok{)]).reshape((}\DecValTok{17}\NormalTok{, }\DecValTok{1}\NormalTok{))]])[}\DecValTok{0}\NormalTok{]}
 \end{Highlighting}
 \end{Shaded}
