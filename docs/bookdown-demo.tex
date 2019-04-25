@@ -395,6 +395,66 @@ Monitor:
 
 Deploy: flask
 
+\hypertarget{distributed}{%
+\subsection{Distributed}\label{distributed}}
+
+\hypertarget{general}{%
+\subsubsection{General}\label{general}}
+
+ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
+
+foreach + doMC \textbar{} parallel \textbar{} doParallel
+
+Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression
+
+\hypertarget{pyspark}{%
+\subsubsection{PySpark}\label{pyspark}}
+
+\begin{itemize}
+\item
+  A {[}cheatsheet{[}(\url{https://www.qubole.com/resources/pyspark-cheatsheet/}).
+\item
+  Spark's assumes the target is called `label' in ML. Everything else is a feature.
+\item
+  alias() method to rename a column you're selecting.
+\item
+  cast() method: nominative determinism on columns
+\item
+  withColumn(): create new column
+\item
+  pyspark.ml.feature
+\item
+  At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
+\item
+  You can create what are called `one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
+\item
+  Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
+\item
+  selectExpr() takes SQL expressions as a string
+\item
+  show() vs collect()
+\item
+  Spark only handles numeric data
+\item
+  In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
+\end{itemize}
+
+\hypertarget{sparklyr}{%
+\subsubsection{sparklyr}\label{sparklyr}}
+
+\begin{itemize}
+\item
+  To collect your data: that is, to move it from Spark to R, you call collect(). copy\_to() moves your data from R to Spark.
+\item
+  Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
+\item
+  If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
+\item
+  feature transforms: ft\_, ml functions: ml\_, spark df functions: sdf\_
+\item
+  ft\_tokenizer(): to lower and split into individual words, ft\_regex\_tokenizer, sdf\_sort
+\end{itemize}
+
 \hypertarget{pre-modeling}{%
 \chapter{Pre-Modeling}\label{pre-modeling}}
 
@@ -405,8 +465,8 @@ tomek link: points of different classes which are neighbors of each other. Remov
 \hypertarget{import}{%
 \section{Import}\label{import}}
 
-\hypertarget{general}{%
-\subsection{General}\label{general}}
+\hypertarget{general-1}{%
+\subsection{General}\label{general-1}}
 
 \begin{itemize}
 \item
@@ -514,8 +574,8 @@ ggplot: \href{https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using
 \hypertarget{transform}{%
 \section{Transform}\label{transform}}
 
-\hypertarget{general-1}{%
-\subsection{General}\label{general-1}}
+\hypertarget{general-2}{%
+\subsection{General}\label{general-2}}
 
 \begin{itemize}
 \tightlist
@@ -593,8 +653,8 @@ then with probability at least 1-d your sample measured proportion q is no furth
   \url{https://mobile.twitter.com/andrewheiss/status/1095443941875343360}
 \end{itemize}
 
-\hypertarget{general-2}{%
-\section{General}\label{general-2}}
+\hypertarget{general-3}{%
+\section{General}\label{general-3}}
 
 \begin{itemize}
 \item
@@ -748,8 +808,8 @@ That said, here is a rough outline of useful approaches. These are listed approx
 \hypertarget{model}{%
 \chapter{Model}\label{model}}
 
-\hypertarget{general-3}{%
-\section{General}\label{general-3}}
+\hypertarget{general-4}{%
+\section{General}\label{general-4}}
 
 \href{https://paperswithcode.com/sota}{SOTA Results}
 
@@ -776,8 +836,6 @@ sequential data: rnn, lstm, hidden markov models \& conditional random fields
 fowles-mallows score for clustering when ground truth is known
 
 Clustering: \href{http://scikit-learn.org/stable/modules/clustering.html\#clustering}{Comparison} \textbar{} \href{https://twitter.com/thomaswdinsmore/status/965223193043718145}{Rules}
-
-\href{https://mikedombo.github.io/graphPlayground/\#}{Network Playground}
 
 train \& dev set error: low-high = high variance, high-high = high bias, high-high = high bias and variance, low-low = low bias and variance
 
@@ -826,8 +884,8 @@ because even though you have higher overall accuracy, you have more false negati
 \hypertarget{model-1}{%
 \section{Model}\label{model-1}}
 
-\hypertarget{general-4}{%
-\subsection{General}\label{general-4}}
+\hypertarget{general-5}{%
+\subsection{General}\label{general-5}}
 
 Semi-supervised: active learning \textbar{} \href{https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html}{Auto Labeling}
 
@@ -1040,7 +1098,8 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 \hypertarget{glm}{%
 \subsection{GLM}\label{glm}}
 
-\#\#\#\#`Linear Regression
+\hypertarget{linear-regression}{%
+\subsubsection{Linear Regression}\label{linear-regression}}
 
 radial basis to attach time awareness linear regression
 
@@ -1116,39 +1175,7 @@ A linear regression model is only as good as the validity of its assumptions, wh
 
 A practical \href{http://www.statmethods.net/stats/rdiagnostics.html}{summary} using R.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# general check}
-\KeywordTok{plot}\NormalTok{(rgr_lr_st1)}
-
-\CommentTok{# linearity check}
-\KeywordTok{avPlots}\NormalTok{(rgr_lr_st1)}
-
-\CommentTok{# repeat of outlier analysis}
-\CommentTok{#influencePlot(rgr_lr_st1)}
-
-\CommentTok{# multi-colinearity}
-\KeywordTok{vif}\NormalTok{(model) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-
-\CommentTok{# Test for Autocorrelated Errors}
-\KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
-
-\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
-\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
-
-\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
-\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
-\CommentTok{#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model}
-\end{Highlighting}
-\end{Shaded}
-
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the \#dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test \& partial f-testr for simple and multiple linear regression.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{statsmodels.stats.outliers_influence.variance_inflation_factor}
-\end{Highlighting}
-\end{Shaded}
 
 Fixing assumptions:
 
@@ -1211,20 +1238,7 @@ Box-Cox: Iterates along values of lambda by maximum likelihood so as to maximize
   If there is an ascending or descending order to your dependent variable, ordinal regression is more appropriate as it has more power than multinomial logistic regression.
 \item
   leaps lm package r is a greedy way to find the best predictors by cycling through all the combinations.
-\item
-  Linear Regression by Year
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(purrr)}
-\NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(score.avg }\OperatorTok{~}\StringTok{ }\NormalTok{driveavg }\OperatorTok{+}\StringTok{ }\NormalTok{drivepct, }\DataTypeTok{data=}\NormalTok{.)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{map}\NormalTok{(summary)}
-\end{Highlighting}
-\end{Shaded}
 
 The importance of a feature in a linear regression model can be measured by the absolute value of
 its t-statistic. The t-statistic is the estimated weight scaled with its standard error.
@@ -1232,7 +1246,7 @@ its t-statistic. The t-statistic is the estimated weight scaled with its standar
 effect of linear regression is w\_ix\_i. A feature effect plot shows the distribution of effects throughout the data.
 
 \hypertarget{logistic-regression}{%
-\section{Logistic Regression}\label{logistic-regression}}
+\subsubsection{Logistic Regression}\label{logistic-regression}}
 
 logistic is the same as probit
 
@@ -1285,58 +1299,7 @@ The Durbin-Watson test is used to test the null hypothesis that linear regressio
 
 \texttt{multicol} shows which columns could be removed for multi-collinearity. (The vif is not working because of multicolinearity.)
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# vif(clf_lr$finalModel)}
-\CommentTok{# multicol <- alias(clf_lr$finalModel)$Complete}
-\CommentTok{# multicol}
-\end{Highlighting}
-\end{Shaded}
-
 \textbf{Linear With The Logit Of Predictions}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# box tidwell doesn't work since features have negative values.}
-
-\CommentTok{# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))}
-\CommentTok{# }
-\CommentTok{# df_num_selected <- df2 %>% }
-\CommentTok{#   select(}
-\CommentTok{#     OverallMap,}
-\CommentTok{#     StrandMap,}
-\CommentTok{#     lesson_length,}
-\CommentTok{#     g_avg_overall_map,}
-\CommentTok{#     g_avg_strand_map,}
-\CommentTok{#     g_avg_score,}
-\CommentTok{#     g_num_students,}
-\CommentTok{#     cohort_avg_overall_map,}
-\CommentTok{#     cohort_avg_strand_map}
-\CommentTok{#   ) %>%}
-\CommentTok{#   map(min_max_scaler) %>% }
-\CommentTok{#   data.frame() %>% }
-\CommentTok{# }
-\CommentTok{# formula_all_num_features <- as.formula(glue('pass ~ \{paste(df_num_selected %>% names, collapse = " + ")\}'))}
-\CommentTok{# car::boxTidwell(formula_all_num_features, data = df_num_selected )}
-
-\CommentTok{# Visual test too many features to work well}
-
-\CommentTok{# lin_test <- df2 %>%}
-\CommentTok{#   dplyr::select_if(is.numeric) }
-\CommentTok{# }
-\CommentTok{# predictors <- colnames(lin_test)}
-\CommentTok{# }
-\CommentTok{# lin_test <- lin_test %>%}
-\CommentTok{#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%}
-\CommentTok{#   gather(key = "predictors", value = "predictor.value", -logit)}
-\CommentTok{# }
-\CommentTok{# ggplot(lin_test, aes(logit, predictor.value))+}
-\CommentTok{#   geom_point(size = 0.5, alpha = 0.5) +}
-\CommentTok{#   geom_smooth(method = "loess") + }
-\CommentTok{#   theme_bw() + }
-\CommentTok{#   facet_wrap(~predictors, scales = "free_y")}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{itemize}
 \item
@@ -1388,10 +1351,7 @@ The Durbin-Watson test is used to test the null hypothesis that linear regressio
 with bayesian log reg you can have a probability distribution of the probability estimate so you can attach a ci to the prediction
 
 \hypertarget{generalized-additive-models}{%
-\section{Generalized Additive Models}\label{generalized-additive-models}}
-
-\hypertarget{intro}{%
-\subsection{Intro}\label{intro}}
+\subsection{Generalized Additive Models}\label{generalized-additive-models}}
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don't use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response.
 
@@ -1402,162 +1362,18 @@ For standard regression, use family = gaussian (the default).
 
 For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
 
-\hypertarget{assumptions}{%
-\subsection{Assumptions}\label{assumptions}}
-
-\hypertarget{evaluation}{%
-\subsection{Evaluation}\label{evaluation}}
-
-\hypertarget{proscons}{%
-\subsection{Pros/Cons}\label{proscons}}
-
 \textbf{Pros}
 
 \textbf{Cons}
-
-\hypertarget{k-means-clustering-us}{%
-\section{K-Means Clustering {[}US{]}}\label{k-means-clustering-us}}
-
-\hypertarget{intro-1}{%
-\subsection{Intro}\label{intro-1}}
-
-K-Means clustering method considers two assumptions regarding the clusters -- first that the clusters are spherical and second that the clusters are of similar size.
-
-k-means assumes the variance of the distribution of each attribute (variable) is spherical;
-all variables have the same variance;
-
-the prior probability for all k clusters is the same, i.e., each cluster has roughly equal number of observations;
-
-Must choose k for clusters. Initialize cluster centes randomly, assign each point to its closest cluster by a distance metric. Recalculate centroids. Halt when cluster assignments no longer change. Clusters will be distinct and non-overlapping.
-
-Goal to minimize within-cluster variation. The within-cluster variation for the kth cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the kth cluster divided by the total number of observations in the kth cluster. Limitation is that it depends on initialization of centroids. Guaranteed convergence but only to a local minima. Run the algorithm several times and pick the solution that yields the smallest within-cluster variance. Increasing k will decrease variance and increase bias and vice versa. K-means: Jaccard coefficient.
-
-Note: Not enough to use within-cluster variance as this decreases as one increases k. Use elbow method or scree plot to choose optimal k where the variance no longer decreases dramatically. To choose how many groups to use, I ran a k-means analysis for each possible number of groups from 5 to 35 and found that 20 was right about the spot that the amount of variance stopped decreasing consistently. This is called the elbow test and while the results weren't totally definitive, they fit in well with the general rule of thumb for determining \# of groups which is the square root of the \# of observations/2.
-
-One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
-in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.{[}3{]} clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
-
-In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)
-
-We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
-
-Davies--Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval.
-
-\textbf{Pros}
-
-Uses simple principle which can be explained in non-statistical terms. It is efficient.
-
-\textbf{Cons}
-
-Less sophisticated, random choices of centers, and requires guess for centers.
-
-\hypertarget{hierarchical-clustering}{%
-\section{Hierarchical Clustering}\label{hierarchical-clustering}}
-
-Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2.
-Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
-
-K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn't need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
-
-\hypertarget{assumptions-1}{%
-\subsection{Assumptions}\label{assumptions-1}}
-
-\hypertarget{characteristics}{%
-\subsection{Characteristics}\label{characteristics}}
-
-\hypertarget{evaluation-1}{%
-\subsection{Evaluation}\label{evaluation-1}}
-
-\hypertarget{proscons-1}{%
-\subsection{Pros/Cons}\label{proscons-1}}
-
-\hypertarget{pca}{%
-\section{PCA}\label{pca}}
-
-\hypertarget{intro-2}{%
-\subsection{Intro}\label{intro-2}}
-
-\hypertarget{assumptions-2}{%
-\subsection{Assumptions}\label{assumptions-2}}
-
-\hypertarget{characteristics-1}{%
-\subsection{Characteristics}\label{characteristics-1}}
-
-\hypertarget{evaluation-2}{%
-\subsection{Evaluation}\label{evaluation-2}}
-
-\hypertarget{proscons-2}{%
-\subsection{Pros/Cons}\label{proscons-2}}
-
-\begin{itemize}
-\item
-  Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit\_transforms, use explained\_variance\_ratio\_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse\_transform to reconstruct your x. Minimum number of principal components is min(n,p).
-\item
-  pca: It accounts for as much of the variability in the data as possible by considering highly correlated features. Each succeeding component in turn has the highest variance using the features that are less correlated with the first principal component and that are orthogonal to the preceding component.
-\end{itemize}
-
-\hypertarget{other-1}{%
-\subsection{Other}\label{other-1}}
-
-\begin{itemize}
-\item
-  \begin{enumerate}
-  \def\labelenumi{\arabic{enumi})}
-  \tightlist
-  \item
-    look at variance: apply(USArrests , 2, var) \textbar{} 2) pca \& scale: pca = prcomp(USArrests , scale = TRUE) \textbar{} 3) plot: biplot(pca, scale = 0)
-  \end{enumerate}
-\item
-  pca\$rotation contains the principal component loadings matrix which explains proportion of each variable along each principal component.
-\item
-  Kaiser-Harris criterion suggests retaining PCs with eigenvalues \textgreater{} 1; PCs with eigenvalues \textless{} 1 explain less variance than contained in a single variable. Cattell Scree test visually inspects the elbow graph for diminishing return; retain PCs before a drastic drop-off.
-\end{itemize}
-
-PC columns contain loadings; correlations of the observed variables with the Pcs. h2 column displays the component comunalities; amount of variance explained by the components.
-
-Note: Look at factorplot. Shows pot of relationship between variables and principal components.
-
-It is also possible to decompress the reduced dataset back to 784 dimensions by applying the inverse transformation of the PCA projection. Of course this won't give you back the original data, since the projection lost a bit of information (within the 5\% variance that was dropped), but it will likely be quite close to the original data. The mean squared distance between the original data and the reconstructed data (compressed and then decompressed) is called the reconstruction error.
-
-It turns out that many things behave very differently in high-dimensional space. For example, if you pick a random point in a unit square (a 1 × 1 square), it will have only about a 0.4\% chance of being located less than 0.001 from a border (in other words, it is very unlikely that a random point will be ``extreme'' along any dimension). But in a 10,000-dimensional unit hypercube (a 1 × 1 × ⋯ × 1 cube, with ten thousand 1s), this probability is greater than 99.999999\%. Most points in a high-dimensional hypercube are very close to the border.
-
-Before looking at the PCA algorithm for dimensionality reduction in more detail, let's summarize the approach in a few simple steps:
-Standardize the -dimensional dataset.
-
-Construct the covariance matrix.Decompose the covariance matrix into its eigenvectors and eigenvalues.
-Select eigenvectors that correspond to the largest eigenvalues, where is the dimensionality of the new feature subspace ().
-
-Construct a projection matrix from the "``top''" eigenvectors.
-
-Transform the -dimensional input dataset using the projection matrix to obtain the new -dimensional feature subspace.
-
-Probabilistic PCA introduces the Gaussian distribution to the PCA modeling framework.
-
-Kernel PCA must project data into a higher dimensional space than that of the original data.
 
 \hypertarget{knn}{%
 \section{KNN}\label{knn}}
-
-\hypertarget{intro-3}{%
-\subsection{Intro}\label{intro-3}}
 
 Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
 
 curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics
 
 smaller k means smaller training error, ut larger k is more stable.
-
-\hypertarget{assumptions-3}{%
-\subsection{Assumptions}\label{assumptions-3}}
-
-\hypertarget{characteristics-2}{%
-\subsection{Characteristics}\label{characteristics-2}}
-
-\hypertarget{evaluation-3}{%
-\subsection{Evaluation}\label{evaluation-3}}
-
-\hypertarget{proscons-3}{%
-\subsection{Pros/Cons}\label{proscons-3}}
 
 \textbf{Pros}
 
@@ -1599,9 +1415,6 @@ Computationally expensive; as the number of observations, dimensions, and K incr
 
 \#\#SVM
 
-\hypertarget{intro-4}{%
-\subsection{Intro}\label{intro-4}}
-
 Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach? To ensure small prediction error when the underlying distribution is not known
 
 The LinearSVC class regularizes the bias term, so you should center the training set first by subtracting its mean. This is automatic if you scale the data using the StandardScaler. Moreover, make sure you set the loss hyperparameter to ``hinge'', as it is not the default value. Finally, for better performance you should set the dual hyperparameter to False, unless there are more features than training instances (we will discuss duality later in the chapter).
@@ -1625,18 +1438,6 @@ Multiclass
 1v1: Construct a support vector machine for each pair of categories. For each classifier, record the prediction for each observation. Have the classifiers vote on the prediction for each observation.
 
 1vAll: Construct a support vector machine for each individual category against all other categories combined. Assign the observation to the classifier with the largest function value.
-
-\hypertarget{assumptions-4}{%
-\subsection{Assumptions}\label{assumptions-4}}
-
-\hypertarget{characteristics-3}{%
-\subsection{Characteristics}\label{characteristics-3}}
-
-\hypertarget{evaluation-4}{%
-\subsection{Evaluation}\label{evaluation-4}}
-
-\hypertarget{proscons-4}{%
-\subsection{Pros/Cons}\label{proscons-4}}
 
 \textbf{Pros}
 
@@ -1671,9 +1472,6 @@ Multiclass
 \hypertarget{decision-tree}{%
 \section{Decision Tree}\label{decision-tree}}
 
-\hypertarget{intro-5}{%
-\subsection{Intro}\label{intro-5}}
-
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
 Decision Trees make very few assumptions about the training data (as opposed to linear models, which obviously assume that the data is linear, for example). Such a model is often called a nonparametric model, not because it does not have any parameters (it often has a lot) but because the number of parameters is not determined prior to training, so the model structure is free to stick closely to the data.
@@ -1686,18 +1484,6 @@ Where each data point has its own node, the variance is high and the training er
 Regression: Use cost complexity pruning to build set of subtrees as a function of lambda. Classification: Use Gini index, measures total variance among classes.
 
 Note: Duplicate splits happen when they increase node purity. While pruning reduces the variance of the overall tree model upon repeated builds with different datasets, we induce biasbecause the trees are much simpler.
-
-\hypertarget{assumptions-5}{%
-\subsection{Assumptions}\label{assumptions-5}}
-
-\hypertarget{characteristics-4}{%
-\subsection{Characteristics}\label{characteristics-4}}
-
-\hypertarget{evaluation-5}{%
-\subsection{Evaluation}\label{evaluation-5}}
-
-\hypertarget{proscons-5}{%
-\subsection{Pros/Cons}\label{proscons-5}}
 
 \textbf{Pros}
 
@@ -1724,9 +1510,6 @@ Note: Duplicate splits happen when they increase node purity. While pruning redu
 \hypertarget{bagging}{%
 \section{Bagging}\label{bagging}}
 
-\hypertarget{intro-6}{%
-\subsection{Intro}\label{intro-6}}
-
 used to decrease variance in decision trees
 
 How it works: train multiple trees using bootstrapped datasets, regression trees: average the predictions from all the trees, classification: take a majority vote of the predictions, majority vote: the class which occurs most frequently, Out of bag (OOB) error, Only a portion of the data is used to train each tree, The remaining data which wasn't selected can be used to assess the tree's performance, (the response for each observation is predicted using
@@ -1740,18 +1523,6 @@ Bagging reduces generalization error.
 
 Take repeated samples of the same size from the single overall training dataset. Treat these different sets of data as pseudo-training sets. Fitting separate, independent decision treesto each of the bootstrapped training data sets. We can then average all predictions (or take the majority vote) to obtain the bagged estimate. Instead of pruning back our trees, create very large trees in the first place. These large trees will tend to have low bias, but high variance. Retain the low bias, but get rid of the high variance by averaging. Con is that the trees are correlation.
 train multiple trees using bootstrapped data to reduce variance and prevent overfitting
-
-\hypertarget{assumptions-6}{%
-\subsection{Assumptions}\label{assumptions-6}}
-
-\hypertarget{characteristics-5}{%
-\subsection{Characteristics}\label{characteristics-5}}
-
-\hypertarget{evaluation-6}{%
-\subsection{Evaluation}\label{evaluation-6}}
-
-\hypertarget{proscons-6}{%
-\subsection{Pros/Cons}\label{proscons-6}}
 
 \textbf{Pros}
 
@@ -1778,9 +1549,6 @@ train multiple trees using bootstrapped data to reduce variance and prevent over
 \hypertarget{random-forest}{%
 \section{Random Forest}\label{random-forest}}
 
-\hypertarget{intro-7}{%
-\subsection{Intro}\label{intro-7}}
-
 Build a number of decision trees using bootstrapped samples
 
 At each split in the tree only a portion of the features are considered
@@ -1799,18 +1567,6 @@ Random forests further improve decision tree performance by de-correlating the i
 
 Random forests decorrelate tree it generates and thus results in a reduction in variance. Similar to bagging, we first build various decision trees on bootstrapped training samples, but we split internal nodes in a special way. Each time a split is considered within the construction of a decision tree, only a random subset of ᬊthe overall predictors are allowed to be candidates. At every split, a new subset of predictors is randomly selected. The random forest procedure forces the decision tree building process to use different predictors to split at different times. Should a good predictor be left out of consideration for some splits, it still has many chances to be consideredin the construction of other splits. We can't overfit by adding more trees. The variance just ends up decreasing. Out of bag score is a good estimate of the test score and is the non-bootstrapped data. Need to turn on this scoing method.
 Error Rate: Depends on correlation between trees (higher is worse), strength of single trees (higher is better). Increasing number of features for each split increases correlation and strength of single trees.
-
-\hypertarget{assumptions-7}{%
-\subsection{Assumptions}\label{assumptions-7}}
-
-\hypertarget{characteristics-6}{%
-\subsection{Characteristics}\label{characteristics-6}}
-
-\hypertarget{evaluation-7}{%
-\subsection{Evaluation}\label{evaluation-7}}
-
-\hypertarget{proscons-7}{%
-\subsection{Pros/Cons}\label{proscons-7}}
 
 \textbf{Pros}
 
@@ -1831,9 +1587,6 @@ Not as easy to visually interpret
 \hypertarget{boosting}{%
 \section{Boosting}\label{boosting}}
 
-\hypertarget{intro-8}{%
-\subsection{Intro}\label{intro-8}}
-
 Unlike boosting and random forests, can overfit if number of trees is too large
 
 Similar to bagging, but trees are grown sequentially. Each tree is created using information from previously grown trees
@@ -1846,18 +1599,6 @@ Note on Variable Importance: For regression trees, we can use the reduction in t
 
 Similar to bagging, but learns sequentially and builds off previous trees
 
-\hypertarget{assumptions-8}{%
-\subsection{Assumptions}\label{assumptions-8}}
-
-\hypertarget{characteristics-7}{%
-\subsection{Characteristics}\label{characteristics-7}}
-
-\hypertarget{evaluation-8}{%
-\subsection{Evaluation}\label{evaluation-8}}
-
-\hypertarget{proscons-8}{%
-\subsection{Pros/Cons}\label{proscons-8}}
-
 \textbf{Pros}
 
 Somewhat more interpretable than boosted trees/random forest as the user can define the size of each tree resulting in a collection of stumps (1 level) which can be viewed as an additive model
@@ -1866,70 +1607,8 @@ Can easily handle qualitative (categorical) features
 
 \textbf{Cons}
 
-\hypertarget{association-rule-mining}{%
-\section{Association Rule Mining}\label{association-rule-mining}}
-
-\hypertarget{intro-9}{%
-\subsection{Intro}\label{intro-9}}
-
-\begin{itemize}
-\item
-  Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.
-\item
-  Tutorial: \url{http://pbpython.com/market-basket-analysis.html}
-\item
-  Incredibly big feature space (2\^{}k-1).
-\item
-  The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space.
-\item
-  Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better.
-\item
-  nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
-\item
-  ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift \textgreater{} 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift \textless{} 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
-\item
-  t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations.
-\end{itemize}
-
-\hypertarget{assumptions-9}{%
-\subsection{Assumptions}\label{assumptions-9}}
-
-\hypertarget{characteristics-8}{%
-\subsection{Characteristics}\label{characteristics-8}}
-
-\hypertarget{evaluation-9}{%
-\subsection{Evaluation}\label{evaluation-9}}
-
-\hypertarget{proscons-9}{%
-\subsection{Pros/Cons}\label{proscons-9}}
-
-\textbf{Pros}
-
-\begin{itemize}
-\item
-  Ideally suited for working with very large amounts of transactional data.
-\item
-  The results are rules that are generally easy to understand and have a high amount of interpretability.
-\item
-  The process is useful for data mining and uncovering unexpected knowledge within a dataset.
-\end{itemize}
-
-\textbf{Cons}
-
-\begin{itemize}
-\item
-  The outcome is usually not interesting when applied to smaller datasets.
-\item
-  It is difficult to separate actual insights from common sense notions.
-\item
-  The analyst might be compelled to draw spurious conclusions--remember that correlation doesn't imply causation!
-\end{itemize}
-
 \hypertarget{naive-bayes}{%
 \section{Naïve Bayes}\label{naive-bayes}}
-
-\hypertarget{intro-10}{%
-\subsection{Intro}\label{intro-10}}
 
 Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.
 
@@ -1938,18 +1617,6 @@ Practitioners do use Naive Bayes regularly for ranking, where the actual values 
 Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.
 
 Note: In addition, we can use function ``partial\_fit'' to fit on a batch of samples incrementally while we are using. MultinomialNB and Bernoulli NB also support sample weighting.
-
-\hypertarget{assumptions-10}{%
-\subsection{Assumptions}\label{assumptions-10}}
-
-\hypertarget{characteristics-9}{%
-\subsection{Characteristics}\label{characteristics-9}}
-
-\hypertarget{evaluation-10}{%
-\subsection{Evaluation}\label{evaluation-10}}
-
-\hypertarget{proscons-10}{%
-\subsection{Pros/Cons}\label{proscons-10}}
 
 \textbf{Pros}
 
@@ -1973,11 +1640,8 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a batch of sam
   While easily attainable, the estimated probabilities are often less reliable than the predicted class labels themselves.
 \end{itemize}
 
-\hypertarget{lda}{%
-\section{LDA}\label{lda}}
-
-\hypertarget{intro-11}{%
-\subsection{Intro}\label{intro-11}}
+\hypertarget{lda-qda}{%
+\section{LDA \& QDA}\label{lda-qda}}
 
 Before we take a look into the inner workings of LDA in the following subsections, let's summarize the key steps of the LDA approach:
 
@@ -1994,38 +1658,6 @@ Choose the eigenvectors that correspond to the largest eigenvalues to construct 
 Project the samples onto the new feature subspace using the transformation matrix.
 
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x\textbar{}y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own.
-
-\hypertarget{assumptions-11}{%
-\subsection{Assumptions}\label{assumptions-11}}
-
-\hypertarget{characteristics-10}{%
-\subsection{Characteristics}\label{characteristics-10}}
-
-\hypertarget{evaluation-11}{%
-\subsection{Evaluation}\label{evaluation-11}}
-
-\hypertarget{proscons-11}{%
-\subsection{Pros/Cons}\label{proscons-11}}
-
-\hypertarget{qda}{%
-\section{QDA}\label{qda}}
-
-\hypertarget{intro-12}{%
-\subsection{Intro}\label{intro-12}}
-
-TBD
-
-\hypertarget{assumptions-12}{%
-\subsection{Assumptions}\label{assumptions-12}}
-
-\hypertarget{characteristics-11}{%
-\subsection{Characteristics}\label{characteristics-11}}
-
-\hypertarget{evaluation-12}{%
-\subsection{Evaluation}\label{evaluation-12}}
-
-\hypertarget{proscons-12}{%
-\subsection{Pros/Cons}\label{proscons-12}}
 
 \hypertarget{gams}{%
 \section{GAMs}\label{gams}}
@@ -2098,37 +1730,6 @@ classification:
 
 outputs on the log odds scale
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot with intercept uncertainty}
-\KeywordTok{plot}\NormalTok{(log_mod2, }\DataTypeTok{pages =} \DecValTok{1}\NormalTok{, }\DataTypeTok{trans =}\NormalTok{ plogis, }\DataTypeTok{shift =} \KeywordTok{coef}\NormalTok{(log_mod2)[}\DecValTok{1}\NormalTok{], }\DataTypeTok{seWithMean =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{#log odds scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{) }
-
-\CommentTok{#probability scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{) }
-
-\CommentTok{#construct se.fit on log odds scale than transform to probs with plogis}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =}\NormalTok{ T)}
-
-\CommentTok{#granular for each record on log odds scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"terms"}\NormalTok{)}
-
-\CommentTok{# Calculate predictions and errors}
-\NormalTok{predictions <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(log_mod2, }\DataTypeTok{newdata =}\NormalTok{ new_credit_data, }
-                       \DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# Calculate high and low predictions intervals}
-\NormalTok{high_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
-\NormalTok{low_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
-
-\CommentTok{# Convert intervals to probability scale}
-\NormalTok{high_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(high_pred)}
-\NormalTok{low_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(low_pred)}
-\end{Highlighting}
-\end{Shaded}
-
 gams work with broom and caret.
 
 \hypertarget{hierarchical-models}{%
@@ -2149,13 +1750,152 @@ Analysis of Variance, or ANOVA, can be used to compare two different lmer models
   Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
 \end{itemize}
 
+\hypertarget{unsupervised}{%
+\section{Unsupervised}\label{unsupervised}}
+
+\hypertarget{k-means-clustering}{%
+\subsection{K-Means Clustering}\label{k-means-clustering}}
+
+K-Means clustering method considers two assumptions regarding the clusters -- first that the clusters are spherical and second that the clusters are of similar size.
+
+k-means assumes the variance of the distribution of each attribute (variable) is spherical;
+all variables have the same variance;
+
+the prior probability for all k clusters is the same, i.e., each cluster has roughly equal number of observations;
+
+Must choose k for clusters. Initialize cluster centes randomly, assign each point to its closest cluster by a distance metric. Recalculate centroids. Halt when cluster assignments no longer change. Clusters will be distinct and non-overlapping.
+
+Goal to minimize within-cluster variation. The within-cluster variation for the kth cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the kth cluster divided by the total number of observations in the kth cluster. Limitation is that it depends on initialization of centroids. Guaranteed convergence but only to a local minima. Run the algorithm several times and pick the solution that yields the smallest within-cluster variance. Increasing k will decrease variance and increase bias and vice versa. K-means: Jaccard coefficient.
+
+Note: Not enough to use within-cluster variance as this decreases as one increases k. Use elbow method or scree plot to choose optimal k where the variance no longer decreases dramatically. To choose how many groups to use, I ran a k-means analysis for each possible number of groups from 5 to 35 and found that 20 was right about the spot that the amount of variance stopped decreasing consistently. This is called the elbow test and while the results weren't totally definitive, they fit in well with the general rule of thumb for determining \# of groups which is the square root of the \# of observations/2.
+
+One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
+in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.{[}3{]} clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
+
+In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)
+
+We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
+
+Davies--Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval.
+
+\textbf{Pros}
+
+Uses simple principle which can be explained in non-statistical terms. It is efficient.
+
+\textbf{Cons}
+
+Less sophisticated, random choices of centers, and requires guess for centers.
+
+\hypertarget{hierarchical-clustering}{%
+\section{Hierarchical Clustering}\label{hierarchical-clustering}}
+
+Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2.
+Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
+
+K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn't need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
+
+\hypertarget{pca}{%
+\section{PCA}\label{pca}}
+
+\begin{itemize}
+\item
+  Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit\_transforms, use explained\_variance\_ratio\_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse\_transform to reconstruct your x. Minimum number of principal components is min(n,p).
+\item
+  pca: It accounts for as much of the variability in the data as possible by considering highly correlated features. Each succeeding component in turn has the highest variance using the features that are less correlated with the first principal component and that are orthogonal to the preceding component.
+\item
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi})}
+  \tightlist
+  \item
+    look at variance: apply(USArrests , 2, var) \textbar{} 2) pca \& scale: pca = prcomp(USArrests , scale = TRUE) \textbar{} 3) plot: biplot(pca, scale = 0)
+  \end{enumerate}
+\item
+  pca\$rotation contains the principal component loadings matrix which explains proportion of each variable along each principal component.
+\item
+  Kaiser-Harris criterion suggests retaining PCs with eigenvalues \textgreater{} 1; PCs with eigenvalues \textless{} 1 explain less variance than contained in a single variable. Cattell Scree test visually inspects the elbow graph for diminishing return; retain PCs before a drastic drop-off.
+\end{itemize}
+
+PC columns contain loadings; correlations of the observed variables with the Pcs. h2 column displays the component comunalities; amount of variance explained by the components.
+
+Note: Look at factorplot. Shows pot of relationship between variables and principal components.
+
+It is also possible to decompress the reduced dataset back to 784 dimensions by applying the inverse transformation of the PCA projection. Of course this won't give you back the original data, since the projection lost a bit of information (within the 5\% variance that was dropped), but it will likely be quite close to the original data. The mean squared distance between the original data and the reconstructed data (compressed and then decompressed) is called the reconstruction error.
+
+It turns out that many things behave very differently in high-dimensional space. For example, if you pick a random point in a unit square (a 1 × 1 square), it will have only about a 0.4\% chance of being located less than 0.001 from a border (in other words, it is very unlikely that a random point will be ``extreme'' along any dimension). But in a 10,000-dimensional unit hypercube (a 1 × 1 × ⋯ × 1 cube, with ten thousand 1s), this probability is greater than 99.999999\%. Most points in a high-dimensional hypercube are very close to the border.
+
+Before looking at the PCA algorithm for dimensionality reduction in more detail, let's summarize the approach in a few simple steps:
+Standardize the -dimensional dataset.
+
+Construct the covariance matrix.Decompose the covariance matrix into its eigenvectors and eigenvalues.
+Select eigenvectors that correspond to the largest eigenvalues, where is the dimensionality of the new feature subspace ().
+
+Construct a projection matrix from the "``top''" eigenvectors.
+
+Transform the -dimensional input dataset using the projection matrix to obtain the new -dimensional feature subspace.
+
+Probabilistic PCA introduces the Gaussian distribution to the PCA modeling framework.
+
+Kernel PCA must project data into a higher dimensional space than that of the original data.
+
+\hypertarget{semi-supervised}{%
+\section{Semi Supervised}\label{semi-supervised}}
+
+TBD
+
+\hypertarget{reinforcement-learning}{%
+\section{Reinforcement Learning}\label{reinforcement-learning}}
+
+TBD
+
 \hypertarget{other-ml}{%
 \section{Other ML}\label{other-ml}}
 
-\hypertarget{nlp}{%
-\subsubsection{NLP}\label{nlp}}
+\hypertarget{association-rule-mining}{%
+\subsection{Association Rule Mining}\label{association-rule-mining}}
 
-\url{https://mobile.twitter.com/lmthang/status/1050543868041555969}
+\begin{itemize}
+\item
+  Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.
+\item
+  Tutorial: \url{http://pbpython.com/market-basket-analysis.html}
+\item
+  Incredibly big feature space (2\^{}k-1).
+\item
+  The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space.
+\item
+  Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better.
+\item
+  nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
+\item
+  ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift \textgreater{} 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift \textless{} 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
+\item
+  t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations.
+\end{itemize}
+
+\textbf{Pros}
+
+\begin{itemize}
+\item
+  Ideally suited for working with very large amounts of transactional data.
+\item
+  The results are rules that are generally easy to understand and have a high amount of interpretability.
+\item
+  The process is useful for data mining and uncovering unexpected knowledge within a dataset.
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  The outcome is usually not interesting when applied to smaller datasets.
+\item
+  It is difficult to separate actual insights from common sense notions.
+\item
+  The analyst might be compelled to draw spurious conclusions--remember that correlation doesn't imply causation!
+\end{itemize}
+
+\hypertarget{nlp}{%
+\subsection{NLP}\label{nlp}}
 
 \url{https://gking.harvard.edu/readme}
 
@@ -2207,7 +1947,7 @@ NLP For: \href{http://blog.algorithmia.com/natural-language-processing-algorithm
 \href{https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r}{Spatial DA R}
 
 \hypertarget{ai}{%
-\subsubsection{AI}\label{ai}}
+\subsection{AI}\label{ai}}
 
 \url{https://www.stateoftheart.ai/}
 
@@ -2330,8 +2070,8 @@ use makefile to run cmd commands
 \hypertarget{stats}{%
 \chapter{Stats}\label{stats}}
 
-\hypertarget{general-5}{%
-\section{General}\label{general-5}}
+\hypertarget{general-6}{%
+\section{General}\label{general-6}}
 
 Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem \textbar{} Importance sampling \textbar{} Bayes Error Rate \textbar{} Pearson's Coefficient of Skewness \textbar{} Bayes factor \textbar{} Correction methods for non representative samples \textbar{} Mann--Whitney U test \textbar{} cohen's f\^{}2 \textbar{} \url{https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression} \textbar{} \url{https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis}
 
@@ -2828,8 +2568,8 @@ Ex-ante forecasts are those that are made using only the information that is ava
 \hypertarget{preprocessing}{%
 \subsection{Preprocessing}\label{preprocessing}}
 
-\hypertarget{general-6}{%
-\subsubsection{General}\label{general-6}}
+\hypertarget{general-7}{%
+\subsubsection{General}\label{general-7}}
 
 So far, we have considered relatively simple seasonal patterns such as quarterly and monthly data. However, higher frequency time series often exhibit more complicated seasonal patterns. For example, daily data may have a weekly pattern as well as an annual pattern. Hourly data usually has three types of seasonality: a daily pattern, a weekly pattern, and an annual pattern
 
@@ -2960,8 +2700,8 @@ ggAcf() \textbar{} ggPacf()
 \hypertarget{models}{%
 \subsection{Models}\label{models}}
 
-\hypertarget{general-7}{%
-\subsubsection{General}\label{general-7}}
+\hypertarget{general-8}{%
+\subsubsection{General}\label{general-8}}
 
 In this model, the slope can be interpreted as an elasticity, and is the average percentage change in y resulting from a 1\% increase in x. Other useful forms can also be specified. The log-linear form is specified by only transforming the forecast variable and the linear-log form is obtained by transforming the predictor.
 
@@ -3268,8 +3008,8 @@ The ets() function does not produce forecasts. Rather, it estimates the model pa
 
 ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.
 
-\hypertarget{other-2}{%
-\subsubsection{Other}\label{other-2}}
+\hypertarget{other-1}{%
+\subsubsection{Other}\label{other-1}}
 
 additive/multiplicative decomposition (decompose(type=``multiplicative'')) not used now because there are better methods.
 
@@ -3396,8 +3136,8 @@ pipeline: signal -\textgreater{} wavelet transform -\textgreater{} pca -\textgre
 \hypertarget{deep-learning}{%
 \chapter{Deep Learning}\label{deep-learning}}
 
-\hypertarget{general-8}{%
-\section{General}\label{general-8}}
+\hypertarget{general-9}{%
+\section{General}\label{general-9}}
 
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
 
@@ -3562,8 +3302,8 @@ Posterior P(theta\textbar{}D): Credibility of the parameter value with the data 
 
 Marginal Likelihood (Evidence): Probability of evidence
 
-\hypertarget{other-3}{%
-\section{Other}\label{other-3}}
+\hypertarget{other-2}{%
+\section{Other}\label{other-2}}
 
 \url{https://causal.app/}
 
@@ -3651,10 +3391,10 @@ The reason that we call it posterior is because it represents the uncertainty af
 Bayesian Inference Methods: Sampling, Grid Approximation
 
 \hypertarget{causality}{%
-\chapter{Causality}\label{causality}}
+\section{Causality}\label{causality}}
 
-\hypertarget{general-9}{%
-\section{General}\label{general-9}}
+\hypertarget{general-10}{%
+\section{General}\label{general-10}}
 
 \href{https://twitter.com/tdietterich/status/1034631407904018437}{Causality \& DL}
 
@@ -3820,68 +3560,133 @@ The fundamental problem of causal inference: We can only observe one potential o
 
 Causal effect: E(y\^{}1) - E(y\^{}0)
 
-\hypertarget{distributed}{%
-\chapter{Distributed}\label{distributed}}
-
-\hypertarget{general-10}{%
-\section{General}\label{general-10}}
-
-ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
-
-foreach + doMC \textbar{} parallel \textbar{} doParallel
-
-Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression
-
-\hypertarget{pyspark}{%
-\section{PySpark}\label{pyspark}}
-
-\begin{itemize}
-\item
-  A {[}cheatsheet{[}(\url{https://www.qubole.com/resources/pyspark-cheatsheet/}).
-\item
-  Spark's assumes the target is called `label' in ML. Everything else is a feature.
-\item
-  alias() method to rename a column you're selecting.
-\item
-  cast() method: nominative determinism on columns
-\item
-  withColumn(): create new column
-\item
-  pyspark.ml.feature
-\item
-  At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
-\item
-  You can create what are called `one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
-\item
-  Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
-\item
-  selectExpr() takes SQL expressions as a string
-\item
-  show() vs collect()
-\item
-  Spark only handles numeric data
-\item
-  In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
-\end{itemize}
-
-\hypertarget{sparklyr}{%
-\section{sparklyr}\label{sparklyr}}
-
-\begin{itemize}
-\item
-  To collect your data: that is, to move it from Spark to R, you call collect(). copy\_to() moves your data from R to Spark.
-\item
-  Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
-\item
-  If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
-\item
-  feature transforms: ft\_, ml functions: ml\_, spark df functions: sdf\_
-\item
-  ft\_tokenizer(): to lower and split into individual words, ft\_regex\_tokenizer, sdf\_sort
-\end{itemize}
-
 \hypertarget{codebook}{%
 \chapter{Codebook}\label{codebook}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# general check}
+\KeywordTok{plot}\NormalTok{(rgr_lr_st1)}
+
+\CommentTok{# linearity check}
+\KeywordTok{avPlots}\NormalTok{(rgr_lr_st1)}
+
+\CommentTok{# repeat of outlier analysis}
+\CommentTok{#influencePlot(rgr_lr_st1)}
+
+\CommentTok{# multi-colinearity}
+\KeywordTok{vif}\NormalTok{(model) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+
+\CommentTok{# Test for Autocorrelated Errors}
+\KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
+
+\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
+\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
+
+\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
+\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
+\CommentTok{#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{statsmodels.stats.outliers_influence.variance_inflation_factor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(purrr)}
+\NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(score.avg }\OperatorTok{~}\StringTok{ }\NormalTok{driveavg }\OperatorTok{+}\StringTok{ }\NormalTok{drivepct, }\DataTypeTok{data=}\NormalTok{.)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{map}\NormalTok{(summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# vif(clf_lr$finalModel)}
+\CommentTok{# multicol <- alias(clf_lr$finalModel)$Complete}
+\CommentTok{# multicol}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# box tidwell doesn't work since features have negative values.}
+
+\CommentTok{# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))}
+\CommentTok{# }
+\CommentTok{# df_num_selected <- df2 %>% }
+\CommentTok{#   select(}
+\CommentTok{#     OverallMap,}
+\CommentTok{#     StrandMap,}
+\CommentTok{#     lesson_length,}
+\CommentTok{#     g_avg_overall_map,}
+\CommentTok{#     g_avg_strand_map,}
+\CommentTok{#     g_avg_score,}
+\CommentTok{#     g_num_students,}
+\CommentTok{#     cohort_avg_overall_map,}
+\CommentTok{#     cohort_avg_strand_map}
+\CommentTok{#   ) %>%}
+\CommentTok{#   map(min_max_scaler) %>% }
+\CommentTok{#   data.frame() %>% }
+\CommentTok{# }
+\CommentTok{# formula_all_num_features <- as.formula(glue('pass ~ \{paste(df_num_selected %>% names, collapse = " + ")\}'))}
+\CommentTok{# car::boxTidwell(formula_all_num_features, data = df_num_selected )}
+
+\CommentTok{# Visual test too many features to work well}
+
+\CommentTok{# lin_test <- df2 %>%}
+\CommentTok{#   dplyr::select_if(is.numeric) }
+\CommentTok{# }
+\CommentTok{# predictors <- colnames(lin_test)}
+\CommentTok{# }
+\CommentTok{# lin_test <- lin_test %>%}
+\CommentTok{#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%}
+\CommentTok{#   gather(key = "predictors", value = "predictor.value", -logit)}
+\CommentTok{# }
+\CommentTok{# ggplot(lin_test, aes(logit, predictor.value))+}
+\CommentTok{#   geom_point(size = 0.5, alpha = 0.5) +}
+\CommentTok{#   geom_smooth(method = "loess") + }
+\CommentTok{#   theme_bw() + }
+\CommentTok{#   facet_wrap(~predictors, scales = "free_y")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot with intercept uncertainty}
+\KeywordTok{plot}\NormalTok{(log_mod2, }\DataTypeTok{pages =} \DecValTok{1}\NormalTok{, }\DataTypeTok{trans =}\NormalTok{ plogis, }\DataTypeTok{shift =} \KeywordTok{coef}\NormalTok{(log_mod2)[}\DecValTok{1}\NormalTok{], }\DataTypeTok{seWithMean =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{#log odds scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{) }
+
+\CommentTok{#probability scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{) }
+
+\CommentTok{#construct se.fit on log odds scale than transform to probs with plogis}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =}\NormalTok{ T)}
+
+\CommentTok{#granular for each record on log odds scale}
+\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"terms"}\NormalTok{)}
+
+\CommentTok{# Calculate predictions and errors}
+\NormalTok{predictions <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(log_mod2, }\DataTypeTok{newdata =}\NormalTok{ new_credit_data, }
+                       \DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# Calculate high and low predictions intervals}
+\NormalTok{high_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
+\NormalTok{low_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
+
+\CommentTok{# Convert intervals to probability scale}
+\NormalTok{high_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(high_pred)}
+\NormalTok{low_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(low_pred)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{general-11}{%
 \section{General}\label{general-11}}

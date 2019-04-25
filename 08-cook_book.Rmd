@@ -1,5 +1,123 @@
 # Codebook 
 
+
+```{r, eval = F}
+# general check
+plot(rgr_lr_st1)
+
+# linearity check
+avPlots(rgr_lr_st1)
+
+# repeat of outlier analysis
+#influencePlot(rgr_lr_st1)
+
+# multi-colinearity
+vif(model) %>% data.frame() %>% mutate(VIF = `GVIF..1..2.Df..`, VIF = VIF^2)
+
+# Test for Autocorrelated Errors
+durbinWatsonTest(rgr_lr_st1)
+
+data = rnorm(100) # Generating data from a standard normal distribution.
+shapiro.test(data) # P-value insignificant; retain H0, conclude data is normally distributed.
+
+# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
+qqnorm(normal.data) + qqline(normal.data)
+#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model
+```
+
+```{python, eval = F}
+statsmodels.stats.outliers_influence.variance_inflation_factor
+```
+
+```{r, eval = FALSE}
+library(purrr)
+pga %>% 
+  select(name,year,driveavg,drivepct, score.avg) %>%
+  split(.$year) %>%
+  map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
+  map(summary)
+```
+
+
+
+```{r, eval = F}
+# vif(clf_lr$finalModel)
+# multicol <- alias(clf_lr$finalModel)$Complete
+# multicol
+```
+
+```{r, eval = F}
+# box tidwell doesn't work since features have negative values.
+
+# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))
+# 
+# df_num_selected <- df2 %>% 
+#   select(
+#     OverallMap,
+#     StrandMap,
+#     lesson_length,
+#     g_avg_overall_map,
+#     g_avg_strand_map,
+#     g_avg_score,
+#     g_num_students,
+#     cohort_avg_overall_map,
+#     cohort_avg_strand_map
+#   ) %>%
+#   map(min_max_scaler) %>% 
+#   data.frame() %>% 
+# 
+# formula_all_num_features <- as.formula(glue('pass ~ {paste(df_num_selected %>% names, collapse = " + ")}'))
+# car::boxTidwell(formula_all_num_features, data = df_num_selected )
+
+# Visual test too many features to work well
+
+# lin_test <- df2 %>%
+#   dplyr::select_if(is.numeric) 
+# 
+# predictors <- colnames(lin_test)
+# 
+# lin_test <- lin_test %>%
+#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%
+#   gather(key = "predictors", value = "predictor.value", -logit)
+# 
+# ggplot(lin_test, aes(logit, predictor.value))+
+#   geom_point(size = 0.5, alpha = 0.5) +
+#   geom_smooth(method = "loess") + 
+#   theme_bw() + 
+#   facet_wrap(~predictors, scales = "free_y")
+```
+
+
+```{r, eval=F}
+#Plot with intercept uncertainty
+plot(log_mod2, pages = 1, trans = plogis, shift = coef(log_mod2)[1], seWithMean = TRUE)
+
+#log odds scale
+predict(mdl, type = "link") 
+
+#probability scale
+predict(mdl, type = "response") 
+
+#construct se.fit on log odds scale than transform to probs with plogis
+predict(mdl, type = "link", se.fit = T)
+
+#granular for each record on log odds scale
+predict(mdl, type = "terms")
+
+# Calculate predictions and errors
+predictions <- predict(log_mod2, newdata = new_credit_data, 
+                       type = "link", se.fit = TRUE)
+
+# Calculate high and low predictions intervals
+high_pred <- predictions$fit + 2*predictions$se.fit
+low_pred <- predictions$fit - 2*predictions$se.fit
+
+# Convert intervals to probability scale
+high_prob <- plogis(high_pred)
+low_prob <- plogis(low_pred)
+```
+
+
 ## General
 
 [Chris Albon](http://chrisalbon.com/)

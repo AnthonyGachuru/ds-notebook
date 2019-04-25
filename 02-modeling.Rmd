@@ -28,8 +28,6 @@ fowles-mallows score for clustering when ground truth is known
 
 Clustering: [Comparison](http://scikit-learn.org/stable/modules/clustering.html#clustering) | [Rules](https://twitter.com/thomaswdinsmore/status/965223193043718145)
 
-[Network Playground](https://mikedombo.github.io/graphPlayground/#)
-
 train & dev set error: low-high = high variance, high-high = high bias, high-high = high bias and variance, low-low = low bias and variance
 
 Opposite the other algorithms, increasing n in KNN means less overfitting.
@@ -278,7 +276,7 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 ### GLM
 
-####`Linear Regression
+#### Linear Regression
 
 radial basis to attach time awareness linear regression
 
@@ -348,35 +346,7 @@ A linear regression model is only as good as the validity of its assumptions, wh
 
 A practical [summary](http://www.statmethods.net/stats/rdiagnostics.html) using R. 
 
-```{r, eval = F}
-# general check
-plot(rgr_lr_st1)
-
-# linearity check
-avPlots(rgr_lr_st1)
-
-# repeat of outlier analysis
-#influencePlot(rgr_lr_st1)
-
-# multi-colinearity
-vif(model) %>% data.frame() %>% mutate(VIF = `GVIF..1..2.Df..`, VIF = VIF^2)
-
-# Test for Autocorrelated Errors
-durbinWatsonTest(rgr_lr_st1)
-
-data = rnorm(100) # Generating data from a standard normal distribution.
-shapiro.test(data) # P-value insignificant; retain H0, conclude data is normally distributed.
-
-# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
-qqnorm(normal.data) + qqline(normal.data)
-#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model
-```
-
 Outliers are observations that have high residual values. Leverage points are observations that have unusually small or large independent variable values. Cook's distance helps to measure the effect of deleting an observation from the #dataset and rerunning the regression. Observations that have large residual values and also high leverage tend to pose threats to the accuracy of the regression line and thus need to be further investigated. Look at influence plot. Confidence and prediction intervals. For avplot distinct patterns are indications of good contributions. Influence plot to look at hat values (lower is better). Use F-test to compare models. F-test & partial f-testr for simple and multiple linear regression.
-
-```{python, eval = F}
-statsmodels.stats.outliers_influence.variance_inflation_factor
-```
 
 Fixing assumptions:
 
@@ -429,23 +399,12 @@ https://cran.r-project.org/web/packages/jtools/vignettes/summ.html
 
 * leaps lm package r is a greedy way to find the best predictors by cycling through all the combinations.
 
-* Linear Regression by Year
-
-```{r, eval = FALSE}
-library(purrr)
-pga %>% 
-  select(name,year,driveavg,drivepct, score.avg) %>%
-  split(.$year) %>%
-  map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
-  map(summary)
-```
-
 The importance of a feature in a linear regression model can be measured by the absolute value of
 its t-statistic. The t-statistic is the estimated weight scaled with its standard error.
 
 effect of linear regression is w_ix_i. A feature effect plot shows the distribution of effects throughout the data.
 
-## Logistic Regression
+#### Logistic Regression
 
 logistic is the same as probit
 
@@ -495,54 +454,7 @@ https://data.library.virginia.edu/diagnostic-plots/
 
 `multicol` shows which columns could be removed for multi-collinearity. (The vif is not working because of multicolinearity.)
 
-```{r, eval = F}
-# vif(clf_lr$finalModel)
-# multicol <- alias(clf_lr$finalModel)$Complete
-# multicol
-```
-
 **Linear With The Logit Of Predictions**
-
-```{r, eval = F}
-# box tidwell doesn't work since features have negative values.
-
-# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))
-# 
-# df_num_selected <- df2 %>% 
-#   select(
-#     OverallMap,
-#     StrandMap,
-#     lesson_length,
-#     g_avg_overall_map,
-#     g_avg_strand_map,
-#     g_avg_score,
-#     g_num_students,
-#     cohort_avg_overall_map,
-#     cohort_avg_strand_map
-#   ) %>%
-#   map(min_max_scaler) %>% 
-#   data.frame() %>% 
-# 
-# formula_all_num_features <- as.formula(glue('pass ~ {paste(df_num_selected %>% names, collapse = " + ")}'))
-# car::boxTidwell(formula_all_num_features, data = df_num_selected )
-
-# Visual test too many features to work well
-
-# lin_test <- df2 %>%
-#   dplyr::select_if(is.numeric) 
-# 
-# predictors <- colnames(lin_test)
-# 
-# lin_test <- lin_test %>%
-#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%
-#   gather(key = "predictors", value = "predictor.value", -logit)
-# 
-# ggplot(lin_test, aes(logit, predictor.value))+
-#   geom_point(size = 0.5, alpha = 0.5) +
-#   geom_smooth(method = "loess") + 
-#   theme_bw() + 
-#   facet_wrap(~predictors, scales = "free_y")
-```
 
 * Wald Test: h_0: b = 0 and h_a: b =/= 0. h_0 means the log odds are unaffected by x and so x has no bearing on the prediction of success.
 
@@ -584,9 +496,7 @@ https://data.library.virginia.edu/diagnostic-plots/
 
 with bayesian log reg you can have a probability distribution of the probability estimate so you can attach a ci to the prediction
 
-## Generalized Additive Models
-
-### Intro
+### Generalized Additive Models
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don't use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response. 
 
@@ -597,128 +507,17 @@ For standard regression, use family = gaussian (the default).
 
 For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
 
-### Assumptions
-
-### Evaluation
-
-### Pros/Cons
-
 **Pros**
 
 **Cons**
 
-## K-Means Clustering [US]
-
-### Intro
-
-K-Means clustering method considers two assumptions regarding the clusters – first that the clusters are spherical and second that the clusters are of similar size.
-
-k-means assumes the variance of the distribution of each attribute (variable) is spherical;
-all variables have the same variance;
-
-the prior probability for all k clusters is the same, i.e., each cluster has roughly equal number of observations;
-
-Must choose k for clusters. Initialize cluster centes randomly, assign each point to its closest cluster by a distance metric. Recalculate centroids. Halt when cluster assignments no longer change. Clusters will be distinct and non-overlapping. 
-
-Goal to minimize within-cluster variation. The within-cluster variation for the kth cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the kth cluster divided by the total number of observations in the kth cluster. Limitation is that it depends on initialization of centroids. Guaranteed convergence but only to a local minima. Run the algorithm several times and pick the solution that yields the smallest within-cluster variance. Increasing k will decrease variance and increase bias and vice versa. K-means: Jaccard coefficient.
-
-Note: Not enough to use within-cluster variance as this decreases as one increases k. Use elbow method or scree plot to choose optimal k where the variance no longer decreases dramatically. To choose how many groups to use, I ran a k-means analysis for each possible number of groups from 5 to 35 and found that 20 was right about the spot that the amount of variance stopped decreasing consistently. This is called the elbow test and while the results weren’t totally definitive, they fit in well with the general rule of thumb for determining # of groups which is the square root of the # of observations/2.
-
-One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
-in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.[3] clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
-
-In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)
-
-We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
-
-Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval. 
-
-**Pros** 
-
-Uses simple principle which can be explained in non-statistical terms. It is efficient.
-
-**Cons**
-
-Less sophisticated, random choices of centers, and requires guess for centers.
-
-## Hierarchical Clustering
-
-Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
-Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
-
-K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn’t need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
-## PCA
-
-### Intro
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
-* Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit_transforms, use explained_variance_ratio_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse_transform to reconstruct your x. Minimum number of principal components is min(n,p).
-
-* pca: It accounts for as much of the variability in the data as possible by considering highly correlated features. Each succeeding component in turn has the highest variance using the features that are less correlated with the first principal component and that are orthogonal to the preceding component.
-
-### Other
-
-* 1) look at variance: apply(USArrests , 2, var) | 2) pca & scale: pca = prcomp(USArrests , scale = TRUE) | 3) plot: biplot(pca, scale = 0)
-
-* pca$rotation contains the principal component loadings matrix which explains proportion of each variable along each principal component.
-
-* Kaiser-Harris criterion suggests retaining PCs with eigenvalues > 1; PCs with eigenvalues < 1 explain less variance than contained in a single variable. Cattell Scree test visually inspects the elbow graph for diminishing return; retain PCs before a drastic drop-off.
-
-PC columns contain loadings; correlations of the observed variables with the Pcs. h2 column displays the component comunalities; amount of variance explained by the components.
-
-Note: Look at factorplot. Shows pot of relationship between variables and principal components.
-
-It is also possible to decompress the reduced dataset back to 784 dimensions by applying the inverse transformation of the PCA projection. Of course this won’t give you back the original data, since the projection lost a bit of information (within the 5% variance that was dropped), but it will likely be quite close to the original data. The mean squared distance between the original data and the reconstructed data (compressed and then decompressed) is called the reconstruction error.
-
-It turns out that many things behave very differently in high-dimensional space. For example, if you pick a random point in a unit square (a 1 × 1 square), it will have only about a 0.4% chance of being located less than 0.001 from a border (in other words, it is very unlikely that a random point will be “extreme” along any dimension). But in a 10,000-dimensional unit hypercube (a 1 × 1 × ⋯ × 1 cube, with ten thousand 1s), this probability is greater than 99.999999%. Most points in a high-dimensional hypercube are very close to the border.
-
-Before looking at the PCA algorithm for dimensionality reduction in more detail, let's summarize the approach in a few simple steps:
-Standardize the -dimensional dataset.
-
-Construct the covariance matrix.Decompose the covariance matrix into its eigenvectors and eigenvalues.
-Select  eigenvectors that correspond to the  largest eigenvalues, where  is the dimensionality of the new feature subspace ().
-
-Construct a projection matrix  from the ""top""  eigenvectors.
-
-Transform the -dimensional input dataset  using the projection matrix  to obtain the new -dimensional feature subspace.
-
-Probabilistic PCA introduces the Gaussian distribution to the PCA modeling framework.
-
-Kernel PCA must project data into a higher dimensional space than that of the original data.
-
 ## KNN
-
-### Intro
 
 Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
 
 curse of dimensionality, overfitting, correlated features, cost to update, sensitivity of distance metrics
 
 smaller k means smaller training error, ut larger k is more stable. 
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 **Pros**
 
@@ -752,10 +551,7 @@ Can be sensitive to outliers or irrelevant attributes because they add noise.
 
 Computationally expensive; as the number of observations, dimensions, and K increases, the time it takes for the algorithm to run and the space it takes to store the computations increases dramatically.
 
-
 ##SVM
-
-### Intro
 
 Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach?  To ensure small prediction error when the underlying distribution is not known
 
@@ -780,14 +576,6 @@ Multiclass
 1v1: Construct a support vector machine for each pair of categories. For each classifier, record the prediction for each observation. Have the classifiers vote on the prediction for each observation.
 
 1vAll: Construct a support vector machine for each individual category against all other categories combined. Assign the observation to the classifier with the largest function value.
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 **Pros**
 
@@ -815,8 +603,6 @@ Multiclass
 
 ## Decision Tree
 
-### Intro
-
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
 Decision Trees make very few assumptions about the training data (as opposed to linear models, which obviously assume that the data is linear, for example). Such a model is often called a nonparametric model, not because it does not have any parameters (it often has a lot) but because the number of parameters is not determined prior to training, so the model structure is free to stick closely to the data.
@@ -829,14 +615,6 @@ Where each data point has its own node, the variance is high and the training er
 Regression: Use cost complexity pruning to build set of subtrees as a function of lambda. Classification: Use Gini index, measures total variance among classes. 
 
 Note: Duplicate splits happen when they increase node purity. While pruning reduces the variance of the overall tree model upon repeated builds with different datasets, we induce biasbecause the trees are much simpler.
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 **Pros**
 
@@ -856,8 +634,6 @@ Note: Duplicate splits happen when they increase node purity. While pruning redu
 
 ## Bagging
 
-### Intro
-
 used to decrease variance in decision trees
 
 How it works: train multiple trees using bootstrapped datasets, regression trees: average the predictions from all the trees, classification: take a majority vote of the predictions, majority vote: the class which occurs most frequently, Out of bag (OOB) error, Only a portion of the data is used to train each tree, The remaining data which wasn't selected can be used  to assess the tree's performance, (the response for each observation is predicted using
@@ -871,14 +647,6 @@ Bagging reduces generalization error.
 
 Take repeated samples of the same size from the single overall training dataset. Treat these different sets of data as pseudo-training sets. Fitting separate, independent decision treesto each of the bootstrapped training data sets. We can then average all predictions (or take the majority vote) to obtain the bagged estimate. Instead of pruning back our trees, create very large trees in the first place. These large trees will tend to have low bias, but high variance. Retain the low bias, but get rid of the high variance by averaging. Con is that the trees are correlation. 
 train multiple trees using bootstrapped data to reduce variance and prevent overfitting 
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 **Pros**
 
@@ -897,8 +665,6 @@ train multiple trees using bootstrapped data to reduce variance and prevent over
 * Does not reduce variance if the features are correlated
 
 ## Random Forest
-
-### Intro
 
 Build a number of decision trees using bootstrapped samples
 
@@ -919,14 +685,6 @@ Random forests further improve decision tree performance by de-correlating the i
 Random forests decorrelate tree it generates and thus results in a reduction in variance. Similar to bagging, we first build various decision trees on bootstrapped training samples, but we split internal nodes in a special way. Each time a split is considered within the construction of a decision tree, only a random subset of ᬊthe overall predictors are allowed to be candidates. At every split, a new subset of predictors is randomly selected. The random forest procedure forces the decision tree building process to use different predictors to split at different times. Should a good predictor be left out of consideration for some splits, it still has many chances to be consideredin the construction of other splits. We can’t overfit by adding more trees. The variance just ends up decreasing. Out of bag score is a good estimate of the test score and is the non-bootstrapped data. Need to turn on this scoing method.
 Error Rate: Depends on correlation between trees (higher is worse), strength of single trees (higher is better). Increasing number of features for each split increases correlation and strength of single trees.
 
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
 **Pros**
 
 Decorrelates trees (relative to boosted trees)
@@ -945,8 +703,6 @@ Not as easy to visually interpret
 
 ## Boosting
 
-### Intro
-
 Unlike boosting and random forests, can overfit if number of trees is too large
 
 Similar to bagging, but trees are grown sequentially. Each tree is created using information from previously grown trees 
@@ -959,14 +715,6 @@ Note on Variable Importance: For regression trees, we can use the reduction in t
 
 Similar to bagging, but learns sequentially and builds off previous trees
 
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
 **Pros**
 
 Somewhat more interpretable than boosted trees/random forest as the user can define the size of each tree resulting in a collection of stumps (1 level) which can be viewed as an additive model
@@ -975,53 +723,7 @@ Can easily handle qualitative (categorical) features
 
 **Cons**
 
-## Association Rule Mining
-
-### Intro
-
-* Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
-
-* Tutorial: http://pbpython.com/market-basket-analysis.html
-
-* Incredibly big feature space (2^k-1). 
-
-* The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space. 
-
-* Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better. 
-
-* nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
-
-* ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift > 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift < 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
-
-* t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
-**Pros**
-
-* Ideally suited for working with very large amounts of transactional data.
-
-* The results are rules that are generally easy to understand and have a high amount of interpretability. 
-
-* The process is useful for data mining and uncovering unexpected knowledge within a dataset.
-
-**Cons**
-
-* The outcome is usually not interesting when applied to smaller datasets. 
-
-* It is difficult to separate actual insights from common sense notions. 
-
-* The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
-
 ## Naïve Bayes
-
-### Intro
 
 Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.
 
@@ -1030,14 +732,6 @@ Practitioners do use Naive Bayes regularly for ranking, where the actual values 
 Document/spam classification is one use. Assumptions are that all the features are equally likely and are all important. Would be computational expensive without these assumptions with having to track all the joint probabilities. Gaussian for continuous variables, Bernoulli for binary input, and Multinomial for binary and more input. Use MLE to estimate parameters for Gaussian. Bernoulli/Multinomial used for spam classification.The Laplace Estimator (usually chosen to be 1) is a corrective measure that adds a small amount of error to each of the counts in the frequency table of words. The addition of error ensures that each resulting probability of each event will necessarily be nonzero, even if the event did not appear in the training data.
 
 Note: In addition, we can use function "partial_fit" to fit on a batch of samples incrementally while we are using. MultinomialNB and Bernoulli NB also support sample weighting. 
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 **Pros**
 
@@ -1055,9 +749,7 @@ Note: In addition, we can use function "partial_fit" to fit on a batch of sample
 
 * While easily attainable, the estimated probabilities are often less reliable than the predicted class labels themselves.
 
-## LDA
-
-### Intro
+## LDA & QDA
 
 Before we take a look into the inner workings of LDA in the following subsections, let's summarize the key steps of the LDA approach:
 
@@ -1074,28 +766,6 @@ Choose the  eigenvectors that correspond to the  largest eigenvalues to construc
 Project the samples onto the new feature subspace using the transformation matrix.
 
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own. 
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
-
-## QDA
-
-### Intro
-
-TBD
-
-### Assumptions
-
-### Characteristics
-
-### Evaluation
-
-### Pros/Cons
 
 ## GAMs
 
@@ -1167,35 +837,6 @@ classification:
 
 outputs on the log odds scale
 
-```{r, eval=F}
-#Plot with intercept uncertainty
-plot(log_mod2, pages = 1, trans = plogis, shift = coef(log_mod2)[1], seWithMean = TRUE)
-
-#log odds scale
-predict(mdl, type = "link") 
-
-#probability scale
-predict(mdl, type = "response") 
-
-#construct se.fit on log odds scale than transform to probs with plogis
-predict(mdl, type = "link", se.fit = T)
-
-#granular for each record on log odds scale
-predict(mdl, type = "terms")
-
-# Calculate predictions and errors
-predictions <- predict(log_mod2, newdata = new_credit_data, 
-                       type = "link", se.fit = TRUE)
-
-# Calculate high and low predictions intervals
-high_pred <- predictions$fit + 2*predictions$se.fit
-low_pred <- predictions$fit - 2*predictions$se.fit
-
-# Convert intervals to probability scale
-high_prob <- plogis(high_pred)
-low_prob <- plogis(low_pred)
-```
-
 gams work with broom and caret.
 
 ## Hierarchical Models
@@ -1212,11 +853,127 @@ Analysis of Variance, or ANOVA, can be used to compare two different lmer models
 
 * Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
 
+
+## Unsupervised
+
+### K-Means Clustering
+
+K-Means clustering method considers two assumptions regarding the clusters – first that the clusters are spherical and second that the clusters are of similar size.
+
+k-means assumes the variance of the distribution of each attribute (variable) is spherical;
+all variables have the same variance;
+
+the prior probability for all k clusters is the same, i.e., each cluster has roughly equal number of observations;
+
+Must choose k for clusters. Initialize cluster centes randomly, assign each point to its closest cluster by a distance metric. Recalculate centroids. Halt when cluster assignments no longer change. Clusters will be distinct and non-overlapping. 
+
+Goal to minimize within-cluster variation. The within-cluster variation for the kth cluster is the sum of all of the pairwise squared Euclidean distances between the observations in the kth cluster divided by the total number of observations in the kth cluster. Limitation is that it depends on initialization of centroids. Guaranteed convergence but only to a local minima. Run the algorithm several times and pick the solution that yields the smallest within-cluster variance. Increasing k will decrease variance and increase bias and vice versa. K-means: Jaccard coefficient.
+
+Note: Not enough to use within-cluster variance as this decreases as one increases k. Use elbow method or scree plot to choose optimal k where the variance no longer decreases dramatically. To choose how many groups to use, I ran a k-means analysis for each possible number of groups from 5 to 35 and found that 20 was right about the spot that the amount of variance stopped decreasing consistently. This is called the elbow test and while the results weren’t totally definitive, they fit in well with the general rule of thumb for determining # of groups which is the square root of the # of observations/2.
+
+One way to assess whether a cluster represents true structure is to see if the cluster holds up under plausible variations
+in the dataset. The fpc package has a function called clusterboot() that uses bootstrap resampling to evaluate how stable a given cluster is.[3] clusterboot() is an integrated function that both performs the clustering and evaluates the final produced clusters. It has interfaces to a number of R clustering algorithms, including both hclust and kmeans.
+
+In K-means, we assume that each cluster fits a Gaussian distribution (normal distribution)
+
+We can set K to optimally cluster the data by starting with a small number of clusters, and then iteratively splitting them until all clusters fit a normal distribution.
+
+Davies–Bouldin index: This is an internal evaluation scheme, where the validation of how well the clustering has been done is made using quantities and features inherent to the dataset. This has a drawback that a good value reported by this method does not imply the best information retrieval. 
+
+**Pros** 
+
+Uses simple principle which can be explained in non-statistical terms. It is efficient.
+
+**Cons**
+
+Less sophisticated, random choices of centers, and requires guess for centers.
+
+## Hierarchical Clustering
+
+Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
+Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
+
+K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn’t need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
+
+## PCA
+
+* Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit_transforms, use explained_variance_ratio_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse_transform to reconstruct your x. Minimum number of principal components is min(n,p).
+
+* pca: It accounts for as much of the variability in the data as possible by considering highly correlated features. Each succeeding component in turn has the highest variance using the features that are less correlated with the first principal component and that are orthogonal to the preceding component.
+
+* 1) look at variance: apply(USArrests , 2, var) | 2) pca & scale: pca = prcomp(USArrests , scale = TRUE) | 3) plot: biplot(pca, scale = 0)
+
+* pca$rotation contains the principal component loadings matrix which explains proportion of each variable along each principal component.
+
+* Kaiser-Harris criterion suggests retaining PCs with eigenvalues > 1; PCs with eigenvalues < 1 explain less variance than contained in a single variable. Cattell Scree test visually inspects the elbow graph for diminishing return; retain PCs before a drastic drop-off.
+
+PC columns contain loadings; correlations of the observed variables with the Pcs. h2 column displays the component comunalities; amount of variance explained by the components.
+
+Note: Look at factorplot. Shows pot of relationship between variables and principal components.
+
+It is also possible to decompress the reduced dataset back to 784 dimensions by applying the inverse transformation of the PCA projection. Of course this won’t give you back the original data, since the projection lost a bit of information (within the 5% variance that was dropped), but it will likely be quite close to the original data. The mean squared distance between the original data and the reconstructed data (compressed and then decompressed) is called the reconstruction error.
+
+It turns out that many things behave very differently in high-dimensional space. For example, if you pick a random point in a unit square (a 1 × 1 square), it will have only about a 0.4% chance of being located less than 0.001 from a border (in other words, it is very unlikely that a random point will be “extreme” along any dimension). But in a 10,000-dimensional unit hypercube (a 1 × 1 × ⋯ × 1 cube, with ten thousand 1s), this probability is greater than 99.999999%. Most points in a high-dimensional hypercube are very close to the border.
+
+Before looking at the PCA algorithm for dimensionality reduction in more detail, let's summarize the approach in a few simple steps:
+Standardize the -dimensional dataset.
+
+Construct the covariance matrix.Decompose the covariance matrix into its eigenvectors and eigenvalues.
+Select  eigenvectors that correspond to the  largest eigenvalues, where  is the dimensionality of the new feature subspace ().
+
+Construct a projection matrix  from the ""top""  eigenvectors.
+
+Transform the -dimensional input dataset  using the projection matrix  to obtain the new -dimensional feature subspace.
+
+Probabilistic PCA introduces the Gaussian distribution to the PCA modeling framework.
+
+Kernel PCA must project data into a higher dimensional space than that of the original data.
+
+## Semi Supervised
+
+TBD
+
+## Reinforcement Learning
+
+TBD
+
 ## Other ML
 
-#### NLP
+### Association Rule Mining
 
-https://mobile.twitter.com/lmthang/status/1050543868041555969
+* Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
+
+* Tutorial: http://pbpython.com/market-basket-analysis.html
+
+* Incredibly big feature space (2^k-1). 
+
+* The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space. 
+
+* Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better. 
+
+* nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
+
+* ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift > 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift < 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
+
+* t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
+
+**Pros**
+
+* Ideally suited for working with very large amounts of transactional data.
+
+* The results are rules that are generally easy to understand and have a high amount of interpretability. 
+
+* The process is useful for data mining and uncovering unexpected knowledge within a dataset.
+
+**Cons**
+
+* The outcome is usually not interesting when applied to smaller datasets. 
+
+* It is difficult to separate actual insights from common sense notions. 
+
+* The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
+
+### NLP
 
 https://gking.harvard.edu/readme
 
@@ -1266,7 +1023,7 @@ https://carto.com/blog/inside/CARTOframes-python-interface-CARTO/
 
 [Spatial DA R](https://data.cdrc.ac.uk/tutorial/an-introduction-to-spatial-data-analysis-and-visualisation-in-r)
 
-#### AI
+### AI
 
 https://www.stateoftheart.ai/
 
