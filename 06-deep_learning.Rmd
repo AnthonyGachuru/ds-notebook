@@ -130,6 +130,8 @@ ADAGRAD is another optimization option that takes care of some of the hyperparam
 
 ## Debugging
 
+https://karpathy.github.io/2019/04/25/recipe/
+
 [1](http://theorangeduck.com/page/neural-network-not-working) 
 
 [2](https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21)

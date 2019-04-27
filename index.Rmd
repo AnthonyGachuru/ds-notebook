@@ -30,17 +30,9 @@ A typical data science workflow can be framed as following these steps:
 
 * Maintain: adapt the models and features to the evolution of the environment
 
-Another instantiation via Hadley Wickham is:  
+Another instantiation via Hadley Wickham is:  import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate. As an abbreviation: ittvmcmd.
 
-import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate
-
-As an abbreviation: ittvmcmd
-
-And the two combined:
-
-preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
-
-Another note is that one way to structure projects is to write user stories a la software engineering. 
+And the two combined: preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this [page](https://gfleetwood.github.io/noted-resources/data_science.html).
 
@@ -50,7 +42,7 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 * See if the data to answer the question exists, and if it is useful.
 
-* Structure project as user stories
+* Structure project as user stories 
 
 * Initialize report to track and summarise work and to do list.
 
@@ -116,65 +108,11 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 
 ## Resources
 
-### Data
+Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/)
 
 [Search](https://toolbox.google.com/datasetsearch)
 
-[Biodiversity](https://www.gbif.org)
-
-[Drives](https://www.backblaze.com/b2/hard-drive-test-data.html)
-
-Medical: [X-rays](https://stanfordmlgroup.github.io/competitions/mura/) | [Medical Data](https://github.com/beamandrew/medical-data) | https://mimic.physionet.org/ | https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750
-
-[Enigma](https://public.enigma.com/) | [Wiki Data Dump](http://dumps.wikimedia.org/other/pagecounts-raw/) | [UCI ML Repo](http://archive.ics.uci.edu/ml/) | [Datanauts](https://open.nasa.gov/explore/datanauts/) | [Research Data](http://academictorrents.com/) | [Data Is Plural Archive](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0) | [Data.gov](http://www.data.gov/) |[Microsoft Research](https://msropendata.com) | [Portals](https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/) | [Kaggle Datasets](https://www.kaggle.com/datasets) | [NASA](https://open.nasa.gov/blog/) | [ML Cameron](https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d#file-datasets-csv) | https://www.enigma.com/data | http://veekaybee.github.io/2018/07/23/small-datasets/ | https://grasswiki.osgeo.org/wiki/Global_datasets | https://www.figure-eight.com/datasets/ | https://blog.webkid.io/datasets-for-machine-learning/ | https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research | https://www.githubarchive.org | https://www.datasetlist.com/ | [NASA](https://bmtgoncalves.github.io/pyNASA/) | [Deep Mind](https://deepmind.com/research/open-source/open-source-datasets/) | [Allen Institute](http://allenai.org/data.html) | [Miscellaneous Datasets](http://users.stat.ufl.edu/~winner/datasets.html) | https://hub.packtpub.com/25-datasets-deep-learning-iot/ | [Open Access Papers](https://unpaywall.org/products/snapshot) | https://www.spe.org/en/jpt/jpt-article-detail/?art=5282 | http://www.fast.ai/2018/10/16/aws-datasets
-
-[Amazon Reviews](http://jmcauley.ucsd.edu/data/amazon/) | [Word-Emotion Association Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) | [Word Bank](http://wordbank.stanford.edu/) | [Rec Systems](http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/) | [SMS Spam](http://www.esp.uem.es/jmgomez/smsspamcorpus/) | [Kickstarter & Indiego Archive](https://webrobots.io/kickstarter-datasets/) | [NLP](https://github.com/niderhoff/nlp-datasets/blob/master/README.md) | [Summarization Data](https://summari.es) | [Visual Reasoning](http://lic.nlp.cornell.edu/nlvr/) | [Journalism Data](http://cjlab.stanford.edu/2015/09/30/lab-launch-and-data-sets/) 
-
-Open Census Data: [1](https://www.producthunt.com/posts/open-census-data) | [2](https://www.safegraph.com/open-census-data?ref=producthunt) | [3](https://docs.safegraph.com/docs/open-census-data)
-
-Causality: [1](https://www.kaggle.com/c/cause-effect-pairs) [2](http://webdav.tuebingen.mpg.de/cause-effect/)
-
-Rosalind: [1](http://rosalind.info/problems/locations/) | [2](https://github.com/mtarbit/Rosalind-Problems)
- 
-SEC: [1](https://www.sec.gov/structureddata) | [2](https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html) | [3](https://www.sec.gov/dera/data/financial-statement-data-sets.html) | [4](https://www.sec.gov/dera/data/financial-statement-data-sets.html)
-
-Neuro Data: [1](http://preprocessed-connectomes-project.org) | [2](http://www.humanconnectomeproject.org) | [3](http://fcon_1000.projects.nitrc.org/indi/abide/) | [4](https://www.ncbi.nlm.nih.gov/pubmed/25840117) | [5](https://coins.mrn.org)
-
-Time Series: [1](http://www2.stat.duke.edu/~mw/ts_data_sets.html) | [2](https://datamarket.com/data/list/?q=provider%3Atsdl) | [3](https://archive.ics.uci.edu/ml/datasets.html?format=&task=&att=&area=&numAtt=&numIns=&type=ts&sort=nameUp&view=table) | [4](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [5](https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/) | [6](www.kaggle.com/c/demand-forecasting-kernels-only) | [7](https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes) | [8](https://www.kaggle.com/c/GEF2012-wind-forecasting) | [9](https://www.kaggle.com/c/web-traffic-time-series-forecasting) | [sensor data](https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp) | [World Holidays](https://date.nager.at/)
-
-Disney Animation: [1](https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html) | [2](https://www.disneyanimation.com/technology/datasets)
-
-NYC: [1](https://nycopendata.socrata.com/) | [2](https://health.data.ny.gov) | [3](http://www.nyc.gov/html/dot/html/about/datafeeds.shtml)
-
-Global: [1](http://datacatalogs.org/) | [2](http://index.okfn.org/place/) | [3](http://data.worldbank.org/) | [European Data Portal](http://www.europeandataportal.eu/)
-
-Sentiment: [1](http://ai.stanford.edu/~amaas/data/sentiment/) | [2](https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews)
-
-Scripts: [1](https://www.springfieldspringfield.co.uk) | [2](https://github.com/BobAdamsEE/SouthParkData) | [3](http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html) | [4](http://transcripts.foreverdreaming.org/viewtopic.php?f=809&t=31120)
-
-Q & A: [1](https://rajpurkar.github.io/SQuAD-explorer/) | [2](https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/) | [3](http://jmcauley.ucsd.edu/data/amazon/qa/) | [4](http://ai2-website.s3.amazonaws.com/publications/algebra-TACL2015.pdf) | [5](http://quac.ai/)
-
-Autonomous Driving: [1](http://robotcar-dataset.robots.ox.ac.uk/) | [2](https://medium.com/udacity/open-sourcing-223gb-of-mountain-view-driving-data-f6b5593fbfa5#.ch9a8c762) | [3](https://github.com/commaai/research) | [4](https://www.scaleapi.com/image-annotation/self-driving-cars)
-
-CV: [1](https://research.googleblog.com/2016/09/introducing-open-images-dataset.html) | [2](http://aloi.science.uva.nl/?__vid=5c0983704ebd0132821522000b2a88d7) | [3](http://www.vision.caltech.edu/visipedia/CUB-200.html?__vid=5c0983704ebd0132821522000b2a88d7) | [4](http://www.robots.ox.ac.uk/~vgg/data/flowers/17/?__vid=5c0983704ebd0132821522000b2a88d7) | [5](http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/) | [6](https://github.com/vc1492a/Hey-Waldo) | [7](https://github.com/gtoderici/sports-1m-dataset)
-
-Networks: [1](https://snap.stanford.edu/data/index.html) | [2](http://networkrepository.com/index.php) | [3](https://aminer.org/data-sna)
-
-Sound: [1](http://labrosa.ee.columbia.edu/millionsong/) | [2](https://github.com/mdeff/fma) | [3](http://homes.cs.washington.edu/~thickstn/musicnet.html) | [4](https://datasets.freesound.org/fsd/) | [Million Song](https://labrosa.ee.columbia.edu/millionsong/) | [Music Net](https://homes.cs.washington.edu/~thickstn/musicnet.html) | [Sound Effects](http://bbcsfx.acropolis.org.uk/)
-
-### Auto Data Science
-
-[Visualize](http://holoviews.org)
-
-[Feature Engineering](https://www.featuretools.com) 
-
-TPOT
-
-[Google AutoML](https://cloud.google.com/automl/)
-
-### Pipelines
-
-**Sample**
+**Sample Pipeline**
 
 [Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
 
@@ -251,53 +189,3 @@ Communicate: jupyter
 Monitor:
 
 Deploy: flask
-
-### Distributed
-
-#### General
-
-ff | bigmemory | biganalytics | bigtabulate | purrrlyr: dplyr purrr | furrr: parallelized purrr
-
-foreach + doMC | parallel | doParallel
-
-Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression
-
-#### PySpark
-
-* A [cheatsheet[(https://www.qubole.com/resources/pyspark-cheatsheet/).
-
-* Spark's assumes the target is called 'label' in ML. Everything else is a feature.
-
-* alias() method to rename a column you're selecting.
-
-* cast() method: nominative determinism on columns
-
-* withColumn(): create new column
-
-* pyspark.ml.feature
-
-* At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
-
-* You can create what are called 'one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
-
-* Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
-
-* selectExpr() takes SQL expressions as a string
-
-* show() vs collect()
-
-* Spark only handles numeric data
-
-* In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
-
-#### sparklyr
-
-* To collect your data: that is, to move it from Spark to R, you call collect(). copy_to() moves your data from R to Spark.
-
-* Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
-
-* If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
-
-* feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
-
-* ft_tokenizer(): to lower and split into individual words, ft_regex_tokenizer, sdf_sort

@@ -2,6 +2,69 @@
 
 ## General
 
+General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+
+* sklearn log_loss | brier score| cross entropy | youdens j
+
+* hamming distance for categorical data. Available in sklearn DBSCAN.
+
+* precision: how good were you at something being true when you said it was true. recall: how many of the true values did you catch. f1: harmonic mean of the two
+
+* Brier score: Don't use for ordinal predictions. 0.25 if say .5 and .33 if randomly assign probs.
+
+* R uses class encoded as 1 in classification to make predictions. Use levels() function on factor to determine what 1 is.
+
+* 20 observations per feature is pretty good for making predictions.
+
+* y = b_0 + b_1x_1 + b_2x_2 + b_3x_1x_2. ( b_1 + b_2x_2 ) is the increase in y with a unit increase in x_1.
+
+* Algorithms for Rec Systems: Linear/Logistic/Elastic Net Regression, Restricted Boltzmann Machines, Singular Value Decomposition, Makov Chains, Latent Dirichlet Allocation, Association Rules, Gradient Boosted Decision Trees, Random Forests, Affinity Propagation, K-Means, Matrix Factorization, Alternating Least Squares.
+
+* For example, multilevel models themselves may be referred to as hierarchical linear models, random effects models, multilevel models, random intercept models, random slope models, or pooling models.
+
+* Multi-Modal Classification: In the machine learning community, the term Multi-Modal is used to refer to multiple kinds of data. For example, consider a YouTube video. It can be thought to contain 3 different modalities: 1) The video frames (visual modality), 2) The audio clip of what's being spoken (audio modality), 3) Some videos also come with the transcription of the words spoken in the form of subtitles (textual modality)
+
+* Less samples and more features increase the chance of overfitting.
+
+* You can choose either of the following inference strategies: offline inference, meaning that you make all possible predictions in a batch, using a MapReduce or something similar. You then write the predictions to an SSTable or Bigtable, and then feed these to a cache/lookup table. online inference, meaning that you predict on demand, using a server.
+
+* A static model is trained offline. That is, we train the model exactly once and then use that trained model for a while. A dynamic model is trained online. That is, data is continually entering the system and we're incorporating that data into the model through continuous updates.
+
+* How would multiplying all of the predictions from a given model by 2.0 (for example, if the model predicts 0.4, we multiply by 2.0 to get a prediction of 0.8) change the model's performance as measured by AUC? No change. AUC only cares about relative prediction scores. Yes, AUC is based on the relative predictions, so any transformation of the predictions that preserves the relative ranking has no effect on AUC. This is clearly not the case for other metrics such as squared error, log loss, or prediction bias (discussed later).
+
+* AUC is desirable for the following two reasons: AUC is scale-invariant. It measures how well predictions are ranked, rather than their absolute values. UC is classification-threshold-invariant. It measures the quality of the model's predictions irrespective of what classification threshold is chosen. However, both these reasons come with caveats, which may limit the usefulness of AUC in certain use cases: Scale invariance is not always desirable. For example, sometimes we really do need well calibrated probability outputs, and AUC won’t tell us about that. Classification-threshold invariance is not always desirable. In cases where there are wide disparities in the cost of false negatives vs. false positives, it may be critical to minimize one type of classification error. For example, when doing email spam detection, you likely want to prioritize minimizing false positives (even if that results in a significant increase of false negatives). AUC isn't a useful metric for this type of optimization.
+
+* Raising our classification threshold will cause the number of true positives to decrease or stay the same and will cause the number of false negatives to increase or stay the same. Thus, recall will either stay constant or decrease. In general, raising the classification threshold reduces false positives, thus raising precision.
+
+* A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
+
+* Bias: Error Introduced by approximating real-life problem by using a simple method
+
+* Imagine a linear model with two strongly correlated features; that is, these two features are nearly identical copies of one another but one feature contains a small amount of random noise. If we train this model with L2 regularization, what will happen to the weights for these two features? L2 regularization will force the features towards roughly equivalent weights that are approximately half of what they would have been had only one of the two features been in the model.
+
+* L2 regularization will encourage many of the non-informative weights to be nearly (but not exactly) 0.0.
+
+* F1 Score = TP/(TP + FP + FN). Essentially how good you are at identifying the positive class.
+
+* A variable that is completely useless by itself can provide a significant performance improvement when taken with others.
+
+* Variance: The amount the model output will change if the model was trained using a different data
+
+* Flexible Methods: higher variance, low bias, Example: KNN (k = 1). * Inflexible Methods: low variance, high bias, Example: Linear regression
+
+* Set Random state by hand in sklearn.
+
+* Generally need 3 rows of data per variable (to prevent model from seeing signal where there is only noise) [Nina Zumel]
+
+* Domain knowledge for feature selection and random forest feature importance (5-10) best variables. [Nina Zumel]
+
+* Because we have a couple thousand data points, even though salary can best be represented by a Poisson distribution, I'm going to use Gaussian distribution. (With bigger datasets, these two distribution start to become very similar).
+
+* We can also tell that our input, smart_1_normalized, doesn't have a very strong relationship to our output because the standard error (0.009) is more than 1/10 of our estimate (0.02).
+
+* The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.
+
+
 [SOTA Results](https://paperswithcode.com/sota)
 
 toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es
@@ -65,10 +128,6 @@ because even though you have higher overall accuracy, you have more false negati
 * Parametric: Model has a function shape and form, Model is trained/fit using training data to determine parameter values, reduces the problem of training a model down to training a set of parameter values, Examples: linear regression. Non-Parametric: No assumption about model form is made, Example: KNN
 
 https://scikit-learn.org/stable/modules/classes.html#module-sklearn.semi_supervised
-
-## Model
-
-### General
 
 Semi-supervised: active learning | [Auto Labeling](https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html)
 
@@ -180,7 +239,7 @@ Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sk
 
 tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.io/tsne/) | [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
 
-### Model Selection/Evaluation
+## Model Selection/Evaluation
 
 * **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
 
@@ -266,13 +325,9 @@ tsne: [1](http://distill.pub/2016/misread-tsne/) | [2](https://lvdmaaten.github.
 
 * [Model Comparison](http://hunch.net/?p=224)
 
-### Model Explanability
-
-Use SHAP.
+Use SHAP for Model Explanability
 
 ## Supervised
-
-General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 ### GLM
 
@@ -511,7 +566,7 @@ For GAM models, the predict() method returns a matrix, so use as.numeric() to co
 
 **Cons**
 
-## KNN
+### KNN
 
 Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
 
@@ -551,7 +606,7 @@ Can be sensitive to outliers or irrelevant attributes because they add noise.
 
 Computationally expensive; as the number of observations, dimensions, and K increases, the time it takes for the algorithm to run and the space it takes to store the computations increases dramatically.
 
-##SVM
+### SVM
 
 Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach?  To ensure small prediction error when the underlying distribution is not known
 
@@ -601,7 +656,7 @@ Multiclass
 
 * Requires significant memory and processing power
 
-## Decision Tree
+### Decision Tree
 
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
@@ -632,7 +687,7 @@ Note: Duplicate splits happen when they increase node purity. While pruning redu
 
 * Duplication within the same sub-tree is possible
 
-## Bagging
+### Bagging
 
 used to decrease variance in decision trees
 
@@ -664,7 +719,7 @@ train multiple trees using bootstrapped data to reduce variance and prevent over
 
 * Does not reduce variance if the features are correlated
 
-## Random Forest
+### Random Forest
 
 Build a number of decision trees using bootstrapped samples
 
@@ -701,7 +756,7 @@ Hard to interpret and needs a lot of work to tune parameters.
 
 Not as easy to visually interpret
 
-## Boosting
+### Boosting
 
 Unlike boosting and random forests, can overfit if number of trees is too large
 
@@ -723,7 +778,7 @@ Can easily handle qualitative (categorical) features
 
 **Cons**
 
-## Naïve Bayes
+### Naïve Bayes
 
 Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.
 
@@ -749,7 +804,7 @@ Note: In addition, we can use function "partial_fit" to fit on a batch of sample
 
 * While easily attainable, the estimated probabilities are often less reliable than the predicted class labels themselves.
 
-## LDA & QDA
+### LDA & QDA
 
 Before we take a look into the inner workings of LDA in the following subsections, let's summarize the key steps of the LDA approach:
 
@@ -767,7 +822,7 @@ Project the samples onto the new feature subspace using the transformation matri
 
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own. 
 
-## GAMs
+### GAMs
 
 Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
 
@@ -839,7 +894,7 @@ outputs on the log odds scale
 
 gams work with broom and caret.
 
-## Hierarchical Models
+### Hierarchical Models
 
 "Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
 
@@ -852,7 +907,6 @@ Analysis of Variance, or ANOVA, can be used to compare two different lmer models
 * One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
 
 * Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
-
 
 ## Unsupervised
 
@@ -888,14 +942,14 @@ Uses simple principle which can be explained in non-statistical terms. It is eff
 
 Less sophisticated, random choices of centers, and requires guess for centers.
 
-## Hierarchical Clustering
+### Hierarchical Clustering
 
 Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2. 
 Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
 
 K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn’t need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
 
-## PCA
+### PCA
 
 * Center and scale data. The eigenvectors yield orthogonal directions of greatest variability(principal components). The eigenvalues correspond to the magnitude of variancealong the principal components. Interpretability is a negative. PCA is completely nonparametric: any data set can be plugged in and an answer comes out, requiring no parameters to tweak and no regard for how the data was recorded. From one perspective, the fact that PCA is non-parametric (or plug-and-play) can be considered a positive feature because the answer is unique and independent of the user. From another perspective the fact that PCA is agnostic to the source of the data is also a weakness. When using dimensional reduction we restrict ourselves to simpler models. Thus, we expect bias to increase and variance to decrease. Getting latent components. Visualize high dimensional data. Reduce noise. Preprocessing. scale and center data before doing. Needs regularization. Too many principal components F1 score starts to drop after increase. Best F1 is 1. set number of components. Use fit_transforms, use explained_variance_ratio_ to see how much of the variance is explained by each component. Choose features that explain most of the variances, then use a inverse_transform to reconstruct your x. Minimum number of principal components is min(n,p).
 
@@ -1005,7 +1059,7 @@ NLP For: [Web Devs](http://blog.algorithmia.com/natural-language-processing-algo
 
 [NLP Intro](http://blog.algorithmia.com/introduction-natural-language-processing-nlp/)
 
-#### Geospatial
+### Geospatial
 
 https://geocompr.robinlovelace.net/adv-map.html#interactive-maps
 

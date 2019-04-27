@@ -165,17 +165,9 @@ A typical data science workflow can be framed as following these steps:
   Maintain: adapt the models and features to the evolution of the environment
 \end{itemize}
 
-Another instantiation via Hadley Wickham is:
+Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate. As an abbreviation: ittvmcmd.
 
-import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate
-
-As an abbreviation: ittvmcmd
-
-And the two combined:
-
-preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}
-
-Another note is that one way to structure projects is to write user stories a la software engineering.
+And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this \href{https://gfleetwood.github.io/noted-resources/data_science.html}{page}.
 
@@ -256,68 +248,11 @@ What lies below is a succinct version of a workflow. Theoretical specifics can b
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
 
-\hypertarget{data}{%
-\subsection{Data}\label{data}}
+Auto Data Science: \href{http://holoviews.org}{Visualize} \textbar{} \href{https://www.featuretools.com}{Feature Engineering} \textbar{} Model: TPOT, \href{https://cloud.google.com/automl/}{Google AutoML}
 
 \href{https://toolbox.google.com/datasetsearch}{Search}
 
-\href{https://www.gbif.org}{Biodiversity}
-
-\href{https://www.backblaze.com/b2/hard-drive-test-data.html}{Drives}
-
-Medical: \href{https://stanfordmlgroup.github.io/competitions/mura/}{X-rays} \textbar{} \href{https://github.com/beamandrew/medical-data}{Medical Data} \textbar{} \url{https://mimic.physionet.org/} \textbar{} \url{https://janelia.figshare.com/articles/Eight-probe_Neuropixels_recordings_during_spontaneous_behaviors/7739750}
-
-\href{https://public.enigma.com/}{Enigma} \textbar{} \href{http://dumps.wikimedia.org/other/pagecounts-raw/}{Wiki Data Dump} \textbar{} \href{http://archive.ics.uci.edu/ml/}{UCI ML Repo} \textbar{} \href{https://open.nasa.gov/explore/datanauts/}{Datanauts} \textbar{} \href{http://academictorrents.com/}{Research Data} \textbar{} \href{https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit\#gid=0}{Data Is Plural Archive} \textbar{} \href{http://www.data.gov/}{Data.gov} \textbar{}\href{https://msropendata.com}{Microsoft Research} \textbar{} \href{https://www.opendatasoft.com/a-comprehensive-list-of-all-open-data-portals-around-the-world/}{Portals} \textbar{} \href{https://www.kaggle.com/datasets}{Kaggle Datasets} \textbar{} \href{https://open.nasa.gov/blog/}{NASA} \textbar{} \href{https://gist.github.com/olivercameron/482dcfe8f34d66b536b1048eefe8b40d\#file-datasets-csv}{ML Cameron} \textbar{} \url{https://www.enigma.com/data} \textbar{} \url{http://veekaybee.github.io/2018/07/23/small-datasets/} \textbar{} \url{https://grasswiki.osgeo.org/wiki/Global_datasets} \textbar{} \url{https://www.figure-eight.com/datasets/} \textbar{} \url{https://blog.webkid.io/datasets-for-machine-learning/} \textbar{} \url{https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research} \textbar{} \url{https://www.githubarchive.org} \textbar{} \url{https://www.datasetlist.com/} \textbar{} \href{https://bmtgoncalves.github.io/pyNASA/}{NASA} \textbar{} \href{https://deepmind.com/research/open-source/open-source-datasets/}{Deep Mind} \textbar{} \href{http://allenai.org/data.html}{Allen Institute} \textbar{} \href{http://users.stat.ufl.edu/~winner/datasets.html}{Miscellaneous Datasets} \textbar{} \url{https://hub.packtpub.com/25-datasets-deep-learning-iot/} \textbar{} \href{https://unpaywall.org/products/snapshot}{Open Access Papers} \textbar{} \url{https://www.spe.org/en/jpt/jpt-article-detail/?art=5282} \textbar{} \url{http://www.fast.ai/2018/10/16/aws-datasets}
-
-\href{http://jmcauley.ucsd.edu/data/amazon/}{Amazon Reviews} \textbar{} \href{http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm}{Word-Emotion Association Lexicon} \textbar{} \href{http://wordbank.stanford.edu/}{Word Bank} \textbar{} \href{http://www.lab41.org/nine-datasets-for-investigating-recommender-systems/}{Rec Systems} \textbar{} \href{http://www.esp.uem.es/jmgomez/smsspamcorpus/}{SMS Spam} \textbar{} \href{https://webrobots.io/kickstarter-datasets/}{Kickstarter \& Indiego Archive} \textbar{} \href{https://github.com/niderhoff/nlp-datasets/blob/master/README.md}{NLP} \textbar{} \href{https://summari.es}{Summarization Data} \textbar{} \href{http://lic.nlp.cornell.edu/nlvr/}{Visual Reasoning} \textbar{} \href{http://cjlab.stanford.edu/2015/09/30/lab-launch-and-data-sets/}{Journalism Data}
-
-Open Census Data: \href{https://www.producthunt.com/posts/open-census-data}{1} \textbar{} \href{https://www.safegraph.com/open-census-data?ref=producthunt}{2} \textbar{} \href{https://docs.safegraph.com/docs/open-census-data}{3}
-
-Causality: \href{https://www.kaggle.com/c/cause-effect-pairs}{1} \href{http://webdav.tuebingen.mpg.de/cause-effect/}{2}
-
-Rosalind: \href{http://rosalind.info/problems/locations/}{1} \textbar{} \href{https://github.com/mtarbit/Rosalind-Problems}{2}
-
-SEC: \href{https://www.sec.gov/structureddata}{1} \textbar{} \href{https://www.sec.gov/dera/data/financial-statement-and-notes-data-set.html}{2} \textbar{} \href{https://www.sec.gov/dera/data/financial-statement-data-sets.html}{3} \textbar{} \href{https://www.sec.gov/dera/data/financial-statement-data-sets.html}{4}
-
-Neuro Data: \href{http://preprocessed-connectomes-project.org}{1} \textbar{} \href{http://www.humanconnectomeproject.org}{2} \textbar{} \href{http://fcon_1000.projects.nitrc.org/indi/abide/}{3} \textbar{} \href{https://www.ncbi.nlm.nih.gov/pubmed/25840117}{4} \textbar{} \href{https://coins.mrn.org}{5}
-
-Time Series: \href{http://www2.stat.duke.edu/~mw/ts_data_sets.html}{1} \textbar{} \href{https://datamarket.com/data/list/?q=provider\%3Atsdl}{2} \textbar{} \href{https://archive.ics.uci.edu/ml/datasets.html?format=\&task=\&att=\&area=\&numAtt=\&numIns=\&type=ts\&sort=nameUp\&view=table}{3} \textbar{} \href{https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/}{4} \textbar{} \href{https://machinelearningmastery.com/challenging-machine-learning-time-series-forecasting-problems/}{5} \textbar{} \href{www.kaggle.com/c/demand-forecasting-kernels-only}{6} \textbar{} \href{https://www.kaggle.com/c/ams-2014-solar-energy-prediction-contes}{7} \textbar{} \href{https://www.kaggle.com/c/GEF2012-wind-forecasting}{8} \textbar{} \href{https://www.kaggle.com/c/web-traffic-time-series-forecasting}{9} \textbar{} \href{https://data.melbourne.vic.gov.au/Transport-Movement/Pedestrian-volume-updated-monthly-/b2ak-trbp}{sensor data} \textbar{} \href{https://date.nager.at/}{World Holidays}
-
-Disney Animation: \href{https://blog.yiningkarlli.com/2018/07/disney-animation-datasets.html}{1} \textbar{} \href{https://www.disneyanimation.com/technology/datasets}{2}
-
-NYC: \href{https://nycopendata.socrata.com/}{1} \textbar{} \href{https://health.data.ny.gov}{2} \textbar{} \href{http://www.nyc.gov/html/dot/html/about/datafeeds.shtml}{3}
-
-Global: \href{http://datacatalogs.org/}{1} \textbar{} \href{http://index.okfn.org/place/}{2} \textbar{} \href{http://data.worldbank.org/}{3} \textbar{} \href{http://www.europeandataportal.eu/}{European Data Portal}
-
-Sentiment: \href{http://ai.stanford.edu/~amaas/data/sentiment/}{1} \textbar{} \href{https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews}{2}
-
-Scripts: \href{https://www.springfieldspringfield.co.uk}{1} \textbar{} \href{https://github.com/BobAdamsEE/SouthParkData}{2} \textbar{} \href{http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html}{3} \textbar{} \href{http://transcripts.foreverdreaming.org/viewtopic.php?f=809\&t=31120}{4}
-
-Q \& A: \href{https://rajpurkar.github.io/SQuAD-explorer/}{1} \textbar{} \href{https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/}{2} \textbar{} \href{http://jmcauley.ucsd.edu/data/amazon/qa/}{3} \textbar{} \href{http://ai2-website.s3.amazonaws.com/publications/algebra-TACL2015.pdf}{4} \textbar{} \href{http://quac.ai/}{5}
-
-Autonomous Driving: \href{http://robotcar-dataset.robots.ox.ac.uk/}{1} \textbar{} \href{https://medium.com/udacity/open-sourcing-223gb-of-mountain-view-driving-data-f6b5593fbfa5\#.ch9a8c762}{2} \textbar{} \href{https://github.com/commaai/research}{3} \textbar{} \href{https://www.scaleapi.com/image-annotation/self-driving-cars}{4}
-
-CV: \href{https://research.googleblog.com/2016/09/introducing-open-images-dataset.html}{1} \textbar{} \href{http://aloi.science.uva.nl/?__vid=5c0983704ebd0132821522000b2a88d7}{2} \textbar{} \href{http://www.vision.caltech.edu/visipedia/CUB-200.html?__vid=5c0983704ebd0132821522000b2a88d7}{3} \textbar{} \href{http://www.robots.ox.ac.uk/~vgg/data/flowers/17/?__vid=5c0983704ebd0132821522000b2a88d7}{4} \textbar{} \href{http://www.ee.surrey.ac.uk/CVSSP/demos/chars74k/}{5} \textbar{} \href{https://github.com/vc1492a/Hey-Waldo}{6} \textbar{} \href{https://github.com/gtoderici/sports-1m-dataset}{7}
-
-Networks: \href{https://snap.stanford.edu/data/index.html}{1} \textbar{} \href{http://networkrepository.com/index.php}{2} \textbar{} \href{https://aminer.org/data-sna}{3}
-
-Sound: \href{http://labrosa.ee.columbia.edu/millionsong/}{1} \textbar{} \href{https://github.com/mdeff/fma}{2} \textbar{} \href{http://homes.cs.washington.edu/~thickstn/musicnet.html}{3} \textbar{} \href{https://datasets.freesound.org/fsd/}{4} \textbar{} \href{https://labrosa.ee.columbia.edu/millionsong/}{Million Song} \textbar{} \href{https://homes.cs.washington.edu/~thickstn/musicnet.html}{Music Net} \textbar{} \href{http://bbcsfx.acropolis.org.uk/}{Sound Effects}
-
-\hypertarget{auto-data-science}{%
-\subsection{Auto Data Science}\label{auto-data-science}}
-
-\href{http://holoviews.org}{Visualize}
-
-\href{https://www.featuretools.com}{Feature Engineering}
-
-TPOT
-
-\href{https://cloud.google.com/automl/}{Google AutoML}
-
-\hypertarget{pipelines}{%
-\subsection{Pipelines}\label{pipelines}}
-
-\textbf{Sample}
+\textbf{Sample Pipeline}
 
 \href{https://mobile.twitter.com/TheStephLocke/status/990251709531344896}{Source}:
 
@@ -395,93 +330,20 @@ Monitor:
 
 Deploy: flask
 
-\hypertarget{distributed}{%
-\subsection{Distributed}\label{distributed}}
-
-\hypertarget{general}{%
-\subsubsection{General}\label{general}}
-
-ff \textbar{} bigmemory \textbar{} biganalytics \textbar{} bigtabulate \textbar{} purrrlyr: dplyr purrr \textbar{} furrr: parallelized purrr
-
-foreach + doMC \textbar{} parallel \textbar{} doParallel
-
-Out-of-Core: pandas chunksize Semantic Style Transfer symbolic regression
-
-\hypertarget{pyspark}{%
-\subsubsection{PySpark}\label{pyspark}}
-
-\begin{itemize}
-\item
-  A {[}cheatsheet{[}(\url{https://www.qubole.com/resources/pyspark-cheatsheet/}).
-\item
-  Spark's assumes the target is called `label' in ML. Everything else is a feature.
-\item
-  alias() method to rename a column you're selecting.
-\item
-  cast() method: nominative determinism on columns
-\item
-  withColumn(): create new column
-\item
-  pyspark.ml.feature
-\item
-  At the core of the pyspark.ml module are the Transformer and Estimator classes. Transformer classes are used for pre-processing and have a .transform() method. eg. PCA
-\item
-  You can create what are called `one-hot vectors' to represent the carrier and the destination of each flight. A one-hot vector is a way of representing a categorical feature where every observation has a vector in which all elements are zero except for at most one element, which has a value of one (1).
-\item
-  Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
-\item
-  selectExpr() takes SQL expressions as a string
-\item
-  show() vs collect()
-\item
-  Spark only handles numeric data
-\item
-  In Spark it's important to make sure you split the data after all the transformations. This is because operations like StringIndexer don't always produce the same index even when given the same list of strings.
-\end{itemize}
-
-\hypertarget{sparklyr}{%
-\subsubsection{sparklyr}\label{sparklyr}}
-
-\begin{itemize}
-\item
-  To collect your data: that is, to move it from Spark to R, you call collect(). copy\_to() moves your data from R to Spark.
-\item
-  Use compute() to compute the calculation, but store the results in a temporary data frame on Spark.
-\item
-  If you want to delay returning the data, you can use dbSendQuery() to execute the query, then dbFetch() to return the results.
-\item
-  feature transforms: ft\_, ml functions: ml\_, spark df functions: sdf\_
-\item
-  ft\_tokenizer(): to lower and split into individual words, ft\_regex\_tokenizer, sdf\_sort
-\end{itemize}
-
 \hypertarget{pre-modeling}{%
 \chapter{Pre-Modeling}\label{pre-modeling}}
-
-outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers
-
-tomek link: points of different classes which are neighbors of each other. Removing them often improves model performance
 
 \hypertarget{import}{%
 \section{Import}\label{import}}
 
-\hypertarget{general-1}{%
-\subsection{General}\label{general-1}}
+\hypertarget{general}{%
+\subsection{General}\label{general}}
 
-\begin{itemize}
-\item
-  A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
-\item
-  Make codebooks
-\end{itemize}
+A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.
 
-\href{https://www.jamovi.org/}{R Spreadsheet}
+Make codebooks
 
 \url{https://www.webscraper.io/documentation\#open-web-scraper}
-
-Documentation: \href{http://databasenotetaker.com/}{1} \textbar{} \href{https://dataedo.com/}{2} \textbar{} \href{https://www.apexsql.com/sql-tools-doc.aspx}{3} \textbar{} \href{https://techwriter.me/best-practices-guide/documenting-databases.aspx}{4} \textbar{} \href{http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary}{5} \textbar{} \href{https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database}{6} \textbar{} \href{https://drawsql.app/\#features}{7}
-
-CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a-peek-at-the-data-set}{1} \textbar{} \href{https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY}{2} \textbar{} \href{http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html}{3}
 
 \href{https://tabula.technology}{pdf table extraction}
 
@@ -492,6 +354,10 @@ CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a
 \url{https://www.stitchdata.com/}
 
 \url{https://www.prefect.io/}
+
+Documentation: \href{http://databasenotetaker.com/}{1} \textbar{} \href{https://dataedo.com/}{2} \textbar{} \href{https://www.apexsql.com/sql-tools-doc.aspx}{3} \textbar{} \href{https://techwriter.me/best-practices-guide/documenting-databases.aspx}{4} \textbar{} \href{http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary}{5} \textbar{} \href{https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database}{6} \textbar{} \href{https://drawsql.app/\#features}{7}
+
+CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a-peek-at-the-data-set}{1} \textbar{} \href{https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY}{2} \textbar{} \href{http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html}{3}
 
 \hypertarget{sql}{%
 \subsection{SQL}\label{sql}}
@@ -513,69 +379,17 @@ CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a
   If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
 \end{itemize}
 
-\hypertarget{tidy}{%
-\section{Tidy}\label{tidy}}
+\hypertarget{tidy-transform}{%
+\section{Tidy \& Transform}\label{tidy-transform}}
 
-\begin{itemize}
-\item
-  In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy.
+\hypertarget{general-1}{%
+\subsection{General}\label{general-1}}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Each variable must have its own column.
-  \item
-    Each observation must have its own row.
-  \item
-    Each value must have its own cell.
-  \end{itemize}
-\end{itemize}
+In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.
 
-\url{http://pyviz.org/}
+outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers
 
-\url{http://dataviz.tools/}
-
-\url{https://www.datawrapper.de/}
-
-\url{https://www.data-to-viz.com}
-
-\url{https://dominikkoch.github.io/Bump-Chart/}
-
-\url{https://www.r-graph-gallery.com/}
-
-\url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\#top}
-
-\href{http://emilkirkegaard.dk/understanding_statistics/}{Stats Viz}
-
-\href{http://students.brown.edu/seeing-theory/}{Seeing Theory}
-
-\href{http://pythonplot.com/}{Python Plotting Guide}
-
-\href{https://python-graph-gallery.com}{Py Graph Gallery}
-
-ggplot: \href{https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html}{1} \textbar{} \href{https://plot.ly/python/table/}{2} \textbar{} \href{https://plot.ly/python/html-reports/}{3} \textbar{} \href{http://www.ggplot2-exts.org/gallery/}{Extensions}
-
-\href{http://sankeymatic.com}{Sankey Diagram Creator}
-
-\href{https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/}{R Waffle Charts}
-
-\href{https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html}{High Dimensional}
-
-\href{http://www.thehackerwithin.org/swinburne/links.html}{Links}
-
-\href{http://motioninsocial.com/tufte/}{Tufte In R}
-
-\href{http://shinyapps.org/apps/RGraphCompendium/index.php}{R Graph Compendium}
-
-\href{http://www.datavizcatalogue.com/index.html}{Data Viz Catalogue}
-
-\href{http://textvis.lnu.se/}{Text Visualization}
-
-\hypertarget{transform}{%
-\section{Transform}\label{transform}}
-
-\hypertarget{general-2}{%
-\subsection{General}\label{general-2}}
+tomek link: points of different classes which are neighbors of each other. Removing them often improves model performance
 
 \begin{itemize}
 \tightlist
@@ -583,9 +397,7 @@ ggplot: \href{https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using
   There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10\%.
 \end{itemize}
 
-A good formula is: if your sample is picked uniformly at random and is of size at least:
-
-\(\frac{-log(\frac{d}{2})}{2e^2}\)
+A good formula is: if your sample is picked uniformly at random and is of size at least: \(\frac{-log(\frac{d}{2})}{2e^2}\)
 
 then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99\% certainty the unknown true population rate to +- 10\% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5\% only increases the estimated sample size to 300.
 
@@ -593,15 +405,7 @@ then with probability at least 1-d your sample measured proportion q is no furth
 \item
   Use spatial sign to transform data with outliers.
 \item
-  Too many levels for a category:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    limit number of categories through feature selection
-  \item
-    \url{https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables} * bucket groups by number of samples
-  \end{itemize}
+  Too many levels for a category: 1) limit number of categories through feature selection, 2) \url{https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables}, 3) bucket groups by number of samples
 \item
   Long story short, if these outliers are really such (i.e.~they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.
 \item
@@ -646,15 +450,118 @@ then with probability at least 1-d your sample measured proportion q is no furth
 \hypertarget{visualize}{%
 \section{Visualize}\label{visualize}}
 
+swarmplot \textbar{} marimekko charts \textbar{} radviz \textbar{} Marey Chart
+
+\url{http://pyviz.org/}
+
+\url{http://dataviz.tools/}
+
+\url{https://www.datawrapper.de/}
+
+\url{https://www.data-to-viz.com}
+
+\url{https://dominikkoch.github.io/Bump-Chart/}
+
+\url{https://www.r-graph-gallery.com/}
+
+\url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\#top}
+
+\href{http://emilkirkegaard.dk/understanding_statistics/}{Stats Viz}
+
+\href{http://students.brown.edu/seeing-theory/}{Seeing Theory}
+
+\href{http://pythonplot.com/}{Python Plotting Guide}
+
+\href{https://python-graph-gallery.com}{Py Graph Gallery}
+
+ggplot: \href{https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html}{1} \textbar{} \href{https://plot.ly/python/table/}{2} \textbar{} \href{https://plot.ly/python/html-reports/}{3} \textbar{} \href{http://www.ggplot2-exts.org/gallery/}{Extensions}
+
+\href{http://sankeymatic.com}{Sankey Diagram Creator}
+
+\href{https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/}{R Waffle Charts}
+
+\href{https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html}{High Dimensional}
+
+\href{http://www.thehackerwithin.org/swinburne/links.html}{Links}
+
+\href{http://motioninsocial.com/tufte/}{Tufte In R}
+
+\href{http://shinyapps.org/apps/RGraphCompendium/index.php}{R Graph Compendium}
+
+\href{http://www.datavizcatalogue.com/index.html}{Data Viz Catalogue}
+
+\href{http://textvis.lnu.se/}{Text Visualization}
+
+\hypertarget{pre-processing}{%
+\section{Pre-processing}\label{pre-processing}}
+
+\hypertarget{feature-engineering}{%
+\subsection{Feature Engineering}\label{feature-engineering}}
+
+encode missingness a a feature
+
+robust scaler python: median \& quantiles
+
+On Unbalanced Classes:
+
+Research on imbalanced classes often considers imbalanced to mean a minority class of 10\% to 20\%.
+
+That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
+
 \begin{itemize}
 \item
-  swarmplot \textbar{} marimekko charts \textbar{} radviz \textbar{} Marey Chart
+  Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
 \item
-  \url{https://mobile.twitter.com/andrewheiss/status/1095443941875343360}
+  Balance the training set in some way: Oversample the minority class. Undersample the majority class.
+  Synthesize new minority classes.
 \end{itemize}
 
-\hypertarget{general-3}{%
-\section{General}\label{general-3}}
+*Throw away minority examples and switch to an anomaly detection framework.
+
+\begin{itemize}
+\item
+  At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
+\item
+  Construct an entirely new algorithm to perform well on imbalanced data.
+\item
+  Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.
+\item
+  Use probability estimates and not the default .5 threshold.
+\item
+  Undersampling, oversampling, increase weight of minority class
+\item
+  Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
+\item
+  Sklearn \url{example:\%60mdl} = svm.SVC(kernel=`linear', class\_weight=\{1: 10\}) \& svm.SVC(kernel=`linear', class\_weight=`balanced')`
+\end{itemize}
+
+\hypertarget{feature-selection}{%
+\subsection{Feature Selection}\label{feature-selection}}
+
+\begin{itemize}
+\item
+  Variance Threshold: Use this to exclude features that don't meet a variance threshold.
+\item
+  Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f\_regression, f\_classification from sklearn.feature\_selection.
+\item
+  SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions.
+\item
+  sklearn.feature\_selection.RFE(CV)
+\item
+  To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality\_rating was supplied. Give this boolean feature a name like is\_quality\_rating\_defined.
+\item
+  Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply ``cap'' or ``clip'' the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
+\item
+  Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn't). 3) Double-check that the training data agrees with other sources (for example, dashboards).
+\end{itemize}
+
+\hypertarget{model}{%
+\chapter{Model}\label{model}}
+
+\hypertarget{general-2}{%
+\section{General}\label{general-2}}
+
+General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 \begin{itemize}
 \item
@@ -718,98 +625,6 @@ then with probability at least 1-d your sample measured proportion q is no furth
 \item
   The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.
 \end{itemize}
-
-\hypertarget{pre-processing}{%
-\section{Pre-processing}\label{pre-processing}}
-
-\hypertarget{feature-engineering}{%
-\section{Feature Engineering}\label{feature-engineering}}
-
-\begin{itemize}
-\item
-  encode missingness a a feature
-\item
-  Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don't think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{df[}\StringTok{'hr_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'hr_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{itemize}
-\tightlist
-\item
-  robust scaler python: median \& quantiles
-\end{itemize}
-
-\hypertarget{feature-selection}{%
-\section{Feature Selection}\label{feature-selection}}
-
-\begin{itemize}
-\item
-  Variance Threshold: Use this to exclude features that don't meet a variance threshold.
-\item
-  Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f\_regression, f\_classification from sklearn.feature\_selection.
-\item
-  SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions.
-\item
-  sklearn.feature\_selection.RFE(CV)
-\item
-  To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality\_rating was supplied. Give this boolean feature a name like is\_quality\_rating\_defined.
-\item
-  Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply ``cap'' or ``clip'' the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
-\item
-  Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn't). 3) Double-check that the training data agrees with other sources (for example, dashboards).
-\end{itemize}
-
-\hypertarget{other}{%
-\section{Other}\label{other}}
-
-\hypertarget{unbalanced-classes}{%
-\subsection{Unbalanced Classes}\label{unbalanced-classes}}
-
-Research on imbalanced classes often considers imbalanced to mean a minority class of 10\% to 20\%.
-
-That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
-
-\begin{itemize}
-\item
-  Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
-\item
-  Balance the training set in some way: Oversample the minority class. Undersample the majority class.
-  Synthesize new minority classes.
-\end{itemize}
-
-*Throw away minority examples and switch to an anomaly detection framework.
-
-\begin{itemize}
-\item
-  At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
-\item
-  Construct an entirely new algorithm to perform well on imbalanced data.
-\item
-  Use AUC, F1 Score, Cohen's Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.
-\item
-  Use probability estimates and not the default .5 threshold.
-\item
-  Undersampling, oversampling, increase weight of minority class
-\item
-  Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
-\item
-  Sklearn Eg: wclf = svm.SVC(kernel=`linear', class\_weight=\{1: 10\}) \& svm.SVC(kernel=`linear', class\_weight=`balanced')
-\end{itemize}
-
-\hypertarget{model}{%
-\chapter{Model}\label{model}}
-
-\hypertarget{general-4}{%
-\section{General}\label{general-4}}
 
 \href{https://paperswithcode.com/sota}{SOTA Results}
 
@@ -880,12 +695,6 @@ because even though you have higher overall accuracy, you have more false negati
 \end{itemize}
 
 \url{https://scikit-learn.org/stable/modules/classes.html\#module-sklearn.semi_supervised}
-
-\hypertarget{model-1}{%
-\section{Model}\label{model-1}}
-
-\hypertarget{general-5}{%
-\subsection{General}\label{general-5}}
 
 Semi-supervised: active learning \textbar{} \href{https://blog.fastforwardlabs.com/2018/09/28/snorkel-rapid-training-data-creation-with-weak-supervision.html}{Auto Labeling}
 
@@ -996,7 +805,7 @@ Sklearn Model Selection: \href{http://scikit-learn.org/stable/modules/generated/
 tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{} \href{https://lvdmaaten.github.io/tsne/}{2} \textbar{} \href{https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html}{3}
 
 \hypertarget{model-selectionevaluation}{%
-\subsection{Model Selection/Evaluation}\label{model-selectionevaluation}}
+\section{Model Selection/Evaluation}\label{model-selectionevaluation}}
 
 \begin{itemize}
 \item
@@ -1085,15 +894,10 @@ tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{} \href{https://l
   \href{http://hunch.net/?p=224}{Model Comparison}
 \end{itemize}
 
-\hypertarget{model-explanability}{%
-\subsection{Model Explanability}\label{model-explanability}}
-
-Use SHAP.
+Use SHAP for Model Explanability
 
 \hypertarget{supervised}{%
 \section{Supervised}\label{supervised}}
-
-General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 \hypertarget{glm}{%
 \subsection{GLM}\label{glm}}
@@ -1367,7 +1171,7 @@ For GAM models, the predict() method returns a matrix, so use as.numeric() to co
 \textbf{Cons}
 
 \hypertarget{knn}{%
-\section{KNN}\label{knn}}
+\subsection{KNN}\label{knn}}
 
 Calculate distance between each observation and all the others. Determine the k nearest observations to the observation. Classify the observation as the most frequent class of the k nearest observations. Small k's are not robust to outliers, highlight local variations and induce unstable decision boundaries. Large k's are robust to outliers, highlight global variations and induce stable decision boundaries. Good value to choose is k = sqrt(n). Can use maximum prior probability to decide ties. Use Euclidean distance for numerical data and Hamming distance for categorical data. Latter treats dimensions equally and is symmetric. Low k is low bias, high variance and high k is high bias low variance. 1NN can't adapt to outliers and has no notion of class frequencies. Can use weighted KNN. Easy in sklearn.
 
@@ -1413,7 +1217,8 @@ Can be sensitive to outliers or irrelevant attributes because they add noise.
 
 Computationally expensive; as the number of observations, dimensions, and K increases, the time it takes for the algorithm to run and the space it takes to store the computations increases dramatically.
 
-\#\#SVM
+\hypertarget{svm}{%
+\subsection{SVM}\label{svm}}
 
 Selection of margin in SVM is a convex optimization problem. What is the objective of the maximum margin approach? To ensure small prediction error when the underlying distribution is not known
 
@@ -1470,7 +1275,7 @@ Multiclass
 \end{itemize}
 
 \hypertarget{decision-tree}{%
-\section{Decision Tree}\label{decision-tree}}
+\subsection{Decision Tree}\label{decision-tree}}
 
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
@@ -1508,7 +1313,7 @@ Note: Duplicate splits happen when they increase node purity. While pruning redu
 \end{itemize}
 
 \hypertarget{bagging}{%
-\section{Bagging}\label{bagging}}
+\subsection{Bagging}\label{bagging}}
 
 used to decrease variance in decision trees
 
@@ -1547,7 +1352,7 @@ train multiple trees using bootstrapped data to reduce variance and prevent over
 \end{itemize}
 
 \hypertarget{random-forest}{%
-\section{Random Forest}\label{random-forest}}
+\subsection{Random Forest}\label{random-forest}}
 
 Build a number of decision trees using bootstrapped samples
 
@@ -1585,7 +1390,7 @@ Hard to interpret and needs a lot of work to tune parameters.
 Not as easy to visually interpret
 
 \hypertarget{boosting}{%
-\section{Boosting}\label{boosting}}
+\subsection{Boosting}\label{boosting}}
 
 Unlike boosting and random forests, can overfit if number of trees is too large
 
@@ -1608,7 +1413,7 @@ Can easily handle qualitative (categorical) features
 \textbf{Cons}
 
 \hypertarget{naive-bayes}{%
-\section{Naïve Bayes}\label{naive-bayes}}
+\subsection{Naïve Bayes}\label{naive-bayes}}
 
 Laplace smoothing/estimator in Naive Bayes: To see why consider the worst case where none of the words in the training sample appear in the test sentence. In this case, under your model we would conclude that the sentence is impossible but it clearly exists creating a contradiction.
 
@@ -1641,7 +1446,7 @@ Note: In addition, we can use function ``partial\_fit'' to fit on a batch of sam
 \end{itemize}
 
 \hypertarget{lda-qda}{%
-\section{LDA \& QDA}\label{lda-qda}}
+\subsection{LDA \& QDA}\label{lda-qda}}
 
 Before we take a look into the inner workings of LDA in the following subsections, let's summarize the key steps of the LDA approach:
 
@@ -1660,7 +1465,7 @@ Project the samples onto the new feature subspace using the transformation matri
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x\textbar{}y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own.
 
 \hypertarget{gams}{%
-\section{GAMs}\label{gams}}
+\subsection{GAMs}\label{gams}}
 
 Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
 
@@ -1733,7 +1538,7 @@ outputs on the log odds scale
 gams work with broom and caret.
 
 \hypertarget{hierarchical-models}{%
-\section{Hierarchical Models}\label{hierarchical-models}}
+\subsection{Hierarchical Models}\label{hierarchical-models}}
 
 ``Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts'' BirthRate \textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
 
@@ -1787,7 +1592,7 @@ Uses simple principle which can be explained in non-statistical terms. It is eff
 Less sophisticated, random choices of centers, and requires guess for centers.
 
 \hypertarget{hierarchical-clustering}{%
-\section{Hierarchical Clustering}\label{hierarchical-clustering}}
+\subsection{Hierarchical Clustering}\label{hierarchical-clustering}}
 
 Generates dendrograms. The lower down a fusion occurs the more similar the group of observations and vice versa. Begin with n observations and a distance measure of all pairwise dissimialirities. Evaluate pairwise intercluster dissimiliarities among the clusters and fuse pair of clusters that are least dissimilar. Repeat process for remaining clusters. Continue for i=n to i=2.
 Need to pick a dissimilarity measure and a linkage method. Complete linkage: maximal inter-cluster dissimilarity, single linkage: minimal inter-cluster dissimilarity, avergae linkage: mean inter-cluster dissimilarity. Complete is sensitive to outliers but tends to produce compact clusters. Distance between groups: complete, average, and ward. Single not as sensitive to outliers but susceptible to chaining effect where clusters can often not represent intuitive groups. Average strikes a balance between the two. Usually standardize data before clustering. Sklearn.metrics has pairwise distances.
@@ -1795,7 +1600,7 @@ Need to pick a dissimilarity measure and a linkage method. Complete linkage: max
 K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn't need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
 
 \hypertarget{pca}{%
-\section{PCA}\label{pca}}
+\subsection{PCA}\label{pca}}
 
 \begin{itemize}
 \item
@@ -1928,7 +1733,7 @@ NLP For: \href{http://blog.algorithmia.com/natural-language-processing-algorithm
 \href{http://blog.algorithmia.com/introduction-natural-language-processing-nlp/}{NLP Intro}
 
 \hypertarget{geospatial}{%
-\subsubsection{Geospatial}\label{geospatial}}
+\subsection{Geospatial}\label{geospatial}}
 
 \url{https://geocompr.robinlovelace.net/adv-map.html\#interactive-maps}
 
@@ -2070,8 +1875,8 @@ use makefile to run cmd commands
 \hypertarget{stats}{%
 \chapter{Stats}\label{stats}}
 
-\hypertarget{general-6}{%
-\section{General}\label{general-6}}
+\hypertarget{general-3}{%
+\section{General}\label{general-3}}
 
 Cohen's H \textbar{} Cohen's D \textbar{} Multiple comparisons Problem \textbar{} Importance sampling \textbar{} Bayes Error Rate \textbar{} Pearson's Coefficient of Skewness \textbar{} Bayes factor \textbar{} Correction methods for non representative samples \textbar{} Mann--Whitney U test \textbar{} cohen's f\^{}2 \textbar{} \url{https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression} \textbar{} \url{https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis}
 
@@ -2568,8 +2373,8 @@ Ex-ante forecasts are those that are made using only the information that is ava
 \hypertarget{preprocessing}{%
 \subsection{Preprocessing}\label{preprocessing}}
 
-\hypertarget{general-7}{%
-\subsubsection{General}\label{general-7}}
+\hypertarget{general-4}{%
+\subsubsection{General}\label{general-4}}
 
 So far, we have considered relatively simple seasonal patterns such as quarterly and monthly data. However, higher frequency time series often exhibit more complicated seasonal patterns. For example, daily data may have a weekly pattern as well as an annual pattern. Hourly data usually has three types of seasonality: a daily pattern, a weekly pattern, and an annual pattern
 
@@ -2700,8 +2505,8 @@ ggAcf() \textbar{} ggPacf()
 \hypertarget{models}{%
 \subsection{Models}\label{models}}
 
-\hypertarget{general-8}{%
-\subsubsection{General}\label{general-8}}
+\hypertarget{general-5}{%
+\subsubsection{General}\label{general-5}}
 
 In this model, the slope can be interpreted as an elasticity, and is the average percentage change in y resulting from a 1\% increase in x. Other useful forms can also be specified. The log-linear form is specified by only transforming the forecast variable and the linear-log form is obtained by transforming the predictor.
 
@@ -3008,8 +2813,8 @@ The ets() function does not produce forecasts. Rather, it estimates the model pa
 
 ETS point forecasts are equal to the medians of the forecast distributions. For models with only additive components, the forecast distributions are normal, so the medians and means are equal. For ETS models with multiplicative errors, or with multiplicative seasonality, the point forecasts will not be equal to the means of the forecast distributions.
 
-\hypertarget{other-1}{%
-\subsubsection{Other}\label{other-1}}
+\hypertarget{other}{%
+\subsubsection{Other}\label{other}}
 
 additive/multiplicative decomposition (decompose(type=``multiplicative'')) not used now because there are better methods.
 
@@ -3136,8 +2941,8 @@ pipeline: signal -\textgreater{} wavelet transform -\textgreater{} pca -\textgre
 \hypertarget{deep-learning}{%
 \chapter{Deep Learning}\label{deep-learning}}
 
-\hypertarget{general-9}{%
-\section{General}\label{general-9}}
+\hypertarget{general-6}{%
+\section{General}\label{general-6}}
 
 \href{https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning}{Cheatsheet}
 
@@ -3272,6 +3077,8 @@ ADAGRAD is another optimization option that takes care of some of the hyperparam
 \hypertarget{debugging}{%
 \section{Debugging}\label{debugging}}
 
+\url{https://karpathy.github.io/2019/04/25/recipe/}
+
 \href{http://theorangeduck.com/page/neural-network-not-working}{1}
 
 \href{https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21}{2}
@@ -3302,8 +3109,8 @@ Posterior P(theta\textbar{}D): Credibility of the parameter value with the data 
 
 Marginal Likelihood (Evidence): Probability of evidence
 
-\hypertarget{other-2}{%
-\section{Other}\label{other-2}}
+\hypertarget{other-1}{%
+\section{Other}\label{other-1}}
 
 \url{https://causal.app/}
 
@@ -3393,8 +3200,8 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 \hypertarget{causality}{%
 \section{Causality}\label{causality}}
 
-\hypertarget{general-10}{%
-\section{General}\label{general-10}}
+\hypertarget{general-7}{%
+\section{General}\label{general-7}}
 
 \href{https://twitter.com/tdietterich/status/1034631407904018437}{Causality \& DL}
 
@@ -3563,41 +3370,49 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \hypertarget{codebook}{%
 \chapter{Codebook}\label{codebook}}
 
+\hypertarget{general-8}{%
+\section{General}\label{general-8}}
+
+\href{http://chrisalbon.com/}{Chris Albon}
+
+\hypertarget{linear-regression-assumption-checks}{%
+\section{Linear Regression Assumption Checks}\label{linear-regression-assumption-checks}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# general check}
-\KeywordTok{plot}\NormalTok{(rgr_lr_st1)}
+\KeywordTok{plot}\NormalTok{(mdl)}
 
 \CommentTok{# linearity check}
-\KeywordTok{avPlots}\NormalTok{(rgr_lr_st1)}
+\KeywordTok{avPlots}\NormalTok{(mdl)}
 
-\CommentTok{# repeat of outlier analysis}
-\CommentTok{#influencePlot(rgr_lr_st1)}
+\CommentTok{# Outlier Analysis}
+\CommentTok{# influencePlot(mdl)}
 
 \CommentTok{# multi-colinearity}
-\KeywordTok{vif}\NormalTok{(model) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
+\KeywordTok{vif}\NormalTok{(mdl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
 
-\CommentTok{# Test for Autocorrelated Errors}
+\CommentTok{#  Autocorrelated Errors}
 \KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
 
-\NormalTok{data =}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{) }\CommentTok{# Generating data from a standard normal distribution.}
-\KeywordTok{shapiro.test}\NormalTok{(data) }\CommentTok{# P-value insignificant; retain H0, conclude data is normally distributed.}
+\CommentTok{# Normality}
+\KeywordTok{shapiro.test}\NormalTok{(data)}
 
 \CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
 \KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
-\CommentTok{#Breusch-Pagan (BP) test lmtest package: is used to test for heteroskedasticity in a linear regression model}
+
+\CommentTok{# heteroskedasticity}
+\CommentTok{# Breusch-Pagan (BP) test lmtest package}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{statsmodels.stats.outliers_influence.variance_inflation_factor}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{regression-by-groups}{%
+\section{Regression By Groups}\label{regression-by-groups}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(purrr)}
+
 \NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
@@ -3606,92 +3421,19 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \end{Highlighting}
 \end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# vif(clf_lr$finalModel)}
-\CommentTok{# multicol <- alias(clf_lr$finalModel)$Complete}
-\CommentTok{# multicol}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{cyclical-feature-engineering}{%
+\section{Cyclical Feature Engineering}\label{cyclical-feature-engineering}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# box tidwell doesn't work since features have negative values.}
-
-\CommentTok{# min_max_scaler <- function(x) (x - min(x))/(max(x) - min(x))}
-\CommentTok{# }
-\CommentTok{# df_num_selected <- df2 %>% }
-\CommentTok{#   select(}
-\CommentTok{#     OverallMap,}
-\CommentTok{#     StrandMap,}
-\CommentTok{#     lesson_length,}
-\CommentTok{#     g_avg_overall_map,}
-\CommentTok{#     g_avg_strand_map,}
-\CommentTok{#     g_avg_score,}
-\CommentTok{#     g_num_students,}
-\CommentTok{#     cohort_avg_overall_map,}
-\CommentTok{#     cohort_avg_strand_map}
-\CommentTok{#   ) %>%}
-\CommentTok{#   map(min_max_scaler) %>% }
-\CommentTok{#   data.frame() %>% }
-\CommentTok{# }
-\CommentTok{# formula_all_num_features <- as.formula(glue('pass ~ \{paste(df_num_selected %>% names, collapse = " + ")\}'))}
-\CommentTok{# car::boxTidwell(formula_all_num_features, data = df_num_selected )}
-
-\CommentTok{# Visual test too many features to work well}
-
-\CommentTok{# lin_test <- df2 %>%}
-\CommentTok{#   dplyr::select_if(is.numeric) }
-\CommentTok{# }
-\CommentTok{# predictors <- colnames(lin_test)}
-\CommentTok{# }
-\CommentTok{# lin_test <- lin_test %>%}
-\CommentTok{#   mutate(logit = log(clf_lr_final$fitted.values/(1-clf_lr_final$fitted.values))) %>%}
-\CommentTok{#   gather(key = "predictors", value = "predictor.value", -logit)}
-\CommentTok{# }
-\CommentTok{# ggplot(lin_test, aes(logit, predictor.value))+}
-\CommentTok{#   geom_point(size = 0.5, alpha = 0.5) +}
-\CommentTok{#   geom_smooth(method = "loess") + }
-\CommentTok{#   theme_bw() + }
-\CommentTok{#   facet_wrap(~predictors, scales = "free_y")}
+\CommentTok{# Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\NormalTok{df[}\StringTok{'hr_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
+\NormalTok{df[}\StringTok{'hr_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
+\NormalTok{df[}\StringTok{'mnth_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
+\NormalTok{df[}\StringTok{'mnth_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Plot with intercept uncertainty}
-\KeywordTok{plot}\NormalTok{(log_mod2, }\DataTypeTok{pages =} \DecValTok{1}\NormalTok{, }\DataTypeTok{trans =}\NormalTok{ plogis, }\DataTypeTok{shift =} \KeywordTok{coef}\NormalTok{(log_mod2)[}\DecValTok{1}\NormalTok{], }\DataTypeTok{seWithMean =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{#log odds scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{) }
-
-\CommentTok{#probability scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{) }
-
-\CommentTok{#construct se.fit on log odds scale than transform to probs with plogis}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =}\NormalTok{ T)}
-
-\CommentTok{#granular for each record on log odds scale}
-\KeywordTok{predict}\NormalTok{(mdl, }\DataTypeTok{type =} \StringTok{"terms"}\NormalTok{)}
-
-\CommentTok{# Calculate predictions and errors}
-\NormalTok{predictions <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(log_mod2, }\DataTypeTok{newdata =}\NormalTok{ new_credit_data, }
-                       \DataTypeTok{type =} \StringTok{"link"}\NormalTok{, }\DataTypeTok{se.fit =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# Calculate high and low predictions intervals}
-\NormalTok{high_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{+}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
-\NormalTok{low_pred <-}\StringTok{ }\NormalTok{predictions}\OperatorTok{$}\NormalTok{fit }\OperatorTok{-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{predictions}\OperatorTok{$}\NormalTok{se.fit}
-
-\CommentTok{# Convert intervals to probability scale}
-\NormalTok{high_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(high_pred)}
-\NormalTok{low_prob <-}\StringTok{ }\KeywordTok{plogis}\NormalTok{(low_pred)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{general-11}{%
-\section{General}\label{general-11}}
-
-\href{http://chrisalbon.com/}{Chris Albon}
 
 \hypertarget{rpy2-ipynb}{%
 \section{Rpy2 Ipynb}\label{rpy2-ipynb}}
@@ -4412,11 +4154,17 @@ A quick way of visualizing model calibration without having to manually bin any 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{pyspark-1}{%
-\section{Pyspark}\label{pyspark-1}}
+\hypertarget{pyspark}{%
+\section{Pyspark}\label{pyspark}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Cheatsheet: https://www.qubole.com/resources/pyspark-cheatsheet/}
+\CommentTok{# Spark only handles numeric data. }
+\CommentTok{# selectExpr() takes SQL expressions as a string.}
+\CommentTok{# Spark's assumes the target is called 'label' in ML. Everything else is a feature.}
+\CommentTok{# Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models}
+\CommentTok{# It's important to split the data after all the transformations because operations like StringIndexer don't always produce the same index even when given the same list of strings.}
 \ImportTok{import}\NormalTok{ findspark}
 \NormalTok{findspark.init()}
 \ImportTok{import}\NormalTok{ findspark}
@@ -4433,6 +4181,11 @@ A quick way of visualizing model calibration without having to manually bin any 
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
 \ImportTok{import}\NormalTok{ pyspark}
 \ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
+\ImportTok{import}\NormalTok{ pyspark.sql.functions }\ImportTok{as}\NormalTok{ F}
+\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
+\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
+\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
+\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
 \NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.getOrCreate() }\CommentTok{# SparkSession.builder.appName('chosenName').getOrCreate()}
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
@@ -4509,7 +4262,6 @@ A quick way of visualizing model calibration without having to manually bin any 
 \NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.carrier}\OperatorTok{==}\StringTok{'DL'}\NormalTok{).}\BuiltInTok{filter}\NormalTok{(flights.origin}\OperatorTok{==}\StringTok{'SEA'}\NormalTok{).groupBy().avg(}\StringTok{'air_time'}\NormalTok{).show()}
 \NormalTok{flights.withColumn(}\StringTok{"duration_hrs"}\NormalTok{, flights.air_time}\OperatorTok{/}\DecValTok{60}\NormalTok{).groupBy().}\BuiltInTok{sum}\NormalTok{(}\StringTok{'duration_hrs'}\NormalTok{).show()}
 \CommentTok{## Spark functions}
-\ImportTok{import}\NormalTok{ pyspark.sql.functions }\ImportTok{as}\NormalTok{ F}
 \NormalTok{by_month_dest.agg(F.stddev(}\StringTok{'dep_delay'}\NormalTok{)).show()}
 \CommentTok{## Drop column}
 \NormalTok{final_test_data.drop(}\StringTok{'State'}\NormalTok{)}
@@ -4523,7 +4275,6 @@ A quick way of visualizing model calibration without having to manually bin any 
 \CommentTok{## Make a VectorAssembler}
 \NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols}\OperatorTok{=}\NormalTok{[}\StringTok{"month"}\NormalTok{, }\StringTok{"air_time"}\NormalTok{, }\StringTok{"carrier_fact"}\NormalTok{, }\StringTok{"dest_fact"}\NormalTok{, }\StringTok{"plane_age"}\NormalTok{], outputCol}\OperatorTok{=}\StringTok{"features"}\NormalTok{)}
 \CommentTok{## Import & Make Pipeline}
-\ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
 \NormalTok{flights_pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages}\OperatorTok{=}\NormalTok{[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])}
 \CommentTok{## Fit and transform the data}
 \NormalTok{piped_data }\OperatorTok{=}\NormalTok{ flights_pipe.fit(model_data).transform(model_data)}
@@ -4531,15 +4282,11 @@ A quick way of visualizing model calibration without having to manually bin any 
 \NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{6}\NormalTok{, }\FloatTok{.4}\NormalTok{])}
 \CommentTok{## Tuning & Selection}
 \CommentTok{## Import LogisticRegression}
-\ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
 \CommentTok{## Create a LogisticRegression Estimator}
 \NormalTok{lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
-\CommentTok{## Import the evaluation submodule}
-\ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
 \CommentTok{## Create a BinaryClassificationEvaluator}
 \NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName}\OperatorTok{=}\StringTok{"areaUnderROC"}\NormalTok{)}
 \CommentTok{## Import the tuning submodule}
-\ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
 \CommentTok{## Create the parameter grid}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
 \CommentTok{## Add the hyperparameter}
@@ -4565,11 +4312,13 @@ A quick way of visualizing model calibration without having to manually bin any 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{sparklyr-1}{%
-\section{Sparklyr}\label{sparklyr-1}}
+\hypertarget{sparklyr}{%
+\section{Sparklyr}\label{sparklyr}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# feature transforms: ft_, ml functions: ml_, spark df functions: sdf_}
+
 \KeywordTok{library}\NormalTok{(sparklyr)}
 
 \NormalTok{sc <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master=}\StringTok{"local"}\NormalTok{)}
@@ -4668,50 +4417,29 @@ A quick way of visualizing model calibration without having to manually bin any 
 \begin{Highlighting}[]
 \CommentTok{# Operations done by reference}
 
-\CommentTok{# subset by i calculate by j grouped using by}
-\NormalTok{dt[i, j, by] }
-
-\CommentTok{# prints last row}
-\NormalTok{DT[.N] }
-
-\CommentTok{# colnames}
-\KeywordTok{names}\NormalTok{(DT)}
-
+\KeywordTok{names}\NormalTok{(DT) }\CommentTok{# colnames}
 \KeywordTok{dim}\NormalTok{(DT) }\CommentTok{# dimensions}
 
+\NormalTok{DT[i, j, by]  }\CommentTok{# subset by i calculate by j grouped using by}
+\NormalTok{DT[.N]  }\CommentTok{# prints last row}
 \NormalTok{DT[, .(A, B)] }\CommentTok{# returns two columns}
-
 \NormalTok{DT[, }\KeywordTok{c}\NormalTok{(A, B)] }\CommentTok{# returns a concatenated vector}
-
 \NormalTok{DT[, .(}\DataTypeTok{sum_c =} \KeywordTok{sum}\NormalTok{(C)] }\CommentTok{# mutate}
-
 \NormalTok{DT[, }\KeywordTok{plot}\NormalTok{(A, C)] }\CommentTok{# plot?}
-
 \NormalTok{DT[, A }\OperatorTok{:}\ErrorTok{=}\StringTok{ }\OtherTok{NULL}\NormalTok{] }\CommentTok{# Remove column A}
-
 \NormalTok{DT[, .(}\DataTypeTok{sumB =} \KeywordTok{sum}\NormalTok{(B)), }\DataTypeTok{by =}\NormalTok{ .(}\DataTypeTok{Grp =}\NormalTok{ A}\OperatorTok{%%}\DecValTok{2}\NormalTok{)] }\CommentTok{# group_by & summarize}
-
 \NormalTok{DT[, .N, }\DataTypeTok{by =}\NormalTok{ Sepal.Width] }\CommentTok{# .N is the count of each group}
-
 \NormalTok{DT[, }\KeywordTok{lapply}\NormalTok{(.SD, median)] }\CommentTok{# .SD is a placeholder for all the columns}
-
-\NormalTok{dogs[, }\KeywordTok{lapply}\NormalTok{(.SD, mean), }\DataTypeTok{.SDcols =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{] }\CommentTok{# Find mean of columns 2 & 3}
+\NormalTok{DT[, }\KeywordTok{lapply}\NormalTok{(.SD, mean), }\DataTypeTok{.SDcols =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{] }\CommentTok{# Find mean of columns 2 & 3}
+\NormalTok{DT[.(}\StringTok{'b'}\NormalTok{)]}
+\NormalTok{DT[.(}\KeywordTok{c}\NormalTok{(}\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{))]}
+\NormalTok{DT[.(}\KeywordTok{c}\NormalTok{(}\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{)), }\DataTypeTok{mult=}\StringTok{"first"}\NormalTok{]}
+\NormalTok{DT[}\KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{), .SD[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, .N)], }\DataTypeTok{by =}\NormalTok{ .EACHI] }\CommentTok{# First and last row of the "b" and "c" groups}
+\NormalTok{DT[}\KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{), \{ }\KeywordTok{print}\NormalTok{(.SD); .SD[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, .N)] \}, }\DataTypeTok{by =}\NormalTok{ .EACH]}
 
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{) }\KeywordTok{set}\NormalTok{(DT, i, 3L, i}\OperatorTok{+}\DecValTok{1}\NormalTok{) }\CommentTok{# update first 5 rows of 3rd column}
-
 \KeywordTok{setnames}\NormalTok{(DT, }\StringTok{'y'}\NormalTok{, }\StringTok{'z'}\NormalTok{) }\CommentTok{# changes colname from y to z}
-
 \KeywordTok{setkey}\NormalTok{(DT, A, B)}
-
-\NormalTok{DT[.(}\StringTok{'b'}\NormalTok{)]}
-
-\NormalTok{DT[.(}\KeywordTok{c}\NormalTok{(}\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{))]}
-
-\NormalTok{DT[.(}\KeywordTok{c}\NormalTok{(}\StringTok{'b'}\NormalTok{, }\StringTok{'c'}\NormalTok{)), }\DataTypeTok{mult=}\StringTok{"first"}\NormalTok{]}
-
-\NormalTok{DT[}\KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{), .SD[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, .N)], }\DataTypeTok{by =}\NormalTok{ .EACHI] }\CommentTok{# First and last row of the "b" and "c" groups}
-
-\NormalTok{DT[}\KeywordTok{c}\NormalTok{(}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{), \{ }\KeywordTok{print}\NormalTok{(.SD); .SD[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, .N)] \}, }\DataTypeTok{by =}\NormalTok{ .EACH]}
 
 \NormalTok{dt1[dt2, }\DataTypeTok{roll=}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DataTypeTok{rollends=}\OtherTok{FALSE}\NormalTok{] }\CommentTok{# rolling join}
 \end{Highlighting}
