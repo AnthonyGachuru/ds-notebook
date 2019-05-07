@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data Science Cribsheet</title>
+  <title>Chapter 10 Checklists | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 10 Checklists | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 10 Checklists | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="codebook.html">
 
-<link rel="next" href="pre-modeling.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -297,70 +297,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data Science Cribsheet</h1>
-</div>
-<div id="workflow" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Workflow</h1>
-<div id="preamble" class="section level2">
-<h2><span class="header-section-number">1.1</span> Preamble</h2>
-<p>A typical data science workflow can be framed as following these steps:</p>
+<div id="checklists" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Checklists</h1>
+<p>An attempt to apply the principles in <a href="https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8&amp;btkr=1">“The Checklist Manifesto”</a> to Data Science.</p>
+<div id="general-9" class="section level2">
+<h2><span class="header-section-number">10.1</span> General</h2>
 <ul>
-<li><p>Business: start with a business question, define the goal and measure of success</p></li>
-<li><p>Data: find, access and explore the data</p></li>
-<li><p>Features: extract, assess and evaluate, select and sort</p></li>
-<li><p>Models: find the right model for the problem at hand, compare, optimize, and fine tune</p></li>
-<li><p>Communication: Interpret and communicate the results</p></li>
-<li><p>Production: transform the code into production ready code, integrate into current ecosystem and deploy</p></li>
-<li><p>Maintain: adapt the models and features to the evolution of the environment</p></li>
+<li><p>Understand the business question, goals, and measures of success</p></li>
+<li><p>See if the data to answer the question exists, and if it is useful.</p></li>
+<li><p>Structure project as user stories</p></li>
+<li><p>Initialize report to track and summarise work and to do list.</p></li>
+<li><p>Remember to use atomic commit messages</p></li>
+<li><p>checklists | code books | appendices | post mortems | tests | gacp</p></li>
+<li><p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p></li>
+<li><p>Sampling from data if its too large</p></li>
+<li><p><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Follow tidy data principles</a>.</p></li>
+<li><p>Figure out what you’re trying to do with the data.</p></li>
+<li><p>See what the data looks like: types of variables, the first and last few observations, missing values or outliers.</p></li>
+<li><p>Outlier Detection: interquartile range, kernel density estimation, bonferroni test</p></li>
+<li><p>Look at missingness.</p></li>
+<li><p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression.</p></li>
+<li><p>Use the Gower distance for categorical dissimilarity.</p></li>
+<li><p>Check for blank spaces and replace with NA. In R: <code>df[df==&quot;&quot;] = NA</code>.</p></li>
+<li><p><a href="https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html">Binned Stats</a></p></li>
+<li><p>Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)</p></li>
+<li><p>Trendlines &amp; Histograms</p></li>
+<li><p>Confidence intervals</p></li>
+<li><p>Compare the distributions of variables with overlayed density plots</p></li>
+<li><p>Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.</p></li>
+<li><p>Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
+<li><p>Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.</p></li>
+<li><p>Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.</p></li>
+<li><p>Pipelines &amp; Feature Unions</p></li>
+<li><p>Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.</p></li>
+<li><p>Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.</p></li>
+<li><p>Model Explanability: SHAP</p></li>
+<li><p>Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.</p></li>
+<li><p>Deal with potential class imbalance: Gradient boosting is one option.</p></li>
+<li><p>Create ensembles</p></li>
+<li><p>Ensembling: mlxtend in Python, and caretEnsemble in R.</p></li>
+<li><p>Look at learning curves: <a href="https://www.dataquest.io/blog/learning-curves-machine-learning/">1</a> | <a href="http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html">2</a></p></li>
 </ul>
-<p>Another instantiation via Hadley Wickham is: import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; communicate. As an abbreviation: ittvmcmd.</p>
-<p>And the two combined: preparation -&gt; import -&gt; tidy -&gt; understand [ transform &lt;-&gt; visualize &lt;-&gt; model ] -&gt; [communicate + deploy + maintain]</p>
-<p>What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this <a href="https://gfleetwood.github.io/noted-resources/data_science.html">page</a>.</p>
 </div>
-<div id="resources" class="section level2">
-<h2><span class="header-section-number">1.2</span> Resources</h2>
-<p>Auto Data Science: <a href="http://holoviews.org">Visualize</a> | <a href="https://www.featuretools.com">Feature Engineering</a> | Model: TPOT, <a href="https://cloud.google.com/automl/">Google AutoML</a></p>
-<p><a href="https://toolbox.google.com/datasetsearch">Search</a></p>
-<p><strong>Sample Pipeline</strong></p>
-<p><a href="https://mobile.twitter.com/TheStephLocke/status/990251709531344896">Source</a>:</p>
-<p>IO: odbc readxl httr</p>
-<p>EDA: DataExplorer</p>
-<p>Prep: tidyverse</p>
-<p>Sampling: rsample modelr</p>
-<p>Feature Engineering: recipes</p>
-<p>Modeling: glmnet h2o FFTrees</p>
-<p>Evaluation: broom yardstick</p>
-<p>Deployment: sqlrutils AzureML opencpu</p>
-<p>Monitoring: flexdashboard</p>
-<p>Docs: rmarkdown</p>
-<p><strong>My Pipeline</strong></p>
-<p>Import: odbc dbi readr data.table</p>
-<p>Tidy: skimr dplyr tidyr visdat data.table</p>
-<p>Transform: dplyr data.table</p>
-<p>Visualization: ggplot2</p>
-<p>Modeling: sklearn mlxtend shap yellowbrick pyspark</p>
-<p>Communicate: rmarkdown</p>
-<p>Monitor:</p>
-<p>Deploy: shiny</p>
-<p><strong>R Pipeline</strong></p>
-<p>Import: odbc dbi readr data.table</p>
-<p>Tidy: skimr dplyr tidyr visdat data.table</p>
-<p>Transform: dplyr data.table</p>
-<p>Visualization: ggplot2</p>
-<p>Modeling: rsample modelr broom yardstick caret sparklyr</p>
-<p>Communicate: rmarkdown</p>
-<p>Monitor:</p>
-<p>Deploy: shiny</p>
-<p><strong>Python Pipeline</strong></p>
-<p>Import: pyodbc pandas-modin</p>
-<p>Tidy: pandas-modin</p>
-<p>Transform: pandas-modin</p>
-<p>Visualization: altair plotnine</p>
-<p>Modeling: sklearn mlxtend shap yellowbrick pyspark chainlearn</p>
-<p>Communicate: jupyter</p>
-<p>Monitor:</p>
-<p>Deploy: flask</p>
+<div id="linear-regression-1" class="section level2">
+<h2><span class="header-section-number">10.2</span> Linear Regression</h2>
+<p>Confidence Intervals for Model Parameters: confint in R</p>
 
 </div>
 </div>
@@ -369,8 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="codebook.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="pre-modeling.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -400,7 +381,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-checklists.Rmd",
 "text": "Edit"
 },
 "history": {

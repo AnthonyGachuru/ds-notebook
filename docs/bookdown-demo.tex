@@ -171,80 +171,6 @@ And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\
 
 What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this \href{https://gfleetwood.github.io/noted-resources/data_science.html}{page}.
 
-\hypertarget{checklist}{%
-\section{Checklist}\label{checklist}}
-
-\begin{itemize}
-\item
-  Understand the business question, goals, and measures of success
-\item
-  See if the data to answer the question exists, and if it is useful.
-\item
-  Structure project as user stories
-\item
-  Initialize report to track and summarise work and to do list.
-\item
-  Remember to use atomic commit messages
-\item
-  checklists \textbar{} code books \textbar{} appendices \textbar{} post mortems \textbar{} tests \textbar{} gacp
-\item
-  Character Encoding Precendence: utf-8, iso-8859-1, utf-16
-\item
-  Sampling from data if its too large
-\item
-  \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data principles}.
-\item
-  Figure out what you're trying to do with the data.
-\item
-  See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
-\item
-  Outlier Detection: interquartile range, kernel density estimation, bonferroni test
-\item
-  Look at missingness.
-\item
-  Imputation. Options include the Mean, Mode, KNN, Random, and Regression.
-\item
-  Use the Gower distance for categorical dissimilarity.
-\item
-  Check for blank spaces and replace with NA. In R: \texttt{df{[}df==""{]}\ =\ NA}.
-\item
-  \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned Stats}
-\item
-  Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
-\item
-  Trendlines \& Histograms
-\item
-  Confidence intervals
-\item
-  Compare the distributions of variables with overlayed density plots
-\item
-  Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
-\item
-  Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
-\item
-  Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
-\item
-  Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.
-\item
-  Pipelines \& Feature Unions
-\item
-  Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.
-\item
-  Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
-\item
-  Model Explanability: SHAP
-\item
-  Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.
-\item
-  Deal with potential class imbalance: Gradient boosting is one option.
-\item
-  Create ensembles
-\item
-  Ensembling: mlxtend in Python, and caretEnsemble in R.
-\item
-  Look at learning curves: \href{https://www.dataquest.io/blog/learning-curves-machine-learning/}{1} \textbar{} \href{http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html}{2}
-\end{itemize}
-
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
 
@@ -808,6 +734,8 @@ tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{} \href{https://l
 \section{Model Selection/Evaluation}\label{model-selectionevaluation}}
 
 \begin{itemize}
+\item
+  \url{https://eli5.readthedocs.io/en/latest/blackbox/permutation_importance.html}
 \item
   \textbf{The Coefficient of Unalikeability}: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
 \item
@@ -1642,6 +1570,11 @@ Probabilistic PCA introduces the Gaussian distribution to the PCA modeling frame
 
 Kernel PCA must project data into a higher dimensional space than that of the original data.
 
+\hypertarget{multiple-correspondence-analysis}{%
+\subsection{Multiple Correspondence Analysis}\label{multiple-correspondence-analysis}}
+
+PCA for categorical data.
+
 \hypertarget{semi-supervised}{%
 \section{Semi Supervised}\label{semi-supervised}}
 
@@ -1772,6 +1705,18 @@ NLP For: \href{http://blog.algorithmia.com/natural-language-processing-algorithm
 
 \href{https://wiki.python.org/moin/PythonForArtificialIntelligence}{AI 4 Py}
 
+\hypertarget{online-learning}{%
+\section{Online Learning}\label{online-learning}}
+
+Incremental PCA
+
+\hypertarget{sequences}{%
+\section{Sequences}\label{sequences}}
+
+Hidden Markov Model
+
+Conditional Rnadom Field
+
 \hypertarget{communicate-deploy-maintain}{%
 \chapter{Communicate, Deploy, Maintain}\label{communicate-deploy-maintain}}
 
@@ -1792,7 +1737,7 @@ State results with details as needed. For an end user presentation show how the 
 
 Discuss recommendations, outstanding issues, and possible future work.
 
-Structure: Introduction \textbar{} Motivation \textbar{} Summary \textbar{} Results \textbar{} Conclusion
+Structure: Introduction \textbar{} Summary \textbar{} Results \textbar{} Conclusion
 
 Interactive Reports Without Shiny: plotly, dt, crosstalk
 
@@ -2251,8 +2196,8 @@ the purpose of blocking an experiment is to make the experimental groups more li
 
 A rule of thumb in experimental design is often ``block what you can, randomize what you cannot'', which means you should aim to block the effects you can control for (e.g.~sex) randomize on those you cannot (e.g.~smoking status). Variability inside a block is expected to be fairly small, but variability between blocks will be larger.
 
-\hypertarget{sequences}{%
-\chapter{Sequences}\label{sequences}}
+\hypertarget{sequences-1}{%
+\chapter{Sequences}\label{sequences-1}}
 
 \hypertarget{time-series}{%
 \section{Time Series}\label{time-series}}
@@ -4528,6 +4473,90 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 \NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{checklists}{%
+\chapter{Checklists}\label{checklists}}
+
+An attempt to apply the principles in \href{https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8\&btkr=1}{``The Checklist Manifesto''} to Data Science.
+
+\hypertarget{general-9}{%
+\section{General}\label{general-9}}
+
+\begin{itemize}
+\item
+  Understand the business question, goals, and measures of success
+\item
+  See if the data to answer the question exists, and if it is useful.
+\item
+  Structure project as user stories
+\item
+  Initialize report to track and summarise work and to do list.
+\item
+  Remember to use atomic commit messages
+\item
+  checklists \textbar{} code books \textbar{} appendices \textbar{} post mortems \textbar{} tests \textbar{} gacp
+\item
+  Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+\item
+  Sampling from data if its too large
+\item
+  \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data principles}.
+\item
+  Figure out what you're trying to do with the data.
+\item
+  See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
+\item
+  Outlier Detection: interquartile range, kernel density estimation, bonferroni test
+\item
+  Look at missingness.
+\item
+  Imputation. Options include the Mean, Mode, KNN, Random, and Regression.
+\item
+  Use the Gower distance for categorical dissimilarity.
+\item
+  Check for blank spaces and replace with NA. In R: \texttt{df{[}df==""{]}\ =\ NA}.
+\item
+  \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned Stats}
+\item
+  Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
+\item
+  Trendlines \& Histograms
+\item
+  Confidence intervals
+\item
+  Compare the distributions of variables with overlayed density plots
+\item
+  Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
+\item
+  Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
+\item
+  Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
+\item
+  Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.
+\item
+  Pipelines \& Feature Unions
+\item
+  Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.
+\item
+  Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
+\item
+  Model Explanability: SHAP
+\item
+  Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.
+\item
+  Deal with potential class imbalance: Gradient boosting is one option.
+\item
+  Create ensembles
+\item
+  Ensembling: mlxtend in Python, and caretEnsemble in R.
+\item
+  Look at learning curves: \href{https://www.dataquest.io/blog/learning-curves-machine-learning/}{1} \textbar{} \href{http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html}{2}
+\end{itemize}
+
+\hypertarget{linear-regression-1}{%
+\section{Linear Regression}\label{linear-regression-1}}
+
+Confidence Intervals for Model Parameters: confint in R
 
 \bibliography{book.bib,packages.bib}
 
