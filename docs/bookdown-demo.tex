@@ -165,11 +165,7 @@ A typical data science workflow can be framed as following these steps:
   Maintain: adapt the models and features to the evolution of the environment
 \end{itemize}
 
-Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate. As an abbreviation: ittvmcmd.
-
-And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}
-
-What lies below is a succinct version of a workflow. Theoretical specifics can be found in other sections of this collection of cribsheets, and libraries or packages to use not included in the Stack can be found on this \href{https://gfleetwood.github.io/noted-resources/data_science.html}{page}.
+Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate. ( ittvmcmd as an abbreviation.) And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}. And this is an \href{https://gist.github.com/gfleetwood/3c152bee44d03a00fa5e8df3210a9918}{attempt} to fit this into the principles in \href{https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8\&btkr=1}{``The Checklist Manifesto''}.
 
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
@@ -4473,90 +4469,6 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 \NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{checklists}{%
-\chapter{Checklists}\label{checklists}}
-
-An attempt to apply the principles in \href{https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8\&btkr=1}{``The Checklist Manifesto''} to Data Science.
-
-\hypertarget{general-9}{%
-\section{General}\label{general-9}}
-
-\begin{itemize}
-\item
-  Understand the business question, goals, and measures of success
-\item
-  See if the data to answer the question exists, and if it is useful.
-\item
-  Structure project as user stories
-\item
-  Initialize report to track and summarise work and to do list.
-\item
-  Remember to use atomic commit messages
-\item
-  checklists \textbar{} code books \textbar{} appendices \textbar{} post mortems \textbar{} tests \textbar{} gacp
-\item
-  Character Encoding Precendence: utf-8, iso-8859-1, utf-16
-\item
-  Sampling from data if its too large
-\item
-  \href{http://vita.had.co.nz/papers/tidy-data.pdf}{Follow tidy data principles}.
-\item
-  Figure out what you're trying to do with the data.
-\item
-  See what the data looks like: types of variables, the first and last few observations, missing values or outliers.
-\item
-  Outlier Detection: interquartile range, kernel density estimation, bonferroni test
-\item
-  Look at missingness.
-\item
-  Imputation. Options include the Mean, Mode, KNN, Random, and Regression.
-\item
-  Use the Gower distance for categorical dissimilarity.
-\item
-  Check for blank spaces and replace with NA. In R: \texttt{df{[}df==""{]}\ =\ NA}.
-\item
-  \href{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.binned_statistic.html}{Binned Stats}
-\item
-  Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread)
-\item
-  Trendlines \& Histograms
-\item
-  Confidence intervals
-\item
-  Compare the distributions of variables with overlayed density plots
-\item
-  Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
-\item
-  Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap) or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
-\item
-  Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
-\item
-  Pre-processing: Use binning + chisquare / mutual information to see correlation between feature and target.
-\item
-  Pipelines \& Feature Unions
-\item
-  Feature Selection: Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection.
-\item
-  Feature Engineering: Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
-\item
-  Model Explanability: SHAP
-\item
-  Tuning: Do bayesian tuning instead of grid or random search. Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.
-\item
-  Deal with potential class imbalance: Gradient boosting is one option.
-\item
-  Create ensembles
-\item
-  Ensembling: mlxtend in Python, and caretEnsemble in R.
-\item
-  Look at learning curves: \href{https://www.dataquest.io/blog/learning-curves-machine-learning/}{1} \textbar{} \href{http://www.scikit-yb.org/en/latest/api/model_selection/learning_curve.html}{2}
-\end{itemize}
-
-\hypertarget{linear-regression-1}{%
-\section{Linear Regression}\label{linear-regression-1}}
-
-Confidence Intervals for Model Parameters: confint in R
 
 \bibliography{book.bib,packages.bib}
 
