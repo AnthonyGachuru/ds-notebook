@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 5 Communicate, Deploy, Maintain | Data Science Cribsheet</title>
+  <title>Chapter 2 Checklist | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 5 Communicate, Deploy, Maintain | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 2 Checklist | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Communicate, Deploy, Maintain | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 2 Checklist | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="model-1.html">
-<link rel="next" href="stats.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="pre-modeling.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -301,62 +301,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="communicate-deploy-maintain" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Communicate, Deploy, Maintain</h1>
-<div id="communicate-1" class="section level2">
-<h2><span class="header-section-number">5.1</span> Communicate</h2>
-<p><a href="https://jupyter.org/jupyter-book/intro.html#installation" class="uri">https://jupyter.org/jupyter-book/intro.html#installation</a></p>
-<p><a href="https://metabase.com/" class="uri">https://metabase.com/</a></p>
-<p><a href="http://koaning.io/make-docs.html" class="uri">http://koaning.io/make-docs.html</a></p>
-<p><a href="https://about.modeanalytics.com/">Mode Studio</a></p>
-<p>Summarize the motivation and goals of the project. It should either be an executive summary or a technical abstract.</p>
-<p>State results with details as needed. For an end user presentation show how the model fits into and improves the user’s workflow, and how to use it.</p>
-<p>Discuss recommendations, outstanding issues, and possible future work.</p>
-<p>Structure: Introduction | Summary | Results | Conclusion</p>
-<p>Interactive Reports Without Shiny: plotly, dt, crosstalk</p>
-<p>Reference this <a href="https://www.dataquest.io/blog/data-science-project-style-guide/">blog</a>.</p>
-<p>appendices | post mortems</p>
+<div id="checklist" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Checklist</h1>
+<div id="preparation" class="section level2">
+<h2><span class="header-section-number">2.1</span> Preparation</h2>
+<ul>
+<li><p>[x] Understand the business question, goals, and measures of success.</p></li>
+<li><p>[ ] See if the data to answer the question exists, and if it is useful.</p></li>
+<li><p>[ ] Structure project as user stories</p></li>
+</ul>
 </div>
-<div id="deploymaintain" class="section level2">
-<h2><span class="header-section-number">5.2</span> Deploy/Maintain</h2>
-<p><a href="https://www.meltano.com/" class="uri">https://www.meltano.com/</a></p>
-<p><a href="http://pachyderm.io" class="uri">http://pachyderm.io</a></p>
-<p><a href="https://datacoral.com/" class="uri">https://datacoral.com/</a></p>
-<p>Algorithmia</p>
-<p>Apache Airflow</p>
-<p><a href="https://cloud.google.com/ai-platform/" class="uri">https://cloud.google.com/ai-platform/</a></p>
-<p><a href="https://www.hyperscience.com/" class="uri">https://www.hyperscience.com/</a></p>
-<p><a href="https://ropensci.org/technotes/2019/03/18/drake-700/" class="uri">https://ropensci.org/technotes/2019/03/18/drake-700/</a></p>
-<p><a href="https://www.mlflow.org" class="uri">https://www.mlflow.org</a></p>
-<p><a href="https://www.wandb.com/blog/towards-reproducibility">Weights &amp; Biases</a></p>
-<p>Databricks</p>
-<p>Ansible</p>
-<p><a href="https://www.prefect.io/" class="uri">https://www.prefect.io/</a></p>
-<p><a href="https://aws.amazon.com/sagemaker/" class="uri">https://aws.amazon.com/sagemaker/</a></p>
-<p><a href="http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines">Pipelines</a></p>
-<p><a href="https://snakemake.readthedocs.io/en/stable/">Workflow System</a></p>
-<p><a href="http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines">Pipeline Automation</a></p>
-<p><a href="https://www.wallaroolabs.com">Streaming Data</a></p>
-<p><a href="https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html">Spark</a></p>
-<p><a href="https://stitchfix.github.io/flotilla-os/">batch job execution framework</a></p>
-<p><a href="https://cmry.github.io/notes/serialize">Sklearn Serialization</a></p>
-<p><a href="http://content.nexosis.com/twimlai">Auto Deploy</a></p>
-<p>TDD: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a></p>
-<p><a href="https://orchestrahq.com">Model Deployment aaS</a></p>
-<p><a href="https://dvc.org/" class="uri">https://dvc.org/</a></p>
-<p>docker</p>
-<p>design by contract: contracts</p>
-<p>property based testing: hypothesis</p>
-<p>unit tests: pytest, static typing: mypy</p>
-<p>packrat &amp; conda</p>
-<p><a href="https://matrixds.com/" class="uri">https://matrixds.com/</a> | <a href="https://www.crestle.com" class="uri">https://www.crestle.com</a> | CoCalc</p>
-<p><a href="https://blog.osteele.com/2008/05/my-git-workflow/">Git Workflow</a></p>
-<p>Tests: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a> | <a href="https://github.com/ericmjl/data-testing-tutorial">4</a> | <a href="http://r-pkgs.had.co.nz/tests.html">R</a> | pytest/hypothesis</p>
-<p>Validation: <a href="https://github.com/data-cleaning/validate">1</a> | <a href="https://rdrr.io/cran/checkmate/">2</a> | <a href="https://github.com/shawnbrown/datatest">3</a></p>
-<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: <code>conda env export &gt; environment.yaml</code>.
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: <code>conda env create -f environment.yaml</code>. This will create a new environment with the same name listed in environment.yaml.</p>
-<p>package for helper functions and units tests</p>
-<p>use makefile to run cmd commands</p>
+<div id="import-tidy-transform-visualize" class="section level2">
+<h2><span class="header-section-number">2.2</span> Import-Tidy-Transform-Visualize</h2>
+<ul>
+<li><p>[ ] See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread).</p></li>
+<li><p>[ ] Also Trendlines &amp; Histograms</p></li>
+<li><p>[ ] Compare the distributions of variables with overlayed density plots</p></li>
+<li><p>[ ] Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.</p></li>
+<li><p>[ ] Outlier Detection: interquartile range, kernel density estimation, bonferroni test</p></li>
+<li><p>[ ] Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.</p></li>
+</ul>
+</div>
+<div id="model" class="section level2">
+<h2><span class="header-section-number">2.3</span> Model</h2>
+<ul>
+<li><p>[ ] Pre-processing - Feature Selection &amp; Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.</p></li>
+<li><p>[ ] Create model ensembles</p></li>
+<li><p>[ ] Do model tuning</p></li>
+<li><p>[ ] Look at confidence intervals</p></li>
+<li><p>[ ] Model Explanability</p></li>
+<li><p>[ ] Look at learning curves</p></li>
+</ul>
+</div>
+<div id="communicate" class="section level2">
+<h2><span class="header-section-number">2.4</span> Communicate</h2>
+</div>
+<div id="deploy" class="section level2">
+<h2><span class="header-section-number">2.5</span> Deploy</h2>
+<ul>
+<li>[ ] Pipelines &amp; feature Unions for model deployment</li>
+</ul>
+</div>
+<div id="maintain" class="section level2">
+<h2><span class="header-section-number">2.6</span> Maintain</h2>
+</div>
+<div id="resources" class="section level2">
+<h2><span class="header-section-number">2.7</span> Resources</h2>
+<p>Auto Data Science: <a href="http://holoviews.org">Visualize</a> | <a href="https://www.featuretools.com">Feature Engineering</a> | Model: TPOT, <a href="https://cloud.google.com/automl/">Google AutoML</a></p>
+<p><a href="https://toolbox.google.com/datasetsearch">Search</a></p>
+<p><a href="https://nextjournal.com/" class="uri">https://nextjournal.com/</a></p>
+<p><strong>Sample Pipeline</strong></p>
+<p><a href="https://mobile.twitter.com/TheStephLocke/status/990251709531344896">Source</a>:</p>
+<p>IO: odbc readxl httr</p>
+<p>EDA: DataExplorer</p>
+<p>Prep: tidyverse</p>
+<p>Sampling: rsample modelr</p>
+<p>Feature Engineering: recipes</p>
+<p>Modeling: glmnet h2o FFTrees</p>
+<p>Evaluation: broom yardstick</p>
+<p>Deployment: sqlrutils AzureML opencpu</p>
+<p>Monitoring: flexdashboard</p>
+<p>Docs: rmarkdown</p>
+<p><strong>My Pipeline</strong></p>
+<p>Import: odbc dbi readr data.table</p>
+<p>Tidy: skimr dplyr tidyr visdat data.table</p>
+<p>Transform: dplyr data.table</p>
+<p>Visualization: ggplot2</p>
+<p>Modeling: sklearn mlxtend shap yellowbrick pyspark</p>
+<p>Communicate: rmarkdown</p>
+<p>Monitor:</p>
+<p>Deploy: shiny</p>
+<p><strong>R Pipeline</strong></p>
+<p>Import: odbc dbi readr data.table</p>
+<p>Tidy: skimr dplyr tidyr visdat data.table</p>
+<p>Transform: dplyr data.table</p>
+<p>Visualization: ggplot2</p>
+<p>Modeling: rsample modelr broom yardstick caret sparklyr</p>
+<p>Communicate: rmarkdown</p>
+<p>Monitor:</p>
+<p>Deploy: shiny</p>
+<p><strong>Python Pipeline</strong></p>
+<p>Import: pyodbc pandas-modin</p>
+<p>Tidy: pandas-modin</p>
+<p>Transform: pandas-modin</p>
+<p>Visualization: altair plotnine</p>
+<p>Modeling: sklearn mlxtend shap yellowbrick pyspark chainlearn</p>
+<p>Communicate: jupyter</p>
+<p>Monitor:</p>
+<p>Deploy: flask</p>
 
 </div>
 </div>
@@ -365,8 +397,8 @@ The first part conda env export writes out all the packages in the environment, 
           </div>
         </div>
       </div>
-<a href="model-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pre-modeling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -396,7 +428,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-post_modeling.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
 "text": "Edit"
 },
 "history": {

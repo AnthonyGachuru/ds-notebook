@@ -167,12 +167,80 @@ A typical data science workflow can be framed as following these steps:
 
 Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate. ( ittvmcmd as an abbreviation.) And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}. And this is an \href{https://gist.github.com/gfleetwood/3c152bee44d03a00fa5e8df3210a9918}{attempt} to fit this into the principles in \href{https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8\&btkr=1}{``The Checklist Manifesto''}.
 
+\hypertarget{checklist}{%
+\chapter{Checklist}\label{checklist}}
+
+\hypertarget{preparation}{%
+\section{Preparation}\label{preparation}}
+
+\begin{itemize}
+\item
+  {[}x{]} Understand the business question, goals, and measures of success.
+\item
+  {[} {]} See if the data to answer the question exists, and if it is useful.
+\item
+  {[} {]} Structure project as user stories
+\end{itemize}
+
+\hypertarget{import-tidy-transform-visualize}{%
+\section{Import-Tidy-Transform-Visualize}\label{import-tidy-transform-visualize}}
+
+\begin{itemize}
+\item
+  {[} {]} See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread).
+\item
+  {[} {]} Also Trendlines \& Histograms
+\item
+  {[} {]} Compare the distributions of variables with overlayed density plots
+\item
+  {[} {]} Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
+\item
+  {[} {]} Outlier Detection: interquartile range, kernel density estimation, bonferroni test
+\item
+  {[} {]} Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
+\end{itemize}
+
+\hypertarget{model}{%
+\section{Model}\label{model}}
+
+\begin{itemize}
+\item
+  {[} {]} Pre-processing - Feature Selection \& Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
+\item
+  {[} {]} Create model ensembles
+\item
+  {[} {]} Do model tuning
+\item
+  {[} {]} Look at confidence intervals
+\item
+  {[} {]} Model Explanability
+\item
+  {[} {]} Look at learning curves
+\end{itemize}
+
+\hypertarget{communicate}{%
+\section{Communicate}\label{communicate}}
+
+\hypertarget{deploy}{%
+\section{Deploy}\label{deploy}}
+
+\begin{itemize}
+\tightlist
+\item
+  {[} {]} Pipelines \& feature Unions for model deployment
+\end{itemize}
+
+\hypertarget{maintain}{%
+\section{Maintain}\label{maintain}}
+
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
 
 Auto Data Science: \href{http://holoviews.org}{Visualize} \textbar{} \href{https://www.featuretools.com}{Feature Engineering} \textbar{} Model: TPOT, \href{https://cloud.google.com/automl/}{Google AutoML}
 
 \href{https://toolbox.google.com/datasetsearch}{Search}
+
+\url{https://nextjournal.com/}
 
 \textbf{Sample Pipeline}
 
@@ -265,6 +333,8 @@ A schema is a blueprint for storing data. For a table every row has same number 
 
 Make codebooks
 
+Sample from data if its too large
+
 \url{https://www.webscraper.io/documentation\#open-web-scraper}
 
 \href{https://tabula.technology}{pdf table extraction}
@@ -308,6 +378,14 @@ CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a
 \subsection{General}\label{general-1}}
 
 In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.
+
+Use the Gower distance for categorical dissimilarity. Binned Stats 1 \textbar{} 2
+
+Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+
+Outlier Detection: interquartile range, kernel density estimation, bonferroni test
+
+Imputation. Options include the Mean, Mode, KNN, Random, and Regression
 
 outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers
 
@@ -477,13 +555,24 @@ That said, here is a rough outline of useful approaches. These are listed approx
   Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn't). 3) Double-check that the training data agrees with other sources (for example, dashboards).
 \end{itemize}
 
-\hypertarget{model}{%
-\chapter{Model}\label{model}}
+\hypertarget{model-1}{%
+\chapter{Model}\label{model-1}}
 
 \hypertarget{general-2}{%
 \section{General}\label{general-2}}
 
 General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+
+\begin{itemize}
+\item
+  Class imbalance: Gradient boosting is one option.
+\item
+  Use binning + chisquare / mutual information to see correlation between feature and target
+\item
+  Also use hyperopt-sklearn, sklearn-deap, and scikit-optimize.
+\end{itemize}
+
+Stick to regression models for prescriptive analysis. Validate assumptions and tune appropriately. If using Python leverage statsmodels.
 
 \begin{itemize}
 \item
@@ -1523,8 +1612,13 @@ Need to pick a dissimilarity measure and a linkage method. Complete linkage: max
 
 K-Means vs Hierarchical Clustering: K-means clustering needs the number of clusters to be speciﬁed. Hierarchical clustering doesn't need the number of clusters to be speciﬁed. K-means clustering is usually more effcient run-time wise.
 
+\hypertarget{dimensionality-reduction}{%
+\subsection{Dimensionality Reduction}\label{dimensionality-reduction}}
+
+PCA, Kernel PCA, TSNE, Isomap
+
 \hypertarget{pca}{%
-\subsection{PCA}\label{pca}}
+\subsubsection{PCA}\label{pca}}
 
 \begin{itemize}
 \item
@@ -1716,8 +1810,8 @@ Conditional Rnadom Field
 \hypertarget{communicate-deploy-maintain}{%
 \chapter{Communicate, Deploy, Maintain}\label{communicate-deploy-maintain}}
 
-\hypertarget{communicate}{%
-\section{Communicate}\label{communicate}}
+\hypertarget{communicate-1}{%
+\section{Communicate}\label{communicate-1}}
 
 \url{https://jupyter.org/jupyter-book/intro.html\#installation}
 
@@ -1739,6 +1833,8 @@ Interactive Reports Without Shiny: plotly, dt, crosstalk
 
 Reference this \href{https://www.dataquest.io/blog/data-science-project-style-guide/}{blog}.
 
+appendices \textbar{} post mortems
+
 \hypertarget{deploymaintain}{%
 \section{Deploy/Maintain}\label{deploymaintain}}
 
@@ -1751,6 +1847,10 @@ Reference this \href{https://www.dataquest.io/blog/data-science-project-style-gu
 Algorithmia
 
 Apache Airflow
+
+\url{https://cloud.google.com/ai-platform/}
+
+\url{https://www.hyperscience.com/}
 
 \url{https://ropensci.org/technotes/2019/03/18/drake-700/}
 
