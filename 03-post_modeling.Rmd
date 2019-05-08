@@ -22,6 +22,8 @@ Interactive Reports Without Shiny: plotly, dt, crosstalk
 
 Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
 
+appendices | post mortems
+
 ## Deploy/Maintain
 
 https://www.meltano.com/
@@ -33,6 +35,10 @@ https://datacoral.com/
 Algorithmia
 
 Apache Airflow
+
+https://cloud.google.com/ai-platform/
+
+https://www.hyperscience.com/
 
 https://ropensci.org/technotes/2019/03/18/drake-700/
 

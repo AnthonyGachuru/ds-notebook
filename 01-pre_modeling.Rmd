@@ -8,6 +8,8 @@ A schema is a blueprint for storing data. For a table every row has same number 
     
 Make codebooks
 
+Sample from data if its too large
+
 https://www.webscraper.io/documentation#open-web-scraper
 
 [pdf table extraction](https://tabula.technology)
@@ -45,6 +47,14 @@ CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-pe
 ### General
 
 In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2)  Each observation must have its own row, 3) Each value must have its own cell.
+
+Use the Gower distance for categorical dissimilarity. Binned Stats 1 | 2
+
+Character Encoding Precendence: utf-8, iso-8859-1, utf-16
+
+Outlier Detection: interquartile range, kernel density estimation, bonferroni test
+
+Imputation. Options include the Mean, Mode, KNN, Random, and Regression
 
 outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers
 

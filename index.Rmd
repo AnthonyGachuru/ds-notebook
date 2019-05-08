@@ -32,11 +32,59 @@ A typical data science workflow can be framed as following these steps:
 
 Another instantiation via Hadley Wickham is: import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate. ( ittvmcmd as an abbreviation.) And the two combined: preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]. And this is an [attempt](https://gist.github.com/gfleetwood/3c152bee44d03a00fa5e8df3210a9918) to fit this into the principles in ["The Checklist Manifesto"](https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1).
 
+# Checklist
+
+## Preparation
+
+- [x] Understand the business question, goals, and measures of success.
+
+- [ ] See if the data to answer the question exists, and if it is useful.
+
+- [ ] Structure project as user stories 
+
+## Import-Tidy-Transform-Visualize
+
+- [ ] See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread). 
+
+- [ ] Also Trendlines & Histograms
+
+- [ ] Compare the distributions of variables with overlayed density plots 
+
+- [ ] Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
+
+- [ ] Outlier Detection: interquartile range, kernel density estimation, bonferroni test
+
+- [ ] Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
+
+## Model
+
+- [ ] Pre-processing - Feature Selection & Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
+
+- [ ] Create model ensembles
+
+- [ ] Do model tuning
+
+- [ ] Look at confidence intervals
+
+- [ ] Model Explanability
+
+- [ ] Look at learning curves
+
+## Communicate 
+
+## Deploy
+
+- [ ] Pipelines & feature Unions for model deployment
+
+## Maintain
+
 ## Resources
 
 Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/)
 
 [Search](https://toolbox.google.com/datasetsearch)
+
+https://nextjournal.com/
 
 **Sample Pipeline**
 
