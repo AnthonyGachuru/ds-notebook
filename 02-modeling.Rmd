@@ -4,6 +4,8 @@
 
 General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
+toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es
+
 * Class imbalance: Gradient boosting is one option.
 
 * Use binning + chisquare / mutual information to see correlation between feature and target
@@ -72,10 +74,7 @@ Stick to regression models for prescriptive analysis. Validate assumptions and t
 
 * The less complex an ML model, the more likely that a good empirical result is not just due to the peculiarities of the sample.
 
-
 [SOTA Results](https://paperswithcode.com/sota)
-
-toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es
 
 "No Free Lunch" theorem: no single classifier works best across all possible scenarios
 

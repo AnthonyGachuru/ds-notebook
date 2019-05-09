@@ -86,6 +86,12 @@ Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](htt
 
 https://nextjournal.com/
 
+https://kyso.io/for-teams
+
+https://blog.shotwell.ca/posts/2019-04-19-technical-debt-in-data-science/
+
+## Pipelines
+
 **Sample Pipeline**
 
 [Source](https://mobile.twitter.com/TheStephLocke/status/990251709531344896):
