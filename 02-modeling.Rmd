@@ -4,7 +4,9 @@
 
 General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
-toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es
+xgb default hyperparameters good
+
+mixed effect regression
 
 * Class imbalance: Gradient boosting is one option.
 

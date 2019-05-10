@@ -168,10 +168,10 @@ A typical data science workflow can be framed as following these steps:
 Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} communicate. ( ittvmcmd as an abbreviation.) And the two combined: preparation -\textgreater{} import -\textgreater{} tidy -\textgreater{} understand {[} transform \textless{}-\textgreater{} visualize \textless{}-\textgreater{} model {]} -\textgreater{} {[}communicate + deploy + maintain{]}. And this is an \href{https://gist.github.com/gfleetwood/3c152bee44d03a00fa5e8df3210a9918}{attempt} to fit this into the principles in \href{https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8\&btkr=1}{``The Checklist Manifesto''}.
 
 \hypertarget{checklist}{%
-\chapter{Checklist}\label{checklist}}
+\section{Checklist}\label{checklist}}
 
 \hypertarget{preparation}{%
-\section{Preparation}\label{preparation}}
+\subsection{Preparation}\label{preparation}}
 
 \begin{itemize}
 \item
@@ -183,7 +183,7 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 \end{itemize}
 
 \hypertarget{import-tidy-transform-visualize}{%
-\section{Import-Tidy-Transform-Visualize}\label{import-tidy-transform-visualize}}
+\subsection{Import-Tidy-Transform-Visualize}\label{import-tidy-transform-visualize}}
 
 \begin{itemize}
 \item
@@ -201,7 +201,7 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 \end{itemize}
 
 \hypertarget{model}{%
-\section{Model}\label{model}}
+\subsection{Model}\label{model}}
 
 \begin{itemize}
 \item
@@ -222,7 +222,7 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 \section{Communicate}\label{communicate}}
 
 \hypertarget{deploy}{%
-\section{Deploy}\label{deploy}}
+\subsection{Deploy}\label{deploy}}
 
 \begin{itemize}
 \tightlist
@@ -231,7 +231,7 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 \end{itemize}
 
 \hypertarget{maintain}{%
-\section{Maintain}\label{maintain}}
+\subsection{Maintain}\label{maintain}}
 
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
@@ -245,6 +245,8 @@ Auto Data Science: \href{http://holoviews.org}{Visualize} \textbar{} \href{https
 \url{https://kyso.io/for-teams}
 
 \url{https://blog.shotwell.ca/posts/2019-04-19-technical-debt-in-data-science/}
+
+\url{https://nextjournal.com/}
 
 \hypertarget{pipelines}{%
 \section{Pipelines}\label{pipelines}}
@@ -283,7 +285,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: sklearn mlxtend shap yellowbrick pyspark
+Modeling: sklearn mlxtend shap yellowbrick sspark, toolbox: classic ml, bayesian ml, abm, rl, ga \& gp: symbolic regression, es, fklearn
 
 Communicate: rmarkdown
 
@@ -570,7 +572,9 @@ That said, here is a rough outline of useful approaches. These are listed approx
 
 General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
-toolbox: classic ml, bayesian ml, abm, rl, ga \& gp: symbolic regression, es
+xgb default hyperparameters good
+
+mixed effect regression
 
 \begin{itemize}
 \item
@@ -1844,6 +1848,8 @@ appendices \textbar{} post mortems
 
 \hypertarget{deploymaintain}{%
 \section{Deploy/Maintain}\label{deploymaintain}}
+
+\url{https://mlflow.org/}
 
 \url{https://www.meltano.com/}
 
@@ -3424,6 +3430,19 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \section{General}\label{general-8}}
 
 \href{http://chrisalbon.com/}{Chris Albon}
+
+\hypertarget{mixed-effect-regression}{%
+\section{Mixed Effect Regression}\label{mixed-effect-regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# mixed effect regression}
+\ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+\ImportTok{import}\NormalTok{ statsmodels.formula.api }\ImportTok{as}\NormalTok{ smf}
+\NormalTok{mdl }\OperatorTok{=}\NormalTok{ smf.mixedlm(}\StringTok{"y ~ x1 + x2"}\NormalTok{. df, groups }\OperatorTok{=}\NormalTok{ train[}\StringTok{'group'}\NormalTok{])}
+\NormalTok{mdl_fit }\OperatorTok{=}\NormalTok{ mdl.fit()}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{linear-regression-assumption-checks}{%
 \section{Linear Regression Assumption Checks}\label{linear-regression-assumption-checks}}

@@ -4,6 +4,18 @@
 
 [Chris Albon](http://chrisalbon.com/)
 
+## Mixed Effect Regression
+
+```{python, eval = F}
+# mixed effect regression
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+mdl = smf.mixedlm("y ~ x1 + x2". df, groups = train['group'])
+mdl_fit = mdl.fit()
+```
+
+
 ## Linear Regression Assumption Checks
 
 ```{r, eval = F}

@@ -32,9 +32,9 @@ A typical data science workflow can be framed as following these steps:
 
 Another instantiation via Hadley Wickham is: import -> tidy -> understand [ transform <-> visualize <-> model ] -> communicate. ( ittvmcmd as an abbreviation.) And the two combined: preparation -> import -> tidy -> understand [ transform <-> visualize <-> model ] -> [communicate + deploy + maintain]. And this is an [attempt](https://gist.github.com/gfleetwood/3c152bee44d03a00fa5e8df3210a9918) to fit this into the principles in ["The Checklist Manifesto"](https://www.amazon.com/dp/B0030V0PEW/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1).
 
-# Checklist
+## Checklist
 
-## Preparation
+### Preparation
 
 - [x] Understand the business question, goals, and measures of success.
 
@@ -42,7 +42,7 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Structure project as user stories 
 
-## Import-Tidy-Transform-Visualize
+### Import-Tidy-Transform-Visualize
 
 - [ ] See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread). 
 
@@ -56,7 +56,7 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
 
-## Model
+### Model
 
 - [ ] Pre-processing - Feature Selection & Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
 
@@ -72,11 +72,11 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 ## Communicate 
 
-## Deploy
+### Deploy
 
 - [ ] Pipelines & feature Unions for model deployment
 
-## Maintain
+### Maintain
 
 ## Resources
 
@@ -89,6 +89,8 @@ https://nextjournal.com/
 https://kyso.io/for-teams
 
 https://blog.shotwell.ca/posts/2019-04-19-technical-debt-in-data-science/
+
+https://nextjournal.com/
 
 ## Pipelines
 
@@ -126,7 +128,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: sklearn mlxtend shap yellowbrick pyspark
+Modeling: sklearn mlxtend shap yellowbrick sspark, toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es, fklearn
 
 Communicate: rmarkdown 
 
