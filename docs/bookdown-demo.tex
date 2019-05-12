@@ -285,7 +285,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: sklearn mlxtend shap yellowbrick sspark, toolbox: classic ml, bayesian ml, abm, rl, ga \& gp: symbolic regression, es, fklearn
+Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic \& bayesian ml, rl, ga \& gp: symbolic regression, es
 
 Communicate: rmarkdown
 
@@ -385,6 +385,8 @@ CLI: \href{http://bconnelly.net/working-with-csvs-on-the-command-line/\#taking-a
 
 \hypertarget{general-1}{%
 \subsection{General}\label{general-1}}
+
+purrlyr::by\_row in R
 
 In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.
 
@@ -567,10 +569,10 @@ That said, here is a rough outline of useful approaches. These are listed approx
 \hypertarget{model-1}{%
 \chapter{Model}\label{model-1}}
 
+General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+
 \hypertarget{general-2}{%
 \section{General}\label{general-2}}
-
-General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 xgb default hyperparameters good
 
@@ -657,8 +659,6 @@ Stick to regression models for prescriptive analysis. Validate assumptions and t
 Always set the seed
 
 natural log goes from unit change to percentage change
-
-Simulated Annealing: Gradient descent extension
 
 hierarchical clustering: ward
 

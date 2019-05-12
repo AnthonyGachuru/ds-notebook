@@ -128,7 +128,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: sklearn mlxtend shap yellowbrick sspark, toolbox: classic ml, bayesian ml, abm, rl, ga & gp: symbolic regression, es, fklearn
+Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic & bayesian ml, rl, ga & gp: symbolic regression, es
 
 Communicate: rmarkdown 
 

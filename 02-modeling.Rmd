@@ -1,8 +1,8 @@
 # Model
 
-## General
-
 General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+
+## General
 
 xgb default hyperparameters good
 
@@ -83,8 +83,6 @@ Stick to regression models for prescriptive analysis. Validate assumptions and t
 Always set the seed
 
 natural log goes from unit change to percentage change
-
-Simulated Annealing: Gradient descent extension
 
 hierarchical clustering: ward
 
@@ -195,8 +193,6 @@ permutation importance (eli5)
 https://pbiecek.github.io/breakDown/
 
 [Break Down Plots](https://cran.r-project.org/web/packages/breakDown/index.html)
-</div>
-<br/>
 
 http://clus.sourceforge.net/doku.php
 

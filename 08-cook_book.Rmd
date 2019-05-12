@@ -15,7 +15,6 @@ mdl = smf.mixedlm("y ~ x1 + x2". df, groups = train['group'])
 mdl_fit = mdl.fit()
 ```
 
-
 ## Linear Regression Assumption Checks
 
 ```{r, eval = F}

@@ -46,6 +46,8 @@ CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-pe
 
 ### General
 
+purrlyr::by_row in R
+
 In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2)  Each observation must have its own row, 3) Each value must have its own cell.
 
 Use the Gower distance for categorical dissimilarity. Binned Stats 1 | 2
