@@ -108,7 +108,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -175,9 +175,9 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 
 \begin{itemize}
 \item
-  {[}x{]} Understand the business question, goals, and measures of success.
+  {[} {]} Understand the business question, goals, and measures of success.
 \item
-  {[} {]} See if the data to answer the question exists, and if it is useful.
+  {[} {]} See if the data to answer the question exists and if it is useful.
 \item
   {[} {]} Structure project as user stories
 \end{itemize}
@@ -187,17 +187,11 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 
 \begin{itemize}
 \item
-  {[} {]} See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread).
+  {[} {]} See what the data looks like by shape, outliers, center, and spread, the types of variables, first and last few observations, and check for missing and blank values.
 \item
-  {[} {]} Also Trendlines \& Histograms
+  {[} {]} Plot scatterplots, overlayed density plots, trendlines, and histograms.
 \item
-  {[} {]} Compare the distributions of variables with overlayed density plots
-\item
-  {[} {]} Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
-\item
-  {[} {]} Outlier Detection: interquartile range, kernel density estimation, bonferroni test
-\item
-  {[} {]} Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
+  {[} {]} Dimensionality reduction or hierarchical clustering to get a feel for high dimensional structure.
 \end{itemize}
 
 \hypertarget{model}{%
@@ -205,15 +199,17 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 
 \begin{itemize}
 \item
-  {[} {]} Pre-processing - Feature Selection \& Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
+  {[} {]} Pre-processing - Feature Selection \& Engineering
 \item
-  {[} {]} Create model ensembles
+  {[} {]} Check model assumptions
 \item
-  {[} {]} Do model tuning
+  {[} {]} Model ensembles
+\item
+  {[} {]} Model tuning
 \item
   {[} {]} Look at confidence intervals
 \item
-  {[} {]} Model Explanability
+  {[} {]} Model explanability
 \item
   {[} {]} Look at learning curves
 \end{itemize}
@@ -221,24 +217,21 @@ Another instantiation via Hadley Wickham is: import -\textgreater{} tidy -\textg
 \hypertarget{communicate}{%
 \section{Communicate}\label{communicate}}
 
-\hypertarget{deploy}{%
-\subsection{Deploy}\label{deploy}}
-
-\begin{itemize}
-\tightlist
-\item
-  {[} {]} Pipelines \& feature Unions for model deployment
-\end{itemize}
-
-\hypertarget{maintain}{%
-\subsection{Maintain}\label{maintain}}
+\hypertarget{deploy-maintain}{%
+\subsection{Deploy \& Maintain}\label{deploy-maintain}}
 
 \hypertarget{resources}{%
 \section{Resources}\label{resources}}
 
 Auto Data Science: \href{http://holoviews.org}{Visualize} \textbar{} \href{https://www.featuretools.com}{Feature Engineering} \textbar{} Model: TPOT, \href{https://cloud.google.com/automl/}{Google AutoML}
 
+\href{http://chrisalbon.com/}{Common Scripts}
+
 \href{https://toolbox.google.com/datasetsearch}{Search}
+
+\url{https://pair-code.github.io/what-if-tool/}
+
+\url{https://ropensci.org/}
 
 \url{https://nextjournal.com/}
 
@@ -285,7 +278,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic \& bayesian ml, rl, ga \& gp: symbolic regression, es
+Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic \& bayesian ml, rl, ga \& gp: symbolic regression, es, gams, statsmodels
 
 Communicate: rmarkdown
 
@@ -509,6 +502,8 @@ ggplot: \href{https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using
 \hypertarget{feature-engineering}{%
 \subsection{Feature Engineering}\label{feature-engineering}}
 
+Cyclical Features: Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don't think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
+
 encode missingness a a feature
 
 robust scaler python: median \& quantiles
@@ -549,6 +544,8 @@ That said, here is a rough outline of useful approaches. These are listed approx
 \hypertarget{feature-selection}{%
 \subsection{Feature Selection}\label{feature-selection}}
 
+Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
+
 \begin{itemize}
 \item
   Variance Threshold: Use this to exclude features that don't meet a variance threshold.
@@ -575,6 +572,12 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 \section{General}\label{general-2}}
 
 xgb default hyperparameters good
+
+Pipelines \& feature Unions for model deployment
+
+Outlier Detection: interquartile range, kernel density estimation
+
+Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap)
 
 mixed effect regression
 
@@ -1850,6 +1853,10 @@ appendices \textbar{} post mortems
 \section{Deploy/Maintain}\label{deploymaintain}}
 
 \url{https://mlflow.org/}
+
+\url{https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/}
+
+fabric-python \& \url{http://www.pyinvoke.org/}
 
 \url{https://www.meltano.com/}
 
@@ -3426,52 +3433,16 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \hypertarget{codebook}{%
 \chapter{Codebook}\label{codebook}}
 
-\hypertarget{general-8}{%
-\section{General}\label{general-8}}
-
-\href{http://chrisalbon.com/}{Chris Albon}
-
 \hypertarget{mixed-effect-regression}{%
 \section{Mixed Effect Regression}\label{mixed-effect-regression}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# mixed effect regression}
 \ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
 \ImportTok{import}\NormalTok{ statsmodels.formula.api }\ImportTok{as}\NormalTok{ smf}
-\NormalTok{mdl }\OperatorTok{=}\NormalTok{ smf.mixedlm(}\StringTok{"y ~ x1 + x2"}\NormalTok{. df, groups }\OperatorTok{=}\NormalTok{ train[}\StringTok{'group'}\NormalTok{])}
+
+\NormalTok{mdl }\OperatorTok{=}\NormalTok{ smf.mixedlm(}\StringTok{"y ~ x"}\NormalTok{. df, groups }\OperatorTok{=}\NormalTok{ train[}\StringTok{'group'}\NormalTok{])}
 \NormalTok{mdl_fit }\OperatorTok{=}\NormalTok{ mdl.fit()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{linear-regression-assumption-checks}{%
-\section{Linear Regression Assumption Checks}\label{linear-regression-assumption-checks}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# general check}
-\KeywordTok{plot}\NormalTok{(mdl)}
-
-\CommentTok{# linearity check}
-\KeywordTok{avPlots}\NormalTok{(mdl)}
-
-\CommentTok{# Outlier Analysis}
-\CommentTok{# influencePlot(mdl)}
-
-\CommentTok{# multi-colinearity}
-\KeywordTok{vif}\NormalTok{(mdl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{VIF =} \StringTok{`}\DataTypeTok{GVIF..1..2.Df..}\StringTok{`}\NormalTok{, }\DataTypeTok{VIF =}\NormalTok{ VIF}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-
-\CommentTok{#  Autocorrelated Errors}
-\KeywordTok{durbinWatsonTest}\NormalTok{(rgr_lr_st1)}
-
-\CommentTok{# Normality}
-\KeywordTok{shapiro.test}\NormalTok{(data)}
-
-\CommentTok{# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): }
-\KeywordTok{qqnorm}\NormalTok{(normal.data) }\OperatorTok{+}\StringTok{ }\KeywordTok{qqline}\NormalTok{(normal.data)}
-
-\CommentTok{# heteroskedasticity}
-\CommentTok{# Breusch-Pagan (BP) test lmtest package}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3480,27 +3451,14 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(purrr)}
-
 \NormalTok{pga }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(name,year,driveavg,drivepct, score.avg) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{year) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\KeywordTok{lm}\NormalTok{(score.avg }\OperatorTok{~}\StringTok{ }\NormalTok{driveavg }\OperatorTok{+}\StringTok{ }\NormalTok{drivepct, }\DataTypeTok{data=}\NormalTok{.)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{map}\NormalTok{(summary)}
-\end{Highlighting}
-\end{Shaded}
 
-\hypertarget{cyclical-feature-engineering}{%
-\section{Cyclical Feature Engineering}\label{cyclical-feature-engineering}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.}
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\NormalTok{df[}\StringTok{'hr_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'hr_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos(df.hr}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{24}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_sin'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.sin((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
-\NormalTok{df[}\StringTok{'mnth_cos'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.cos((df.mnth}\DecValTok{-1}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\FloatTok{2.}\OperatorTok{*}\NormalTok{np.pi}\OperatorTok{/}\DecValTok{12}\NormalTok{))}
+\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ .))}
+\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{map}\NormalTok{(data, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ x) ))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3511,18 +3469,25 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np }
 \ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
 \ImportTok{import}\NormalTok{ rpy2.robjects}
 \ImportTok{from}\NormalTok{ rpy2.robjects }\ImportTok{import}\NormalTok{ r, pandas2ri}
 \ImportTok{from}\NormalTok{ rpy2.robjects.packages }\ImportTok{import}\NormalTok{ importr}
+
 \CommentTok{# base = importr('base') # not working for some weird issue}
 \CommentTok{# %load_ext rpy2.ipython}
+
 \NormalTok{stats }\OperatorTok{=}\NormalTok{ importr(}\StringTok{'stats'}\NormalTok{)}
+
 \NormalTok{pandas2ri.activate()}
+
 \NormalTok{r[}\StringTok{'mtcars'}\NormalTok{].head()}
+
 \NormalTok{iris }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{"https://bit.ly/2ow0oJO"}\NormalTok{)}
 \NormalTok{test }\OperatorTok{=}\NormalTok{ iris.copy()}
 \NormalTok{test.columns  }\OperatorTok{=}\NormalTok{ [}\StringTok{"Sepal.Length"}\NormalTok{, }\StringTok{"Sepal.Width"}\NormalTok{,  }\StringTok{"Petal.Length"}\NormalTok{, }\StringTok{"Petal.Width"}\NormalTok{, }\StringTok{"Species"}\NormalTok{]}
 \NormalTok{rdf }\OperatorTok{=}\NormalTok{ pandas2ri.py2rpy_pandasdataframe(test)}
+
 \NormalTok{rpy2.robjects.r(}\StringTok{'''}
 \StringTok{f <- function() \{}
 \StringTok{    model = load("rgr_iris.rda")}
@@ -3530,17 +3495,23 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \StringTok{    return(get(model))}
 \StringTok{    \}}
 \StringTok{'''}\NormalTok{)}
+
 \NormalTok{r_f }\OperatorTok{=}\NormalTok{ rpy2.robjects.r[}\StringTok{'f'}\NormalTok{]}
 \NormalTok{mdl1 }\OperatorTok{=}\NormalTok{ r_f() }
 \NormalTok{stats.predict(mdl1, test)}
+
 \CommentTok{#----------------------------------------------------------}
+
 \CommentTok{# %%R -i df -o model -w 5 -h 5 --units in -r 200}
 \CommentTok{# import df from global environment}
 \CommentTok{# make default figure size 5 by 5 inches with 200 dpi resolution}
+
 \CommentTok{#library(ggplot2)}
 \CommentTok{#library(stats)}
+
 \CommentTok{#ggplot(df, aes(x=cups_of_coffee, y=productivity)) + geom_line()}
 \CommentTok{#model =  lm("Petal.Length ~ . - Species", iris)}
+
 \CommentTok{#----------------------------------------------------------}
 \NormalTok{preds2 }\OperatorTok{=}\NormalTok{ stats.predict(model, test)}
 \end{Highlighting}
@@ -3552,14 +3523,18 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{from}\NormalTok{ gplearn }\ImportTok{import}\NormalTok{ SymbolicRegressor}
+
 \NormalTok{est_gp }\OperatorTok{=}\NormalTok{ SymbolicRegressor(population_size }\OperatorTok{=} \DecValTok{100}\NormalTok{, generations }\OperatorTok{=} \DecValTok{100}\NormalTok{, stopping_criteria }\OperatorTok{=} \FloatTok{0.01}\NormalTok{, p_crossover }\OperatorTok{=} \FloatTok{0.7}\NormalTok{, p_subtree_mutation }\OperatorTok{=} \FloatTok{0.1}\NormalTok{, metric }\OperatorTok{=} \StringTok{'rmse'}\NormalTok{, p_hoist_mutation }\OperatorTok{=} \FloatTok{0.05}\NormalTok{, p_point_mutation }\OperatorTok{=} \FloatTok{0.1}\NormalTok{, max_samples }\OperatorTok{=} \FloatTok{0.9}\NormalTok{, verbose }\OperatorTok{=} \DecValTok{0}\NormalTok{, parsimony_coefficient }\OperatorTok{=} \FloatTok{0.01}\NormalTok{, random_state }\OperatorTok{=}\NormalTok{ seed)}
+
 \NormalTok{est_gp.fit(X_train, y_train)}
 \NormalTok{preds }\OperatorTok{=}\NormalTok{ est_gp.predict(X_train)}
 \NormalTok{np.sqrt(mean_squared_error(y_train, preds))}
+
 \NormalTok{graph }\OperatorTok{=}\NormalTok{ pydotplus.graphviz.graph_from_dot_data(est_gp._program.export_graphviz())}
 \NormalTok{Image(graph.create_png())}
 \NormalTok{eqn }\OperatorTok{=} \BuiltInTok{str}\NormalTok{(est_gp._program)}
 \NormalTok{mapping_dict }\OperatorTok{=}\NormalTok{ \{}\StringTok{'X}\SpecialCharTok{\{\}}\StringTok{'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(i): X_train.columns[i] }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(X_train.shape[}\DecValTok{1}\NormalTok{])\}}
+
 \ControlFlowTok{for}\NormalTok{ old_value, new_value }\KeywordTok{in}\NormalTok{ mapping_dict.items():}
 \NormalTok{  eqn }\OperatorTok{=}\NormalTok{ eqn.replace(old_value, new_value)}
 \end{Highlighting}
@@ -3634,9 +3609,11 @@ Comparing groups
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)}
+\CommentTok{# Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)}
+
 \ImportTok{from}\NormalTok{ numpy.random }\ImportTok{import}\NormalTok{ beta }\ImportTok{as}\NormalTok{ beta_dist}
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
 \NormalTok{N_samp }\OperatorTok{=} \DecValTok{10000} \CommentTok{#number of samples to draw}
 \NormalTok{clicks_A }\OperatorTok{=} \DecValTok{450}
 \NormalTok{views_A }\OperatorTok{=} \DecValTok{56000}
@@ -3644,6 +3621,7 @@ Comparing groups
 \NormalTok{views_B }\OperatorTok{=} \DecValTok{49000}
 \NormalTok{alpha }\OperatorTok{=} \FloatTok{1.1}
 \NormalTok{beta }\OperatorTok{=} \FloatTok{14.2}
+
 \NormalTok{A_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_A }\OperatorTok{+}\NormalTok{ alpha, views_A }\OperatorTok{-}\NormalTok{ clicks_A }\OperatorTok{+}\NormalTok{ beta, N_samp)}
 \NormalTok{B_samples }\OperatorTok{=}\NormalTok{ beta_dist(clicks_B }\OperatorTok{+}\NormalTok{ alpha, views_B }\OperatorTok{-}\NormalTok{ clicks_B }\OperatorTok{+}\NormalTok{ beta, N_samp)}
 \end{Highlighting}
@@ -3671,7 +3649,9 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{from}\NormalTok{ sklearn.externals }\ImportTok{import}\NormalTok{ joblib}
+
 \NormalTok{joblib.dump(grid_search, }\StringTok{'model.pkl'}\NormalTok{)}
+
 \NormalTok{grid_search }\OperatorTok{=}\NormalTok{ joblib.load(}\StringTok{'model.pkl'}\NormalTok{)}
 \NormalTok{model }\OperatorTok{=}\NormalTok{ grid_search.best_estimator_}
 \end{Highlighting}
@@ -3711,39 +3691,10 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+
 \NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
 \NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ sm.Logit(Y, X).fit(disp}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
 \BuiltInTok{print}\NormalTok{(results.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{function-negation}{%
-\section{Function Negation}\label{function-negation}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{not_in <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{negate}\NormalTok{(}\OperatorTok{%in%}\NormalTok{)}
-\NormalTok{not_between <-}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{negate}\NormalTok{(between)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{attach-date-csv}{%
-\section{Attach Date CSV}\label{attach-date-csv}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df.to_csv(}\StringTok{'}\SpecialCharTok{\{\}}\StringTok{_model.csv'}\NormalTok{.}\BuiltInTok{format}\NormalTok{(}\BuiltInTok{str}\NormalTok{(datetime.datetime.now()).split(}\StringTok{' '}\NormalTok{)[}\DecValTok{0}\NormalTok{]))}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{ebb}{%
-\section{EBB}\label{ebb}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df_ebb <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{successes =} \KeywordTok{sum}\NormalTok{(success), }\DataTypeTok{sample_size =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{add_ebb_estimate}\NormalTok{(num_passed, sample_size)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3771,9 +3722,11 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# https://stackoverflow.com/questions/38516664/anti-join-pandas}
+
 \CommentTok{# Identify what values are in TableB and not in TableA}
 \NormalTok{key_diff }\OperatorTok{=} \BuiltInTok{set}\NormalTok{(TableB.Key).difference(TableA.Key)}
 \NormalTok{where_diff }\OperatorTok{=}\NormalTok{ TableB.Key.isin(key_diff)}
+
 \CommentTok{# Slice TableB accordingly and append to TableA}
 \NormalTok{TableA.append(TableB[where_diff], ignore_index}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \end{Highlighting}
@@ -3785,6 +3738,7 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# https://stackoverflow.com/a/36893675/6627726}
+
 \NormalTok{merged }\OperatorTok{=}\NormalTok{ df1.merge(df2, indicator}\OperatorTok{=}\VariableTok{True}\NormalTok{, how}\OperatorTok{=}\StringTok{'outer'}\NormalTok{)}
 \NormalTok{merged[merged[}\StringTok{'_merge'}\NormalTok{] }\OperatorTok{==} \StringTok{'right_only'}\NormalTok{]}
 \end{Highlighting}
@@ -3796,6 +3750,7 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ chardet}
+
 \ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(}\StringTok{"../input/kickstarter-projects/ks-projects-201801.csv"}\NormalTok{, }\StringTok{'rb'}\NormalTok{) }\ImportTok{as}\NormalTok{ rawdata:}
 \NormalTok{    result }\OperatorTok{=}\NormalTok{ chardet.detect(rawdata.read(}\DecValTok{10000}\NormalTok{))}
 \end{Highlighting}
@@ -3807,6 +3762,7 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ pandas_profiling}
+
 \NormalTok{pandas_profiling.ProfileReport(data)}
 \end{Highlighting}
 \end{Shaded}
@@ -3817,6 +3773,12 @@ Comparing groups
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df <-}\StringTok{ }\KeywordTok{dbGetQuery}\NormalTok{(con, }\DataTypeTok{statement =} \KeywordTok{read_file}\NormalTok{(}\StringTok{'query.sql'}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT} \StringTok{'Dummy Column Text'} \KeywordTok{as}\NormalTok{ DUMMYCOL }\KeywordTok{FROM}\NormalTok{ tbl}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3841,8 +3803,8 @@ Comparing groups
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{custom-theme-for-plot}{%
-\section{Custom Theme For Plot}\label{custom-theme-for-plot}}
+\hypertarget{custom-plotting-theme}{%
+\section{Custom Plotting Theme}\label{custom-plotting-theme}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3859,42 +3821,17 @@ Comparing groups
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{heatmap}{%
-\section{Heatmap}\label{heatmap}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(corrplot)}
-
-\NormalTok{df_fltrd }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{select_if}\NormalTok{(is.numeric) }\OperatorTok{%>%}
-\StringTok{    }\KeywordTok{cor}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{corrplot}\NormalTok{(}\DataTypeTok{method =} \StringTok{"circle"}\NormalTok{, }\DataTypeTok{is.corr =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{linear-regression-statsmodels}{%
 \section{Linear Regression Statsmodels}\label{linear-regression-statsmodels}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ statsmodels.api }\ImportTok{as}\NormalTok{ sm}
+
 \NormalTok{X }\OperatorTok{=}\NormalTok{ sm.add_constant(X)}
 \NormalTok{mdl }\OperatorTok{=}\NormalTok{ sm.OLS(Y, X).fit(disp }\OperatorTok{=} \VariableTok{False}\NormalTok{)}
+
 \BuiltInTok{print}\NormalTok{(mdl.summary())}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{linear-regression-by-groups}{%
-\section{Linear Regression By Groups}\label{linear-regression-by-groups}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{librarytidyverse}\ErrorTok{)}
-
-\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{split}\NormalTok{(.}\OperatorTok{$}\NormalTok{cyl) }\OperatorTok{%>%}\StringTok{ }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\OperatorTok{~}\StringTok{ }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ .))}
-\NormalTok{mtcars }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(cyl) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{model =} \KeywordTok{map}\NormalTok{(data, }\ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{lm}\NormalTok{(mpg }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data =}\NormalTok{ x) ))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3965,49 +3902,23 @@ Comparing groups
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{sql-dummy-columns}{%
-\section{SQL Dummy Columns}\label{sql-dummy-columns}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{SELECT} \StringTok{'Dummy Column Text'} \KeywordTok{as}\NormalTok{ DUMMYCOL }\KeywordTok{FROM}\NormalTok{ tbl}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{model-calibration}{%
-\section{Model Calibration}\label{model-calibration}}
-
-A quick way of visualizing model calibration without having to manually bin any observations
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(fitted_probability, binary_class_indicator)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{binning-rule-of-thumb}{%
-\section{Binning Rule Of Thumb}\label{binning-rule-of-thumb}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862}
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{(}\KeywordTok{aes}\NormalTok{(x), }\DataTypeTok{binwidth =} \KeywordTok{diff}\NormalTok{(}\KeywordTok{range}\NormalTok{(x)) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{2} \OperatorTok{*}\StringTok{ }\KeywordTok{IQR}\NormalTok{(x) }\OperatorTok{/}\StringTok{ }\KeywordTok{length}\NormalTok{(x)}\OperatorTok{^}\NormalTok{(}\DecValTok{1}\OperatorTok{/}\DecValTok{3}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{featuretools}{%
 \section{Featuretools}\label{featuretools}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table}
+
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
 \ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
 \ImportTok{import}\NormalTok{ featuretools }\ImportTok{as}\NormalTok{ ft}
+
 \NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'iris.csv'}\NormalTok{)}
 \NormalTok{df }\OperatorTok{=}\NormalTok{ df.reset_index()}
+
 \NormalTok{es }\OperatorTok{=}\NormalTok{ ft.EntitySet(}\BuiltInTok{id} \OperatorTok{=} \StringTok{"test"}\NormalTok{) }\CommentTok{#.drop(columns = ['species'], axis = 1)}
 \NormalTok{es }\OperatorTok{=}\NormalTok{ es.entity_from_dataframe(entity_id }\OperatorTok{=} \StringTok{'d'}\NormalTok{, dataframe }\OperatorTok{=}\NormalTok{ df, make_index}\OperatorTok{=}\VariableTok{True}\NormalTok{, index}\OperatorTok{=}\StringTok{'ind'}\NormalTok{)}
+
 \CommentTok{# produces 626 features}
 \NormalTok{fm, features }\OperatorTok{=}\NormalTok{ ft.dfs(}
 \NormalTok{    entityset }\OperatorTok{=}\NormalTok{ es, }
@@ -4015,6 +3926,7 @@ A quick way of visualizing model calibration without having to manually bin any 
 \NormalTok{    agg_primitives }\OperatorTok{=}\NormalTok{ [}\StringTok{'mean'}\NormalTok{, }\StringTok{'max'}\NormalTok{, }\StringTok{'percent_true'}\NormalTok{, }\StringTok{'last'}\NormalTok{],}
 \NormalTok{    trans_primitives }\OperatorTok{=}\NormalTok{ [}\StringTok{'subtract'}\NormalTok{, }\StringTok{'divide'}\NormalTok{]}
 \NormalTok{)}
+
 \CommentTok{# produces no new features}
 \NormalTok{_, features2 }\OperatorTok{=}\NormalTok{ ft.dfs(}
 \NormalTok{    entityset }\OperatorTok{=}\NormalTok{ es, }
@@ -4024,53 +3936,33 @@ A quick way of visualizing model calibration without having to manually bin any 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{skimage}{%
-\section{Skimage}\label{skimage}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ skimage }\ImportTok{import}\NormalTok{ io}
-\ImportTok{from}\NormalTok{ skimage.transform }\ImportTok{import}\NormalTok{ resize}
-\NormalTok{image }\OperatorTok{=}\NormalTok{ io.imread(}\VerbatimStringTok{r'test.jpg'}\NormalTok{)}
-\NormalTok{image2 }\OperatorTok{=}\NormalTok{ resize(image,(}\DecValTok{200}\NormalTok{, }\DecValTok{200}\NormalTok{),mode}\OperatorTok{=}\StringTok{'edge'}\NormalTok{)}
-\NormalTok{plt.imshow(image)}
-\NormalTok{plt.show()}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{shap}{%
 \section{SHAP}\label{shap}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ shap}
+
 \NormalTok{mdl.fit(X_train, y_train)}
 \NormalTok{explainer }\OperatorTok{=}\NormalTok{ shap.TreeExplainer(clf)}
 \NormalTok{shap_values }\OperatorTok{=}\NormalTok{ explainer.shap_values(X_train)}
+
 \CommentTok{#all records explained (both lines of code)}
 \NormalTok{shap.summary_plot(shap_values, X_train)}
 \NormalTok{shap.summary_plot(shap_values, X_train, plot_type }\OperatorTok{=} \StringTok{"bar"}\NormalTok{)}
+
 \NormalTok{df_shap }\OperatorTok{=}\NormalTok{ pd.DataFrame(}\BuiltInTok{list}\NormalTok{(}\BuiltInTok{zip}\NormalTok{(np.mean(shap_values, axis }\OperatorTok{=} \DecValTok{0}\NormalTok{), X_train.columns)),}
 \NormalTok{                       columns }\OperatorTok{=}\NormalTok{ [}\StringTok{'shap_mean'}\NormalTok{, }\StringTok{'feature'}\NormalTok{])}
 \NormalTok{df_shap }\OperatorTok{=}\NormalTok{ df_shap[[}\StringTok{'feature'}\NormalTok{, }\StringTok{'shap_mean'}\NormalTok{]]}
+
 \NormalTok{df_shap[}\StringTok{'shap_mean_abs'}\NormalTok{] }\OperatorTok{=}\NormalTok{ np.absolute(df_shap[}\StringTok{'shap_mean'}\NormalTok{])}
 \NormalTok{df_shap.sort_values([}\StringTok{'shap_mean_abs'}\NormalTok{], ascending }\OperatorTok{=} \VariableTok{False}\NormalTok{, inplace }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
+
 \ImportTok{import}\NormalTok{ shap}
 \ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+
 \NormalTok{attribution_data }\OperatorTok{=}\NormalTok{ np.array(train_data[:}\DecValTok{50}\NormalTok{])}
 \NormalTok{explainer }\OperatorTok{=}\NormalTok{ shap.DeepExplainer(model, attribution_data)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{hyperband-cv}{%
-\section{Hyperband CV}\label{hyperband-cv}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py}
-\ImportTok{from}\NormalTok{ civismlext.hyperband }\ImportTok{import}\NormalTok{ HyperbandSearchCV}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4079,52 +3971,10 @@ A quick way of visualizing model calibration without having to manually bin any 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{#source: http://bit.ly/294gmmP}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\ImportTok{import}\NormalTok{ sqlite3}
-\CommentTok{# pass in column names for each CSV}
-\NormalTok{r_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{'user_id'}\NormalTok{, }\StringTok{'movie_id'}\NormalTok{, }\StringTok{'rating'}\NormalTok{, }\StringTok{'unix_timestamp'}\NormalTok{]}
-\NormalTok{ratings }\OperatorTok{=}\NormalTok{ pd.read_csv(fdata, sep}\OperatorTok{=}\StringTok{';'}\NormalTok{, names}\OperatorTok{=}\NormalTok{r_cols, compression}\OperatorTok{=}\StringTok{'gzip'}\NormalTok{)}
-\NormalTok{m_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{'movie_id'}\NormalTok{, }\StringTok{'title'}\NormalTok{, }\StringTok{'genres'}\NormalTok{]}
-\NormalTok{movies }\OperatorTok{=}\NormalTok{ pd.read_csv(fitem, sep}\OperatorTok{=}\StringTok{';'}\NormalTok{, names}\OperatorTok{=}\NormalTok{m_cols, dtype}\OperatorTok{=}\NormalTok{\{}\StringTok{'title'}\NormalTok{: }\BuiltInTok{object}\NormalTok{, }\StringTok{'genres'}\NormalTok{: }\BuiltInTok{object}\NormalTok{\})}
-\NormalTok{sqlite_norm }\OperatorTok{=} \StringTok{"movielens-norm.sqlite"}
-\ControlFlowTok{if}\NormalTok{ os.path.exists(sqlite_norm):}
-\NormalTok{    os.unlink(sqlite_norm)}
-\NormalTok{conn }\OperatorTok{=}\NormalTok{ sqlite3.}\ExtensionTok{connect}\NormalTok{(sqlite_norm)}
-\NormalTok{conn.text_factory }\OperatorTok{=} \BuiltInTok{str}   \CommentTok{# Shut up problems with Unicode}
-\NormalTok{ratings.to_sql(}\StringTok{"ratings"}\NormalTok{, conn)}
-\NormalTok{movies.to_sql(}\StringTok{"movies"}\NormalTok{, conn)}
-\NormalTok{conn.close()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\CommentTok{# alternative: http://bit.ly/294gmmP}
 \ExtensionTok{sqlite3}\NormalTok{ db_name.db}
 \ExtensionTok{.mode}\NormalTok{ csv db_name}
 \ExtensionTok{.import}\NormalTok{ data.csv db_name}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{xgboost-light-gbm}{%
-\section{Xgboost \& Light GBM}\label{xgboost-light-gbm}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ xgboost }\ImportTok{as}\NormalTok{ xgb}
-\ImportTok{import}\NormalTok{ lightgbm }\ImportTok{as}\NormalTok{ lgb}
-\NormalTok{param_grid_lgb }\OperatorTok{=}\NormalTok{ \{}
-    \StringTok{'learning_rate'}\NormalTok{: [}\FloatTok{0.005}\NormalTok{, }\FloatTok{0.05}\NormalTok{, }\FloatTok{0.1}\NormalTok{], }\StringTok{'n_estimators'}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{500}\NormalTok{],}
-    \StringTok{'num_leaves'}\NormalTok{: [}\DecValTok{6}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{250}\NormalTok{, }\DecValTok{500}\NormalTok{], }\StringTok{'boosting_type'}\NormalTok{: [}\StringTok{'gbdt'}\NormalTok{, }\StringTok{'rf'}\NormalTok{],}
-    \StringTok{'colsample_bytree'}\NormalTok{ : [}\FloatTok{0.65}\NormalTok{, }\DecValTok{1}\NormalTok{], }\StringTok{'subsample'}\NormalTok{: [}\FloatTok{0.7}\NormalTok{, }\FloatTok{0.9}\NormalTok{],}
-    \StringTok{'reg_alpha'}\NormalTok{: [}\DecValTok{0}\NormalTok{, }\FloatTok{1.2}\NormalTok{], }\StringTok{'reg_lambda'}\NormalTok{: [}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{],}
-\NormalTok{    \}}
-\NormalTok{param_grid_xgb }\OperatorTok{=}\NormalTok{ \{}\StringTok{'bootstrap'}\NormalTok{: [}\VariableTok{True}\NormalTok{, }\VariableTok{False}\NormalTok{],}
- \StringTok{'max_depth'}\NormalTok{: [}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{60}\NormalTok{, }\DecValTok{70}\NormalTok{, }\DecValTok{80}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{100}\NormalTok{, }\VariableTok{None}\NormalTok{],}
- \StringTok{'max_features'}\NormalTok{: [}\StringTok{'auto'}\NormalTok{, }\StringTok{'sqrt'}\NormalTok{],}
- \StringTok{'min_samples_leaf'}\NormalTok{: [}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{],}
- \StringTok{'min_samples_split'}\NormalTok{: [}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{],}
- \StringTok{'n_estimators'}\NormalTok{: [}\DecValTok{200}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{600}\NormalTok{, }\DecValTok{800}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DecValTok{1400}\NormalTok{, }\DecValTok{1600}\NormalTok{, }\DecValTok{1800}\NormalTok{, }\DecValTok{2000}\NormalTok{]\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4133,93 +3983,23 @@ A quick way of visualizing model calibration without having to manually bin any 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
-\ImportTok{import}\NormalTok{ lightgbm }\ImportTok{as}\NormalTok{ lgb}
 \ImportTok{from}\NormalTok{ scipy.stats }\ImportTok{import}\NormalTok{ randint }\ImportTok{as}\NormalTok{ sp_randint}
 \ImportTok{from}\NormalTok{ skopt }\ImportTok{import}\NormalTok{ BayesSearchCV}
 \ImportTok{from}\NormalTok{ skopt.space }\ImportTok{import}\NormalTok{ Real, Integer, Categorical}
-\CommentTok{#v1: Light GBM}
-\NormalTok{bayes_cv_tuner }\OperatorTok{=}\NormalTok{ BayesSearchCV(}
-\NormalTok{    estimator }\OperatorTok{=}\NormalTok{ lgb.LGBMClassifier(}
-\NormalTok{        objective}\OperatorTok{=}\StringTok{'binary'}\NormalTok{,}
-\NormalTok{        metric}\OperatorTok{=}\StringTok{'auc'}\NormalTok{,}
-\NormalTok{        n_jobs}\OperatorTok{=}\DecValTok{1}\NormalTok{,}
-\NormalTok{        verbose}\OperatorTok{=}\DecValTok{0}
-\NormalTok{    ),}
-\NormalTok{    search_spaces }\OperatorTok{=}\NormalTok{ \{}
-        \StringTok{'learning_rate'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'num_leaves'}\NormalTok{: (}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{),      }
-        \StringTok{'max_depth'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-        \StringTok{'min_child_samples'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-        \StringTok{'max_bin'}\NormalTok{: (}\DecValTok{100}\NormalTok{, }\DecValTok{1000}\NormalTok{),}
-        \StringTok{'subsample'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'uniform'}\NormalTok{),}
-        \StringTok{'subsample_freq'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{),}
-        \StringTok{'colsample_bytree'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'uniform'}\NormalTok{),}
-        \StringTok{'min_child_weight'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{),}
-        \StringTok{'subsample_for_bin'}\NormalTok{: (}\DecValTok{100000}\NormalTok{, }\DecValTok{500000}\NormalTok{),}
-        \StringTok{'reg_lambda'}\NormalTok{: (}\FloatTok{1e-9}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'reg_alpha'}\NormalTok{: (}\FloatTok{1e-9}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'scale_pos_weight'}\NormalTok{: (}\FloatTok{1e-6}\NormalTok{, }\DecValTok{500}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'n_estimators'}\NormalTok{: (}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{),}
-\NormalTok{    \},    }
+
+\NormalTok{mdl_tuner }\OperatorTok{=}\NormalTok{ BayesSearchCV(}
+\NormalTok{    estimator }\OperatorTok{=}\NormalTok{ mdl,}
+\NormalTok{    search_spaces }\OperatorTok{=}\NormalTok{ grid,    }
 \NormalTok{    scoring }\OperatorTok{=} \StringTok{'roc_auc'}\NormalTok{,}
-\NormalTok{    cv }\OperatorTok{=}\NormalTok{ sk_ms.StratifiedKFold(}
-\NormalTok{        n_splits}\OperatorTok{=}\DecValTok{3}\NormalTok{,}
-\NormalTok{        shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{,}
-\NormalTok{        random_state }\OperatorTok{=} \DecValTok{42}
-\NormalTok{    ),}
+\NormalTok{    cv }\OperatorTok{=}\NormalTok{ folds,}
 \NormalTok{    n_jobs }\OperatorTok{=} \DecValTok{3}\NormalTok{,}
 \NormalTok{    n_iter }\OperatorTok{=} \DecValTok{10}\NormalTok{,   }
 \NormalTok{    verbose }\OperatorTok{=} \DecValTok{0}\NormalTok{,}
 \NormalTok{    refit }\OperatorTok{=} \VariableTok{True}\NormalTok{,}
 \NormalTok{    random_state }\OperatorTok{=} \DecValTok{42}
 \NormalTok{)}
-\NormalTok{result }\OperatorTok{=}\NormalTok{ bayes_cv_tuner.fit(X_train.values, y_train.values)}
-\CommentTok{#v2: XGBoost}
-\NormalTok{bayes_cv_tuner }\OperatorTok{=}\NormalTok{ BayesSearchCV(}
-\NormalTok{    estimator }\OperatorTok{=}\NormalTok{ xgb.XGBClassifier(}
-\NormalTok{        n_jobs }\OperatorTok{=} \DecValTok{1}\NormalTok{,}
-\NormalTok{        objective }\OperatorTok{=} \StringTok{'binary:logistic'}\NormalTok{,}
-\NormalTok{        eval_metric }\OperatorTok{=} \StringTok{'auc'}\NormalTok{,}
-\NormalTok{        silent}\OperatorTok{=}\DecValTok{1}\NormalTok{,}
-\NormalTok{        tree_method}\OperatorTok{=}\StringTok{'approx'}
-\NormalTok{    ),}
-\NormalTok{    search_spaces }\OperatorTok{=}\NormalTok{ \{}
-        \StringTok{'learning_rate'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'min_child_weight'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{),}
-        \StringTok{'max_depth'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{),}
-        \StringTok{'max_delta_step'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{20}\NormalTok{),}
-        \StringTok{'subsample'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'uniform'}\NormalTok{),}
-        \StringTok{'colsample_bytree'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'uniform'}\NormalTok{),}
-        \StringTok{'colsample_bylevel'}\NormalTok{: (}\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'uniform'}\NormalTok{),}
-        \StringTok{'reg_lambda'}\NormalTok{: (}\FloatTok{1e-9}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'reg_alpha'}\NormalTok{: (}\FloatTok{1e-9}\NormalTok{, }\FloatTok{1.0}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'gamma'}\NormalTok{: (}\FloatTok{1e-9}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{),}
-        \StringTok{'min_child_weight'}\NormalTok{: (}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{),}
-        \StringTok{'n_estimators'}\NormalTok{: (}\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{),}
-        \StringTok{'scale_pos_weight'}\NormalTok{: (}\FloatTok{1e-6}\NormalTok{, }\DecValTok{500}\NormalTok{, }\StringTok{'log-uniform'}\NormalTok{)}
-\NormalTok{    \},    }
-\NormalTok{    scoring }\OperatorTok{=} \StringTok{'roc_auc'}\NormalTok{,}
-\NormalTok{    cv }\OperatorTok{=}\NormalTok{ sk_ms.StratifiedKFold(}
-\NormalTok{        n_splits}\OperatorTok{=}\DecValTok{3}\NormalTok{,}
-\NormalTok{        shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{,}
-\NormalTok{        random_state}\OperatorTok{=}\DecValTok{42}
-\NormalTok{    ),}
-\NormalTok{    n_jobs }\OperatorTok{=} \DecValTok{3}\NormalTok{,}
-\NormalTok{    n_iter }\OperatorTok{=} \DecValTok{10}\NormalTok{,   }
-\NormalTok{    verbose }\OperatorTok{=} \DecValTok{0}\NormalTok{,}
-\NormalTok{    refit }\OperatorTok{=} \VariableTok{True}\NormalTok{,}
-\NormalTok{    random_state }\OperatorTok{=} \DecValTok{42}
-\NormalTok{)}
-\CommentTok{#v3}
-\NormalTok{param_grid }\OperatorTok{=}\NormalTok{ \{}
-    \StringTok{'learning_rate'}\NormalTok{: Real(}\FloatTok{0.005}\NormalTok{, }\FloatTok{0.1}\NormalTok{), }\StringTok{'n_estimators'}\NormalTok{: Integer(}\DecValTok{10}\NormalTok{, }\DecValTok{500}\NormalTok{),}
-    \StringTok{'num_leaves'}\NormalTok{: Integer(}\DecValTok{6}\NormalTok{, }\DecValTok{50}\NormalTok{), }\StringTok{'boosting_type'}\NormalTok{ : Categorical([}\StringTok{'gbdt'}\NormalTok{, }\StringTok{'rf'}\NormalTok{]),}
-    \StringTok{'colsample_bytree'}\NormalTok{ : Real(}\FloatTok{0.65}\NormalTok{, }\DecValTok{1}\NormalTok{), }\StringTok{'subsample'}\NormalTok{ : Real(}\FloatTok{0.7}\NormalTok{, }\FloatTok{0.9}\NormalTok{),}
-    \StringTok{'reg_alpha'}\NormalTok{ : Real(}\DecValTok{0}\NormalTok{, }\FloatTok{1.2}\NormalTok{), }\StringTok{'reg_lambda'}\NormalTok{ : Real(}\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{),}
-\NormalTok{    \}}
-\NormalTok{clf_tuned }\OperatorTok{=}\NormalTok{ BayesSearchCV(clf, param_grid, cv }\OperatorTok{=} \DecValTok{5}\NormalTok{, random_state }\OperatorTok{=} \DecValTok{8}\NormalTok{, scoring }\OperatorTok{=} \StringTok{'f1'}\NormalTok{, n_jobs }\OperatorTok{=} \DecValTok{-1}\NormalTok{)}
+
+\NormalTok{result }\OperatorTok{=}\NormalTok{ mdl_tuner.fit(X_train.values, y_train.values)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -4234,31 +4014,41 @@ A quick way of visualizing model calibration without having to manually bin any 
 \CommentTok{# Spark's assumes the target is called 'label' in ML. Everything else is a feature.}
 \CommentTok{# Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models}
 \CommentTok{# It's important to split the data after all the transformations because operations like StringIndexer don't always produce the same index even when given the same list of strings.}
+
 \ImportTok{import}\NormalTok{ findspark}
 \NormalTok{findspark.init()}
+
 \ImportTok{import}\NormalTok{ findspark}
 \NormalTok{findspark.init()}
 \ImportTok{import}\NormalTok{ pyspark}
 \ImportTok{import}\NormalTok{ random}
+
 \ImportTok{import}\NormalTok{ pyspark}
 \ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
+
 \ImportTok{from}\NormalTok{ pyspark.ml.feature }\ImportTok{import}\NormalTok{ StringIndexer, OneHotEncoder, VectorAssembler}
 \ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
 \ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
 \ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
 \ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
 \ImportTok{import}\NormalTok{ pyspark}
 \ImportTok{from}\NormalTok{ pyspark.sql }\ImportTok{import}\NormalTok{ SparkSession}
+
 \ImportTok{import}\NormalTok{ pyspark.sql.functions }\ImportTok{as}\NormalTok{ F}
 \ImportTok{from}\NormalTok{ pyspark.ml }\ImportTok{import}\NormalTok{ Pipeline}
 \ImportTok{from}\NormalTok{ pyspark.ml.classification }\ImportTok{import}\NormalTok{ LogisticRegression}
 \ImportTok{import}\NormalTok{ pyspark.ml.evaluation }\ImportTok{as}\NormalTok{ evals}
 \ImportTok{import}\NormalTok{ pyspark.ml.tuning }\ImportTok{as}\NormalTok{ tune}
+
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
 \NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.getOrCreate() }\CommentTok{# SparkSession.builder.appName('chosenName').getOrCreate()}
+
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext()}
 \NormalTok{spark }\OperatorTok{=}\NormalTok{ SparkSession.builder.appName(}\StringTok{'example'}\NormalTok{).getOrCreate()}
+
+
 \NormalTok{sc }\OperatorTok{=}\NormalTok{ pyspark.SparkContext(appName}\OperatorTok{=}\StringTok{"Pi"}\NormalTok{)}
 \NormalTok{num_samples }\OperatorTok{=} \DecValTok{100000000}
 \KeywordTok{def}\NormalTok{ inside(p):     }
@@ -4267,116 +4057,165 @@ A quick way of visualizing model calibration without having to manually bin any 
 \NormalTok{count }\OperatorTok{=}\NormalTok{ sc.parallelize(}\BuiltInTok{range}\NormalTok{(}\DecValTok{0}\NormalTok{, num_samples)).}\BuiltInTok{filter}\NormalTok{(inside).count()}
 \NormalTok{pi }\OperatorTok{=} \DecValTok{4} \OperatorTok{*}\NormalTok{ count }\OperatorTok{/}\NormalTok{ num_samples}
 \BuiltInTok{print}\NormalTok{(pi)}
+
 \NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'data.csv'}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
 \NormalTok{df.show(}\DecValTok{5}\NormalTok{)}
 \NormalTok{df.columns}
+
 \CommentTok{# Preprocessing}
+
 \NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"label"}\NormalTok{, df[}\StringTok{"target"}\NormalTok{].cast(}\StringTok{'integer'}\NormalTok{))}
+
 \NormalTok{scf_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{)}
 \NormalTok{scf_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol }\OperatorTok{=} \StringTok{"some_cat_feature_index"}\NormalTok{, outputCol }\OperatorTok{=} \StringTok{"some_cat_feature_fact"}\NormalTok{)}
+
 \NormalTok{feature_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{"some list of column names"}\NormalTok{]}
+
 \NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols }\OperatorTok{=}\NormalTok{ feature_cols, }
 \NormalTok{                                outputCol }\OperatorTok{=} \StringTok{"features"}\NormalTok{)}
+
 \NormalTok{pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages }\OperatorTok{=}\NormalTok{ [scf_indexer, scf_encoder, vec_assembler])}
+
 \NormalTok{piped_data }\OperatorTok{=}\NormalTok{ pipe.fit(df).transform(df)}
 \NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{8}\NormalTok{, }\FloatTok{.2}\NormalTok{])}
+
 \CommentTok{# Model}
+
 \NormalTok{clf_lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
 \NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName }\OperatorTok{=} \StringTok{"areaUnderROC"}\NormalTok{)}
+
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.01}\NormalTok{))}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(clf_lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
+
 \NormalTok{clf_lr_cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
 \NormalTok{    estimator }\OperatorTok{=}\NormalTok{ clf_lr,}
 \NormalTok{    estimatorParamMaps }\OperatorTok{=}\NormalTok{ grid,}
 \NormalTok{    evaluator }\OperatorTok{=}\NormalTok{ evaluator,}
 \NormalTok{    numFolds }\OperatorTok{=} \DecValTok{5}
 \NormalTok{               )}
+
 \NormalTok{best_clf_lr }\OperatorTok{=}\NormalTok{ clf_lr_cv.fit(training).bestModel}
 \NormalTok{results }\OperatorTok{=}\NormalTok{ best_clf_lr.transform(training)}
 \BuiltInTok{print}\NormalTok{(evaluator.evaluate(results))}
+
 \CommentTok{## List tables}
 \NormalTok{spark.catalog.listTables()}
+
 \CommentTok{## Access and display data}
 \NormalTok{query }\OperatorTok{=} \StringTok{"FROM flights SELECT * LIMIT 10"}
 \NormalTok{flights10 }\OperatorTok{=}\NormalTok{ spark.sql(query)}
 \NormalTok{flights10.show()}
+
 \CommentTok{## Cast}
 \NormalTok{df[}\StringTok{'g'}\NormalTok{] }\OperatorTok{=}\NormalTok{ df[}\StringTok{'g'}\NormalTok{].astype(}\BuiltInTok{str}\NormalTok{)}
+
 \CommentTok{## Read from csv}
 \NormalTok{df}\OperatorTok{=}\NormalTok{ spark.read.csv(file_path, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
 \NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.csv(}\StringTok{'fileNameWithPath'}\NormalTok{, mode}\OperatorTok{=}\StringTok{"DROPMALFORMED"}\NormalTok{,inferSchema}\OperatorTok{=}\VariableTok{True}\NormalTok{, header }\OperatorTok{=} \VariableTok{True}\NormalTok{)}
 \NormalTok{df }\OperatorTok{=}\NormalTok{ spark.read.}\BuiltInTok{format}\NormalTok{(}\StringTok{"csv"}\NormalTok{).option(}\StringTok{"header"}\NormalTok{,}\StringTok{"true"}\NormalTok{).option(}\StringTok{"inferSchema"}\NormalTok{,}\StringTok{"true"}\NormalTok{).load(}\StringTok{"john_doe.csv"}\NormalTok{)}
+
 \CommentTok{## Spark df to pandas and vice versa}
 \NormalTok{toPandas()}
 \NormalTok{spark_temp }\OperatorTok{=}\NormalTok{ spark.createDataFrame(pd_temp)}
+
 \CommentTok{## Add to the catalog}
 \NormalTok{spark_temp.createOrReplaceTempView(}\StringTok{"temp"}\NormalTok{)}
+
 \CommentTok{## Mutate}
 \NormalTok{df }\OperatorTok{=}\NormalTok{ df.withColumn(}\StringTok{"newCol"}\NormalTok{, df.oldCol }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
 \NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"arr_delay"}\NormalTok{, model_data.arr_delay.cast(}\StringTok{'integer'}\NormalTok{))}
 \NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.withColumn(}\StringTok{"plane_age"}\NormalTok{, model_data.year }\OperatorTok{-}\NormalTok{ model_data.plane_year)}
+
 \CommentTok{## Create the DataFrame flights}
 \NormalTok{flights }\OperatorTok{=}\NormalTok{ spark.table(}\StringTok{'flights'}\NormalTok{)}
+
 \CommentTok{## Get column names}
 \NormalTok{spark_df.schema.names}
 \NormalTok{spark_df.printSchema()}
+
 \CommentTok{## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string}
 \NormalTok{long_flights1 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(}\StringTok{'distance > 1000'}\NormalTok{)}
 \NormalTok{long_flights2 }\OperatorTok{=}\NormalTok{ flights.}\BuiltInTok{filter}\NormalTok{(flights.distance }\OperatorTok{>} \DecValTok{1000}\NormalTok{)}
 \NormalTok{model_data }\OperatorTok{=}\NormalTok{ model_data.}\BuiltInTok{filter}\NormalTok{(}\StringTok{"arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL"}\NormalTok{)}
+
 \CommentTok{## Groupby examples}
 \NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.origin }\OperatorTok{==} \StringTok{"PDX"}\NormalTok{).groupBy().}\BuiltInTok{min}\NormalTok{(}\StringTok{"distance"}\NormalTok{).show()}
 \NormalTok{flights.}\BuiltInTok{filter}\NormalTok{(flights.carrier}\OperatorTok{==}\StringTok{'DL'}\NormalTok{).}\BuiltInTok{filter}\NormalTok{(flights.origin}\OperatorTok{==}\StringTok{'SEA'}\NormalTok{).groupBy().avg(}\StringTok{'air_time'}\NormalTok{).show()}
 \NormalTok{flights.withColumn(}\StringTok{"duration_hrs"}\NormalTok{, flights.air_time}\OperatorTok{/}\DecValTok{60}\NormalTok{).groupBy().}\BuiltInTok{sum}\NormalTok{(}\StringTok{'duration_hrs'}\NormalTok{).show()}
+
 \CommentTok{## Spark functions}
 \NormalTok{by_month_dest.agg(F.stddev(}\StringTok{'dep_delay'}\NormalTok{)).show()}
+
 \CommentTok{## Drop column}
 \NormalTok{final_test_data.drop(}\StringTok{'State'}\NormalTok{)}
+
 \CommentTok{## Dummying}
+
 \CommentTok{#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.}
+
 \CommentTok{#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer}
+
 \CommentTok{## Create a StringIndexer}
 \NormalTok{carr_indexer }\OperatorTok{=}\NormalTok{ StringIndexer(inputCol}\OperatorTok{=}\StringTok{"carrier"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{)}
+
 \CommentTok{## Create a OneHotEncoder}
 \NormalTok{carr_encoder }\OperatorTok{=}\NormalTok{ OneHotEncoder(inputCol}\OperatorTok{=}\StringTok{"carrier_index"}\NormalTok{, outputCol}\OperatorTok{=}\StringTok{"carrier_fact"}\NormalTok{)}
+
 \CommentTok{## Make a VectorAssembler}
 \NormalTok{vec_assembler }\OperatorTok{=}\NormalTok{ VectorAssembler(inputCols}\OperatorTok{=}\NormalTok{[}\StringTok{"month"}\NormalTok{, }\StringTok{"air_time"}\NormalTok{, }\StringTok{"carrier_fact"}\NormalTok{, }\StringTok{"dest_fact"}\NormalTok{, }\StringTok{"plane_age"}\NormalTok{], outputCol}\OperatorTok{=}\StringTok{"features"}\NormalTok{)}
+
 \CommentTok{## Import & Make Pipeline}
 \NormalTok{flights_pipe }\OperatorTok{=}\NormalTok{ Pipeline(stages}\OperatorTok{=}\NormalTok{[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])}
+
 \CommentTok{## Fit and transform the data}
 \NormalTok{piped_data }\OperatorTok{=}\NormalTok{ flights_pipe.fit(model_data).transform(model_data)}
+
 \CommentTok{## Train-test split}
 \NormalTok{training, test }\OperatorTok{=}\NormalTok{ piped_data.randomSplit([.}\DecValTok{6}\NormalTok{, }\FloatTok{.4}\NormalTok{])}
+
 \CommentTok{## Tuning & Selection}
+
 \CommentTok{## Import LogisticRegression}
+
 \CommentTok{## Create a LogisticRegression Estimator}
 \NormalTok{lr }\OperatorTok{=}\NormalTok{ LogisticRegression()}
+
 \CommentTok{## Create a BinaryClassificationEvaluator}
 \NormalTok{evaluator }\OperatorTok{=}\NormalTok{ evals.BinaryClassificationEvaluator(metricName}\OperatorTok{=}\StringTok{"areaUnderROC"}\NormalTok{)}
+
 \CommentTok{## Import the tuning submodule}
+
 \CommentTok{## Create the parameter grid}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ tune.ParamGridBuilder()}
+
 \CommentTok{## Add the hyperparameter}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.regParam, np.arange(}\DecValTok{0}\NormalTok{, }\FloatTok{.1}\NormalTok{, }\FloatTok{.01}\NormalTok{))}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.addGrid(lr.elasticNetParam, [}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{])}
+
 \CommentTok{## Build the grid}
 \NormalTok{grid }\OperatorTok{=}\NormalTok{ grid.build()}
+
 \CommentTok{## Create the CrossValidator}
 \NormalTok{cv }\OperatorTok{=}\NormalTok{ tune.CrossValidator(}
 \NormalTok{estimator}\OperatorTok{=}\NormalTok{lr,}
 \NormalTok{estimatorParamMaps}\OperatorTok{=}\NormalTok{grid,}
 \NormalTok{evaluator}\OperatorTok{=}\NormalTok{evaluator}
 \NormalTok{               )}
+
 \CommentTok{## Fit cross validation models}
 \NormalTok{models }\OperatorTok{=}\NormalTok{ cv.fit(training)}
+
 \CommentTok{## Extract the best model}
 \NormalTok{best_lr }\OperatorTok{=}\NormalTok{ models.bestModel}
+
 \CommentTok{## Use the model to predict the test set}
 \NormalTok{test_results }\OperatorTok{=}\NormalTok{ best_lr.transform(test)}
+
 \CommentTok{## Evaluate the predictions}
 \BuiltInTok{print}\NormalTok{(evaluator.evaluate(test_results))}
+
 \NormalTok{sc.stop()}
 \end{Highlighting}
 \end{Shaded}
@@ -4538,7 +4377,9 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 \CommentTok{#import keras}
 \CommentTok{#from keras.layers import Dense}
 \CommentTok{#from keras.models import Sequential}
+
 \CommentTok{# Regression}
+
 \CommentTok{# Specify the model}
 \CommentTok{#model = Sequential()}
 \CommentTok{## Input}
@@ -4551,7 +4392,9 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 \CommentTok{#model.compile(optimizer = 'adam', loss = 'mean_squared_error') }
 \CommentTok{# Fit the model}
 \CommentTok{#model.fit(predictors, target))}
+
 \CommentTok{# Classification}
+
 \CommentTok{# Specify the model: Two hidden layers}
 \CommentTok{#model = Sequential()}
 \CommentTok{## Input}
@@ -4564,37 +4407,21 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 \CommentTok{#model.compile(optimizer = 'sgd', loss = 'categorical_crossentropy', metrics = 'accuracy')}
 \CommentTok{# Fit the model}
 \CommentTok{#model.fit(predictors, target)}
+
 \CommentTok{# Other}
+
 \CommentTok{# Dummying}
 \CommentTok{#y = 1}
 \CommentTok{#keras.utils.to_categorical(y, num_classes = 2)}
+
 \CommentTok{#Look at summary}
 \CommentTok{#model.summary()}
+
 \CommentTok{#Calculate predictions: predictions}
 \CommentTok{#predictions = model.predict(pred_data)}
+
 \CommentTok{#Calculate predicted probability of survival}
-\NormalTok{predicted_prob_true }\OperatorTok{=}\NormalTok{ predictions[:, }\DecValTok{1}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{mnist-example}{%
-\section{MNIST Example}\label{mnist-example}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ sklearn }\ImportTok{import}\NormalTok{ datasets}
-\ImportTok{from}\NormalTok{ sklearn }\ImportTok{import}\NormalTok{ svm}
-\NormalTok{digits }\OperatorTok{=}\NormalTok{ datasets.load_digits()}
-\CommentTok{#print(digits.data)}
-\CommentTok{#print(digits.target)}
-\BuiltInTok{print}\NormalTok{(digits.images[}\DecValTok{0}\NormalTok{])}
-\NormalTok{clf }\OperatorTok{=}\NormalTok{ svm.SVC(gamma}\OperatorTok{=}\NormalTok{.}\DecValTok{001}\NormalTok{,C}\OperatorTok{=}\DecValTok{100}\NormalTok{)}
-\NormalTok{x, y }\OperatorTok{=}\NormalTok{ digits.data[:}\OperatorTok{-}\DecValTok{10}\NormalTok{], digits.target[:}\OperatorTok{-}\DecValTok{10}\NormalTok{]}
-\NormalTok{clf.fit(x,y)}
-\BuiltInTok{print}\NormalTok{(}\StringTok{"Prediction: "}\NormalTok{, clf.predict(digits.data[}\OperatorTok{-}\DecValTok{2}\NormalTok{].reshape(}\DecValTok{1}\NormalTok{, }\DecValTok{-1}\NormalTok{)))}
-\NormalTok{plt.imshow(digits.images[}\OperatorTok{-}\DecValTok{2}\NormalTok{], cmap}\OperatorTok{=}\NormalTok{plt.cm.gray_r, interpolation}\OperatorTok{=}\StringTok{"nearest"}\NormalTok{)}
-\NormalTok{plt.show()}
+\CommentTok{#predicted_prob_true = predictions[:, 1]}
 \end{Highlighting}
 \end{Shaded}
 

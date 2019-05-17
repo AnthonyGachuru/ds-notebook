@@ -6,6 +6,12 @@ General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
 
 xgb default hyperparameters good
 
+Pipelines & feature Unions for model deployment
+
+Outlier Detection: interquartile range, kernel density estimation
+
+Dimensionality reduction (PCA, Kernel PCA, TSNE, Isomap)
+
 mixed effect regression
 
 * Class imbalance: Gradient boosting is one option.

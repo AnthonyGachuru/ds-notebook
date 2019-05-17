@@ -1,71 +1,26 @@
 # Codebook 
 
-## General
-
-[Chris Albon](http://chrisalbon.com/)
-
 ## Mixed Effect Regression
 
 ```{python, eval = F}
-# mixed effect regression
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 
-mdl = smf.mixedlm("y ~ x1 + x2". df, groups = train['group'])
+mdl = smf.mixedlm("y ~ x". df, groups = train['group'])
 mdl_fit = mdl.fit()
-```
-
-## Linear Regression Assumption Checks
-
-```{r, eval = F}
-# general check
-plot(mdl)
-
-# linearity check
-avPlots(mdl)
-
-# Outlier Analysis
-# influencePlot(mdl)
-
-# multi-colinearity
-vif(mdl) %>% data.frame() %>% mutate(VIF = `GVIF..1..2.Df..`, VIF = VIF^2)
-
-#  Autocorrelated Errors
-durbinWatsonTest(rgr_lr_st1)
-
-# Normality
-shapiro.test(data)
-
-# Inspect this same data using the QQ-plots (For normal data, the QQ-plot produces a straight-line relationship. For uniform data, the QQ-plot does NOT produce a straight-line relationship): 
-qqnorm(normal.data) + qqline(normal.data)
-
-# heteroskedasticity
-# Breusch-Pagan (BP) test lmtest package
 ```
 
 ## Regression By Groups
 
 ```{r, eval = FALSE}
-library(purrr)
-
 pga %>% 
-  select(name,year,driveavg,drivepct, score.avg) %>%
   split(.$year) %>%
   map(~lm(score.avg ~ driveavg + drivepct, data=.)) %>%
   map(summary)
-```
 
-## Cyclical Feature Engineering
-
-```{python, eval = FALSE}
-# Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
-
-import numpy as np
-
-df['hr_sin'] = np.sin(df.hr*(2.*np.pi/24))
-df['hr_cos'] = np.cos(df.hr*(2.*np.pi/24))
-df['mnth_sin'] = np.sin((df.mnth-1)*(2.*np.pi/12))
-df['mnth_cos'] = np.cos((df.mnth-1)*(2.*np.pi/12))
+mtcars %>% group_by(cyl) %>% split(.$cyl) %>% purrr::map(~ lm(mpg ~ ., data = .))
+mtcars %>% group_by(cyl) %>% nest() %>% 
+mutate(model = map(data, function(x) lm(mpg ~ ., data = x) ))
 ```
 
 ## Rpy2 Ipynb
@@ -200,8 +155,7 @@ result/n
 ## Simple Bayes
 
 ```{python, eval = FALSE}
-
-#Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
+# Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
 
 from numpy.random import beta as beta_dist
 import numpy as np
@@ -273,27 +227,6 @@ clf_lr = sm.Logit(Y, X).fit(disp=False)
 print(results.summary())
 ```
 
-## Function Negation
-
-```{r, eval = FALSE}
-not_in <- purrr::negate(%in%)
-not_between <- purrr::negate(between)
-```
-
-## Attach Date CSV
-
-```{python, eval = F}
-df.to_csv('{}_model.csv'.format(str(datetime.datetime.now()).split(' ')[0]))
-```
-
-## EBB
-
-```{r, eval = F}
-df_ebb <- df %>%
-  summarise(successes = sum(success), sample_size = n()) %>%
-  add_ebb_estimate(num_passed, sample_size)
-```
-
 ## Plot Grid 
 
 ```{r, eval = F}
@@ -341,6 +274,7 @@ with open("../input/kickstarter-projects/ks-projects-201801.csv", 'rb') as rawda
 
 ```{python, eval = F}
 import pandas_profiling
+
 pandas_profiling.ProfileReport(data)
 ```
 
@@ -350,6 +284,9 @@ pandas_profiling.ProfileReport(data)
 df <- dbGetQuery(con, statement = read_file('query.sql'))
 ```
 
+```{sql, eval = F}
+SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
+```
 
 ## Extract Date
 
@@ -366,7 +303,7 @@ ggplotly(ggplot(filter(df_master2, group == x), aes(x,y, label = z, color = w)) 
         geom_jitter(width = .2), tooltip = c('y', 'label'))
 ```
 
-## Custom Theme For Plot
+## Custom Plotting Theme
 
 ```{r, eval = F}
 theme_ilo <- function() {
@@ -381,17 +318,6 @@ theme_ilo <- function() {
 }
 ```
 
-## Heatmap
-
-```{r, eval = F}
-library(corrplot)
-
-df_fltrd %>% 
-select_if(is.numeric) %>%
-    cor() %>% 
-corrplot(method = "circle", is.corr = FALSE)
-```
-
 ## Linear Regression Statsmodels
 
 ```{python, eval = F}
@@ -401,16 +327,6 @@ X = sm.add_constant(X)
 mdl = sm.OLS(Y, X).fit(disp = False)
 
 print(mdl.summary())
-```
-
-## Linear Regression By Groups
-
-```{r, eval = F}
-librarytidyverse)
-
-mtcars %>% group_by(cyl) %>% split(.$cyl) %>% purrr::map(~ lm(mpg ~ ., data = .))
-mtcars %>% group_by(cyl) %>% nest() %>% 
-mutate(model = map(data, function(x) lm(mpg ~ ., data = x) ))
 ```
 
 ## RML Pipeline
@@ -469,27 +385,6 @@ pip install subsample
 subsample -s 8 -n 100000 test.csv -r > test_sample.csv
 ```
 
-## SQL Dummy Columns
-
-```{sql, eval = F}
-SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
-```
-
-## Model Calibration
-
-A quick way of visualizing model calibration without having to manually bin any observations
-
-```{r, eval = F}
-ggplot(df, aes(fitted_probability, binary_class_indicator)) + geom_smooth()
-```
-
-## Binning Rule Of Thumb
-
-```{r, eval = F}
-# https://stats.stackexchange.com/questions/798/calculating-optimal-number-of-bins-in-a-histogram/862#862
-ggplot() + geom_histogram(aes(x), binwidth = diff(range(x)) / (2 * IQR(x) / length(x)^(1/3)))
-```
-
 ## Featuretools
 
 ```{python, eval = F}
@@ -521,21 +416,6 @@ _, features2 = ft.dfs(
 )
 ```
 
-## Skimage
-
-```{python, eval = F}
-import numpy as np
-import matplotlib.pyplot as plt
-from skimage import io
-from skimage.transform import resize
-
-image = io.imread(r'test.jpg')
-image2 = resize(image,(200, 200),mode='edge')
-
-plt.imshow(image)
-plt.show()
-```
-
 ## SHAP
 
 ```{python, eval = F}
@@ -563,109 +443,27 @@ attribution_data = np.array(train_data[:50])
 explainer = shap.DeepExplainer(model, attribution_data)
 ```
 
-## Hyperband CV
-
-```{python, eval = F}
-#https://github.com/civisanalytics/civisml-extensions/blob/master/civismlext/hyperband.py
-
-from civismlext.hyperband import HyperbandSearchCV
-```
-
 ## CSV To DB
 
-```{python, eval = F}
-#source: http://bit.ly/294gmmP
-
-import pandas as pd
-import sqlite3
-
-# pass in column names for each CSV
-r_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
-ratings = pd.read_csv(fdata, sep=';', names=r_cols, compression='gzip')
-
-m_cols = ['movie_id', 'title', 'genres']
-movies = pd.read_csv(fitem, sep=';', names=m_cols, dtype={'title': object, 'genres': object})
-
-sqlite_norm = "movielens-norm.sqlite"
-
-if os.path.exists(sqlite_norm):
-    os.unlink(sqlite_norm)
-
-conn = sqlite3.connect(sqlite_norm)
-conn.text_factory = str   # Shut up problems with Unicode
-ratings.to_sql("ratings", conn)
-movies.to_sql("movies", conn)
-conn.close()
-```
-
 ```{bash, eval = F}
+# alternative: http://bit.ly/294gmmP
 sqlite3 db_name.db
 .mode csv db_name
 .import data.csv db_name
 ```
 
-## Xgboost & Light GBM
-
-```{python, eval = F}
-import xgboost as xgb
-import lightgbm as lgb
-
-param_grid_lgb = {
-    'learning_rate': [0.005, 0.05, 0.1], 'n_estimators': [10, 100, 250, 500],
-    'num_leaves': [6, 50, 100, 250, 500], 'boosting_type': ['gbdt', 'rf'],
-    'colsample_bytree' : [0.65, 1], 'subsample': [0.7, 0.9],
-    'reg_alpha': [0, 1.2], 'reg_lambda': [0, 2],
-    }
-
-param_grid_xgb = {'bootstrap': [True, False],
- 'max_depth': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, None],
- 'max_features': ['auto', 'sqrt'],
- 'min_samples_leaf': [1, 2, 4],
- 'min_samples_split': [2, 5, 10],
- 'n_estimators': [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]}
-```
-
 ## Bayesian CV
 
 ```{python, eval = F}
-import numpy as np
-import pandas as pd
-import lightgbm as lgb
 from scipy.stats import randint as sp_randint
 from skopt import BayesSearchCV
 from skopt.space import Real, Integer, Categorical
 
-#v1: Light GBM
-
-bayes_cv_tuner = BayesSearchCV(
-    estimator = lgb.LGBMClassifier(
-        objective='binary',
-        metric='auc',
-        n_jobs=1,
-        verbose=0
-    ),
-    search_spaces = {
-        'learning_rate': (0.01, 1.0, 'log-uniform'),
-        'num_leaves': (1, 100),      
-        'max_depth': (0, 50),
-        'min_child_samples': (0, 50),
-        'max_bin': (100, 1000),
-        'subsample': (0.01, 1.0, 'uniform'),
-        'subsample_freq': (0, 10),
-        'colsample_bytree': (0.01, 1.0, 'uniform'),
-        'min_child_weight': (0, 10),
-        'subsample_for_bin': (100000, 500000),
-        'reg_lambda': (1e-9, 1000, 'log-uniform'),
-        'reg_alpha': (1e-9, 1.0, 'log-uniform'),
-        'scale_pos_weight': (1e-6, 500, 'log-uniform'),
-        'n_estimators': (50, 100),
-    },    
+mdl_tuner = BayesSearchCV(
+    estimator = mdl,
+    search_spaces = grid,    
     scoring = 'roc_auc',
-    cv = sk_ms.StratifiedKFold(
-        n_splits=3,
-        shuffle=True,
-        random_state = 42
-    ),
+    cv = folds,
     n_jobs = 3,
     n_iter = 10,   
     verbose = 0,
@@ -673,57 +471,7 @@ bayes_cv_tuner = BayesSearchCV(
     random_state = 42
 )
 
-result = bayes_cv_tuner.fit(X_train.values, y_train.values)
-
-#v2: XGBoost
-
-bayes_cv_tuner = BayesSearchCV(
-    estimator = xgb.XGBClassifier(
-        n_jobs = 1,
-        objective = 'binary:logistic',
-        eval_metric = 'auc',
-        silent=1,
-        tree_method='approx'
-    ),
-    search_spaces = {
-        'learning_rate': (0.01, 1.0, 'log-uniform'),
-        'min_child_weight': (0, 10),
-        'max_depth': (0, 50),
-        'max_delta_step': (0, 20),
-        'subsample': (0.01, 1.0, 'uniform'),
-        'colsample_bytree': (0.01, 1.0, 'uniform'),
-        'colsample_bylevel': (0.01, 1.0, 'uniform'),
-        'reg_lambda': (1e-9, 1000, 'log-uniform'),
-        'reg_alpha': (1e-9, 1.0, 'log-uniform'),
-        'gamma': (1e-9, 0.5, 'log-uniform'),
-        'min_child_weight': (0, 5),
-        'n_estimators': (50, 100),
-        'scale_pos_weight': (1e-6, 500, 'log-uniform')
-    },    
-    scoring = 'roc_auc',
-    cv = sk_ms.StratifiedKFold(
-        n_splits=3,
-        shuffle=True,
-        random_state=42
-    ),
-    n_jobs = 3,
-    n_iter = 10,   
-    verbose = 0,
-    refit = True,
-    random_state = 42
-)
-
-#v3
-
-param_grid = {
-    'learning_rate': Real(0.005, 0.1), 'n_estimators': Integer(10, 500),
-    'num_leaves': Integer(6, 50), 'boosting_type' : Categorical(['gbdt', 'rf']),
-    'colsample_bytree' : Real(0.65, 1), 'subsample' : Real(0.7, 0.9),
-    'reg_alpha' : Real(0, 1.2), 'reg_lambda' : Real(0, 2),
-    }
-
-clf_tuned = BayesSearchCV(clf, param_grid, cv = 5, random_state = 8, scoring = 'f1', n_jobs = -1)
-
+result = mdl_tuner.fit(X_train.values, y_train.values)
 ```
 
 ## Pyspark
@@ -1132,25 +880,5 @@ metrics <- network %>% evaluate(test_images, test_labels)
 #predictions = model.predict(pred_data)
 
 #Calculate predicted probability of survival
-predicted_prob_true = predictions[:, 1]
+#predicted_prob_true = predictions[:, 1]
 ```
-
-## MNIST Example
-
-```{python, eval = F}
-import matplotlib.pyplot as plt
-from sklearn import datasets
-from sklearn import svm
-
-digits = datasets.load_digits()
-#print(digits.data)
-#print(digits.target)
-print(digits.images[0])
-clf = svm.SVC(gamma=.001,C=100)
-x, y = digits.data[:-10], digits.target[:-10]
-clf.fit(x,y)
-print("Prediction: ", clf.predict(digits.data[-2].reshape(1, -1)))
-plt.imshow(digits.images[-2], cmap=plt.cm.gray_r, interpolation="nearest")
-plt.show()
-```
-

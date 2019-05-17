@@ -36,53 +36,51 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 ### Preparation
 
-- [x] Understand the business question, goals, and measures of success.
+- [ ] Understand the business question, goals, and measures of success.
 
-- [ ] See if the data to answer the question exists, and if it is useful.
+- [ ] See if the data to answer the question exists and if it is useful.
 
 - [ ] Structure project as user stories 
 
 ### Import-Tidy-Transform-Visualize
 
-- [ ] See what the data looks like: types of variables, the first and last few observations, missing values, blank space, and outliers. Quick Exploration Guide: S.O.C.S (Shape, Outlier, Center, Spread). 
+- [ ] See what the data looks like by shape, outliers, center, and spread, the types of variables, first and last few observations, and check for missing and blank values.
 
-- [ ] Also Trendlines & Histograms
+- [ ] Plot scatterplots, overlayed density plots, trendlines, and histograms.
 
-- [ ] Compare the distributions of variables with overlayed density plots 
-
-- [ ] Scatterplots: Pairwise and color/size the dots by other variables to try to identify any confounding relationships.
-
-- [ ] Outlier Detection: interquartile range, kernel density estimation, bonferroni test
-
-- [ ] Dimensionality reduction or hierarchical clustering for multivariate data to get a feel for high dimensional structure.
+- [ ] Dimensionality reduction or hierarchical clustering to get a feel for high dimensional structure.
 
 ### Model
 
-- [ ] Pre-processing - Feature Selection & Engineering: Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python. 
+- [ ] Pre-processing - Feature Selection & Engineering
 
-- [ ] Create model ensembles
+- [ ] Check model assumptions
 
-- [ ] Do model tuning
+- [ ] Model ensembles
+
+- [ ] Model tuning
 
 - [ ] Look at confidence intervals
 
-- [ ] Model Explanability
+- [ ] Model explanability
 
 - [ ] Look at learning curves
 
 ## Communicate 
 
-### Deploy
-
-- [ ] Pipelines & feature Unions for model deployment
-
-### Maintain
+### Deploy & Maintain
 
 ## Resources
 
 Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/)
 
+[Common Scripts](http://chrisalbon.com/)
+
 [Search](https://toolbox.google.com/datasetsearch)
+
+https://pair-code.github.io/what-if-tool/
+
+https://ropensci.org/
 
 https://nextjournal.com/
 
@@ -128,7 +126,7 @@ Transform: dplyr data.table
 
 Visualization: ggplot2
 
-Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic & bayesian ml, rl, ga & gp: symbolic regression, es
+Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic & bayesian ml, rl, ga & gp: symbolic regression, es, gams, statsmodels
 
 Communicate: rmarkdown 
 

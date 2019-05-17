@@ -149,6 +149,8 @@ ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_P
 
 ### Feature Engineering
 
+Cyclical Features: Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
+
 encode missingness a a feature
 
 robust scaler python: median & quantiles
@@ -181,6 +183,8 @@ Synthesize new minority classes.
 * Sklearn example:`mdl = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')`
 
 ### Feature Selection
+
+Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
 
 * Variance Threshold: Use this to exclude features that don't meet a variance threshold.
  
