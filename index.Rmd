@@ -54,6 +54,8 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Pre-processing - Feature Selection & Engineering
 
+- [ ] Check relationships between features and target: scatterplots and chi-squared test
+
 - [ ] Check model assumptions
 
 - [ ] Model ensembles
@@ -62,7 +64,7 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Look at confidence intervals
 
-- [ ] Model explanability
+- [ ] Model explanability and variable importance
 
 - [ ] Look at learning curves
 
@@ -77,6 +79,8 @@ Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](htt
 [Common Scripts](http://chrisalbon.com/)
 
 [Search](https://toolbox.google.com/datasetsearch)
+
+https://www.openmined.org/
 
 https://pair-code.github.io/what-if-tool/
 

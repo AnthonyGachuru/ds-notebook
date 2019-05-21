@@ -10,6 +10,8 @@ Make codebooks
 
 Sample from data if its too large
 
+Apache Arrow
+
 https://www.webscraper.io/documentation#open-web-scraper
 
 [pdf table extraction](https://tabula.technology)

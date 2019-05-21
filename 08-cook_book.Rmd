@@ -23,58 +23,6 @@ mtcars %>% group_by(cyl) %>% nest() %>%
 mutate(model = map(data, function(x) lm(mpg ~ ., data = x) ))
 ```
 
-## Rpy2 Ipynb
-
-```{python, eval = F}
-import numpy as np 
-import pandas as pd
-
-import rpy2.robjects
-from rpy2.robjects import r, pandas2ri
-from rpy2.robjects.packages import importr
-
-# base = importr('base') # not working for some weird issue
-# %load_ext rpy2.ipython
-
-stats = importr('stats')
-
-pandas2ri.activate()
-
-r['mtcars'].head()
-
-iris = pd.read_csv("https://bit.ly/2ow0oJO")
-test = iris.copy()
-test.columns  = ["Sepal.Length", "Sepal.Width",  "Petal.Length", "Petal.Width", "Species"]
-rdf = pandas2ri.py2rpy_pandasdataframe(test)
-
-rpy2.robjects.r('''
-f <- function() {
-    model = load("rgr_iris.rda")
-    #predict(get(model), X)
-    return(get(model))
-    }
-''')
-
-r_f = rpy2.robjects.r['f']
-mdl1 = r_f() 
-stats.predict(mdl1, test)
-
-#----------------------------------------------------------
-
-# %%R -i df -o model -w 5 -h 5 --units in -r 200
-# import df from global environment
-# make default figure size 5 by 5 inches with 200 dpi resolution
-
-#library(ggplot2)
-#library(stats)
-
-#ggplot(df, aes(x=cups_of_coffee, y=productivity)) + geom_line()
-#model =  lm("Petal.Length ~ . - Species", iris)
-
-#----------------------------------------------------------
-preds2 = stats.predict(model, test)
-```
-
 ## Symbolic Regression
 
 ```{python, eval = F}
@@ -99,11 +47,9 @@ for old_value, new_value in mapping_dict.items():
 
 Notes on the talk by Jake Vanderplas. I left out bootstrap and cross validation below. For all methods look out for selection bias and make sure you have representative samples. More on the bootstrap: These are simulated confidence intervals that work well for n > 20 as a rule of thumb.
 
-**Direct Simulation**
-
-Works well with an apriori (generative) model of the world, like the probability distribution of a coin toss. Example: Flip a fair coin 30 times. How likely it is to see 22 heads?
-
 ```{r, eval = F}
+# Direct Simulation: Works well with an apriori (generative) model of the world, like the probability distribution of a coin toss. Example: Flip a fair coin 30 times. How likely it is to see 22 heads?
+
 n <- 10^6
 h_a <- 22
 result <- purrr::map(seq(1, n, 1), 
@@ -111,19 +57,13 @@ result <- purrr::map(seq(1, n, 1),
   unlist() %>% sum()
 
 result/n
-```
 
-**Shuffling**
+# Shuffling: Comparing groups
 
-Comparing groups
-
-```{r, eval = F}
 iris_100 <- iris[1:100, c(2,5)]
 (t.test(iris_100[1:50, 1], iris_100[51:100, 1], 
        alternative = 'greater'))$p.value
-```
 
-```{r, eval = F}
 ha_shuffle <- function(df){
   
   result <- df %>% 
@@ -150,26 +90,8 @@ result <- purrr::map(seq(1, n, 1), ~ ha_shuffle(iris_100)) %>%
   unlist() %>% sum()
 
 result/n
-```
 
-## Simple Bayes
-
-```{python, eval = FALSE}
-# Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
-
-from numpy.random import beta as beta_dist
-import numpy as np
-
-N_samp = 10000 #number of samples to draw
-clicks_A = 450
-views_A = 56000
-clicks_B = 345
-views_B = 49000
-alpha = 1.1
-beta = 14.2
-
-A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
-B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+# He discussed cross validation as a third method
 ```
 
 ## TS Harmonic Regression
@@ -191,8 +113,8 @@ autoplot(fc)
 from sklearn.externals import joblib
 
 joblib.dump(grid_search, 'model.pkl')
-
 grid_search = joblib.load('model.pkl')
+
 model = grid_search.best_estimator_
 ```
 
@@ -210,27 +132,9 @@ data_x = np.array([
     [[1, 2, 3], [4, 5, 6]],
     # Datapoint 2
     [[7, 8, 9], [10, 11, 12]]])
-```
-
-```{python, eval = F}
+    
 # Prediction Example
 mdl.predict([[np.array([.5, .6, .6] + [0 for i in range(14)]).reshape((17, 1))]])[0]
-```
-
-## Logistic Regression Stats Models
-
-```{python, eval = FALSE}
-import statsmodels.api as sm
-
-X = sm.add_constant(X)
-clf_lr = sm.Logit(Y, X).fit(disp=False)
-print(results.summary())
-```
-
-## Plot Grid 
-
-```{r, eval = F}
-gridExtra::grid.arrange(plots[[1]],plots[[2]],plots[[3]], plots[[4]],plots[[5]],plots[[6]], nrow=3)
 ```
 
 ## Pairwise Scatterplot
@@ -252,7 +156,7 @@ where_diff = TableB.Key.isin(key_diff)
 TableA.append(TableB[where_diff], ignore_index=True)
 ```
 
-## DF Diff
+## Df Diff
 
 ```{python, eval = F}
 # https://stackoverflow.com/a/36893675/6627726
@@ -261,31 +165,10 @@ merged = df1.merge(df2, indicator=True, how='outer')
 merged[merged['_merge'] == 'right_only']
 ```
 
-## CSV Encoding Check
-
-```{python, eval = F}
-import chardet
-
-with open("../input/kickstarter-projects/ks-projects-201801.csv", 'rb') as rawdata:
-    result = chardet.detect(rawdata.read(10000))
-```
-
-## Pandas Profiling
-
-```{python, eval = F}
-import pandas_profiling
-
-pandas_profiling.ProfileReport(data)
-```
-
 ## Read SQL 
 
 ```{r, eval = F}
 df <- dbGetQuery(con, statement = read_file('query.sql'))
-```
-
-```{sql, eval = F}
-SELECT 'Dummy Column Text' as DUMMYCOL FROM tbl
 ```
 
 ## Extract Date
@@ -296,10 +179,10 @@ YearMonth = Day %>% strftime(format="%Y-%m")
 date = date %>% as.POSIXct() %>% strptime('%Y-%m-%d') %>% strftime(format="%Y-%m-%d")
 ```
 
-## GGPLOT To Plotly
+## GGplot To Plotly
 
 ```{r, eval = F}
-ggplotly(ggplot(filter(df_master2, group == x), aes(x,y, label = z, color = w)) +
+ggplotly(ggplot(df), aes(x, y, label = z, color = w)) +
         geom_jitter(width = .2), tooltip = c('y', 'label'))
 ```
 
@@ -316,27 +199,6 @@ theme_ilo <- function() {
             plot.margin = unit(c(5, 10, 5, 10), units = "mm")
         )
 }
-```
-
-## Linear Regression Statsmodels
-
-```{python, eval = F}
-import statsmodels.api as sm
-
-X = sm.add_constant(X)
-mdl = sm.OLS(Y, X).fit(disp = False)
-
-print(mdl.summary())
-```
-
-## RML Pipeline
-
-```{r, eval = F}
-# categorical comparison to target
-chisq.test(table(cut(iris$Sepal.Length, 3), iris$Species))
-
-# Variable Importance
-varImp
 ```
 
 ## Rowwise
@@ -388,7 +250,7 @@ subsample -s 8 -n 100000 test.csv -r > test_sample.csv
 ## Featuretools
 
 ```{python, eval = F}
-#https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table
+# https://stackoverflow.com/questions/50145953/how-to-apply-deep-feature-synthesis-to-a-single-table
 
 import numpy as np
 import pandas as pd
@@ -420,6 +282,7 @@ _, features2 = ft.dfs(
 
 ```{python, eval = F}
 import shap
+import matplotlib.pyplot as plt
 
 mdl.fit(X_train, y_train)
 explainer = shap.TreeExplainer(clf)
@@ -435,9 +298,6 @@ df_shap = df_shap[['feature', 'shap_mean']]
 
 df_shap['shap_mean_abs'] = np.absolute(df_shap['shap_mean'])
 df_shap.sort_values(['shap_mean_abs'], ascending = False, inplace = True)
-
-import shap
-import matplotlib.pyplot as plt
 
 attribution_data = np.array(train_data[:50])
 explainer = shap.DeepExplainer(model, attribution_data)
@@ -459,18 +319,9 @@ from scipy.stats import randint as sp_randint
 from skopt import BayesSearchCV
 from skopt.space import Real, Integer, Categorical
 
-mdl_tuner = BayesSearchCV(
-    estimator = mdl,
-    search_spaces = grid,    
-    scoring = 'roc_auc',
-    cv = folds,
-    n_jobs = 3,
-    n_iter = 10,   
-    verbose = 0,
-    refit = True,
-    random_state = 42
-)
-
+mdl_tuner = BayesSearchCV(estimator = mdl, search_spaces = grid, scoring = 'roc_auc',
+                          cv = folds, random_state = 8)
+                          
 result = mdl_tuner.fit(X_train.values, y_train.values)
 ```
 
@@ -478,70 +329,125 @@ result = mdl_tuner.fit(X_train.values, y_train.values)
 
 ```{python, eval = FALSE}
 # Cheatsheet: https://www.qubole.com/resources/pyspark-cheatsheet/
+
 # Spark only handles numeric data. 
+
 # selectExpr() takes SQL expressions as a string.
+
 # Spark's assumes the target is called 'label' in ML. Everything else is a feature.
+
 # Estimator classes are for modeling and all implement a .fit() method. eg. StringIndexerModel for including categorical data saved as strings in your models
+
 # It's important to split the data after all the transformations because operations like StringIndexer don't always produce the same index even when given the same list of strings.
 
-import findspark
-findspark.init()
+# Import
 
 import findspark
 findspark.init()
-import pyspark
-import random
 
 import pyspark
 from pyspark.sql import SparkSession
-
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
 from pyspark.ml import Pipeline
 from pyspark.ml.classification import LogisticRegression
 import pyspark.ml.evaluation as evals
 import pyspark.ml.tuning as tune
-import numpy as np
-
-import pyspark
-from pyspark.sql import SparkSession
-
 import pyspark.sql.functions as F
-from pyspark.ml import Pipeline
-from pyspark.ml.classification import LogisticRegression
-import pyspark.ml.evaluation as evals
-import pyspark.ml.tuning as tune
 
 sc = pyspark.SparkContext()
 spark = SparkSession.builder.getOrCreate() # SparkSession.builder.appName('chosenName').getOrCreate()
 
-sc = pyspark.SparkContext()
-spark = SparkSession.builder.appName('example').getOrCreate()
+# Approximate Pi
 
-
-sc = pyspark.SparkContext(appName="Pi")
-num_samples = 100000000
 def inside(p):     
     x, y = random.random(), random.random()
     return x*x + y*y < 1
+    
+num_samples = 100000000
 count = sc.parallelize(range(0, num_samples)).filter(inside).count()
 pi = 4 * count / num_samples
+
 print(pi)
 
 df = spark.read.csv('data.csv', header = True)
+#df = spark.read.format("csv").option("header","true").option("inferSchema","true").load("john_doe.csv")
+
 df.show(5)
 df.columns
 
+# Transform
+
+## List tables
+spark.catalog.listTables()
+
+# Access and display data
+flights10 = spark.sql("FROM flights SELECT * LIMIT 10")
+flights10.show()
+
+# Cast
+df['g'] = df['g'].astype(str)
+
+# Spark df to pandas and vice versa
+spark_temp = spark.createDataFrame(pd_temp) # toPandas()
+
+# Add to the catalog
+spark_temp.createOrReplaceTempView("temp")
+
+# Create the DataFrame flights
+flights = spark.table('flights')
+
+# Get column names
+spark_df.schema.names
+spark_df.printSchema()
+
+# Filter
+# takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string
+long_flights1 = flights.filter('distance > 1000')
+long_flights2 = flights.filter(flights.distance > 1000)
+model_data = model_data.filter("arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL")
+
+# Groupby
+flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
+flights.filter(flights.carrier=='DL').filter(flights.origin=='SEA').groupBy().avg('air_time').show()
+flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum('duration_hrs').show()
+
+# Spark functions
+by_month_dest.agg(F.stddev('dep_delay')).show()
+
+# Drop column
+final_test_data.drop('State')
+
+# Dummying
+
+# The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a new DataFrame with a numeric column corresponding to the string column. The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer
+
+# Create a StringIndexer
+carr_indexer = StringIndexer(inputCol="carrier", outputCol="carrier_index")
+
+# Create a OneHotEncoder
+carr_encoder = OneHotEncoder(inputCol="carrier_index", outputCol="carrier_fact")
+
+# Make a VectorAssembler
+vec_assembler = VectorAssembler(inputCols = ["carrier_fact", "dest_fact", "plane_age"], outputCol = "features")
+
+## Import & Make Pipeline
+flights_pipe = Pipeline(stages=[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
+
+## Fit and transform the data
+piped_data = flights_pipe.fit(model_data).transform(model_data)
+
 # Preprocessing
 
+# Mutate
 df = df.withColumn("label", df["target"].cast('integer'))
-
-scf_indexer = StringIndexer(inputCol = "some_cat_feature", outputCol = "some_cat_feature_index")
-scf_encoder = OneHotEncoder(inputCol = "some_cat_feature_index", outputCol = "some_cat_feature_fact")
+#df = df.withColumn("newCol", df.oldCol + 1)
+#model_data = model_data.withColumn("plane_age", model_data.year - model_data.plane_year)
 
 feature_cols = ["some list of column names"]
 
-vec_assembler = VectorAssembler(inputCols = feature_cols, 
-                                outputCol = "features")
+scf_indexer = StringIndexer(inputCol = "some_cat_feature", outputCol = "some_cat_feature_index")
+scf_encoder = OneHotEncoder(inputCol = "some_cat_feature_index", outputCol = "some_cat_feature_fact")
+vec_assembler = VectorAssembler(inputCols = feature_cols, outputCol = "features")
 
 pipe = Pipeline(stages = [scf_indexer, scf_encoder, vec_assembler])
 
@@ -550,140 +456,21 @@ training, test = piped_data.randomSplit([.8, .2])
 
 # Model
 
-clf_lr = LogisticRegression()
+mdl = LogisticRegression()
 evaluator = evals.BinaryClassificationEvaluator(metricName = "areaUnderROC")
 
 grid = tune.ParamGridBuilder()
-grid = grid.addGrid(clf_lr.regParam, np.arange(0, .1, .01))
-grid = grid.addGrid(clf_lr.elasticNetParam, [0, 1])
+grid = grid.addGrid(mdl.regParam, np.arange(0, .1, .01))
+grid = grid.addGrid(mdl.elasticNetParam, [0, 1])
 grid = grid.build()
 
-clf_lr_cv = tune.CrossValidator(
-    estimator = clf_lr,
-    estimatorParamMaps = grid,
-    evaluator = evaluator,
-    numFolds = 5
-               )
+cv_results = tune.CrossValidator(estimator = mdl, estimatorParamMaps = grid,
+                                 evaluator = evaluator, numFolds = 5)
 
-best_clf_lr = clf_lr_cv.fit(training).bestModel
-results = best_clf_lr.transform(training)
+mdl_best = cv_results.fit(training).bestModel
+results = mdl_best.transform(training)
+
 print(evaluator.evaluate(results))
-
-## List tables
-spark.catalog.listTables()
-
-## Access and display data
-query = "FROM flights SELECT * LIMIT 10"
-flights10 = spark.sql(query)
-flights10.show()
-
-## Cast
-df['g'] = df['g'].astype(str)
-
-## Read from csv
-df= spark.read.csv(file_path, header = True)
-df = spark.read.csv('fileNameWithPath', mode="DROPMALFORMED",inferSchema=True, header = True)
-df = spark.read.format("csv").option("header","true").option("inferSchema","true").load("john_doe.csv")
-
-## Spark df to pandas and vice versa
-toPandas()
-spark_temp = spark.createDataFrame(pd_temp)
-
-## Add to the catalog
-spark_temp.createOrReplaceTempView("temp")
-
-## Mutate
-df = df.withColumn("newCol", df.oldCol + 1)
-model_data = model_data.withColumn("arr_delay", model_data.arr_delay.cast('integer'))
-model_data = model_data.withColumn("plane_age", model_data.year - model_data.plane_year)
-
-## Create the DataFrame flights
-flights = spark.table('flights')
-
-## Get column names
-spark_df.schema.names
-spark_df.printSchema()
-
-## Filter: takes either a Spark Column of boolean (True/False) values or the WHERE clause of a SQL expression as a string
-long_flights1 = flights.filter('distance > 1000')
-long_flights2 = flights.filter(flights.distance > 1000)
-model_data = model_data.filter("arr_delay is not NULL and dep_delay is not NULL and air_time is not NULL and plane_year is not NULL")
-
-## Groupby examples
-flights.filter(flights.origin == "PDX").groupBy().min("distance").show()
-flights.filter(flights.carrier=='DL').filter(flights.origin=='SEA').groupBy().avg('air_time').show()
-flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum('duration_hrs').show()
-
-## Spark functions
-by_month_dest.agg(F.stddev('dep_delay')).show()
-
-## Drop column
-final_test_data.drop('State')
-
-## Dummying
-
-#The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are #Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the #Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a #new DataFrame with a numeric column corresponding to the string column.
-
-#The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer
-
-## Create a StringIndexer
-carr_indexer = StringIndexer(inputCol="carrier", outputCol="carrier_index")
-
-## Create a OneHotEncoder
-carr_encoder = OneHotEncoder(inputCol="carrier_index", outputCol="carrier_fact")
-
-## Make a VectorAssembler
-vec_assembler = VectorAssembler(inputCols=["month", "air_time", "carrier_fact", "dest_fact", "plane_age"], outputCol="features")
-
-## Import & Make Pipeline
-flights_pipe = Pipeline(stages=[dest_indexer, dest_encoder, carr_indexer, carr_encoder, vec_assembler])
-
-## Fit and transform the data
-piped_data = flights_pipe.fit(model_data).transform(model_data)
-
-## Train-test split
-training, test = piped_data.randomSplit([.6, .4])
-
-## Tuning & Selection
-
-## Import LogisticRegression
-
-## Create a LogisticRegression Estimator
-lr = LogisticRegression()
-
-## Create a BinaryClassificationEvaluator
-evaluator = evals.BinaryClassificationEvaluator(metricName="areaUnderROC")
-
-## Import the tuning submodule
-
-## Create the parameter grid
-grid = tune.ParamGridBuilder()
-
-## Add the hyperparameter
-grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01))
-grid = grid.addGrid(lr.elasticNetParam, [0, 1])
-
-## Build the grid
-grid = grid.build()
-
-## Create the CrossValidator
-cv = tune.CrossValidator(
-estimator=lr,
-estimatorParamMaps=grid,
-evaluator=evaluator
-               )
-
-## Fit cross validation models
-models = cv.fit(training)
-
-## Extract the best model
-best_lr = models.bestModel
-
-## Use the model to predict the test set
-test_results = best_lr.transform(test)
-
-## Evaluate the predictions
-print(evaluator.evaluate(test_results))
 
 sc.stop()
 ```
@@ -691,9 +478,10 @@ sc.stop()
 ## Sparklyr
 
 ```{r, eval = FALSE}
-# feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
-
 library(sparklyr)
+
+# feature transforms: ft_, ml functions: ml_, spark df functions: sdf_
+# spark: src, ft, ml, sdf, new_ml, spark, stream, compute & collect spark
 
 sc <- spark_connect(master="local")
 config <- spark_config()
@@ -703,38 +491,25 @@ config$spark.executor.memory <- "25G"
 flights <- copy_to(sc, flights, "flights")
 src_tbls(sc)
 
-iris_tbl %>%
-  spark_apply(
-    function(e) summary(lm(Petal_Length ~ Petal_Width, e))$r.squared,
-    names = "r.squared",
-    group_by = "Species")
+spark_apply(iris_tbl, 
+            function(e) summary(lm(Petal_Length ~ Petal_Width, e))$r.squared, 
+            names = "r.squared",
+            group_by = "Species")
 
-
-## Connect to your Spark cluster
-spark_conn <- spark_connect(master = "local")
-
-## Print the version of Spark
-spark_version(sc = spark_conn)
-
-## Disconnect from Spark
-spark_disconnect(sc = spark_conn)
-
-## See tables
-src_tbls(sc)
-
-## Copy track_metadata to Spark
-track_metadata_tbl <- copy_to(spark_conn, track_metadata)
+final <- names %>%
+  spark_dataframe() %>%
+  sqlfunction(sc, "SELECT * FROM test") %>%
+  sdf_register("name5")
 
 ## Print 5 rows, all columns
 print(track_metadata_tbl, n = 5, width = Inf)
 
 ## Write and run SQL query
 query <- "SELECT * FROM track_metadata WHERE year < 1935 AND duration > 300"
-(results <- dbGetQuery(spark_conn, query))
+results <- dbGetQuery(sc, query)
 
 ## General transformation structure and example
-a_tibble %>%
-  ft_some_transformation("x", "y", some_other_args)
+df <- ft_some_transformation(df, "x", "y", some_other_args)
 
 hotttnesss <- track_metadata_tbl %>%
   # Select artist_hotttnesss
@@ -749,22 +524,14 @@ hotttnesss <- track_metadata_tbl %>%
 ## Get and transform the schema
 
 (schema <- sdf_schema(track_metadata_tbl))
-schema %>%
-  lapply(function(x) do.call(data_frame, x)) %>%
-  bind_rows()
+schema %>% lapply(function(x) do.call(data_frame, x)) %>% bind_rows()
 
 ## Train-test split
-partitioned <- track_metadata_tbl %>%
-  sdf_partition(training = 0.7, testing = 0.3)
+partitioned <- sdf_partition(df, training = 0.7, testing = 0.3)
 
-## List ml functions
-ls("package:sparklyr", pattern = "^ml")
+## gradient boosted trees model Example
 
-## GBT Example
-
-gradient_boosted_trees_model <- track_data_to_model_tbl %>%
-  # Run the gradient boosted trees model
-   ml_gradient_boosted_trees('year', feature_colnames)
+gradient_boosted_trees_model <- ml_gradient_boosted_trees(df, 'year', feature_colnames)
 
 responses <- track_data_to_predict_tbl %>%
   # Select the year column
@@ -772,13 +539,7 @@ responses <- track_data_to_predict_tbl %>%
   # Collect the results
   collect() %>%
   # Add in the predictions
-  mutate(
-    predicted_year = predict(
-      gradient_boosted_trees_model,
-      track_data_to_predict_tbl
-    )
-  )
-
+  mutate(predicted_year = predict(gradient_boosted_trees_model, track_data_to_predict_tbl))
 
 spark_disconnect(sc)
 ```
@@ -829,9 +590,6 @@ network %>%
   fit(train_images, train_labels, epochs = 5, batch_size = 128)
 
 metrics <- network %>% evaluate(test_images, test_labels)
-```
-
-```{python, eval = FALSE}
 
 #import keras
 #from keras.layers import Dense

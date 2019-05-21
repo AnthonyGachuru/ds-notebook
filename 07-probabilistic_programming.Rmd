@@ -12,6 +12,26 @@ Posterior P(theta|D):  Credibility of the parameter value with the data taken in
 
 Marginal Likelihood (Evidence): Probability of evidence
 
+## Simple Bayes
+
+```{python, eval = FALSE}
+# Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
+
+from numpy.random import beta as beta_dist
+import numpy as np
+
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
 ## Other
 
 https://causal.app/
@@ -92,7 +112,7 @@ Bayesian Inference Methods: Sampling, Grid Approximation
 
 ## Causality
 
-## General
+### General
 
 [Causality & DL](https://twitter.com/tdietterich/status/1034631407904018437)
 
@@ -104,7 +124,7 @@ http://causalinference.gitlab.io/icwsm-tutorial/
 
 http://causalinference.gitlab.io/dowhy/do_why_simple_example.html
 
-## Causality edX
+### Causality edX
 
 Draw a complete DAG if your expert knowledge is insufficient to exclude any possible effect.
 Knowledge is expressed in the form of missing arrows.
@@ -139,7 +159,6 @@ Bias introduced by association by chance can be removed by increasing the sample
 A (parent) -> B (descendant)
 
 D(irectionally)-separation rules: Determine whether paths (which don't need to follow arrows) are blocked or open. 
-
 D-separation rules:
 
 1. If there are no variables being conditioned on, a path is blocked iff two arrows on the path collide at some
