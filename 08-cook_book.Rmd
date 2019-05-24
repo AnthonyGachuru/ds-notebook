@@ -1,5 +1,49 @@
 # Codebook 
 
+```{python, eval = F}
+def objective(trial):    
+    
+    #joblib.dump(study, 'study.pkl')
+    
+    lr = trial.suggest_uniform('learning_rate', 0.01, 1.0)
+    nl = trial.suggest_int('num_leaves', 1, 100) 
+    md = trial.suggest_int('max_depth', 0, 50) 
+    mcs = trial.suggest_int('min_child_samples', 0, 50) 
+    mb = trial.suggest_int('max_bin', 100, 1000) 
+    ss = trial.suggest_uniform('subsample', 0.01, 1.0)
+    ssf = trial.suggest_int('subsample_freq', 0, 10) 
+    csbt = trial.suggest_uniform('subsample', 0.01, 1.0)
+    mcw = trial.suggest_int('min_child_weight', 0, 10) 
+    ssfb = trial.suggest_int('subsample_for_bin', 100000, 500000) 
+    rl = trial.suggest_loguniform('reg_lambda', 1e-9, 1000)
+    ra = trial.suggest_loguniform('reg_alpha', 1e-9, 1.0)
+    spw = trial.suggest_loguniform('scale_pos_weight', 1e-6, 500)
+    ne = trial.suggest_int('n_estimators', 50, 100)
+    
+    grid = {'learning_rate': lr,
+            'num_leaves': nl, 
+            'max_depth': md, 
+            'min_child_samples': mcs,
+            'max_bin': mb, 
+            'subsample': ss,
+            'subsample_freq': ssf, 
+            'colsample_bytree': csbt,
+            'min_child_weight': mcw,
+            'subsample_for_bin': ssfb,
+            'reg_lambda': rl,
+            'reg_alpha': ra ,
+            'scale_pos_weight': spw,
+            'n_estimators': ne}
+    
+    mdl.set_params(**grid)
+
+    return(np.mean(sk_ms.cross_val_score(mdl, X_train, y_train, cv = 5)))
+
+study = optuna.create_study()
+study.optimize(objective, timeout = 10)
+```
+
+
 ## Mixed Effect Regression
 
 ```{python, eval = F}

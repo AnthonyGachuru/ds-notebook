@@ -191,7 +191,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>4</b> Communicate, Deploy, Maintain</a><ul>
 <li class="chapter" data-level="4.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>4.1</b> Communicate</a></li>
-<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploymaintain"><i class="fa fa-check"></i><b>4.2</b> Deploy/Maintain</a></li>
+<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>4.2</b> Maintain</a></li>
+<li class="chapter" data-level="4.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>4.3</b> Deploy</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Stats</a><ul>
 <li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#general-3"><i class="fa fa-check"></i><b>5.1</b> General</a></li>
@@ -282,6 +283,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="codebook" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Codebook</h1>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> objective(trial):    
+    
+    <span class="co">#joblib.dump(study, &#39;study.pkl&#39;)</span>
+    
+    lr <span class="op">=</span> trial.suggest_uniform(<span class="st">&#39;learning_rate&#39;</span>, <span class="fl">0.01</span>, <span class="fl">1.0</span>)
+    nl <span class="op">=</span> trial.suggest_int(<span class="st">&#39;num_leaves&#39;</span>, <span class="dv">1</span>, <span class="dv">100</span>) 
+    md <span class="op">=</span> trial.suggest_int(<span class="st">&#39;max_depth&#39;</span>, <span class="dv">0</span>, <span class="dv">50</span>) 
+    mcs <span class="op">=</span> trial.suggest_int(<span class="st">&#39;min_child_samples&#39;</span>, <span class="dv">0</span>, <span class="dv">50</span>) 
+    mb <span class="op">=</span> trial.suggest_int(<span class="st">&#39;max_bin&#39;</span>, <span class="dv">100</span>, <span class="dv">1000</span>) 
+    ss <span class="op">=</span> trial.suggest_uniform(<span class="st">&#39;subsample&#39;</span>, <span class="fl">0.01</span>, <span class="fl">1.0</span>)
+    ssf <span class="op">=</span> trial.suggest_int(<span class="st">&#39;subsample_freq&#39;</span>, <span class="dv">0</span>, <span class="dv">10</span>) 
+    csbt <span class="op">=</span> trial.suggest_uniform(<span class="st">&#39;subsample&#39;</span>, <span class="fl">0.01</span>, <span class="fl">1.0</span>)
+    mcw <span class="op">=</span> trial.suggest_int(<span class="st">&#39;min_child_weight&#39;</span>, <span class="dv">0</span>, <span class="dv">10</span>) 
+    ssfb <span class="op">=</span> trial.suggest_int(<span class="st">&#39;subsample_for_bin&#39;</span>, <span class="dv">100000</span>, <span class="dv">500000</span>) 
+    rl <span class="op">=</span> trial.suggest_loguniform(<span class="st">&#39;reg_lambda&#39;</span>, <span class="fl">1e-9</span>, <span class="dv">1000</span>)
+    ra <span class="op">=</span> trial.suggest_loguniform(<span class="st">&#39;reg_alpha&#39;</span>, <span class="fl">1e-9</span>, <span class="fl">1.0</span>)
+    spw <span class="op">=</span> trial.suggest_loguniform(<span class="st">&#39;scale_pos_weight&#39;</span>, <span class="fl">1e-6</span>, <span class="dv">500</span>)
+    ne <span class="op">=</span> trial.suggest_int(<span class="st">&#39;n_estimators&#39;</span>, <span class="dv">50</span>, <span class="dv">100</span>)
+    
+    grid <span class="op">=</span> {<span class="st">&#39;learning_rate&#39;</span>: lr,
+            <span class="st">&#39;num_leaves&#39;</span>: nl, 
+            <span class="st">&#39;max_depth&#39;</span>: md, 
+            <span class="st">&#39;min_child_samples&#39;</span>: mcs,
+            <span class="st">&#39;max_bin&#39;</span>: mb, 
+            <span class="st">&#39;subsample&#39;</span>: ss,
+            <span class="st">&#39;subsample_freq&#39;</span>: ssf, 
+            <span class="st">&#39;colsample_bytree&#39;</span>: csbt,
+            <span class="st">&#39;min_child_weight&#39;</span>: mcw,
+            <span class="st">&#39;subsample_for_bin&#39;</span>: ssfb,
+            <span class="st">&#39;reg_lambda&#39;</span>: rl,
+            <span class="st">&#39;reg_alpha&#39;</span>: ra ,
+            <span class="st">&#39;scale_pos_weight&#39;</span>: spw,
+            <span class="st">&#39;n_estimators&#39;</span>: ne}
+    
+    mdl.set_params(<span class="op">**</span>grid)
+
+    <span class="cf">return</span>(np.mean(sk_ms.cross_val_score(mdl, X_train, y_train, cv <span class="op">=</span> <span class="dv">5</span>)))
+
+study <span class="op">=</span> optuna.create_study()
+study.optimize(objective, timeout <span class="op">=</span> <span class="dv">10</span>)</code></pre>
 <div id="mixed-effect-regression" class="section level2">
 <h2><span class="header-section-number">9.1</span> Mixed Effect Regression</h2>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> statsmodels.api <span class="im">as</span> sm

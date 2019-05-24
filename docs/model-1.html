@@ -191,7 +191,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>4</b> Communicate, Deploy, Maintain</a><ul>
 <li class="chapter" data-level="4.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>4.1</b> Communicate</a></li>
-<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploymaintain"><i class="fa fa-check"></i><b>4.2</b> Deploy/Maintain</a></li>
+<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>4.2</b> Maintain</a></li>
+<li class="chapter" data-level="4.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>4.3</b> Deploy</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Stats</a><ul>
 <li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#general-3"><i class="fa fa-check"></i><b>5.1</b> General</a></li>
@@ -465,6 +466,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><a href="http://hunch.net/?p=224">Model Comparison</a></p></li>
 </ul>
 <p>Use SHAP for Model Explanability</p>
+<p>Adversarial validation: Makes it easier to check distribution changes over time for train and validation/test data. Combine train and valid/test data into one dataframe, assign labels 1 and 0 to different data and build a binary classification model. If it has high AUC, then there are variables, which separate train and test data - this means that their distributions are quite difference. So you can take top features by feature importance (or other metric) and drop them (at first look at them of course) to make models more stable.</p>
+<p>summary and plot for r models</p>
+<p>optuna: <a href="https://towardsdatascience.com/how-to-make-your-model-awesome-with-optuna-b56d490368af" class="uri">https://towardsdatascience.com/how-to-make-your-model-awesome-with-optuna-b56d490368af</a> | <a href="https://github.com/PiotrekGa/optuna_article/blob/master/Example.ipynb" class="uri">https://github.com/PiotrekGa/optuna_article/blob/master/Example.ipynb</a></p>
 </div>
 <div id="supervised" class="section level2">
 <h2><span class="header-section-number">3.3</span> Supervised</h2>

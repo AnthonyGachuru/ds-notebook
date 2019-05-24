@@ -233,6 +233,8 @@ Auto Data Science: \href{http://holoviews.org}{Visualize} \textbar{} \href{https
 
 \url{https://www.openmined.org/}
 
+\url{https://www.hyperscience.com/}
+
 \url{https://pair-code.github.io/what-if-tool/}
 
 \url{https://ropensci.org/}
@@ -928,6 +930,12 @@ tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \textbar{} \href{https://l
 \end{itemize}
 
 Use SHAP for Model Explanability
+
+Adversarial validation: Makes it easier to check distribution changes over time for train and validation/test data. Combine train and valid/test data into one dataframe, assign labels 1 and 0 to different data and build a binary classification model. If it has high AUC, then there are variables, which separate train and test data - this means that their distributions are quite difference. So you can take top features by feature importance (or other metric) and drop them (at first look at them of course) to make models more stable.
+
+summary and plot for r models
+
+optuna: \url{https://towardsdatascience.com/how-to-make-your-model-awesome-with-optuna-b56d490368af} \textbar{} \url{https://github.com/PiotrekGa/optuna_article/blob/master/Example.ipynb}
 
 \hypertarget{supervised}{%
 \section{Supervised}\label{supervised}}
@@ -1855,8 +1863,38 @@ Reference this \href{https://www.dataquest.io/blog/data-science-project-style-gu
 
 appendices \textbar{} post mortems
 
-\hypertarget{deploymaintain}{%
-\section{Deploy/Maintain}\label{deploymaintain}}
+\hypertarget{maintain}{%
+\section{Maintain}\label{maintain}}
+
+Hypothesis
+
+TDD: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3}
+
+design by contract: contracts
+
+property based testing: hypothesis
+
+unit tests: pytest, static typing: mypy
+
+packrat \& conda
+
+A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: \texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}.
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, \textgreater{} environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: \texttt{conda\ env\ create\ -f\ environment.yaml}. This will create a new environment with the same name listed in environment.yaml.
+
+package for helper functions and units tests
+
+\href{https://blog.osteele.com/2008/05/my-git-workflow/}{Git Workflow}
+
+Tests: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3} \textbar{} \href{https://github.com/ericmjl/data-testing-tutorial}{4} \textbar{} \href{http://r-pkgs.had.co.nz/tests.html}{R} \textbar{} pytest/hypothesis
+
+Validation: \href{https://github.com/data-cleaning/validate}{1} \textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{} \href{https://github.com/shawnbrown/datatest}{3}
+
+dvc
+
+\url{https://matrixds.com/} \textbar{} \url{https://www.crestle.com} \textbar{} CoCalc
+
+\hypertarget{deploy}{%
+\section{Deploy}\label{deploy}}
 
 \url{https://mlflow.org/}
 
@@ -1876,11 +1914,7 @@ Apache Airflow
 
 \url{https://cloud.google.com/ai-platform/}
 
-\url{https://www.hyperscience.com/}
-
 \url{https://ropensci.org/technotes/2019/03/18/drake-700/}
-
-\url{https://www.mlflow.org}
 
 \href{https://www.wandb.com/blog/towards-reproducibility}{Weights \& Biases}
 
@@ -1908,34 +1942,9 @@ Ansible
 
 \href{http://content.nexosis.com/twimlai}{Auto Deploy}
 
-TDD: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3}
-
 \href{https://orchestrahq.com}{Model Deployment aaS}
 
-\url{https://dvc.org/}
-
-docker
-
-design by contract: contracts
-
-property based testing: hypothesis
-
-unit tests: pytest, static typing: mypy
-
-packrat \& conda
-
-\url{https://matrixds.com/} \textbar{} \url{https://www.crestle.com} \textbar{} CoCalc
-
-\href{https://blog.osteele.com/2008/05/my-git-workflow/}{Git Workflow}
-
-Tests: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3} \textbar{} \href{https://github.com/ericmjl/data-testing-tutorial}{4} \textbar{} \href{http://r-pkgs.had.co.nz/tests.html}{R} \textbar{} pytest/hypothesis
-
-Validation: \href{https://github.com/data-cleaning/validate}{1} \textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{} \href{https://github.com/shawnbrown/datatest}{3}
-
-A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: \texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}.
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, \textgreater{} environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: \texttt{conda\ env\ create\ -f\ environment.yaml}. This will create a new environment with the same name listed in environment.yaml.
-
-package for helper functions and units tests
+Docker
 
 use makefile to run cmd commands
 
@@ -3204,6 +3213,8 @@ Marginal Likelihood (Evidence): Probability of evidence
 \hypertarget{other-1}{%
 \section{Other}\label{other-1}}
 
+\url{http://brunaw.com/slides/SER2019/talk/pres.html\#1}
+
 \url{https://causal.app/}
 
 \href{https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit\#slide=id.g4254d546f6_0_0}{PyMc3 Quick Intro}
@@ -3460,6 +3471,51 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 
 \hypertarget{codebook}{%
 \chapter{Codebook}\label{codebook}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ objective(trial):    }
+    
+    \CommentTok{#joblib.dump(study, 'study.pkl')}
+    
+\NormalTok{    lr }\OperatorTok{=}\NormalTok{ trial.suggest_uniform(}\StringTok{'learning_rate'}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+\NormalTok{    nl }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'num_leaves'}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{) }
+\NormalTok{    md }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'max_depth'}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{) }
+\NormalTok{    mcs }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'min_child_samples'}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{) }
+\NormalTok{    mb }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'max_bin'}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{1000}\NormalTok{) }
+\NormalTok{    ss }\OperatorTok{=}\NormalTok{ trial.suggest_uniform(}\StringTok{'subsample'}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+\NormalTok{    ssf }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'subsample_freq'}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }
+\NormalTok{    csbt }\OperatorTok{=}\NormalTok{ trial.suggest_uniform(}\StringTok{'subsample'}\NormalTok{, }\FloatTok{0.01}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+\NormalTok{    mcw }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'min_child_weight'}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{) }
+\NormalTok{    ssfb }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'subsample_for_bin'}\NormalTok{, }\DecValTok{100000}\NormalTok{, }\DecValTok{500000}\NormalTok{) }
+\NormalTok{    rl }\OperatorTok{=}\NormalTok{ trial.suggest_loguniform(}\StringTok{'reg_lambda'}\NormalTok{, }\FloatTok{1e-9}\NormalTok{, }\DecValTok{1000}\NormalTok{)}
+\NormalTok{    ra }\OperatorTok{=}\NormalTok{ trial.suggest_loguniform(}\StringTok{'reg_alpha'}\NormalTok{, }\FloatTok{1e-9}\NormalTok{, }\FloatTok{1.0}\NormalTok{)}
+\NormalTok{    spw }\OperatorTok{=}\NormalTok{ trial.suggest_loguniform(}\StringTok{'scale_pos_weight'}\NormalTok{, }\FloatTok{1e-6}\NormalTok{, }\DecValTok{500}\NormalTok{)}
+\NormalTok{    ne }\OperatorTok{=}\NormalTok{ trial.suggest_int(}\StringTok{'n_estimators'}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+    
+\NormalTok{    grid }\OperatorTok{=}\NormalTok{ \{}\StringTok{'learning_rate'}\NormalTok{: lr,}
+            \StringTok{'num_leaves'}\NormalTok{: nl, }
+            \StringTok{'max_depth'}\NormalTok{: md, }
+            \StringTok{'min_child_samples'}\NormalTok{: mcs,}
+            \StringTok{'max_bin'}\NormalTok{: mb, }
+            \StringTok{'subsample'}\NormalTok{: ss,}
+            \StringTok{'subsample_freq'}\NormalTok{: ssf, }
+            \StringTok{'colsample_bytree'}\NormalTok{: csbt,}
+            \StringTok{'min_child_weight'}\NormalTok{: mcw,}
+            \StringTok{'subsample_for_bin'}\NormalTok{: ssfb,}
+            \StringTok{'reg_lambda'}\NormalTok{: rl,}
+            \StringTok{'reg_alpha'}\NormalTok{: ra ,}
+            \StringTok{'scale_pos_weight'}\NormalTok{: spw,}
+            \StringTok{'n_estimators'}\NormalTok{: ne\}}
+    
+\NormalTok{    mdl.set_params(}\OperatorTok{**}\NormalTok{grid)}
+
+    \ControlFlowTok{return}\NormalTok{(np.mean(sk_ms.cross_val_score(mdl, X_train, y_train, cv }\OperatorTok{=} \DecValTok{5}\NormalTok{)))}
+
+\NormalTok{study }\OperatorTok{=}\NormalTok{ optuna.create_study()}
+\NormalTok{study.optimize(objective, timeout }\OperatorTok{=} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{mixed-effect-regression}{%
 \section{Mixed Effect Regression}\label{mixed-effect-regression}}

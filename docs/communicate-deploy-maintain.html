@@ -191,7 +191,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html"><i class="fa fa-check"></i><b>4</b> Communicate, Deploy, Maintain</a><ul>
 <li class="chapter" data-level="4.1" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#communicate-1"><i class="fa fa-check"></i><b>4.1</b> Communicate</a></li>
-<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploymaintain"><i class="fa fa-check"></i><b>4.2</b> Deploy/Maintain</a></li>
+<li class="chapter" data-level="4.2" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#maintain"><i class="fa fa-check"></i><b>4.2</b> Maintain</a></li>
+<li class="chapter" data-level="4.3" data-path="communicate-deploy-maintain.html"><a href="communicate-deploy-maintain.html#deploy"><i class="fa fa-check"></i><b>4.3</b> Deploy</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="stats.html"><a href="stats.html"><i class="fa fa-check"></i><b>5</b> Stats</a><ul>
 <li class="chapter" data-level="5.1" data-path="stats.html"><a href="stats.html#general-3"><i class="fa fa-check"></i><b>5.1</b> General</a></li>
@@ -296,8 +297,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Reference this <a href="https://www.dataquest.io/blog/data-science-project-style-guide/">blog</a>.</p>
 <p>appendices | post mortems</p>
 </div>
-<div id="deploymaintain" class="section level2">
-<h2><span class="header-section-number">4.2</span> Deploy/Maintain</h2>
+<div id="maintain" class="section level2">
+<h2><span class="header-section-number">4.2</span> Maintain</h2>
+<p>Hypothesis</p>
+<p>TDD: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a></p>
+<p>design by contract: contracts</p>
+<p>property based testing: hypothesis</p>
+<p>unit tests: pytest, static typing: mypy</p>
+<p>packrat &amp; conda</p>
+<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: <code>conda env export &gt; environment.yaml</code>.
+The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: <code>conda env create -f environment.yaml</code>. This will create a new environment with the same name listed in environment.yaml.</p>
+<p>package for helper functions and units tests</p>
+<p><a href="https://blog.osteele.com/2008/05/my-git-workflow/">Git Workflow</a></p>
+<p>Tests: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a> | <a href="https://github.com/ericmjl/data-testing-tutorial">4</a> | <a href="http://r-pkgs.had.co.nz/tests.html">R</a> | pytest/hypothesis</p>
+<p>Validation: <a href="https://github.com/data-cleaning/validate">1</a> | <a href="https://rdrr.io/cran/checkmate/">2</a> | <a href="https://github.com/shawnbrown/datatest">3</a></p>
+<p>dvc</p>
+<p><a href="https://matrixds.com/" class="uri">https://matrixds.com/</a> | <a href="https://www.crestle.com" class="uri">https://www.crestle.com</a> | CoCalc</p>
+</div>
+<div id="deploy" class="section level2">
+<h2><span class="header-section-number">4.3</span> Deploy</h2>
 <p><a href="https://mlflow.org/" class="uri">https://mlflow.org/</a></p>
 <p><a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" class="uri">https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/</a></p>
 <p>fabric-python &amp; <a href="http://www.pyinvoke.org/" class="uri">http://www.pyinvoke.org/</a></p>
@@ -307,9 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Algorithmia</p>
 <p>Apache Airflow</p>
 <p><a href="https://cloud.google.com/ai-platform/" class="uri">https://cloud.google.com/ai-platform/</a></p>
-<p><a href="https://www.hyperscience.com/" class="uri">https://www.hyperscience.com/</a></p>
 <p><a href="https://ropensci.org/technotes/2019/03/18/drake-700/" class="uri">https://ropensci.org/technotes/2019/03/18/drake-700/</a></p>
-<p><a href="https://www.mlflow.org" class="uri">https://www.mlflow.org</a></p>
 <p><a href="https://www.wandb.com/blog/towards-reproducibility">Weights &amp; Biases</a></p>
 <p>Databricks</p>
 <p>Ansible</p>
@@ -323,21 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://stitchfix.github.io/flotilla-os/">batch job execution framework</a></p>
 <p><a href="https://cmry.github.io/notes/serialize">Sklearn Serialization</a></p>
 <p><a href="http://content.nexosis.com/twimlai">Auto Deploy</a></p>
-<p>TDD: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a></p>
 <p><a href="https://orchestrahq.com">Model Deployment aaS</a></p>
-<p><a href="https://dvc.org/" class="uri">https://dvc.org/</a></p>
-<p>docker</p>
-<p>design by contract: contracts</p>
-<p>property based testing: hypothesis</p>
-<p>unit tests: pytest, static typing: mypy</p>
-<p>packrat &amp; conda</p>
-<p><a href="https://matrixds.com/" class="uri">https://matrixds.com/</a> | <a href="https://www.crestle.com" class="uri">https://www.crestle.com</a> | CoCalc</p>
-<p><a href="https://blog.osteele.com/2008/05/my-git-workflow/">Git Workflow</a></p>
-<p>Tests: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a> | <a href="https://github.com/ericmjl/data-testing-tutorial">4</a> | <a href="http://r-pkgs.had.co.nz/tests.html">R</a> | pytest/hypothesis</p>
-<p>Validation: <a href="https://github.com/data-cleaning/validate">1</a> | <a href="https://rdrr.io/cran/checkmate/">2</a> | <a href="https://github.com/shawnbrown/datatest">3</a></p>
-<p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: <code>conda env export &gt; environment.yaml</code>.
-The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: <code>conda env create -f environment.yaml</code>. This will create a new environment with the same name listed in environment.yaml.</p>
-<p>package for helper functions and units tests</p>
+<p>Docker</p>
 <p>use makefile to run cmd commands</p>
 <p>pipelines and feature unions</p>
 

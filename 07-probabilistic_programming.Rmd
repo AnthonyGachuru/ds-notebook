@@ -34,6 +34,8 @@ B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
 
 ## Other
 
+http://brunaw.com/slides/SER2019/talk/pres.html#1
+
 https://causal.app/
 
 [PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0)
