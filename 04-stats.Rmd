@@ -4,6 +4,8 @@
 
 Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test | cohen's f^2 | https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression | https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis
 
+A mixture distribution is a distribution whose density is a linear combination of normal distribution densities (components).
+
 [Probability Cheat Sheet](http://www.wzchen.com/probability-cheatsheet)
 
 [Prob Dists In R](http://www.cyclismo.org/tutorial/R/probability.html)

@@ -1124,6 +1124,10 @@ https://alleninstitute.org | http://allenai.org/index.html | http://geometry.all
 
 [AI 4 Py](https://wiki.python.org/moin/PythonForArtificialIntelligence)
 
+## CV
+
+https://www.pyimagesearch.com/
+
 ## Online Learning
 
 Incremental PCA
