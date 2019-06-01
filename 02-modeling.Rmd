@@ -1124,16 +1124,24 @@ https://alleninstitute.org | http://allenai.org/index.html | http://geometry.all
 
 [AI 4 Py](https://wiki.python.org/moin/PythonForArtificialIntelligence)
 
-## CV
+### CV
 
 https://www.pyimagesearch.com/
 
-## Online Learning
+### Online Learning
 
 Incremental PCA
 
-## Sequences
+### Sequences
 
 Hidden Markov Model
+
+### Federated ML
+
+https://blog.openmined.org/upgrade-to-federated-learning-in-10-lines/
+
+https://onnx.ai/onnx-r/
+
+https://openmined.org/
 
 Conditional Rnadom Field

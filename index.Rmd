@@ -74,7 +74,7 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 ## Resources
 
-Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/)
+Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/) | https://www.automl.org/
 
 [Common Scripts](http://chrisalbon.com/)
 
