@@ -3664,8 +3664,8 @@ Notes on the talk by Jake Vanderplas. I left out bootstrap and cross validation 
 \begin{Highlighting}[]
 \ImportTok{from}\NormalTok{ sklearn.externals }\ImportTok{import}\NormalTok{ joblib}
 
-\NormalTok{joblib.dump(grid_search, }\StringTok{'model.pkl'}\NormalTok{)}
-\NormalTok{grid_search }\OperatorTok{=}\NormalTok{ joblib.load(}\StringTok{'model.pkl'}\NormalTok{)}
+\NormalTok{joblib.dump(grid_search, }\StringTok{'model.joblib'}\NormalTok{)}
+\NormalTok{grid_search }\OperatorTok{=}\NormalTok{ joblib.load(}\StringTok{'model.joblib'}\NormalTok{)}
 
 \NormalTok{model }\OperatorTok{=}\NormalTok{ grid_search.best_estimator_}
 \end{Highlighting}

@@ -156,8 +156,8 @@ autoplot(fc)
 ```{python, eval = F}
 from sklearn.externals import joblib
 
-joblib.dump(grid_search, 'model.pkl')
-grid_search = joblib.load('model.pkl')
+joblib.dump(grid_search, 'model.joblib')
+grid_search = joblib.load('model.joblib')
 
 model = grid_search.best_estimator_
 ```

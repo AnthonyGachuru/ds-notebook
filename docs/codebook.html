@@ -425,8 +425,8 @@ fc &lt;-<span class="st"> </span><span class="kw">forecast</span>(fit, <span cla
 <h2><span class="header-section-number">9.6</span> Save And Load Models</h2>
 <pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sklearn.externals <span class="im">import</span> joblib
 
-joblib.dump(grid_search, <span class="st">&#39;model.pkl&#39;</span>)
-grid_search <span class="op">=</span> joblib.load(<span class="st">&#39;model.pkl&#39;</span>)
+joblib.dump(grid_search, <span class="st">&#39;model.joblib&#39;</span>)
+grid_search <span class="op">=</span> joblib.load(<span class="st">&#39;model.joblib&#39;</span>)
 
 model <span class="op">=</span> grid_search.best_estimator_</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(m1, <span class="dt">file =</span> <span class="st">&quot;my_model1.rda&quot;</span>)
