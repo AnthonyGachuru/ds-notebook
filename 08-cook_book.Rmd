@@ -684,3 +684,70 @@ metrics <- network %>% evaluate(test_images, test_labels)
 #Calculate predicted probability of survival
 #predicted_prob_true = predictions[:, 1]
 ```
+
+## Parsnip
+
+```{r, eval = F}
+# parsnip
+
+predict_cv <- function(split, rec, model) {
+  
+  test <- bake(rec, assessment(split))
+  
+  result <- tibble(actual = test$map_growth_fw,
+                   predicted = predict(model, test))
+  
+  
+  return(result)
+  
+}
+
+split <- initial_split(df_fw, prop = 3/4)
+train <- training(split)
+test <- testing(split)
+
+rcp <- recipe(map_growth_fw ~ ., train) %>% 
+pp <- prep(rcp, training = train, retain = TRUE)
+train_pp <- juice(pp)
+#test_pp <- bake(pp, newdata = test)
+
+mdl <- set_engine(rand_forest(mode = "regression", trees = 200),
+                  "randomForest")
+
+# regular
+mdl_fit <- fit(object = mdl,
+               formula = formula(pp),
+               data = train_pp)
+
+results <- train_pp %>%
+  mutate(actual = target,
+         preds = pull(predict(mdl_fit, train_pp), .pred)) %>%
+  select(actual, preds)
+
+metrics(results, truth = actual, estimate = preds)
+
+#cv
+
+folds <- vfold_cv(train, v = 10)
+
+cv <- folds %>% 
+  mutate(train = map(splits, prepper, recipe = rcp), 
+         val = map(splits, analysis),
+         mdl_fits = map2(train, 
+                         val, 
+                         ~ fit(mdl, 
+                               formula(.x), 
+                               data = bake(object = .x, new_data = .y))))
+
+preds <- mutate(cv, 
+                pred = pmap(list(splits, train, mdl_fits), predict_cv))
+
+evaluation <- preds %>% 
+  mutate(metrics = map(pred, ~ metrics(.x, truth = actual, estimate = predicted))) %>% 
+  select(metrics) %>% 
+  unnest(metrics) %>% 
+  summarise_at(vars(accuracy), funs(mean, sd))
+
+
+```
+

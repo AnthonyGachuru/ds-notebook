@@ -571,15 +571,17 @@ Use binning + chisquare / mutual information to see correlation between feature 
   Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn't). 3) Double-check that the training data agrees with other sources (for example, dashboards).
 \end{itemize}
 
-\hypertarget{model-1}{%
-\chapter{Model}\label{model-1}}
-
-General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+\hypertarget{mode}{%
+\chapter{Mode}\label{mode}}
 
 \hypertarget{general-2}{%
 \section{General}\label{general-2}}
 
 xgb default hyperparameters good
+
+Random forests are easier to tune and harder to overfit than gradient boosted machines.
+
+KNN memorizes the training data and compares test observations with the nearest training observation. Thus is it a lazy learner.
 
 Pipelines \& feature Unions for model deployment
 
@@ -4249,6 +4251,73 @@ The general framework: 1) instantiate, 2) add layers input-hidden-output, 3) com
 
 \CommentTok{#Calculate predicted probability of survival}
 \CommentTok{#predicted_prob_true = predictions[:, 1]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parsnip}{%
+\section{Parsnip}\label{parsnip}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# parsnip}
+
+\NormalTok{predict_cv <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(split, rec, model) \{}
+  
+\NormalTok{  test <-}\StringTok{ }\KeywordTok{bake}\NormalTok{(rec, }\KeywordTok{assessment}\NormalTok{(split))}
+  
+\NormalTok{  result <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{actual =}\NormalTok{ test}\OperatorTok{$}\NormalTok{map_growth_fw,}
+                   \DataTypeTok{predicted =} \KeywordTok{predict}\NormalTok{(model, test))}
+  
+  
+  \KeywordTok{return}\NormalTok{(result)}
+  
+\NormalTok{\}}
+
+\NormalTok{split <-}\StringTok{ }\KeywordTok{initial_split}\NormalTok{(df_fw, }\DataTypeTok{prop =} \DecValTok{3}\OperatorTok{/}\DecValTok{4}\NormalTok{)}
+\NormalTok{train <-}\StringTok{ }\KeywordTok{training}\NormalTok{(split)}
+\NormalTok{test <-}\StringTok{ }\KeywordTok{testing}\NormalTok{(split)}
+
+\NormalTok{rcp <-}\StringTok{ }\KeywordTok{recipe}\NormalTok{(map_growth_fw }\OperatorTok{~}\StringTok{ }\NormalTok{., train) }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{pp <-}\StringTok{ }\KeywordTok{prep}\NormalTok{(rcp, }\DataTypeTok{training =}\NormalTok{ train, }\DataTypeTok{retain =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{train_pp <-}\StringTok{ }\KeywordTok{juice}\NormalTok{(pp)}
+\CommentTok{#test_pp <- bake(pp, newdata = test)}
+
+\NormalTok{mdl <-}\StringTok{ }\KeywordTok{set_engine}\NormalTok{(}\KeywordTok{rand_forest}\NormalTok{(}\DataTypeTok{mode =} \StringTok{"regression"}\NormalTok{, }\DataTypeTok{trees =} \DecValTok{200}\NormalTok{),}
+                  \StringTok{"randomForest"}\NormalTok{)}
+
+\CommentTok{# regular}
+\NormalTok{mdl_fit <-}\StringTok{ }\KeywordTok{fit}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ mdl,}
+               \DataTypeTok{formula =} \KeywordTok{formula}\NormalTok{(pp),}
+               \DataTypeTok{data =}\NormalTok{ train_pp)}
+
+\NormalTok{results <-}\StringTok{ }\NormalTok{train_pp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{actual =}\NormalTok{ target,}
+         \DataTypeTok{preds =} \KeywordTok{pull}\NormalTok{(}\KeywordTok{predict}\NormalTok{(mdl_fit, train_pp), .pred)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(actual, preds)}
+
+\KeywordTok{metrics}\NormalTok{(results, }\DataTypeTok{truth =}\NormalTok{ actual, }\DataTypeTok{estimate =}\NormalTok{ preds)}
+
+\CommentTok{#cv}
+
+\NormalTok{folds <-}\StringTok{ }\KeywordTok{vfold_cv}\NormalTok{(train, }\DataTypeTok{v =} \DecValTok{10}\NormalTok{)}
+
+\NormalTok{cv <-}\StringTok{ }\NormalTok{folds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{train =} \KeywordTok{map}\NormalTok{(splits, prepper, }\DataTypeTok{recipe =}\NormalTok{ rcp), }
+         \DataTypeTok{val =} \KeywordTok{map}\NormalTok{(splits, analysis),}
+         \DataTypeTok{mdl_fits =} \KeywordTok{map2}\NormalTok{(train, }
+\NormalTok{                         val, }
+                         \OperatorTok{~}\StringTok{ }\KeywordTok{fit}\NormalTok{(mdl, }
+                               \KeywordTok{formula}\NormalTok{(.x), }
+                               \DataTypeTok{data =} \KeywordTok{bake}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ .x, }\DataTypeTok{new_data =}\NormalTok{ .y))))}
+
+\NormalTok{preds <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(cv, }
+                \DataTypeTok{pred =} \KeywordTok{pmap}\NormalTok{(}\KeywordTok{list}\NormalTok{(splits, train, mdl_fits), predict_cv))}
+
+\NormalTok{evaluation <-}\StringTok{ }\NormalTok{preds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{metrics =} \KeywordTok{map}\NormalTok{(pred, }\OperatorTok{~}\StringTok{ }\KeywordTok{metrics}\NormalTok{(.x, }\DataTypeTok{truth =}\NormalTok{ actual, }\DataTypeTok{estimate =}\NormalTok{ predicted))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(metrics) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unnest}\NormalTok{(metrics) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(accuracy), }\KeywordTok{funs}\NormalTok{(mean, sd))}
 \end{Highlighting}
 \end{Shaded}
 

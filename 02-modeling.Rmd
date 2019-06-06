@@ -1,10 +1,12 @@
-# Model
-
-General format: Intro, Assumptions, Evaluation, Interpretation, Pros/Cons, Notes
+# Mode
 
 ## General
 
 xgb default hyperparameters good
+
+Random forests are easier to tune and harder to overfit than gradient boosted machines.
+
+KNN memorizes the training data and compares test observations with the nearest training observation. Thus is it a lazy learner.
 
 Pipelines & feature Unions for model deployment
 
