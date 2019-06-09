@@ -2,6 +2,28 @@
 
 ## Communicate
 
+### Outline
+
+Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
+
+**Summary**
+
+Summarize the motivation and goals of the project. It should either be an executive summary or a technical abstract.
+
+**Results**
+
+State results with details as needed. For an end user presentation show how the model fits into and improves the user's workflow, and how to use it.
+
+**Conclusion**
+
+Discuss recommendations, outstanding issues, and possible future work.
+
+### Other
+
+Write appendices and port mortems
+
+Interactive Reports Without Shiny: plotly, dt, crosstalk
+
 https://jupyter.org/jupyter-book/intro.html#installation
 
 https://metabase.com/
@@ -9,20 +31,6 @@ https://metabase.com/
 http://koaning.io/make-docs.html
 
 [Mode Studio](https://about.modeanalytics.com/)
-
-Summarize the motivation and goals of the project. It should either be an executive summary or a technical abstract.
-
-State results with details as needed. For an end user presentation show how the model fits into and improves the user's workflow, and how to use it.
-
-Discuss recommendations, outstanding issues, and possible future work.
-
-Structure: Introduction | Summary | Results | Conclusion
-
-Interactive Reports Without Shiny: plotly, dt, crosstalk
-
-Reference this [blog](https://www.dataquest.io/blog/data-science-project-style-guide/).
-
-appendices | post mortems
 
 ## Maintain
 

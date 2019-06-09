@@ -42,7 +42,7 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Structure project as user stories 
 
-### Import-Tidy-Transform-Visualize
+### Pre-Modeling
 
 - [ ] See what the data looks like by shape, outliers, center, and spread, the types of variables, first and last few observations, and check for missing and blank values.
 
@@ -68,21 +68,15 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Look at learning curves
 
-## Communicate 
-
-### Deploy & Maintain
-
 ## Resources
 
-Auto Data Science: [Visualize](http://holoviews.org) | [Feature Engineering](https://www.featuretools.com)  | Model: TPOT, [Google AutoML](https://cloud.google.com/automl/) | https://www.automl.org/
+Auto Data Science: [Visualize](http://holoviews.org) [Feature_Engineering](https://www.featuretools.com) TPOT [Google AutoML](https://cloud.google.com/automl/) [AutoML](https://www.automl.org/)
 
 [Common Scripts](http://chrisalbon.com/)
 
 [Search](https://toolbox.google.com/datasetsearch)
 
-https://www.openmined.org/
-
- https://distill.pub/
+https://distill.pub/
 
 https://www.hyperscience.com/
 

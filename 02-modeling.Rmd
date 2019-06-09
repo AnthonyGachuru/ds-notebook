@@ -1,4 +1,4 @@
-# Mode
+# Model
 
 ## General
 
@@ -1139,6 +1139,8 @@ Incremental PCA
 Hidden Markov Model
 
 ### Federated ML
+
+https://www.openmined.org/
 
 https://blog.openmined.org/upgrade-to-federated-learning-in-10-lines/
 
