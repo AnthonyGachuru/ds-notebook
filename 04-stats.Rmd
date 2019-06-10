@@ -2,7 +2,7 @@
 
 ## General
 
-Cohen's H | Cohen's D | Multiple comparisons Problem | Importance sampling | Bayes Error Rate | Pearson’s Coefficient of Skewness | Bayes factor | Correction methods for non representative samples | Mann–Whitney U test | cohen's f^2 | https://stats.stackexchange.com/questions/266003/interpretation-of-cohens-f2-for-effect-size-in-multiple-regression | https://www.researchgate.net/post/How_to_calculate_the_effect_size_in_multiple_linear_regression_analysis
+Cohen's Alphabet (H D F^2) Multiple comparisons Problem Importance sampling Bayes Error Rate Pearson’s Coefficient of Skewness Bayes factor Correction methods for non representative samples Mann–Whitney U test
 
 A mixture distribution is a distribution whose density is a linear combination of normal distribution densities (components).
 
@@ -14,15 +14,11 @@ A mixture distribution is a distribution whose density is a linear combination o
 
 Zero correlation doesn't imply independence
 
-lm vs t.test vs anova
+lm vs t.test vs anova library(EMT): multinomial test
 
-library(EMT): multinomial test
+ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) [2](https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf)
 
-ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) | [2](https://www.rdocumentation.org/packages/stats/versions/3.4.3/topics/ecdf)
-
-[Mixed Categorical & Numeric Distance](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist) | [2](https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor)
-
-[Outliers in small samples](https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617)
+[Mixed Categorical & Numeric Distance](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist) [2](https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor) [Outliers in small samples](https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617)
 
 Another common measure of effect size is d, sometimes known as Cohen's d. This can be used when comparing two means, as when you might do a t-test, and is simply the difference in the two groups' means divided by the average of their standard deviations*. This means that if we see a d of 1, we know that the two groups' means differ by one standard deviation; a d of .5 tells us that the two groups' means differ by half a standard deviation; and so on. Cohen suggested that d=0.2 be considered a 'small' effect size, 0.5 represents a 'medium' effect size and 0.8 a 'large' effect size. This means that if two groups' means don't differ by 0.2 standard deviations or more, the difference is trivial, even if it is statistically significant. 
 
@@ -40,8 +36,6 @@ There is no one rule about when a number is not accurate enough to use, but as a
 
 Probability is calibrated if it is empirically correct, i.e. the empirical probability matches the theoretical one.
 
-[Effect size](https://artax.karlin.mff.cuni.cz/r-help/library/lsr/html/cohensD.html)
-
 Sum of normally distributed random variables: sum of means & sum of variances
 
 Zero correlation doesn't mean independent variables. Covariance only determines linear relationships.
@@ -54,17 +48,7 @@ Frequentists: Probability is a measure of the the frequency of repeated events. 
 
 Independent rvs are uncorrelated. That is Cor (X,Y)=0
 
-Don’t sum sd’s, sum variances
-
-The sampling distribution is the distribution of the samples mean.
-
-The CDF is the function that maps values to their percentile rank in a distribution.
-
-I’ll start with the exponential distribution because it is easy to work with. In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
-
-If the distribution of the values has mean and standard deviation μ and σ, the distribution of the sum is approximately N (n mu, n sigma_sqrd).
-
-If there are no outliers, the sample mean minimizes the mean squared error
+In the real world, exponential distributions come up when we look at a series of events and measure the times between events, which are called interarrival times. If the events are equally likely to occur at any time, the distribution of inter-arrival times tends to look like an exponential distribution.
 
 An estimator is unbiased if the expected total (or mean) error, after many iterations of the estimation game, is 0.
 
@@ -144,7 +128,7 @@ The MWW RankSum test is a useful test to determine if two distributions are sign
 
 Mostly notes from the Udacity class.
 
-[AB Testing](http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html)
+Power-Of-Test: https://rpsychologist.com/d3/NHST/ https://juliasilge.shinyapps.io/power-app/ https://www.statmethods.net/stats/power.html https://www.graphpad.com/quickcalcs/binomial1.cfm https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html [Power Analysis](https://www.statmethods.net/stats/power.html) [AB Testing](http://www.evanmiller.org/announcing-evans-awesome-ab-tools.html)
 
 The appropriate sample size depends on many things, chiefly the complexity of the analysis and the expected effect size. The "30" rule comes from one of the simplest cases: Whether to use a z-test or t-test for comparing two means. 
 1) for large n (sample size), many distributions can be approximated to normal. [ courtesy : Central Limit Theorems ]
@@ -311,12 +295,6 @@ Choose test statistics method or metrics to evaluate experiment.
 Designing the control group and experiment group.
 
 Analyzing results, and draw valid conclusions.
-
-### Power Analysis
-
-[Power Analysis](https://www.statmethods.net/stats/power.html)
-
-Power-Of-Test: https://rpsychologist.com/d3/NHST/ https://juliasilge.shinyapps.io/power-app/ https://www.statmethods.net/stats/power.html https://www.graphpad.com/quickcalcs/binomial1.cfm https://stat.ethz.ch/R-manual/R-devel/library/stats/html/power.prop.test.html https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prop.test.html
 
 ## Experimental Design
 

@@ -10,49 +10,31 @@ Make codebooks
 
 Sample from data if its too large
 
-Apache Arrow
-
-https://www.webscraper.io/documentation#open-web-scraper
-
-[pdf table extraction](https://tabula.technology)
-
-[DEaaS](https://www.astronomer.io/)
-  
-[data build tool](https://www.getdbt.com/)
-
-https://www.stitchdata.com/
-
-https://www.prefect.io/
-
 Documentation: [1](http://databasenotetaker.com/) | [2](https://dataedo.com/) | [3](https://www.apexsql.com/sql-tools-doc.aspx) | [4](https://techwriter.me/best-practices-guide/documenting-databases.aspx) | [5](http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary) | [6](https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database) | [7](https://drawsql.app/#features)
   
 CLI: [1](http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-peek-at-the-data-set) | [2](https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY) | [3](http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html)
 
+[pdf table extraction](https://tabula.technology)
+
 ### SQL
 
-* Maintain a query library
+Maintain a query library
 
-* Common Table Expressions
+cross apply = inner join & outer apply = full join
 
-* cross apply = inner join | outer apply = full join
+SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.
 
-* SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.
-
-* COUNT(DISTINCT month): returns count of non-null values like table in R
-
-* The CASE statement is followed by at least one pair of WHEN and THEN statements: CASE WHEN year = 'SR' THEN 'yes' ELSE NULL END. You can also define a number of outcomes in a CASE statement by including as many WHEN/THEN statements as you’d like
-
-* If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
+If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns
 
 ## Tidy & Transform
 
 ### General
 
-purrlyr::by_row in R
+In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.
 
-In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2)  Each observation must have its own row, 3) Each value must have its own cell.
+Gower distance for categorical dissimilarity.
 
-Use the Gower distance for categorical dissimilarity. Binned Stats 1 | 2
+Use binned statistics.
 
 Character Encoding Precendence: utf-8, iso-8859-1, utf-16
 
@@ -64,62 +46,45 @@ outliers: 1) dropping is an option but a bad one, 2) create a new columns to mar
 
 tomek link: points of different classes which are neighbors of each other. Removing them often improves model performance
 
-* There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
+There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.
 
 A good formula is: if your sample is picked uniformly at random and is of size at least: $\frac{-log(\frac{d}{2})}{2e^2}$
 
 then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.
 
-* Use spatial sign to transform data with outliers.
+Use spatial sign to transform data with outliers.
 
-* Too many levels for a category: 1) limit number of categories through feature selection, 2) https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables, 3) bucket groups by number of samples
+Too many levels for a category: 1) limit number of categories through feature selection, 2) https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables, 3) bucket groups by number of samples
 
-* Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.
+Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.
 
-* Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.
+Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.
 
-* You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values. 
+You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values. 
 
-* Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.
+Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.
 
-* Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it. 
+Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it. 
 
-* Dixon and Chi-squared tests for outlier detection plus LOF Algorithm.
+Dixon and Chi-squared tests for outlier detection plus LOF Algorithm.
 
 ### Missingness & Imputation
 
-* There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
+There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random
 
-* Types of imputation
+Types of imputation: Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero, Random: Can amplify outlier observation and induce bias, Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate
 
-  * Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero.
-  * Random: Can amplify outlier observation and induce bias.
-  * Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate.
-  & multiple stochastic regression imputation
+The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.
 
-* The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.
+The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.
 
-* The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.
-
-* logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
+Logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.
 
 ## Visualize
 
-swarmplot | marimekko charts | radviz | Marey Chart
+plots: swarmplot | marimekko charts | radviz | Marey Chart
 
-http://pyviz.org/
-
-http://dataviz.tools/
-
-https://www.datawrapper.de/
-
-https://www.data-to-viz.com
-
-https://dominikkoch.github.io/Bump-Chart/
-
-https://www.r-graph-gallery.com/
-
-http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top
+http://pyviz.org/ http://dataviz.tools/ https://www.datawrapper.de/ https://www.data-to-viz.com https://dominikkoch.github.io/Bump-Chart/ https://www.r-graph-gallery.com/ http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top
 
 [Stats Viz](http://emilkirkegaard.dk/understanding_statistics/)
 
@@ -129,11 +94,11 @@ http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top
   
 [Py Graph Gallery](https://python-graph-gallery.com)
 
-ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html) | [2](https://plot.ly/python/table/) | [3](https://plot.ly/python/html-reports/) | [Extensions](http://www.ggplot2-exts.org/gallery/)
+ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html) [2](https://plot.ly/python/table/) [3](https://plot.ly/python/html-reports/) [Extensions](http://www.ggplot2-exts.org/gallery/)
 
 [Sankey Diagram Creator](http://sankeymatic.com)
 
-[R Waffle Charts](https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/)
+[Waffle Charts](https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/)
 
 [High Dimensional](https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html)
 
@@ -153,22 +118,20 @@ ggplot: [1](https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_P
 
 Cyclical Features: Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.
 
-encode missingness a a feature
+Encode missingness as a feature
 
-robust scaler python: median & quantiles
+Use a robust scaler such as the median & quantiles
 
-On Unbalanced Classes:
+**On Unbalanced Classes**
 
-Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. 
-
-That said, here is a rough outline of useful approaches. These are listed approximately in order of effort:
+Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. Here is a rough outline of useful approaches. These are listed approximately in order of effort:
 
 * Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.
 
 * Balance the training set in some way: Oversample the minority class. Undersample the majority class.
 Synthesize new minority classes.
 
-*Throw away minority examples and switch to an anomaly detection framework.
+* Throw away minority examples and switch to an anomaly detection framework.
 
 * At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.
 
@@ -182,22 +145,18 @@ Synthesize new minority classes.
 
 * Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.
 
-* Sklearn example:`mdl = svm.SVC(kernel='linear', class_weight={1: 10}) & svm.SVC(kernel='linear', class_weight='balanced')`
-
 ### Feature Selection
 
 Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.
 
-* Variance Threshold: Use this to exclude features that don't meet a variance threshold.
- 
-* Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
+Variance Threshold: Use this to exclude features that don't meet a variance threshold.
 
-* SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
+Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.
 
-* sklearn.feature_selection.RFE(CV)
+SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions. 
 
-* To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.
+To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.
     
-* Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply "cap" or "clip" the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
+Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there's still a significant tail of outlier values. Let's pick yet another approach. What if we simply "cap" or "clip" the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn't mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.
 
-* Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).
+Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).

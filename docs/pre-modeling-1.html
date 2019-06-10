@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Deep Learning | Data Science Cribsheet</title>
+  <title>Chapter 2 Pre-Modeling | Data Science Cribsheet</title>
   <meta name="description" content="A collection of quick notes on the field." />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Deep Learning | Data Science Cribsheet" />
+  <meta property="og:title" content="Chapter 2 Pre-Modeling | Data Science Cribsheet" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Deep Learning | Data Science Cribsheet" />
+  <meta name="twitter:title" content="Chapter 2 Pre-Modeling | Data Science Cribsheet" />
   
   <meta name="twitter:description" content="A collection of quick notes on the field." />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sequences-1.html">
-<link rel="next" href="probabilistic-programming.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="model-1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -283,93 +283,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="deep-learning" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Deep Learning</h1>
-<div id="general-6" class="section level2">
-<h2><span class="header-section-number">7.1</span> General</h2>
-<p><a href="https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning">Cheatsheet</a></p>
-<p><a href="http://www.wildml.com/deep-learning-glossary/">Glossary</a></p>
-<p>Batch: Subset of the data used to calculate slopes during back propagation. Different batches are used to calculate different updates.</p>
-<p>Epoch: One full pass through all the batches in the training data.</p>
-<p>Activation Functions: Sigmoid: Takes a real-valued input and squashes it to range between 0 and 1. Softmax: Same end result as sigmoid, but different function. tanh: Takes a real-valued input and squashes it to the range [-1, 1]. ReLU:Has been shown to lead to very high-performance networks. This function takes a single number as an input, returning 0 if the input is negative, and the input if the input is positive.</p>
-<p>Embeddings vs One-Hot Encoding: Embeddings are better than One-Hot Encodings because it allows for relationships to be shown between days.</p>
-<p><a href="https://www.youtube.com/watch?v=nqEYVzJLR_c&amp;feature=youtu.be&amp;t=31">Rule of 30</a>: A change that affects at least 30 data points in your validation set is usually significant and not just noise.</p>
-<p>In a single-label, multiclass classification problem, your network should end with a softmax activation so that it will output a probability distribution over the N output classes.</p>
-<p>If you’re predicting N categories, don’t have layers with less than N nodes.</p>
-<p>Softmax regression (or multinomial logistic regression) is a generalization of logistic regression to the case where we want to handle multiple classes.</p>
-<p>Few people use kfold cv in deep learning because of the large datasets in play.</p>
-<p>n inputs and k outputs gives you <span class="math inline">\((n+1)*k\)</span> parameters.</p>
-<p>Do random initialization of weights but set bias to zero. Don’t intialize to values that are too large. He initialization works well for networks with ReLU activations.</p>
-<p>end to end deep learning: an end-to-end approach as it maps directly the input (x) to the output (y). end-to-end learning works better in practice than multi-task learning, but requires a large amount of data.</p>
-<p>restnet/attention &gt; RNN / LSTM</p>
-<p>With a reduced the training set a high batch size and high learning rate cause the model to jump around chaotically.</p>
-<p>In backpropagation all derivatives applied to same parameters, so they’re very correlated. This is bad for stochastic gradient descent. Gradients are either zero (don’t remember the past well) or infinity. The latter is fixed by gradient clipping and the former by using LSTMs.</p>
+<div id="pre-modeling-1" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Pre-Modeling</h1>
+<div id="import" class="section level2">
+<h2><span class="header-section-number">2.1</span> Import</h2>
+<div id="general" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> General</h3>
+<p>A schema is a blueprint for storing data. For a table every row has same number of columns, and each column is of the same type.</p>
+<p>Make codebooks</p>
+<p>Sample from data if its too large</p>
+<p>Documentation: <a href="http://databasenotetaker.com/">1</a> | <a href="https://dataedo.com/">2</a> | <a href="https://www.apexsql.com/sql-tools-doc.aspx">3</a> | <a href="https://techwriter.me/best-practices-guide/documenting-databases.aspx">4</a> | <a href="http://help.osf.io/m/bestpractices/l/618767-how-to-make-a-data-dictionary">5</a> | <a href="https://dataedo.com/blog/different-types-of-tools-you-can-use-to-document-your-database">6</a> | <a href="https://drawsql.app/#features">7</a></p>
+<p>CLI: <a href="http://bconnelly.net/working-with-csvs-on-the-command-line/#taking-a-peek-at-the-data-set">1</a> | <a href="https://opensource.com/article/17/2/command-line-tools-data-analysis-linux?sc_cid=701600000011jJVAAY">2</a> | <a href="http://alexisperrier.com/shell/2017/11/07/command-line-data-scientist.html">3</a></p>
+<p><a href="https://tabula.technology">pdf table extraction</a></p>
 </div>
-<div id="pre-processing-1" class="section level2">
-<h2><span class="header-section-number">7.2</span> Pre-processing</h2>
-<p>Normalization makes the cost function faster to optimize</p>
-<p>One common preprocessing step in machine learning is to center and standardize your dataset, meaning that you substract the mean of the whole numpy array from each example, and then divide each example by the standard deviation of the whole numpy array. But for picture datasets, it is simpler and more convenient and works almost as well to just divide every row of the dataset by 255 (the maximum value of a pixel channel).</p>
-<p>Scale images: train_set_x = train_set_x_flatten/255.</p>
-<p>Common steps for pre-processing a new dataset are: 1) Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, …), 2) Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1), 3) Standardize the data</p>
+<div id="sql" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> SQL</h3>
+<p>Maintain a query library</p>
+<p>cross apply = inner join &amp; outer apply = full join</p>
+<p>SQL UNION stacks one dataset on top of the other. It only appends distinct values. More specifically, when you use UNION, the dataset is appended, and any rows in the appended table that are exactly identical to rows in the first table are dropped. If you’d like to append all the values from the second table, use UNION ALL.</p>
+<p>If you include two (or more) columns in a SELECT DISTINCT clause, your results will contain all of the unique pairs of those two columns</p>
 </div>
-<div id="defaults" class="section level2">
-<h2><span class="header-section-number">7.3</span> Defaults</h2>
-<p>Regression: loss - mean_squared_error, metric - rmse, activation_function - relu</p>
-<p>Classification: loss - categorical_crossentropy, metric - accuracy, activation_function - softmax</p>
 </div>
-<div id="rnnlstm" class="section level2">
-<h2><span class="header-section-number">7.4</span> RNN/LSTM</h2>
-<p>stateful vs stateless LSTMs</p>
-<p>One major issue with layer_simple_rnn is that although it should theoretically be able to retain at time t information about inputs seen many time steps before, in practice, such long-term dependencies are impossible to learn. This is due to the vanishing gradient problem, an effect that is similar to what is observed with non-recurrent networks (feed forward networks) that are many layers deep: as you keep adding layers to a network, the network eventually becomes un-trainable.</p>
-<p>The default activation function for LSTMs is the hyperbolic tangent (tanh), which outputs values between -1 and 1. This is the preferred range for the time series data: MinMaxScaler(feature_range = (-1, 1)).</p>
-<p>Keras’ LSTM expects the input as well as the target data to be in a specific shape. The input has to be a 3-d array of size num_samples, num_timesteps, num_features.</p>
-<p>Wiring the LSTM hidden states to sets of consecutive outputs of the same length. For example, if we want to produce predictions for 12 months, our LSTM should have a hidden state length of 12.</p>
-<p>A loss function is used to optimize a machine learning algorithm. An accuracy metric is used to measure the algorithm’s performance (accuracy) in an interpretable way. Loss function applies to a single training example while the cost function applies to many. The loss function computes the error for a single training example; the cost function is the average of the loss functions of the entire training set.</p>
-<p>A trick when you want to flatten a matrix X of shape (a,b,c,d) to a matrix X_flatten of shape (b ∗ c ∗ d, a) is to use <code>X_flatten = X.reshape(X.shape[0], -1).T</code></p>
-<p>The tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.</p>
-<p>Sigmoid outputs a value between 0 and 1 which makes it a very good choice for binary classification. You can classify as 0 if the output is less than 0.5 and classify as 1 if the output is more than 0.5. It can be done with tanh as well but it is less convenient as the output is between -1 and 1.</p>
-<p>The deeper layers of a neural network are typically computing more complex features of the input than the earlier layers.</p>
-<p>data augmentation for images: rotate and crop</p>
-<p>If you have 10,000,000 examples, how would you split the train/dev/test set? 98% train . 1% dev . 1% test. The dev and test set should come from the same distribution</p>
-<p>What is weight decay? A regularization technique (such as L2 regularization) that results in gradient descent shrinking the weights on every iteration. As a rule of thumb, the more training examples you have, the weaker this term should be. The more parameters you have the higher this term should be.</p>
-<p>Techniques for reducing variance (reducing overfitting)? Dropout, L2 regularization, Data augmentation</p>
-<p>Do a loss vs learning rate plot to pick a good one. It’s the key thing to set. Learning rate annealing: decrease learning rate as you reach the minimum.</p>
-<p>Training for more epochs will lead to overfitting.</p>
-<p>Number of params in logistic regression: k multiplied by d where k is the number of classes and d is the size of the dimensional space.</p>
-<p>Large model weights can indicate that model is overfitted</p>
-<p>Gradient descent extensions: adagrad, rms prop, adam, mini-batch gradient descent</p>
-<p>A dense layer applies a linear transformation to its input</p>
-<p>Always use ReLU activation because it doesn’t saturate and it converges faster. Use He et al initialization which is square root of two divided by square root of number of inputs.</p>
-<p>batch normalization</p>
+<div id="tidy-transform" class="section level2">
+<h2><span class="header-section-number">2.2</span> Tidy &amp; Transform</h2>
+<div id="general-1" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> General</h3>
+<p>In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.</p>
+<p>Gower distance for categorical dissimilarity.</p>
+<p>Use binned statistics.</p>
+<p>Character Encoding Precendence: utf-8, iso-8859-1, utf-16</p>
+<p>Outlier Detection: interquartile range, kernel density estimation, bonferroni test</p>
+<p>Imputation. Options include the Mean, Mode, KNN, Random, and Regression</p>
+<p>outliers: 1) dropping is an option but a bad one, 2) create a new columns to mark outliers, 3) rescale with the log to reduce the effect of outliers</p>
+<p>tomek link: points of different classes which are neighbors of each other. Removing them often improves model performance</p>
+<p>There is no one rule about when a number is not accurate enough to use, but as a rule of thumb, you should be cautious about using any number with a MOE (Margin-of-error) over 10%.</p>
+<p>A good formula is: if your sample is picked uniformly at random and is of size at least: <span class="math inline">\(\frac{-log(\frac{d}{2})}{2e^2}\)</span></p>
+<p>then with probability at least 1-d your sample measured proportion q is no further away than e from the unknown true population proportion p (what you are trying to estimate). Need to estimate with 99% certainty the unknown true population rate to +- 10% precision? That is d=0.01, e=0.1 and a sample of size 265 should be enough. A stricter precision of +-0.05 causes the estimated sample size to increase to 1060, but increasing the certainty requirement to 99.5% only increases the estimated sample size to 300.</p>
+<p>Use spatial sign to transform data with outliers.</p>
+<p>Too many levels for a category: 1) limit number of categories through feature selection, 2) <a href="https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables" class="uri">https://stats.stackexchange.com/questions/95212/improve-classification-with-many-categorical-variables</a>, 3) bucket groups by number of samples</p>
+<p>Long story short, if these outliers are really such (i.e. they appear with a very low frequency and very likely are bad/random/corrupted measurements) and they do not correspond to potential events/failures that your model should be aware of, you can safely remove them. In all other cases you should evaluate case by case what those outliers represent.</p>
+<p>Otherwise, assuming levels of the categorical variable are ordered, the polyserial correlation (here it is in R), which is a variant of the better known polychoric correlation. Note the latter is defined based on the correlation between the numerical variable and a continuous latent trait underlying the categorical variable.</p>
+<p>You should use a logarithmic scale when percent change, or change in orders of magnitude, is more important than changes in absolute units. You should also use a log scale to better visualize data that is heavily skewed. Taking the logarithm only works if the data is non-negative. There are other transforms, such as arcsinh or signed log, that you can use to decrease data range if you have zero or negative values.</p>
+<p>Normalizing by mean and standard deviation is most meaningful when the data distribution is roughly symmetric.</p>
+<p>Monetary amounts are often log- distributed—the log of the data is normally distributed. This leads us to the idea that taking the log of the data can restore symmetry to it.</p>
+<p>Dixon and Chi-squared tests for outlier detection plus LOF Algorithm.</p>
 </div>
-<div id="tuning" class="section level2">
-<h2><span class="header-section-number">7.5</span> Tuning</h2>
-<p><strong>Optimizers</strong>: If batch gradient descent in a deep network is taking excessively long to find a value of the parameters that achieves a small value for the cost function: Try mini-batch gradient descent, Try better random initialization for the weights, Try Adam, Try tuning the learning rate. A variant of this is Stochastic Gradient Descent (SGD), which is equivalent to mini-batch gradient descent where each mini-batch has just 1 example. When the training set is large, SGD can be faster. But the parameters will “oscillate” toward the minimum rather than converge smoothly. In practice, you’ll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples. The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is the number of examples you use to perform one update step. You have to tune a learning rate hyperparameter alpha. With a well-turned mini-batch size, usually it outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large). Shuffling and Partitioning are the two steps required to build mini-batches. Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128. Mini-batch Gradient descent, Mini-batch Gradient descent with momentum, mini-batch with Adam. Adam usually performs best. Some advantages of Adam include: Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum), usually works well even with little tuning of hyperparameters (except alpha).</p>
-<p><strong>early stopping/termination</strong>: (stop as soon as performance on validation set drops after a certain number of epochs) and regularization which applies artifical constraints to reduce the number of free parameters while making it difficult to optimize. Use L2 regularization or dropout.</p>
-<p><strong>Dropout</strong>. Slow down learning with regularization methods like dropout on the recurrent LSTM connections. Dropout works by randomly setting activations from one layer to the next to 0 repeatly. Forces the network to learn redundant representations, and takes average consensus for final prediction. Makes things more robust and prevents overfitting. You should use dropout (randomly eliminate nodes) only in training. Apply dropout both during forward and backward propagation. During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5. Also consider inverted dropout. Andrew Ng doesn’t like dropout bc it couples optimization with regularization</p>
-<p><strong>Inverted dropout</strong>: At test time you do not apply dropout (do not randomly eliminate units) and do not keep the 1/keep_prob factor in the calculations used in training.</p>
-<p><strong>Layers</strong>. Explore additional hierarchical learning capacity by adding more layers and varied numbers of neurons in each layer.</p>
-<p><strong>Regularization</strong>. Explore how weight regularization, such as L1 and L2, can be used to slow down learning and overfitting of the network on some configurations.</p>
-<p><strong>Optimization Algorithm</strong>. Explore the use of <a href="https://keras.io/optimizers/">alternate optimization algorithms</a>, such as classical gradient descent, to see if specific configurations to speed up or slow down learning can lead to benefits.</p>
-<p><strong>Loss Function</strong>. Explore the use of <a href="https://keras.io/objectives/">alternative loss functions</a> to see if these can be used to lift performance.</p>
-<p><strong>Features and Timesteps</strong>. Explore the use of lag observations as input features and input time steps of the feature to see if their presence as input can improve learning and/or predictive capability of the model.</p>
-<p><strong>Larger Batch Size</strong>. Explore larger batch sizes than 4, perhaps requiring further manipulation of the size of the training and test datasets. Don’t use mini-batches larger than 32. Training with large mini-batches is bad for your test error.</p>
-<p><strong>Change Learning Rate</strong>: Reducing the learning rate can improve results. Use different learning rates for each layer</p>
-<p><strong>Model Capacity (Bias-Variance)</strong>: If your Neural Network model seems to have high variance try to add regularization &amp; get more training data. For high bias, make a bigger and deeper network. In general, the less training data you have, the worse overfitting will be, and using a small network is one way to mitigate overfitting. Less nodes and hidden layers corresponds to simpler model and vice versa.</p>
-<p>Try to add batch normalization or dropout, maybe it will converge better. Try to augment your training data.</p>
-<p>ADAGRAD is another optimization option that takes care of some of the hyperparameters for you.</p>
+<div id="missingness-imputation" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Missingness &amp; Imputation</h3>
+<p>There are three types of missingness: 1) Completely at Random, 2) At Random, 3) Not at random</p>
+<p>Types of imputation: Mean: Simple but can distort distribution, underestimate standard deviation, and distort variable relationships by dragging correlation to zero, Random: Can amplify outlier observation and induce bias, Regression: Use observed variables and relationships between these variables. Must make assumptions and can badly extrapolate</p>
+<p>The pros of imputation: 1) Helps retain a larger sample size of your data, 2) Does not sacrifice all the available information in an observation because of sparse missingness, 3) Can potentially avoid unwanted bias.</p>
+<p>The cons of imputation: 1) The standard errors of any estimates made during analyses following imputation can tend to be too small, 2) The methods are under the assumption that all measurements are actually “known,” when in fact some were imputed, 3) Can potentially induce unwanted bias.</p>
+<p>Logging converts multiplicative relationships to additive relationships, and by the same token it converts exponential (compound growth) trends to linear trends. By taking logarithms of variables which are multiplicatively related and/or growing exponentially over time, we can often explain their behavior with linear models.</p>
 </div>
-<div id="debugging" class="section level2">
-<h2><span class="header-section-number">7.6</span> Debugging</h2>
-<p><a href="https://karpathy.github.io/2019/04/25/recipe/" class="uri">https://karpathy.github.io/2019/04/25/recipe/</a></p>
-<p><a href="http://theorangeduck.com/page/neural-network-not-working">1</a></p>
-<p><a href="https://towardsdatascience.com/checklist-for-debugging-neural-networks-d8b2a9434f21">2</a></p>
-<p>gradient checking</p>
-<p>Sigmoid neurons can lead to vanshing gradients at its extremes. ReLU is better and Leaky ReLU is the best to avoid non-activation.</p>
-<p>dying relu</p>
-<p>Gradient checking verifies closeness between the gradients from backpropagation and the numerical approximation of the gradient (computed using forward propagation). Gradient checking is slow, so we don’t run it in every iteration of training. You would usually run it only to make sure your code is correct, then turn it off and use backprop for the actual learning process. In batch GD the cost should be monotone decreasing. In mini-batch it doesn’t have to be since it’s like training on a different training set every time. It should still be trending downwards. For small training set use ( &lt; 2000) use batch GD. Use batches of 64, 128, 256, 512 otherwise which should speed up training. Make sure it fits in meemory. MIni-batch size is another hyperparameter.</p>
-<p>Vanishing gradient problem: the gradients of the network’s output with respect to the parameters in the early layers become extremely small. That’s a fancy way of saying that even a large change in the value of parameters for the early layers doesn’t have a big effect on the output. Change the activation function to solve.</p>
+</div>
+<div id="visualize" class="section level2">
+<h2><span class="header-section-number">2.3</span> Visualize</h2>
+<p>plots: swarmplot | marimekko charts | radviz | Marey Chart</p>
+<p><a href="http://pyviz.org/" class="uri">http://pyviz.org/</a> <a href="http://dataviz.tools/" class="uri">http://dataviz.tools/</a> <a href="https://www.datawrapper.de/" class="uri">https://www.datawrapper.de/</a> <a href="https://www.data-to-viz.com" class="uri">https://www.data-to-viz.com</a> <a href="https://dominikkoch.github.io/Bump-Chart/" class="uri">https://dominikkoch.github.io/Bump-Chart/</a> <a href="https://www.r-graph-gallery.com/" class="uri">https://www.r-graph-gallery.com/</a> <a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top" class="uri">http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#top</a></p>
+<p><a href="http://emilkirkegaard.dk/understanding_statistics/">Stats Viz</a></p>
+<p><a href="http://students.brown.edu/seeing-theory/">Seeing Theory</a></p>
+<p><a href="http://pythonplot.com/">Python Plotting Guide</a></p>
+<p><a href="https://python-graph-gallery.com">Py Graph Gallery</a></p>
+<p>ggplot: <a href="https://www.pitt.edu/~naraehan/presentation/Graphs_and_Plots_using_Plotly.html">1</a> <a href="https://plot.ly/python/table/">2</a> <a href="https://plot.ly/python/html-reports/">3</a> <a href="http://www.ggplot2-exts.org/gallery/">Extensions</a></p>
+<p><a href="http://sankeymatic.com">Sankey Diagram Creator</a></p>
+<p><a href="https://nsaunders.wordpress.com/2017/09/08/infographic-style-charts-using-the-r-waffle-package/">Waffle Charts</a></p>
+<p><a href="https://research.googleblog.com/2016/12/open-sourcing-embedding-projector-tool.html">High Dimensional</a></p>
+<p><a href="http://www.thehackerwithin.org/swinburne/links.html">Links</a></p>
+<p><a href="http://motioninsocial.com/tufte/">Tufte In R</a></p>
+<p><a href="http://shinyapps.org/apps/RGraphCompendium/index.php">R Graph Compendium</a></p>
+<p><a href="http://www.datavizcatalogue.com/index.html">Data Viz Catalogue</a></p>
+<p><a href="http://textvis.lnu.se/">Text Visualization</a></p>
+</div>
+<div id="pre-processing" class="section level2">
+<h2><span class="header-section-number">2.4</span> Pre-processing</h2>
+<div id="feature-engineering" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Feature Engineering</h3>
+<p>Cyclical Features: Dealing with cyclical features: Hours of the day, days of the week, months in a year, and wind direction are all examples of features that are cyclical. Many new machine learning engineers don’t think to convert these features into a representation that can preserve information such as hour 23 and hour 0 being close to each other and not far. Keeping with the hour example, the best way to handle this is to calculate the sin and cos component so that you represent your cyclical feature as (x,y) coordinates of a circle. In this representation hour, 23 and hour 0 are right next to each other numerically, just as they should be.</p>
+<p>Encode missingness as a feature</p>
+<p>Use a robust scaler such as the median &amp; quantiles</p>
+<p><strong>On Unbalanced Classes</strong></p>
+<p>Research on imbalanced classes often considers imbalanced to mean a minority class of 10% to 20%. Here is a rough outline of useful approaches. These are listed approximately in order of effort:</p>
+<ul>
+<li><p>Do nothing. Sometimes you get lucky and nothing needs to be done. You can train on the so-called natural (or stratified) distribution and sometimes it works without need for modification.</p></li>
+<li><p>Balance the training set in some way: Oversample the minority class. Undersample the majority class.
+Synthesize new minority classes.</p></li>
+<li><p>Throw away minority examples and switch to an anomaly detection framework.</p></li>
+<li><p>At the algorithm level, or after it: Adjust the class weight (misclassification costs). Adjust the decision threshold. Modify an existing algorithm to be more sensitive to rare classes.</p></li>
+<li><p>Construct an entirely new algorithm to perform well on imbalanced data.</p></li>
+<li><p>Use AUC, F1 Score, Cohen’s Kappa, ROC curve, a precision-recall curve, a lift curve, or a profit (gain) curve for evaluation.</p></li>
+<li><p>Use probability estimates and not the default .5 threshold.</p></li>
+<li><p>Undersampling, oversampling, increase weight of minority class</p></li>
+<li><p>Decision trees often perform well on imbalanced datasets because their hierarchical structure allows them to learn signals from both classes.</p></li>
+</ul>
+</div>
+<div id="feature-selection" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Feature Selection</h3>
+<p>Use binning + chisquare / mutual information to see correlation between feature and target. Variance Threshold, Univariate Feature Selection, Multivariate Feature Selection. Standardization, dimensionality reduction, dummying. sklearn.preprocessing.binarize, pandas.factorize, and featuretools for automation in Python.</p>
+<p>Variance Threshold: Use this to exclude features that don’t meet a variance threshold.</p>
+<p>Univariate Feature Selection: For classification can use chi-squared and F-Test while F-Test for regression. Functions: chi2, f_regression, f_classification from sklearn.feature_selection.</p>
+<p>SelectKBest/SelectPercentile: Keep the k highest scoring features and keep a user-specified highest scoring percentage of features. Can use the univariate feature selection in these functions.</p>
+<p>To work around magic values, convert the feature into two features: One feature holds only quality ratings, never magic values. One feature holds a boolean value indicating whether or not a quality_rating was supplied. Give this boolean feature a name like is_quality_rating_defined.</p>
+<p>Handling extreme outliers: Given data with a very long tail, log scaling does a slightly better job, but there’s still a significant tail of outlier values. Let’s pick yet another approach. What if we simply “cap” or “clip” the maximum value at an arbitrary value, say 4.0? Clipping the feature value at 4.0 doesn’t mean that we ignore all values greater than 4.0. Rather, it means that all values that were greater than 4.0 now become 4.0. This explains the funny hill at 4.0. Despite that hill, the scaled feature set is now more useful than the original data. Binning.</p>
+<p>Know your data. Follow these rules: 1) Keep in mind what you think your data should look like. 2) Verify that the data meets these expectations (or that you can explain why it doesn’t). 3) Double-check that the training data agrees with other sources (for example, dashboards).</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -377,8 +395,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="sequences-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="probabilistic-programming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -408,7 +426,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-deep_learning.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-pre_modeling.Rmd",
 "text": "Edit"
 },
 "history": {

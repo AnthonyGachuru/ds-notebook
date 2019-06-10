@@ -1,5 +1,7 @@
 # Codebook 
 
+[Common Scripts](http://chrisalbon.com/)
+
 ```{python, eval = F}
 def objective(trial):    
     
@@ -43,6 +45,32 @@ study = optuna.create_study()
 study.optimize(objective, timeout = 10)
 ```
 
+## Simple Bayes
+
+```{python, eval = FALSE}
+# Posterior prob that CTR_A > CTR_B given data is np.mean(A_samples > B_samples). Prob that lift of A relative to B is >=3%: np.mean(100*(A_samples-B_samples)/B_samples > 3)
+
+from numpy.random import beta as beta_dist
+import numpy as np
+
+N_samp = 10000 #number of samples to draw
+clicks_A = 450
+views_A = 56000
+clicks_B = 345
+views_B = 49000
+alpha = 1.1
+beta = 14.2
+
+A_samples = beta_dist(clicks_A + alpha, views_A - clicks_A + beta, N_samp)
+B_samples = beta_dist(clicks_B + alpha, views_B - clicks_B + beta, N_samp)
+```
+
+## Unbalanced Classes
+
+```{python, eval = F}
+mdl = svm.SVC(kernel='linear', class_weight={1: 10})
+svm.SVC(kernel='linear', class_weight = 'balanced')`
+```
 
 ## Mixed Effect Regression
 
@@ -260,6 +288,8 @@ rectangles_df.apply(calculate_area, axis=1)
 ```
 
 ```{r, eval = F}
+# purrlyr::by_row in R
+
 library(dplyr)
 
 mtcars %>% 
