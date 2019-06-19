@@ -74,6 +74,8 @@ Auto Data Science: [Visualize](http://holoviews.org) [Feature_Engineering](https
 
 https://distill.pub/
 
+https://electronjs.org/apps/netron
+
 https://pair-code.github.io/what-if-tool/
 
 https://nextjournal.com/

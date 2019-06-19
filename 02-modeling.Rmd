@@ -1055,4 +1055,6 @@ Hidden Markov Model
 
 ### Federated ML
 
+federated learning vs split learning
+
 https://blog.openmined.org/upgrade-to-federated-learning-in-10-lines/ https://onnx.ai/onnx-r/
