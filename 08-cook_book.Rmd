@@ -45,6 +45,16 @@ study = optuna.create_study()
 study.optimize(objective, timeout = 10)
 ```
 
+## Nested CV
+
+```{python, eval = F}
+mdl = sk_lm.LogisticRegression()
+grid = None
+mdl_tuned = sk_ms.GridSearchCV(estimator = mdl, param_grid = grid, cv = 5) if grid is not None else mdl
+training_scores = cross_val_score(mdl_tuned, X_train, y_train, cv = 5)
+training_scores.mean(), training_scores.std()
+```
+
 ## Simple Bayes
 
 ```{python, eval = FALSE}

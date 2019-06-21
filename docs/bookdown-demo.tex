@@ -228,6 +228,8 @@ Auto Data Science: \href{http://holoviews.org}{Visualize} \href{https://www.feat
 
 \url{https://nextjournal.com/}
 
+\url{https://causal.app/}
+
 \hypertarget{pipelines}{%
 \section{Pipelines}\label{pipelines}}
 
@@ -1732,6 +1734,8 @@ use makefile to run cmd commands pipelines and feature unions Sig Opt fabric-pyt
 \hypertarget{general-3}{%
 \section{General}\label{general-3}}
 
+Studies with low statistical power, like those with small samples, are more likely to show false negative and false positive results.
+
 Cohen's Alphabet (H D F\^{}2) Multiple comparisons Problem Importance sampling Bayes Error Rate Pearson's Coefficient of Skewness Bayes factor Correction methods for non representative samples Mann--Whitney U test
 
 A mixture distribution is a distribution whose density is a linear combination of normal distribution densities (components).
@@ -3229,6 +3233,19 @@ Causal effect: E(y\^{}1) - E(y\^{}0)
 
 \NormalTok{study }\OperatorTok{=}\NormalTok{ optuna.create_study()}
 \NormalTok{study.optimize(objective, timeout }\OperatorTok{=} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{nested-cv}{%
+\section{Nested CV}\label{nested-cv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mdl }\OperatorTok{=}\NormalTok{ sk_lm.LogisticRegression()}
+\NormalTok{grid }\OperatorTok{=} \VariableTok{None}
+\NormalTok{mdl_tuned }\OperatorTok{=}\NormalTok{ sk_ms.GridSearchCV(estimator }\OperatorTok{=}\NormalTok{ mdl, param_grid }\OperatorTok{=}\NormalTok{ grid, cv }\OperatorTok{=} \DecValTok{5}\NormalTok{) }\ControlFlowTok{if}\NormalTok{ grid }\KeywordTok{is} \KeywordTok{not} \VariableTok{None} \ControlFlowTok{else}\NormalTok{ mdl}
+\NormalTok{training_scores }\OperatorTok{=}\NormalTok{ cross_val_score(mdl_tuned, X_train, y_train, cv }\OperatorTok{=} \DecValTok{5}\NormalTok{)}
+\NormalTok{training_scores.mean(), training_scores.std()}
 \end{Highlighting}
 \end{Shaded}
 

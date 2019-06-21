@@ -80,6 +80,8 @@ https://pair-code.github.io/what-if-tool/
 
 https://nextjournal.com/
 
+https://causal.app/
+
 ## Pipelines
 
 **Sample Pipeline**

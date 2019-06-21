@@ -2,6 +2,8 @@
 
 ## General
 
+Studies with low statistical power, like those with small samples, are more likely to show false negative and false positive results.
+
 Cohen's Alphabet (H D F^2) Multiple comparisons Problem Importance sampling Bayes Error Rate Pearson’s Coefficient of Skewness Bayes factor Correction methods for non representative samples Mann–Whitney U test
 
 A mixture distribution is a distribution whose density is a linear combination of normal distribution densities (components).
