@@ -265,9 +265,9 @@ Tidy: skimr dplyr tidyr visdat data.table
 
 Transform: dplyr data.table
 
-Visualization: ggplot2
+Visualization: ggplot2 plotnine hypertools plotly\_express
 
-Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic \& bayesian ml, rl, ga \& gp: symbolic regression, es, gams, statsmodels
+Modeling: sklearn mlxtend shap statsmodels yellowbrick spark, toolbox: classic ml, bayesian ml, rl, ga \& gp (symbolic regression0, es, gams
 
 Communicate: rmarkdown
 
@@ -808,7 +808,7 @@ The McNemar test, introduced by Quinn McNemar in 1947 (McNemar 1947), is a non-p
 
 Use SHAP for Model Explanability
 
-Adversarial validation: Makes it easier to check distribution changes over time for train and validation/test data. Combine train and valid/test data into one dataframe, assign labels 1 and 0 to different data and build a binary classification model. If it has high AUC, then there are variables, which separate train and test data - this means that their distributions are quite difference. So you can take top features by feature importance (or other metric) and drop them (at first look at them of course) to make models more stable.
+Adversarial validation: The general idea is to check the degree of similarity between training and tests in terms of feature distribution. Makes it easier to check distribution changes over time for train and validation/test data. Combine train and valid/test data into one dataframe, assign labels 1 and 0 to different data and build a binary classification model. If it has high AUC, then there are variables, which separate train and test data - this means that their distributions are quite difference. So you can take top features by feature importance (or other metric) and drop them (at first look at them of course) to make models more stable.
 
 summary and plot for r models
 

@@ -116,9 +116,9 @@ Tidy: skimr dplyr tidyr visdat data.table
 
 Transform: dplyr data.table
 
-Visualization: ggplot2
+Visualization: ggplot2 plotnine hypertools plotly_express 
 
-Modeling: fklearn sklearn mlxtend shap yellowbrick sspark, toolbox: classic & bayesian ml, rl, ga & gp: symbolic regression, es, gams, statsmodels
+Modeling: sklearn mlxtend shap statsmodels yellowbrick spark, toolbox: classic ml, bayesian ml, rl, ga & gp (symbolic regression0, es, gams
 
 Communicate: rmarkdown 
 
