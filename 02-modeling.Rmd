@@ -223,6 +223,8 @@ tsne: [1](http://distill.pub/2016/misread-tsne/) [2](https://lvdmaaten.github.io
 
 ## Model Selection/Evaluation
 
+https://christophm.github.io/interpretable-ml-book/shapley.html#the-general-idea
+
 https://eli5.readthedocs.io/en/latest/blackbox/permutation_importance.html
 
 **The Coefficient of Unalikeability**: Unalikeability is defined as how often observations differ from one another. It varies from 0 to 1. The higher the value, the more unalike the data are.
