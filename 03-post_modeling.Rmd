@@ -45,7 +45,7 @@ The first part conda env export writes out all the packages in the environment, 
 
 ## Deploy
 
-DE: [aaS](https://www.astronomer.io/)  [data build tool](https://www.getdbt.com/) https://www.stitchdata.com/ https://www.prefect.io/ https://mlflow.org/ Apache Arrow
+DE: [aaS](https://www.astronomer.io/)  [data build tool](https://www.getdbt.com/) https://www.stitchdata.com/ https://www.prefect.io/ https://mlflow.org/ Apache Arrow https://fivetran.com/ + snowflake
 
 https://www.meltano.com/ http://pachyderm.io https://datacoral.com/ Algorithmia https://cloud.google.com/ai-platform/ https://ropensci.org/technotes/2019/03/18/drake-700/ [Weights & Biases](https://www.wandb.com/blog/towards-reproducibility) Databricks Ansible https://aws.amazon.com/sagemaker/ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
