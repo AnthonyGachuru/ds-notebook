@@ -74,7 +74,7 @@ Auto Data Science: [Visualize](http://holoviews.org) [Feature_Engineering](https
 
 [Stochastic Spreadsheets](https://www.getguesstimate.com/) https://causal.app/
 
-https://distill.pub/ https://pair-code.github.io/what-if-tool/ https://nextjournal.com/
+https://distill.pub/ https://pair-code.github.io/what-if-tool/ https://nextjournal.com/ https://paperswithcode.com/
 
 ## Pipelines
 
