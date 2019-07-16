@@ -32,6 +32,8 @@ If you include two (or more) columns in a SELECT DISTINCT clause, your results w
 
 In tidy data: Each variable forms a column. Each observation forms a row. Each type of observational unit forms a table. There are three interrelated rules which make a dataset tidy: 1) Each variable must have its own column, 2) Each observation must have its own row, 3) Each value must have its own cell.
 
+pd.group_by aggregate functions: size count sum mean median sd var min max prod first last
+
 Gower distance for categorical dissimilarity.
 
 Use binned statistics.

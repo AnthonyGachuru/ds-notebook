@@ -8,6 +8,8 @@ ARIMA models don't work well on financial data.
 
 Distance Measures: Dynamic Time Warping & Frechet Distance
 
+xgboost good for time series
+
 A stationary time series is one whose properties do not depend on the time at which the series is observed. 
 
 Another time series with multiple seasonal periods is calls, which contains 20 consecutive days of 5-minute call volume data for a large North American bank. There are 169 5-minute periods in a working day, and so the weekly seasonal frequency is 5 x 169 = 845. The weekly seasonality is relatively weak, so here you will just model daily seasonality. The residuals in this case still fail the white noise tests, but their autocorrelations are tiny, even though they are significant. This is because the series is so long. It is often unrealistic to have residuals that pass the tests for such long series. The effect of the remaining correlations on the forecasts will be negligible.
