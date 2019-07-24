@@ -1,5 +1,21 @@
 # Model
 
+## Toolkit
+
+classic ml
+
+bayesian ml
+
+rl
+
+ga & gp (symbolic regression)
+
+es
+
+gams
+
+statsmodels
+
 ## General
 
 xgb default hyperparameters good

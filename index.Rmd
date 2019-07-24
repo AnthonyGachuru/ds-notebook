@@ -74,7 +74,7 @@ Auto Data Science: [Visualize](http://holoviews.org) [Feature_Engineering](https
 
 [Stochastic Spreadsheets](https://www.getguesstimate.com/) https://causal.app/
 
-[Common Scripts](http://chrisalbon.com/) https://distill.pub/ https://pair-code.github.io/what-if-tool/ https://nextjournal.com/ https://paperswithcode.com/ https://gitlab.com/meltano/meltano https://jdssv.org/index.php/jdssv https://rapids.ai/
+[Common Scripts](http://chrisalbon.com/) https://distill.pub/ https://pair-code.github.io/what-if-tool/ https://nextjournal.com/ https://paperswithcode.com/ https://gitlab.com/meltano/meltano https://jdssv.org/index.php/jdssv https://rapids.ai/ https://postersession.ai/
 
 ## Pipelines
 
@@ -104,37 +104,19 @@ Docs: rmarkdown
 
 **My Pipeline**
 
-Import
+Import: tidyverse:::readr odbc dbi 
 
-odbc dbi readr data.table
+Tidy & Transform: tidyverse:::dplyr+tidyr skimr visdat data.table
 
-Tidy
+Visualization: ggplot2 plotnine hypertools plotly_express 
 
-skimr dplyr tidyr visdat data.table
+Modeling: sklearn mlxtend yellowbrick spark shap
 
-Transform
+Communicate: rmarkdown 
 
-dplyr data.table
+Monitor: hypothesis
 
-Visualization
-
-ggplot2 plotnine hypertools plotly_express 
-
-Modeling
-
-sklearn mlxtend shap statsmodels yellowbrick spark
-
-toolbox: classic ml, bayesian ml, rl, ga & gp (symbolic regression0, es, gams
-
-Communicate:
-
-rmarkdown 
-
-Monitor:
-
-Deploy: 
-
-shiny
+Deploy: shiny
 
 **R Pipeline**
 
