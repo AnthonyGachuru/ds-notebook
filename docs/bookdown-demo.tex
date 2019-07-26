@@ -1666,24 +1666,26 @@ Discuss recommendations, outstanding issues, and possible future work.
 
 Write appendices and port mortems
 
-Interactive Rmarkdown reports without shiny: plotly, dt, crosstalk
+Interactive Rmarkdown W/O Shiny: plotly dt crosstalk
 
-\url{https://metabase.com/} \url{http://koaning.io/make-docs.html} \href{https://about.modeanalytics.com/}{Mode Studio}
+\url{https://metabase.com/} \url{http://koaning.io/make-docs.html} \href{https://about.modeanalytics.com/}{Mode Studio} \url{https://readthedocs.org/}
 
 \hypertarget{maintain}{%
 \section{Maintain}\label{maintain}}
 
-TDD: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3}
+TDD: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \href{http://www.tdda.info/}{2} \href{http://stochasticsolutions.com/}{3}
 
-Tests: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \textbar{} \href{http://www.tdda.info/}{2} \textbar{} \href{http://stochasticsolutions.com/}{3} \textbar{} \href{https://github.com/ericmjl/data-testing-tutorial}{4} \textbar{} \href{http://r-pkgs.had.co.nz/tests.html}{R} \textbar{} pytest/hypothesis
+Tests: \href{http://engineering.pivotal.io/post/test-driven-development-for-data-science/}{1} \href{http://www.tdda.info/}{2} \href{http://stochasticsolutions.com/}{3} \href{https://github.com/ericmjl/data-testing-tutorial}{4} \href{http://r-pkgs.had.co.nz/tests.html}{R} pytest/hypothesis
 
-Validation: \href{https://github.com/data-cleaning/validate}{1} \textbar{} \href{https://rdrr.io/cran/checkmate/}{2} \textbar{} \href{https://github.com/shawnbrown/datatest}{3}
+\href{https://rdrr.io/cran/checkmate/}{Validation}
 
-dvc \url{https://matrixds.com/} \textbar{} \url{https://www.crestle.com} \textbar{} CoCalc
-
-design by contract: contracts, unit tests: pytest Hypothesis (property based testing), static typing: mypy
+\url{https://matrixds.com/} \url{https://www.crestle.com} CoCalc
 
 packrat \& conda
+
+use makefile to run cmd commands: \url{http://stat545.com/automation04_make-activity.html}
+
+pipelines and feature unions
 
 A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: \texttt{conda\ env\ export\ \textgreater{}\ environment.yaml}.
 The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, \textgreater{} environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: \texttt{conda\ env\ create\ -f\ environment.yaml}. This will create a new environment with the same name listed in environment.yaml.
@@ -1699,7 +1701,7 @@ DE: \href{https://www.astronomer.io/}{aaS} \href{https://www.getdbt.com/}{data b
 
 \href{https://stitchfix.github.io/flotilla-os/}{batch job execution framework} \href{https://cmry.github.io/notes/serialize}{Sklearn Serialization} \href{http://content.nexosis.com/twimlai}{Auto Deploy} \href{https://orchestrahq.com}{Model Deployment}
 
-use makefile to run cmd commands pipelines and feature unions Sig Opt fabric-python \& \url{http://www.pyinvoke.org/}
+fabric-python \& \url{http://www.pyinvoke.org/}
 
 \hypertarget{stats}{%
 \chapter{Stats}\label{stats}}

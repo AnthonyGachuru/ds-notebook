@@ -210,18 +210,19 @@
 <div id="other" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> Other</h3>
 <p>Write appendices and port mortems</p>
-<p>Interactive Rmarkdown reports without shiny: plotly, dt, crosstalk</p>
-<p><a href="https://metabase.com/" class="uri">https://metabase.com/</a> <a href="http://koaning.io/make-docs.html" class="uri">http://koaning.io/make-docs.html</a> <a href="https://about.modeanalytics.com/">Mode Studio</a></p>
+<p>Interactive Rmarkdown W/O Shiny: plotly dt crosstalk</p>
+<p><a href="https://metabase.com/" class="uri">https://metabase.com/</a> <a href="http://koaning.io/make-docs.html" class="uri">http://koaning.io/make-docs.html</a> <a href="https://about.modeanalytics.com/">Mode Studio</a> <a href="https://readthedocs.org/" class="uri">https://readthedocs.org/</a></p>
 </div>
 </div>
 <div id="maintain" class="section level2">
 <h2><span class="header-section-number">4.2</span> Maintain</h2>
-<p>TDD: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a></p>
-<p>Tests: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> | <a href="http://www.tdda.info/">2</a> | <a href="http://stochasticsolutions.com/">3</a> | <a href="https://github.com/ericmjl/data-testing-tutorial">4</a> | <a href="http://r-pkgs.had.co.nz/tests.html">R</a> | pytest/hypothesis</p>
-<p>Validation: <a href="https://github.com/data-cleaning/validate">1</a> | <a href="https://rdrr.io/cran/checkmate/">2</a> | <a href="https://github.com/shawnbrown/datatest">3</a></p>
-<p>dvc <a href="https://matrixds.com/" class="uri">https://matrixds.com/</a> | <a href="https://www.crestle.com" class="uri">https://www.crestle.com</a> | CoCalc</p>
-<p>design by contract: contracts, unit tests: pytest Hypothesis (property based testing), static typing: mypy</p>
+<p>TDD: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> <a href="http://www.tdda.info/">2</a> <a href="http://stochasticsolutions.com/">3</a></p>
+<p>Tests: <a href="http://engineering.pivotal.io/post/test-driven-development-for-data-science/">1</a> <a href="http://www.tdda.info/">2</a> <a href="http://stochasticsolutions.com/">3</a> <a href="https://github.com/ericmjl/data-testing-tutorial">4</a> <a href="http://r-pkgs.had.co.nz/tests.html">R</a> pytest/hypothesis</p>
+<p><a href="https://rdrr.io/cran/checkmate/">Validation</a></p>
+<p><a href="https://matrixds.com/" class="uri">https://matrixds.com/</a> <a href="https://www.crestle.com" class="uri">https://www.crestle.com</a> CoCalc</p>
 <p>packrat &amp; conda</p>
+<p>use makefile to run cmd commands: <a href="http://stat545.com/automation04_make-activity.html" class="uri">http://stat545.com/automation04_make-activity.html</a></p>
+<p>pipelines and feature unions</p>
 <p>A really useful feature is sharing environments so others can install all the packages used in your code, with the correct versions. You can save the packages to a YAML file with: <code>conda env export &gt; environment.yaml</code>.
 The first part conda env export writes out all the packages in the environment, including the Python version. Above you can see the name of the environment and all the dependencies (along with versions) are listed. The second part of the export command, &gt; environment.yaml writes the exported text to a YAML file environment.yaml. This file can now be shared and others will be able to create the same environment you used for the project. To create an environment from an environment file use: <code>conda env create -f environment.yaml</code>. This will create a new environment with the same name listed in environment.yaml.</p>
 </div>
@@ -231,7 +232,7 @@ The first part conda env export writes out all the packages in the environment, 
 <p><a href="https://www.meltano.com/" class="uri">https://www.meltano.com/</a> <a href="http://pachyderm.io" class="uri">http://pachyderm.io</a> <a href="https://datacoral.com/" class="uri">https://datacoral.com/</a> Algorithmia <a href="https://cloud.google.com/ai-platform/" class="uri">https://cloud.google.com/ai-platform/</a> <a href="https://ropensci.org/technotes/2019/03/18/drake-700/" class="uri">https://ropensci.org/technotes/2019/03/18/drake-700/</a> <a href="https://www.wandb.com/blog/towards-reproducibility">Weights &amp; Biases</a> Databricks Ansible <a href="https://aws.amazon.com/sagemaker/" class="uri">https://aws.amazon.com/sagemaker/</a> <a href="https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/" class="uri">https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/</a></p>
 <p><a href="http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines">Pipelines</a> <a href="https://snakemake.readthedocs.io/en/stable/">Workflow System</a> <a href="http://stat545.com/automation01_slides/#/automating-data-analysis-pipelines">Pipeline Automation</a> <a href="https://www.wallaroolabs.com">Streaming Data</a> <a href="https://docs.azuredatabricks.net/spark/latest/mllib/mllib-pipelines-and-stuctured-streaming.html">Spark</a></p>
 <p><a href="https://stitchfix.github.io/flotilla-os/">batch job execution framework</a> <a href="https://cmry.github.io/notes/serialize">Sklearn Serialization</a> <a href="http://content.nexosis.com/twimlai">Auto Deploy</a> <a href="https://orchestrahq.com">Model Deployment</a></p>
-<p>use makefile to run cmd commands pipelines and feature unions Sig Opt fabric-python &amp; <a href="http://www.pyinvoke.org/" class="uri">http://www.pyinvoke.org/</a></p>
+<p>fabric-python &amp; <a href="http://www.pyinvoke.org/" class="uri">http://www.pyinvoke.org/</a></p>
 
 </div>
 </div>
