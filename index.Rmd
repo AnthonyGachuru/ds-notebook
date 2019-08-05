@@ -68,6 +68,10 @@ Another instantiation via Hadley Wickham is: import -> tidy -> understand [ tran
 
 - [ ] Look at learning curves
 
+## Notes
+
+don't need to version control data really. just document the process of creating it properly.
+
 ## Resources
 
 Auto Data Science: [Visualize](http://holoviews.org) [Feature_Engineering](https://www.featuretools.com) TPOT [Google AutoML](https://cloud.google.com/automl/) [AutoML](https://www.automl.org/)
