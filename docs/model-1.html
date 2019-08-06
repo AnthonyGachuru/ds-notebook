@@ -371,6 +371,8 @@ If a model suffers from overfitting, we also say that the model has a high varia
 <p>Adversarial validation: The general idea is to check the degree of similarity between training and tests in terms of feature distribution. Makes it easier to check distribution changes over time for train and validation/test data. Combine train and valid/test data into one dataframe, assign labels 1 and 0 to different data and build a binary classification model. If it has high AUC, then there are variables, which separate train and test data - this means that their distributions are quite difference. So you can take top features by feature importance (or other metric) and drop them (at first look at them of course) to make models more stable.</p>
 <p>summary and plot for r models</p>
 <p>optuna: <a href="https://towardsdatascience.com/how-to-make-your-model-awesome-with-optuna-b56d490368af" class="uri">https://towardsdatascience.com/how-to-make-your-model-awesome-with-optuna-b56d490368af</a> <a href="https://github.com/PiotrekGa/optuna_article/blob/master/Example.ipynb" class="uri">https://github.com/PiotrekGa/optuna_article/blob/master/Example.ipynb</a></p>
+<p>Eight ways to interpret the output of an ML algorithm: 1) PDP 2) ICE 3) ALE
+4) Friedman’s H-stat 5) MDI, MDA 6) Global surrogate 7) LIME 8) Shapley values</p>
 </div>
 <div id="supervised" class="section level2">
 <h2><span class="header-section-number">3.4</span> Supervised</h2>
