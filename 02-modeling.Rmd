@@ -4,6 +4,8 @@
 
 Toolkit: classic ml bayesian ml rl ga & gp (symbolic regression) es gams statsmodels
 
+Multiple Correspondence Analysis: PCA for categorical data
+
 endogeneity: reverse causality
 
 xgb default hyperparameters good
@@ -225,7 +227,7 @@ Sklearn Model Selection: [1](http://scikit-learn.org/stable/modules/generated/sk
 
 tsne: [1](http://distill.pub/2016/misread-tsne/) [2](https://lvdmaaten.github.io/tsne/) [3](https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html)
 
-## Model Selection/Evaluation
+## Model Evaluation
 
 https://christophm.github.io/interpretable-ml-book/shapley.html#the-general-idea
 
@@ -550,7 +552,7 @@ https://data.library.virginia.edu/diagnostic-plots/
 
 with bayesian log reg you can have a probability distribution of the probability estimate so you can attach a ci to the prediction
 
-### Generalized Additive Models
+### GAMs
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don't use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response. 
 
@@ -560,6 +562,76 @@ gam(formula, family, data)
 For standard regression, use family = gaussian (the default).
 
 For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
+
+Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
+
+gam(y ~ s(x, k = 3), data = df, sp = .1)
+gam(y ~ s(x, k = 3), data = df, method = "REML")
+
+Categorical features must be included as factors.
+
+gam(hw.mpg ~ s(weight) + fuel, data = mpg, method = "REML")
+
+A factor smooth interaction fits different models for different categorical vars.
+
+gam(hw.mpg ~ s(weight, by = fuel) + fuel, data = mpg, method = "REML")
+
+Summary:
+
+edf=1 is a straight line
+
+Visualize: 
+
+plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod)[1])
+
+Model Evaluation:
+
+gam.check: Bad if model hasn't converged. Likely due to too many features. Small p-values indicate residuals not randomly distributed which is often due to not enough basis functions. 
+
+first do concurvity(mod, full = T) then do concurvity(mod, full = F). check co-linearity. worst case is bad over 0.8.
+
+interaction b/w x & y: mod2d <- gam(cadmium ~ s(x, y), data = meuse, method = "REML")
+
+vis.gam for visualization
+
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "persp", se = 2, theta = 135)
+
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "contour", too.far = 0.05)
+
+vis.gam(mod2d, view = c("x", "y"), plot.type = "contour", too.far = .1)
+
+Make plot with 25% extrapolation
+vis.gam(mod2d, view = c("x", "y"), 
+        plot.type = "contour", too.far = .25)
+
+Overlay data
+points(meuse)
+
+Nonlinear Modeling in R with GAMs:
+
+Fit a model with a factor-smooth interaction:
+mod_fs <- gam(copper ~ s(dist, landuse, bs = "fs"), data = meuse, method = "REML")
+
+Plot both models making 3D perspective plots:
+vis.gam(mod_sep, view = c("dist", "landuse"), plot.type = "persp")
+
+2-way interactions: 2d interaction smooths, categorical-continuous interaction, tensor smooths: allow to model on different scales (space & time)
+
+tensor_mod <- gam(cadmium ~ te(x, y, elev), data = meuse, method = "REML")
+
+Single-variable smooths use s().
+Smooths in which multiple variables interact on the same scale also use s().
+Smooths that have only interactions, but have multiple lambda terms or scales, use ti().
+
+te() must be used along. if you include s() switch to ti()
+
+classification: 
+
+outputs on the log odds scale
+
+gams work with broom and caret.
 
 **Pros**
 
@@ -655,7 +727,7 @@ Multiclass
 
 * Requires significant memory and processing power
 
-### Decision Tree
+### Decision Trees
 
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
@@ -821,91 +893,19 @@ Project the samples onto the new feature subspace using the transformation matri
 
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x|y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own. 
 
-### GAMs
+### Multilevel Models
 
-Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
-
-gam(y ~ s(x, k = 3), data = df, sp = .1)
-gam(y ~ s(x, k = 3), data = df, method = "REML")
-
-Categorical features must be included as factors.
-
-gam(hw.mpg ~ s(weight) + fuel, data = mpg, method = "REML")
-
-A factor smooth interaction fits different models for different categorical vars.
-
-gam(hw.mpg ~ s(weight, by = fuel) + fuel, data = mpg, method = "REML")
-
-Summary:
-
-edf=1 is a straight line
-
-Visualize: 
-
-plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod)[1])
-
-Model Evaluation:
-
-gam.check: Bad if model hasn't converged. Likely due to too many features. Small p-values indicate residuals not randomly distributed which is often due to not enough basis functions. 
-
-first do concurvity(mod, full = T) then do concurvity(mod, full = F). check co-linearity. worst case is bad over 0.8.
-
-interaction b/w x & y: mod2d <- gam(cadmium ~ s(x, y), data = meuse, method = "REML")
-
-vis.gam for visualization
-
-vis.gam(mod2d, view = c("x", "y"), 
-        plot.type = "persp", se = 2, theta = 135)
-
-vis.gam(mod2d, view = c("x", "y"), 
-        plot.type = "contour", too.far = 0.05)
-
-vis.gam(mod2d, view = c("x", "y"), plot.type = "contour", too.far = .1)
-
-Make plot with 25% extrapolation
-vis.gam(mod2d, view = c("x", "y"), 
-        plot.type = "contour", too.far = .25)
-
-Overlay data
-points(meuse)
-
-Nonlinear Modeling in R with GAMs:
-
-Fit a model with a factor-smooth interaction:
-mod_fs <- gam(copper ~ s(dist, landuse, bs = "fs"), data = meuse, method = "REML")
-
-Plot both models making 3D perspective plots:
-vis.gam(mod_sep, view = c("dist", "landuse"), plot.type = "persp")
-
-2-way interactions: 2d interaction smooths, categorical-continuous interaction, tensor smooths: allow to model on different scales (space & time)
-
-tensor_mod <- gam(cadmium ~ te(x, y, elev), data = meuse, method = "REML")
-
-Single-variable smooths use s().
-Smooths in which multiple variables interact on the same scale also use s().
-Smooths that have only interactions, but have multiple lambda terms or scales, use ti().
-
-te() must be used along. if you include s() switch to ti()
-
-classification: 
-
-outputs on the log odds scale
-
-gams work with broom and caret.
-
-### Hierarchical Models
+Also known as Hierarchical or Mixed Effect Models. Good for dealing with longitudinal and/or nested data.
 
 "Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts" BirthRate ~ AverageAgeofMother + (1 | State)
-
-https://www.jstatsoft.org/article/view/v067i01/0
 
 lmerTest 
 
 Analysis of Variance, or ANOVA, can be used to compare two different lmer models and test if one model explains more variability than the other model. We can use this to compare two lmer models. For example, if we wanted to see if Year is important for predicting Crime in Maryland, we can build a null model with only County as a random-effect and a year model that includes Year. 
 
-* One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
+One suggestion in one of the links is to do PCA and then regress the original variables against the new axis. 
 
-* Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
+Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
 
 ## Unsupervised
 
@@ -976,10 +976,6 @@ Probabilistic PCA introduces the Gaussian distribution to the PCA modeling frame
 
 Kernel PCA must project data into a higher dimensional space than that of the original data.
 
-### Multiple Correspondence Analysis
-
-PCA for categorical data
-
 ## Semi Supervised
 
 TBD
@@ -992,37 +988,37 @@ TBD
 
 ### Association Rule Mining
 
-* Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
+Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well. 
 
-* Tutorial: http://pbpython.com/market-basket-analysis.html
+Tutorial: http://pbpython.com/market-basket-analysis.html
 
-* Incredibly big feature space (2^k-1). 
+Incredibly big feature space (2^k-1). 
 
-* The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space. 
+The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space. 
 
-* Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better. 
+Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better. 
 
-* nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
+Confidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
 
-* ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift > 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift < 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
+Lift: the ratio by which the confidence of a rule exceeds the expected outcome. When lift > 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift < 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
 
-* t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
+t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations. 
 
 **Pros**
 
-* Ideally suited for working with very large amounts of transactional data.
+Ideally suited for working with very large amounts of transactional data.
 
-* The results are rules that are generally easy to understand and have a high amount of interpretability. 
+The results are rules that are generally easy to understand and have a high amount of interpretability. 
 
-* The process is useful for data mining and uncovering unexpected knowledge within a dataset.
+The process is useful for data mining and uncovering unexpected knowledge within a dataset.
 
 **Cons**
 
-* The outcome is usually not interesting when applied to smaller datasets. 
+The outcome is usually not interesting when applied to smaller datasets. 
 
-* It is difficult to separate actual insights from common sense notions. 
+It is difficult to separate actual insights from common sense notions. 
 
-* The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
+The analyst might be compelled to draw spurious conclusions--remember that correlation doesn’t imply causation!
 
 ### NLP
 

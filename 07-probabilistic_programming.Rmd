@@ -2,6 +2,8 @@
 
 ## Bayes Rule 
 
+posterior-p(model|data) = likelihood-p(data|model) * prior-p(model) / p(data)
+
 old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]
 
 Posterior = Likelihood * Prior / Marginal Likelihood
@@ -19,6 +21,8 @@ Marginal Likelihood (Evidence): Probability of evidence
 http://brunaw.com/slides/SER2019/talk/pres.html#1 https://causal.app/ [PyMc3 Quick Intro](https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0) [Prior Guide](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
 
 [PGM Viz](http://daft-pgm.org)
+
+Beaks cannot be of "negative" mean, therefore, HalfNormal is a reasonable, constrained prior.
 
 Another option is to report just the Bayes Factor or likelihood ratio, rather than the posterior probability.
 

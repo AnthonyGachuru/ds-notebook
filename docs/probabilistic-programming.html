@@ -92,26 +92,24 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="model-1.html"><a href="model-1.html"><i class="fa fa-check"></i><b>3</b> Model</a><ul>
 <li class="chapter" data-level="3.1" data-path="model-1.html"><a href="model-1.html#general-2"><i class="fa fa-check"></i><b>3.1</b> General</a></li>
-<li class="chapter" data-level="3.2" data-path="model-1.html"><a href="model-1.html#model-selectionevaluation"><i class="fa fa-check"></i><b>3.2</b> Model Selection/Evaluation</a></li>
+<li class="chapter" data-level="3.2" data-path="model-1.html"><a href="model-1.html#model-evaluation"><i class="fa fa-check"></i><b>3.2</b> Model Evaluation</a></li>
 <li class="chapter" data-level="3.3" data-path="model-1.html"><a href="model-1.html#supervised"><i class="fa fa-check"></i><b>3.3</b> Supervised</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="model-1.html"><a href="model-1.html#glm"><i class="fa fa-check"></i><b>3.3.1</b> GLM</a></li>
-<li class="chapter" data-level="3.3.2" data-path="model-1.html"><a href="model-1.html#generalized-additive-models"><i class="fa fa-check"></i><b>3.3.2</b> Generalized Additive Models</a></li>
+<li class="chapter" data-level="3.3.2" data-path="model-1.html"><a href="model-1.html#gams"><i class="fa fa-check"></i><b>3.3.2</b> GAMs</a></li>
 <li class="chapter" data-level="3.3.3" data-path="model-1.html"><a href="model-1.html#knn"><i class="fa fa-check"></i><b>3.3.3</b> KNN</a></li>
 <li class="chapter" data-level="3.3.4" data-path="model-1.html"><a href="model-1.html#svm"><i class="fa fa-check"></i><b>3.3.4</b> SVM</a></li>
-<li class="chapter" data-level="3.3.5" data-path="model-1.html"><a href="model-1.html#decision-tree"><i class="fa fa-check"></i><b>3.3.5</b> Decision Tree</a></li>
+<li class="chapter" data-level="3.3.5" data-path="model-1.html"><a href="model-1.html#decision-trees"><i class="fa fa-check"></i><b>3.3.5</b> Decision Trees</a></li>
 <li class="chapter" data-level="3.3.6" data-path="model-1.html"><a href="model-1.html#bagging"><i class="fa fa-check"></i><b>3.3.6</b> Bagging</a></li>
 <li class="chapter" data-level="3.3.7" data-path="model-1.html"><a href="model-1.html#random-forest"><i class="fa fa-check"></i><b>3.3.7</b> Random Forest</a></li>
 <li class="chapter" data-level="3.3.8" data-path="model-1.html"><a href="model-1.html#boosting"><i class="fa fa-check"></i><b>3.3.8</b> Boosting</a></li>
 <li class="chapter" data-level="3.3.9" data-path="model-1.html"><a href="model-1.html#naive-bayes"><i class="fa fa-check"></i><b>3.3.9</b> Naïve Bayes</a></li>
 <li class="chapter" data-level="3.3.10" data-path="model-1.html"><a href="model-1.html#lda-qda"><i class="fa fa-check"></i><b>3.3.10</b> LDA &amp; QDA</a></li>
-<li class="chapter" data-level="3.3.11" data-path="model-1.html"><a href="model-1.html#gams"><i class="fa fa-check"></i><b>3.3.11</b> GAMs</a></li>
-<li class="chapter" data-level="3.3.12" data-path="model-1.html"><a href="model-1.html#hierarchical-models"><i class="fa fa-check"></i><b>3.3.12</b> Hierarchical Models</a></li>
+<li class="chapter" data-level="3.3.11" data-path="model-1.html"><a href="model-1.html#multilevel-models"><i class="fa fa-check"></i><b>3.3.11</b> Multilevel Models</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="model-1.html"><a href="model-1.html#unsupervised"><i class="fa fa-check"></i><b>3.4</b> Unsupervised</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="model-1.html"><a href="model-1.html#k-means-clustering"><i class="fa fa-check"></i><b>3.4.1</b> K-Means Clustering</a></li>
 <li class="chapter" data-level="3.4.2" data-path="model-1.html"><a href="model-1.html#hierarchical-clustering"><i class="fa fa-check"></i><b>3.4.2</b> Hierarchical Clustering</a></li>
 <li class="chapter" data-level="3.4.3" data-path="model-1.html"><a href="model-1.html#dimensionality-reduction"><i class="fa fa-check"></i><b>3.4.3</b> Dimensionality Reduction</a></li>
-<li class="chapter" data-level="3.4.4" data-path="model-1.html"><a href="model-1.html#multiple-correspondence-analysis"><i class="fa fa-check"></i><b>3.4.4</b> Multiple Correspondence Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="model-1.html"><a href="model-1.html#semi-supervised"><i class="fa fa-check"></i><b>3.5</b> Semi Supervised</a></li>
 <li class="chapter" data-level="3.6" data-path="model-1.html"><a href="model-1.html#reinforcement-learning"><i class="fa fa-check"></i><b>3.6</b> Reinforcement Learning</a></li>
@@ -197,6 +195,7 @@
 <h1><span class="header-section-number">Chapter 8</span> Probabilistic Programming</h1>
 <div id="bayes-rule" class="section level2">
 <h2><span class="header-section-number">8.1</span> Bayes Rule</h2>
+<p>posterior-p(model|data) = likelihood-p(data|model) * prior-p(model) / p(data)</p>
 <p>old_prob [P(h)/p(~h)] * strength_of_evidence [p(e|h)/p(e|~h)] = new_prob [p(h|e)/p(~h|e)]</p>
 <p>Posterior = Likelihood * Prior / Marginal Likelihood</p>
 <p>Likelihood P(Data|theta): Probability of the date could be generated by a model with the given parameter(s)</p>
@@ -208,6 +207,7 @@
 <h2><span class="header-section-number">8.2</span> Other</h2>
 <p><a href="http://brunaw.com/slides/SER2019/talk/pres.html#1" class="uri">http://brunaw.com/slides/SER2019/talk/pres.html#1</a> <a href="https://causal.app/" class="uri">https://causal.app/</a> <a href="https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit#slide=id.g4254d546f6_0_0">PyMc3 Quick Intro</a> <a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Prior Guide</a></p>
 <p><a href="http://daft-pgm.org">PGM Viz</a></p>
+<p>Beaks cannot be of “negative” mean, therefore, HalfNormal is a reasonable, constrained prior.</p>
 <p>Another option is to report just the Bayes Factor or likelihood ratio, rather than the posterior probability.</p>
 <p>Models have a lot of parameters classical methods that use simple point estimates of the parameters don’t adequately capture uncertainty so we turn to Bayesian methods because Bayesian inference is one way of finding a large model with metadata.</p>
 <p>The second reason we use Bayesian inference is for combining information you might have experimental data on the drug under one condition and aggregate data under another condition we can combine polls and election forecast of public opinion data from multiple poles and environmental statistics we have measurements of different quality Bayesian methods are particularly adapted tocombining information.</p>

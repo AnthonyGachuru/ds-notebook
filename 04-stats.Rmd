@@ -71,6 +71,8 @@ Block: account for the potential effect of confounding variables
 
 Random Sampling + Random Assignment: Causal + generalizable
 
+The Poisson distribution is the limit of the Binomial distribution for low probability of success and large number of trials, that is, for rare events.
+
 ## Sample Size
 
 Sample size: A good formula is: if your sample is picked uniformly at random and is of size at least:

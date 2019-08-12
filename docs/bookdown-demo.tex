@@ -457,6 +457,8 @@ Know your data. Follow these rules: 1) Keep in mind what you think your data sho
 
 Toolkit: classic ml bayesian ml rl ga \& gp (symbolic regression) es gams statsmodels
 
+Multiple Correspondence Analysis: PCA for categorical data
+
 endogeneity: reverse causality
 
 xgb default hyperparameters good
@@ -682,8 +684,8 @@ Sklearn Model Selection: \href{http://scikit-learn.org/stable/modules/generated/
 
 tsne: \href{http://distill.pub/2016/misread-tsne/}{1} \href{https://lvdmaaten.github.io/tsne/}{2} \href{https://index.pocketcluster.io/harveyslash-tsne-embedding-visualisation.html}{3}
 
-\hypertarget{model-selectionevaluation}{%
-\section{Model Selection/Evaluation}\label{model-selectionevaluation}}
+\hypertarget{model-evaluation}{%
+\section{Model Evaluation}\label{model-evaluation}}
 
 \url{https://christophm.github.io/interpretable-ml-book/shapley.html\#the-general-idea}
 
@@ -1042,8 +1044,8 @@ The Durbin-Watson test is used to test the null hypothesis that linear regressio
 
 with bayesian log reg you can have a probability distribution of the probability estimate so you can attach a ci to the prediction
 
-\hypertarget{generalized-additive-models}{%
-\subsection{Generalized Additive Models}\label{generalized-additive-models}}
+\hypertarget{gams}{%
+\subsection{GAMs}\label{gams}}
 
 mgcv::gam: More complex than lm, more likely to overfit, best used on larger data sets. use s(var) to denote non-linear relationship. Don't use s() with categorical variable. Use type = terms for y values of plots to get predictions type = response.
 
@@ -1053,6 +1055,76 @@ gam(formula, family, data)
 For standard regression, use family = gaussian (the default).
 
 For GAM models, the predict() method returns a matrix, so use as.numeric() to convert the matrix to a vector.
+
+Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
+
+gam(y \textasciitilde{} s(x, k = 3), data = df, sp = .1)
+gam(y \textasciitilde{} s(x, k = 3), data = df, method = ``REML'')
+
+Categorical features must be included as factors.
+
+gam(hw.mpg \textasciitilde{} s(weight) + fuel, data = mpg, method = ``REML'')
+
+A factor smooth interaction fits different models for different categorical vars.
+
+gam(hw.mpg \textasciitilde{} s(weight, by = fuel) + fuel, data = mpg, method = ``REML'')
+
+Summary:
+
+edf=1 is a straight line
+
+Visualize:
+
+plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod){[}1{]})
+
+Model Evaluation:
+
+gam.check: Bad if model hasn't converged. Likely due to too many features. Small p-values indicate residuals not randomly distributed which is often due to not enough basis functions.
+
+first do concurvity(mod, full = T) then do concurvity(mod, full = F). check co-linearity. worst case is bad over 0.8.
+
+interaction b/w x \& y: mod2d \textless{}- gam(cadmium \textasciitilde{} s(x, y), data = meuse, method = ``REML'')
+
+vis.gam for visualization
+
+vis.gam(mod2d, view = c(``x'', ``y''),
+plot.type = ``persp'', se = 2, theta = 135)
+
+vis.gam(mod2d, view = c(``x'', ``y''),
+plot.type = ``contour'', too.far = 0.05)
+
+vis.gam(mod2d, view = c(``x'', ``y''), plot.type = ``contour'', too.far = .1)
+
+Make plot with 25\% extrapolation
+vis.gam(mod2d, view = c(``x'', ``y''),
+plot.type = ``contour'', too.far = .25)
+
+Overlay data
+points(meuse)
+
+Nonlinear Modeling in R with GAMs:
+
+Fit a model with a factor-smooth interaction:
+mod\_fs \textless{}- gam(copper \textasciitilde{} s(dist, landuse, bs = ``fs''), data = meuse, method = ``REML'')
+
+Plot both models making 3D perspective plots:
+vis.gam(mod\_sep, view = c(``dist'', ``landuse''), plot.type = ``persp'')
+
+2-way interactions: 2d interaction smooths, categorical-continuous interaction, tensor smooths: allow to model on different scales (space \& time)
+
+tensor\_mod \textless{}- gam(cadmium \textasciitilde{} te(x, y, elev), data = meuse, method = ``REML'')
+
+Single-variable smooths use s().
+Smooths in which multiple variables interact on the same scale also use s().
+Smooths that have only interactions, but have multiple lambda terms or scales, use ti().
+
+te() must be used along. if you include s() switch to ti()
+
+classification:
+
+outputs on the log odds scale
+
+gams work with broom and caret.
 
 \textbf{Pros}
 
@@ -1162,8 +1234,8 @@ Multiclass
   Requires significant memory and processing power
 \end{itemize}
 
-\hypertarget{decision-tree}{%
-\subsection{Decision Tree}\label{decision-tree}}
+\hypertarget{decision-trees}{%
+\subsection{Decision Trees}\label{decision-trees}}
 
 So should you use Gini impurity or entropy? The truth is, most of the time it does not make a big difference: they lead to similar trees. Gini impurity is slightly faster to compute, so it is a good default. However, when they differ, Gini impurity tends to isolate the most frequent class in its own branch of the tree, while entropy tends to produce slightly more balanced trees.
 
@@ -1352,96 +1424,20 @@ Project the samples onto the new feature subspace using the transformation matri
 
 LDA similar to Naive Bayes but doesn't assume variables are independent, assumes that p(x\textbar{}y) is a multivariate normal distribution, and assumes gaussian distributions for each class share the same covariance matrix. If they don't share the same covariance matrix, then we use Quadratic Discriminant Analysis which assumes each class has its own.
 
-\hypertarget{gams}{%
-\subsection{GAMs}\label{gams}}
+\hypertarget{multilevel-models}{%
+\subsection{Multilevel Models}\label{multilevel-models}}
 
-Wiggleness affected by smoothing factor (sp) and number of basis functions (k)
-
-gam(y \textasciitilde{} s(x, k = 3), data = df, sp = .1)
-gam(y \textasciitilde{} s(x, k = 3), data = df, method = ``REML'')
-
-Categorical features must be included as factors.
-
-gam(hw.mpg \textasciitilde{} s(weight) + fuel, data = mpg, method = ``REML'')
-
-A factor smooth interaction fits different models for different categorical vars.
-
-gam(hw.mpg \textasciitilde{} s(weight, by = fuel) + fuel, data = mpg, method = ``REML'')
-
-Summary:
-
-edf=1 is a straight line
-
-Visualize:
-
-plot(mod, select = 1, seWithMean = TRUE, shift = coef(mod){[}1{]})
-
-Model Evaluation:
-
-gam.check: Bad if model hasn't converged. Likely due to too many features. Small p-values indicate residuals not randomly distributed which is often due to not enough basis functions.
-
-first do concurvity(mod, full = T) then do concurvity(mod, full = F). check co-linearity. worst case is bad over 0.8.
-
-interaction b/w x \& y: mod2d \textless{}- gam(cadmium \textasciitilde{} s(x, y), data = meuse, method = ``REML'')
-
-vis.gam for visualization
-
-vis.gam(mod2d, view = c(``x'', ``y''),
-plot.type = ``persp'', se = 2, theta = 135)
-
-vis.gam(mod2d, view = c(``x'', ``y''),
-plot.type = ``contour'', too.far = 0.05)
-
-vis.gam(mod2d, view = c(``x'', ``y''), plot.type = ``contour'', too.far = .1)
-
-Make plot with 25\% extrapolation
-vis.gam(mod2d, view = c(``x'', ``y''),
-plot.type = ``contour'', too.far = .25)
-
-Overlay data
-points(meuse)
-
-Nonlinear Modeling in R with GAMs:
-
-Fit a model with a factor-smooth interaction:
-mod\_fs \textless{}- gam(copper \textasciitilde{} s(dist, landuse, bs = ``fs''), data = meuse, method = ``REML'')
-
-Plot both models making 3D perspective plots:
-vis.gam(mod\_sep, view = c(``dist'', ``landuse''), plot.type = ``persp'')
-
-2-way interactions: 2d interaction smooths, categorical-continuous interaction, tensor smooths: allow to model on different scales (space \& time)
-
-tensor\_mod \textless{}- gam(cadmium \textasciitilde{} te(x, y, elev), data = meuse, method = ``REML'')
-
-Single-variable smooths use s().
-Smooths in which multiple variables interact on the same scale also use s().
-Smooths that have only interactions, but have multiple lambda terms or scales, use ti().
-
-te() must be used along. if you include s() switch to ti()
-
-classification:
-
-outputs on the log odds scale
-
-gams work with broom and caret.
-
-\hypertarget{hierarchical-models}{%
-\subsection{Hierarchical Models}\label{hierarchical-models}}
+Also known as Hierarchical or Mixed Effect Models. Good for dealing with longitudinal and/or nested data.
 
 ``Across counties, as the average mother's age increases the birth rate decreases while correcting for state-level impacts'' BirthRate \textasciitilde{} AverageAgeofMother + (1 \textbar{} State)
-
-\url{https://www.jstatsoft.org/article/view/v067i01/0}
 
 lmerTest
 
 Analysis of Variance, or ANOVA, can be used to compare two different lmer models and test if one model explains more variability than the other model. We can use this to compare two lmer models. For example, if we wanted to see if Year is important for predicting Crime in Maryland, we can build a null model with only County as a random-effect and a year model that includes Year.
 
-\begin{itemize}
-\item
-  One far out suggestion in one of the links is to do PCA and then regress the original variables against the new axis.
-\item
-  Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
-\end{itemize}
+One suggestion in one of the links is to do PCA and then regress the original variables against the new axis.
+
+Account for longitudinal data: random selection of one event from each student, partition cross validation by dates, pca finds major trends hidden within the data
 
 \hypertarget{unsupervised}{%
 \section{Unsupervised}\label{unsupervised}}
@@ -1522,11 +1518,6 @@ Probabilistic PCA introduces the Gaussian distribution to the PCA modeling frame
 
 Kernel PCA must project data into a higher dimensional space than that of the original data.
 
-\hypertarget{multiple-correspondence-analysis}{%
-\subsection{Multiple Correspondence Analysis}\label{multiple-correspondence-analysis}}
-
-PCA for categorical data
-
 \hypertarget{semi-supervised}{%
 \section{Semi Supervised}\label{semi-supervised}}
 
@@ -1543,46 +1534,37 @@ TBD
 \hypertarget{association-rule-mining}{%
 \subsection{Association Rule Mining}\label{association-rule-mining}}
 
-\begin{itemize}
-\item
-  Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.
-\item
-  Tutorial: \url{http://pbpython.com/market-basket-analysis.html}
-\item
-  Incredibly big feature space (2\^{}k-1).
-\item
-  The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space.
-\item
-  Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better.
-\item
-  nfidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
-\item
-  ft: the ratio by which the confidence of a rule exceeds the expected outcome. When lift \textgreater{} 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift \textless{} 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
-\item
-  t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations.
-\end{itemize}
+Used in Genetics, Fraud, and Market Basket Analysis, etc. A typical rule might be: if someone buys peanut butter and jelly, then that person is likely to buy bread as well.
+
+Tutorial: \url{http://pbpython.com/market-basket-analysis.html}
+
+Incredibly big feature space (2\^{}k-1).
+
+The Apriori algorithm employs a simple a priori belief as a guideline for reducing the association rule space.
+
+Support: the fraction of which each item appears within the dataset as a whole. Support(item) = count(item)/N. Higher support is better.
+
+Confidence: the likelihood that a constructed rule is correct given the items on the left hand side of the transaction. A higher level of confidence implies a higher likelihood that Y appears alongside transactions in which X appears.
+
+Lift: the ratio by which the confidence of a rule exceeds the expected outcome. When lift \textgreater{} 1, the presence of X seems to have increasedthe probability of Y occurring in the transaction. When lift \textless{} 1, the presence of X seems to have decreasedthe probability of Y occurring in the transaction. When lift = 1, X and Y are independent.
+
+t thresholds for support and confidence and then the algorithm goes from all 1-combinations to 2-combinations and up. Those subset below the threshold don't make it to the higher iterations.
 
 \textbf{Pros}
 
-\begin{itemize}
-\item
-  Ideally suited for working with very large amounts of transactional data.
-\item
-  The results are rules that are generally easy to understand and have a high amount of interpretability.
-\item
-  The process is useful for data mining and uncovering unexpected knowledge within a dataset.
-\end{itemize}
+Ideally suited for working with very large amounts of transactional data.
+
+The results are rules that are generally easy to understand and have a high amount of interpretability.
+
+The process is useful for data mining and uncovering unexpected knowledge within a dataset.
 
 \textbf{Cons}
 
-\begin{itemize}
-\item
-  The outcome is usually not interesting when applied to smaller datasets.
-\item
-  It is difficult to separate actual insights from common sense notions.
-\item
-  The analyst might be compelled to draw spurious conclusions--remember that correlation doesn't imply causation!
-\end{itemize}
+The outcome is usually not interesting when applied to smaller datasets.
+
+It is difficult to separate actual insights from common sense notions.
+
+The analyst might be compelled to draw spurious conclusions--remember that correlation doesn't imply causation!
 
 \hypertarget{nlp}{%
 \subsection{NLP}\label{nlp}}
@@ -1774,6 +1756,8 @@ Replicate: collect a sufficiently large sample within a study, or replicate the 
 Block: account for the potential effect of confounding variables
 
 Random Sampling + Random Assignment: Causal + generalizable
+
+The Poisson distribution is the limit of the Binomial distribution for low probability of success and large number of trials, that is, for rare events.
 
 \hypertarget{sample-size}{%
 \section{Sample Size}\label{sample-size}}
@@ -2917,6 +2901,8 @@ Vanishing gradient problem: the gradients of the network's output with respect t
 \hypertarget{bayes-rule}{%
 \section{Bayes Rule}\label{bayes-rule}}
 
+posterior-p(model\textbar{}data) = likelihood-p(data\textbar{}model) * prior-p(model) / p(data)
+
 old\_prob {[}P(h)/p(\textasciitilde{}h){]} * strength\_of\_evidence {[}p(e\textbar{}h)/p(e\textbar{}\textasciitilde{}h){]} = new\_prob {[}p(h\textbar{}e)/p(\textasciitilde{}h\textbar{}e){]}
 
 Posterior = Likelihood * Prior / Marginal Likelihood
@@ -2935,6 +2921,8 @@ Marginal Likelihood (Evidence): Probability of evidence
 \url{http://brunaw.com/slides/SER2019/talk/pres.html\#1} \url{https://causal.app/} \href{https://docs.google.com/presentation/d/1buknIrG5b8u0twrwvlxcTudIOdx68AlqDiST_A_jJ9g/edit\#slide=id.g4254d546f6_0_0}{PyMc3 Quick Intro} \href{https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations}{Prior Guide}
 
 \href{http://daft-pgm.org}{PGM Viz}
+
+Beaks cannot be of ``negative'' mean, therefore, HalfNormal is a reasonable, constrained prior.
 
 Another option is to report just the Bayes Factor or likelihood ratio, rather than the posterior probability.
 
