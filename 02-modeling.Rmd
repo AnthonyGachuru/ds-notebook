@@ -976,6 +976,32 @@ Probabilistic PCA introduces the Gaussian distribution to the PCA modeling frame
 
 Kernel PCA must project data into a higher dimensional space than that of the original data.
 
+## Distributed
+
+## Spark
+
+Spark does lazy processing
+
+Spark takes advantage of data immutability to efficiently share / create new data representations throughout the cluster.
+
+RDD vs DF vs SQL APIs
+
+spark.mllib contains the legacy API built on top of RDDs. spark.ml provides higher-level API built on top of DataFrames for constructing ML pipelines.
+
+Spark only handles numeric data 
+
+Spark uses Transformations & Actions for both RDD and dfs.
+
+Spark's assumes the target is called 'label' in ML. Everything else is a feature.
+
+Estimator classes are for modeling and all implement a .fit() method.
+
+It's important to split the data after all the transformations because operations like StringIndexer don't always produce the same index even when given the same list of strings.
+
+Dummying: The first step to encoding your categorical feature is to create a StringIndexer. Members of this class are Estimators that take a DataFrame with a column of strings and map each unique string to a number. Then, the Estimator returns a Transformer that takes a DataFrame, attaches the mapping to it as metadata, and returns a new DataFrame with a numeric column corresponding to the string column. The second step is to encode this numeric column as a one-hot vector using a OneHotEncoder. This works exactly #the same way as the StringIndexer by creating an Estimator and then a Transformer
+
+At the core of the pyspark.ml module are the Transformer and Estimator classes. Almost every other class in the module behaves similarly to these two basic classes.
+
 ## Semi Supervised
 
 TBD
