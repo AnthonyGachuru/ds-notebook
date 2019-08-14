@@ -6,6 +6,8 @@ Toolkit: classic ml bayesian ml rl ga & gp (symbolic regression) es gams statsmo
 
 Multiple Correspondence Analysis: PCA for categorical data
 
+inference vs prediction
+
 endogeneity: reverse causality
 
 xgb default hyperparameters good

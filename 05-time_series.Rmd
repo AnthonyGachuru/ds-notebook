@@ -8,6 +8,8 @@ tslearn
 
 ### Notes
 
+https://tidyverts.github.io/tidy-forecasting-principles/
+
 ARIMA models don't work well on financial data.
 
 Distance Measures: Dynamic Time Warping & Frechet Distance
