@@ -14,6 +14,10 @@ ecdf: [1](http://www.ericmjl.com/blog/2018/7/14/ecdfs/) [2](https://www.rdocumen
 
 [Mixed Categorical & Numeric Distance](https://www.rdocumentation.org/packages/StatMatch/versions/1.2.5/topics/gower.dist) [2](https://www.rdocumentation.org/packages/ltm/versions/1.1-1/topics/biserial.cor) [Outliers in small samples](https://stats.stackexchange.com/questions/78609/outlier-detection-in-very-small-sets/78617#78617)
 
+paired t-test compares different measures within the same sample similar idea with repeated measures ANOVA
+
+count data poisson n < 30
+
 Studies with low statistical power, like those with small samples, are more likely to show false negative and false positive results.
 
 Cohen's Alphabet (H D F^2) Multiple comparisons Problem Importance sampling Bayes Error Rate Pearson’s Coefficient of Skewness Bayes factor Correction methods for non representative samples Mann–Whitney U test
